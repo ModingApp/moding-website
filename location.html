@@ -143,31 +143,27 @@
     }
 
     /* ---------------- 모바일 대응 ---------------- */
-    @media (max-width: 768px) {
-      .container {
-        padding: 24px 16px 32px;
-      }
+   /* ===== 공통 모바일 최적화: Fold 포함 스마트폰 대응 ===== */
+@media (max-width: 768px) {
 
-      h1 {
-        font-size: 22px;
-      }
+  /* 전체 기본 글자 크기 살짝 줄이기 */
+  body {
+    font-size: 15px;
+  }
 
-      .subtitle {
-        font-size: 13px;
-      }
+  /* 제목/본문은 줄바꿈 자연스럽게 + 행간 조정 */
+  p, h1, h2, h3, h4, h5, h6 {
+    white-space: normal !important;  /* 강제로 한 줄 고정된 것들 풀기 */
+    word-break: keep-all;            /* 한국어 단어 단위로 줄바꿈 */
+    line-height: 1.6;                /* 모바일에서는 조금 더 촘촘하게 */
+  }
 
-      .address-main {
-        font-size: 14px;
-      }
-
-      .address-sub {
-        font-size: 12px;
-      }
-
-      .map-note {
-        font-size: 10px;
-      }
-    }
+  /* 본문 박스 폭은 화면에 꽉 차게, 좌우 여백만 살짝 */
+  .container {
+    max-width: 100% !important;
+    padding: 20px 18px;
+  }
+}
   </style>
 </head>
 
