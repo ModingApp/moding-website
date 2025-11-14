@@ -1,121 +1,47 @@
-<!DOCTYPE html> <!-- HTML5 문서 선언 -->
-<html lang="ko"> <!-- 문서 기본 언어: 한국어 -->
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8"> <!-- 한글 안 깨지게 UTF-8 인코딩 -->
+  <meta charset="UTF-8">
+  <!-- 모바일에서도 화면이 깨지지 않도록 하는 설정 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 모바일 기기에서 화면 크기를 디바이스 폭에 맞추도록 설정 -->
-
   <title>모든 사장님을 위한 모든 것을 담은 플랫폼, 모딩</title>
 
   <style>
-    /* =============================
-       공통 기본값 초기화
-       ============================= */
+    /* 기본 여백 제거 + 박스 사이즈를 border까지 포함해서 계산하도록 설정 */
     * {
-      box-sizing: border-box; /* padding, border를 width 계산에 포함 */
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth; /* 앵커(#회사소개)로 이동할 때 부드럽게 스크롤 */
-    }
-
-    /* =============================
-       전체 페이지(body) 스타일
-       ============================= */
+    /* 전체 바탕 / 폰트 / 레이아웃 기본 설정 */
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                    "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
-      background: #0b0b0b; /* 전체 배경색 */
-      color: #ffffff;      /* 기본 글자색 */
-      min-height: 100vh;   /* 화면 높이 100% 이상 사용 */
-
-      display: flex;
-      flex-direction: column; /* 위쪽: 메인 레이아웃, 아래쪽: 푸터 */
-    }
-
-    /* =============================
-       메인 레이아웃
-       (좌: 사이드바 / 우: 메인 컨텐츠)
-       ============================= */
-    .layout {
-      flex: 1;                   /* body에서 남은 공간을 모두 차지 */
-      display: flex;             /* 좌우 배치 */
-      max-width: 1200px;         /* 전체 폭 최대값 */
-      width: 100%;
-      margin: 0 auto;            /* 화면 가운데 정렬 */
-    }
-
-    /* =============================
-       좌측 사이드바 (카테고리 메뉴)
-       ============================= */
-    .sidebar {
-      width: 200px;              /* 데스크톱 기준 사이드바 폭 */
-      border-right: 1px solid #222;
-      padding: 32px 16px;
-    }
-
-    .sidebar-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #bbbbbb;
-      margin-bottom: 16px;
-    }
-
-    .sidebar-nav {
-      list-style: none;          /* 앞의 점 제거 */
-      display: flex;
-      flex-direction: column;
-      gap: 10px;                 /* 메뉴 사이 간격 */
-    }
-
-    .sidebar-nav a {
-      font-size: 14px;
-      color: #e0e0e0;
-      text-decoration: none;     /* 밑줄 제거 */
-      padding: 6px 4px;
-      border-radius: 4px;
-      transition: background 0.2s ease, color 0.2s ease;
-      cursor: pointer;
-    }
-
-    .sidebar-nav a:hover {
-      background: #202020;       /* 마우스 올렸을 때 배경 */
+      background: #0b0b0b;   /* 거의 검정에 가까운 배경색 */
       color: #ffffff;
-    }
-
-    /* 활성 메뉴 표시용 클래스 (필요하면 JS로 추가해서 활용 가능) */
-    .sidebar-nav a.active {
-      background: #f97316;       /* 주황색 하이라이트 */
-      color: #000;
-      font-weight: 600;
-    }
-
-    /* =============================
-       오른쪽 메인 컨텐츠 영역
-       ============================= */
-    .main {
-      flex: 1;                   /* 나머지 가로 공간 모두 사용 */
-      padding: 32px 24px 80px;   /* 아래쪽 약간 더 넉넉한 여백(스크롤용) */
-
+      min-height: 100vh;     /* 세로 전체 높이를 화면 높이 이상으로 */
       display: flex;
-      flex-direction: column;
-      gap: 80px;                 /* 섹션 간 간격 */
-      align-items: center;       /* 내부 섹션들을 가운데 정렬 */
+      flex-direction: column;/* 위쪽: 메인, 아래쪽: 푸터 */
     }
 
-    /* =============================
-       상단 히어로(타이핑 + 로고 + 문구)
-       ============================= */
+    /* 가운데 영역 컨테이너 */
     .wrapper {
       width: 100%;
-      max-width: 520px;
+      max-width: 520px;      /* 너무 넓어지지 않게 최대 폭 제한 */
       margin: 0 auto;
+      padding: 40px 24px;
       text-align: center;
+
+      /* 수직 가운데 정렬을 위한 설정 */
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 세로 가운데 */
+      align-items: center;      /* 가로 가운데 */
     }
 
-    /* 타이핑 텍스트 영역 */
+    /* 문구(타이핑) 영역 – 레이아웃이 튀지 않도록 블록 하나로 묶음 */
     .type-box {
       margin-bottom: 20px;
     }
@@ -125,7 +51,7 @@
       font-size: 35px;
       opacity: 0.85;
       margin-bottom: 6px;
-      white-space: nowrap;       /* 데스크톱에서는 한 줄 유지 */
+      white-space: nowrap;   /* 한 줄 유지 (PC 기준) */
     }
 
     /* 로고 영역 */
@@ -134,12 +60,12 @@
     }
 
     .logo img {
-      width: 380px;              /* 기본 로고 폭 */
-      max-width: 100%;           /* 화면이 좁으면 자동 축소 */
+      width: 380px;
+      max-width: 100%;      /* 모바일에서 화면을 넘지 않도록 */
       height: auto;
     }
 
-    /* 설명 문구 */
+    /* 아래 설명 문구 */
     .desc1,
     .desc2 {
       font-size: 24px;
@@ -147,59 +73,24 @@
       opacity: 0.8;
     }
 
-    /* =============================
-       공통 섹션 스타일
-       (회사소개 / 오시는길 등)
-       ============================= */
-    .section {
-      width: 100%;
-      max-width: 720px;
-      color: #e5e5e5;
-    }
-
-    .section-title {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .section-sub {
-      font-size: 13px;
-      color: #9d9d9d;
-      margin-bottom: 16px;
-    }
-
-    .section-content {
+    /* 메인 아래에 들어갈 작은 링크(회사소개 / 오시는 길) */
+    .links {
+      margin-top: 18px;
       font-size: 14px;
-      line-height: 1.7;
-      color: #d4d4d4;
+      opacity: 0.8;
     }
 
-    /* 오시는길 섹션에서 지도 감싸는 영역 */
-    .map-wrap {
-      margin-top: 16px;
-      border-radius: 8px;
-      overflow: hidden;          /* 테두리 밖 내용 안 보이게 */
-      border: 1px solid #222;
+    .links a {
+      color: #f0f0f0;
+      text-decoration: none;  /* 밑줄 제거 */
+      margin: 0 6px;
     }
 
-    .map-placeholder {
-      width: 100%;
-      height: 320px;             /* 지도 높이 */
-      background: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: #777;
+    .links a:hover {
+      text-decoration: underline; /* 마우스 올리면 밑줄 */
     }
 
-    /* 실제 네이버 지도 iframe을 넣으면
-       .map-placeholder 대신 그 iframe이 들어가게 됩니다. */
-
-    /* =============================
-       하단 푸터 바 (회사 정보)
-       ============================= */
+    /* 하단 푸터 바 (회사 정보) */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -207,60 +98,35 @@
       padding: 12px 16px;
       font-size: 11px;
       color: #9d9d9d;
-
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: wrap;        /* 줄바꿈 허용 */
       justify-content: center;
       gap: 8px;
       text-align: center;
     }
 
     .footer-item::after {
-      content: "·";
+      content: "·";          /* 항목 사이에 점(·) 추가 */
       margin-left: 8px;
     }
 
     .footer-item:last-child::after {
-      content: "";
+      content: "";           /* 마지막 항목 뒤에는 점 제거 */
       margin: 0;
     }
 
-    /* =============================
-       반응형: 화면 폭이 768px 이하일 때 (모바일)
-       ============================= */
+    /* 태블릿/모바일 반응형 조정 */
     @media (max-width: 768px) {
-      /* 레이아웃을 위아래 구조로 변경:
-         위: 사이드바, 아래: 메인 컨텐츠 */
-      .layout {
-        flex-direction: column;
-      }
-
-      .sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid #222;
-        padding: 12px 16px;
-      }
-
-      /* 모바일에서는 메뉴를 가로로 나열 */
-      .sidebar-nav {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .line1,
-      .line2 {
+      .line1, .line2 {
         font-size: 26px;
-        white-space: normal;     /* 모바일에서는 자동 줄바꿈 허용 */
+        white-space: normal; /* 작은 화면에서는 줄바꿈 허용 */
       }
 
       .logo img {
         width: 260px;
       }
 
-      .desc1,
-      .desc2 {
+      .desc1, .desc2 {
         font-size: 18px;
       }
 
@@ -271,92 +137,36 @@
   </style>
 </head>
 <body>
-  <!-- 전체 레이아웃 감싸는 영역 (좌: 사이드바 / 우: 메인) -->
-  <div class="layout">
-    <!-- ======================
-         좌측 사이드바 (카테고리)
-         ====================== -->
-    <aside class="sidebar">
-      <div class="sidebar-title">모딩(Moding)</div>
+  <!-- 메인 가운데 영역 -->
+  <div class="wrapper">
+    <!-- 타이핑 효과가 들어갈 영역 -->
+    <div class="type-box">
+      <div id="line1" class="line1"></div>
+      <div id="line2" class="line2"></div>
+    </div>
 
-      <ul class="sidebar-nav">
-        <!-- 클릭 시 #about 섹션으로 이동 -->
-        <li><a href="#about">회사소개</a></li>
-        <!-- 클릭 시 #location 섹션으로 이동 -->
-        <li><a href="#location">오시는길</a></li>
-      </ul>
-    </aside>
+    <!-- 로고 이미지 (파일명은 실제 업로드한 이름과 맞춰야 함) -->
+    <div class="logo">
+      <img src="모딩로고.png" alt="Moding Logo">
+    </div>
 
-    <!-- ======================
-         오른쪽 메인 컨텐츠
-         ====================== -->
-    <main class="main">
-      <!-- 1) 상단 히어로 영역 (타이핑 + 로고 + 문구) -->
-      <section class="wrapper" id="top">
-        <div class="type-box">
-          <!-- JS에서 이 두 줄에 글자를 하나씩 채워 넣습니다 -->
-          <div id="line1" class="line1"></div>
-          <div id="line2" class="line2"></div>
-        </div>
+    <!-- 설명 문구 -->
+    <p class="desc1">
+      Food &amp; SaaS 플랫폼
+    </p>
+    <p class="desc2">
+      Moding Coming Soon
+    </p>
 
-        <div class="logo">
-          <!-- 실제 파일명이 "모딩로고.png" 인지 확인 필요 -->
-          <img src="모딩로고.png" alt="Moding Logo">
-        </div>
-
-        <p class="desc1">
-          Food &amp; SaaS 플랫폼
-        </p>
-        <p class="desc2">
-          Moding Coming Soon
-        </p>
-      </section>
-
-      <!-- 2) 회사소개 섹션 -->
-      <section id="about" class="section">
-        <h2 class="section-title">회사소개</h2>
-        <p class="section-sub">About Moding</p>
-        <div class="section-content">
-          <!-- 이 부분은 원하시는대로 내용만 바꾸시면 됩니다 -->
-          모딩(Moding)은 외식업 사장님들을 위한 Food &amp; SaaS 플랫폼입니다.<br>
-          레시피·원부자재·제조사·물류·정산을 하나의 흐름으로 연결하여,<br>
-          작은 매장도 ‘본사 수준’의 시스템으로 운영할 수 있도록 돕는 것을 목표로 합니다.
-        </div>
-      </section>
-
-      <!-- 3) 오시는길 섹션 (네이버 지도 영역) -->
-      <section id="location" class="section">
-        <h2 class="section-title">오시는길</h2>
-        <p class="section-sub">대구광역시 달서구 달구벌대로 1698</p>
-
-        <div class="section-content">
-          지하철 <strong>○○역</strong> 인근에 위치해 있으며, 차량 방문 시 건물 주차장을 이용하실 수 있습니다.
-        </div>
-
-        <!-- 지도 감싸는 박스 -->
-        <div class="map-wrap">
-          <!-- ▼▼▼ 여기에 나중에 네이버 지도 iframe을 붙여 넣으면 됩니다 ▼▼▼ -->
-         
-          iframe src="https://map.naver.com/p/entry/place/2054645683?placePath=/home?entry=plt&from=map&fromPanelNum=1&additionalHeight=76&timestamp=202511142249&locale=ko&svcName=map_pcv5&searchType=place&lng=128.5515681&lat=35.8551558&c=15.00,0,0,0,dh"
-                  width="100%"
-                  height="320"
-                  frameborder="0"
-                  scrolling="no"
-                  marginheight="0"
-                  marginwidth="0">
-          </iframe>
-          -->
-          <div class="map-placeholder">
-            네이버 지도 iframe을 여기(map-wrap 내부)에 붙여 넣어 주세요.
-          </div>
-        </div>
-      </section>
-    </main>
+    <!-- 회사소개 / 오시는 길 페이지로 이동하는 작은 링크 -->
+    <div class="links">
+      <!-- about.html, location.html 파일을 따로 만들어서 연결할 예정 -->
+      <a href="about.html">회사소개</a>|
+      <a href="location.html">오시는 길</a>
+    </div>
   </div>
 
-  <!-- ======================
-       하단 푸터 (회사 정보)
-       ====================== -->
+  <!-- 하단 푸터 바 (회사 정보 고정 영역) -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -365,36 +175,34 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- ======================
-       타이핑 효과 자바스크립트
-       ====================== -->
+  <!-- 타이핑 효과 스크립트 -->
   <script>
-    /* 페이지 로딩이 끝나면 실행 */
+    // 페이지 로드가 완료되면 타이핑 함수 실행
     window.onload = function () {
-      /* 타이핑할 텍스트 두 줄 */
+      // 첫 줄 / 둘째 줄에 들어갈 문구
       const text1 = "모든 사장님을 위한";
       const text2 = "모든 것을 담은 플랫폼";
 
-      /* 글자를 채워 넣을 DOM 요소 찾기 */
+      // 실제 글자가 찍힐 DOM 요소 가져오기
       const el1 = document.getElementById("line1");
       const el2 = document.getElementById("line2");
 
       let i = 0; // text1 인덱스
       let j = 0; // text2 인덱스
 
-      /* 첫 번째 줄 타이핑 함수 */
+      // 첫 번째 줄 타이핑 함수
       function typeLine1() {
         if (i < text1.length) {
-          el1.textContent += text1[i]; // i번째 글자를 추가
+          el1.textContent += text1[i]; // 한 글자씩 추가
           i++;
-          setTimeout(typeLine1, 90);   // 90ms 뒤에 다시 자기 자신 호출
+          setTimeout(typeLine1, 90);  // 타이핑 속도 (ms)
         } else {
-          // 첫 줄이 끝나면 250ms 쉬었다가 두 번째 줄 시작
+          // 첫 줄이 끝나면 잠시 쉬었다가 두 번째 줄 시작
           setTimeout(typeLine2, 250);
         }
       }
 
-      /* 두 번째 줄 타이핑 함수 */
+      // 두 번째 줄 타이핑 함수
       function typeLine2() {
         if (j < text2.length) {
           el2.textContent += text2[j];
@@ -403,7 +211,7 @@
         }
       }
 
-      /* 타이핑 시작 */
+      // 타이핑 시작
       typeLine1();
     };
   </script>
