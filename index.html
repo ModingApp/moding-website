@@ -116,24 +116,27 @@
     }
 
     /* 태블릿/모바일 반응형 조정 */
-    @media (max-width: 768px) {
-      .line1, .line2 {
-        font-size: 26px;
-        white-space: normal; /* 작은 화면에서는 줄바꿈 허용 */
-      }
+    /* ===== 공통 모바일 최적화: Fold 포함 스마트폰 대응 ===== */
+@media (max-width: 768px) {
 
-      .logo img {
-        width: 260px;
-      }
+  /* 전체 기본 글자 크기 살짝 줄이기 */
+  body {
+    font-size: 15px;
+  }
 
-      .desc1, .desc2 {
-        font-size: 18px;
-      }
+  /* 제목/본문은 줄바꿈 자연스럽게 + 행간 조정 */
+  p, h1, h2, h3, h4, h5, h6 {
+    white-space: normal !important;  /* 강제로 한 줄 고정된 것들 풀기 */
+    word-break: keep-all;            /* 한국어 단어 단위로 줄바꿈 */
+    line-height: 1.6;                /* 모바일에서는 조금 더 촘촘하게 */
+  }
 
-      .footer-bar {
-        font-size: 10px;
-      }
-    }
+  /* 본문 박스 폭은 화면에 꽉 차게, 좌우 여백만 살짝 */
+  .container {
+    max-width: 100% !important;
+    padding: 20px 18px;
+  }
+}
   </style>
 </head>
 <body>
