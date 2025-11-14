@@ -2,20 +2,48 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
+  <!-- 모바일 화면에서도 깨지지 않도록 하는 설정 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>오시는 길 | 모딩</title>
 
-  <!-- ✅ 새 NAVER Maps JS API 로드 (ncpKeyId 사용) -->
+  <!-- ✅ NAVER Maps JS API (ncpKeyId 사용) -->
   <script
     type="text/javascript"
     src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=yzegd1ve8v">
   </script>
 
   <style>
+    /* ================================
+       공통 초기화 + 기본 설정
+    ================================ */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    /* ===== 텍스트 선택 / 복사 방지 (input, textarea 제외) ===== */
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* 이미지 드래그/롱클릭 저장 최소화 */
+    img, .nocopy-img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none; /* 링크가 아닌 순수 이미지 보호용 */
+    }
+
+    /* 입력창은 선택/복사 가능하게 허용 (필요시 사용) */
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+      pointer-events: auto;
     }
 
     body {
@@ -28,6 +56,9 @@
       flex-direction: column;
     }
 
+    /* ================================
+       레이아웃 컨테이너
+    ================================ */
     .container {
       max-width: 960px;
       margin: 0 auto;
@@ -35,6 +66,9 @@
       flex: 1;
     }
 
+    /* ================================
+       상단 헤더 (로고 + 메인으로)
+    ================================ */
     .header {
       display: flex;
       align-items: center;
@@ -63,6 +97,9 @@
       text-decoration: underline;
     }
 
+    /* ================================
+       제목 / 주소 / 설명
+    ================================ */
     h1 {
       font-size: 28px;
       margin-bottom: 8px;
@@ -86,6 +123,9 @@
       opacity: 0.85;
     }
 
+    /* ================================
+       지도 박스
+    ================================ */
     .map-box {
       margin-top: 24px;
       background: #111111;
@@ -95,9 +135,11 @@
       border: 1px solid #222;
     }
 
+    /* 실제 네이버 지도가 들어갈 영역 */
     #map {
       width: 100%;
-      height: 420px;
+      height: 420px; /* 데스크톱 기준 높이 */
+      /* 지도는 클릭/드래그가 되어야 하므로 pointer-events 차단 X */
     }
 
     .map-note {
@@ -107,6 +149,9 @@
       border-top: 1px solid #222;
     }
 
+    /* ================================
+       하단 공통 푸터
+    ================================ */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -131,21 +176,27 @@
       margin: 0;
     }
 
+    /* ================================
+       모바일(Fold 포함) 대응
+    ================================ */
     @media (max-width: 768px) {
       body {
         font-size: 15px;
       }
+
       p, h1, h2, h3, h4, h5, h6 {
         white-space: normal !important;
         word-break: keep-all;
         line-height: 1.6;
       }
+
       .container {
         max-width: 100% !important;
         padding: 20px 18px 32px;
       }
+
       #map {
-        height: 320px;
+        height: 320px; /* 모바일에서 조금 낮게 */
       }
     }
   </style>
@@ -153,14 +204,17 @@
 
 <body>
   <main class="container">
+    <!-- 상단 헤더 -->
     <header class="header">
       <div class="header-left">
-        <img src="모딩로고.png" alt="Moding Logo" class="header-logo" />
+        <!-- 상단 로고 (복사 방지 위해 nocopy-img 클래스 추가) -->
+        <img src="모딩로고.png" alt="Moding Logo" class="header-logo nocopy-img" />
         <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
       </div>
       <a href="index.html" class="back-link">← 메인으로</a>
     </header>
 
+    <!-- 오시는 길 내용 -->
     <section>
       <h1>오시는 길</h1>
       <p class="subtitle">
@@ -173,6 +227,7 @@
       </p>
 
       <div class="map-box">
+        <!-- 네이버 지도 표시 영역 -->
         <div id="map"></div>
         <div class="map-note">
           ※ 지도가 보이지 않을 경우 새로고침하시거나,
@@ -182,6 +237,7 @@
     </section>
   </main>
 
+  <!-- 하단 공통 푸터 -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -191,15 +247,21 @@
   </footer>
 
   <script>
-    // 인증 실패 시 어떤 문제인지 바로 확인하기 위한 훅
+    /* ================================
+       NAVER MAP 인증 실패 시 알림
+    ================================ */
     window.navermap_authFailure = function () {
       alert("네이버 지도 API 인증에 실패했습니다.\nWeb 서비스 URL과 ncpKeyId를 다시 확인해 주세요.");
     };
 
+    /* ================================
+       지도 초기화 스크립트
+    ================================ */
     window.addEventListener("load", function () {
       // 모딩 좌표 (위도, 경도)
       var modingPosition = new naver.maps.LatLng(35.8551558, 128.5515681);
 
+      // 지도 생성
       var map = new naver.maps.Map("map", {
         center: modingPosition,
         zoom: 16,
@@ -211,12 +273,14 @@
         }
       });
 
+      // 마커 생성
       var marker = new naver.maps.Marker({
         position: modingPosition,
         map: map,
         title: "모딩(Moding Inc.)"
       });
 
+      // 정보창 생성
       var infoWindow = new naver.maps.InfoWindow({
         content: [
           '<div style="padding:10px 12px; font-size:12px; color:#000;">',
@@ -226,8 +290,10 @@
         ].join("")
       });
 
+      // 기본으로 정보창 열기
       infoWindow.open(map, marker);
 
+      // 마커 클릭 시 정보창 토글
       naver.maps.Event.addListener(marker, "click", function () {
         if (infoWindow.getMap()) {
           infoWindow.close();
@@ -235,6 +301,41 @@
           infoWindow.open(map, marker);
         }
       });
+    });
+
+    /* ================================
+       복사 / 우클릭 / 단축키 방지
+    ================================ */
+
+    // 우클릭 메뉴 차단 (링크, 입력창은 허용)
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) {
+        e.preventDefault();
+      }
+    });
+
+    // 드래그 차단 (지도 내부는 그대로 작동)
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+
+    // Ctrl + C, X, V, S, U, P, A 등 차단 (입력창 제외)
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+
+    // copy 이벤트 직접 차단 (입력창 제외)
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
     });
   </script>
 </body>
