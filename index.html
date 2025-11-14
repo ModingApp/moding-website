@@ -1,128 +1,168 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html> <!-- 문서 타입 선언 : HTML5 사용 -->
+<html lang="ko"> <!-- 문서 기본 언어를 한국어로 설정 -->
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"> <!-- 문자를 UTF-8 인코딩으로 사용 (한글 깨짐 방지) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 모바일에서 화면 크기를 기기 너비에 맞게 보여주도록 설정 -->
+
   <title>모든 사장님을 위한 모든 것을 담은 플랫폼, 모딩</title>
+  <!-- 브라우저 탭에 표시되는 제목 -->
+
   <style>
+    /* ------------------------------
+       전체 공통 기본값 설정
+       ------------------------------ */
     * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      box-sizing: border-box; /* padding, border를 width 계산에 포함 */
+      margin: 0;              /* 모든 기본 margin 제거 */
+      padding: 0;             /* 모든 기본 padding 제거 */
     }
 
+    /* ------------------------------
+       body(전체 페이지) 스타일
+       ------------------------------ */
     body {
+      /* 폰트 우선순위: 시스템 폰트 우선, 없으면 순서대로 대체 */
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                    "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
-      background: #0b0b0b;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column; /* 위: 내용, 아래: 푸터 */
+
+      background: #0b0b0b;   /* 전체 배경색 (거의 검정에 가까운 회색) */
+      color: #ffffff;        /* 기본 글자색은 흰색 */
+      min-height: 100vh;     /* 화면 높이(viewport height) 100% 이상 사용 */
+
+      display: flex;         /* body를 flex 컨테이너로 만들어 수직 정렬에 사용 */
+      flex-direction: column;/* 위에서 아래로 세로 방향으로 배치
+                                (위: 메인 영역 / 아래: 푸터) */
     }
 
+    /* ------------------------------
+       중앙 컨텐츠 박스(wrapper)
+       ------------------------------ */
     .wrapper {
-      width: 100%;
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 40px 24px;
-      text-align: center;
+      width: 100%;           /* 모바일에서 가로폭 100% 사용 */
+      max-width: 520px;      /* 데스크톱에서 최대폭 520px */
+      margin: 0 auto;        /* 좌우 가운데 정렬 */
+      padding: 40px 24px;    /* 상하/좌우 여백 */
 
-      flex: 1;
+      text-align: center;    /* 안쪽 텍스트 기본 중앙 정렬 */
+
+      /* body(flex 컨테이너)의 자식으로서
+         남는 공간을 채우고, 안에서 다시 중앙 배치 */
+      flex: 1;               /* 위아래 여유 공간을 주로 wrapper가 차지 */
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      justify-content: center; /* 세로 중앙 정렬 */
+      align-items: center;     /* 가로 중앙 정렬 */
     }
 
-    /* 타이핑 영역 높이를 고정해줘서 레이아웃이 튀지 않게 함 */
+    /* ------------------------------
+       타이핑 텍스트 영역
+       ------------------------------ */
     .type-box {
-      margin-bottom: 20px;
+      margin-bottom: 20px;   /* 아래 요소(로고)와 간격 */
     }
 
     .line1,
     .line2 {
-      font-size: 35px;
-      opacity: 0.85;
-      margin-bottom: 6px;
-      white-space: nowrap;
+      font-size: 35px;       /* 글자 크기 */
+      opacity: 0.85;         /* 살짝 반투명 효과 */
+      margin-bottom: 6px;    /* 줄간 간격 */
+      white-space: nowrap;   /* 줄바꿈 없이 한 줄로 표시 (데스크톱 기준) */
     }
 
+    /* ------------------------------
+       로고 영역
+       ------------------------------ */
     .logo {
-      margin: 24px 0 28px 0;
+      margin: 24px 0 28px 0; /* 위쪽 24px, 아래쪽 28px 여백 */
     }
 
     .logo img {
-      width: 380px;
-      max-width: 100%;
-      height: auto;
+      width: 380px;          /* 기본 로고 너비 */
+      max-width: 100%;       /* 화면이 좁으면 화면 폭에 맞게 축소 */
+      height: auto;          /* 비율 유지하면서 높이 자동 조절 */
     }
 
+    /* ------------------------------
+       아래 설명 텍스트 영역
+       ------------------------------ */
     .desc1,
     .desc2 {
-      font-size: 24px;
-      line-height: 1.6;
-      opacity: 0.8;
+      font-size: 24px;       /* 글자 크기 */
+      line-height: 1.6;      /* 줄 간격 */
+      opacity: 0.8;          /* 살짝 연하게 */
     }
 
-    /* 하단 푸터 바 */
+    /* ------------------------------
+       하단 회사 정보 바(푸터)
+       ------------------------------ */
     .footer-bar {
-      width: 100%;
-      border-top: 1px solid #222;
-      background: #0b0b0b;
-      padding: 12px 16px;
+      width: 100%;           /* 가로 전체 사용 */
+      border-top: 1px solid #222; /* 위쪽에 얇은 선 */
+      background: #0b0b0b;   /* 배경색 (body와 동일) */
+      padding: 12px 16px;    /* 안쪽 여백 */
+
       font-size: 11px;
-      color: #9d9d9d;
+      color: #9d9d9d;        /* 회색 텍스트 */
+
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
+      flex-wrap: wrap;       /* 줄이 길면 자동 줄바꿈 */
+      justify-content: center; /* 중앙 정렬 */
+      gap: 8px;              /* 아이템들 사이 간격 */
       text-align: center;
     }
 
     .footer-item::after {
-      content: "·";
+      content: "·";          /* 각 아이템 뒤에 점(구분자) 찍기 */
       margin-left: 8px;
     }
 
     .footer-item:last-child::after {
-      content: "";
+      content: "";           /* 마지막 아이템 뒤에는 점 표시 제거 */
       margin: 0;
     }
 
+    /* ------------------------------
+       반응형(모바일 화면일 때) 설정
+       화면 가로폭이 768px 이하일 때 적용
+       ------------------------------ */
     @media (max-width: 768px) {
       .line1, .line2 {
-        font-size: 26px;
-        white-space: normal;
+        font-size: 26px;     /* 글자 크기 줄이기 */
+        white-space: normal; /* 모바일에서는 줄바꿈 허용 */
       }
 
       .logo img {
-        width: 260px;
+        width: 260px;        /* 로고 사이즈 축소 */
       }
 
       .desc1, .desc2 {
-        font-size: 18px;
+        font-size: 18px;     /* 설명 글자 크기 축소 */
       }
 
       .footer-bar {
-        font-size: 10px;
+        font-size: 10px;     /* 푸터 글자 크기 조금 줄이기 */
       }
     }
   </style>
 </head>
 <body>
+  <!-- 중앙 내용 전체를 감싸는 컨테이너 -->
   <div class="wrapper">
-    <!-- 타이핑 효과가 들어갈 영역 -->
+    <!-- 타이핑 애니메이션이 들어가는 영역 -->
     <div class="type-box">
+      <!-- 자바스크립트가 이 요소들의 textContent를 하나씩 채워 넣음 -->
       <div id="line1" class="line1"></div>
       <div id="line2" class="line2"></div>
     </div>
 
+    <!-- 로고 이미지 영역 -->
     <div class="logo">
-      <!-- 실제 파일명이 "모딩로고.png"가 맞는지 확인 필요합니다 -->
+      <!-- 실제 파일명이 "모딩로고.png" 인지 확인 필요 -->
       <img src="모딩로고.png" alt="Moding Logo">
     </div>
 
+    <!-- 아래 설명 문구 -->
     <p class="desc1">
       Food &amp; SaaS 플랫폼
     </p>
@@ -131,7 +171,7 @@
     </p>
   </div>
 
-  <!-- 하단 푸터 바 -->
+  <!-- 하단 회사 정보 바 (푸터) -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -140,36 +180,47 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- 타이핑 효과 스크립트 -->
+  <!-- ------------------------------
+       타이핑 효과를 위한 자바스크립트
+       ------------------------------ -->
   <script>
+    /* 페이지의 모든 리소스(HTML, 이미지 등)가 로드된 후에 실행 */
     window.onload = function () {
+      /* 타이핑할 실제 문자열 정의 */
       const text1 = "모든 사장님을 위한";
       const text2 = "모든 것을 담은 플랫폼";
 
+      /* HTML 요소 가져오기 (id로 찾기) */
       const el1 = document.getElementById("line1");
       const el2 = document.getElementById("line2");
 
-      let i = 0;
-      let j = 0;
+      /* 각 줄에서 몇 번째 글자까지 썼는지 기록하는 인덱스 */
+      let i = 0; // text1 인덱스
+      let j = 0; // text2 인덱스
 
+      /* 첫 번째 줄을 한 글자씩 타이핑하는 함수 */
       function typeLine1() {
+        /* 아직 text1의 모든 글자를 다 쓰지 않았다면 */
         if (i < text1.length) {
-          el1.textContent += text1[i];
-          i++;
-          setTimeout(typeLine1, 90); // 글자 나오는 속도
+          el1.textContent += text1[i]; // 현재 글자를 화면에 추가
+          i++;                         // 다음 글자 위치로 이동
+          setTimeout(typeLine1, 90);   // 90ms 후에 다시 typeLine1() 호출
         } else {
-          setTimeout(typeLine2, 250); // 첫 줄 끝난 후 딜레이
+          /* 첫 줄이 끝나면, 250ms 쉬었다가 두 번째 줄 타이핑 시작 */
+          setTimeout(typeLine2, 250);
         }
       }
 
+      /* 두 번째 줄을 한 글자씩 타이핑하는 함수 */
       function typeLine2() {
         if (j < text2.length) {
-          el2.textContent += text2[j];
+          el2.textContent += text2[j]; // 두 번째 줄에 글자 추가
           j++;
-          setTimeout(typeLine2, 90);
+          setTimeout(typeLine2, 90);   // 90ms 간격으로 계속 호출
         }
       }
 
+      /* 스크립트 시작 시, 첫 번째 줄 타이핑 함수 실행 */
       typeLine1();
     };
   </script>
