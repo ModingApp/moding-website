@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회사소개 | 모딩</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+      background: #0b0b0b;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 960px;  /* 본문 폭 */
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      flex: 1;
+    }
+
+    /* 상단 로고 + 뒤로가기 */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .back-link {
+      font-size: 13px;
+      color: #cccccc;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 30px 0 10px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+
+    /* 하단 회사 정보 푸터 */
+    .footer-bar {
+      width: 100%;
+      border-top: 1px solid #222;
+      background: #0b0b0b;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #9d9d9d;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .footer-item::after {
+      content: "·";
+      margin-left: 8px;
+    }
+
+    .footer-item:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px 16px 32px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <!-- 상단 로고와 메인으로 돌아가기 링크 -->
+    <header class="header">
+      <div class="header-left">
+        <img src="모딩로고.png" alt="Moding Logo" class="header-logo">
+        <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
+      </div>
+      <a href="index.html" class="back-link">← 메인으로</a>
+    </header>
+
+    <!-- 회사소개 본문 -->
+    <section>
+      <h1>회사소개</h1>
+      <p>
+        모딩(Moding)은 외식업 사장님들을 위한 Food &amp; SaaS 플랫폼입니다.<br>
+        레시피·제조·배송·정산까지 한 번에 연결하여,<br>
+        작은 매장도 “한 사람의 식사”에 집중할 수 있도록 돕는 것을 목표로 합니다.
+      </p>
+
+      <h2>About Moding</h2>
+      <p>
+        · 매장 운영에 꼭 필요한 소스/식자재를 PB로 개발하고,<br>
+        · 안정적인 제조 파트너와 함께 생산·배송을 책임지며,<br>
+        · 주문·정산·데이터를 한 번에 볼 수 있는 SaaS 도구를 제공합니다.
+      </p>
+    </section>
+  </main>
+
+  <!-- 공통 푸터 -->
+  <footer class="footer-bar">
+    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
+    <span class="footer-item">대표자: 서희진</span>
+    <span class="footer-item">사업자등록번호: 730-87-03564</span>
+    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1693, 6층 607호</span>
+    <span class="footer-item">문의: moding_inc@naver.com</span>
+  </footer>
+</body>
+</html>
