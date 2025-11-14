@@ -10,7 +10,7 @@
        공통 초기화 스타일
     ------------------------------ */
     * {
-      box-sizing: border-box; /* padding, border 포함한 크기 계산 */
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
@@ -25,13 +25,35 @@
       flex-direction: column;
     }
 
+    /* ===== 텍스트 선택 / 복사 방지 (입력창 제외) ===== */
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* 입력창 / textarea 는 선택 허용 (다른 페이지 공통용) */
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+
+    /* 이미지 드래그 방지용 공통 클래스 */
+    .nocopy-img {
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
     /* ------------------------------
        메인 컨테이너 레이아웃
     ------------------------------ */
     .container {
-      max-width: 860px;           /* 본문 가로폭 */
+      max-width: 860px;
       margin: 0 auto;
-      padding: 40px 20px 60px;    /* 좌우 + 위/아래 여백 */
+      padding: 40px 20px 60px;
       flex: 1;
     }
 
@@ -66,7 +88,7 @@
     }
 
     /* ------------------------------
-       제목 스타일 (모딩 브랜드 포인트 사용)
+       제목 스타일
     ------------------------------ */
     h1, h2, h3 {
       font-weight: 700;
@@ -77,7 +99,7 @@
     h1 {
       font-size: 28px;
       color: #1FAA48;  /* 모딩 그린 */
-      margin-top: 0;   /* 첫 제목은 위 마진 제거 */
+      margin-top: 0;
     }
 
     h2 {
@@ -159,19 +181,16 @@
     <!-- 상단 로고 + 뒤로가기 -->
     <header class="header">
       <div class="header-left">
-        <img src="모딩로고.png" alt="Moding Logo" class="header-logo">
+        <img src="모딩로고.png" alt="Moding Logo" class="header-logo nocopy-img">
         <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
       </div>
       <a href="index.html" class="back-link">← 메인으로</a>
     </header>
 
-
-    <!-- ------------------------------
-         SECTION 1 - 모딩 소개
-    ------------------------------ -->
+    <!-- SECTION 1 - 모딩 소개 -->
     <h1>
-  <img src="모딩로고(가로형).png" alt="Moding" style="height:32px; width:auto;">
-</h1>
+      <img src="모딩로고(가로형).png" alt="Moding" style="height:32px; width:auto;" class="nocopy-img">
+    </h1>
 
     <p>
       모딩(Moding)은 식품 제조사와 외식업 사장님이<br>
@@ -185,9 +204,7 @@
 
     <div class="divider"></div>
 
-    <!-- ------------------------------
-         SECTION 2 - 모딩이 필요한 이유
-    ------------------------------ -->
+    <!-- SECTION 2 - 모딩이 필요한 이유 -->
     <h2>모딩이 필요한 이유</h2>
     <p>
       식품 제조 시장과 외식업 시장은 빠르게 변화하고 있지만,<br>
@@ -199,9 +216,7 @@
 
     <div class="divider"></div>
 
-    <!-- ------------------------------
-         SECTION 3 - 모딩이 만드는 연결
-    ------------------------------ -->
+    <!-- SECTION 3 - 모딩이 만드는 연결 -->
     <h2>모딩이 만드는 연결</h2>
 
     <h3>(1) 제조사와 모딩</h3>
@@ -222,9 +237,7 @@
 
     <div class="divider"></div>
 
-    <!-- ------------------------------
-         SECTION 4 - 모딩의 혁신 기술
-    ------------------------------ -->
+    <!-- SECTION 4 - 모딩의 혁신 기술 -->
     <h2>모딩의 혁신 기술</h2>
 
     <p>
@@ -259,9 +272,7 @@
 
   </main>
 
-  <!-- ------------------------------
-       공통 푸터
-  ------------------------------ -->
+  <!-- 공통 푸터 -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -270,5 +281,36 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
+  <!-- 복사 / 우클릭 / 단축키 방지 스크립트 -->
+  <script>
+    // 우클릭 메뉴 차단 (입력창, textarea는 예외)
+    document.addEventListener("contextmenu", function (e) {
+      if (e.target.closest("input, textarea")) return;
+      e.preventDefault();
+    });
+
+    // 드래그 시작 차단
+    document.addEventListener("dragstart", function (e) {
+      if (e.target.closest("input, textarea")) return;
+      e.preventDefault();
+    });
+
+    // Ctrl + C / X / V / S / U / P / A 차단 (입력창, textarea는 예외)
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        const blocked = ["c", "x", "v", "s", "u", "p", "a"];
+        if (blocked.includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+
+    // copy 이벤트 차단 (입력창, textarea는 예외)
+    document.addEventListener("copy", function (e) {
+      if (e.target.closest("input, textarea")) return;
+      e.preventDefault();
+    });
+  </script>
 </body>
 </html>
