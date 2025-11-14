@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <!-- 모바일에서도 화면이 깨지지 않도록 하는 설정 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회사소개 | 모딩</title>
 
@@ -30,9 +29,9 @@
        메인 컨테이너 레이아웃
     ------------------------------ */
     .container {
-      max-width: 860px;           /* 본문 가로폭 */
+      max-width: 860px;
       margin: 0 auto;
-      padding: 40px 20px 60px;    /* 좌우 + 위/아래 여백 */
+      padding: 40px 20px 60px;
       flex: 1;
     }
 
@@ -67,7 +66,7 @@
     }
 
     /* ------------------------------
-       제목 스타일
+       제목 스타일 (모딩 브랜드 포인트 사용)
     ------------------------------ */
     h1, h2, h3 {
       font-weight: 700;
@@ -77,13 +76,13 @@
 
     h1 {
       font-size: 28px;
-      color: #1FAA48; /* 모딩 그린 */
-      margin-top: 0;  /* 첫 제목은 위쪽 여백 제거 */
+      color: #1FAA48;  /* 모딩 그린 */
+      margin-top: 0;
     }
 
     h2 {
       font-size: 22px;
-      color: #FF8A00; /* 모딩 오렌지 */
+      color: #FF8A00;  /* 모딩 오렌지 */
     }
 
     h3 {
@@ -97,42 +96,28 @@
     ------------------------------ */
     p {
       font-size: 15px;
-      line-height: 1.9;   /* 문장 사이 간격 넉넉하게 */
+      line-height: 1.85;
       opacity: 0.9;
       margin-bottom: 14px;
     }
 
-    /* ------------------------------
-       불릿 리스트 (가독성 강화)
-    ------------------------------ */
+    /* 리스트 스타일 (• 대신 한국 서비스 느낌으로 · 사용) */
     .text-list {
       list-style: none;
-      margin: 8px 0 0 0;
-      padding: 0;
+      margin: 8px 0 12px;
+      padding-left: 0;
     }
-
     .text-list li {
-      position: relative;
-      padding-left: 16px;
       font-size: 15px;
       line-height: 1.9;
       opacity: 0.9;
-      margin-bottom: 10px; /* 항목 간 간격 */
     }
-
     .text-list li::before {
-      content: "·";        /* 리스트 앞에 점 표시 */
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
-    .text-list li:last-child {
-      margin-bottom: 0;
+      content: "· ";
     }
 
     /* ------------------------------
-       섹션 구분 라인
+       섹션 간 구분용 라인
     ------------------------------ */
     .divider {
       border-bottom: 1px solid #222;
@@ -140,49 +125,72 @@
     }
 
     /* ------------------------------
-       ✅ 문의 배너 스타일
+       CTA 섹션
     ------------------------------ */
-    .contact-section-title {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 16px;
+    .cta-section {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding: 32px 20px 36px;
+      border-radius: 18px;
+      border: 1px solid #262626;
+      background: radial-gradient(circle at top left, #1d3a26 0, #050505 55%);
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
     }
 
-    .contact-banner {
-      margin-top: 8px;
-      background: linear-gradient(135deg, #1FAA48 0%, #0f7934 60%, #0b5224 100%);
-      border-radius: 14px;
-      padding: 18px 20px;
+    .cta-title {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #FFB341;
+    }
+
+    .cta-desc {
+      font-size: 14px;
+      line-height: 1.9;
+      opacity: 0.92;
+      margin-bottom: 22px;
+    }
+
+    .cta-buttons {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 10px;
+      margin-bottom: 8px;
     }
 
-    .contact-text {
-      font-size: 14px;
-      line-height: 1.8;
-      color: #f4fff7;
-    }
-
-    .contact-text strong {
-      font-weight: 700;
-    }
-
-    .contact-button {
-      padding: 8px 14px;
-      font-size: 13px;
+    .cta-btn-primary,
+    .cta-btn-outline {
+      padding: 10px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      color: #ffffff;
-      background: rgba(0, 0, 0, 0.18);
+      font-size: 13px;
       text-decoration: none;
       white-space: nowrap;
+      transition: all 0.18s ease-out;
     }
 
-    .contact-button:hover {
-      background: rgba(0, 0, 0, 0.32);
+    .cta-btn-primary {
+      border: 1px solid #1FAA48;
+      color: #ffffff;
+      background: #1FAA48;
+    }
+    .cta-btn-primary:hover {
+      background: #22c455;
+      border-color: #22c455;
+    }
+
+    .cta-btn-outline {
+      border: 1px solid #FF8A00;
+      color: #FF8A00;
+      background: transparent;
+    }
+    .cta-btn-outline:hover {
+      background: rgba(255, 138, 0, 0.12);
+    }
+
+    .cta-note {
+      font-size: 11px;
+      opacity: 0.7;
     }
 
     /* ------------------------------
@@ -212,22 +220,10 @@
     }
 
     /* ------------------------------
-       반응형 (모바일 / Fold 포함)
+       반응형 (모바일)
     ------------------------------ */
     @media (max-width: 768px) {
-      body {
-        font-size: 15px;
-      }
-
-      /* 제목/본문 줄바꿈 자연스럽게 */
-      p, h1, h2, h3, h4, h5, h6 {
-        white-space: normal !important;
-        word-break: keep-all;
-        line-height: 1.65;
-      }
-
       .container {
-        max-width: 100% !important;
         padding: 28px 16px 40px;
       }
 
@@ -235,28 +231,28 @@
       h2 { font-size: 20px; }
       h3 { font-size: 18px; }
 
-      p,
-      .text-list li {
-        font-size: 14px;
-        line-height: 1.8;   /* 모바일에서 조금 더 여유 */
-        margin-bottom: 12px;
+      p { font-size: 14px; }
+
+      .cta-section {
+        margin-top: 32px;
+        padding: 26px 18px 30px;
       }
 
-      /* 문의 배너 모바일 정렬 */
-      .contact-banner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .contact-button {
-        align-self: flex-start;
+      .cta-title {
+        font-size: 20px;
       }
     }
+
   </style>
 </head>
-<body>
+<body
+  oncontextmenu="return false"
+  onselectstart="return false"
+  ondragstart="return false"
+>
 
   <main class="container">
+    
     <!-- 상단 로고 + 뒤로가기 -->
     <header class="header">
       <div class="header-left">
@@ -266,7 +262,9 @@
       <a href="index.html" class="back-link">← 메인으로</a>
     </header>
 
-    <!-- SECTION 1 - 모딩 소개 -->
+    <!-- ------------------------------
+         SECTION 1 - 모딩 소개
+    ------------------------------ -->
     <h1>
       <img src="모딩로고(가로형).png" alt="Moding" style="height:32px; width:auto;">
     </h1>
@@ -287,7 +285,9 @@
 
     <div class="divider"></div>
 
-    <!-- SECTION 2 - 모딩이 필요한 이유 -->
+    <!-- ------------------------------
+         SECTION 2 - 모딩이 필요한 이유
+    ------------------------------ -->
     <h2>모딩이 필요한 이유</h2>
     <p>
       식품 제조 시장과 외식업 시장은 빠르게 변화하고 있지만,<br>
@@ -303,7 +303,9 @@
 
     <div class="divider"></div>
 
-    <!-- SECTION 3 - 모딩이 만드는 연결 -->
+    <!-- ------------------------------
+         SECTION 3 - 모딩이 만드는 연결
+    ------------------------------ -->
     <h2>모딩이 만드는 연결</h2>
 
     <h3>(1) 제조사와 모딩</h3>
@@ -314,7 +316,7 @@
       <li>브랜드와 제품의 가치를 온전히 드러낼 수 있는 상품 페이지</li>
     </ul>
 
-    <h3 style="margin-top:28px;">(2) 외식업 사장님과 모딩</h3>
+    <h3>(2) 외식업 사장님과 모딩</h3>
     <ul class="text-list">
       <li>검증된 제조사의 소스·원부재료·밀키트를 한 곳에서 비교·주문할 수 있는 환경</li>
       <li>결제·정산·내역 확인까지 통합된 SaaS 도구</li>
@@ -323,7 +325,9 @@
 
     <div class="divider"></div>
 
-    <!-- SECTION 4 - 모딩의 혁신 기술 -->
+    <!-- ------------------------------
+         SECTION 4 - 모딩의 혁신 기술
+    ------------------------------ -->
     <h2>모딩의 혁신 기술</h2>
 
     <p>
@@ -332,7 +336,7 @@
       B2B Food-SaaS 플랫폼입니다.
     </p>
 
-    <ul class="text-list" style="margin-top:16px;">
+    <ul class="text-list">
       <li>
         자동화된 정산 시스템 : 복잡한 수기 정산 없이<br>
         결제→정산→내역 관리가 한 흐름으로 처리됩니다.
@@ -352,28 +356,58 @@
       </li>
     </ul>
 
-    <!-- ==========================
-         ✅ SECTION 5 - 문의 배너
-    =========================== -->
+    <!-- ------------------------------
+         SECTION 5 - 모딩의 운영 철학
+    ------------------------------ -->
     <div class="divider"></div>
 
-    <section class="contact-section">
-      <div class="contact-section-title">제휴 · 입점 · 플랫폼 문의</div>
-      <div class="contact-banner">
-        <div class="contact-text">
-          <strong>모딩과 함께할 제조사 / 외식업 사장님</strong><br>
-          입점, 제휴, 플랫폼 관련 문의는 아래 메일로 연락 주세요.<br>
-          <strong>moding_inc@naver.com</strong>
-        </div>
-        <a class="contact-button" href="mailto:moding_inc@naver.com">
-          이메일 보내기
+    <h2>모딩의 운영 철학</h2>
+    <p>
+      모딩 팀은 실제로 식품 제조업과 외식업 현장을 모두 경험한 사람들로 구성되어 있습니다.<br>
+      현장의 언어를 이해하는 만큼, 현장에서 정말 필요로 하는 도구만 조용히, 단단하게 만들어가겠습니다.
+    </p>
+    <p>
+      단기적인 판매 실적보다 제조사와 사장님이 오래 함께 갈 수 있는 거래 구조를 우선합니다.<br>
+      가격을 깎기 위한 과도한 출혈 경쟁이나 불투명한 수수료 구조는 지양합니다.
+    </p>
+
+    <!-- ------------------------------
+         SECTION 6 - CTA
+    ------------------------------ -->
+    <section class="cta-section">
+      <h3 class="cta-title">모딩과 함께하고 싶으신가요?</h3>
+      <p class="cta-desc">
+        식품 제조사와 외식업 사장님을 대상으로<br>
+        모딩(Moding)의 1차 파트너를 모집하고 있습니다.<br>
+        입점·제휴·플랫폼 관련 문의는 아래 채널로 연락 주세요.
+      </p>
+
+      <div class="cta-buttons">
+        <a
+          href="mailto:moding_inc@naver.com?subject=[제조사] 모딩 입점·제휴 문의"
+          class="cta-btn-primary"
+        >
+          제조사 입점·제휴 문의
+        </a>
+
+        <a
+          href="mailto:moding_inc@naver.com?subject=[외식업] 모딩 서비스 문의"
+          class="cta-btn-outline"
+        >
+          외식업 사장님 서비스 문의
         </a>
       </div>
+
+      <p class="cta-note">
+        현재 베타 단계로, 일부 기능은 순차적으로 제공됩니다.
+      </p>
     </section>
 
   </main>
 
-  <!-- 공통 푸터 -->
+  <!-- ------------------------------
+       공통 푸터
+  ------------------------------ -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -382,5 +416,25 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
+  <!-- ------------------------------
+       복사 / 우클릭 / 단축키 방지 스크립트
+       (기본적인 억제용 – 완전한 보안은 아님)
+  ------------------------------ -->
+  <script>
+    // 복사 이벤트 차단
+    document.addEventListener("copy", function (e) {
+      e.preventDefault();
+      alert("모딩(Moding)의 콘텐츠는 보호되고 있습니다.");
+    });
+
+    // Ctrl/Cmd + C, X, S, U, A 등 일부 단축키 차단
+    document.addEventListener("keydown", function (e) {
+      if ((e.ctrlKey || e.metaKey) &&
+          ["c", "x", "s", "u", "a"].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
+```0
