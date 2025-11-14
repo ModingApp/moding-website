@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오시는 길 | 모딩</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+      background: #0b0b0b;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      flex: 1;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .back-link {
+      font-size: 13px;
+      color: #cccccc;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.8;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    /* 네이버 지도 iframe 래퍼 */
+    .map-wrapper {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;     /* 모서리 둥글게 자르기 */
+      border: 1px solid #222;
+    }
+
+    .map-iframe {
+      width: 100%;
+      height: 360px;        /* 지도 높이 */
+      border: 0;
+    }
+
+    .footer-bar {
+      width: 100%;
+      border-top: 1px solid #222;
+      background: #0b0b0b;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #9d9d9d;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .footer-item::after {
+      content: "·";
+      margin-left: 8px;
+    }
+
+    .footer-item:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px 16px 32px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .map-iframe {
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <!-- 상단 로고 + 메인으로 돌아가기 -->
+    <header class="header">
+      <div class="header-left">
+        <img src="모딩로고.png" alt="Moding Logo" class="header-logo">
+        <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
+      </div>
+      <a href="index.html" class="back-link">← 메인으로</a>
+    </header>
+
+    <section>
+      <h1>오시는 길</h1>
+      <p>
+        대구광역시 달서구 달구벌대로 1698 인근<br>
+        대중교통 및 자가용 이용 시 네이버 지도를 참고해 주세요.
+      </p>
+
+      <!-- 네이버 지도 임베드 (대표님이 주신 주소 사용) -->
+      <div class="map-wrapper">
+        <!-- 이 iframe src는 네이버 지도에서 ‘퍼가기’로 가져온 코드로 교체해도 됩니다 -->
+        <iframe
+          class="map-iframe"
+          src="https://map.naver.com/p/entry/place/2054645683?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=128.5515681&lat=35.8551558&c=15.00,0,0,0,dh"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-bar">
+    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
+    <span class="footer-item">대표자: 서희진</span>
+    <span class="footer-item">사업자등록번호: 730-87-03564</span>
+    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1693, 6층 607호</span>
+    <span class="footer-item">문의: moding_inc@naver.com</span>
+  </footer>
+</body>
+</html>
