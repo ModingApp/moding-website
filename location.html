@@ -11,7 +11,8 @@
   <!-- 네이버 지도 JS API 불러오기 (Client ID 는 실제 값으로 교체) -->
   <!-- ncpClientId= 뒤에 네이버 콘솔의 Client ID 를 넣어야 지도가 정상 출력됩니다. -->
   
-  <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ng7o6t4vk6"></script>
+ <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ng7o6t4vk6"></script>
+
   
   <style>
     /* ========== 공통 기본 설정 ========== */
@@ -231,23 +232,25 @@
       var modingPosition = new naver.maps.LatLng(35.8551558, 128.5515681);
 
       // 2) 지도 생성
-      var map = new naver.maps.Map("map", {
-        center: modingPosition, // 지도의 중앙 위치
-        zoom: 16,               // 확대 레벨 (숫자 높을수록 확대)
-        minZoom: 10,            // 최소 줌
-        maxZoom: 19,            // 최대 줌
-        zoomControl: true,      // 줌 컨트롤러 표시
-        zoomControlOptions: {
-          position: naver.maps.Position.TOP_RIGHT  // 줌 컨트롤러 위치
-        }
-      });
+     var modingPosition = new naver.maps.LatLng(35.8551558, 128.5515681);
 
-      // 3) 마커 생성 (모딩 위치 표시)
-      var marker = new naver.maps.Marker({
-        position: modingPosition, // 마커가 찍힐 좌표
-        map: map,                 // 어느 지도에 표시할지
-        title: "모딩(Moding Inc.)" // 마우스 오버 시 뜨는 텍스트
-      });
+var map = new naver.maps.Map("map", {
+  center: modingPosition,
+  zoom: 16,
+  minZoom: 10,
+  maxZoom: 19,
+  zoomControl: true,
+  zoomControlOptions: {
+    position: naver.maps.Position.TOP_RIGHT
+  }
+});
+
+var marker = new naver.maps.Marker({
+  position: modingPosition,
+  map: map,
+  title: "모딩(Moding Inc.)"
+});
+
 
       // 4) 정보창(풍선) 옵션 설정 (필요 없으면 이 블록은 삭제해도 무방)
       var infoWindow = new naver.maps.InfoWindow({
