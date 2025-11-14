@@ -18,7 +18,7 @@
       color: #ffffff;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
+      flex-direction: column; /* 위: 내용, 아래: 푸터 */
     }
 
     .wrapper {
@@ -27,6 +27,7 @@
       margin: 0 auto;
       padding: 40px 24px;
       text-align: center;
+
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -34,34 +35,37 @@
       align-items: center;
     }
 
+    /* 타이핑 영역 높이를 고정해줘서 레이아웃이 튀지 않게 함 */
     .type-box {
-      height: 90px; /* 글자가 움직여도 레이아웃이 흔들리지 않게 높이 고정 */
       margin-bottom: 20px;
     }
 
-    .line {
+    .line1,
+    .line2 {
       font-size: 35px;
       opacity: 0.85;
+      margin-bottom: 6px;
       white-space: nowrap;
     }
 
     .logo {
-      margin-bottom: 28px;
+      margin: 24px 0 28px 0;
     }
 
     .logo img {
       width: 380px;
-      max-width: 300%;
+      max-width: 100%;
       height: auto;
     }
 
-    .desc1, .desc2 {
+    .desc1,
+    .desc2 {
       font-size: 24px;
       line-height: 1.6;
       opacity: 0.8;
     }
 
-    /* 푸터 */
+    /* 하단 푸터 바 */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -78,3 +82,96 @@
 
     .footer-item::after {
       content: "·";
+      margin-left: 8px;
+    }
+
+    .footer-item:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .line1, .line2 {
+        font-size: 26px;
+        white-space: normal;
+      }
+
+      .logo img {
+        width: 260px;
+      }
+
+      .desc1, .desc2 {
+        font-size: 18px;
+      }
+
+      .footer-bar {
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- 타이핑 효과가 들어갈 영역 -->
+    <div class="type-box">
+      <div id="line1" class="line1"></div>
+      <div id="line2" class="line2"></div>
+    </div>
+
+    <div class="logo">
+      <!-- 실제 파일명이 "모딩로고.png"가 맞는지 확인 필요합니다 -->
+      <img src="모딩로고.png" alt="Moding Logo">
+    </div>
+
+    <p class="desc1">
+      Food &amp; SaaS 플랫폼
+    </p>
+    <p class="desc2">
+      Moding Coming Soon
+    </p>
+  </div>
+
+  <!-- 하단 푸터 바 -->
+  <footer class="footer-bar">
+    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
+    <span class="footer-item">대표자: 서희진</span>
+    <span class="footer-item">사업자등록번호: 730-87-03564</span>
+    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1693, 6층 607호</span>
+    <span class="footer-item">문의: moding_inc@naver.com</span>
+  </footer>
+
+  <!-- 타이핑 효과 스크립트 -->
+  <script>
+    window.onload = function () {
+      const text1 = "모든 사장님을 위한";
+      const text2 = "모든 것을 담은 플랫폼";
+
+      const el1 = document.getElementById("line1");
+      const el2 = document.getElementById("line2");
+
+      let i = 0;
+      let j = 0;
+
+      function typeLine1() {
+        if (i < text1.length) {
+          el1.textContent += text1[i];
+          i++;
+          setTimeout(typeLine1, 90); // 글자 나오는 속도
+        } else {
+          setTimeout(typeLine2, 250); // 첫 줄 끝난 후 딜레이
+        }
+      }
+
+      function typeLine2() {
+        if (j < text2.length) {
+          el2.textContent += text2[j];
+          j++;
+          setTimeout(typeLine2, 90);
+        }
+      }
+
+      typeLine1();
+    };
+  </script>
+</body>
+</html>
