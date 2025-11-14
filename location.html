@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <!-- 문서 인코딩 설정 -->
   <meta charset="UTF-8" />
-  <!-- 모바일 화면에서 반응형 레이아웃 적용 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- 브라우저 탭 제목 -->
   <title>오시는 길 | 모딩</title>
 
-  <!-- 
-    ✅ 네이버 지도 JS API 불러오기 
-    - ncpClientId= 뒤에 네이버 콘솔의 Client ID 값을 넣습니다.
-    - 지금은 대표님 계정의 Client ID "ng7o6t4vk6" 로 적어둠
-    - 값이 바뀌면 꼭 같이 수정해야 합니다.
-  -->
-  <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ub6ti3op6e"></script>
+  <!-- ✅ 새 NAVER Maps JS API 로드 (ncpKeyId 사용) -->
+  <script
+    type="text/javascript"
+    src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=ub6ti3op6e">
+  </script>
 
   <style>
-    /* ========== 공통 기본 설정 ========== */
     * {
-      box-sizing: border-box;   /* padding, border를 width 계산에 포함 */
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
@@ -27,22 +21,20 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                    "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
-      background: #0b0b0b;       /* 회사소개 페이지와 동일한 진한 배경색 */
-      color: #ffffff;            /* 기본 글자색 흰색 */
-      min-height: 100vh;         /* 화면 전체 높이 확보 */
+      background: #0b0b0b;
+      color: #ffffff;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;    /* 위: 내용, 아래: 푸터 배치 */
+      flex-direction: column;
     }
 
-    /* ========== 전체 컨테이너 (본문 영역) ========== */
     .container {
-      max-width: 960px;           /* 데스크톱에서 본문 최대 폭 */
-      margin: 0 auto;             /* 가운데 정렬 */
-      padding: 32px 20px 40px;    /* 상·좌우·하 여백 */
-      flex: 1;                    /* 푸터 위 영역을 꽉 채우기 */
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      flex: 1;
     }
 
-    /* ========== 상단 헤더 (로고 + 메인으로 링크) ========== */
     .header {
       display: flex;
       align-items: center;
@@ -53,11 +45,11 @@
     .header-left {
       display: flex;
       align-items: center;
-      gap: 12px;                  /* 로고와 텍스트 사이 간격 */
+      gap: 12px;
     }
 
     .header-logo {
-      height: 40px;               /* 상단 로고 높이 */
+      height: 40px;
       width: auto;
     }
 
@@ -68,10 +60,9 @@
     }
 
     .back-link:hover {
-      text-decoration: underline; /* 마우스 오버 시 밑줄 표시 */
+      text-decoration: underline;
     }
 
-    /* ========== 제목/설명 텍스트 ========== */
     h1 {
       font-size: 28px;
       margin-bottom: 8px;
@@ -95,23 +86,20 @@
       opacity: 0.85;
     }
 
-    /* ========== 지도 박스 ========== */
     .map-box {
       margin-top: 24px;
-      background: #111111;                          /* 지도 박스 배경 */
-      border-radius: 14px;                          /* 모서리 둥글게 */
-      overflow: hidden;                             /* 내용이 밖으로 튀어나오지 않게 */
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);   /* 박스 그림자 */
-      border: 1px solid #222;                       /* 외곽선 */
+      background: #111111;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      border: 1px solid #222;
     }
 
-    /* 실제 지도가 그려질 영역 */
     #map {
-      width: 100%;   /* 가로는 부모 박스 기준 100% */
-      height: 420px; /* 기본 높이 (데스크톱 기준) */
+      width: 100%;
+      height: 420px;
     }
 
-    /* 지도 아래 안내 문구 */
     .map-note {
       font-size: 11px;
       color: #b5b5b5;
@@ -119,7 +107,6 @@
       border-top: 1px solid #222;
     }
 
-    /* ========== 하단 회사 정보 푸터 ========== */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -128,41 +115,35 @@
       font-size: 11px;
       color: #9d9d9d;
       display: flex;
-      flex-wrap: wrap;            /* 줄 바꿈 허용 */
-      justify-content: center;    /* 가운데 정렬 */
-      gap: 8px;                   /* 항목 간 간격 */
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
       text-align: center;
     }
 
     .footer-item::after {
-      content: "·";               /* 각 항목 뒤에 점(.) 구분자 */
+      content: "·";
       margin-left: 8px;
     }
 
     .footer-item:last-child::after {
-      content: "";                /* 마지막 항목 뒤에는 점(.) 제거 */
+      content: "";
       margin: 0;
     }
 
-    /* ========== 모바일 최적화 (Fold 포함) ========== */
     @media (max-width: 768px) {
       body {
         font-size: 15px;
       }
-
-      /* 제목/본문이 자연스럽게 줄바꿈되도록 설정 */
       p, h1, h2, h3, h4, h5, h6 {
         white-space: normal !important;
         word-break: keep-all;
         line-height: 1.6;
       }
-
       .container {
         max-width: 100% !important;
         padding: 20px 18px 32px;
       }
-
-      /* 모바일에서는 지도 높이를 조금 줄이기 */
       #map {
         height: 320px;
       }
@@ -171,23 +152,17 @@
 </head>
 
 <body>
-  <!-- ========== 메인 컨텐츠 영역 ========== -->
   <main class="container">
-    <!-- 상단 헤더 (로고 + 메인으로 링크) -->
     <header class="header">
       <div class="header-left">
-        <!-- 상단 로고: 파일명은 실제 업로드한 이름에 맞게 수정 -->
         <img src="모딩로고.png" alt="Moding Logo" class="header-logo" />
         <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
       </div>
-      <!-- 메인(Coming Soon) 페이지 파일명에 맞게 href 수정 -->
       <a href="index.html" class="back-link">← 메인으로</a>
     </header>
 
-    <!-- 오시는 길 텍스트 + 지도 -->
     <section>
       <h1>오시는 길</h1>
-
       <p class="subtitle">
         아래 지도를 통해 <span style="font-weight:600;">모딩 본사</span> 위치를 확인하실 수 있습니다.
       </p>
@@ -197,20 +172,16 @@
         두류역 7번 출구 도보 약 5분 · 건물 내 주차장 이용 가능
       </p>
 
-      <!-- 지도 박스 -->
       <div class="map-box">
-        <!-- 실제 지도가 렌더링될 영역 (네이버 JS가 이 id="map" 을 찾습니다) -->
         <div id="map"></div>
-
         <div class="map-note">
-          ※ 지도가 보이지 않을 경우 새로고침(F5)하시거나,
+          ※ 지도가 보이지 않을 경우 새로고침하시거나,
           <strong>네이버 지도 앱</strong>에서 “모딩 (대구 달서구)”를 검색해 주세요.
         </div>
       </div>
     </section>
   </main>
 
-  <!-- ========== 공통 푸터 ========== -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -219,34 +190,33 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- ========== 네이버 지도 초기화 스크립트 ========== -->
   <script>
-    // 페이지 로드가 끝난 뒤에 지도 초기화
+    // 인증 실패 시 어떤 문제인지 바로 확인하기 위한 훅
+    window.navermap_authFailure = function () {
+      alert("네이버 지도 API 인증에 실패했습니다.\nWeb 서비스 URL과 ncpKeyId를 다시 확인해 주세요.");
+    };
+
     window.addEventListener("load", function () {
-      // 1) 지도의 중심 좌표 설정 (위도, 경도 순서)
-      //    네이버 좌표계 기준: Lat(위도), Lng(경도)
+      // 모딩 좌표 (위도, 경도)
       var modingPosition = new naver.maps.LatLng(35.8551558, 128.5515681);
 
-      // 2) 지도 생성
       var map = new naver.maps.Map("map", {
-        center: modingPosition,        // 지도 중심 좌표
-        zoom: 16,                      // 초기 확대 수준 (숫자 클수록 더 확대)
-        minZoom: 10,                   // 최소 축소 레벨
-        maxZoom: 19,                   // 최대 확대 레벨
-        zoomControl: true,             // 확대/축소 컨트롤 표시
+        center: modingPosition,
+        zoom: 16,
+        minZoom: 10,
+        maxZoom: 19,
+        zoomControl: true,
         zoomControlOptions: {
-          position: naver.maps.Position.TOP_RIGHT  // 컨트롤 위치
+          position: naver.maps.Position.TOP_RIGHT
         }
       });
 
-      // 3) 마커 생성 (회사 위치 표시)
       var marker = new naver.maps.Marker({
-        position: modingPosition,      // 마커가 찍힐 좌표
-        map: map,                      // 마커를 표시할 지도 객체
-        title: "모딩(Moding Inc.)"     // 마우스 오버 시 말풍선 텍스트
+        position: modingPosition,
+        map: map,
+        title: "모딩(Moding Inc.)"
       });
 
-      // 4) 정보창(풍선) 내용 구성
       var infoWindow = new naver.maps.InfoWindow({
         content: [
           '<div style="padding:10px 12px; font-size:12px; color:#000;">',
@@ -256,10 +226,8 @@
         ].join("")
       });
 
-      // 5) 지도 로드 시 기본으로 정보창 열기
       infoWindow.open(map, marker);
 
-      // 6) 마커 클릭 시 정보창 토글
       naver.maps.Event.addListener(marker, "click", function () {
         if (infoWindow.getMap()) {
           infoWindow.close();
