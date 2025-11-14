@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <!-- 모바일에서도 화면이 깨지지 않도록 하는 설정 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회사소개 | 모딩</title>
 
@@ -29,9 +30,9 @@
        메인 컨테이너 레이아웃
     ------------------------------ */
     .container {
-      max-width: 860px;
+      max-width: 860px;           /* 본문 가로폭 */
       margin: 0 auto;
-      padding: 40px 20px 60px;
+      padding: 40px 20px 60px;    /* 좌우 + 위/아래 여백 */
       flex: 1;
     }
 
@@ -77,7 +78,7 @@
     h1 {
       font-size: 28px;
       color: #1FAA48; /* 모딩 그린 */
-      margin-top: 0;
+      margin-top: 0;  /* 첫 제목은 위쪽 여백 제거 */
     }
 
     h2 {
@@ -96,7 +97,7 @@
     ------------------------------ */
     p {
       font-size: 15px;
-      line-height: 1.9;
+      line-height: 1.9;   /* 문장 사이 간격 넉넉하게 */
       opacity: 0.9;
       margin-bottom: 14px;
     }
@@ -120,7 +121,7 @@
     }
 
     .text-list li::before {
-      content: "·";
+      content: "·";        /* 리스트 앞에 점 표시 */
       position: absolute;
       left: 0;
       top: 0;
@@ -136,6 +137,52 @@
     .divider {
       border-bottom: 1px solid #222;
       margin: 40px 0;
+    }
+
+    /* ------------------------------
+       ✅ 문의 배너 스타일
+    ------------------------------ */
+    .contact-section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .contact-banner {
+      margin-top: 8px;
+      background: linear-gradient(135deg, #1FAA48 0%, #0f7934 60%, #0b5224 100%);
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .contact-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #f4fff7;
+    }
+
+    .contact-text strong {
+      font-weight: 700;
+    }
+
+    .contact-button {
+      padding: 8px 14px;
+      font-size: 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.18);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .contact-button:hover {
+      background: rgba(0, 0, 0, 0.32);
     }
 
     /* ------------------------------
@@ -193,6 +240,16 @@
         font-size: 14px;
         line-height: 1.8;   /* 모바일에서 조금 더 여유 */
         margin-bottom: 12px;
+      }
+
+      /* 문의 배너 모바일 정렬 */
+      .contact-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contact-button {
+        align-self: flex-start;
       }
     }
   </style>
@@ -294,6 +351,25 @@
         양 당사자가 효율적으로 거래할 수 있는 기술 기반만 제공합니다.
       </li>
     </ul>
+
+    <!-- ==========================
+         ✅ SECTION 5 - 문의 배너
+    =========================== -->
+    <div class="divider"></div>
+
+    <section class="contact-section">
+      <div class="contact-section-title">제휴 · 입점 · 플랫폼 문의</div>
+      <div class="contact-banner">
+        <div class="contact-text">
+          <strong>모딩과 함께할 제조사 / 외식업 사장님</strong><br>
+          입점, 제휴, 플랫폼 관련 문의는 아래 메일로 연락 주세요.<br>
+          <strong>moding_inc@naver.com</strong>
+        </div>
+        <a class="contact-button" href="mailto:moding_inc@naver.com">
+          이메일 보내기
+        </a>
+      </div>
+    </section>
 
   </main>
 
