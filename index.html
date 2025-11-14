@@ -2,46 +2,63 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <!-- 모바일에서도 화면이 깨지지 않도록 하는 설정 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>모든 사장님을 위한 모든 것을 담은 플랫폼, 모딩</title>
 
   <style>
-    /* 기본 여백 제거 + 박스 사이즈를 border까지 포함해서 계산하도록 설정 */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    /* 전체 바탕 / 폰트 / 레이아웃 기본 설정 */
+    /* ===== 텍스트 선택 / 복사 방지 (input 제외) ===== */
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* 이미지 드래그 방지 */
+    img, .nocopy-img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none; /* 모바일에서 꾹 눌러서 저장 방지 */
+    }
+
+    /* 입력창은 선택 허용 */
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+      pointer-events: auto;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                    "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
-      background: #0b0b0b;   /* 거의 검정에 가까운 배경색 */
+      background: #0b0b0b;
       color: #ffffff;
-      min-height: 100vh;     /* 세로 전체 높이를 화면 높이 이상으로 */
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;/* 위쪽: 메인, 아래쪽: 푸터 */
+      flex-direction: column;
     }
 
-    /* 가운데 영역 컨테이너 */
     .wrapper {
       width: 100%;
-      max-width: 520px;      /* 너무 넓어지지 않게 최대 폭 제한 */
+      max-width: 520px;
       margin: 0 auto;
       padding: 40px 24px;
       text-align: center;
-
-      /* 수직 가운데 정렬을 위한 설정 */
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center; /* 세로 가운데 */
-      align-items: center;      /* 가로 가운데 */
+      justify-content: center;
+      align-items: center;
     }
 
-    /* 문구(타이핑) 영역 – 레이아웃이 튀지 않도록 블록 하나로 묶음 */
     .type-box {
       margin-bottom: 20px;
     }
@@ -51,21 +68,19 @@
       font-size: 35px;
       opacity: 0.85;
       margin-bottom: 6px;
-      white-space: nowrap;   /* 한 줄 유지 (PC 기준) */
+      white-space: nowrap;
     }
 
-    /* 로고 영역 */
     .logo {
       margin: 24px 0 28px 0;
     }
 
     .logo img {
       width: 380px;
-      max-width: 100%;      /* 모바일에서 화면을 넘지 않도록 */
+      max-width: 100%;
       height: auto;
     }
 
-    /* 아래 설명 문구 */
     .desc1,
     .desc2 {
       font-size: 24px;
@@ -73,7 +88,6 @@
       opacity: 0.8;
     }
 
-    /* 메인 아래에 들어갈 작은 링크(회사소개 / 오시는 길) */
     .links {
       margin-top: 18px;
       font-size: 14px;
@@ -82,15 +96,15 @@
 
     .links a {
       color: #f0f0f0;
-      text-decoration: none;  /* 밑줄 제거 */
+      text-decoration: none;
       margin: 0 6px;
+      pointer-events: auto;
     }
 
     .links a:hover {
-      text-decoration: underline; /* 마우스 올리면 밑줄 */
+      text-decoration: underline;
     }
 
-    /* 하단 푸터 바 (회사 정보) */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -99,78 +113,60 @@
       font-size: 11px;
       color: #9d9d9d;
       display: flex;
-      flex-wrap: wrap;        /* 줄바꿈 허용 */
+      flex-wrap: wrap;
       justify-content: center;
       gap: 8px;
       text-align: center;
     }
 
     .footer-item::after {
-      content: "·";          /* 항목 사이에 점(·) 추가 */
+      content: "·";
       margin-left: 8px;
     }
-
     .footer-item:last-child::after {
-      content: "";           /* 마지막 항목 뒤에는 점 제거 */
+      content: "";
       margin: 0;
     }
 
-    /* 태블릿/모바일 반응형 조정 */
-    /* ===== 공통 모바일 최적화: Fold 포함 스마트폰 대응 ===== */
-/* ===== 공통 모바일 최적화: Fold 포함 스마트폰 대응 ===== */
-@media (max-width: 768px) {
+    @media (max-width: 768px) {
+      body {
+        font-size: 15px;
+      }
 
-  /* 전체 기본 글자 크기 살짝 줄이기 */
-  body {
-    font-size: 15px;
-  }
+      p, h1, h2, h3, h4, h5, h6 {
+        white-space: normal !important;
+        word-break: keep-all;
+        line-height: 1.6;
+      }
 
-  /* 제목/본문은 줄바꿈 자연스럽게 + 행간 조정 */
-  p, h1, h2, h3, h4, h5, h6 {
-    white-space: normal !important;  /* 강제로 한 줄 고정된 것들 풀기 */
-    word-break: keep-all;            /* 한국어 단어 단위로 줄바꿈 */
-    line-height: 1.6;                /* 모바일에서는 조금 더 촘촘하게 */
-  }
-
-  /* 본문 박스 폭은 화면에 꽉 차게, 좌우 여백만 살짝 */
-  .container {
-    max-width: 100% !important;
-    padding: 20px 18px;
-  }
-}
+      .container {
+        max-width: 100% !important;
+        padding: 20px 18px;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <!-- 메인 가운데 영역 -->
   <div class="wrapper">
-    <!-- 타이핑 효과가 들어갈 영역 -->
     <div class="type-box">
       <div id="line1" class="line1"></div>
       <div id="line2" class="line2"></div>
     </div>
 
-    <!-- 로고 이미지 (파일명은 실제 업로드한 이름과 맞춰야 함) -->
     <div class="logo">
-      <img src="모딩로고.png" alt="Moding Logo">
+      <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
     </div>
 
-    <!-- 설명 문구 -->
-    <p class="desc1">
-      B2B Food-SaaS 플랫폼
-    </p>
-    <p class="desc2">
-      Moding Coming Soon
-    </p>
+    <p class="desc1">B2B Food-SaaS 플랫폼</p>
+    <p class="desc2">Moding Coming Soon</p>
 
-    <!-- 회사소개 / 오시는 길 페이지로 이동하는 작은 링크 -->
     <div class="links">
-      <!-- about.html, location.html 파일을 따로 만들어서 연결할 예정 -->
       <a href="about.html">회사소개</a>|
       <a href="location.html">오시는 길</a>
     </div>
   </div>
 
-  <!-- 하단 푸터 바 (회사 정보 고정 영역) -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -179,34 +175,29 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- 타이핑 효과 스크립트 -->
   <script>
-    // 페이지 로드가 완료되면 타이핑 함수 실행
+    /* -----------------------------
+       타이핑 효과
+    ----------------------------- */
     window.onload = function () {
-      // 첫 줄 / 둘째 줄에 들어갈 문구
       const text1 = "모든 사장님을 위한";
       const text2 = "모든 것을 담은 플랫폼";
 
-      // 실제 글자가 찍힐 DOM 요소 가져오기
       const el1 = document.getElementById("line1");
       const el2 = document.getElementById("line2");
 
-      let i = 0; // text1 인덱스
-      let j = 0; // text2 인덱스
+      let i = 0, j = 0;
 
-      // 첫 번째 줄 타이핑 함수
       function typeLine1() {
         if (i < text1.length) {
-          el1.textContent += text1[i]; // 한 글자씩 추가
+          el1.textContent += text1[i];
           i++;
-          setTimeout(typeLine1, 90);  // 타이핑 속도 (ms)
+          setTimeout(typeLine1, 90);
         } else {
-          // 첫 줄이 끝나면 잠시 쉬었다가 두 번째 줄 시작
           setTimeout(typeLine2, 250);
         }
       }
 
-      // 두 번째 줄 타이핑 함수
       function typeLine2() {
         if (j < text2.length) {
           el2.textContent += text2[j];
@@ -215,9 +206,37 @@
         }
       }
 
-      // 타이핑 시작
       typeLine1();
     };
+
+    /* -----------------------------
+       복사/우클릭/단축키 방지
+    ----------------------------- */
+
+    // 우클릭 메뉴 차단
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) e.preventDefault();
+    });
+
+    // 드래그 차단
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) e.preventDefault();
+    });
+
+    // Ctrl 단축키 차단
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+
+    // copy 이벤트 차단
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) e.preventDefault();
+    });
   </script>
 </body>
 </html>
