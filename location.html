@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>오시는 길 | 모딩</title>
 
+  <!-- ✅ 네이버 지도 JS API 로드 : Client ID 꼭 본인 걸 사용해야 함 -->
+  <script
+    type="text/javascript"
+    src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ng7o6t4vk6">
+  </script>
+
   <style>
     /* ---------------- 공통 기본 설정 ---------------- */
     * {
@@ -101,13 +107,13 @@
       height: 0;
     }
 
-    .map-responsive iframe {
+    /* JS 지도가 그려질 실제 영역 */
+    .map-responsive #map {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;   /* 가로 전체 채우기 */
       height: 100%;  /* 부모 비율에 맞춰 세로도 자동 */
-      border: 0;
     }
 
     .map-note {
@@ -142,28 +148,27 @@
       margin: 0;
     }
 
-    /* ---------------- 모바일 대응 ---------------- */
-   /* ===== 공통 모바일 최적화: Fold 포함 스마트폰 대응 ===== */
-@media (max-width: 768px) {
+    /* ===== 공통 모바일 최적화: Fold 포함 스마트폰 대응 ===== */
+    @media (max-width: 768px) {
 
-  /* 전체 기본 글자 크기 살짝 줄이기 */
-  body {
-    font-size: 15px;
-  }
+      /* 전체 기본 글자 크기 살짝 줄이기 */
+      body {
+        font-size: 15px;
+      }
 
-  /* 제목/본문은 줄바꿈 자연스럽게 + 행간 조정 */
-  p, h1, h2, h3, h4, h5, h6 {
-    white-space: normal !important;  /* 강제로 한 줄 고정된 것들 풀기 */
-    word-break: keep-all;            /* 한국어 단어 단위로 줄바꿈 */
-    line-height: 1.6;                /* 모바일에서는 조금 더 촘촘하게 */
-  }
+      /* 제목/본문은 줄바꿈 자연스럽게 + 행간 조정 */
+      p, h1, h2, h3, h4, h5, h6 {
+        white-space: normal !important;  /* 강제로 한 줄 고정된 것들 풀기 */
+        word-break: keep-all;            /* 한국어 단어 단위로 줄바꿈 */
+        line-height: 1.6;                /* 모바일에서는 조금 더 촘촘하게 */
+      }
 
-  /* 본문 박스 폭은 화면에 꽉 차게, 좌우 여백만 살짝 */
-  .container {
-    max-width: 100% !important;
-    padding: 20px 18px;
-  }
-}
+      /* 본문 박스 폭은 화면에 꽉 차게, 좌우 여백만 살짝 */
+      .container {
+        max-width: 100% !important;
+        padding: 20px 18px;
+      }
+    }
   </style>
 </head>
 
@@ -191,19 +196,14 @@
       <!-- 주소 텍스트 영역 -->
       <p class="address-main">대구광역시 달서구 달구벌대로 1693, 6층 607호</p>
       <p class="address-sub">
-        두류역 7번 출구 도보 약 5분 · 건물 타워 주차장 이용 가능
+        두류역 7번 출구 도보 약 5분 · 건물 내 지하 주차장 이용 가능
       </p>
 
       <!-- 지도 박스 -->
       <div class="map-box">
         <div class="map-responsive">
-          <!-- ✅ 네이버에서 제공한 지도 iframe 코드 (주소만 교체 가능) -->
-          <iframe
-            src="https://map.naver.com/p/entry/place/2054645683?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=128.5515681&lat=35.8551558&c=15.00,0,0,0,dh"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+          <!-- ✅ JS API로 지도가 들어갈 실제 영역 -->
+          <div id="map"></div>
         </div>
         <div class="map-note">
           ※ 지도가 보이지 않을 경우 새로고침(F5)하시거나, <strong>네이버 지도 앱</strong>에서
@@ -221,9 +221,56 @@
     <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1693, 6층 607호</span>
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
+
+  <!-- ✅ 네이버 지도 생성 스크립트 (페이지 로드 후 실행) -->
+  <script>
+    // DOM 요소가 모두 준비된 뒤에 지도 생성
+    document.addEventListener('DOMContentLoaded', function () {
+      // 지도 중심 좌표 (위도, 경도) : 모딩 본사 위치
+      var centerLat = 35.8551558;
+      var centerLng = 128.5515681;
+
+      // 지도 객체 생성
+      var map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(centerLat, centerLng), // 지도 중심
+        zoom: 16,                                            // 확대 레벨
+        zoomControl: true,                                   // + / - 줌 컨트롤 표시
+        zoomControlOptions: {
+          position: naver.maps.Position.TOP_RIGHT            // 줌 컨트롤 위치
+        }
+      });
+
+      // 마커(핀) 생성
+      var marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(centerLat, centerLng),
+        map: map,
+        title: '모딩(Moding Inc.)'
+      });
+
+      // 간단한 정보 창(풍선) 내용
+      var infoHtml = [
+        '<div style="padding:8px 10px;font-size:12px;line-height:1.5;">',
+        '모딩(Moding Inc.)<br>',
+        '대구광역시 달서구 달구벌대로 1693, 6층 607호',
+        '</div>'
+      ].join('');
+
+      var infoWindow = new naver.maps.InfoWindow({
+        content: infoHtml
+      });
+
+      // 기본으로 마커 위에 정보창 열기
+      infoWindow.open(map, marker);
+
+      // 마커 클릭 시 정보창 토글
+      naver.maps.Event.addListener(marker, 'click', function () {
+        if (infoWindow.getMap()) {
+          infoWindow.close();
+        } else {
+          infoWindow.open(map, marker);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-
-</body>
-</html>
-
