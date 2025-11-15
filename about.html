@@ -48,7 +48,7 @@
     .header-left {
       display: flex;
       align-items: center;
-      gap: 6px;            /* 로고와 텍스트 간격 조금 더 붙임 */
+      gap: 6px;            /* 로고와 텍스트 간격 붙임 */
     }
 
     .header-logo {
@@ -101,7 +101,21 @@
       margin-bottom: 14px;
     }
 
-    /* 리스트 스타일 (• 대신 한국 서비스 느낌으로 · 사용) */
+    /* 로고와 첫 문장이 한 줄로 붙는 영역 */
+    .intro-first {
+      font-size: 15px;
+      line-height: 1.9;
+      opacity: 0.9;
+      margin-bottom: 14px;
+    }
+    .intro-logo-inline {
+      height: 40px;       /* 가로 로고 크기 (조금 키움) */
+      width: auto;
+      vertical-align: middle;
+      margin-right: 2px;
+    }
+
+    /* 리스트 스타일 */
     .text-list {
       list-style: none;
       margin: 8px 0 12px;
@@ -313,6 +327,10 @@
         word-break: keep-all;
       }
 
+      .intro-logo-inline {
+        height: 32px;   /* 모바일에서 살짝 축소 */
+      }
+
       .philosophy-wrap {
         padding: 22px 16px 22px;
         margin-top: 32px;
@@ -367,16 +385,16 @@
     <!-- ------------------------------
          SECTION 1 - 모딩 소개
     ------------------------------ -->
-    <h1>
-      <img src="모딩로고(가로형).png" alt="Moding"
-           style="height:40px; width:auto;">   <!-- 로고 조금 키움 -->
-    </h1>
+    <!-- h1은 SEO용으로 남겨두고, 실제 문장은 아래 intro-first에서 출력 -->
+    <h1>회사 소개</h1>
 
-    <p>
-      <strong>모딩(Moding)은</strong> 식품 제조사와 외식업 사장님이<br>
+    <p class="intro-first">
+      <img src="모딩로고(가로형).png" alt="Moding" class="intro-logo-inline">은<br> 
+      식품 제조사와 외식업 사장님이<br>
       더 빠르고 더 안전하게 연결될 수 있도록 설계된<br>
       B2B Food-SaaS 플랫폼입니다.
     </p>
+
     <p>
       누군가는 정성껏 만든 제품을 팔 곳이 없어 고민하고,<br>
       누군가는 매장 운영에 필요한 좋은 제품을 찾지 못해 어려움을 겪습니다.
@@ -537,7 +555,6 @@
 
   <!-- ------------------------------
        복사 / 우클릭 / 단축키 방지 스크립트
-       (기본적인 억제용 – 완전한 보안은 아님)
   ------------------------------ -->
   <script>
     // 복사 이벤트 차단
