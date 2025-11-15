@@ -13,91 +13,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-  /* ------------------------------
-       운영 철학 블록
-    ------------------------------ */
-    .philosophy-wrap {
-      margin-top: 48px;
-      margin-bottom: 40px;
-      padding: 28px 24px 26px;
-      border-radius: 18px;
-      background: radial-gradient(circle at top left, #1f7a3a 0, #0b0b0b 55%) ;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
-      position: relative;
-      overflow: hidden;
     }
-
-    .philosophy-tag {
-      display: inline-block;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      margin-bottom: 12px;
-    }
-
-    .philosophy-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: #FF8A00;
-      margin-bottom: 10px;
-    }
-
-    .philosophy-lead {
-      font-size: 15px;
-      line-height: 1.9;
-      opacity: 0.98;
-      margin-bottom: 16px;
-    }
-
-    .philosophy-body p {
-      font-size: 14px;
-      line-height: 1.9;
-      opacity: 0.9;
-      margin-bottom: 8px;
-    }
-
-    .philosophy-body p:last-child {
-      margin-bottom: 0;
-    }
-
-    .philosophy-accent {
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      font-size: 13px;
-      line-height: 1.9;
-      opacity: 0.9;
-    }
-
-    /* 모바일 최적화 */
-    @media (max-width: 768px) {
-      .philosophy-wrap {
-        padding: 22px 16px 22px;
-        margin-top: 32px;
-        margin-bottom: 32px;
-        border-radius: 16px;
-      }
-
-      .philosophy-title {
-        font-size: 20px;
-      }
-
-      .philosophy-lead {
-        font-size: 14px;
-        line-height: 1.8;
-      }
-
-      .philosophy-body p,
-      .philosophy-accent {
-        font-size: 13px;
-        line-height: 1.8;
-      }
-    }  }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -132,7 +48,7 @@
     .header-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 6px;            /* 로고와 텍스트 간격 조금 더 붙임 */
     }
 
     .header-logo {
@@ -206,6 +122,77 @@
     .divider {
       border-bottom: 1px solid #222;
       margin: 40px 0;
+    }
+
+    /* ------------------------------
+       혁신 기술 섹션 리드 문장
+    ------------------------------ */
+    .tech-lead {
+      font-size: 16px;
+      line-height: 1.95;
+      opacity: 0.96;
+      margin-bottom: 18px;
+    }
+
+    /* ------------------------------
+       운영 철학 블록
+    ------------------------------ */
+    .philosophy-wrap {
+      margin-top: 48px;
+      margin-bottom: 40px;
+      padding: 28px 24px 26px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, #1f7a3a 0, #0b0b0b 55%);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .philosophy-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      margin-bottom: 12px;
+    }
+
+    .philosophy-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FF8A00;
+      margin-bottom: 10px;
+    }
+
+    .philosophy-lead {
+      font-size: 15px;
+      line-height: 1.9;
+      opacity: 0.98;
+      margin-bottom: 16px;
+    }
+
+    .philosophy-body p {
+      font-size: 14px;
+      line-height: 1.9;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .philosophy-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .philosophy-accent {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 13px;
+      line-height: 1.9;
+      opacity: 0.9;
     }
 
     /* ------------------------------
@@ -311,11 +298,42 @@
         padding: 28px 16px 40px;
       }
 
-      h1 { font-size: 32px; }
-      h2 { font-size: 30px; }
-      h3 { font-size: 20px; }
+      h1 { font-size: 28px; }
+      h2 { font-size: 24px; }
+      h3 { font-size: 18px; }
 
-      p { font-size: 14px; }
+      p,
+      .text-list li {
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      p, h1, h2, h3 {
+        white-space: normal;
+        word-break: keep-all;
+      }
+
+      .philosophy-wrap {
+        padding: 22px 16px 22px;
+        margin-top: 32px;
+        margin-bottom: 32px;
+        border-radius: 16px;
+      }
+
+      .philosophy-title {
+        font-size: 20px;
+      }
+
+      .philosophy-lead {
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .philosophy-body p,
+      .philosophy-accent {
+        font-size: 13px;
+        line-height: 1.8;
+      }
 
       .cta-section {
         margin-top: 32px;
@@ -350,11 +368,12 @@
          SECTION 1 - 모딩 소개
     ------------------------------ -->
     <h1>
-      <img src="모딩로고(가로형).png" alt="Moding" style="height:32px; width:auto;">
+      <img src="모딩로고(가로형).png" alt="Moding"
+           style="height:40px; width:auto;">   <!-- 로고 조금 키움 -->
     </h1>
 
     <p>
-      은 식품 제조사와 외식업 사장님이<br>
+      <strong>모딩(Moding)은</strong> 식품 제조사와 외식업 사장님이<br>
       더 빠르고 더 안전하게 연결될 수 있도록 설계된<br>
       B2B Food-SaaS 플랫폼입니다.
     </p>
@@ -414,10 +433,10 @@
     ------------------------------ -->
     <h2>모딩의 혁신 기술</h2>
 
-    <p>
-      <h3>모딩은 단순한 온라인 도매몰이 아니라,<br>
+    <p class="tech-lead">
+      모딩은 단순한 온라인 도매몰이 아니라,<br>
       거래·결제·정산·데이터 관리가 하나의 구조로 연결된<br>
-      B2B Food-SaaS 플랫폼입니다.</h3>
+      B2B Food-SaaS 플랫폼입니다.
     </p>
 
     <ul class="text-list">
@@ -425,19 +444,19 @@
         자동화된 정산 시스템 : 복잡한 수기 정산 없이<br>
         결제→정산→내역 관리가 한 흐름으로 처리됩니다.
       </li>
-     <p> <li>
+      <li>
         전자세금계산서 연동 : 제조사와 외식업 사장님 모두<br>
         전자동 발행 시스템을 통해 별도의 세금계산서 정리 작업이 필요 없습니다.
-      </li>   </p>
-     <p> <li>
+      </li>
+      <li>
         데이터 기반 분석 도구 : 상품 판매 추이, 반복 주문 패턴, 시즌별 수요 등<br>
         실제 매장 운영과 제조사의 생산 계획에 도움이 되는 정보를 제공합니다.
-      </li> </p>
-     <p>  <li>
+      </li>
+      <li>
         안전하고 투명한 거래 환경 : 모딩은 ‘통신판매중개자’의 지위를 명확히 하여<br>
         제조·유통·품질·안전의 직접 당사자가 아니며,<br>
         양 당사자가 효율적으로 거래할 수 있는 기술 기반만 제공합니다.
-      </li> </p>
+      </li>
     </ul>
 
     <!-- ------------------------------
@@ -497,7 +516,7 @@
           외식업 사장님 서비스 문의
         </a>
       </div>
-<br>
+      <br>
       <p class="cta-note">
         현재 베타 단계로, 일부 기능은 순차적으로 제공됩니다.
       </p>
@@ -537,4 +556,3 @@
   </script>
 </body>
 </html>
-
