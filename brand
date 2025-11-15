@@ -2,12 +2,15 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  />
   <title>브랜드 아이덴티티 | 모딩(Moding)</title>
 
   <style>
     /* ------------------------------
-       공통 초기화 & 복사 방지 기본값
+       공통 초기화
     ------------------------------ */
     * {
       box-sizing: border-box;
@@ -16,7 +19,9 @@
     }
 
     /* 텍스트 선택 방지 (input, textarea 제외) */
-    html, body, *:not(input):not(textarea) {
+    html,
+    body,
+    *:not(input):not(textarea) {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
@@ -31,7 +36,7 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+        "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
       background: #0b0b0b;
       color: #ffffff;
       min-height: 100vh;
@@ -40,7 +45,7 @@
     }
 
     /* ------------------------------
-       메인 컨테이너 레이아웃
+       메인 컨테이너
     ------------------------------ */
     .container {
       max-width: 860px;
@@ -50,7 +55,7 @@
     }
 
     /* ------------------------------
-       헤더 (로고 + 메인으로 링크)
+       헤더 (로고 + 메인으로)
     ------------------------------ */
     .header {
       display: flex;
@@ -75,14 +80,17 @@
       color: #cccccc;
       text-decoration: none;
     }
+
     .back-link:hover {
       text-decoration: underline;
     }
 
     /* ------------------------------
-       제목 / 섹션 공통 스타일
+       제목 / 섹션 공통
     ------------------------------ */
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
       font-weight: 700;
       line-height: 1.4;
       margin: 32px 0 12px;
@@ -90,16 +98,13 @@
 
     h1 {
       font-size: 28px;
-      color: #1FAA48; /* 모딩 그린 */
+      color: #1faa48; /* 모딩 그린 */
       margin-top: 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
 
     h2 {
       font-size: 22px;
-      color: #FF8A00; /* 모딩 오렌지 */
+      color: #ff8a00; /* 모딩 오렌지 */
     }
 
     h3 {
@@ -151,7 +156,7 @@
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 10px;
-      color: #FFB341;
+      color: #ffb341;
     }
 
     .identity-hero-text {
@@ -182,7 +187,7 @@
 
     .name-badge span:first-child {
       font-weight: 600;
-      color: #1FAA48;
+      color: #1faa48;
     }
 
     .name-grid {
@@ -268,11 +273,13 @@
     }
 
     .color-green {
-      background: linear-gradient(135deg, #0B5043, #1FAA48);
+      background: linear-gradient(135deg, #0b5043, #1faa48);
     }
+
     .color-orange {
-      background: linear-gradient(135deg, #FF8A00, #FFB341);
+      background: linear-gradient(135deg, #ff8a00, #ffb341);
     }
+
     .color-wood {
       background: linear-gradient(135deg, #5b3c20, #8c5a2b);
     }
@@ -298,7 +305,7 @@
       font-size: 13px;
       font-weight: 600;
       margin-bottom: 6px;
-      color: #FFB341;
+      color: #ffb341;
     }
 
     .tone-text {
@@ -336,6 +343,7 @@
       content: "·";
       margin-left: 8px;
     }
+
     .footer-item:last-child::after {
       content: "";
       margin: 0;
@@ -349,11 +357,21 @@
         padding: 28px 16px 40px;
       }
 
-      h1 { font-size: 24px; }
-      h2 { font-size: 20px; }
-      h3 { font-size: 17px; }
+      h1 {
+        font-size: 24px;
+      }
 
-      p { font-size: 14px; }
+      h2 {
+        font-size: 20px;
+      }
+
+      h3 {
+        font-size: 17px;
+      }
+
+      p {
+        font-size: 14px;
+      }
 
       .identity-hero {
         padding: 18px 16px 20px;
@@ -412,8 +430,8 @@
         </div>
         <p class="identity-hero-text">
           <span class="hero-highlight">모딩(Moding)</span>은 식품 제조사와 외식업 사장님,
-          그리고 그 사이를 잇는 기술을 하나의 구조로 묶어내기 위해 탄생한 이름입니다.<br/>
-          복잡한 거래 흐름을 단순하게 만들고,<br/>
+          그리고 그 사이를 잇는 기술을 하나의 구조로 묶어내기 위해 탄생한 이름입니다.<br />
+          복잡한 거래 흐름을 단순하게 만들고,<br />
           현장에서 오래 쓰이는 도구를 만드는 것이 모딩의 브랜드 방향입니다.
         </p>
       </div>
@@ -431,7 +449,7 @@
       </div>
 
       <p>
-        모딩(Moding)은 대표적인 한국어 발음인 “모두(Modoo)”와<br/>
+        모딩(Moding)은 대표적인 한국어 발음인 “모두(Modoo)”와<br />
         진행·실행을 뜻하는 “ing”가 결합된 이름입니다.
       </p>
 
@@ -439,24 +457,24 @@
         <div class="name-card">
           <div class="name-card-title">Modoo (모두)</div>
           <div class="name-card-desc">
-            제조사, 외식업 사장님, 그리고 모딩까지.<br/>
-            모든 주체가 한 구조 안에서 연결되고<br/>
+            제조사, 외식업 사장님, 그리고 모딩까지.<br />
+            모든 주체가 한 구조 안에서 연결되고<br />
             함께 성장하는 생태계를 의미합니다.
           </div>
         </div>
         <div class="name-card">
           <div class="name-card-title">ing (하는 중)</div>
           <div class="name-card-desc">
-            멈춰 있는 플랫폼이 아니라,<br/>
-            주문·정산·데이터가 계속 흐르고 있는<br/>
+            멈춰 있는 플랫폼이 아니라,<br />
+            주문·정산·데이터가 계속 흐르고 있는<br />
             ‘진행 중인 서비스’라는 의미를 담고 있습니다.
           </div>
         </div>
       </div>
 
       <p style="margin-top:16px;">
-        모딩이라는 이름에는<br/>
-        <strong>모든 사장님을 위한, 모든 것을 담은 플랫폼</strong>이라는<br/>
+        모딩이라는 이름에는<br />
+        <strong>모든 사장님을 위한, 모든 것을 담은 플랫폼</strong>이라는<br />
         브랜드의 약속이 함께 들어 있습니다.
       </p>
     </section>
@@ -470,14 +488,14 @@
       <div class="logo-row">
         <img src="모딩로고.png" alt="Moding Logo" class="logo-main" />
         <div class="logo-caption">
-          세 개의 축(제조사 · 외식업 사장님 · 모딩)을<br/>
+          세 개의 축(제조사 · 외식업 사장님 · 모딩)을<br />
           하나의 구조로 묶어낸 모노그램 형태의 로고입니다.
         </div>
       </div>
 
       <p>
-        모딩의 로고는 B2B 거래의 세 축을 하나의 길로 모으는 구조를 표현합니다.<br/>
-        부드러운 라운드 형태는 따뜻함과 신뢰를, 균형 잡힌 비례는<br/>
+        모딩의 로고는 B2B 거래의 세 축을 하나의 길로 모으는 구조를 표현합니다.<br />
+        부드러운 라운드 형태는 따뜻함과 신뢰를, 균형 잡힌 비례는<br />
         플랫폼으로서의 안정성과 중심성을 상징합니다.
       </p>
 
@@ -487,7 +505,7 @@
           <div class="color-chip-body">
             <div class="color-chip-label">Green – 제조사</div>
             <div class="color-chip-desc">
-              지속 가능성과 신뢰, 정직하게 만드는 사람들을 상징합니다.<br/>
+              지속 가능성과 신뢰, 정직하게 만드는 사람들을 상징합니다.<br />
               제품의 본질과 기술력에 집중하는 색입니다.
             </div>
           </div>
@@ -498,7 +516,7 @@
           <div class="color-chip-body">
             <div class="color-chip-label">Orange – 외식업 사장님</div>
             <div class="color-chip-desc">
-              에너지, 실행력, 빠른 판단을 의미합니다.<br/>
+              에너지, 실행력, 빠른 판단을 의미합니다.<br />
               바쁜 매장과 뜨거운 현장을 대표하는 색입니다.
             </div>
           </div>
@@ -509,7 +527,7 @@
           <div class="color-chip-body">
             <div class="color-chip-label">Wood – 연결과 성장</div>
             <div class="color-chip-desc">
-              나무처럼 뻗어나가는 생태계, 그리고 함께 자라는 구조를 상징합니다.<br/>
+              나무처럼 뻗어나가는 생태계, 그리고 함께 자라는 구조를 상징합니다.<br />
               제조사와 사장님을 잇는 모딩의 역할을 나타냅니다.
             </div>
           </div>
@@ -524,7 +542,7 @@
       <h2>브랜드 톤앤매너</h2>
 
       <p>
-        모딩의 커뮤니케이션은<br/>
+        모딩의 커뮤니케이션은<br />
         화려한 수식어보다, 현장에서 실제로 도움이 되는 말을 우선합니다.
       </p>
 
@@ -532,7 +550,7 @@
         <div class="tone-item">
           <div class="tone-title">차분한 기술</div>
           <div class="tone-text">
-            기술을 전면에 내세우기보다,<br/>
+            기술을 전면에 내세우기보다,<br />
             문제를 얼마나 단순하게 해결하는가에 집중합니다.
           </div>
         </div>
@@ -540,7 +558,7 @@
         <div class="tone-item">
           <div class="tone-title">따뜻한 전문성</div>
           <div class="tone-text">
-            외식업과 제조 현장을 이해하는 언어로 설명하고,<br/>
+            외식업과 제조 현장을 이해하는 언어로 설명하고,<br />
             실무에 바로 쓸 수 있는 안내를 제공합니다.
           </div>
         </div>
@@ -548,7 +566,7 @@
         <div class="tone-item">
           <div class="tone-title">현장의 언어</div>
           <div class="tone-text">
-            실제로 가게를 운영하고, 공장을 돌려본 사람의 시선에서<br/>
+            실제로 가게를 운영하고, 공장을 돌려본 사람의 시선에서<br />
             불필요한 표현은 덜어내고 꼭 필요한 말만 남깁니다.
           </div>
         </div>
@@ -556,7 +574,7 @@
         <div class="tone-item">
           <div class="tone-title">신뢰 기반 파트너십</div>
           <div class="tone-text">
-            단기적인 수수료 경쟁보다,<br/>
+            단기적인 수수료 경쟁보다,<br />
             오래 함께 갈 수 있는 구조와 계약을 우선합니다.
           </div>
         </div>
@@ -565,21 +583,21 @@
 
     <div class="divider"></div>
 
-    <!-- 브랜드 정리 -->
+    <!-- 브랜드 요약 -->
     <section class="section">
       <h2>브랜드 아이덴티티 요약</h2>
       <p>
-        모딩(Moding)은 단순한 “식품 B2B 플랫폼”이 아니라,<br/>
+        모딩(Moding)은 단순한 “식품 B2B 플랫폼”이 아니라,<br />
         <strong>제조사 – 외식업 사장님 – 기술</strong>이 하나로 연결된 생태계를 지향합니다.
       </p>
       <p>
-        그 철학은 이름(Modoo + ing)에서 시작해,<br/>
-        그린·오렌지·우드 톤 컬러와 구조적인 로고, 그리고<br/>
+        그 철학은 이름(Modoo + ing)에서 시작해,<br />
+        그린·오렌지·우드 톤 컬러와 구조적인 로고, 그리고<br />
         차분하지만 단단한 톤앤매너로 이어집니다.
       </p>
       <p>
-        모딩의 모든 디자인과 기능은<br/>
-        “모든 사장님을 위한, 모든 것을 담은 플랫폼”이라는 이 한 문장을<br/>
+        모딩의 모든 디자인과 기능은<br />
+        “모든 사장님을 위한, 모든 것을 담은 플랫폼”이라는 이 한 문장을<br />
         더 잘 실현하기 위해 존재합니다.
       </p>
     </section>
@@ -607,8 +625,8 @@
     // Ctrl/Cmd + C, X, S, U, A 등 일부 단축키 차단
     document.addEventListener("keydown", function (e) {
       if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
-        const k = e.key.toLowerCase();
-        if (["c", "x", "s", "u", "a"].includes(k)) {
+        var k = e.key.toLowerCase();
+        if (["c", "x", "s", "u", "a"].indexOf(k) !== -1) {
           e.preventDefault();
         }
       }
