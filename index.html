@@ -118,11 +118,12 @@
       transition: all 0.16s ease-out;
     }
 
-    .top-links a + a::before {
-      content: "|";
-      margin: 0 10px;
-      color: rgba(255,255,255,0.6);
-    }
+    .top-links .divider {
+     margin: 0 10px;
+     color: rgba(255,255,255,0.6);
+     pointer-events: none; /* 클릭/hover 영향 제외 */
+     user-select: none;
+}
 
     /* 🔥 상단 메뉴 Green/Orange 반반 hover 적용 */
     .top-links a:hover {
@@ -294,11 +295,13 @@
     <p class="desc2">Coming Soon</p>
 
     <div class="top-links-wrapper">
-      <nav class="top-links">
+     <nav class="top-links">
         <a href="about.html">회사소개</a>
+        <span class="divider">|</span>
         <a href="brand.html">브랜드 아이덴티티</a>
+        <span class="divider">|</span>
         <a href="location.html">오시는 길</a>
-      </nav>
+    </nav>
     </div>
   </div>
 
