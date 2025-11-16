@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>오시는 길 | 모딩(Moding)</title>
   <meta name="description" content="모딩(Moding) 본사 위치 안내. 대구 달서구 달구벌대로 1698, 6층 607호. 내비게이션 및 지도 링크 포함.">
+
+
+
+
   
   <!-- ✅ NAVER Maps JS API (ncpKeyId 사용) -->
   <script
@@ -215,18 +219,35 @@
       <a href="index.html" class="back-link">← 메인으로</a>
     </header>
 
-    <!-- 오시는 길 내용 -->
-    <section>
-      <h1>오시는 길</h1>
-      <p class="subtitle">
-        아래 지도를 통해 <span style="font-weight:600;">모딩 본사</span> 위치를 확인하실 수 있습니다.
-      </p>
+  <!-- 오시는 길 상단 배지 -->
+<div style="
+  display:inline-block;
+  padding: 8px 18px;
+  border:1px solid #3a3a3a;
+  border-radius: 22px;
+  font-size:13px;
+  letter-spacing:1px;
+  margin-bottom:24px;
+  color:#cccccc;
+">
+  오시는 길
+</div>
+
+<!-- 기존 <h1>오시는 길</h1> 삭제됨 -->
+<p class="subtitle">
+  아래 지도를 통해 <span style="font-weight:600;">모딩 본사</span> 위치를 확인하실 수 있습니다.
+</p>
 
       <p class="address-main">대구광역시 달서구 달구벌대로 1698, 6층 607호</p>
       <p class="address-sub">
         두류역 7번 출구 도보 약 5분 · 건물 타워 주차장 이용 가능
       </p>
 
+
+
+
+
+      
       <div class="map-box">
         <!-- 네이버 지도 표시 영역 -->
         <div id="map"></div>
