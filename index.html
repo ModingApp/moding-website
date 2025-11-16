@@ -1,334 +1,197 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>모든 사장님을 위한 모든 것을 담은 플랫폼, 모딩</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moding Inc. — B2B Food-SaaS Platform</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <!-- SEO 기본 -->
+    <meta name="description" content="Moding — 외식업과 식품제조사를 연결하는 B2B Food-SaaS 플랫폼. 발주·정산·세금계산서 자동화 및 소스·밀키트 PB 생산 지원." />
 
-    /* ===== 텍스트 선택 / 복사 방지 (input 제외) ===== */
-    html, body, *:not(input):not(textarea) {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
+    <!-- 파비콘 (원하시면 교체 가능) -->
+    <link rel="icon" href="logo.png" type="image/png" />
 
-    /* 이미지 드래그 방지 */
-    img, .nocopy-img {
-      -webkit-user-drag: none;
-      user-drag: none;
-      pointer-events: none; /* 모바일 꾹 눌러 저장 방지 */
-    }
+    <!-- 복사·드래그·우클릭 방지 -->
+    <style>
+        body {
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
 
-    /* 입력창은 선택 허용 */
-    input, textarea {
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
-      pointer-events: auto;
-    }
+        img, svg {
+            pointer-events: none;
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
-      background: #0b0b0b;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+        ::selection {
+            background: transparent;
+        }
 
-    .wrapper {
-      width: 100%;
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 40px 24px;
-      text-align: center;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+        /* 상단 로고 */
+        .logo {
+            width: 260px;
+            max-width: 80%;
+            margin: 60px auto 30px;
+        }
 
-    .type-box {
-      margin-bottom: 20px;
-    }
+        /* 메인 타이틀 */
+        .title {
+            font-size: 22px;
+            margin-top: 10px;
+            color: #e6e6e6;
+        }
+        .subtitle {
+            font-size: 26px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
 
-    .line1,
-    .line2 {
-      font-size: 35px;
-      opacity: 0.85;
-      margin-bottom: 6px;
-      white-space: nowrap;
-    }
+        /* 상단 3메뉴 */
+        .top-links {
+            margin-top: 30px;
+            font-size: 14px;
+        }
+        .top-links a {
+            color: #d2d2d2;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .top-links a:hover {
+            color: #00c853;
+        }
 
-    .logo {
-      margin: 24px 0 28px 0;
-    }
+        /* 하단 ABOUT MODING 전체 사이트맵 */
+        .bottom-nav {
+            max-width: 900px;
+            margin: 80px auto 0;            /* 상단과 넉넉히 여백 */
+            padding-top: 40px;
+            border-top: 1px solid #222;
+            text-align: center;
+        }
 
-    .logo img {
-      width: 380px;
-      max-width: 100%;
-      height: auto;
-    }
+        .bottom-nav-label {
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #b4b4b4;
+            margin-bottom: 28px;
+        }
 
-    .desc1,
-    .desc2 {
-      font-size: 24px;
-      line-height: 1.6;
-      opacity: 0.8;
-    }
+        .bottom-nav-columns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+        }
 
-    .links {
-      margin-top: 18px;
-      font-size: 14px;
-      opacity: 0.8;
-    }
+        .bottom-nav-col {
+            flex: 0 1 200px;
+            min-width: 180px;
+            text-align: left;
+        }
 
-    .links a {
-      color: #f0f0f0;
-      text-decoration: none;
-      margin: 0 6px;
-      pointer-events: auto;
-    }
+        .bottom-nav-col-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
 
-    .links a:hover {
-      text-decoration: underline;
-    }
+        .bottom-nav-col a {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #dcdcdc;
+            text-decoration: none;
+        }
+        .bottom-nav-col a:hover {
+            color: #00e676;
+        }
 
-    /* ==========================================
-       ABOUT MODING (하단 대메뉴) - 개정판
-    ========================================== */
-    .bottom-nav {
-      max-width: 620px;   /* 데스크톱 좌측 치우침 해결 */
-      margin: 40px auto 0;
-      padding-top: 32px;
-      border-top: 1px solid #222;
-      text-align: center;
-    }
+        /* 회사 정보 */
+        .footer-info {
+            margin: 40px 0 80px;
+            font-size: 12px;
+            color: #7c7c7c;
+            line-height: 1.7;
+        }
 
-    .bottom-nav-label {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #b4b4b4;
-      margin-bottom: 18px;
-    }
+        /* 반응형 */
+        @media (max-width: 500px) {
+            .logo {
+                width: 220px;
+                margin-top: 50px;
+            }
+            .subtitle {
+                font-size: 22px;
+            }
+            .bottom-nav {
+                margin-top: 60px;
+            }
+        }
+    </style>
 
-    .bottom-nav-columns {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center; /* 중앙 정렬 */
-      gap: 40px;
-      text-align: left;
-    }
-
-    .bottom-nav-col {
-      flex: 0 1 170px;
-      min-width: 150px;
-    }
-
-    .bottom-nav-section-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #ffffff;
-    }
-
-    .bottom-nav-link {
-      display: block;
-      font-size: 13px;
-      line-height: 1.9;
-      color: #bbbbbb;
-      text-decoration: none;
-    }
-
-    .bottom-nav-link:hover {
-      color: #ffffff;
-      text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        font-size: 15px;
-      }
-
-      p, h1, h2, h3, h4, h5, h6 {
-        white-space: normal !important;
-        word-break: keep-all;
-        line-height: 1.6;
-      }
-
-      .container {
-        max-width: 100% !important;
-        padding: 20px 18px;
-      }
-
-      .bottom-nav {
-        max-width: 100%;
-        padding: 28px 18px 0;
-      }
-
-      .bottom-nav-columns {
-        gap: 24px;
-      }
-    }
-
-    /* ---------------------------------- */
-    /* 푸터 */
-    /* ---------------------------------- */
-    .footer-bar {
-      width: 100%;
-      border-top: 1px solid #222;
-      background: #0b0b0b;
-      padding: 12px 16px;
-      font-size: 11px;
-      color: #9d9d9d;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      text-align: center;
-    }
-
-    .footer-item::after {
-      content: "·";
-      margin-left: 8px;
-    }
-    .footer-item:last-child::after {
-      content: "";
-      margin: 0;
-    }
-  </style>
+    <script>
+        /* 우클릭 방지 */
+        document.addEventListener("contextmenu", e => e.preventDefault());
+        document.addEventListener("dragstart", e => e.preventDefault());
+    </script>
 </head>
 
 <body>
-  <div class="wrapper">
-    <div class="type-box">
-      <div id="line1" class="line1"></div>
-      <div id="line2" class="line2"></div>
+
+    <!-- 로고 -->
+    <img src="modinglogo.png" class="logo" alt="Moding Logo" />
+
+    <!-- 타이틀 -->
+    <div class="title">B2B Food-SaaS 플랫폼</div>
+    <div class="subtitle">Coming Soon</div>
+
+    <!-- 상단 3메뉴 -->
+    <div class="top-links">
+        <a href="brand.html">브랜드 아이덴티티</a> |
+        <a href="about.html">회사소개</a> |
+        <a href="contact.html">오시는 길</a>
     </div>
 
-    <div class="logo">
-      <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
+    <!-- ABOUT MODING (전체 사이트맵) -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-label">ABOUT MODING</div>
+
+        <div class="bottom-nav-columns">
+
+            <!-- 서비스 안내 -->
+            <div class="bottom-nav-col">
+                <div class="bottom-nav-col-title">서비스 안내</div>
+                <a href="services.html">Services (서비스 소개)</a>
+                <a href="owner.html">사장님 안내</a>
+                <a href="join.html">입점 안내</a>
+                <a href="alliance.html">제휴·입점 문의</a>
+            </div>
+
+            <!-- 정책 / 고객지원 -->
+            <div class="bottom-nav-col">
+                <div class="bottom-nav-col-title">정책·고객지원</div>
+                <a href="terms.html">이용약관</a>
+                <a href="privacy.html">개인정보처리방침</a>
+                <a href="faq.html">FAQ</a>
+                <a href="notice.html">공지사항</a>
+                <a href="data.html">자료실</a>
+            </div>
+
+        </div>
     </div>
 
-    <p class="desc1">B2B Food-SaaS 플랫폼</p>
-    <p class="desc2">Coming Soon</p>
-
-    <div class="links">
-      <a href="brand.html">브랜드 아이덴티티</a> |
-      <a href="about.html">회사소개</a> |
-      <a href="location.html">오시는 길</a>
+    <!-- 회사 정보 -->
+    <div class="footer-info">
+        상호: 주식회사 모딩(Moding Inc.) · 대표자: 서희진 · 사업자등록번호: 730-87-03564<br>
+        주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호 · 문의: moding_inc@naver.com
     </div>
-  </div>
 
-  <!-- =====================================
-       ABOUT MODING – 하단 전체 메뉴
-  ===================================== -->
-  <div class="bottom-nav">
-    <div class="bottom-nav-label">ABOUT MODING</div>
-
-    <div class="bottom-nav-columns">
-
-      <div class="bottom-nav-col">
-        <div class="bottom-nav-section-title">서비스 안내</div>
-        <a class="bottom-nav-link" href="services.html">Services (서비스 소개)</a>
-        <a class="bottom-nav-link" href="owner.html">사장님 안내</a>
-        <a class="bottom-nav-link" href="shop-entry.html">입점 안내</a>
-        <a class="bottom-nav-link" href="alliance.html">제휴·입점 문의</a>
-      </div>
-
-      <div class="bottom-nav-col">
-        <div class="bottom-nav-section-title">정책·고객지원</div>
-        <a class="bottom-nav-link" href="policy.html">이용약관</a>
-        <a class="bottom-nav-link" href="privacy.html">개인정보처리방침</a>
-        <a class="bottom-nav-link" href="faq.html">FAQ</a>
-        <a class="bottom-nav-link" href="notice.html">공지사항</a>
-        <a class="bottom-nav-link" href="resources.html">자료실</a>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- =====================================
-       FOOTER
-  ===================================== -->
-  <footer class="footer-bar">
-    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
-    <span class="footer-item">대표자: 서희진</span>
-    <span class="footer-item">사업자등록번호: 730-87-03564</span>
-    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
-    <span class="footer-item">문의: moding_inc@naver.com</span>
-  </footer>
-
-  <script>
-    /* -----------------------------
-       타이핑 효과
-    ----------------------------- */
-    window.onload = function () {
-      const text1 = "모든 사장님을 위한";
-      const text2 = "모든 것을 담은 플랫폼";
-
-      const el1 = document.getElementById("line1");
-      const el2 = document.getElementById("line2");
-
-      let i = 0, j = 0;
-
-      function typeLine1() {
-        if (i < text1.length) {
-          el1.textContent += text1[i];
-          i++;
-          setTimeout(typeLine1, 90);
-        } else {
-          setTimeout(typeLine2, 250);
-        }
-      }
-
-      function typeLine2() {
-        if (j < text2.length) {
-          el2.textContent += text2[j];
-          j++;
-          setTimeout(typeLine2, 90);
-        }
-      }
-
-      typeLine1();
-    };
-
-    /* -----------------------------
-       복사/우클릭/단축키 방지
-    ----------------------------- */
-
-    document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) e.preventDefault();
-    });
-
-    document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
-    });
-
-    document.addEventListener("keydown", function (e) {
-      const key = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
-        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
-          e.preventDefault();
-        }
-      }
-    });
-
-    document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
-    });
-  </script>
 </body>
 </html>
