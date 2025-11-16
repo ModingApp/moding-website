@@ -12,7 +12,7 @@
       padding: 0;
     }
 
-    /* ===== 텍스트 선택 / 복사 방지 (input, textarea 제외) ===== */
+    /* ===== 텍스트 선택 / 복사 방지 (input 제외) ===== */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -24,7 +24,7 @@
     img, .nocopy-img {
       -webkit-user-drag: none;
       user-drag: none;
-      pointer-events: none; /* 모바일에서 꾹 눌러서 저장 방지 */
+      pointer-events: none; /* 모바일 꾹 눌러 저장 방지 */
     }
 
     /* 입력창은 선택 허용 */
@@ -105,65 +105,87 @@
       text-decoration: underline;
     }
 
-    /* ===== ABOUT MODING 섹션 ===== */
-    .home-about-section {
-      width: 100%;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 26px 24px 34px;
+    /* ==========================================
+       ABOUT MODING (하단 대메뉴) - 개정판
+    ========================================== */
+    .bottom-nav {
+      max-width: 620px;   /* 데스크톱 좌측 치우침 해결 */
+      margin: 40px auto 0;
+      padding-top: 32px;
       border-top: 1px solid #222;
-      border-bottom: 1px solid #222;
+      text-align: center;
     }
 
-    .home-about-title {
-      font-size: 13px;
-      letter-spacing: 0.16em;
+    .bottom-nav-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 14px;
+      color: #b4b4b4;
+      margin-bottom: 18px;
     }
 
-    .home-about-grid {
+    .bottom-nav-columns {
       display: flex;
-      justify-content: center;
+      flex-wrap: wrap;
+      justify-content: center; /* 중앙 정렬 */
       gap: 40px;
       text-align: left;
-      flex-wrap: wrap;
     }
 
-    .home-about-col {
-      min-width: 180px;
+    .bottom-nav-col {
+      flex: 0 1 170px;
+      min-width: 150px;
     }
 
-    .home-about-col h4 {
+    .bottom-nav-section-title {
       font-size: 13px;
-      opacity: 0.9;
+      font-weight: 600;
       margin-bottom: 8px;
+      color: #ffffff;
     }
 
-    .home-about-col ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .home-about-col li {
-      margin: 4px 0;
-    }
-
-    .home-about-col a {
+    .bottom-nav-link {
+      display: block;
       font-size: 13px;
-      color: #e6e6e6;
+      line-height: 1.9;
+      color: #bbbbbb;
       text-decoration: none;
-      opacity: 0.8;
-      pointer-events: auto;
     }
 
-    .home-about-col a:hover {
-      opacity: 1;
+    .bottom-nav-link:hover {
+      color: #ffffff;
       text-decoration: underline;
     }
 
+    @media (max-width: 768px) {
+      body {
+        font-size: 15px;
+      }
+
+      p, h1, h2, h3, h4, h5, h6 {
+        white-space: normal !important;
+        word-break: keep-all;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 100% !important;
+        padding: 20px 18px;
+      }
+
+      .bottom-nav {
+        max-width: 100%;
+        padding: 28px 18px 0;
+      }
+
+      .bottom-nav-columns {
+        gap: 24px;
+      }
+    }
+
+    /* ---------------------------------- */
+    /* 푸터 */
+    /* ---------------------------------- */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -185,37 +207,6 @@
     .footer-item:last-child::after {
       content: "";
       margin: 0;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        font-size: 15px;
-      }
-
-      p, h1, h2, h3, h4, h5, h6 {
-        white-space: normal !important;
-        word-break: keep-all;
-        line-height: 1.6;
-      }
-
-      .wrapper {
-        padding: 32px 18px;
-      }
-
-      .line1,
-      .line2 {
-        font-size: 28px;
-      }
-
-      .home-about-section {
-        padding: 22px 18px 28px;
-      }
-
-      .home-about-grid {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 18px;
-      }
     }
   </style>
 </head>
@@ -241,36 +232,37 @@
     </div>
   </div>
 
-  <!-- ABOUT MODING 섹션: 모든 카테고리 정리 -->
-  <section class="home-about-section">
-    <div class="home-about-title">ABOUT MODING</div>
+  <!-- =====================================
+       ABOUT MODING – 하단 전체 메뉴
+  ===================================== -->
+  <div class="bottom-nav">
+    <div class="bottom-nav-label">ABOUT MODING</div>
 
-    <div class="home-about-grid">
-      <!-- 왼쪽: 서비스 안내 -->
-      <div class="home-about-col">
-        <h4>서비스 안내</h4>
-        <ul>
-          <li><a href="services.html">Services (서비스 소개)</a></li>
-          <li><a href="owner-guide.html">사장님 안내</a></li>
-          <li><a href="partner-guide.html">입점 안내</a></li>
-          <li><a href="alliance.html">제휴 · 입점 문의</a></li>
-        </ul>
+    <div class="bottom-nav-columns">
+
+      <div class="bottom-nav-col">
+        <div class="bottom-nav-section-title">서비스 안내</div>
+        <a class="bottom-nav-link" href="services.html">Services (서비스 소개)</a>
+        <a class="bottom-nav-link" href="owner.html">사장님 안내</a>
+        <a class="bottom-nav-link" href="shop-entry.html">입점 안내</a>
+        <a class="bottom-nav-link" href="alliance.html">제휴·입점 문의</a>
       </div>
 
-      <!-- 오른쪽: 정책 · 고객지원 -->
-      <div class="home-about-col">
-        <h4>정책 · 고객지원</h4>
-        <ul>
-          <li><a href="terms.html">이용약관</a></li>
-          <li><a href="privacy.html">개인정보처리방침</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="notice.html">공지사항</a></li>
-          <li><a href="resources.html">자료실</a></li>
-        </ul>
+      <div class="bottom-nav-col">
+        <div class="bottom-nav-section-title">정책·고객지원</div>
+        <a class="bottom-nav-link" href="policy.html">이용약관</a>
+        <a class="bottom-nav-link" href="privacy.html">개인정보처리방침</a>
+        <a class="bottom-nav-link" href="faq.html">FAQ</a>
+        <a class="bottom-nav-link" href="notice.html">공지사항</a>
+        <a class="bottom-nav-link" href="resources.html">자료실</a>
       </div>
+
     </div>
-  </section>
+  </div>
 
+  <!-- =====================================
+       FOOTER
+  ===================================== -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -317,17 +309,14 @@
        복사/우클릭/단축키 방지
     ----------------------------- */
 
-    // 우클릭 메뉴 차단
     document.addEventListener("contextmenu", function (e) {
       if (!e.target.closest("input, textarea, a")) e.preventDefault();
     });
 
-    // 드래그 차단
     document.addEventListener("dragstart", function (e) {
       if (!e.target.closest("input, textarea")) e.preventDefault();
     });
 
-    // Ctrl 단축키 차단
     document.addEventListener("keydown", function (e) {
       const key = e.key.toLowerCase();
       if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
@@ -337,7 +326,6 @@
       }
     });
 
-    // copy 이벤트 차단
     document.addEventListener("copy", function (e) {
       if (!e.target.closest("input, textarea")) e.preventDefault();
     });
