@@ -38,7 +38,7 @@
       pointer-events: none; /* 링크가 아닌 순수 이미지 보호용 */
     }
 
-    /* 입력창은 선택/복사 가능하게 허용 (필요시 사용) */
+    /* 입력창은 선택/복사 가능하게 허용 */
     input, textarea {
       -webkit-user-select: text;
       -moz-user-select: text;
@@ -136,11 +136,10 @@
       border: 1px solid #222;
     }
 
-    /* 실제 네이버 지도가 들어갈 영역 */
+    /* 네이버 지도 */
     #map {
       width: 100%;
-      height: 420px; /* 데스크톱 기준 높이 */
-      /* 지도는 클릭/드래그가 되어야 하므로 pointer-events 차단 X */
+      height: 420px;
     }
 
     .map-note {
@@ -151,7 +150,7 @@
     }
 
     /* ================================
-       하단 공통 푸터
+       하단 푸터
     ================================ */
     .footer-bar {
       width: 100%;
@@ -171,62 +170,62 @@
       content: "·";
       margin-left: 8px;
     }
-
     .footer-item:last-child::after {
       content: "";
       margin: 0;
     }
 
     /* ================================
-       모바일(Fold 포함) 대응
+       모바일 대응
     ================================ */
     @media (max-width: 768px) {
-      body {
-        font-size: 15px;
-      }
-
-      p, h1, h2, h3, h4, h5, h6 {
-        white-space: normal !important;
-        word-break: keep-all;
-        line-height: 1.6;
-      }
-
-      .container {
-        max-width: 100% !important;
-        padding: 20px 18px 32px;
-      }
-
-      #map {
-        height: 320px; /* 모바일에서 조금 낮게 */
-      }
+      #map { height: 320px; }
     }
   </style>
 </head>
 
 <body>
   <main class="container">
+
     <!-- 상단 헤더 -->
     <header class="header">
       <div class="header-left">
-        <!-- 상단 로고 (복사 방지 위해 nocopy-img 클래스 추가) -->
         <img src="모딩로고.png" alt="Moding Logo" class="header-logo nocopy-img" />
         <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
       </div>
       <a href="index.html" class="back-link">← 메인으로</a>
     </header>
 
-    <!-- 오시는 길 내용 -->
+    <!-- 오시는 길 SECTION 시작 -->
     <section>
-  <!-- 상단 섹션 태그 -->
-  <div class="section-tag">SECTION</div>
 
-  <!-- 초록색 큰 제목 -->
-  <h1 class="section-title">오시는 길</h1>
+      <!-- SECTION LABEL -->
+      <div style="
+        display:inline-block;
+        padding:10px 22px;
+        border:1px solid #333;
+        border-radius:40px;
+        font-size:13px;
+        letter-spacing:2px;
+        color:#ccc;
+        margin-bottom:20px;
+      ">
+        DIRECTIONS
+      </div>
 
-  <p class="subtitle">
-    아래 지도를 통해 <span style="font-weight:600;">모딩 본사</span> 위치를 확인하실 수 있습니다.
-  </p>
-  ...
+      <!-- 초록색 오시는 길 -->
+      <h1 style="
+        font-size:32px;
+        font-weight:700;
+        color:#1FAA48;
+        margin:0 0 22px 0;
+      ">
+        오시는 길
+      </h1>
+
+      <p class="subtitle">
+        아래 지도를 통해 <span style="font-weight:600;">모딩 본사</span> 위치를 확인하실 수 있습니다.
+      </p>
 
       <p class="address-main">대구광역시 달서구 달구벌대로 1698, 6층 607호</p>
       <p class="address-sub">
@@ -234,11 +233,10 @@
       </p>
 
       <div class="map-box">
-        <!-- 네이버 지도 표시 영역 -->
         <div id="map"></div>
         <div class="map-note">
-          ※ 지도가 보이지 않을 경우 새로고침하시거나,
-          <strong>네이버 지도 앱</strong>에서 “모딩 (대구 달서구)”를 검색해 주세요.
+          ※ 지도가 보이지 않을 경우 새로고침하거나  
+          네이버 지도 앱에서 “모딩(대구 달서구)” 검색해 주세요.
         </div>
       </div>
     </section>
@@ -254,95 +252,40 @@
   </footer>
 
   <script>
-    /* ================================
-       NAVER MAP 인증 실패 시 알림
-    ================================ */
     window.navermap_authFailure = function () {
-      alert("네이버 지도 API 인증에 실패했습니다.\nWeb 서비스 URL과 ncpKeyId를 다시 확인해 주세요.");
+      alert("네이버 지도 API 인증 실패: Web 서비스 URL과 ncpKeyId를 확인하세요.");
     };
 
-    /* ================================
-       지도 초기화 스크립트
-    ================================ */
     window.addEventListener("load", function () {
-      // 모딩 좌표 (위도, 경도)
       var modingPosition = new naver.maps.LatLng(35.8551558, 128.5515681);
 
-      // 지도 생성
       var map = new naver.maps.Map("map", {
         center: modingPosition,
         zoom: 16,
-        minZoom: 10,
-        maxZoom: 19,
         zoomControl: true,
-        zoomControlOptions: {
-          position: naver.maps.Position.TOP_RIGHT
-        }
+        zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT }
       });
 
-      // 마커 생성
       var marker = new naver.maps.Marker({
         position: modingPosition,
         map: map,
         title: "모딩(Moding Inc.)"
       });
 
-      // 정보창 생성
       var infoWindow = new naver.maps.InfoWindow({
         content: [
           '<div style="padding:10px 12px; font-size:12px; color:#000;">',
           '  <strong>모딩(Moding Inc.)</strong><br>',
-          '  대구광역시 달서구 달구벌대로 1698, 6층 607호',
+          '  대구 달서구 달구벌대로 1698, 6층 607호',
           '</div>'
         ].join("")
       });
 
-      // 기본으로 정보창 열기
       infoWindow.open(map, marker);
 
-      // 마커 클릭 시 정보창 토글
       naver.maps.Event.addListener(marker, "click", function () {
-        if (infoWindow.getMap()) {
-          infoWindow.close();
-        } else {
-          infoWindow.open(map, marker);
-        }
+        infoWindow.getMap() ? infoWindow.close() : infoWindow.open(map, marker);
       });
-    });
-
-    /* ================================
-       복사 / 우클릭 / 단축키 방지
-    ================================ */
-
-    // 우클릭 메뉴 차단 (링크, 입력창은 허용)
-    document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) {
-        e.preventDefault();
-      }
-    });
-
-    // 드래그 차단 (지도 내부는 그대로 작동)
-    document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
-    });
-
-    // Ctrl + C, X, V, S, U, P, A 등 차단 (입력창 제외)
-    document.addEventListener("keydown", function (e) {
-      const key = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
-        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
-          e.preventDefault();
-        }
-      }
-    });
-
-    // copy 이벤트 직접 차단 (입력창 제외)
-    document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
     });
   </script>
 </body>
