@@ -46,6 +46,58 @@
       flex-direction: column;
     }
 
+    /* ===== 상단 글로벌 헤더 ===== */
+    .global-header {
+      width: 100%;
+      border-bottom: 1px solid #222;
+      background: #0b0b0b;
+    }
+
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-logo-small {
+      height: 32px;
+      width: auto;
+    }
+
+    .header-brand-text {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      color: #f0f0f0;
+      text-decoration: none;
+      opacity: 0.8;
+      pointer-events: auto; /* 복사 방지 설정과 무관하게 클릭 가능 */
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* ===== 메인 인덱스 영역 ===== */
     .wrapper {
       width: 100%;
       max-width: 520px;
@@ -98,13 +150,14 @@
       color: #f0f0f0;
       text-decoration: none;
       margin: 0 6px;
-      pointer-events: auto;
+      pointer-events: auto; /* 링크는 클릭 가능해야 하므로 허용 */
     }
 
     .links a:hover {
       text-decoration: underline;
     }
 
+    /* ===== 하단 사업자 정보 푸터 ===== */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -143,11 +196,42 @@
         max-width: 100% !important;
         padding: 20px 18px;
       }
+
+      .line1,
+      .line2 {
+        font-size: 26px;
+        white-space: normal;
+      }
+
+      .header-inner {
+        padding: 12px 16px;
+      }
+
+      .nav-links {
+        gap: 10px;
+        font-size: 12px;
+      }
     }
   </style>
 </head>
 
 <body>
+  <!-- 상단 글로벌 헤더 -->
+  <header class="global-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <img src="모딩로고.png" alt="Moding Logo" class="header-logo-small nocopy-img">
+        <span class="header-brand-text">Moding Inc.</span>
+      </div>
+      <nav class="nav-links">
+        <a href="brand.html">브랜드 아이덴티티</a>
+        <a href="about.html">회사소개</a>
+        <a href="location.html">오시는 길</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 가운데 인덱스 영역 -->
   <div class="wrapper">
     <div class="type-box">
       <div id="line1" class="line1"></div>
@@ -162,12 +246,13 @@
     <p class="desc2">Coming Soon</p>
 
     <div class="links">
-  <a href="brand.html">브랜드 아이덴티티</a> |
-  <a href="about.html">회사소개</a> |
-  <a href="location.html">오시는 길</a>
-</div>
+      <a href="brand.html">브랜드 아이덴티티</a> |
+      <a href="about.html">회사소개</a> |
+      <a href="location.html">오시는 길</a>
+    </div>
   </div>
 
+  <!-- 하단 공통 푸터 -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
