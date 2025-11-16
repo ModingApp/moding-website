@@ -1,1 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제휴·입점 문의 | 모딩(Moding)</title>
+  <meta name="description" content="모딩(Moding)과의 제조사 입점·제휴, 외식업 사장님 서비스 문의 페이지입니다. 모딩과 함께할 파트너를 모집합니다.">
+  <style>
+    /* ------------------------------
+       공통 초기화 스타일
+    ------------------------------ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+      background: #0b0b0b;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ------------------------------
+       메인 컨테이너 레이아웃
+    ------------------------------ */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+      flex: 1;
+    }
+
+    /* ------------------------------
+       헤더 (로고 + 메인으로 링크)
+    ------------------------------ */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-logo {
+      height: 42px;
+      width: auto;
+    }
+
+    .back-link {
+      font-size: 13px;
+      color: #cccccc;
+      text-decoration: none;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ------------------------------
+       상단 캡슐 + 제목
+    ------------------------------ */
+    .brand-header {
+      margin-bottom: 26px;
+    }
+
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 10px;
+    }
+
+    .brand-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1FAA48;
+      line-height: 1.35;
+    }
+
+    /* ------------------------------
+       제목 / 본문 텍스트
+    ------------------------------ */
+    h1, h2, h3 {
+      font-weight: 700;
+      line-height: 1.4;
+      margin: 32px 0 12px;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #1FAA48;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 26px;
+      color: #FF8A00;
+    }
+
+    h3 {
+      font-size: 18px;
+      color: #ffffff;
+      opacity: 0.95;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.9;
+      opacity: 0.9;
+      margin-bottom: 12px;
+    }
+
+    .lead {
+      font-size: 15px;
+      line-height: 1.9;
+      opacity: 0.92;
+      margin-bottom: 18px;
+    }
+
+    .text-list {
+      list-style: none;
+      margin: 8px 0 16px;
+      padding-left: 0;
+    }
+    .text-list li {
+      font-size: 14px;
+      line-height: 1.9;
+      opacity: 0.9;
+    }
+    .text-list li::before {
+      content: "· ";
+    }
+
+    .divider {
+      border-bottom: 1px solid #222;
+      margin: 32px 0 28px;
+    }
+
+    /* ------------------------------
+       메일 강조 박스
+    ------------------------------ */
+    .mail-box {
+      margin-top: 24px;
+      margin-bottom: 32px;
+      padding: 18px 18px 16px;
+      border-radius: 14px;
+      border: 1px solid #2a2a2a;
+      background: radial-gradient(circle at top left, #163322 0, #050505 55%);
+    }
+
+    .mail-label {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 6px;
+    }
+
+    .mail-address {
+      font-size: 15px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .mail-desc {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    /* ------------------------------
+       CTA 버튼 영역
+    ------------------------------ */
+    .cta-section {
+      margin-top: 24px;
+      margin-bottom: 20px;
+      padding: 26px 20px 30px;
+      border-radius: 18px;
+      border: 1px solid #262626;
+      background: radial-gradient(circle at top left, #1d3a26 0, #050505 55%);
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
+    }
+
+    .cta-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #FFB341;
+    }
+
+    .cta-desc {
+      font-size: 14px;
+      line-height: 1.9;
+      opacity: 0.92;
+      margin-bottom: 18px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .cta-btn-primary,
+    .cta-btn-outline {
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.18s ease-out;
+    }
+
+    .cta-btn-primary {
+      border: 1px solid #1FAA48;
+      color: #ffffff;
+      background: #1FAA48;
+    }
+    .cta-btn-primary:hover {
+      background: #22c455;
+      border-color: #22c455;
+    }
+
+    .cta-btn-outline {
+      border: 1px solid #FF8A00;
+      color: #FF8A00;
+      background: transparent;
+    }
+    .cta-btn-outline:hover {
+      background: rgba(255, 138, 0, 0.12);
+    }
+
+    .cta-note {
+      font-size: 11px;
+      opacity: 0.7;
+    }
+
+    /* ------------------------------
+       푸터 (공통)
+    ------------------------------ */
+    .footer-bar {
+      width: 100%;
+      border-top: 1px solid #222;
+      background: #0b0b0b;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #9d9d9d;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .footer-item::after {
+      content: "·";
+      margin-left: 8px;
+    }
+    .footer-item:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    /* ------------------------------
+       반응형 (모바일)
+    ------------------------------ */
+    @media (max-width: 768px) {
+      p, 
+      .text-list li {
+        word-break: keep-all;
+      }
+    }
+      .container {
+        padding: 28px 16px 40px;
+      }
+
+      h1 { font-size: 28px; }
+      h2 { font-size: 22px; }
+      h3 { font-size: 18px; }
+
+      p,
+      .text-list li {
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      p, h1, h2, h3 {
+        white-space: normal;
+        word-break: keep-all;
+      }
+
+      .cta-section {
+        margin-top: 24px;
+        padding: 22px 16px 26px;
+      }
+
+      .cta-title {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body
+  oncontextmenu="return false"
+  onselectstart="return false"
+  ondragstart="return false"
+>
+
+  <main class="container">
+    <!-- 상단 로고 + 뒤로가기 -->
+    <header class="header">
+      <div class="header-left">
+        <img src="모딩로고.png" alt="Moding Logo" class="header-logo">
+        <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
+      </div>
+      <a href="index.html" class="back-link">← 메인으로</a>
+    </header>
+
+    <!-- 상단 캡슐 + 제목 -->
+    <div class="brand-header">
+      <div class="brand-tag">Partnership & Inquiry</div>
+      <div class="brand-title">제휴·입점 문의</div>
+    </div>
+
+    <p class="lead">
+      모딩(Moding)은 신뢰할 수 있는 식품 제조사와<br>
+      매장 운영에 진심인 외식업 사장님과 함께 성장하고자 합니다.<br>
+      아래 안내를 참고해 제휴·입점 문의를 남겨 주세요.
+    </p>
+
+    <div class="divider"></div>
+
+    <!-- 제조사 섹션 -->
+    <section>
+      <h2>식품 제조사 입점·제휴 문의</h2>
+      <p>
+        자체 공장 또는 OEM/ODM 형태로 제품을 생산하시는 제조사라면,<br>
+        다음 정보를 함께 보내주시면 검토에 큰 도움이 됩니다.
+      </p>
+      <ul class="text-list">
+        <li>회사명 / 브랜드명</li>
+        <li>담당자 성함 및 연락처(휴대폰, 이메일)</li>
+        <li>주요 제품 카테고리 (예: 소스, 밀키트, HMR, 육가공 등)</li>
+        <li>현재 유통 채널 (B2B, B2C, 자사몰, 마켓, 로컬 납품 등)</li>
+        <li>희망 거래 형태 (PB, OEM, 레시피 기반 단독 공급 등)</li>
+        <li>기타 모딩과 논의하고 싶은 조건이나 방향</li>
+      </ul>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 외식업 섹션 -->
+    <section>
+      <h2>외식업 사장님 서비스 문의</h2>
+      <p>
+        매장에서 사용할 안정적인 소스·원부재료·밀키트를 찾고 계시거나,<br>
+        모딩의 정산·세금계산서·발주 관리 도구에 관심이 있으시다면<br>
+        다음 내용을 함께 적어 보내 주세요.
+      </p>
+      <ul class="text-list">
+        <li>매장 상호명 / 업종 (예: 일식주점, 고기집, 카페 등)</li>
+        <li>담당자 성함 및 연락처</li>
+        <li>현재 사용 중인 주요 품목 또는 해결하고 싶은 운영 고민</li>
+        <li>모딩을 통해 기대하는 방향 (예: 발주 통합, 비용 절감, 메뉴 개발 등)</li>
+      </ul>
+    </section>
+
+    <!-- 메일 박스 -->
+    <div class="mail-box">
+      <div class="mail-label">CONTACT EMAIL</div>
+      <div class="mail-address">moding_inc@naver.com</div>
+      <div class="mail-desc">
+        제조사, 외식업 사장님 모두 위 이메일로 문의 주시면<br>
+        순차적으로 검토 후 회신드립니다.
+      </div>
+    </div>
+
+    <!-- CTA 섹션 -->
+    <section class="cta-section">
+      <h3 class="cta-title">메일로 바로 문의하시겠어요?</h3>
+      <p class="cta-desc">
+        아래 버튼을 누르면 메일 제목이 자동으로 작성됩니다.<br>
+        내용은 자유롭게 적어 보내 주세요.
+      </p>
+
+      <div class="cta-buttons">
+        <a
+          href="mailto:moding_inc@naver.com?subject=[제조사] 모딩 입점·제휴 문의"
+          class="cta-btn-primary"
+        >
+          제조사 입점·제휴 문의 메일 열기
+        </a>
+
+        <a
+          href="mailto:moding_inc@naver.com?subject=[외식업] 모딩 서비스 문의"
+          class="cta-btn-outline"
+        >
+          외식업 사장님 문의 메일 열기
+        </a>
+      </div>
+
+      <p class="cta-note">
+        현재 베타 단계로, 일부 기능은 순차적으로 제공됩니다.<br>
+        답변까지는 약간의 시간이 소요될 수 있습니다.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- 공통 푸터 (이메일 없이 회사 정보만) -->
+  <footer class="footer-bar">
+    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
+    <span class="footer-item">대표자: 서희진</span>
+    <span class="footer-item">사업자등록번호: 730-87-03564</span>
+    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
+  </footer>
+
+  <!-- 복사 / 단축키 방지 -->
+  <script>
+    document.addEventListener("copy", function (e) {
+      e.preventDefault();
+      alert("모딩(Moding)의 콘텐츠는 보호되고 있습니다.");
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if ((e.ctrlKey || e.metaKey) &&
+          ["c", "x", "s", "u", "a"].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
