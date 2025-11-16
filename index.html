@@ -6,13 +6,16 @@
   <title>모든 사장님을 위한 모든 것을 담은 플랫폼, 모딩</title>
 
   <style>
+    /* ============================
+       공통 초기화
+    ============================ */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    /* ===== 텍스트 선택 / 복사 방지 (input, textarea 제외) ===== */
+    /* 텍스트 선택 / 복사 방지 (input, textarea 제외) */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -20,11 +23,11 @@
       user-select: none;
     }
 
-    /* 이미지 드래그 방지 */
+    /* 이미지 드래그 및 길게 눌러 저장 최소화 */
     img, .nocopy-img {
       -webkit-user-drag: none;
       user-drag: none;
-      pointer-events: none; /* 모바일에서 꾹 눌러서 저장 방지 */
+      pointer-events: none; /* 링크가 아닌 순수 이미지 보호용 */
     }
 
     /* 입력창은 선택 허용 */
@@ -46,33 +49,36 @@
       flex-direction: column;
     }
 
+    /* ============================
+       상단 메인 영역
+    ============================ */
     .wrapper {
       width: 100%;
       max-width: 520px;
       margin: 0 auto;
-      padding: 40px 24px 10px;
+      padding: 40px 24px 32px;
       text-align: center;
       flex: 0 0 auto;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
     }
 
     .type-box {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .line1,
     .line2 {
-      font-size: 35px;
-      opacity: 0.85;
-      margin-bottom: 6px;
+      font-size: 28px;
+      opacity: 0.9;
+      margin-bottom: 4px;
       white-space: nowrap;
     }
 
     .logo {
-      margin: 24px 0 28px 0;
+      margin: 16px 0 24px 0;
     }
 
     .logo img {
@@ -81,85 +87,123 @@
       height: auto;
     }
 
-    .desc1,
-    .desc2 {
-      font-size: 24px;
+    .desc1 {
+      font-size: 20px;
       line-height: 1.6;
-      opacity: 0.8;
+      opacity: 0.9;
+      margin-bottom: 6px;
     }
 
-    .links {
-      margin-top: 18px;
+    /* Coming Soon 강조 (페이드 인/아웃) */
+    .desc2 {
+      font-size: 22px;
+      line-height: 1.4;
+      margin-bottom: 18px;
+      animation: fadeBlink 2.4s ease-in-out infinite;
+    }
+
+    @keyframes fadeBlink {
+      0%, 100% { opacity: 0.35; }
+      50%      { opacity: 1; }
+    }
+
+    /* ============================
+       상단 링크 (회사소개 / 브랜드 / 오시는 길)
+    ============================ */
+    .top-links-wrapper {
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .top-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
       font-size: 14px;
       opacity: 0.8;
     }
 
-    .links a {
+    .top-links a {
       color: #f0f0f0;
       text-decoration: none;
-      margin: 0 6px;
       pointer-events: auto;
     }
 
-    .links a:hover {
+    .top-links a:hover {
       text-decoration: underline;
     }
 
-    /* ===== ABOUT MODING 사이트맵 영역 ===== */
-    .about-moding {
+    /* ============================
+       ABOUT MODING 섹션
+    ============================ */
+    .about-section {
       width: 100%;
-      max-width: 860px;
-      margin: 40px auto 0;
-      padding: 30px 24px 10px;
-      border-top: 1px solid #222;
-      text-align: center;
+      max-width: 960px;
+      margin: 40px auto 32px;
+      padding: 32px 24px 36px;
+      border-top: 1px solid #262626;
+      border-bottom: 1px solid #262626;
+      background: #080808;
     }
 
-    .about-moding-label {
-      font-size: 11px;
-      letter-spacing: 0.18em;
+    .about-title {
+      font-size: 12px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #b4b4b4;
-      margin-bottom: 26px;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      margin-bottom: 22px;
     }
 
-    /* PC: ABOUT MODING을 기준으로 좌우 완전 대칭되게 그리드 구성 */
-    .about-moding-cols {
+    .about-grid {
       display: grid;
-      grid-template-columns: repeat(2, 220px); /* 두 컬럼 고정폭 */
-      column-gap: 80px;                        /* 가운데 간격 */
-      justify-content: center;                 /* 그리드 전체를 중앙 배치 */
-      align-items: flex-start;
+      grid-template-columns: repeat(2, minmax(160px, 1fr));
+      gap: 16px 80px;
+      max-width: 520px;
+      margin: 0 auto;
     }
 
-    .about-moding-col {
+    .about-col {
       text-align: left;
     }
 
-    .about-moding-col-title {
+    .about-col-title {
       font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .about-moding-col a {
-      display: block;
+      font-weight: 600;
       margin-bottom: 8px;
-      font-size: 14px;
-      color: #f0f0f0;
+    }
+
+    .about-col ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .about-col li {
+      font-size: 13px;
+      line-height: 1.9;
       opacity: 0.9;
+    }
+
+    .about-col li a {
+      color: #f0f0f0;
       text-decoration: none;
+      pointer-events: auto;
     }
 
-    .about-moding-col a:hover {
-      color: #00e676;
+    .about-col li a:hover {
+      text-decoration: underline;
     }
 
+    /* ============================
+       사업자 정보 푸터
+    ============================ */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
       background: #0b0b0b;
-      padding: 12px 16px 40px;
+      padding: 12px 16px;
       font-size: 11px;
       color: #9d9d9d;
       display: flex;
@@ -167,7 +211,7 @@
       justify-content: center;
       gap: 8px;
       text-align: center;
-      margin-top: 24px;
+      flex-shrink: 0;
     }
 
     .footer-item::after {
@@ -179,9 +223,30 @@
       margin: 0;
     }
 
+    /* ============================
+       반응형 (모바일)
+    ============================ */
     @media (max-width: 768px) {
       body {
         font-size: 15px;
+      }
+
+      .wrapper {
+        padding: 32px 18px 24px;
+      }
+
+      .line1,
+      .line2 {
+        font-size: 22px;
+        white-space: normal;
+      }
+
+      .desc1 {
+        font-size: 18px;
+      }
+
+      .desc2 {
+        font-size: 20px;
       }
 
       p, h1, h2, h3, h4, h5, h6 {
@@ -190,80 +255,94 @@
         line-height: 1.6;
       }
 
-      .wrapper {
-        max-width: 100% !important;
-        padding: 32px 18px 10px;
+      .about-section {
+        margin: 32px auto 24px;
+        padding: 24px 18px 28px;
       }
 
-      .line1,
-      .line2 {
-        font-size: 26px;
-        white-space: normal;
+      .about-grid {
+        gap: 10px 32px;
       }
 
-      .about-moding {
-        padding: 24px 18px 4px;
-        margin-top: 32px;
+      .about-col-title {
+        font-size: 14px;
       }
 
-      /* 📱 모바일에서는 세로 한 줄로 쌓이게 */
-      .about-moding-cols {
-        grid-template-columns: 1fr;
-        row-gap: 24px;
-        column-gap: 0;
-        justify-items: center;
+      .about-col li {
+        font-size: 12px;
       }
+    }
 
-      .about-moding-col {
-        text-align: center;
+    /* 데스크톱에서 상단 링크를 좌/중/우 3분할 느낌으로 */
+    @media (min-width: 768px) {
+      .top-links {
+        max-width: 520px;
+        margin: 0 auto;
+        justify-content: space-between;
       }
     }
   </style>
 </head>
 
 <body>
+  <!-- 메인 상단 영역 -->
   <div class="wrapper">
+    <!-- 타이핑 문구 -->
     <div class="type-box">
       <div id="line1" class="line1"></div>
       <div id="line2" class="line2"></div>
     </div>
 
+    <!-- 로고 -->
     <div class="logo">
       <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
     </div>
 
+    <!-- 설명 텍스트 -->
     <p class="desc1">B2B Food-SaaS 플랫폼</p>
     <p class="desc2">Coming Soon</p>
 
-    <div class="links">
-      <a href="brand.html">브랜드 아이덴티티</a> |
-      <a href="about.html">회사소개</a> |
-      <a href="location.html">오시는 길</a>
+    <!-- 상단 링크 (회사소개 / 브랜드 / 오시는 길) -->
+    <div class="top-links-wrapper">
+      <nav class="top-links">
+        <a href="about.html">회사소개</a>
+        <a href="brand.html">브랜드 아이덴티티</a>
+        <a href="location.html">오시는 길</a>
+      </nav>
     </div>
   </div>
 
-  <!-- ABOUT MODING 사이트맵 -->
-  <section class="about-moding">
-    <div class="about-moding-label">ABOUT MODING</div>
-    <div class="about-moding-cols">
-      <div class="about-moding-col">
-        <div class="about-moding-col-title">서비스 안내</div>
-        <a href="services.html">Services (서비스 소개)</a>
-        <a href="owner.html">사장님 안내</a>
-        <a href="join.html">입점 안내</a>
-        <a href="alliance.html">제휴·입점 문의</a>
+  <!-- ABOUT MODING 섹션 -->
+  <section class="about-section">
+    <div class="about-title">ABOUT MODING</div>
+
+    <div class="about-grid">
+      <!-- 왼쪽 컬럼 -->
+      <div class="about-col">
+        <div class="about-col-title">서비스 안내</div>
+        <ul>
+          <li><a href="services.html">Services (서비스 소개)</a></li>
+          <li><a href="owners.html">사장님 안내</a></li>
+          <li><a href="entry.html">입점 안내</a></li>
+          <li><a href="alliance.html">제휴·입점 문의</a></li>
+        </ul>
       </div>
-      <div class="about-moding-col">
-        <div class="about-moding-col-title">정책·고객지원</div>
-        <a href="terms.html">이용약관</a>
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="faq.html">FAQ</a>
-        <a href="notice.html">공지사항</a>
-        <a href="data.html">자료실</a>
+
+      <!-- 오른쪽 컬럼 -->
+      <div class="about-col">
+        <div class="about-col-title">정책·고객지원</div>
+        <ul>
+          <li><a href="terms.html">이용약관</a></li>
+          <li><a href="privacy.html">개인정보처리방침</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="notice.html">공지사항</a></li>
+          <li><a href="resources.html">자료실</a></li>
+        </ul>
       </div>
     </div>
   </section>
 
+  <!-- 사업자 정보 푸터 -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -272,10 +351,11 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
+  <!-- ============================
+       스크립트 : 타이핑 + 보호 기능
+  ============================ -->
   <script>
-    /* -----------------------------
-       타이핑 효과
-    ----------------------------- */
+    /* 타이핑 효과 */
     window.onload = function () {
       const text1 = "모든 사장님을 위한";
       const text2 = "모든 것을 담은 플랫폼";
@@ -306,21 +386,23 @@
       typeLine1();
     };
 
-    /* -----------------------------
-       복사/우클릭/단축키 방지
-    ----------------------------- */
+    /* 복사 / 우클릭 / 드래그 / 단축키 방지 */
 
-    // 우클릭 메뉴 차단
+    // 우클릭 메뉴 차단 (링크, 입력창은 허용)
     document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) e.preventDefault();
+      if (!e.target.closest("input, textarea, a")) {
+        e.preventDefault();
+      }
     });
 
-    // 드래그 차단
+    // 드래그 차단 (입력창 제외)
     document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
     });
 
-    // Ctrl 단축키 차단
+    // Ctrl / Cmd 단축키 차단
     document.addEventListener("keydown", function (e) {
       const key = e.key.toLowerCase();
       if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
@@ -332,7 +414,9 @@
 
     // copy 이벤트 차단
     document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
     });
   </script>
 </body>
