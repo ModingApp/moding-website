@@ -123,16 +123,16 @@
       margin-bottom: 26px;
     }
 
+    /* PC: ABOUT MODING을 기준으로 좌우 완전 대칭되게 그리드 구성 */
     .about-moding-cols {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 60px;
+      display: grid;
+      grid-template-columns: repeat(2, 220px); /* 두 컬럼 고정폭 */
+      column-gap: 80px;                        /* 가운데 간격 */
+      justify-content: center;                 /* 그리드 전체를 중앙 배치 */
+      align-items: flex-start;
     }
 
     .about-moding-col {
-      flex: 0 1 200px;
-      min-width: 180px;
       text-align: left;
     }
 
@@ -206,8 +206,16 @@
         margin-top: 32px;
       }
 
+      /* 📱 모바일에서는 세로 한 줄로 쌓이게 */
       .about-moding-cols {
-        gap: 32px;
+        grid-template-columns: 1fr;
+        row-gap: 24px;
+        column-gap: 0;
+        justify-items: center;
+      }
+
+      .about-moding-col {
+        text-align: center;
       }
     }
   </style>
