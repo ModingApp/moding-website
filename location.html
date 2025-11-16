@@ -2,28 +2,25 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <!-- 모바일 화면에서도 깨지지 않도록 하는 설정 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>오시는 길 | 모딩(Moding)</title>
   <meta name="description" content="모딩(Moding) 본사 위치 안내. 대구 달서구 달구벌대로 1698, 6층 607호. 내비게이션 및 지도 링크 포함.">
-  
-  <!-- ✅ NAVER Maps JS API (ncpClientId 사용) -->
+
+  <!-- NAVER Maps JS API -->
   <script
     type="text/javascript"
-    src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=yzegd1ve8v">
+    src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=yzegd1ve8v">
   </script>
 
   <style>
-    /* ================================
-       공통 초기화 + 기본 설정
-    ================================ */
+    /* 공통 초기화 */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    /* ===== 텍스트 선택 / 복사 방지 (input, textarea 제외) ===== */
+    /* 텍스트 선택 제한 (input, textarea 제외) */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -38,7 +35,7 @@
       pointer-events: none; /* 링크가 아닌 순수 이미지 보호용 */
     }
 
-    /* 입력창은 선택/복사 가능하게 허용 (필요시 사용) */
+    /* 입력창은 선택/복사 허용 (필요시 사용) */
     input, textarea {
       -webkit-user-select: text;
       -moz-user-select: text;
@@ -57,34 +54,30 @@
       flex-direction: column;
     }
 
-    /* ================================
-       레이아웃 컨테이너
-    ================================ */
+    /* 레이아웃 컨테이너 (회사소개와 동일 폭) */
     .container {
-      max-width: 860px;              /* 회사소개 페이지와 동일 */
+      max-width: 860px;
       margin: 0 auto;
-      padding: 32px 20px 40px;
+      padding: 40px 20px 60px;
       flex: 1;
     }
 
-    /* ================================
-       상단 헤더 (로고 + 메인으로)
-    ================================ */
+    /* 헤더 (로고 + 메인으로) */
     .header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 32px;
+      margin-bottom: 40px;
     }
 
     .header-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 6px;
     }
 
     .header-logo {
-      height: 40px;
+      height: 42px;
       width: auto;
     }
 
@@ -93,34 +86,32 @@
       color: #cccccc;
       text-decoration: none;
     }
-
     .back-link:hover {
       text-decoration: underline;
     }
 
-    /* ================================
-       섹션 라벨 태그 (캡슐)
-    ================================ */
-    .tag-line {
-      display: inline-block;
+    /* 상단 캡슐 (회사소개와 톤 맞춤) */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
       font-size: 11px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.7); 
       margin-bottom: 10px;
     }
 
-    /* ================================
-       제목 / 주소 / 설명
-    ================================ */
-    h1 {
-      font-size: 32px;               /* 회사소개와 동일한 기본 크기 */
-      margin-bottom: 8px;
-      color: #1FAA48;                /* 모딩 그린 */
+    /* 제목 / 텍스트 */
+    .section-title {
+      font-size: 32px;
       font-weight: 700;
+      color: #1FAA48;
+      margin-bottom: 18px;
+      line-height: 1.35;
     }
 
     .subtitle {
@@ -141,9 +132,7 @@
       opacity: 0.85;
     }
 
-    /* ================================
-       지도 박스
-    ================================ */
+    /* 지도 박스 */
     .map-box {
       margin-top: 24px;
       background: #111111;
@@ -153,15 +142,189 @@
       border: 1px solid #222;
     }
 
-    /* 실제 네이버 지도가 들어갈 영역 */
     #map {
       width: 100%;
-      height: 420px; /* 데스크톱 기준 높이 */
-      /* 지도는 클릭/드래그가 되어야 하므로 pointer-events 차단 X */
+      height: 420px;
     }
 
     .map-note {
       font-size: 11px;
       color: #b5b5b5;
       padding: 10px 14px 12px;
-      border-top: 1px solid #222
+      border-top: 1px solid #222;
+    }
+
+    /* 푸터 (공통) */
+    .footer-bar {
+      width: 100%;
+      border-top: 1px solid #222;
+      background: #0b0b0b;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #9d9d9d;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
+    .footer-item::after {
+      content: "·";
+      margin-left: 8px;
+    }
+    .footer-item:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    /* 모바일 대응 */
+    @media (max-width: 768px) {
+      .container {
+        max-width: 100%;
+        padding: 28px 16px 40px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      p, h1, h2, h3, h4, h5, h6 {
+        font-size: 14px;
+        line-height: 1.8;
+        white-space: normal;
+        word-break: keep-all;
+      }
+
+      #map {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <img src="모딩로고.png" alt="Moding Logo" class="header-logo nocopy-img">
+        <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
+      </div>
+      <a href="index.html" class="back-link">← 메인으로</a>
+    </header>
+
+    <!-- 오시는 길 섹션 -->
+    <section>
+      <div class="section-tag">DIRECTIONS</div>
+      <h1 class="section-title">오시는 길</h1>
+
+      <p class="subtitle">
+        아래 지도를 통해 <span style="font-weight:600;">모딩 본사</span> 위치를 확인하실 수 있습니다.
+      </p>
+
+      <p class="address-main">대구광역시 달서구 달구벌대로 1698, 6층 607호</p>
+      <p class="address-sub">
+        두류역 7번 출구 도보 약 5분 · 건물 타워 주차장 이용 가능
+      </p>
+
+      <div class="map-box">
+        <div id="map"></div>
+        <div class="map-note">
+          ※ 지도가 보이지 않을 경우 새로고침하시거나,
+          <strong>네이버 지도 앱</strong>에서 “모딩(대구 달서구)”를 검색해 주세요.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 공통 푸터 -->
+  <footer class="footer-bar">
+    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
+    <span class="footer-item">대표자: 서희진</span>
+    <span class="footer-item">사업자등록번호: 730-87-03564</span>
+    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
+    <span class="footer-item">문의: moding_inc@naver.com</span>
+  </footer>
+
+  <script>
+    /* NAVER MAP 인증 실패 시 알림 */
+    window.navermap_authFailure = function () {
+      alert("네이버 지도 API 인증에 실패했습니다.\nWeb 서비스 URL과 ncpKeyId를 다시 확인해 주세요.");
+    };
+
+    /* 지도 초기화 */
+    window.addEventListener("load", function () {
+      var modingPosition = new naver.maps.LatLng(35.8551558, 128.5515681);
+
+      var map = new naver.maps.Map("map", {
+        center: modingPosition,
+        zoom: 16,
+        minZoom: 10,
+        maxZoom: 19,
+        zoomControl: true,
+        zoomControlOptions: {
+          position: naver.maps.Position.TOP_RIGHT
+        }
+      });
+
+      var marker = new naver.maps.Marker({
+        position: modingPosition,
+        map: map,
+        title: "모딩(Moding Inc.)"
+      });
+
+      var infoWindow = new naver.maps.InfoWindow({
+        content: [
+          '<div style="padding:10px 12px; font-size:12px; color:#000;">',
+          '  <strong>모딩(Moding Inc.)</strong><br>',
+          '  대구광역시 달서구 달구벌대로 1698, 6층 607호',
+          '</div>'
+        ].join("")
+      });
+
+      infoWindow.open(map, marker);
+
+      naver.maps.Event.addListener(marker, "click", function () {
+        if (infoWindow.getMap()) {
+          infoWindow.close();
+        } else {
+          infoWindow.open(map, marker);
+        }
+      });
+    });
+
+    /* 복사 / 우클릭 / 드래그 / 단축키 방지 */
+
+    // 우클릭 메뉴 차단 (링크, 입력창은 허용)
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) {
+        e.preventDefault();
+      }
+    });
+
+    // 드래그 차단 (지도 내부는 그대로 작동)
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+
+    // Ctrl/Cmd + C, X, V, S, U, P, A 차단 (입력창 제외)
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+
+    // copy 이벤트 직접 차단 (입력창 제외)
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+        alert("모딩(Moding)의 콘텐츠는 보호되고 있습니다.");
+      }
+    });
+  </script>
+</body>
+</html>
