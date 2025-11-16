@@ -12,7 +12,7 @@
       padding: 0;
     }
 
-    /* ----- 텍스트 선택/복사 방지 ----- */
+    /* ===== 텍스트 선택 / 복사 방지 (input, textarea 제외) ===== */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -24,10 +24,10 @@
     img, .nocopy-img {
       -webkit-user-drag: none;
       user-drag: none;
-      pointer-events: none;
+      pointer-events: none; /* 모바일에서 꾹 눌러서 저장 방지 */
     }
 
-    /* input 허용 */
+    /* 입력창은 선택 허용 */
     input, textarea {
       -webkit-user-select: text;
       -moz-user-select: text;
@@ -59,16 +59,21 @@
       align-items: center;
     }
 
-    .type-box { margin-bottom: 20px; }
+    .type-box {
+      margin-bottom: 20px;
+    }
 
-    .line1, .line2 {
+    .line1,
+    .line2 {
       font-size: 35px;
       opacity: 0.85;
       margin-bottom: 6px;
       white-space: nowrap;
     }
 
-    .logo { margin: 24px 0 28px 0; }
+    .logo {
+      margin: 24px 0 28px 0;
+    }
 
     .logo img {
       width: 380px;
@@ -76,7 +81,8 @@
       height: auto;
     }
 
-    .desc1, .desc2 {
+    .desc1,
+    .desc2 {
       font-size: 24px;
       line-height: 1.6;
       opacity: 0.8;
@@ -94,53 +100,70 @@
       margin: 0 6px;
       pointer-events: auto;
     }
-    .links a:hover { text-decoration: underline; }
 
-    /* ======= ABOUT SECTION (신규 추가) ======= */
-    .home-about-section {
-      margin-top: 40px;
-      padding-top: 36px;
-      text-align: center;
+    .links a:hover {
+      text-decoration: underline;
     }
 
-    .home-about-divider {
+    /* ===== ABOUT MODING 섹션 ===== */
+    .home-about-section {
       width: 100%;
-      max-width: 480px;
-      margin: 0 auto 22px;
-      border-top: 1px solid #1a1a1a;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 26px 24px 34px;
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
     }
 
     .home-about-title {
-      font-size: 15px;
-      letter-spacing: 0.14em;
-      opacity: 0.85;
-      margin-bottom: 16px;
+      font-size: 13px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 14px;
     }
 
-    .home-about-links {
+    .home-about-grid {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      text-align: left;
+      flex-wrap: wrap;
+    }
+
+    .home-about-col {
+      min-width: 180px;
+    }
+
+    .home-about-col h4 {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .home-about-col ul {
       list-style: none;
       padding: 0;
       margin: 0;
     }
 
-    .home-about-links li {
-      margin: 6px 0;
+    .home-about-col li {
+      margin: 4px 0;
     }
 
-    .home-about-links a {
+    .home-about-col a {
+      font-size: 13px;
       color: #e6e6e6;
       text-decoration: none;
-      font-size: 14px;
-      opacity: 0.85;
+      opacity: 0.8;
+      pointer-events: auto;
     }
 
-    .home-about-links a:hover {
+    .home-about-col a:hover {
       opacity: 1;
       text-decoration: underline;
     }
 
-    /* Footer */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -159,18 +182,39 @@
       content: "·";
       margin-left: 8px;
     }
-    .footer-item:last-child::after { content: ""; margin: 0; }
+    .footer-item:last-child::after {
+      content: "";
+      margin: 0;
+    }
 
     @media (max-width: 768px) {
-      body { font-size: 15px; }
-      p, h1, h2, h3 {
+      body {
+        font-size: 15px;
+      }
+
+      p, h1, h2, h3, h4, h5, h6 {
         white-space: normal !important;
         word-break: keep-all;
         line-height: 1.6;
       }
-      .container {
-        max-width: 100% !important;
-        padding: 20px 18px;
+
+      .wrapper {
+        padding: 32px 18px;
+      }
+
+      .line1,
+      .line2 {
+        font-size: 28px;
+      }
+
+      .home-about-section {
+        padding: 22px 18px 28px;
+      }
+
+      .home-about-grid {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
       }
     }
   </style>
@@ -178,14 +222,11 @@
 
 <body>
   <div class="wrapper">
-
-    <!-- 타이핑 문구 -->
     <div class="type-box">
       <div id="line1" class="line1"></div>
       <div id="line2" class="line2"></div>
     </div>
 
-    <!-- 로고 -->
     <div class="logo">
       <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
     </div>
@@ -193,30 +234,43 @@
     <p class="desc1">B2B Food-SaaS 플랫폼</p>
     <p class="desc2">Coming Soon</p>
 
-    <!-- 상단 링크 -->
     <div class="links">
       <a href="brand.html">브랜드 아이덴티티</a> |
       <a href="about.html">회사소개</a> |
-      <a href="alliance.html">제휴·입점 문의</a> |
       <a href="location.html">오시는 길</a>
     </div>
-
-    <!-- ▼▼▼ 신규 추가 — ABOUT SECTION ▼▼▼ -->
-    <div class="home-about-section">
-      <div class="home-about-divider"></div>
-      <div class="home-about-title">ABOUT MODING</div>
-
-      <ul class="home-about-links">
-        <li><a href="brand.html">브랜드 아이덴티티</a></li>
-        <li><a href="about.html">회사 소개</a></li>
-        <li><a href="alliance.html">제휴·입점 문의</a></li>
-      </ul>
-    </div>
-    <!-- ▲▲▲ ABOUT SECTION END ▲▲▲ -->
-
   </div>
 
-  <!-- Footer -->
+  <!-- ABOUT MODING 섹션: 모든 카테고리 정리 -->
+  <section class="home-about-section">
+    <div class="home-about-title">ABOUT MODING</div>
+
+    <div class="home-about-grid">
+      <!-- 왼쪽: 서비스 안내 -->
+      <div class="home-about-col">
+        <h4>서비스 안내</h4>
+        <ul>
+          <li><a href="services.html">Services (서비스 소개)</a></li>
+          <li><a href="owner-guide.html">사장님 안내</a></li>
+          <li><a href="partner-guide.html">입점 안내</a></li>
+          <li><a href="alliance.html">제휴 · 입점 문의</a></li>
+        </ul>
+      </div>
+
+      <!-- 오른쪽: 정책 · 고객지원 -->
+      <div class="home-about-col">
+        <h4>정책 · 고객지원</h4>
+        <ul>
+          <li><a href="terms.html">이용약관</a></li>
+          <li><a href="privacy.html">개인정보처리방침</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="notice.html">공지사항</a></li>
+          <li><a href="resources.html">자료실</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -226,7 +280,9 @@
   </footer>
 
   <script>
-    /* 타이핑 효과 */
+    /* -----------------------------
+       타이핑 효과
+    ----------------------------- */
     window.onload = function () {
       const text1 = "모든 사장님을 위한";
       const text2 = "모든 것을 담은 플랫폼";
@@ -257,27 +313,34 @@
       typeLine1();
     };
 
-    /* 복사/우클릭 방지 */
-    document.addEventListener("contextmenu", e => {
+    /* -----------------------------
+       복사/우클릭/단축키 방지
+    ----------------------------- */
+
+    // 우클릭 메뉴 차단
+    document.addEventListener("contextmenu", function (e) {
       if (!e.target.closest("input, textarea, a")) e.preventDefault();
     });
 
-    document.addEventListener("dragstart", e => {
+    // 드래그 차단
+    document.addEventListener("dragstart", function (e) {
       if (!e.target.closest("input, textarea")) e.preventDefault();
     });
 
-    document.addEventListener("keydown", e => {
+    // Ctrl 단축키 차단
+    document.addEventListener("keydown", function (e) {
       const key = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) &&
-          ["c", "x", "v", "s", "u", "a"].includes(key)) {
-        e.preventDefault();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
       }
     });
 
-    document.addEventListener("copy", e => {
+    // copy 이벤트 차단
+    document.addEventListener("copy", function (e) {
       if (!e.target.closest("input, textarea")) e.preventDefault();
     });
   </script>
-
 </body>
 </html>
