@@ -6,16 +6,12 @@
   <title>모든 사장님을 위한 모든 것을 담은 플랫폼, 모딩</title>
 
   <style>
-    /* ============================
-       공통 초기화
-    ============================ */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    /* 텍스트 선택 / 복사 방지 (input, textarea 제외) */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -23,14 +19,12 @@
       user-select: none;
     }
 
-    /* 이미지 드래그 및 길게 눌러 저장 최소화 */
     img, .nocopy-img {
       -webkit-user-drag: none;
       user-drag: none;
-      pointer-events: none; /* 링크가 아닌 순수 이미지 보호용 */
+      pointer-events: none;
     }
 
-    /* 입력창은 선택 허용 */
     input, textarea {
       -webkit-user-select: text;
       -moz-user-select: text;
@@ -49,9 +43,6 @@
       flex-direction: column;
     }
 
-    /* ============================
-       상단 메인 영역
-    ============================ */
     .wrapper {
       width: 100%;
       max-width: 520px;
@@ -94,7 +85,6 @@
       margin-bottom: 6px;
     }
 
-    /* Coming Soon 강조 (페이드 인/아웃) */
     .desc2 {
       font-size: 26px;
       line-height: 1.4;
@@ -107,9 +97,6 @@
       50%      { opacity: 1; }
     }
 
-    /* ============================
-       상단 링크 (회사소개 / 브랜드 / 오시는 길)
-    ============================ */
     .top-links-wrapper {
       margin-top: 4px;
       margin-bottom: 8px;
@@ -119,7 +106,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0;                 /* 구분선으로 간격 처리 */
+      gap: 0;
       font-size: 14px;
       opacity: 0.8;
     }
@@ -128,22 +115,29 @@
       color: #f0f0f0;
       text-decoration: none;
       pointer-events: auto;
+      transition: all 0.16s ease-out;
     }
 
-    /* 두 번째 링크부터 앞에 | 추가 */
     .top-links a + a::before {
       content: "|";
       margin: 0 10px;
       color: rgba(255,255,255,0.6);
     }
 
+    /* 🔥 상단 메뉴 Green/Orange 반반 hover 적용 */
     .top-links a:hover {
-      text-decoration: underline;
+      background: linear-gradient(
+        90deg,
+        #0B8F3A 0%,
+        #0B8F3A 50%,
+        #F59C1A 50%,
+        #F59C1A 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
     }
 
-    /* ============================
-       ABOUT MODING 섹션
-    ============================ */
     .about-section {
       width: 100%;
       max-width: 960px;
@@ -163,7 +157,6 @@
       margin-bottom: 22px;
     }
 
-    /* 중앙 2컬럼 정확히 맞추기: flex 중앙정렬 */
     .about-grid {
       display: flex;
       justify-content: center;
@@ -203,7 +196,6 @@
       transition: all 0.16s ease-out;
     }
 
-    /* ✅ 하단 서비스·정책·고객지원 링크 hover 시 그린/오렌지 반반 그라데이션 */
     .about-col li a:hover {
       background: linear-gradient(
         90deg,
@@ -214,12 +206,8 @@
       );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-decoration: none;
     }
 
-    /* ============================
-       사업자 정보 푸터
-    ============================ */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -244,14 +232,7 @@
       margin: 0;
     }
 
-    /* ============================
-       반응형 (모바일)
-    ============================ */
     @media (max-width: 768px) {
-      body {
-        font-size: 15px;
-      }
-
       .wrapper {
         padding: 32px 18px 24px;
       }
@@ -268,12 +249,6 @@
 
       .desc2 {
         font-size: 20px;
-      }
-
-      p, h1, h2, h3, h4, h5, h6 {
-        white-space: normal !important;
-        word-break: keep-all;
-        line-height: 1.6;
       }
 
       .about-section {
@@ -294,36 +269,30 @@
       }
     }
 
-    /* 데스크톱에서 상단 링크를 좌/중/우 3분할 느낌으로 */
     @media (min-width: 768px) {
       .top-links {
         max-width: 520px;
         margin: 0 auto;
-        justify-content: center; /* 가운데 두고, | 로 좌/중/우 느낌 */
+        justify-content: center;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- 메인 상단 영역 -->
   <div class="wrapper">
-    <!-- 타이핑 문구 -->
     <div class="type-box">
       <div id="line1" class="line1"></div>
       <div id="line2" class="line2"></div>
     </div>
 
-    <!-- 로고 -->
     <div class="logo">
       <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
     </div>
 
-    <!-- 설명 텍스트 -->
     <p class="desc1">B2B Food-SaaS 플랫폼</p>
     <p class="desc2">Coming Soon</p>
 
-    <!-- 상단 링크 (회사소개 / 브랜드 / 오시는 길) -->
     <div class="top-links-wrapper">
       <nav class="top-links">
         <a href="about.html">회사소개</a>
@@ -333,12 +302,10 @@
     </div>
   </div>
 
-  <!-- ABOUT MODING 섹션 -->
   <section class="about-section">
     <div class="about-title">ABOUT MODING</div>
 
     <div class="about-grid">
-      <!-- 왼쪽 컬럼 -->
       <div class="about-col">
         <div class="about-col-title">서비스 안내</div>
         <ul>
@@ -349,7 +316,6 @@
         </ul>
       </div>
 
-      <!-- 오른쪽 컬럼 -->
       <div class="about-col">
         <div class="about-col-title">정책·고객지원</div>
         <ul>
@@ -363,7 +329,6 @@
     </div>
   </section>
 
-  <!-- 사업자 정보 푸터 -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -372,11 +337,7 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- ============================
-       스크립트 : 타이핑 + 보호 기능
-  ============================ -->
   <script>
-    /* 타이핑 효과 */
     window.onload = function () {
       const text1 = "모든 사장님을 위한";
       const text2 = "모든 것을 담은 플랫폼";
@@ -407,23 +368,18 @@
       typeLine1();
     };
 
-    /* 복사 / 우클릭 / 드래그 / 단축키 방지 */
-
-    // 우클릭 메뉴 차단 (링크, 입력창은 허용)
     document.addEventListener("contextmenu", function (e) {
       if (!e.target.closest("input, textarea, a")) {
         e.preventDefault();
       }
     });
 
-    // 드래그 차단 (입력창 제외)
     document.addEventListener("dragstart", function (e) {
       if (!e.target.closest("input, textarea")) {
         e.preventDefault();
       }
     });
 
-    // Ctrl / Cmd 단축키 차단
     document.addEventListener("keydown", function (e) {
       const key = e.key.toLowerCase();
       if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
@@ -433,7 +389,6 @@
       }
     });
 
-    // copy 이벤트 차단
     document.addEventListener("copy", function (e) {
       if (!e.target.closest("input, textarea")) {
         e.preventDefault();
