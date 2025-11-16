@@ -119,7 +119,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 14px;
+      gap: 0;                 /* 구분선으로 간격 처리 */
       font-size: 14px;
       opacity: 0.8;
     }
@@ -128,6 +128,13 @@
       color: #f0f0f0;
       text-decoration: none;
       pointer-events: auto;
+    }
+
+    /* 두 번째 링크부터 앞에 | 추가 */
+    .top-links a + a::before {
+      content: "|";
+      margin: 0 10px;
+      color: rgba(255,255,255,0.6);
     }
 
     .top-links a:hover {
@@ -156,10 +163,11 @@
       margin-bottom: 22px;
     }
 
+    /* 중앙 2컬럼 정확히 맞추기: flex 중앙정렬 */
     .about-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(160px, 1fr));
-      gap: 16px 80px;
+      display: flex;
+      justify-content: center;
+      gap: 80px;
       max-width: 520px;
       margin: 0 auto;
     }
@@ -261,7 +269,7 @@
       }
 
       .about-grid {
-        gap: 10px 32px;
+        gap: 32px;
       }
 
       .about-col-title {
@@ -278,7 +286,7 @@
       .top-links {
         max-width: 520px;
         margin: 0 auto;
-        justify-content: space-between;
+        justify-content: center; /* 가운데 두고, | 로 좌/중/우 느낌 */
       }
     }
   </style>
