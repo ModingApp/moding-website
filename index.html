@@ -6,16 +6,13 @@
   <title>모든 사장님을 위한 모든 것을 담은 플랫폼, 모딩</title>
 
   <style>
-    /* ============================
-       공통 초기화
-    ============================ */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    /* 텍스트 선택 / 복사 방지 (input, textarea 제외) */
+    /* ===== 텍스트 선택 / 복사 방지 (input, textarea 제외) ===== */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -23,11 +20,11 @@
       user-select: none;
     }
 
-    /* 이미지 드래그 및 길게 눌러 저장 최소화 */
+    /* 이미지 드래그 방지 */
     img, .nocopy-img {
       -webkit-user-drag: none;
       user-drag: none;
-      pointer-events: none; /* 링크가 아닌 순수 이미지 보호용 */
+      pointer-events: none; /* 모바일에서 꾹 눌러서 저장 방지 */
     }
 
     /* 입력창은 선택 허용 */
@@ -49,9 +46,27 @@
       flex-direction: column;
     }
 
-    /* ============================
-       상단 메인 영역
-    ============================ */
+    a {
+      color: #f0f0f0;
+      text-decoration: none;
+      position: relative;
+      transition: all 0.16s ease-out;
+    }
+
+    /* 🔹 링크 hover 시 그린/오렌지 반반 그라데이션 효과 */
+    a:hover {
+      background: linear-gradient(
+        90deg,
+        #0B8F3A 0%,
+        #0B8F3A 50%,
+        #F59C1A 50%,
+        #F59C1A 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* 메인 래퍼 (히어로 영역) */
     .wrapper {
       width: 100%;
       max-width: 520px;
@@ -61,24 +76,77 @@
       flex: 0 0 auto;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
     }
 
+    /* 상단 로고 + 상단 메뉴 */
+    .top-header {
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-logo-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 860px;
+    }
+
+    .top-logo-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-logo {
+      height: 36px;
+      width: auto;
+    }
+
+    .top-nav {
+      margin-top: 4px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      opacity: 0.9;
+    }
+
+    .top-nav-link {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .top-nav-divider {
+      opacity: 0.5;
+      font-size: 11px;
+      transform: translateY(-0.5px);
+    }
+
+    /* 타이핑 텍스트 박스 */
     .type-box {
-      margin-bottom: 24px;
+      margin-top: 12px;
+      margin-bottom: 20px;
     }
 
     .line1,
     .line2 {
-      font-size: 28px;
-      opacity: 0.9;
-      margin-bottom: 4px;
+      font-size: 35px;
+      opacity: 0.85;
+      margin-bottom: 6px;
       white-space: nowrap;
     }
 
+    /* 로고 영역 */
     .logo {
-      margin: 16px 0 24px 0;
+      margin: 20px 0 24px 0;
     }
 
     .logo img {
@@ -88,125 +156,122 @@
     }
 
     .desc1 {
-      font-size: 20px;
+      font-size: 22px;
       line-height: 1.6;
-      opacity: 0.9;
+      opacity: 0.82;
       margin-bottom: 6px;
     }
 
-    /* Coming Soon 강조 (페이드 인/아웃) */
     .desc2 {
-      font-size: 22px;
-      line-height: 1.4;
-      margin-bottom: 18px;
-      animation: fadeBlink 2.4s ease-in-out infinite;
+      font-size: 24px;
+      line-height: 1.6;
+      opacity: 0.9;
+      font-weight: 600;
+      margin-bottom: 0;
+      /* 🔹 Coming Soon 페이드 인/아웃 효과 */
+      animation: fadePulse 1.8s ease-in-out infinite;
     }
 
-    @keyframes fadeBlink {
-      0%, 100% { opacity: 0.35; }
-      50%      { opacity: 1; }
+    @keyframes fadePulse {
+      0%   { opacity: 0.25; transform: translateY(0); }
+      40%  { opacity: 1;    transform: translateY(-1px); }
+      70%  { opacity: 0.9;  transform: translateY(0); }
+      100% { opacity: 0.25; transform: translateY(0); }
     }
 
-    /* ============================
-       상단 링크 (회사소개 / 브랜드 / 오시는 길)
-    ============================ */
-    .top-links-wrapper {
-      margin-top: 4px;
+    /* 하단 링크(브랜드/회사소개/오시는 길) */
+    .links {
+      margin-top: 22px;
+      font-size: 14px;
+      opacity: 0.85;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      pointer-events: auto;
+      font-size: 14px;
+    }
+
+    .links-separator {
+      opacity: 0.5;
+      font-size: 12px;
+      transform: translateY(-0.5px);
+    }
+
+    /* 하단 글로벌 네비게이션 영역 */
+    .global-nav {
+      width: 100%;
+      border-top: 1px solid #222;
+      margin-top: 24px;
+      padding: 26px 20px 30px;
+      flex: 1 0 auto;
+    }
+
+    .global-nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr); /* 2열 그리드 */
+      column-gap: 40px;
+      row-gap: 24px;
+      align-items: flex-start;
+    }
+
+    /* 좌측: ABOUT MODING 블록 */
+    .nav-about-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
       margin-bottom: 8px;
     }
 
-    .top-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0;                 /* 구분선으로 간격 처리 */
-      font-size: 14px;
-      opacity: 0.8;
+    .nav-about-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
     }
 
-    .top-links a {
-      color: #f0f0f0;
-      text-decoration: none;
-      pointer-events: auto;
+    .nav-about-desc {
+      font-size: 13px;
+      line-height: 1.8;
+      opacity: 0.75;
+      max-width: 320px;
     }
 
-    /* 두 번째 링크부터 앞에 | 추가 */
-    .top-links a + a::before {
-      content: "|";
-      margin: 0 10px;
-      color: rgba(255,255,255,0.6);
+    /* 우측: 서비스/정책/고객지원 2열 그리드 */
+    .nav-links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 40px;
+      row-gap: 20px;
     }
 
-    .top-links a:hover {
-      text-decoration: underline;
+    .nav-group {
+      min-width: 0;
     }
 
-    /* ============================
-       ABOUT MODING 섹션
-    ============================ */
-    .about-section {
-      width: 100%;
-      max-width: 960px;
-      margin: 40px auto 32px;
-      padding: 32px 24px 36px;
-      border-top: 1px solid #262626;
-      border-bottom: 1px solid #262626;
-      background: #080808;
-    }
-
-    .about-title {
-      font-size: 12px;
-      letter-spacing: 0.2em;
+    .nav-group-title {
+      font-size: 11px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.7);
-      text-align: center;
-      margin-bottom: 22px;
-    }
-
-    /* 중앙 2컬럼 정확히 맞추기: flex 중앙정렬 */
-    .about-grid {
-      display: flex;
-      justify-content: center;
-      gap: 80px;
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    .about-col {
-      text-align: left;
-    }
-
-    .about-col-title {
-      font-size: 15px;
-      font-weight: 600;
       margin-bottom: 8px;
+      line-height: 1.4;
     }
 
-    .about-col ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-
-    .about-col li {
+    .nav-item {
       font-size: 13px;
       line-height: 1.9;
-      opacity: 0.9;
+      opacity: 0.86;
+      display: block;
     }
 
-    .about-col li a {
-      color: #f0f0f0;
-      text-decoration: none;
-      pointer-events: auto;
-    }
-
-    .about-col li a:hover {
-      text-decoration: underline;
-    }
-
-    /* ============================
-       사업자 정보 푸터
-    ============================ */
+    /* 공통 푸터 */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -219,7 +284,6 @@
       justify-content: center;
       gap: 8px;
       text-align: center;
-      flex-shrink: 0;
     }
 
     .footer-item::after {
@@ -231,21 +295,34 @@
       margin: 0;
     }
 
-    /* ============================
-       반응형 (모바일)
-    ============================ */
+    /* ------- 반응형 (모바일) ------- */
     @media (max-width: 768px) {
       body {
         font-size: 15px;
       }
 
+      .top-header {
+        padding: 20px 16px 0;
+        margin-bottom: 12px;
+      }
+
+      .top-logo-row {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .top-nav {
+        flex-wrap: wrap;
+        row-gap: 4px;
+      }
+
       .wrapper {
-        padding: 32px 18px 24px;
+        padding: 20px 18px 24px;
       }
 
       .line1,
       .line2 {
-        font-size: 22px;
+        font-size: 26px;
         white-space: normal;
       }
 
@@ -257,100 +334,118 @@
         font-size: 20px;
       }
 
-      p, h1, h2, h3, h4, h5, h6 {
-        white-space: normal !important;
-        word-break: keep-all;
-        line-height: 1.6;
+      .global-nav {
+        padding: 20px 16px 24px;
       }
 
-      .about-section {
-        margin: 32px auto 24px;
-        padding: 24px 18px 28px;
+      .global-nav-inner {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 24px;
       }
 
-      .about-grid {
-        gap: 32px;
+      .nav-about-desc {
+        max-width: 100%;
       }
 
-      .about-col-title {
-        font-size: 14px;
-      }
-
-      .about-col li {
-        font-size: 12px;
-      }
-    }
-
-    /* 데스크톱에서 상단 링크를 좌/중/우 3분할 느낌으로 */
-    @media (min-width: 768px) {
-      .top-links {
-        max-width: 520px;
-        margin: 0 auto;
-        justify-content: center; /* 가운데 두고, | 로 좌/중/우 느낌 */
+      .nav-links-grid {
+        grid-template-columns: minmax(0, 1fr); /* 모바일에서는 1열 */
+        row-gap: 18px;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- 메인 상단 영역 -->
+  <!-- 복사/드래그 차단용 바디 속성은 JS에서 처리 (contextmenu 등) -->
+
+  <!-- 상단 로고 + 상단 메뉴 -->
+  <header class="top-header">
+    <div class="top-logo-row">
+      <div class="top-logo-left">
+        <img src="모딩로고.png" alt="Moding Logo" class="header-logo">
+        <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
+      </div>
+    </div>
+
+    <!-- 상단 내비게이션 (회사소개 / 브랜드 아이덴티티 / 오시는 길) -->
+    <nav class="top-nav">
+      <a href="about.html" class="top-nav-link">회사소개</a>
+      <span class="top-nav-divider">|</span>
+      <a href="brand.html" class="top-nav-link">브랜드 아이덴티티</a>
+      <span class="top-nav-divider">|</span>
+      <a href="location.html" class="top-nav-link">오시는 길</a>
+    </nav>
+  </header>
+
+  <!-- 메인 히어로 영역 -->
   <div class="wrapper">
-    <!-- 타이핑 문구 -->
     <div class="type-box">
       <div id="line1" class="line1"></div>
       <div id="line2" class="line2"></div>
     </div>
 
-    <!-- 로고 -->
     <div class="logo">
       <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
     </div>
 
-    <!-- 설명 텍스트 -->
     <p class="desc1">B2B Food-SaaS 플랫폼</p>
     <p class="desc2">Coming Soon</p>
 
-    <!-- 상단 링크 (회사소개 / 브랜드 / 오시는 길) -->
-    <div class="top-links-wrapper">
-      <nav class="top-links">
-        <a href="about.html">회사소개</a>
-        <a href="brand.html">브랜드 아이덴티티</a>
-        <a href="location.html">오시는 길</a>
-      </nav>
+    <!-- 중앙 링크 라인 -->
+    <div class="links">
+      <a href="brand.html">브랜드 아이덴티티</a>
+      <span class="links-separator">|</span>
+      <a href="about.html">회사소개</a>
+      <span class="links-separator">|</span>
+      <a href="alliance.html">제휴·입점 문의</a>
     </div>
   </div>
 
-  <!-- ABOUT MODING 섹션 -->
-  <section class="about-section">
-    <div class="about-title">ABOUT MODING</div>
-
-    <div class="about-grid">
-      <!-- 왼쪽 컬럼 -->
-      <div class="about-col">
-        <div class="about-col-title">서비스 안내</div>
-        <ul>
-          <li><a href="services.html">Services (서비스 소개)</a></li>
-          <li><a href="owners.html">사장님 안내</a></li>
-          <li><a href="entry.html">입점 안내</a></li>
-          <li><a href="alliance.html">제휴·입점 문의</a></li>
-        </ul>
+  <!-- 하단 글로벌 네비게이션 (ABOUT MODING + 2열 그리드) -->
+  <section class="global-nav">
+    <div class="global-nav-inner">
+      <!-- 좌측 ABOUT MODING -->
+      <div>
+        <div class="nav-about-label">ABOUT MODING</div>
+        <div class="nav-about-title">모든 사장님을 위한 B2B Food-SaaS</div>
+        <p class="nav-about-desc">
+          모딩(Moding)은 식품 제조사와 외식업 사장님을 안전하게 연결하는
+          B2B Food-SaaS 플랫폼입니다. 정산, 주문, 세금계산서, 데이터를
+          하나의 흐름으로 관리할 수 있도록 돕는 실무형 도구를 지향합니다.
+        </p>
       </div>
 
-      <!-- 오른쪽 컬럼 -->
-      <div class="about-col">
-        <div class="about-col-title">정책·고객지원</div>
-        <ul>
-          <li><a href="terms.html">이용약관</a></li>
-          <li><a href="privacy.html">개인정보처리방침</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="notice.html">공지사항</a></li>
-          <li><a href="resources.html">자료실</a></li>
-        </ul>
+      <!-- 우측 2열 그리드: 서비스 안내 / 정책·약관 / 고객지원 -->
+      <div class="nav-links-grid">
+        <!-- 서비스 안내 -->
+        <div class="nav-group">
+          <div class="nav-group-title">서비스 안내</div>
+          <a href="services.html" class="nav-item">서비스 소개</a>
+          <a href="merchant.html" class="nav-item">사장님 안내</a>
+          <a href="alliance.html" class="nav-item">제휴·입점 문의</a>
+        </div>
+
+        <!-- 정책·약관 -->
+        <div class="nav-group">
+          <div class="nav-group-title">정책·약관</div>
+          <a href="terms.html" class="nav-item">이용약관</a>
+          <a href="privacy.html" class="nav-item">개인정보처리방침</a>
+        </div>
+
+        <!-- 고객지원 -->
+        <div class="nav-group">
+          <div class="nav-group-title">고객지원</div>
+          <a href="faq.html" class="nav-item">FAQ</a>
+          <a href="notice.html" class="nav-item">공지사항</a>
+          <a href="resources.html" class="nav-item">자료실</a>
+        </div>
+
+        <!-- 필요하면 여기에 추가 그룹 배치 가능 -->
       </div>
     </div>
   </section>
 
-  <!-- 사업자 정보 푸터 -->
+  <!-- 공통 푸터 -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -359,11 +454,10 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- ============================
-       스크립트 : 타이핑 + 보호 기능
-  ============================ -->
   <script>
-    /* 타이핑 효과 */
+    /* -----------------------------
+       타이핑 효과
+    ----------------------------- */
     window.onload = function () {
       const text1 = "모든 사장님을 위한";
       const text2 = "모든 것을 담은 플랫폼";
@@ -394,23 +488,21 @@
       typeLine1();
     };
 
-    /* 복사 / 우클릭 / 드래그 / 단축키 방지 */
+    /* -----------------------------
+       복사/우클릭/단축키 방지
+    ----------------------------- */
 
-    // 우클릭 메뉴 차단 (링크, 입력창은 허용)
+    // 우클릭 메뉴 차단
     document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) {
-        e.preventDefault();
-      }
+      if (!e.target.closest("input, textarea, a")) e.preventDefault();
     });
 
-    // 드래그 차단 (입력창 제외)
+    // 드래그 차단
     document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
+      if (!e.target.closest("input, textarea")) e.preventDefault();
     });
 
-    // Ctrl / Cmd 단축키 차단
+    // Ctrl/Cmd 단축키 차단
     document.addEventListener("keydown", function (e) {
       const key = e.key.toLowerCase();
       if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
@@ -422,9 +514,7 @@
 
     // copy 이벤트 차단
     document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
+      if (!e.target.closest("input, textarea")) e.preventDefault();
     });
   </script>
 </body>
