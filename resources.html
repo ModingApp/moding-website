@@ -1,1 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자료실 | 모딩(Moding)</title>
+  <meta name="description" content="모딩(Moding) 자료실 페이지입니다. 매뉴얼, 가이드, 서식, 참고자료 등을 다운로드하실 수 있습니다.">
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+      pointer-events: auto;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+      background: #0b0b0b;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+      flex: 1;
+    }
+
+    /* 상단 헤더 */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-logo {
+      height: 42px;
+      width: auto;
+    }
+
+    .header-left span {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .back-link {
+      font-size: 13px;
+      color: #cccccc;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* 타이틀 */
+    .brand-header {
+      margin-bottom: 26px;
+    }
+
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 10px;
+    }
+
+    .brand-title {
+      font-size: 30px;
+      font-weight: 700;
+      color: #FF8A00;
+      line-height: 1.35;
+    }
+
+    .intro-text {
+      font-size: 14px;
+      line-height: 1.8;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    .divider {
+      border-bottom: 1px solid #222;
+      margin: 26px 0 20px;
+    }
+
+    /* 자료실 리스트 */
+    .resource-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .resource-group-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .resource-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .resource-item {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #262626;
+      background: #050505;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: border-color 0.16s ease-out, background 0.16s ease-out;
+    }
+
+    .resource-item:hover {
+      border-color: #FF8A00;
+      background: radial-gradient(circle at top left, #2b2012 0, #050505 55%);
+    }
+
+    .resource-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .resource-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .resource-meta {
+      font-size: 11px;
+      color: #9d9d9d;
+    }
+
+    .resource-link a {
+      font-size: 12px;
+      color: #FFB341;
+      text-decoration: none;
+    }
+
+    .resource-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* 푸터 */
+    .footer-bar {
+      width: 100%;
+      border-top: 1px solid #222;
+      background: #0b0b0b;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #9d9d9d;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .footer-item::after {
+      content: "·";
+      margin-left: 8px;
+    }
+
+    .footer-item:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 28px 16px 40px;
+      }
+
+      .brand-title {
+        font-size: 26px;
+      }
+
+      .intro-text {
+        font-size: 13px;
+      }
+
+      .resource-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .resource-link {
+        margin-top: 4px;
+      }
+    }
+  </style>
+</head>
+<body
+  oncontextmenu="return false"
+  onselectstart="return false"
+  ondragstart="return false"
+>
+
+  <main class="container">
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <img src="모딩로고.png" alt="Moding Logo" class="header-logo">
+        <span>Moding Inc.</span>
+      </div>
+      <a href="index.html" class="back-link">← 메인으로</a>
+    </header>
+
+    <!-- 타이틀 -->
+    <section class="brand-header">
+      <div class="brand-tag">RESOURCES</div>
+      <div class="brand-title">자료실</div>
+      <p class="intro-text">
+        모딩(Moding) 플랫폼 이용을 위한 매뉴얼, 가이드, 서식 및 참고자료를
+        한 곳에 정리합니다. 필요하신 문서를 자유롭게 내려받아 활용하실 수 있습니다.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 자료 그룹 -->
+    <section class="resource-groups">
+
+      <!-- ✅ 그룹 1: 이용 가이드 -->
+      <div class="resource-group">
+        <h2 class="resource-group-title">이용 가이드</h2>
+        <ul class="resource-list">
+
+          <!-- 예시 자료 1 -->
+          <li class="resource-item">
+            <div class="resource-text">
+              <span class="resource-name">모딩 서비스 소개서 (PDF)</span>
+              <span class="resource-meta">파일형식: PDF · 버전: v0.1 · 최근 업데이트: 2025-11-16</span>
+            </div>
+            <div class="resource-link">
+              <!-- 실제 파일 경로로 교체 -->
+              <a href="docs/moding_intro_v0.1.pdf" download>다운로드</a>
+            </div>
+          </li>
+
+          <!-- 예시 자료 2 (복사해서 사용) -->
+          <!--
+          <li class="resource-item">
+            <div class="resource-text">
+              <span class="resource-name">파일 이름을 여기에</span>
+              <span class="resource-meta">파일형식: PDF · 버전: v1.0 · 최근 업데이트: YYYY-MM-DD</span>
+            </div>
+            <div class="resource-link">
+              <a href="docs/파일명.pdf" download>다운로드</a>
+            </div>
+          </li>
+          -->
+
+        </ul>
+      </div>
+
+      <!-- ✅ 그룹 2: 서식 / 템플릿 -->
+      <div class="resource-group">
+        <h2 class="resource-group-title">서식 · 템플릿</h2>
+        <ul class="resource-list">
+
+          <!-- 예시 자료 -->
+          <li class="resource-item">
+            <div class="resource-text">
+              <span class="resource-name">제조사 입점 제안서 템플릿 (PPTX)</span>
+              <span class="resource-meta">파일형식: PPTX · 버전: v0.1 · 최근 업데이트: 2025-11-16</span>
+            </div>
+            <div class="resource-link">
+              <a href="docs/moding_partner_template_v0.1.pptx" download>다운로드</a>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- ✅ 그룹 3: 기타 자료 -->
+      <!-- 필요 없으면 이 블록 통째로 지워도 됩니다 -->
+      <div class="resource-group">
+        <h2 class="resource-group-title">기타 자료</h2>
+        <ul class="resource-list">
+          <li class="resource-item">
+            <div class="resource-text">
+              <span class="resource-name">기타 참고자료 예시</span>
+              <span class="resource-meta">파일형식: PDF · 최근 업데이트: 2025-11-16</span>
+            </div>
+            <div class="resource-link">
+              <a href="#" onclick="alert('파일 경로를 연결해 주세요.'); return false;">다운로드</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- 공통 푸터 -->
+  <footer class="footer-bar">
+    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
+    <span class="footer-item">대표자: 서희진</span>
+    <span class="footer-item">사업자등록번호: 730-87-03564</span>
+    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
+    <span class="footer-item">문의: moding_inc@naver.com</span>
+  </footer>
+
+  <!-- 복사 / 우클릭 / 단축키 방지 -->
+  <script>
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
