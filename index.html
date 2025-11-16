@@ -12,7 +12,7 @@
       padding: 0;
     }
 
-    /* ===== 텍스트 선택 / 복사 방지 (input 제외) ===== */
+    /* ----- 텍스트 선택/복사 방지 ----- */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -24,10 +24,10 @@
     img, .nocopy-img {
       -webkit-user-drag: none;
       user-drag: none;
-      pointer-events: none; /* 모바일에서 꾹 눌러서 저장 방지 */
+      pointer-events: none;
     }
 
-    /* 입력창은 선택 허용 */
+    /* input 허용 */
     input, textarea {
       -webkit-user-select: text;
       -moz-user-select: text;
@@ -59,21 +59,16 @@
       align-items: center;
     }
 
-    .type-box {
-      margin-bottom: 20px;
-    }
+    .type-box { margin-bottom: 20px; }
 
-    .line1,
-    .line2 {
+    .line1, .line2 {
       font-size: 35px;
       opacity: 0.85;
       margin-bottom: 6px;
       white-space: nowrap;
     }
 
-    .logo {
-      margin: 24px 0 28px 0;
-    }
+    .logo { margin: 24px 0 28px 0; }
 
     .logo img {
       width: 380px;
@@ -81,8 +76,7 @@
       height: auto;
     }
 
-    .desc1,
-    .desc2 {
+    .desc1, .desc2 {
       font-size: 24px;
       line-height: 1.6;
       opacity: 0.8;
@@ -100,23 +94,64 @@
       margin: 0 6px;
       pointer-events: auto;
     }
+    .links a:hover { text-decoration: underline; }
 
-    .links a:hover {
+    /* ======= ABOUT SECTION (신규 추가) ======= */
+    .home-about-section {
+      margin-top: 40px;
+      padding-top: 36px;
+      text-align: center;
+    }
+
+    .home-about-divider {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto 22px;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .home-about-title {
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      opacity: 0.85;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .home-about-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .home-about-links li {
+      margin: 6px 0;
+    }
+
+    .home-about-links a {
+      color: #e6e6e6;
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .home-about-links a:hover {
+      opacity: 1;
       text-decoration: underline;
     }
 
-    /* ===== 푸터 ===== */
+    /* Footer */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
       background: #0b0b0b;
-      padding: 12px 16px 16px;
+      padding: 12px 16px;
       font-size: 11px;
       color: #9d9d9d;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
       text-align: center;
     }
 
@@ -124,31 +159,15 @@
       content: "·";
       margin-left: 8px;
     }
-    .footer-item:last-child::after {
-      content: "";
-      margin: 0;
-    }
-
-    /* 푸터 내 네비게이션 링크 */
-    .footer-link {
-      color: #9d9d9d;
-      text-decoration: none;
-    }
-    .footer-link:hover {
-      text-decoration: underline;
-    }
+    .footer-item:last-child::after { content: ""; margin: 0; }
 
     @media (max-width: 768px) {
-      body {
-        font-size: 15px;
-      }
-
-      p, h1, h2, h3, h4, h5, h6 {
+      body { font-size: 15px; }
+      p, h1, h2, h3 {
         white-space: normal !important;
         word-break: keep-all;
         line-height: 1.6;
       }
-
       .container {
         max-width: 100% !important;
         padding: 20px 18px;
@@ -159,11 +178,14 @@
 
 <body>
   <div class="wrapper">
+
+    <!-- 타이핑 문구 -->
     <div class="type-box">
       <div id="line1" class="line1"></div>
       <div id="line2" class="line2"></div>
     </div>
 
+    <!-- 로고 -->
     <div class="logo">
       <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
     </div>
@@ -171,66 +193,40 @@
     <p class="desc1">B2B Food-SaaS 플랫폼</p>
     <p class="desc2">Coming Soon</p>
 
-    <!-- 상단 심플 3개 메뉴 -->
+    <!-- 상단 링크 -->
     <div class="links">
       <a href="brand.html">브랜드 아이덴티티</a> |
       <a href="about.html">회사소개</a> |
+      <a href="alliance.html">제휴·입점 문의</a> |
       <a href="location.html">오시는 길</a>
     </div>
+
+    <!-- ▼▼▼ 신규 추가 — ABOUT SECTION ▼▼▼ -->
+    <div class="home-about-section">
+      <div class="home-about-divider"></div>
+      <div class="home-about-title">ABOUT MODING</div>
+
+      <ul class="home-about-links">
+        <li><a href="brand.html">브랜드 아이덴티티</a></li>
+        <li><a href="about.html">회사 소개</a></li>
+        <li><a href="alliance.html">제휴·입점 문의</a></li>
+      </ul>
+    </div>
+    <!-- ▲▲▲ ABOUT SECTION END ▲▲▲ -->
+
   </div>
 
-  <!-- 푸터: 사업자 정보 + 전체 목차 -->
+  <!-- Footer -->
   <footer class="footer-bar">
-    <!-- 사업자 정보 라인 -->
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
     <span class="footer-item">사업자등록번호: 730-87-03564</span>
     <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
     <span class="footer-item">문의: moding_inc@naver.com</span>
-
-    <!-- 전체 페이지 목차 (Sitemap) -->
-    <span class="footer-item">
-      <a href="brand.html" class="footer-link">브랜드 아이덴티티</a>
-    </span>
-    <span class="footer-item">
-      <a href="about.html" class="footer-link">회사소개</a>
-    </span>
-    <span class="footer-item">
-      <a href="location.html" class="footer-link">오시는 길</a>
-    </span>
-    <span class="footer-item">
-      <a href="services.html" class="footer-link">서비스 소개</a>
-    </span>
-    <span class="footer-item">
-      <a href="partners.html" class="footer-link">입점 안내</a>
-    </span>
-    <span class="footer-item">
-      <a href="owners.html" class="footer-link">사장님 안내</a>
-    </span>
-    <span class="footer-item">
-      <a href="terms.html" class="footer-link">이용약관</a>
-    </span>
-    <span class="footer-item">
-      <a href="privacy.html" class="footer-link">개인정보처리방침</a>
-    </span>
-    <span class="footer-item">
-      <a href="faq.html" class="footer-link">FAQ</a>
-    </span>
-    <span class="footer-item">
-      <a href="notices.html" class="footer-link">공지사항</a>
-    </span>
-    <span class="footer-item">
-      <a href="alliance.html" class="footer-link">제휴 문의</a>
-    </span>
-    <span class="footer-item">
-      <a href="resources.html" class="footer-link">자료실</a>
-    </span>
   </footer>
 
   <script>
-    /* -----------------------------
-       타이핑 효과
-    ----------------------------- */
+    /* 타이핑 효과 */
     window.onload = function () {
       const text1 = "모든 사장님을 위한";
       const text2 = "모든 것을 담은 플랫폼";
@@ -261,34 +257,27 @@
       typeLine1();
     };
 
-    /* -----------------------------
-       복사/우클릭/단축키 방지
-    ----------------------------- */
-
-    // 우클릭 메뉴 차단
-    document.addEventListener("contextmenu", function (e) {
+    /* 복사/우클릭 방지 */
+    document.addEventListener("contextmenu", e => {
       if (!e.target.closest("input, textarea, a")) e.preventDefault();
     });
 
-    // 드래그 차단
-    document.addEventListener("dragstart", function (e) {
+    document.addEventListener("dragstart", e => {
       if (!e.target.closest("input, textarea")) e.preventDefault();
     });
 
-    // Ctrl 단축키 차단
-    document.addEventListener("keydown", function (e) {
+    document.addEventListener("keydown", e => {
       const key = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
-        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
-          e.preventDefault();
-        }
+      if ((e.ctrlKey || e.metaKey) &&
+          ["c", "x", "v", "s", "u", "a"].includes(key)) {
+        e.preventDefault();
       }
     });
 
-    // copy 이벤트 차단
-    document.addEventListener("copy", function (e) {
+    document.addEventListener("copy", e => {
       if (!e.target.closest("input, textarea")) e.preventDefault();
     });
   </script>
+
 </body>
 </html>
