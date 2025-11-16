@@ -1,1 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모딩 서비스 소개</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    img, .nocopy-img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+      pointer-events: auto;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+      background: #0b0b0b;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 공통 상단 래퍼 */
+    .wrapper {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 24px 24px;
+      text-align: center;
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .logo {
+      margin: 8px 0 20px 0;
+    }
+
+    .logo img {
+      width: 260px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .page-tagline {
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 4px;
+    }
+
+    .page-title {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 15px;
+      opacity: 0.85;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    /* 상단 링크 (회사소개 / 브랜드 / 오시는 길) */
+    .top-links-wrapper {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    .top-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .top-links a {
+      color: #f0f0f0;
+      text-decoration: none;
+      pointer-events: auto;
+      transition: all 0.16s ease-out;
+    }
+
+    .top-links .divider {
+      margin: 0 10px;
+      color: rgba(255,255,255,0.6);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Green / Orange 반반 hover */
+    .top-links a:hover {
+      background: linear-gradient(
+        90deg,
+        #0B8F3A 0%,
+        #0B8F3A 50%,
+        #F59C1A 50%,
+        #F59C1A 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    /* 메인 컨텐츠 영역 */
+    main.page-container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto 56px;
+      padding: 0 24px 40px;
+      flex: 1 0 auto;
+    }
+
+    .section {
+      max-width: 720px;
+      margin: 0 auto 40px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      opacity: 0.9;
+      line-height: 1.8;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #2b2b2b;
+      background: #101010;
+      opacity: 0.9;
+    }
+
+    /* 3개 카드형 기능 소개 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .feature-card {
+      background: #101010;
+      border-radius: 14px;
+      padding: 16px 16px 18px;
+      border: 1px solid #1f1f1f;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .feature-tag {
+      font-size: 11px;
+      opacity: 0.75;
+      margin-bottom: 8px;
+    }
+
+    .feature-text {
+      font-size: 13px;
+      opacity: 0.9;
+      line-height: 1.7;
+    }
+
+    .step-list {
+      margin-top: 10px;
+      font-size: 13px;
+      opacity: 0.92;
+      line-height: 1.8;
+    }
+
+    .step-list li {
+      margin-left: 1em;
+      margin-bottom: 4px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid #0B8F3A;
+      font-size: 13px;
+      text-decoration: none;
+      color: #ffffff;
+      background: linear-gradient(90deg, #0B8F3A, #0B8F3A 50%, #F59C1A 50%, #F59C1A);
+      background-size: 200% 100%;
+      background-position: 0% 50%;
+      transition: background-position 0.25s ease-out, transform 0.1s ease-out;
+    }
+
+    .cta-button:hover {
+      background-position: 100% 50%;
+      transform: translateY(-1px);
+    }
+
+    .cta-button.secondary {
+      border-color: #444;
+      background: #101010;
+      color: #f0f0f0;
+    }
+
+    .cta-button.secondary:hover {
+      border-color: #666;
+      background: #181818;
+    }
+
+    /* footer */
+    .footer-bar {
+      width: 100%;
+      border-top: 1px solid #222;
+      background: #0b0b0b;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #9d9d9d;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .footer-item::after {
+      content: "·";
+      margin-left: 8px;
+    }
+    .footer-item:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .wrapper {
+        padding: 28px 18px 18px;
+      }
+
+      .page-title {
+        font-size: 22px;
+      }
+
+      .page-subtitle {
+        font-size: 14px;
+      }
+
+      main.page-container {
+        padding: 0 18px 32px;
+      }
+
+      .section {
+        margin-bottom: 32px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .top-links {
+        max-width: 520px;
+        margin: 0 auto;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 상단 공통 영역 -->
+  <div class="wrapper">
+    <div class="logo">
+      <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
+    </div>
+
+    <div class="page-tagline">SERVICE OVERVIEW</div>
+    <h1 class="page-title">모딩(Moding) 서비스 소개</h1>
+    <p class="page-subtitle">
+      모딩은 <strong>B2B Food-SaaS 플랫폼</strong>으로,<br>
+      식품 제조사와 외식업 사장님을 연결하고 주문·정산·데이터를 한 번에 관리할 수 있도록 설계되었습니다.
+    </p>
+
+    <!-- 상단 링크 -->
+    <div class="top-links-wrapper">
+      <nav class="top-links">
+        <a href="about.html">회사소개</a>
+        <span class="divider">|</span>
+        <a href="brand.html">브랜드 아이덴티티</a>
+        <span class="divider">|</span>
+        <a href="location.html">오시는 길</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 메인 컨텐츠 -->
+  <main class="page-container">
+
+    <!-- 1. 이런 분들께 필요합니다 -->
+    <section class="section">
+      <h2 class="section-title">이런 분들을 위해 만들어졌습니다</h2>
+      <p class="section-desc">
+        모딩은 단순한 도매몰이 아니라, <strong>“제조사와 매장의 일하는 방식”</strong>을 정리해 주는 서비스입니다.
+        다음과 같은 제조사·외식업 사장님께 특히 도움이 됩니다.
+      </p>
+
+      <div class="pill-row">
+        <div class="pill">B2B 납품을 늘리고 싶은 식품 제조사 사장님</div>
+        <div class="pill">검증된 소스·원부재료·밀키트를 찾는 외식업 사장님</div>
+        <div class="pill">발주·정산·세금계산서 관리가 복잡한 브랜드</div>
+        <div class="pill">여러 협력업체 및 가맹점 발주를 한 곳에서 관리하고 싶은 본사</div>
+      </div>
+    </section>
+
+    <!-- 2. 모딩이 제공하는 핵심 기능 -->
+    <section class="section">
+      <h2 class="section-title">모딩이 제공하는 핵심 기능</h2>
+      <p class="section-desc">
+        초기 버전(MVP)은 작지만 실무에 바로 쓸 수 있는 기능부터 시작합니다.
+        아래 기능들은 실제 운영 상황에 맞춰 단계적으로 고도화될 예정입니다.
+      </p>
+
+      <div class="feature-grid">
+        <!-- 카드 1 -->
+        <div class="feature-card">
+          <div class="feature-title">상품·레시피 마켓</div>
+          <div class="feature-tag">소스 / 원·부재료 / 밀키트</div>
+          <p class="feature-text">
+            입점한 제조사의 상품을 카테고리·용도·업종별로 확인하고
+            매장에 맞는 제품을 골라 발주할 수 있습니다.
+            추후에는 메뉴별 레시피와 함께 제안되는
+            <strong>“레시피 기반 상품 추천”</strong> 기능도 준비하고 있습니다.
+          </p>
+        </div>
+
+        <!-- 카드 2 -->
+        <div class="feature-card">
+          <div class="feature-title">발주·정산 관리 SaaS</div>
+          <div class="feature-tag">주문 · 정산 · 세금계산서</div>
+          <p class="feature-text">
+            여러 제조사에 분산된 발주·입금을 모딩에서 한 번에 정리합니다.
+            주문 내역, 출고 상태, 정산 내역을 한 화면에서 확인하고,
+            <strong>D+7 정산</strong> 및 <strong>세금계산서 자동 발행(예정)</strong> 기능을 통해
+            사장님의 회계·정산 부담을 줄여 드립니다.
+          </p>
+        </div>
+
+        <!-- 카드 3 -->
+        <div class="feature-card">
+          <div class="feature-title">데이터 리포트 (예정)</div>
+          <div class="feature-tag">발주·메뉴 데이터</div>
+          <p class="feature-text">
+            복잡한 BI툴이 아닌, 사장님이 바로 이해할 수 있는 수준의 숫자만 보여줍니다.
+            매장·상품별 발주 추이, 시즌별 인기 상품, 기본적인 상품 추천 등
+            <strong>“운영에 바로 쓰는 데이터”</strong>를 목표로 준비하고 있습니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 이용 흐름 -->
+    <section class="section">
+      <h2 class="section-title">모딩 이용 흐름</h2>
+      <p class="section-desc">
+        제조사와 외식업 사장님 모두, 아래와 같은 기본 흐름으로 서비스를 이용하게 됩니다.
+      </p>
+
+      <ol class="step-list">
+        <li><strong>회원가입 및 사업자 인증</strong> – 사업자등록증 기준으로 계정을 생성합니다.</li>
+        <li><strong>프로필 등록</strong> – 제조사는 공장·상품 정보를, 매장은 업종·메뉴 정보를 입력합니다.</li>
+        <li><strong>상품 등록 또는 발주 시작</strong> – 제조사는 상품·가격·MOQ를, 매장은 필요한 상품을 선택해 발주합니다.</li>
+        <li><strong>배송 / 수령 확인</strong> – 출고·배송 상태를 모딩에서 확인합니다.</li>
+        <li><strong>정산 및 세금계산서 처리</strong> – 정산 내역과 세금계산서 발행 현황을 한 번에 관리합니다.</li>
+      </ol>
+
+      <div class="cta-row">
+        <a href="entry.html" class="cta-button">입점 안내 보기</a>
+        <a href="alliance.html" class="cta-button secondary">제휴·입점 문의하기</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- 공통 푸터 -->
+  <footer class="footer-bar">
+    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
+    <span class="footer-item">대표자: 서희진</span>
+    <span class="footer-item">사업자등록번호: 730-87-03564</span>
+    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
+    <span class="footer-item">문의: moding_inc@naver.com</span>
+  </footer>
+
+  <!-- 기본 보호 스크립트 (index와 동일 패턴) -->
+  <script>
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
