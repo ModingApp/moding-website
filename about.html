@@ -48,7 +48,7 @@
     .header-left {
       display: flex;
       align-items: center;
-      gap: 6px;            /* 로고와 텍스트 간격 붙임 */
+      gap: 6px;
     }
 
     .header-logo {
@@ -94,7 +94,7 @@
     }
 
     /* ------------------------------
-       제목 스타일 (모딩 브랜드 포인트 사용)
+       제목 스타일
     ------------------------------ */
     h1, h2, h3 {
       font-weight: 700;
@@ -104,13 +104,13 @@
 
     h1 {
       font-size: 32px;
-      color: #1FAA48;  /* 모딩 그린 */
+      color: #1FAA48;
       margin-top: 0;
     }
 
     h2 {
       font-size: 30px;
-      color: #FF8A00;  /* 모딩 오렌지 */
+      color: #FF8A00;
     }
 
     h3 {
@@ -129,7 +129,6 @@
       margin-bottom: 14px;
     }
 
-    /* 로고와 첫 문장이 한 줄로 붙는 영역 */
     .intro-first {
       font-size: 15px;
       line-height: 1.9;
@@ -137,7 +136,7 @@
       margin-bottom: 14px;
     }
     .intro-logo-inline {
-      height: 40px;       /* 가로 로고 크기 (조금 키움) */
+      height: 40px;
       width: auto;
       vertical-align: middle;
       margin-right: 2px;
@@ -159,7 +158,7 @@
     }
 
     /* ------------------------------
-       섹션 간 구분용 라인
+       섹션 구분선
     ------------------------------ */
     .divider {
       border-bottom: 1px solid #222;
@@ -362,7 +361,7 @@
       }
 
       .intro-logo-inline {
-        height: 32px;   /* 모바일에서 살짝 축소 */
+        height: 32px;
       }
 
       .philosophy-wrap {
@@ -396,7 +395,6 @@
         font-size: 20px;
       }
     }
-
   </style>
 </head>
 <body
@@ -406,7 +404,6 @@
 >
 
   <main class="container">
-    
     <!-- 상단 로고 + 뒤로가기 -->
     <header class="header">
       <div class="header-left">
@@ -422,12 +419,7 @@
       <div class="brand-title">회사소개</div>
     </div>
 
-    <!-- ------------------------------
-         SECTION 1 - 모딩 소개
-    ------------------------------ -->
-    <!-- h1은 SEO용으로 남겨두고, 실제 문장은 아래 intro-first에서 출력 -->
-   
-
+    <!-- SECTION 1 - 모딩 소개 -->
     <p class="intro-first">
       <img src="모딩로고(가로형).png" alt="Moding" class="intro-logo-inline">은<br> 
       식품 제조사와 외식업 사장님이<br>
@@ -446,9 +438,7 @@
 
     <div class="divider"></div>
 
-   <!-- ------------------------------
-         SECTION 2 - 모딩이 필요한 이유
-    ------------------------------ -->
+    <!-- SECTION 2 - 모딩이 필요한 이유 -->
     <h2>모딩이 필요한 이유</h2>
     <p>
       식품 제조 시장과 외식업 시장은 빠르게 변화하고 있지만,<br>
@@ -464,9 +454,7 @@
 
     <div class="divider"></div>
 
-    <!-- ------------------------------
-         SECTION 3 - 모딩이 만드는 연결
-    ------------------------------ -->
+    <!-- SECTION 3 - 모딩이 만드는 연결 -->
     <h2>모딩이 만드는 연결</h2>
 
     <h3>1. 제조사와 모딩</h3>
@@ -486,9 +474,7 @@
 
     <div class="divider"></div>
 
-    <!-- ------------------------------
-         SECTION 4 - 모딩의 혁신 기술
-    ------------------------------ -->
+    <!-- SECTION 4 - 모딩의 혁신 기술 -->
     <h2>모딩의 혁신 기술</h2>
 
     <p class="tech-lead">
@@ -517,9 +503,7 @@
       </li>
     </ul>
 
-    <!-- ------------------------------
-         SECTION 5 - 모딩의 운영 철학
-    ------------------------------ -->
+    <!-- SECTION 5 - 모딩의 운영 철학 -->
     <div class="philosophy-wrap">
       <div class="philosophy-tag">PHILOSOPHY</div>
       <h2 class="philosophy-title">모딩의 운영 철학</h2>
@@ -548,33 +532,16 @@
       </div>
     </div>
 
-    <!-- ------------------------------
-         SECTION 6 - CTA
-    ------------------------------ -->
+    <!-- SECTION 6 - CTA -->
     <section class="cta-section">
       <h3 class="cta-title">모딩과 함께하고 싶으신가요?</h3>
       <p class="cta-desc">
         식품 제조사와 외식업 사장님을 대상으로<br>
         모딩(Moding)의 1차 파트너를 모집하고 있습니다.<br>
-        입점·제휴·플랫폼 관련 문의는 아래 채널로 연락 주세요.
+        입점·제휴·플랫폼 관련 문의는<br>
+        상단 메뉴 또는 제휴·입점 문의 페이지를 통해 남겨 주세요.
       </p>
 
-      <div class="cta-buttons">
-        <a
-          href="mailto:moding_inc@naver.com?subject=[제조사] 모딩 입점·제휴 문의"
-          class="cta-btn-primary"
-        >
-          제조사 입점·제휴 문의
-        </a>
-
-        <a
-          href="mailto:moding_inc@naver.com?subject=[외식업] 모딩 서비스 문의"
-          class="cta-btn-outline"
-        >
-          외식업 사장님 서비스 문의
-        </a>
-      </div>
-      <br>
       <p class="cta-note">
         현재 베타 단계로, 일부 기능은 순차적으로 제공됩니다.
       </p>
@@ -582,28 +549,21 @@
 
   </main>
 
-  <!-- ------------------------------
-       공통 푸터
-  ------------------------------ -->
+  <!-- 공통 푸터 (문의 메일 제거 버전) -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
     <span class="footer-item">사업자등록번호: 730-87-03564</span>
     <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
-    <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- ------------------------------
-       복사 / 우클릭 / 단축키 방지 스크립트
-  ------------------------------ -->
+  <!-- 복사 / 단축키 방지 -->
   <script>
-    // 복사 이벤트 차단
     document.addEventListener("copy", function (e) {
       e.preventDefault();
       alert("모딩(Moding)의 콘텐츠는 보호되고 있습니다.");
     });
 
-    // Ctrl/Cmd + C, X, S, U, A 등 일부 단축키 차단
     document.addEventListener("keydown", function (e) {
       if ((e.ctrlKey || e.metaKey) &&
           ["c", "x", "s", "u", "a"].includes(e.key.toLowerCase())) {
