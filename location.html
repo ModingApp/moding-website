@@ -61,7 +61,7 @@
        레이아웃 컨테이너
     ================================ */
     .container {
-      max-width: 860px;              /* 회사소개 페이지와 동일 */
+      max-width: 960px;
       margin: 0 auto;
       padding: 32px 20px 40px;
       flex: 1;
@@ -99,28 +99,35 @@
     }
 
     /* ================================
-       섹션 라벨 태그 (캡슐)
+       섹션 태그 & 제목 (위에 캡슐 + 초록 글씨)
     ================================ */
-    .tag-line {
-      display: inline-block;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      padding: 4px 10px;
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 20px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      margin-bottom: 10px;
+      border: 1px solid #3a3a3a;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #f1f1f1;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 34px;
+      font-weight: 800;
+      color: #1FAA48; /* 모딩 그린 */
+      margin-bottom: 18px;
     }
 
     /* ================================
-       제목 / 주소 / 설명
+       본문 텍스트
     ================================ */
     h1 {
-      font-size: 32px;               /* 회사소개와 동일한 기본 크기 */
+      font-size: 28px;
       margin-bottom: 8px;
-      color: #1FAA48;                /* 모딩 그린 */
-      font-weight: 700;
     }
 
     .subtitle {
@@ -217,8 +224,8 @@
         height: 320px; /* 모바일에서 조금 낮게 */
       }
 
-      h1 {
-        font-size: 28px;             /* 회사소개와 동일한 모바일 크기 */
+      .section-title {
+        font-size: 30px;
       }
     }
   </style>
@@ -238,10 +245,11 @@
 
     <!-- 오시는 길 내용 -->
     <section>
-      <!-- 섹션 라벨 -->
-      <div class="tag-line">DIRECTIONS</div>
-      <!-- 메인 타이틀 -->
-      <h1>오시는 길</h1>
+      <!-- 위 캡슐형 섹션 라벨 -->
+      <div class="section-tag">DIRECTIONS</div>
+
+      <!-- 초록색 큰 제목 -->
+      <h1 class="section-title">오시는 길</h1>
 
       <p class="subtitle">
         아래 지도를 통해 <span style="font-weight:600;">모딩 본사</span> 위치를 확인하실 수 있습니다.
@@ -341,4 +349,28 @@
     });
 
     // 드래그 차단 (지도 내부는 그대로 작동)
-    document
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+
+    // Ctrl + C, X, V, S, U, P, A 등 차단 (입력창 제외)
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+
+    // copy 이벤트 직접 차단 (입력창 제외)
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
