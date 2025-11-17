@@ -116,7 +116,7 @@
       line-height: 1.8;
     }
 
-    /* 공통 카드 스타일 (브랜드 페이지 느낌) */
+    /* 공통 카드 스타일 */
     .card {
       margin-top: 24px;
       padding: 20px 22px 22px;
@@ -140,6 +140,7 @@
       font-size: 14px;
       line-height: 1.9;
       opacity: 0.92;
+      max-width: 640px; /* [MODING EDIT] 카드 안 본문 폭 제한 */
     }
 
     .pill-row {
@@ -174,16 +175,25 @@
       opacity: 0.92;
     }
 
+    /* [MODING EDIT] 핵심 기능 – 2열 박스 레이아웃 */
     .feature-list {
-      margin-top: 10px;
-      font-size: 13px;
-      line-height: 1.8;
-      opacity: 0.92;
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 24px;
+      list-style: none;
+      padding: 0;
     }
 
     .feature-list li {
-      margin-left: 1.1em;
-      margin-bottom: 3px;
+      margin: 0;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #080808;
+      border: 1px solid #141414;
+      font-size: 13px;
+      line-height: 1.8;
+      opacity: 0.92;
     }
 
     .two-columns {
@@ -193,32 +203,24 @@
       margin-top: 14px;
     }
 
-    /* 외식업/제조사 카드 그라데이션 */
-    .small-card.restaurant-card {
-      border-radius: 18px;
-      border: 1px solid rgba(11, 143, 58, 0.8);
-      background:
-        radial-gradient(circle at top left, rgba(11, 143, 58, 0.6) 0%, #050505 55%),
-        #050505;
-      padding: 14px 16px 16px;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
-    }
-
-    .small-card.manufacturer-card {
-      border-radius: 18px;
-      border: 1px solid rgba(245, 156, 26, 0.8);
-      background:
-        radial-gradient(circle at top left, rgba(245, 156, 26, 0.6) 0%, #050505 55%),
-        #050505;
-      padding: 14px 16px 16px;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
-    }
-
+    /* [MODING EDIT] 외식업/제조사 카드 기본 */
     .small-card {
+      position: relative;
       border-radius: 18px;
-      border: 1px solid #1a1a1a;
+      padding: 16px 16px 18px;
       background: #080808;
-      padding: 14px 16px 16px;
+      border: 1px solid #1a1a1a;
+      overflow: hidden;
+    }
+
+    .small-card::before {
+      /* [MODING EDIT] 상단 배너 느낌 */
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: -1;
     }
 
     .small-card-title {
@@ -231,6 +233,38 @@
       font-size: 13px;
       line-height: 1.8;
       opacity: 0.92;
+    }
+
+    /* [MODING EDIT] 제조사 카드 – 초록 (Moding 메인 컬러) */
+    .manufacturer-card {
+      border-color: rgba(11, 143, 58, 0.85);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    .manufacturer-card::before {
+      background:
+        radial-gradient(circle at top left, rgba(11, 143, 58, 0.55) 0%, rgba(5, 5, 5, 0.98) 55%),
+        #050505;
+    }
+
+    .manufacturer-card .small-card-title {
+      color: #3AD171;
+    }
+
+    /* [MODING EDIT] 외식업 카드 – 주황 */
+    .restaurant-card {
+      border-color: rgba(245, 156, 26, 0.85);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    .restaurant-card::before {
+      background:
+        radial-gradient(circle at top left, rgba(245, 156, 26, 0.55) 0%, rgba(5, 5, 5, 0.98) 55%),
+        #050505;
+    }
+
+    .restaurant-card .small-card-title {
+      color: #F5A623;
     }
 
     .link-row {
@@ -282,6 +316,11 @@
       .page-title { font-size: 22px; }
       .card { padding: 18px 16px 20px; }
       .two-columns { grid-template-columns: 1fr; }
+
+      /* [MODING EDIT] 모바일에서는 핵심 기능 1열 */
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -315,7 +354,6 @@
       <p class="card-text">
         복잡하게 흩어져 있는 거래 흐름을 하나의 구조로 단순하게 정리하고, 현장에서 오래 쓸 수 있는 도구를 만드는 것이 
         모딩의 서비스 방향입니다.<br>
-        
       </p>
 
       <div class="pill-row">
@@ -341,15 +379,17 @@
       <h3>제조사 · 외식업 사장님, 두 관점에서의 모딩</h3>
 
       <div class="two-columns">
+        <!-- 식품 제조사 (초록) -->
         <div class="small-card manufacturer-card">
           <div class="small-card-title">식품 제조사에게</div>
           <p class="small-card-text">
             판로 확보가 어려웠던 제조사에게는 새로운 B2B 채널이 됩니다.
-            모딩PB·프랜차이즈OEM 제안, 정산 구조 정리, 거래 데이터 제공 등을 통해
+            PB·OEM 제안, 정산 구조 정리, 거래 데이터 제공 등을 통해
             “거래처와 함께 성장하는 플랫폼”을 지향합니다.
           </p>
         </div>
 
+        <!-- 외식업 사장님 (주황) -->
         <div class="small-card restaurant-card">
           <div class="small-card-title">외식업 사장님에게</div>
           <p class="small-card-text">
@@ -359,7 +399,7 @@
         </div>
       </div>
 
-      <div class="link-row"> <br>
+      <div class="link-row">
         보다 구체적인 이용 방식은
         <a href="owners.html" class="link-inline">사장님 안내 페이지</a>에서 역할별로 다시 정리해 두었습니다.
       </div>
