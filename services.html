@@ -78,7 +78,7 @@
       text-decoration: underline;
     }
 
-    /* 페이지 전체 */
+    /* 페이지 전체 래퍼 */
     .page-wrap {
       width: 100%;
       max-width: 1024px;
@@ -87,16 +87,20 @@
       flex: 1 0 auto;
     }
 
+    .page-header {
+      margin: 8px 0 24px;
+    }
+
     .page-pill {
       display: inline-block;
       padding: 4px 12px;
       border-radius: 999px;
-      border: 1px solid #2e2e2e;
+      border: 1px solid #2b2b2b;
       font-size: 11px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      opacity: 0.75;
-      margin-bottom: 14px;
+      opacity: 0.8;
+      margin-bottom: 10px;
     }
 
     .page-title {
@@ -108,100 +112,146 @@
 
     .page-subtitle {
       font-size: 14px;
-      opacity: 0.9;
+      opacity: 0.88;
       line-height: 1.8;
-      margin-bottom: 10px;
     }
 
-    /* 🔹 상단 소개 영역: 초록 그라데이션 박스 */
-    .intro-box {
-      width: 100%;
+    /* 공통 카드 스타일 (브랜드 페이지 느낌) */
+    .card {
+      margin-top: 24px;
+      padding: 20px 22px 22px;
       border-radius: 22px;
-      padding: 18px 26px 20px;
-      margin-bottom: 28px;
-      background: linear-gradient(135deg, rgba(31,219,79,0.92) 0%, rgba(11,80,67,0.96) 60%, rgba(5,5,5,0.98) 100%);
-      border: 1px solid rgba(31,219,79,0.75);
+      border: 1px solid #1a1a1a;
+      background: radial-gradient(circle at top left, #102815 0%, #050505 45%, #050505 100%);
     }
 
-    .intro-box .page-subtitle {
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #F5A623;
+    }
+
+    .card-title span {
+      color: #ffffff;
+    }
+
+    .card-text {
+      font-size: 14px;
+      line-height: 1.9;
+      opacity: 0.92;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid #2b2b2b;
+      background: #090909;
+      opacity: 0.95;
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section h3 {
+      font-size: 15px;
+      font-weight: 600;
       margin-bottom: 8px;
     }
 
-    .big-banner {
-      margin: 0;
-      padding: 0;
-      background: none;
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    /* --------------------------- */
-    /*   핵심 기능 뱃지 영역      */
-    /* --------------------------- */
-    .feature-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 34px;
-    }
-
-    .feature-card {
-      border-radius: 999px;
-      border: 1px solid #F5A623;
-      background: radial-gradient(circle at top left,
-                                  rgba(245,166,35,0.22) 0%,
-                                  rgba(245,166,35,0.10) 40%,
-                                  rgba(5,5,5,0.95) 100%);
-      padding: 8px 18px;
+    .section p {
       font-size: 13px;
-      line-height: 1.6;
-      display: inline-flex;
-      flex-direction: column;
+      line-height: 1.9;
+      opacity: 0.92;
     }
 
-    .feature-title {
-      font-weight: 600;
-      color: #F5A623;
-      margin-bottom: 2px;
+    .feature-list {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.8;
+      opacity: 0.92;
     }
 
-    /* 제조사 / 외식업 카드 */
+    .feature-list li {
+      margin-left: 1.1em;
+      margin-bottom: 3px;
+    }
+
     .two-columns {
       display: grid;
-      grid-template-columns: repeat(2,1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
-      margin-top: 10px;
+      margin-top: 14px;
     }
 
-    .manufacturer-card {
+    /* 외식업/제조사 카드 그라데이션 */
+    .small-card.restaurant-card {
       border-radius: 18px;
-      padding: 20px 22px;
-      background: linear-gradient(160deg, rgba(26,220,95,0.45) 0%, #050505 55%);
-      border: 1px solid rgba(26,220,95,0.55);
+      border: 1px solid rgba(11, 143, 58, 0.8);
+      background:
+        radial-gradient(circle at top left, rgba(11, 143, 58, 0.6) 0%, #050505 55%),
+        #050505;
+      padding: 14px 16px 16px;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
     }
 
-    .restaurant-card {
+    .small-card.manufacturer-card {
       border-radius: 18px;
-      padding: 20px 22px;
-      background: linear-gradient(160deg, rgba(255,165,52,0.45) 0%, #050505 55%);
-      border: 1px solid rgba(255,165,52,0.55);
+      border: 1px solid rgba(245, 156, 26, 0.8);
+      background:
+        radial-gradient(circle at top left, rgba(245, 156, 26, 0.6) 0%, #050505 55%),
+        #050505;
+      padding: 14px 16px 16px;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
     }
 
-    .small-title {
-      font-size: 15px;
+    .small-card {
+      border-radius: 18px;
+      border: 1px solid #1a1a1a;
+      background: #080808;
+      padding: 14px 16px 16px;
+    }
+
+    .small-card-title {
+      font-size: 14px;
       font-weight: 600;
       margin-bottom: 6px;
     }
 
-    .small-text {
-      font-size: 14px;
-      opacity: 0.9;
+    .small-card-text {
+      font-size: 13px;
       line-height: 1.8;
+      opacity: 0.92;
     }
 
-    /* footer */
+    .link-row {
+      margin-top: 14px;
+      font-size: 13px;
+    }
+
+    .link-inline {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+      opacity: 0.9;
+    }
+
+    .link-inline:hover {
+      background: linear-gradient(90deg, #0B8F3A 0%, #0B8F3A 50%, #F59C1A 50%, #F59C1A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* footer (index와 동일 정보) */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -214,6 +264,7 @@
       justify-content: center;
       gap: 8px;
       text-align: center;
+      flex-shrink: 0;
     }
 
     .footer-item::after {
@@ -222,18 +273,21 @@
     }
     .footer-item:last-child::after {
       content: "";
+      margin: 0;
     }
 
     @media (max-width: 768px) {
-      .feature-grid { flex-direction: column; }
+      .top-bar { padding: 16px 14px; }
+      .page-wrap { padding: 0 14px 32px; }
+      .page-title { font-size: 22px; }
+      .card { padding: 18px 16px 20px; }
       .two-columns { grid-template-columns: 1fr; }
-      .page-wrap { padding: 0 16px 32px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- 상단 고정 영역 -->
+  <!-- 상단 로고바 -->
   <header class="top-bar">
     <div class="top-left">
       <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
@@ -246,82 +300,73 @@
 
   <!-- 본문 -->
   <main class="page-wrap">
-
-    <div class="page-pill">SERVICE OVERVIEW</div>
-
-    <h1 class="page-title">서비스 소개</h1>
-
-    <!-- 소개 문단 + 방향 문구를 하나의 틀로 묶은 영역 -->
-    <div class="intro-box">
+    <header class="page-header">
+      <div class="page-pill">SERVICE OVERVIEW</div>
+      <h1 class="page-title">서비스 소개</h1>
       <p class="page-subtitle">
         모딩(Moding)은 식품 제조사와 외식업 사장님, 그리고 그 사이를 잇는 기술을<br>
         하나의 구조로 묶어 주는 <strong>B2B Food-SaaS 플랫폼</strong>입니다.
       </p>
-      <p class="big-banner">
-        모든 사장님을 위한, 모든 것을 담은 플랫폼 모딩
-        <br>
-        복잡하게 흩어져 있는 거래 흐름을 하나의 구조로 단순하게 정리하고, 현장에서 오래 쓸 수 있는 도구를 만드는 것이 모딩의 서비스 방향입니다.
+    </header>
+
+    <!-- 메인 카드: 모딩이 하는 일 -->
+    <section class="card">
+      <h2 class="card-title">모든 사장님을 위한, 모든 것을 담은 플랫폼 <span>모딩</span></h2>
+      <p class="card-text">
+        복잡하게 흩어져 있는 거래 흐름을 하나의 구조로 단순하게 정리하고, 현장에서 오래 쓸 수 있는 도구를 만드는 것이 
+        모딩의 서비스 방향입니다.<br>
+        
       </p>
-    </div>
 
-    <!-- 핵심 기능 4개: 주황색 뱃지 스타일 -->
-    <div class="feature-grid">
+      <div class="pill-row">
+        <div class="pill">소스·원부재료·밀키트 B2B 마켓</div>
+        <div class="pill">B2B 특화 주문·정산 SaaS 도구</div>
+        <div class="pill">세금계산서·정산 자동화</div>
+      </div>
+    </section>
 
-      <div class="feature-card">
-        <div class="feature-title">상품·레시피 마켓</div>
-        카테고리·용도·업종별로 상품을 찾아 발주할 수 있습니다.
+    <!-- 섹션 1: 주요 기능 -->
+    <section class="section">
+      <h3>모딩이 제공하는 핵심 기능</h3>
+      <ul class="feature-list">
+        <li><strong>상품·레시피 마켓</strong> – 카테고리·용도·업종별로 상품을 찾아 발주할 수 있습니다.</li>
+        <li><strong>발주·정산 관리</strong> – 여러 제조사에 나뉘어 있던 주문/입금을 한 화면에서 정리합니다.</li>
+        <li><strong>정산 주기와 세금계산서</strong> – D+7 정산 구조와 세금계산서 자동 발행(예정)을 지원합니다.</li>
+        <li><strong>데이터 리포트(예정)</strong> – 매장·상품별 발주 추이 등, 운영에 바로 쓰는 숫자만 보여주는 것을 목표로 합니다.</li>
+      </ul>
+    </section>
+
+    <!-- 섹션 2: 두 관점에서 보는 모딩 -->
+    <section class="section">
+      <h3>제조사 · 외식업 사장님, 두 관점에서의 모딩</h3>
+
+      <div class="two-columns">
+        <div class="small-card manufacturer-card">
+          <div class="small-card-title">식품 제조사에게</div>
+          <p class="small-card-text">
+            판로 확보가 어려웠던 제조사에게는 새로운 B2B 채널이 됩니다.
+            모딩PB·프랜차이즈OEM 제안, 정산 구조 정리, 거래 데이터 제공 등을 통해
+            “거래처와 함께 성장하는 플랫폼”을 지향합니다.
+          </p>
+        </div>
+
+        <div class="small-card restaurant-card">
+          <div class="small-card-title">외식업 사장님에게</div>
+          <p class="small-card-text">
+            검증된 제조사의 소스·육류·밀키트를 한 곳에서 보고, 매장 운영에 맞는 제품을 선택해 발주할 수 있습니다.
+            발주 내역과 정산 내역을 한 곳에서 관리해 회계·재고 업무를 줄이는 것이 목표입니다.
+          </p>
+        </div>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-title">발주·정산 관리</div>
-        여러 제조사에 나뉘어 있던 주문/입금을 한 화면에서 정리합니다.
+      <div class="link-row"> <br>
+        보다 구체적인 이용 방식은
+        <a href="owners.html" class="link-inline">사장님 안내 페이지</a>에서 역할별로 다시 정리해 두었습니다.
       </div>
-
-      <div class="feature-card">
-        <div class="feature-title">정산 주기와 세금계산서</div>
-        D+7 정산 구조와 세금계산서 자동 발행(예정)을 지원합니다.
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-title">데이터 리포트(예정)</div>
-        매장·상품별 발주 추이 등, 운영에 바로 쓰는 숫자만 보여주는 것을 목표로 합니다.
-      </div>
-
-    </div>
-
-    <!-- 제조사 / 외식업 -->
-    <h3 style="font-size:15px; font-weight:600; margin-bottom:10px; margin-top:20px;">
-      제조사 · 외식업 사장님, 두 관점에서의 모딩
-    </h3>
-
-    <div class="two-columns">
-
-      <div class="manufacturer-card">
-        <div class="small-title">식품 제조사에게</div>
-        <p class="small-text">
-          판로 확보가 어려웠던 제조사에게는 새로운 B2B 채널이 됩니다.
-          모딩PB·프랜차이즈OEM 제안, 정산 구조 정리, 거래 데이터 제공 등을 통해
-          “거래처와 함께 성장하는 플랫폼”을 지향합니다.
-        </p>
-      </div>
-
-      <div class="restaurant-card">
-        <div class="small-title">외식업 사장님에게</div>
-        <p class="small-text">
-          검증된 제조사의 소스·육류·밀키트를 한 곳에서 보고, 매장 운영에 맞는 제품을 선택해 발주할 수 있습니다.
-          발주 내역과 정산 내역을 한 곳에서 관리해 회계·재고 업무를 줄이는 것이 목표입니다.
-        </p>
-      </div>
-
-    </div>
-
-    <p style="font-size:13px; opacity:0.85; margin-top:20px;">
-      보다 구체적인 이용 방식은 사장님 안내 페이지에서 역할별로 다시 정리해 두었습니다.
-    </p>
-
+    </section>
   </main>
 
-  <!-- 푸터 -->
+  <!-- 공통 푸터 -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -330,24 +375,31 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- 복사/우클릭 방지 -->
+  <!-- 복사/우클릭 방지 (index와 동일 패턴) -->
   <script>
     document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) e.preventDefault();
+      if (!e.target.closest("input, textarea, a")) {
+        e.preventDefault();
+      }
     });
     document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
     });
     document.addEventListener("keydown", function (e) {
       const key = e.key.toLowerCase();
       if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
-        if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
       }
     });
     document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
     });
   </script>
-
 </body>
 </html>
