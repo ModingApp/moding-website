@@ -114,6 +114,7 @@
       line-height: 1.8;
     }
 
+    /* 상단 공통 안내 배너 카드 */
     .card {
       margin-top: 24px;
       padding: 20px 22px 22px;
@@ -135,19 +136,7 @@
       opacity: 0.92;
     }
 
-    .two-columns {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 16px;
-    }
-
-    .small-card {
-      border-radius: 18px;
-      border: 1px solid #1a1a1a;
-      background: #080808;
-      padding: 16px 16px 18px;
-    }
+    /* ===== 공통 요소 (기존 스타일 유지) ===== */
 
     .small-label {
       font-size: 11px;
@@ -186,6 +175,7 @@
       flex-wrap: wrap;
       gap: 6px;
       margin-top: 8px;
+      margin-bottom: 6px;
     }
 
     .badge {
@@ -262,12 +252,99 @@
       margin: 0;
     }
 
+    /* =========================================
+       ① 외식업 / 제조사 통합 2단 레이아웃
+       ========================================= */
+
+    /* 두 개의 큰 박스를 감싸는 컨테이너 */
+    .owners-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    /* 공통 박스 스타일 */
+    .owner-box {
+      border-radius: 20px;
+      padding: 18px 20px 20px;
+      border: 1px solid #1a1a1a;
+      background: #080808;
+    }
+
+    .owner-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .owner-flow {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .owner-flow-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .owner-flow-intro {
+      font-size: 13px;
+      line-height: 1.8;
+      opacity: 0.92;
+    }
+
+    /* ② 좌측: 외식업 사장님 박스 (주황 그라데이션) */
+    .restaurant-box {
+      border-color: rgba(245, 156, 26, 0.8);
+      background: radial-gradient(circle at top left, rgba(245, 156, 26, 0.52) 0%, #050505 55%);
+    }
+
+    .restaurant-box .small-label,
+    .restaurant-box .owner-title,
+    .restaurant-box .owner-flow-title {
+      color: #F5A623;
+    }
+
+    /* 외식업 badge 주황색 처리 */
+    .restaurant-box .badge {
+      border-color: rgba(245, 156, 26, 0.9);
+      background: rgba(245, 156, 26, 0.15);
+      color: #F5A623;
+    }
+
+    /* ③ 우측: 식품 제조사 박스 (초록 그라데이션, 로고톤 기준) */
+    .manufacturer-box {
+      border-color: rgba(11, 143, 58, 0.9);
+      background: radial-gradient(circle at top left, rgba(11, 143, 58, 0.55) 0%, #050505 55%);
+    }
+
+    .manufacturer-box .small-label,
+    .manufacturer-box .owner-title,
+    .manufacturer-box .owner-flow-title {
+      color: #1FDB4F;
+    }
+
+    /* 제조사 badge 초록색 처리 */
+    .manufacturer-box .badge {
+      border-color: rgba(31, 219, 79, 0.9);
+      background: rgba(11, 143, 58, 0.16);
+      color: #1FDB4F;
+    }
+
     @media (max-width: 768px) {
       .top-bar { padding: 16px 14px; }
       .page-wrap { padding: 0 14px 32px; }
       .page-title { font-size: 22px; }
       .card { padding: 18px 16px 20px; }
-      .two-columns { grid-template-columns: 1fr; }
+
+      /* 모바일에서는 세로 1열로 쌓이도록 */
+      .owners-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
     }
   </style>
 </head>
@@ -295,91 +372,95 @@
       </p>
     </header>
 
-    <!-- 카드: 두 종류의 사장님 -->
+    <!-- 상단 공통 안내 배너 -->
     <section class="card">
       <h2 class="card-title">함께 사용하는 두 주인공, 제조사와 매장 사장님</h2>
       <p class="card-text">
         한쪽은 상품을 만드는 제조사, 다른 한쪽은 메뉴를 완성하는 매장입니다.
         모딩은 이 두 흐름을 한 구조 안에서 정리해, '모두가 편안한 거래' 를 목표로 합니다.
       </p>
+    </section>
 
-      <div class="two-columns">
-        <div class="small-card">
-          <div class="small-label">FOR RESTAURANT</div>
-          <div class="small-title">외식업 사장님</div>
-          <p class="small-text">
-            한식·중식·일식·양식·요리주점·카페·배달전문점 등,
-            매장에서 사용할 소스·원부재료·밀키트를 안정적으로 공급받고 싶은 사장님을 위한 안내입니다.
-          </p>
-          <ul class="small-list">
-            <li>사업자등록증이 있는 외식업 매장</li>
-            <li>메뉴 개발에 필요한 소스·육류·밀키트를 찾고 있는 브랜드</li>
-            <li>여러 협력업체 발주·정산을 한 번에 보고 싶은 본사</li>
-          </ul>
-          <div class="badge-row">
-            <div class="badge">검증된 제조사 상품</div>
-            <div class="badge">편리한 발주·정산 </div>
-            <div class="badge"></div>
-          </div>
+    <!-- 외식업 / 제조사 2단 통합 레이아웃 -->
+    <section class="owners-grid">
+      <!-- 좌측: 외식업 사장님 + 이용 흐름 (주황 박스) -->
+      <div class="owner-box restaurant-box">
+        <div class="small-label">FOR RESTAURANT</div>
+        <h2 class="owner-title">외식업 사장님</h2>
+
+        <p class="small-text">
+          한식·중식·일식·양식·요리주점·카페·배달전문점 등,
+          매장에서 사용할 소스·원부재료·밀키트를 안정적으로 공급받고 싶은 사장님을 위한 안내입니다.
+        </p>
+        <ul class="small-list">
+          <li>사업자등록증이 있는 외식업 매장</li>
+          <li>메뉴 개발에 필요한 소스·육류·밀키트를 찾고 있는 브랜드</li>
+          <li>여러 협력업체 발주·정산을 한 번에 보고 싶은 본사</li>
+        </ul>
+        <div class="badge-row">
+          <div class="badge">검증된 제조사 상품</div>
+          <div class="badge">편리한 발주·정산</div>
+          <div class="badge">매장 상황에 맞춘 공급</div>
         </div>
 
-        <div class="small-card">
-          <div class="small-label">FOR MANUFACTURER</div>
-          <div class="small-title">식품 제조사</div>
-          <p class="small-text">
-            소스·육류/생선 가공품·밀키트·냉동/냉장 완제품 등 B2B 공급이 가능한 제조사를 위한 안내입니다.
+        <!-- 외식업 사장님 이용 흐름 -->
+        <div class="owner-flow">
+          <h3 class="owner-flow-title">외식업 사장님 이용 흐름</h3>
+          <p class="owner-flow-intro">
+            매장 사장님 기준으로 모딩을 이용하는 기본 단계는 다음과 같습니다.
           </p>
-          <ul class="small-list">
-            <li>식육/식품 기타 제조가공업 등 인허가를 갖춘 공장</li>
-            <li>B2B상품의 판로를 넓히고 싶은 제조사</li>
-            <li>발주·입금·세금계산서 관리를 편하게 하고 싶은 업체</li>
-          </ul>
-          <div class="badge-row">
-            <div class="badge">B2B 판로 확대</div>
-            <div class="badge">정산·세금계산서 정리</div>
-            <div class="badge">프랜차이즈·OEM 협업</div>
-          </div>
+          <ol class="step-list">
+            <li><strong>회원가입 및 사업자 인증</strong> – 사업자등록증 기준으로 계정을 생성합니다.</li>
+            <li><strong>매장 프로필 등록</strong> – 상호 및 업종, 주력메뉴, 필요품목 등을 입력합니다.</li>
+            <li><strong>상품 탐색 및 발주</strong> – 카테고리별로 상품을 둘러보고 필요한 제품을 선택해 발주합니다.</li>
+            <li><strong>배송 / 수령 확인</strong> – 출고·배송 상태를 확인하고, 이상 유무를 체크합니다.</li>
+            <li><strong>정산·세금계산서 확인</strong> – 정산 예정일과 세금계산서 발행 내역을 한 번에 확인합니다.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- 우측: 식품 제조사 + 이용 흐름 (초록 박스) -->
+      <div class="owner-box manufacturer-box">
+        <div class="small-label">FOR MANUFACTURER</div>
+        <h2 class="owner-title">식품 제조사</h2>
+
+        <p class="small-text">
+          소스·육류/생선 가공품·밀키트·냉동/냉장 완제품 등 B2B 공급이 가능한 제조사를 위한 안내입니다.
+        </p>
+        <ul class="small-list">
+          <li>식육/식품 기타 제조가공업 등 인허가를 갖춘 공장</li>
+          <li>B2B상품의 판로를 넓히고 싶은 제조사</li>
+          <li>발주·입금·세금계산서 관리를 편하게 하고 싶은 업체</li>
+        </ul>
+        <div class="badge-row">
+          <div class="badge">B2B 판로 확대</div>
+          <div class="badge">정산·세금계산서 정리</div>
+          <div class="badge">프랜차이즈·OEM 협업</div>
+        </div>
+
+        <!-- 식품 제조사 이용 흐름 -->
+        <div class="owner-flow">
+          <h3 class="owner-flow-title">식품 제조사 이용 흐름</h3>
+          <p class="owner-flow-intro">
+            제조사 기준의 이용 흐름은 아래와 같습니다. 실제 계약 조건과 세부 프로세스는
+            <a href="alliance.html" class="link-inline">제휴·입점 문의</a> 이후 별도로 안내드립니다.
+          </p>
+          <ol class="step-list">
+            <li><strong>제휴·입점 문의</strong> – 공장 기본 정보와 주요 품목을 남겨주시면 담당자가 연락드립니다.</li>
+            <li><strong>공장·상품 검토</strong> – 인허가, 생산 가능량, 품질 기준 등을 함께 확인합니다.</li>
+            <li><strong>계약 및 상품 등록</strong> – 가격, 배송방법, 리드타임, 정산 조건을 정하고 상품을 등록합니다.</li>
+            <li><strong>발주·출고·배송</strong> – 모딩에서 들어오는 발주를 확인하고 출고·배송을 진행합니다.</li>
+            <li><strong>정산 및 데이터</strong> – 정산 내역과 거래 데이터를 확인하며, 전자세금계산서 자동 발행을 처리합니다.</li>
+          </ol>
         </div>
       </div>
     </section>
 
-    <!-- 외식업 사장님 이용 흐름 -->
-    <section class="section">
-      <h3>외식업 사장님 이용 흐름</h3>
-      <p>
-        매장 사장님 기준으로 모딩을 이용하는 기본 단계는 다음과 같습니다.
-      </p>
-      <ol class="step-list">
-        <li><strong>회원가입 및 사업자 인증</strong> – 사업자등록증 기준으로 계정을 생성합니다.</li>
-        <li><strong>매장 프로필 등록</strong> – 상호 및 업종, 주력메뉴, 필요품목 등을 입력합니다.</li>
-        <li><strong>상품 탐색 및 발주</strong> – 카테고리별로 상품을 둘러보고 필요한 제품을 선택해 발주합니다.</li>
-        <li><strong>배송 / 수령 확인</strong> – 출고·배송 상태를 확인하고, 이상 유무를 체크합니다.</li>
-        <li><strong>정산·세금계산서 확인</strong> – 정산 예정일과 세금계산서 발행 내역을 한 번에 확인합니다.</li>
-      </ol>
-      
-    </section>
+    <!-- 입점 기준 안내 문구 (기존 문장 유지) -->
+    <p class="step-list" style="margin-top: 20px;">
+      자세한 입점 기준은 <a href="entry.html" class="link-inline">입점 안내</a> 페이지를 참고해주세요.
+    </p>
 
-    <!-- 제조사 이용 흐름 -->
-    <section class="section">
-      <h3>식품 제조사 이용 흐름</h3>
-      <p>
-        제조사 기준의 이용 흐름은 아래와 같습니다. 실제 계약 조건과 세부 프로세스는
-        <a href="alliance.html" class="link-inline">제휴·입점 문의</a> 이후 별도로 안내드립니다.
-      </p>
-      <ol class="step-list">
-        <li><strong>제휴·입점 문의</strong> – 공장 기본 정보와 주요 품목을 남겨주시면 담당자가 연락드립니다.</li>
-        <li><strong>공장·상품 검토</strong> – 인허가, 생산 가능량, 품질 기준 등을 함께 확인합니다.</li>
-        <li><strong>계약 및 상품 등록</strong> – 가격, 배송방법, 리드타임, 정산 조건을 정하고 상품을 등록합니다.</li>
-        <li><strong>발주·출고·배송</strong> – 모딩에서 들어오는 발주를 확인하고 출고·배송을 진행합니다.</li>
-        <li><strong>정산 및 데이터</strong> – 정산 내역과 거래 데이터를 확인하며, 전자세금계산서 자동 발행을 처리합니다. </li>
-      </ol>
-    </section>
-
-    <p class="step-list">
-        자세한 입점 기준은 <a href="entry.html" class="link-inline">입점 안내</a> 페이지를 참고해주세요.
-      </p>
-
-    
   </main>
 
   <!-- 푸터 -->
