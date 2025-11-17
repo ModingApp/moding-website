@@ -2,14 +2,15 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>입점 안내 - 모딩(Moding)</title>
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     html, body, *:not(input):not(textarea) {
       -webkit-user-select: none;
@@ -18,23 +19,14 @@
       user-select: none;
     }
 
-    img, .nocopy-img {
+    img {
       -webkit-user-drag: none;
       user-drag: none;
-      pointer-events: none;
-    }
-
-    input, textarea {
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
-      pointer-events: auto;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+        "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
       background: #050505;
       color: #ffffff;
       min-height: 100vh;
@@ -42,7 +34,10 @@
       flex-direction: column;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     /* 상단 로고바 */
     .top-bar {
@@ -81,7 +76,7 @@
       text-decoration: underline;
     }
 
-    /* 페이지 전체 래퍼 */
+    /* 페이지 래퍼 */
     .page-wrap {
       width: 100%;
       max-width: 1024px;
@@ -119,76 +114,141 @@
       line-height: 1.8;
     }
 
-    .section {
-      margin-top: 28px;
-    }
-
-    .section h2 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .section h3 {
-      font-size: 15px;
-      font-weight: 600;
-      margin: 16px 0 6px;
-    }
-
-    .section p {
-      font-size: 13px;
-      line-height: 1.9;
-      opacity: 0.92;
-      margin-bottom: 8px;
-    }
-
-    .section ul {
-      margin: 4px 0 10px;
-      padding-left: 1.2em;
-      font-size: 13px;
-      line-height: 1.8;
-      opacity: 0.92;
-    }
-
-    .section ul li {
-      margin-bottom: 3px;
-    }
-
-    .card {
-      margin-top: 24px;
+    /* 공통 카드 */
+    .entry-card {
+      margin-top: 26px;
       padding: 20px 22px 22px;
       border-radius: 22px;
       border: 1px solid #1a1a1a;
-      background: radial-gradient(circle at top left, #102815 0%, #050505 45%, #050505 100%);
+      background: #050505;
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
     }
 
-    .card-title {
-      font-size: 16px;
-      font-weight: 600;
+    .entry-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.36;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* 제조사(녹색 그라데이션) */
+    .entry-card.manufacturer::before {
+      background:
+        radial-gradient(circle at top left, #0B5043 0%, rgba(5, 5, 5, 0.2) 48%, transparent 70%);
+    }
+
+    /* 외식업(주황 그라데이션) */
+    .entry-card.restaurant::before {
+      background:
+        radial-gradient(circle at top left, #F59C1A 0%, rgba(5, 5, 5, 0.2) 48%, transparent 70%);
+    }
+
+    .entry-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .entry-label {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      opacity: 0.85;
       margin-bottom: 8px;
+    }
+
+    .entry-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .entry-title.manufacturer {
+      color: #1FDB4F;
+    }
+
+    .entry-title.restaurant {
       color: #F5A623;
     }
 
-    .card-text {
+    .entry-text {
       font-size: 14px;
       line-height: 1.9;
-      opacity: 0.92;
+      opacity: 0.94;
+      margin-bottom: 14px;
     }
 
-    .divider {
-      border-bottom: 1px solid #222;
-      margin: 32px 0 26px;
+    /* 표 스타일 */
+    .entry-table-wrap {
+      margin-top: 4px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(5, 5, 5, 0.72);
+      overflow: hidden;
     }
 
-    .highlight-box {
-      margin-top: 8px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid #2b2b2b;
-      background: #080808;
+    .entry-table-header {
+      padding: 10px 14px;
       font-size: 13px;
-      line-height: 1.8;
-      opacity: 0.95;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .entry-table-header span.badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      opacity: 0.9;
+    }
+
+    table.entry-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    table.entry-table tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    table.entry-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    table.entry-table th,
+    table.entry-table td {
+      padding: 8px 12px;
+      vertical-align: top;
+    }
+
+    table.entry-table th {
+      width: 32%;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    table.entry-table td {
+      width: 68%;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .entry-note {
+      font-size: 12px;
+      opacity: 0.75;
+      margin-top: 10px;
+      line-height: 1.7;
     }
 
     /* 푸터 */
@@ -211,6 +271,7 @@
       content: "·";
       margin-left: 8px;
     }
+
     .footer-item:last-child::after {
       content: "";
       margin: 0;
@@ -220,7 +281,9 @@
       .top-bar { padding: 16px 14px; }
       .page-wrap { padding: 0 14px 32px; }
       .page-title { font-size: 22px; }
-      .card { padding: 18px 16px 20px; }
+      .entry-card { padding: 18px 16px 20px; }
+      table.entry-table th,
+      table.entry-table td { padding: 8px 10px; }
     }
   </style>
 </head>
@@ -229,7 +292,7 @@
   <!-- 상단 로고바 -->
   <header class="top-bar">
     <div class="top-left">
-      <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
+      <img src="모딩로고.png" alt="Moding Logo" />
       <div class="brand-name">Moding Inc.</div>
     </div>
     <div class="top-right">
@@ -243,191 +306,137 @@
       <div class="page-pill">ENTRY GUIDE</div>
       <h1 class="page-title">입점 안내</h1>
       <p class="page-subtitle">
-        모딩(Moding)은 식품 제조사와 외식업 사장님을 하나의 구조로 연결하는
-        <strong>B2B Food-SaaS 플랫폼</strong>입니다.<br>
-        모딩의 입점 절차는 복잡한 서류 없이, 실제 거래에 필요한 최소한의 정보만으로 빠르게 진행됩니다.
+        모딩(Moding)에 함께 들어오실 <strong>식품 제조사</strong>와 <strong>외식업 사장님</strong>을 위한 입점 안내입니다.<br>
+        아래 정보를 기준으로 기본 검토를 진행하며, 세부 조건은 담당자와 개별 협의 후 확정됩니다.
       </p>
     </header>
 
-    <!-- 인트로 카드 -->
-    <section class="card">
-      <h2 class="card-title">모딩(Moding) 입점 안내</h2>
-      <p class="card-text">
-        모딩(Moding)은 식품 제조사와 외식업 사장님을 하나의 구조로 연결하는
-        <strong>B2B Food-SaaS 플랫폼</strong>입니다.<br>
-        모딩의 입점 절차는 복잡한 서류 없이, 실제 거래에 필요한 최소한의 정보만으로 빠르게 진행됩니다.
-      </p>
+    <!-- 식품 제조사 카드 (녹색 그라데이션) -->
+    <section class="entry-card manufacturer">
+      <div class="entry-inner">
+        <div class="entry-label">FOR MANUFACTURER</div>
+        <h2 class="entry-title manufacturer">식품 제조사 입점 안내</h2>
+        <p class="entry-text">
+          판로 확보가 어려웠던 제조사에게는 새로운 B2B 채널이 됩니다.
+          모딩PB·프랜차이즈OEM 제안, 정산 구조 정리, 거래 데이터 제공 등을 통해
+          “거래처와 함께 성장하는 플랫폼”을 지향합니다.
+        </p>
+
+        <div class="entry-table-wrap">
+          <div class="entry-table-header">
+            <span>기본 정보</span>
+            <span class="badge">식품제조가공 / 즉석식품제조 등 인허가 공장</span>
+          </div>
+          <table class="entry-table">
+            <tbody>
+              <tr>
+                <th>회사명 / 사업자등록번호</th>
+                <td>법인명 또는 사업자명, 10자리 사업자등록번호</td>
+              </tr>
+              <tr>
+                <th>대표자 / 담당자 정보</th>
+                <td>대표자 성명, 실무 담당자 이름과 직책, 연락 가능한 휴대전화 / 이메일</td>
+              </tr>
+              <tr>
+                <th>공장 주소 및 인허가</th>
+                <td>제조 공장 주소, 보유 인허가(식품제조가공업, 즉석식품제조가공업, 식육가공업 등) 및 허가번호</td>
+              </tr>
+              <tr>
+                <th>주요 품목 및 카테고리</th>
+                <td>소스, 육가공, 밀키트, 냉동/냉장 완제품 등 주요 품목과 대표 제품명</td>
+              </tr>
+              <tr>
+                <th>하루 / 월 생산 가능 수량</th>
+                <td>SKU별 일일 생산량, 월 최대 공급 가능 수량(대략적인 범위도 가능)</td>
+              </tr>
+              <tr>
+                <th>최소 발주 수량(MOQ)</th>
+                <td>제품별 최소 발주 수량 및 박스 단위, 파렛트 단위 등 거래 단위</td>
+              </tr>
+              <tr>
+                <th>단가 및 정산 조건 희망안</th>
+                <td>기준 단가표(부가세 여부 포함), 희망 정산 주기(예: D+7, 월 단위 등), 세금계산서 발행 방식</td>
+              </tr>
+              <tr>
+                <th>보관 / 유통 정보</th>
+                <td>냉장 / 냉동 / 상온, 유통기한, 권장 보관 조건 및 배송 방식(직배송 / 택배 / 3PL 등)</td>
+              </tr>
+              <tr>
+                <th>기존 B2B 거래 현황(선택)</th>
+                <td>현재 거래 중인 프랜차이즈/도매처, PB/OEM 경험 여부 등 참고용 정보</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="entry-note">
+          제조사 입점 문의는 <strong>제휴·입점 문의(alliance.html)</strong> 또는 별도 안내된 메일로 접수해 주시면,
+          제출해 주신 정보를 바탕으로 1차 검토 후 개별 연락을 드립니다.
+        </p>
+      </div>
     </section>
 
-    <div class="divider"></div>
+    <!-- 외식업 사장님 카드 (주황 그라데이션) -->
+    <section class="entry-card restaurant">
+      <div class="entry-inner">
+        <div class="entry-label">FOR RESTAURANT</div>
+        <h2 class="entry-title restaurant">외식업 사장님 입점 안내</h2>
+        <p class="entry-text">
+          검증된 제조사의 소스·육류·밀키트를 한 곳에서 보고, 매장 운영에 맞는 제품을 선택해 발주할 수 있습니다.
+          발주 내역과 정산 내역을 한 곳에서 관리해 회계·재고 업무를 줄이는 것이 목표입니다.
+        </p>
 
-    <!-- 1. 제조사 입점 절차 -->
-    <section class="section">
-      <h2>1. 제조사 입점 절차</h2>
+        <div class="entry-table-wrap">
+          <div class="entry-table-header">
+            <span>매장 / 본사 정보</span>
+            <span class="badge">단일 매장 · 다점포 · 프랜차이즈 본사 모두 가능</span>
+          </div>
+          <table class="entry-table">
+            <tbody>
+              <tr>
+                <th>사업자 유형</th>
+                <td>개인/법인 사업자 구분, 단일 매장 / 다점포 / 프랜차이즈 본사 여부</td>
+              </tr>
+              <tr>
+                <th>상호 / 사업자등록번호</th>
+                <td>상호명, 10자리 사업자등록번호, 대표자 성명</td>
+              </tr>
+              <tr>
+                <th>매장 수 및 형태</th>
+                <td>운영 중인 점포 수, 매장 유형(한식, 일식, 주점, 배달전문점, 카페 등)</td>
+              </tr>
+              <tr>
+                <th>주소 / 주요 권역</th>
+                <td>대표 매장 주소, 주요 영업 권역(도시/지역 단위)</td>
+              </tr>
+              <tr>
+                <th>주력 메뉴 / 콘셉트</th>
+                <td>대표 메뉴, 콘셉트(예: 해산물 주점, 한식 주점, 분식, 카페 등) 및 현재 사용 중인 주요 소스/원재료</td>
+              </tr>
+              <tr>
+                <th>예상 월 발주 규모</th>
+                <td>소스 / 육류 / 밀키트 등 카테고리별 대략적인 월 발주 금액 또는 수량</td>
+              </tr>
+              <tr>
+                <th>희망 상품 / 카테고리</th>
+                <td>찾고 있는 상품 유형(예: 육수, 양념소스, 밀키트, 정육, 가공육, 반조리 등)과 필요 스펙</td>
+              </tr>
+              <tr>
+                <th>정산 / 세금계산서 정보</th>
+                <td>정산 계좌 정보, 세금계산서 수령 이메일, 회계 담당자 연락처 등</td>
+              </tr>
+              <tr>
+                <th>기존 거래사(선택)</th>
+                <td>현재 거래 중인 도매상/제조사, 불편했던 점 또는 개선이 필요한 부분</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>① 기본정보 등록</h3>
-      <ul>
-        <li>사업자등록증</li>
-        <li>공장·제조업 관련 허가증</li>
-        <li>담당자 연락처</li>
-        <li>상품 카테고리(소스·육류·밀키트·반조리 등)</li>
-      </ul>
-      <p>
-        모든 정보는 <strong>모딩 약관에 따라 비공개·암호화</strong>되어 처리됩니다.
-      </p>
-
-      <h3>② 제품 정보 제출</h3>
-      <ul>
-        <li>품목제조보고증(해당 시)</li>
-        <li>원재료명 및 함량</li>
-        <li>규격·박스단가·MOQ</li>
-        <li>유통기한 및 보관 방식</li>
-        <li>제조 리드타임</li>
-      </ul>
-      <p>
-        모딩은 입점한 제조사의 제품을 <strong>카테고리·용도·업종별로 자동 분류</strong>하여
-        외식업 사장님들이 쉽게 발주할 수 있도록 구성합니다.
-      </p>
-
-      <h3>③ 정산 구조 설정</h3>
-      <p>
-        모딩은 <strong>통신판매중개자(중개)</strong>로 운영되며,
-        제조사가 직접 판매자로서 정산을 받습니다.
-      </p>
-      <ul>
-        <li>정산주기: D+7 (가맹점별 합산 정산)</li>
-        <li>PG 결제 수수료: 제조사 부담(약관 고지)</li>
-        <li>세금계산서 자동 발행(예정)</li>
-      </ul>
-      <p>
-        정산 구조는 투명하게 관리되고, 제조사가 직접 정산 내역을 확인할 수 있습니다.
-      </p>
-
-      <h3>④ PB·프랜차이즈 OEM 제안(선택)</h3>
-      <p>
-        제조사는 입점과 동시에 다음의 추가 비즈니스도 제안받을 수 있습니다.
-      </p>
-      <ul>
-        <li>모딩 PB</li>
-        <li>프랜차이즈 OEM 솔루션</li>
-        <li>매장 전용 레시피 개발</li>
-        <li>반복 발주 데이터 기반 수요 분석</li>
-      </ul>
-      <p>
-        이 영역은 모딩이 제공하는 <strong>부가 성장 모델</strong>입니다.
-      </p>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 2. 외식업 사장님 이용 절차 -->
-    <section class="section">
-      <h2>2. 외식업 사장님 이용 절차</h2>
-
-      <h3>① 카테고리 기반 상품 탐색</h3>
-      <p>
-        외식업 사장님은 식당 업종에 맞춰 다음을 기준으로 상품을 탐색할 수 있습니다.
-      </p>
-      <ul>
-        <li>카테고리(소스·육류·반조리·밀키트)</li>
-        <li>업종별(한식·일식·분식·주점 등)</li>
-        <li>사용용도(베이스·토핑·육수·전골·볶음)</li>
-        <li>제조사/원산지/포장단위</li>
-      </ul>
-      <p>
-        모딩은 <strong>“실제 매장에서 바로 사용하는 상품만”</strong> 선별하여 제공합니다.
-      </p>
-
-      <h3>② 발주·정산 통합 관리</h3>
-      <p>
-        여러 제조사에 흩어져 있던 발주/정산 내역을
-        한 화면에서 정리할 수 있습니다.
-      </p>
-      <ul>
-        <li>발주 내역 자동 기록</li>
-        <li>입금 내역 정리</li>
-        <li>세금계산서 관리(예정)</li>
-      </ul>
-      <p>
-        외식업 사장님은 <strong>회계·재고 업무가 크게 감소</strong>합니다.
-      </p>
-
-      <h3>③ 데이터 리포트 지원(예정)</h3>
-      <ul>
-        <li>메뉴별 발주 추세</li>
-        <li>계절성 발주 그래프</li>
-        <li>뷰/클릭/구매 전환 분석</li>
-      </ul>
-      <p>
-        운영에 바로 쓸 수 있는 숫자 중심으로 제공됩니다.
-      </p>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 3. 입점 시 중요한 정책 -->
-    <section class="section">
-      <h2>3. 입점 시 중요한 정책(필수 안내)</h2>
-
-      <h3>① 모딩의 법적 지위</h3>
-      <p>
-        모든 약관에서 모딩은
-        <strong>“통신판매중개자(중개사업자)”</strong>로서 역할을 수행합니다.
-      </p>
-      <p>즉,</p>
-      <ul>
-        <li>제조사 = 판매자</li>
-        <li>외식업 사장님 = 구매자</li>
-        <li>모딩 = 중개 플랫폼</li>
-      </ul>
-      <p>
-        모딩은 <strong>제품 제조·유통·품질·안전의 직접 당사자가 아닙니다.</strong>
-      </p>
-
-      <h3>② 수수료 및 비용</h3>
-      <ul>
-        <li>입점비 없음</li>
-        <li>상품 노출 비용 없음</li>
-        <li>정산 수수료는 PG 수수료 외 추가 없음</li>
-        <li>광고/배너는 선택(제조사 요청 시)</li>
-      </ul>
-
-      <h3>③ 데이터 보호·보안</h3>
-      <p>
-        모든 정보는
-      </p>
-      <ul>
-        <li>암호화 저장</li>
-        <li>비공개 처리</li>
-        <li>제3자 제공 금지</li>
-      </ul>
-      <p>
-        정책을 따릅니다.
-      </p>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 4. 입점 완료 후 기능 -->
-    <section class="section">
-      <h2>4. 입점 완료 후 제공되는 기능</h2>
-      <ul>
-        <li>제조사 전용 관리자 페이지</li>
-        <li>상품 등록·가격 변경·재고 안내</li>
-        <li>주문 알림 및 정산 조회</li>
-        <li>OEM/PB 제안 가능</li>
-        <li>발주 패턴 기반 수요 예측(예정)</li>
-      </ul>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 5. 입점 문의 -->
-    <section class="section">
-      <h2>5. 입점 문의</h2>
-      <div class="highlight-box">
-        👉 <strong>제휴·입점 문의 페이지(alliance.html)</strong><br>
-        👉 이메일: <strong>moding_inc@naver.com</strong>
+        <p class="entry-note">
+          외식업 사장님은 <strong>사장님 안내(owners.html)</strong>에서 이용 흐름을 먼저 확인하신 뒤,
+          위 정보를 기준으로 입점/이용 신청을 남겨 주시면 됩니다. 초기에는 선택된 일부 매장부터 순차적으로 연결됩니다.
+        </p>
       </div>
     </section>
   </main>
@@ -441,18 +450,20 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- 복사/우클릭/단축키 방지 -->
+  <!-- 복사 / 우클릭 / 단축키 방지 -->
   <script>
     document.addEventListener("contextmenu", function (e) {
       if (!e.target.closest("input, textarea, a")) {
         e.preventDefault();
       }
     });
+
     document.addEventListener("dragstart", function (e) {
       if (!e.target.closest("input, textarea")) {
         e.preventDefault();
       }
     });
+
     document.addEventListener("keydown", function (e) {
       const key = e.key.toLowerCase();
       if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
@@ -461,6 +472,7 @@
         }
       }
     });
+
     document.addEventListener("copy", function (e) {
       if (!e.target.closest("input, textarea")) {
         e.preventDefault();
