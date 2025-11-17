@@ -1,1 +1,657 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  />
+  <title>FAQ - 모딩(Moding)</title>
 
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    img, .nocopy-img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+      pointer-events: auto;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+      background: #050505;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* 상단 로고바 (다른 서브페이지와 동일 톤) */
+    .top-bar {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-left img {
+      height: 28px;
+      width: auto;
+    }
+
+    .brand-name {
+      font-size: 16px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .top-right a {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .top-right a:hover {
+      text-decoration: underline;
+    }
+
+    /* 페이지 래퍼 */
+    .page-wrap {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto 56px;
+      padding: 0 20px 40px;
+      flex: 1 0 auto;
+    }
+
+    .page-header {
+      margin: 8px 0 18px;
+    }
+
+    .page-pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid #2b2b2b;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 10px;
+    }
+
+    .page-title {
+      font-size: 26px;
+      font-weight: 600;
+      color: #1FDB4F;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      opacity: 0.9;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    /* FAQ 상단 가벼운 그라데이션 히어로 */
+    .faq-hero {
+      border-radius: 18px;
+      padding: 18px 20px 20px;
+      margin-bottom: 24px;
+      background: linear-gradient(
+        135deg,
+        rgba(245, 156, 26, 0.22) 0%,
+        rgba(11, 143, 58, 0.16) 55%,
+        #050505 100%
+      );
+      border: 1px solid #2b2b2b;
+    }
+
+    .faq-hero-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #FFD27A;
+    }
+
+    .faq-hero-text {
+      font-size: 13px;
+      line-height: 1.9;
+      opacity: 0.92;
+    }
+
+    /* FAQ 리스트 */
+    .faq-list {
+      margin-top: 4px;
+    }
+
+    .faq-item {
+      border-radius: 14px;
+      border: 1px solid #252525;
+      background: #080808;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.18s ease-out, box-shadow 0.18s ease-out, background 0.18s ease-out;
+    }
+
+    .faq-item.open {
+      box-shadow: 0 18px 32px rgba(0, 0, 0, 0.6);
+      background: radial-gradient(circle at top left, rgba(15, 15, 15, 0.95) 0%, #050505 55%);
+    }
+
+    .faq-question {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-size: 14px;
+      gap: 10px;
+    }
+
+    .faq-question-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .faq-q-label {
+      font-size: 11px;
+      font-weight: 600;
+      opacity: 0.85;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid #444;
+      background: #111;
+      white-space: nowrap;
+    }
+
+    .faq-tag-green {
+      border-color: rgba(11, 143, 58, 0.8);
+      background: rgba(11, 143, 58, 0.12);
+      color: #87e6a4;
+    }
+
+    .faq-tag-orange {
+      border-color: rgba(245, 156, 26, 0.8);
+      background: rgba(245, 156, 26, 0.12);
+      color: #ffd08a;
+    }
+
+    .faq-tag-neutral {
+      border-color: #444;
+      background: #161616;
+      color: #d0d0d0;
+    }
+
+    .faq-q-text {
+      font-size: 14px;
+      opacity: 0.94;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .faq-arrow {
+      font-size: 16px;
+      opacity: 0.8;
+      transition: transform 0.16s ease-out;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-arrow {
+      transform: rotate(90deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 16px 12px;
+      border-top: 1px solid #262626;
+      font-size: 13px;
+      line-height: 1.9;
+      opacity: 0.9;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .faq-answer p {
+      margin-top: 8px;
+    }
+
+    .faq-answer strong {
+      font-weight: 600;
+    }
+
+    .faq-note {
+      font-size: 12px;
+      opacity: 0.8;
+      margin-top: 18px;
+      line-height: 1.7;
+    }
+
+    .link-inline {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+      opacity: 0.9;
+    }
+
+    .link-inline:hover {
+      background: linear-gradient(
+        90deg,
+        #0B8F3A 0%,
+        #0B8F3A 50%,
+        #F59C1A 50%,
+        #F59C1A 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* footer (공통) */
+    .footer-bar {
+      width: 100%;
+      border-top: 1px solid #222;
+      background: #0b0b0b;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #9d9d9d;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .footer-item::after {
+      content: "·";
+      margin-left: 8px;
+    }
+    .footer-item:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .top-bar { padding: 16px 14px; }
+      .page-wrap { padding: 0 14px 32px; }
+      .page-title { font-size: 22px; }
+      .faq-question { padding: 11px 14px; }
+      .faq-q-text { white-space: normal; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 상단 로고바 -->
+  <header class="top-bar">
+    <div class="top-left">
+      <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
+      <div class="brand-name">Moding Inc.</div>
+    </div>
+    <div class="top-right">
+      <a href="index.html">← 메인으로</a>
+    </div>
+  </header>
+
+  <!-- 본문 -->
+  <main class="page-wrap">
+    <header class="page-header">
+      <div class="page-pill">FAQ</div>
+      <h1 class="page-title">자주 묻는 질문</h1>
+      <p class="page-subtitle">
+        모딩(Moding)에 대해 제조사와 외식업 사장님이 가장 많이 궁금해하실 내용을 중심으로 정리했습니다.<br>
+        보다 구체적인 계약 조건과 세부 내용은 제휴·입점 문의 이후 개별 안내를 드립니다.
+      </p>
+    </header>
+
+    <!-- FAQ 상단 히어로 -->
+    <section class="faq-hero">
+      <div class="faq-hero-title">먼저 자주 받는 질문부터 정리했습니다</div>
+      <p class="faq-hero-text">
+        모딩은 <strong>식품 제조사</strong>와 <strong>외식업 사장님</strong>을 위한 B2B Food-SaaS 플랫폼이며,
+        당사자는 <strong>통신판매중개자</strong>로서 거래 시스템을 제공합니다.<br>
+        아래 답변은 서비스의 방향성과 기본 원칙을 설명하며,
+        실제 이용 조건은 <a href="terms.html" class="link-inline">이용약관</a> 및 개별 계약서가 우선합니다.
+      </p>
+    </section>
+
+    <!-- FAQ 리스트 -->
+    <section class="faq-list">
+
+      <!-- Q1 -->
+      <article class="faq-item open">
+        <div class="faq-question">
+          <div class="faq-question-left">
+            <span class="faq-q-label faq-tag-neutral">공통</span>
+            <div class="faq-q-text">Q1. 모딩은 어떤 서비스인가요?</div>
+          </div>
+          <div class="faq-arrow">›</div>
+        </div>
+        <div class="faq-answer">
+          <p>
+            모딩(Moding)은 <strong>식품 제조사</strong>와 <strong>외식업 사장님</strong> 사이의 B2B 거래를
+            하나의 구조로 정리해 주는 <strong>Food-SaaS 플랫폼</strong>입니다.
+          </p>
+          <p>
+            소스·육류·밀키트 등 <strong>상품/레시피 마켓</strong>과,<br>
+            발주·정산·세금계산서·데이터 리포트를 다루는 <strong>SaaS 도구</strong>를 함께 제공하는 것을 목표로 하고 있으며,<br>
+            모딩은 <strong>통신판매중개자</strong>로서 거래 시스템과 운영 정책을 제공합니다.
+          </p>
+          <p>
+            자세한 서비스 방향은 <a href="services.html" class="link-inline">서비스 소개</a>와
+            <a href="brand.html" class="link-inline">브랜드 아이덴티티</a> 페이지에서 정리되어 있습니다.
+          </p>
+        </div>
+      </article>
+
+      <!-- Q2 -->
+      <article class="faq-item">
+        <div class="faq-question">
+          <div class="faq-question-left">
+            <span class="faq-q-label faq-tag-neutral">공통</span>
+            <div class="faq-q-text">Q2. 서비스 이용 요금은 어떻게 되나요?</div>
+          </div>
+          <div class="faq-arrow">›</div>
+        </div>
+        <div class="faq-answer">
+          <p>
+            기본적인 <strong>회원가입 및 계정 생성 자체는 무료</strong>를 전제로 설계하고 있으며,<br>
+            실제 수수료 구조(중개 수수료, 정산 수수료 등)는
+            <strong>제조사·외식업 사장님과 체결하는 개별 계약</strong>에서 정리됩니다.
+          </p>
+          <p>
+            현재는 정식 오픈 전 단계로, <strong>테스트 파트너/초기 파트너 중심으로 조건을 협의</strong>하고 있으며,<br>
+            상용 서비스 출시 시에는 이용약관·정책에 주요 수수료 구조를 명시할 예정입니다.
+          </p>
+          <p>
+            실제 적용 요율과 비용은 <strong>입점 규모·상품 구성·정산 방식</strong> 등에 따라 달라질 수 있습니다.
+          </p>
+        </div>
+      </article>
+
+      <!-- Q3 제조사 -->
+      <article class="faq-item">
+        <div class="faq-question">
+          <div class="faq-question-left">
+            <span class="faq-q-label faq-tag-green">제조사</span>
+            <div class="faq-q-text">Q3. 식품 제조사 입점 기준과 필요한 서류는 무엇인가요?</div>
+          </div>
+          <div class="faq-arrow">›</div>
+        </div>
+        <div class="faq-answer">
+          <p>
+            기본적으로 <strong>식품 관련 인허가를 갖춘 B2B 제조사</strong>를 대상으로 하며,
+            예시는 다음과 같습니다.
+          </p>
+          <p>
+            • 식품제조가공업 / 즉석식품제조가공업 / 식육가공업 등 관련 인허가 증명서<br>
+            • 사업자등록증<br>
+            • 통장사본(정산 계좌)<br>
+            • 주요 품목(소스·육가공·밀키트 등)에 대한 기본 정보 및 품목제조보고 여부<br>
+            • HACCP 인증 여부(해당 시)
+          </p>
+          <p>
+            구체적인 기준과 절차는 <a href="entry.html" class="link-inline">입점 안내</a> 및
+            <a href="alliance.html" class="link-inline">제휴·입점 문의</a>를 통해 연락 주시면<br>
+            공장 규모·생산 가능량·품질 기준 등을 함께 검토한 뒤 개별 안내를 드립니다.
+          </p>
+        </div>
+      </article>
+
+      <!-- Q4 외식업 -->
+      <article class="faq-item">
+        <div class="faq-question">
+          <div class="faq-question-left">
+            <span class="faq-q-label faq-tag-orange">외식업</span>
+            <div class="faq-q-text">Q4. 외식업 사장님은 어떻게 가입하고 사용할 수 있나요?</div>
+          </div>
+          <div class="faq-arrow">›</div>
+        </div>
+        <div class="faq-answer">
+          <p>
+            기본 흐름은 <strong>사장님 안내</strong> 페이지에 정리되어 있으며, 구조는 다음과 같습니다.
+          </p>
+          <p>
+            1) <strong>회원가입 및 사업자 인증</strong> – 사업자등록증을 기준으로 계정을 생성합니다.<br>
+            2) <strong>매장 프로필 등록</strong> – 업종, 점포 수, 주력 메뉴, 예상 발주 규모 등을 입력합니다.<br>
+            3) <strong>상품 탐색 및 발주</strong> – 카테고리·용도별 상품을 선택해 발주합니다.<br>
+            4) <strong>배송/수령 확인</strong> – 출고·배송 상태를 확인하고 이상 유무를 체크합니다.<br>
+            5) <strong>정산·세금계산서 확인</strong> – 정산 예정일과 세금계산서 발행 내역을 한 화면에서 확인합니다.
+          </p>
+          <p>
+            자세한 설명은 <a href="owners.html" class="link-inline">사장님 안내</a> 페이지에 역할별로 정리되어 있습니다.
+          </p>
+        </div>
+      </article>
+
+      <!-- Q5 정산/세금계산서 -->
+      <article class="faq-item">
+        <div class="faq-question">
+          <div class="faq-question-left">
+            <span class="faq-q-label faq-tag-neutral">정산</span>
+            <div class="faq-q-text">Q5. 정산 주기와 세금계산서는 어떻게 처리되나요?</div>
+          </div>
+          <div class="faq-arrow">›</div>
+        </div>
+        <div class="faq-answer">
+          <p>
+            모딩은 <strong>D+7 정산 구조와 세금계산서 자동 발행(예정)</strong>을 기본 방향으로 설계하고 있습니다.<br>
+            다만, 실제 정산 주기와 발행 방식은 <strong>제조사·브랜드와의 계약 조건</strong>에 따라 달라질 수 있습니다.
+          </p>
+          <p>
+            모딩은 <strong>통신판매중개자</strong>로서 정산·세금계산서 처리를 위한 시스템을 제공하며,<br>
+            세금계산서는 원칙적으로 <strong>거래 당사자(제조사 또는 판매자) 명의</strong>로 발행됩니다.
+          </p>
+          <p>
+            정식 서비스 단계에서는 <a href="terms.html" class="link-inline">이용약관</a>과 별도의 계약서에서<br>
+            정산 주기, 수수료, 세금계산서 발행 구조를 명확히 안내드릴 예정입니다.
+          </p>
+        </div>
+      </article>
+
+      <!-- Q6 책임 구조 -->
+      <article class="faq-item">
+        <div class="faq-question">
+          <div class="faq-question-left">
+            <span class="faq-q-label faq-tag-neutral">정책</span>
+            <div class="faq-q-text">Q6. 모딩은 통신판매중개자라는데, 책임 구조는 어떻게 되나요?</div>
+          </div>
+          <div class="faq-arrow">›</div>
+        </div>
+        <div class="faq-answer">
+          <p>
+            모딩은 <strong>통신판매중개자(중개 플랫폼)</strong>로서,<br>
+            거래 시스템·정산 기능·정보 제공 등 플랫폼 역할을 수행합니다.
+          </p>
+          <p>
+            • <strong>상품의 제조·품질·표시·보관·배송</strong>에 대한 1차 책임은 각 제조사·판매자에게 있습니다.<br>
+            • 모딩은 관련 법령이 허용하는 범위 내에서, 신고·문의 접수 및 분쟁 조정, 로그 제공 등<br>
+              플랫폼으로서의 <strong>지원 역할</strong>을 수행합니다.
+          </p>
+          <p>
+            이 구조는 향후 공개될 <a href="terms.html" class="link-inline">이용약관</a>과<br>
+            <strong>제조사·PB·식당(구매자) 약관</strong>에서도 일관되게 명시될 예정입니다.
+          </p>
+        </div>
+      </article>
+
+      <!-- Q7 앱/서비스 일정 -->
+      <article class="faq-item">
+        <div class="faq-question">
+          <div class="faq-question-left">
+            <span class="faq-q-label faq-tag-neutral">서비스</span>
+            <div class="faq-q-text">Q7. 앱은 언제부터 사용할 수 있나요?</div>
+          </div>
+          <div class="faq-arrow">›</div>
+        </div>
+        <div class="faq-answer">
+          <p>
+            현재 모딩은 <strong>정식 출시를 준비 중인 단계</strong>로,<br>
+            내부 테스트 및 일부 파트너와의 파일럿 운영을 우선 진행할 예정입니다.
+          </p>
+          <p>
+            • 웹 기반 랜딩/안내 페이지를 먼저 정리하고,<br>
+            • 이후 <strong>앱과 운영용 백오피스</strong>를 순차적으로 오픈하는 로드맵을 갖고 있습니다.
+          </p>
+          <p>
+            구체적인 서비스 오픈 일정과 베타 테스트 모집은<br>
+            <a href="notice.html" class="link-inline">공지사항</a>을 통해 별도로 안내드릴 예정입니다.
+          </p>
+        </div>
+      </article>
+
+      <!-- Q8 파일럿/테스트 -->
+      <article class="faq-item">
+        <div class="faq-question">
+          <div class="faq-question-left">
+            <span class="faq-q-label faq-tag-green">제조사</span>
+            <div class="faq-q-text">Q8. 일부 기능만 테스트하거나 파일럿으로 써볼 수 있나요?</div>
+          </div>
+          <div class="faq-arrow">›</div>
+        </div>
+        <div class="faq-answer">
+          <p>
+            네, <strong>파일럿/테스트 형태의 협업</strong>도 고려하고 있습니다.<br>
+            예를 들어 다음과 같은 방식이 가능합니다.
+          </p>
+          <p>
+            • 특정 브랜드·메뉴에 한정한 발주/정산 테스트<br>
+            • 일부 상품만 모딩을 통해 공급해 보는 시험 운영<br>
+            • 기존 계정 체계를 유지한 상태에서 정산·데이터 기능만 부분 적용 등
+          </p>
+          <p>
+            파일럿에 관심이 있으신 제조사·브랜드·본부는<br>
+            <a href="alliance.html" class="link-inline">제휴·입점 문의</a>를 통해 연락 주시면<br>
+            공장·매장 상황을 듣고 맞는 구조를 함께 설계해 드립니다.
+          </p>
+        </div>
+      </article>
+
+      <!-- Q9 개인 이용 여부 -->
+      <article class="faq-item">
+        <div class="faq-question">
+          <div class="faq-question-left">
+            <span class="faq-q-label faq-tag-neutral">회원</span>
+            <div class="faq-q-text">Q9. 일반 소비자(개인)도 모딩을 이용할 수 있나요?</div>
+          </div>
+          <div class="faq-arrow">›</div>
+        </div>
+        <div class="faq-answer">
+          <p>
+            모딩은 <strong>B2B(사업자 간 거래)</strong>를 전제로 한 플랫폼이며,<br>
+            기본적으로 <strong>사업자등록증을 가진 제조사·외식업 사장님</strong>을 대상으로 합니다.
+          </p>
+          <p>
+            일반 소비자 대상의 직접 판매 서비스는 현재 단계에서 별도 계획이 없으며,<br>
+            구조가 변경되는 경우에는 <a href="notice.html" class="link-inline">공지사항</a>과
+            <a href="terms.html" class="link-inline">이용약관</a>을 통해 안내할 예정입니다.
+          </p>
+        </div>
+      </article>
+
+    </section>
+
+    <p class="faq-note">
+      위 답변은 모딩 서비스의 기본 방향과 원칙을 설명하기 위한 것이며,<br>
+      실제 계약·거래에 적용되는 내용은 각 약관과 개별 계약서가 우선합니다.<br>
+      여기서 다루지 않은 질문은 <a href="alliance.html" class="link-inline">제휴·입점 문의</a>를 통해 남겨 주시면
+      순차적으로 답변드리겠습니다.
+    </p>
+  </main>
+
+  <!-- 공통 푸터 -->
+  <footer class="footer-bar">
+    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
+    <span class="footer-item">대표자: 서희진</span>
+    <span class="footer-item">사업자등록번호: 730-87-03564</span>
+    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
+    <span class="footer-item">문의: moding_inc@naver.com</span>
+  </footer>
+
+  <!-- 복사/우클릭/단축키 방지 + FAQ 아코디언 스크립트 -->
+  <script>
+    // FAQ 아코디언
+    document.querySelectorAll(".faq-question").forEach(function (q) {
+      q.addEventListener("click", function () {
+        const item = q.parentElement;
+        const alreadyOpen = item.classList.contains("open");
+
+        // 하나만 열리도록: 모두 닫기
+        document.querySelectorAll(".faq-item").forEach(function (it) {
+          it.classList.remove("open");
+        });
+
+        // 원래 열려 있던 게 아니면 열기
+        if (!alreadyOpen) {
+          item.classList.add("open");
+        }
+      });
+    });
+
+    // 우클릭 방지
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) {
+        e.preventDefault();
+      }
+    });
+
+    // 드래그 방지
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+
+    // 단축키 방지 (복사 등)
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+
+    // copy 이벤트 차단
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
+```0
