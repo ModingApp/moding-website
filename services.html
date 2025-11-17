@@ -193,6 +193,27 @@
       margin-top: 14px;
     }
 
+    /* 외식업/제조사 카드 그라데이션 */
+    .small-card.restaurant-card {
+      border-radius: 18px;
+      border: 1px solid rgba(11, 143, 58, 0.8);
+      background:
+        radial-gradient(circle at top left, rgba(11, 143, 58, 0.6) 0%, #050505 55%),
+        #050505;
+      padding: 14px 16px 16px;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+    }
+
+    .small-card.manufacturer-card {
+      border-radius: 18px;
+      border: 1px solid rgba(245, 156, 26, 0.8);
+      background:
+        radial-gradient(circle at top left, rgba(245, 156, 26, 0.6) 0%, #050505 55%),
+        #050505;
+      padding: 14px 16px 16px;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+    }
+
     .small-card {
       border-radius: 18px;
       border: 1px solid #1a1a1a;
@@ -320,7 +341,7 @@
       <h3>제조사 · 외식업 사장님, 두 관점에서의 모딩</h3>
 
       <div class="two-columns">
-        <div class="small-card">
+        <div class="small-card restaurant-card">
           <div class="small-card-title">외식업 사장님에게</div>
           <p class="small-card-text">
             검증된 제조사의 소스·육류·밀키트를 한 곳에서 보고, 매장 운영에 맞는 제품을 선택해 발주할 수 있습니다.
@@ -328,7 +349,7 @@
           </p>
         </div>
 
-        <div class="small-card">
+        <div class="small-card manufacturer-card">
           <div class="small-card-title">식품 제조사에게</div>
           <p class="small-card-text">
             판로 확보가 어려웠던 제조사에게는 새로운 B2B 채널이 됩니다.
