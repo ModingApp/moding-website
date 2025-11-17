@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-  />
-  <title>브랜드 아이덴티티 | 모딩(Moding)</title>
-  <meta name="description" content="모든 사장님을 위한 B2B Food-SaaS 플랫폼 모딩(Moding)의 로고, 네이밍 철학, 컬러 시스템, 톤앤매너를 소개합니다.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모든 사장님을 위한 모든 것을 담은 플랫폼, 모딩</title>
+
   <style>
-    /* ------------------------------
-       공통 초기화
-    ------------------------------ */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    /* 텍스트 선택 방지 (input, textarea 제외) */
-    html,
-    body,
-    *:not(input):not(textarea) {
+    html, body, *:not(input):not(textarea) {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
     }
 
-    /* 이미지 드래그/롱탭 저장 최소화 */
-    img {
+    img, .nocopy-img {
       -webkit-user-drag: none;
       user-drag: none;
+      pointer-events: none;
+    }
+
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+      pointer-events: auto;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
       background: #0b0b0b;
       color: #ffffff;
       min-height: 100vh;
@@ -44,287 +43,172 @@
       flex-direction: column;
     }
 
-    /* ------------------------------
-       메인 컨테이너
-    ------------------------------ */
-    .container {
-      max-width: 860px;
+    .wrapper {
+      width: 100%;
+      max-width: 520px;
       margin: 0 auto;
-      padding: 40px 20px 60px;
-      flex: 1;
-    }
-
-    /* ------------------------------
-       헤더 (로고 + 메인으로)
-    ------------------------------ */
-    .header {
+      padding: 40px 24px 32px;
+      text-align: center;
+      flex: 0 0 auto;
       display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 40px;
     }
 
-    .header-left {
+    .type-box {
+      margin-bottom: 24px;
+    }
+
+    .line1,
+    .line2 {
+      font-size: 28px;
+      opacity: 0.9;
+      margin-bottom: 4px;
+      white-space: nowrap;
+    }
+
+    .logo {
+      margin: 16px 0 24px 0;
+    }
+
+    .logo img {
+      width: 380px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .desc1 {
+      font-size: 20px;
+      line-height: 1.6;
+      opacity: 0.9;
+      margin-bottom: 6px;
+    }
+
+    .desc2 {
+      font-size: 26px;
+      line-height: 1.4;
+      margin-bottom: 18px;
+      animation: fadeBlink 2.4s ease-in-out infinite;
+    }
+
+    @keyframes fadeBlink {
+      0%, 100% { opacity: 0.35; }
+      50%      { opacity: 1; }
+    }
+
+    .top-links-wrapper {
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .top-links {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      font-size: 14px;
+      opacity: 0.8;
     }
 
-    .header-logo {
-      height: 42px;
-      width: auto;
+    .top-links a {
+      color: #f0f0f0;
+      text-decoration: none;
+      pointer-events: auto;
+      transition: all 0.16s ease-out;
     }
 
-    .back-link {
-      font-size: 13px;
-      color: #cccccc;
+    .top-links .divider {
+     margin: 0 10px;
+     color: rgba(255,255,255,0.6);
+     pointer-events: none; /* 클릭/hover 영향 제외 */
+     user-select: none;
+}
+
+    /* 🔥 상단 메뉴 Green/Orange 반반 hover 적용 */
+    .top-links a:hover {
+      background: linear-gradient(
+        90deg,
+        #0B8F3A 0%,
+        #0B8F3A 50%,
+        #F59C1A 50%,
+        #F59C1A 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-decoration: none;
     }
 
-    .back-link:hover {
-      text-decoration: underline;
+    .about-section {
+      width: 100%;
+      max-width: 960px;
+      margin: 40px auto 32px;
+      padding: 32px 24px 36px;
+      border-top: 1px solid #262626;
+      border-bottom: 1px solid #262626;
+      background: #080808;
     }
 
-    /* ------------------------------
-       제목 / 섹션 공통
-    ------------------------------ */
-    h1,
-    h2,
-    h3 {
-      font-weight: 700;
-      line-height: 1.4;
-      margin: 32px 0 12px;
-    }
-
-    h1 {
-      font-size: 28px;
-      color: #1faa48; /* 모딩 그린 */
-      margin-top: 0;
-    }
-
-    h2 {
-      font-size: 22px;
-      color: #ff8a00; /* 모딩 오렌지 */
-    }
-
-    h3 {
-      font-size: 18px;
-      color: #ffffff;
-      opacity: 0.95;
-    }
-
-    p {
-      font-size: 15px;
-      line-height: 1.9;
-      opacity: 0.9;
-      margin-bottom: 12px;
-    }
-
-    .section {
-      margin-bottom: 36px;
-    }
-
-    .section-intro {
-      margin-bottom: 28px;
-    }
-
-    .tag-line {
-      display: inline-block;
-      font-size: 11px;
-      letter-spacing: 0.14em;
+    .about-title {
+      font-size: 12px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.7);
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      margin-bottom: 10px;
+      text-align: center;
+      margin-bottom: 22px;
     }
 
-    /* ------------------------------
-       인트로 카드
-    ------------------------------ */
-    .identity-hero {
-      margin-top: 8px;
-      padding: 22px 20px 24px;
-      border-radius: 18px;
-      background: radial-gradient(circle at top left, #1d3a26 0, #060606 55%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
-    }
-
-    .identity-hero-title {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: #ffb341;
-    }
-
-    .identity-hero-text {
-      font-size: 14px;
-      line-height: 1.9;
-      opacity: 0.92;
-    }
-
-    .hero-highlight {
-      font-weight: 600;
-      color: #ffffff;
-    }
-
-    /* ------------------------------
-       네이밍 섹션
-    ------------------------------ */
-    .name-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(31, 170, 72, 0.12);
-      border: 1px solid rgba(31, 170, 72, 0.45);
-      margin-bottom: 10px;
-    }
-
-    .name-badge span:first-child {
-      font-weight: 600;
-      color: #1faa48;
-    }
-
-    .name-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 12px;
-    }
-
-    .name-card {
-      padding: 14px 14px 16px;
-      border-radius: 14px;
-      background: #101010;
-      border: 1px solid #222;
-    }
-
-    .name-card-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .name-card-desc {
-      font-size: 13px;
-      line-height: 1.8;
-      opacity: 0.9;
-    }
-
-    /* ------------------------------
-       로고 & 컬러 시스템
-    ------------------------------ */
-    .logo-row {
+    .about-grid {
       display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: 6px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
+      justify-content: center;
+      gap: 80px;
+      max-width: 520px;
+      margin: 0 auto;
     }
 
-    .logo-main {
-      height: 40px;
-      width: auto;
+    .about-col {
+      text-align: center;
     }
 
-    .logo-caption {
-      font-size: 14px;
+    .about-col-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .about-col ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .about-col li {
+      font-size: 13px;
+      line-height: 1.9;
       opacity: 0.9;
     }
 
-    .color-palette {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 16px;
+    .about-col li a {
+      color: #f0f0f0;
+      text-decoration: none;
+      pointer-events: auto;
+      position: relative;
+      display: inline-block;
+      transition: all 0.16s ease-out;
     }
 
-    .color-chip {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid #222;
-      background: #101010;
+    .about-col li a:hover {
+      background: linear-gradient(
+        90deg,
+        #0B8F3A 0%,
+        #0B8F3A 50%,
+        #F59C1A 50%,
+        #F59C1A 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .color-chip-top {
-      height: 46px;
-    }
-
-    .color-chip-body {
-      padding: 10px 12px 12px;
-    }
-
-    .color-chip-label {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .color-chip-desc {
-      font-size: 12px;
-      line-height: 1.7;
-      opacity: 0.85;
-    }
-
-    .color-green {
-      background: linear-gradient(135deg, #0b5043, #1faa48);
-    }
-
-    .color-orange {
-      background: linear-gradient(135deg, #ff8a00, #ffb341);
-    }
-
-    .color-wood {
-      background: linear-gradient(135deg, #5b3c20, #8c5a2b);
-    }
-
-    /* ------------------------------
-       톤앤매너
-    ------------------------------ */
-    .tone-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 12px;
-    }
-
-    .tone-item {
-      padding: 14px 14px 16px;
-      border-radius: 14px;
-      background: #101010;
-      border: 1px solid #252525;
-    }
-
-    .tone-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #ffb341;
-    }
-
-    .tone-text {
-      font-size: 13px;
-      line-height: 1.8;
-      opacity: 0.9;
-    }
-
-    /* ------------------------------
-       섹션 구분 라인
-    ------------------------------ */
-    .divider {
-      border-bottom: 1px solid #222;
-      margin: 40px 0;
-    }
-
-    /* ------------------------------
-       푸터 (공통)
-    ------------------------------ */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -337,275 +221,117 @@
       justify-content: center;
       gap: 8px;
       text-align: center;
+      flex-shrink: 0;
     }
 
     .footer-item::after {
       content: "·";
       margin-left: 8px;
     }
-
     .footer-item:last-child::after {
       content: "";
       margin: 0;
     }
 
-    /* ------------------------------
-       반응형 (모바일 / Fold 포함)
-    ------------------------------ */
     @media (max-width: 768px) {
-      .container {
-        padding: 28px 16px 40px;
+      .wrapper {
+        padding: 32px 18px 24px;
       }
 
-      h1 {
-        font-size: 24px;
+      .line1,
+      .line2 {
+        font-size: 22px;
+        white-space: normal;
       }
 
-      h2 {
+      .desc1 {
+        font-size: 18px;
+      }
+
+      .desc2 {
         font-size: 20px;
       }
 
-      h3 {
-        font-size: 17px;
+      .about-section {
+        margin: 32px auto 24px;
+        padding: 24px 18px 28px;
       }
 
-      p {
+      .about-grid {
+        gap: 32px;
+      }
+
+      .about-col-title {
         font-size: 14px;
       }
 
-      .identity-hero {
-        padding: 18px 16px 20px;
+      .about-col li {
+        font-size: 12px;
       }
+    }
 
-      .identity-hero-title {
-        font-size: 16px;
-      }
-
-      .identity-hero-text {
-        font-size: 13px;
-      }
-
-      .name-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .color-palette {
-        grid-template-columns: 1fr;
-      }
-
-      .tone-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .logo-main {
-        height: 34px;
+    @media (min-width: 768px) {
+      .top-links {
+        max-width: 520px;
+        margin: 0 auto;
+        justify-content: center;
       }
     }
   </style>
 </head>
 
-<body
-  oncontextmenu="return false"
-  onselectstart="return false"
-  ondragstart="return false"
->
-  <main class="container">
-    <!-- 상단 로고 + 뒤로가기 -->
-    <header class="header">
-      <div class="header-left">
-        <img src="모딩로고.png" alt="Moding Logo" class="header-logo" />
-        <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
-      </div>
-      <a href="index.html" class="back-link">← 메인으로</a>
-    </header>
+<body>
+  <div class="wrapper">
+    <div class="type-box">
+      <div id="line1" class="line1"></div>
+      <div id="line2" class="line2"></div>
+    </div>
 
-    <!-- 인트로 -->
-    <section class="section section-intro">
-      <div class="tag-line">BRAND IDENTITY</div>
-      <h1>브랜드 아이덴티티</h1>
+    <div class="logo">
+      <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
+    </div>
 
-      <div class="identity-hero">
-        <div class="identity-hero-title">
-          모든 사장님을 위한, 모든 것을 담은 플랫폼
-        </div>
-        <p class="identity-hero-text">
-          <span class="hero-highlight">모딩(Moding)</span>은 식품 제조사와 외식업 사장님,
-          그리고 그 사이를 잇는 기술을 하나의 구조로 묶어내기 위해 탄생한 이름입니다.<br />
-          복잡한 거래 흐름을 단순하게 만들고,<br />
-          현장에서 오래 쓰이는 도구를 만드는 것이 모딩의 브랜드 방향입니다.
-        </p>
-      </div>
-    </section>
+    <p class="desc1">B2B Food-SaaS 플랫폼</p>
+    <p class="desc2">Coming Soon</p>
 
-    <div class="divider"></div>
+    <div class="top-links-wrapper">
+     <nav class="top-links">
+        <a href="about.html">회사소개</a>
+        <span class="divider">|</span>
+        <a href="brand.html">브랜드 아이덴티티</a>
+        <span class="divider">|</span>
+        <a href="location.html">오시는 길</a>
+    </nav>
+    </div>
+  </div>
 
-    <!-- 네이밍 철학 -->
-    <section class="section">
-      <h2>브랜드 네임의 의미</h2>
+  <section class="about-section">
+    <div class="about-title">ABOUT MODING</div>
 
-      <div class="name-badge">
-        <span>Moding</span>
-        <span>= Modoo + ing</span>
+    <div class="about-grid">
+      <div class="about-col">
+        <div class="about-col-title">서비스 안내</div>
+        <ul>
+          <li><a href="services.html">서비스 소개</a></li>
+          <li><a href="owners.html">사장님 안내</a></li>
+          <li><a href="entry.html">입점 안내</a></li>
+          <li><a href="alliance.html">제휴·입점 문의</a></li>
+        </ul>
       </div>
 
-      <p>모딩(Moding)은 대표적인 한국어 발음인 '모두(Modoo)”와<br />
-        진행·실행을 뜻하는 'ing' 가 결합된 이름입니다.</p>
-
-      
-      <div class="name-grid">
-        <div class="name-card">
-          <div class="name-card-title">Modoo (모두)</div>
-          <div class="name-card-desc">
-            제조사, 외식업 사장님, 그리고 모딩까지.<br />
-            모든 주체가 한 구조 안에서 연결되고<br />
-            함께 성장하는 생태계를 의미합니다.
-          </div>
-        </div>
-        </div>
-        <div class="name-card">
-          <div class="name-card-title">ing (하는 중)</div>
-          <div class="name-card-desc">
-            멈춰 있는 플랫폼이 아니라,<br />
-            주문·정산·데이터가 계속 흐르고 있는<br />
-            ‘진행 중인 서비스’라는 의미를 담고 있습니다.
-          </div>
-        </div>
-    
-     
-      
-
-      <p style="margin-top:16px;">
-        모딩이라는 이름에는<br />
-        <strong>모든 사장님을 위한, 모든 것을 담은 플랫폼</strong>이라는<br />
-        브랜드의 약속이 함께 들어 있습니다.
-      </p>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 로고 & 컬러 시스템 -->
-    <section class="section">
-      <h2>로고 아이덴티티</h2>
-
-      <div class="logo-row">
-        <img src="모딩로고.png" alt="Moding Logo" class="logo-main" />
-        <div class="logo-caption">
-          세 개의 축(제조사 · 외식업 사장님 · 모딩)을<br />
-          하나의 구조로 묶어낸 모노그램 형태의 로고입니다.
-        </div>
+      <div class="about-col">
+        <div class="about-col-title">정책·고객지원</div>
+        <ul>
+          <li><a href="terms.html">이용약관</a></li>
+          <li><a href="privacy.html">개인정보처리방침</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="notice.html">공지사항</a></li>
+          <li><a href="resources.html">자료실</a></li>
+        </ul>
       </div>
+    </div>
+  </section>
 
-      <p>
-        모딩의 로고는 B2B 거래의 세 축을 하나의 길로 모으는 구조를 표현합니다.<br />
-        부드러운 라운드 형태는 따뜻함과 신뢰를, 균형 잡힌 비례는<br />
-        플랫폼으로서의 안정성과 중심성을 상징합니다.
-      </p>
-
-      <div class="color-palette">
-        <div class="color-chip">
-          <div class="color-chip-top color-green"></div>
-          <div class="color-chip-body">
-            <div class="color-chip-label">Green – 제조사</div>
-            <div class="color-chip-desc">
-              지속 가능성과 신뢰, 정직하게 만드는 사람들을 상징합니다.<br />
-              제품의 본질과 기술력에 집중하는 색입니다.
-            </div>
-          </div>
-        </div>
-
-        <div class="color-chip">
-          <div class="color-chip-top color-orange"></div>
-          <div class="color-chip-body">
-            <div class="color-chip-label">Orange – 외식업 사장님</div>
-            <div class="color-chip-desc">
-              에너지, 실행력, 빠른 판단을 의미합니다.<br />
-              바쁜 매장과 뜨거운 현장을 대표하는 색입니다.
-            </div>
-          </div>
-        </div>
-
-        <div class="color-chip">
-          <div class="color-chip-top color-wood"></div>
-          <div class="color-chip-body">
-            <div class="color-chip-label">Wood – 연결과 성장</div>
-            <div class="color-chip-desc">
-              나무처럼 뻗어나가는 생태계, 그리고 함께 자라는 구조를 상징합니다.<br />
-              제조사와 사장님을 잇는 모딩의 역할을 나타냅니다.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 톤앤매너 -->
-    <section class="section">
-      <h2>브랜드 톤앤매너</h2>
-
-      <p>
-        모딩의 커뮤니케이션은<br />
-        화려한 수식어보다, 현장에서 실제로 도움이 되는 말을 우선합니다.
-      </p>
-
-      <div class="tone-grid">
-        <div class="tone-item">
-          <div class="tone-title">차분한 기술</div>
-          <div class="tone-text">
-            기술을 전면에 내세우기보다,<br />
-            문제를 얼마나 단순하게 해결하는가에 집중합니다.
-          </div>
-        </div>
-
-        <div class="tone-item">
-          <div class="tone-title">따뜻한 전문성</div>
-          <div class="tone-text">
-            외식업과 제조 현장을 이해하는 언어로 설명하고,<br />
-            실무에 바로 쓸 수 있는 안내를 제공합니다.
-          </div>
-        </div>
-
-        <div class="tone-item">
-          <div class="tone-title">현장의 언어</div>
-          <div class="tone-text">
-            오랜시간 외식업과 HACCP 제조 현장을 경험한 운영진들이<br />
-            현장에서 필요한 언어를 표현합니다.
-          </div>
-        </div>
-
-        <div class="tone-item">
-          <div class="tone-title">신뢰 기반 파트너십</div>
-          <div class="tone-text">
-            단기적인 수수료 경쟁보다,<br />
-            오래 함께 갈 수 있는 구조와 계약을 우선합니다.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- 브랜드 요약 -->
-    <section class="section">
-      <h2>브랜드 아이덴티티 요약</h2>
-      <p>
-        모딩(Moding)은 단순한 “식품 B2B 플랫폼”이 아니라,<br />
-        <strong>제조사 – 외식업 사장님 – 기술</strong>이 하나로 연결된 생태계를 지향합니다.
-      </p>
-      <p>
-        그 철학은 이름(Modoo + ing)에서 시작해,<br />
-        그린·오렌지·우드 톤 컬러와 구조적인 로고, 그리고<br />
-        차분하지만 단단한 톤앤매너로 이어집니다.
-      </p>
-      <p>
-        모딩의 모든 디자인과 기능은<br />
-        “모든 사장님을 위한, 모든 것을 담은 플랫폼”이라는 이 한 문장을<br />
-        실현하기 위해 존재합니다.
-      </p>
-    </section>
-  </main>
-
-  <!-- 공통 푸터 -->
   <footer class="footer-bar">
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
     <span class="footer-item">대표자: 서희진</span>
@@ -614,23 +340,61 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- 복사 / 단축키 방지 -->
   <script>
-    // 복사 이벤트 차단
-    document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) {
+    window.onload = function () {
+      const text1 = "모든 사장님을 위한";
+      const text2 = "모든 것을 담은 플랫폼";
+
+      const el1 = document.getElementById("line1");
+      const el2 = document.getElementById("line2");
+
+      let i = 0, j = 0;
+
+      function typeLine1() {
+        if (i < text1.length) {
+          el1.textContent += text1[i];
+          i++;
+          setTimeout(typeLine1, 90);
+        } else {
+          setTimeout(typeLine2, 250);
+        }
+      }
+
+      function typeLine2() {
+        if (j < text2.length) {
+          el2.textContent += text2[j];
+          j++;
+          setTimeout(typeLine2, 90);
+        }
+      }
+
+      typeLine1();
+    };
+
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) {
         e.preventDefault();
-        alert("모딩(Moding)의 브랜드 콘텐츠는 보호되고 있습니다.");
       }
     });
 
-    // Ctrl/Cmd + C, X, S, U, A 등 일부 단축키 차단
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+
     document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
       if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
-        var k = e.key.toLowerCase();
-        if (["c", "x", "s", "u", "a"].indexOf(k) !== -1) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
           e.preventDefault();
         }
+      }
+    });
+
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
       }
     });
   </script>
