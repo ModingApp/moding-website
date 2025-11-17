@@ -103,50 +103,68 @@
       font-size: 26px;
       font-weight: 600;
       color: #1FDB4F;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .page-subtitle {
       font-size: 14px;
       opacity: 0.9;
       line-height: 1.8;
-      margin-bottom: 26px;
+      margin-bottom: 10px;
     }
 
-    /* --------------------------- */
-    /*   🟧 Owners 페이지 배너 스타일 적용   */
-    /* --------------------------- */
-    .big-banner {
+    /* 🔹 상단 소개 영역: 초록 그라데이션 박스 */
+    .intro-box {
       width: 100%;
-      border-radius: 18px;
-      padding: 20px 26px;
-      margin-bottom: 26px;
-      color: #000;
-      font-weight: 600;
-      background: linear-gradient(90deg, #F6A623 0%, #FAD961 100%);
+      border-radius: 22px;
+      padding: 18px 26px 20px;
+      margin-bottom: 28px;
+      background: linear-gradient(135deg, rgba(31,219,79,0.92) 0%, rgba(11,80,67,0.96) 60%, rgba(5,5,5,0.98) 100%);
+      border: 1px solid rgba(31,219,79,0.75);
     }
 
-    /* 핵심 기능 4가지 — owners 카드 스타일 */
+    .intro-box .page-subtitle {
+      margin-bottom: 8px;
+    }
+
+    .big-banner {
+      margin: 0;
+      padding: 0;
+      background: none;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* --------------------------- */
+    /*   핵심 기능 뱃지 영역      */
+    /* --------------------------- */
     .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-bottom: 34px;
     }
 
     .feature-card {
-      background: #0A0A0A;
-      border: 1px solid #1a1a1a;
-      border-radius: 18px;
-      padding: 18px 20px;
-      line-height: 1.9;
-      font-size: 14px;
+      border-radius: 999px;
+      border: 1px solid #F5A623;
+      background: radial-gradient(circle at top left,
+                                  rgba(245,166,35,0.22) 0%,
+                                  rgba(245,166,35,0.10) 40%,
+                                  rgba(5,5,5,0.95) 100%);
+      padding: 8px 18px;
+      font-size: 13px;
+      line-height: 1.6;
+      display: inline-flex;
+      flex-direction: column;
     }
 
     .feature-title {
       font-weight: 600;
-      color: #ffffff;
-      margin-bottom: 6px;
+      color: #F5A623;
+      margin-bottom: 2px;
     }
 
     /* 제조사 / 외식업 카드 */
@@ -183,7 +201,7 @@
       line-height: 1.8;
     }
 
-    /* footer (기존 그대로) */
+    /* footer */
     .footer-bar {
       width: 100%;
       border-top: 1px solid #222;
@@ -207,7 +225,7 @@
     }
 
     @media (max-width: 768px) {
-      .feature-grid { grid-template-columns: 1fr; }
+      .feature-grid { flex-direction: column; }
       .two-columns { grid-template-columns: 1fr; }
       .page-wrap { padding: 0 16px 32px; }
     }
@@ -232,19 +250,21 @@
     <div class="page-pill">SERVICE OVERVIEW</div>
 
     <h1 class="page-title">서비스 소개</h1>
-    <p class="page-subtitle">
-      모딩(Moding)은 식품 제조사와 외식업 사장님, 그리고 그 사이를 잇는 기술을<br>
-      하나의 구조로 묶어 주는 <strong>B2B Food-SaaS 플랫폼</strong>입니다.
-    </p>
 
-    <!-- 🟧 owners 스타일 "대배너" -->
-    <div class="big-banner">
-      모든 사장님을 위한, 모든 것을 담은 플랫폼 모딩
-      <br>
-      복잡하게 흩어져 있는 거래 흐름을 하나의 구조로 단순하게 정리하고, 현장에서 오래 쓸 수 있는 도구를 만드는 것이 모딩의 서비스 방향입니다.
+    <!-- 소개 문단 + 방향 문구를 하나의 틀로 묶은 영역 -->
+    <div class="intro-box">
+      <p class="page-subtitle">
+        모딩(Moding)은 식품 제조사와 외식업 사장님, 그리고 그 사이를 잇는 기술을<br>
+        하나의 구조로 묶어 주는 <strong>B2B Food-SaaS 플랫폼</strong>입니다.
+      </p>
+      <p class="big-banner">
+        모든 사장님을 위한, 모든 것을 담은 플랫폼 모딩
+        <br>
+        복잡하게 흩어져 있는 거래 흐름을 하나의 구조로 단순하게 정리하고, 현장에서 오래 쓸 수 있는 도구를 만드는 것이 모딩의 서비스 방향입니다.
+      </p>
     </div>
 
-    <!-- 핵심 기능 4단 -->
+    <!-- 핵심 기능 4개: 주황색 뱃지 스타일 -->
     <div class="feature-grid">
 
       <div class="feature-card">
