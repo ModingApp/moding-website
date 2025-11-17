@@ -261,6 +261,16 @@
       content: "";  
       margin: 0;  
     }  
+
+    /* 외식업 / 제조사 이용 흐름 섹션  
+       글자·여백은 그대로 두고, 배경 그라데이션만 추가 */  
+    .page-wrap > .section:nth-of-type(1) {  
+      background: radial-gradient(circle at top left, rgba(245, 156, 26, 0.45) 0%, #050505 55%);  
+    }  
+  
+    .page-wrap > .section:nth-of-type(2) {  
+      background: radial-gradient(circle at top left, rgba(11, 143, 58, 0.45) 0%, #050505 55%);  
+    }  
   
     @media (max-width: 768px) {  
       .top-bar { padding: 16px 14px; }  
@@ -269,30 +279,6 @@
       .card { padding: 18px 16px 20px; }  
       .two-columns { grid-template-columns: 1fr; }  
     }  
-
-    /* =========================
-       ▼ 추가: 이용 흐름 섹션 그라데이션
-       외식업(첫 번째 섹션) = 주황, 제조사(두 번째 섹션) = 초록
-       HTML은 그대로, 섹션의 순서를 기반으로만 스타일 적용
-       ========================= */
-    .page-wrap > .section:nth-of-type(1) {
-      border-radius: 18px;
-      border: 1px solid rgba(245, 156, 26, 0.8);
-      background:
-        radial-gradient(circle at top left, rgba(245, 156, 26, 0.6) 0%, #050505 55%),
-        #050505;
-      padding: 18px 20px;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
-    }
-    .page-wrap > .section:nth-of-type(2) {
-      border-radius: 18px;
-      border: 1px solid rgba(11, 143, 58, 0.8);
-      background:
-        radial-gradient(circle at top left, rgba(11, 143, 58, 0.6) 0%, #050505 55%),
-        #050505;
-      padding: 18px 20px;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
-    }
   </style>  
 </head>  
   
@@ -380,7 +366,6 @@
         <li><strong>배송 / 수령 확인</strong> – 출고·배송 상태를 확인하고, 이상 유무를 체크합니다.</li>  
         <li><strong>정산·세금계산서 확인</strong> – 정산 예정일과 세금계산서 발행 내역을 한 번에 확인합니다.</li>  
       </ol>  
-        
     </section>  
   
     <!-- 제조사 이용 흐름 -->  
@@ -399,9 +384,11 @@
       </ol>  
     </section>  
   </main>  
-<p class="step-list">  
-        자세한 기준은 <a href="entry.html" class="link-inline">입점 안내</a> 페이지에서 다시 정리할 예정입니다.  
-      </p>  
+
+  <p class="step-list">  
+    자세한 기준은 <a href="entry.html" class="link-inline">입점 안내</a> 페이지에서 다시 정리할 예정입니다.  
+  </p>  
+
   <!-- 푸터 -->  
   <footer class="footer-bar">  
     <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>  
