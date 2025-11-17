@@ -1,1 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  />
+  <title>입점 안내 - 모딩(Moding)</title>
 
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    img, .nocopy-img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+      pointer-events: auto;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+      background: #050505;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* 상단 로고바 */
+    .top-bar {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-left img {
+      height: 28px;
+      width: auto;
+    }
+
+    .brand-name {
+      font-size: 16px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .top-right a {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .top-right a:hover {
+      text-decoration: underline;
+    }
+
+    /* 페이지 전체 래퍼 */
+    .page-wrap {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto 56px;
+      padding: 0 20px 40px;
+      flex: 1 0 auto;
+    }
+
+    .page-header {
+      margin: 8px 0 24px;
+    }
+
+    .page-pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid #2b2b2b;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 10px;
+    }
+
+    .page-title {
+      font-size: 26px;
+      font-weight: 600;
+      color: #1FDB4F;
+      margin-bottom: 10px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      opacity: 0.88;
+      line-height: 1.8;
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .section h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 16px 0 6px;
+    }
+
+    .section p {
+      font-size: 13px;
+      line-height: 1.9;
+      opacity: 0.92;
+      margin-bottom: 8px;
+    }
+
+    .section ul {
+      margin: 4px 0 10px;
+      padding-left: 1.2em;
+      font-size: 13px;
+      line-height: 1.8;
+      opacity: 0.92;
+    }
+
+    .section ul li {
+      margin-bottom: 3px;
+    }
+
+    .card {
+      margin-top: 24px;
+      padding: 20px 22px 22px;
+      border-radius: 22px;
+      border: 1px solid #1a1a1a;
+      background: radial-gradient(circle at top left, #102815 0%, #050505 45%, #050505 100%);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #F5A623;
+    }
+
+    .card-text {
+      font-size: 14px;
+      line-height: 1.9;
+      opacity: 0.92;
+    }
+
+    .divider {
+      border-bottom: 1px solid #222;
+      margin: 32px 0 26px;
+    }
+
+    .highlight-box {
+      margin-top: 8px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid #2b2b2b;
+      background: #080808;
+      font-size: 13px;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    /* 푸터 */
+    .footer-bar {
+      width: 100%;
+      border-top: 1px solid #222;
+      background: #0b0b0b;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #9d9d9d;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .footer-item::after {
+      content: "·";
+      margin-left: 8px;
+    }
+    .footer-item:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .top-bar { padding: 16px 14px; }
+      .page-wrap { padding: 0 14px 32px; }
+      .page-title { font-size: 22px; }
+      .card { padding: 18px 16px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 상단 로고바 -->
+  <header class="top-bar">
+    <div class="top-left">
+      <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
+      <div class="brand-name">Moding Inc.</div>
+    </div>
+    <div class="top-right">
+      <a href="index.html">← 메인으로</a>
+    </div>
+  </header>
+
+  <!-- 본문 -->
+  <main class="page-wrap">
+    <header class="page-header">
+      <div class="page-pill">ENTRY GUIDE</div>
+      <h1 class="page-title">입점 안내</h1>
+      <p class="page-subtitle">
+        모딩(Moding)은 식품 제조사와 외식업 사장님을 하나의 구조로 연결하는
+        <strong>B2B Food-SaaS 플랫폼</strong>입니다.<br>
+        모딩의 입점 절차는 복잡한 서류 없이, 실제 거래에 필요한 최소한의 정보만으로 빠르게 진행됩니다.
+      </p>
+    </header>
+
+    <!-- 인트로 카드 -->
+    <section class="card">
+      <h2 class="card-title">모딩(Moding) 입점 안내</h2>
+      <p class="card-text">
+        모딩(Moding)은 식품 제조사와 외식업 사장님을 하나의 구조로 연결하는
+        <strong>B2B Food-SaaS 플랫폼</strong>입니다.<br>
+        모딩의 입점 절차는 복잡한 서류 없이, 실제 거래에 필요한 최소한의 정보만으로 빠르게 진행됩니다.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 1. 제조사 입점 절차 -->
+    <section class="section">
+      <h2>1. 제조사 입점 절차</h2>
+
+      <h3>① 기본정보 등록</h3>
+      <ul>
+        <li>사업자등록증</li>
+        <li>공장·제조업 관련 허가증</li>
+        <li>담당자 연락처</li>
+        <li>상품 카테고리(소스·육류·밀키트·반조리 등)</li>
+      </ul>
+      <p>
+        모든 정보는 <strong>모딩 약관에 따라 비공개·암호화</strong>되어 처리됩니다.
+      </p>
+
+      <h3>② 제품 정보 제출</h3>
+      <ul>
+        <li>품목제조보고증(해당 시)</li>
+        <li>원재료명 및 함량</li>
+        <li>규격·박스단가·MOQ</li>
+        <li>유통기한 및 보관 방식</li>
+        <li>제조 리드타임</li>
+      </ul>
+      <p>
+        모딩은 입점한 제조사의 제품을 <strong>카테고리·용도·업종별로 자동 분류</strong>하여
+        외식업 사장님들이 쉽게 발주할 수 있도록 구성합니다.
+      </p>
+
+      <h3>③ 정산 구조 설정</h3>
+      <p>
+        모딩은 <strong>통신판매중개자(중개)</strong>로 운영되며,
+        제조사가 직접 판매자로서 정산을 받습니다.
+      </p>
+      <ul>
+        <li>정산주기: D+7 (가맹점별 합산 정산)</li>
+        <li>PG 결제 수수료: 제조사 부담(약관 고지)</li>
+        <li>세금계산서 자동 발행(예정)</li>
+      </ul>
+      <p>
+        정산 구조는 투명하게 관리되고, 제조사가 직접 정산 내역을 확인할 수 있습니다.
+      </p>
+
+      <h3>④ PB·프랜차이즈 OEM 제안(선택)</h3>
+      <p>
+        제조사는 입점과 동시에 다음의 추가 비즈니스도 제안받을 수 있습니다.
+      </p>
+      <ul>
+        <li>모딩 PB</li>
+        <li>프랜차이즈 OEM 솔루션</li>
+        <li>매장 전용 레시피 개발</li>
+        <li>반복 발주 데이터 기반 수요 분석</li>
+      </ul>
+      <p>
+        이 영역은 모딩이 제공하는 <strong>부가 성장 모델</strong>입니다.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 2. 외식업 사장님 이용 절차 -->
+    <section class="section">
+      <h2>2. 외식업 사장님 이용 절차</h2>
+
+      <h3>① 카테고리 기반 상품 탐색</h3>
+      <p>
+        외식업 사장님은 식당 업종에 맞춰 다음을 기준으로 상품을 탐색할 수 있습니다.
+      </p>
+      <ul>
+        <li>카테고리(소스·육류·반조리·밀키트)</li>
+        <li>업종별(한식·일식·분식·주점 등)</li>
+        <li>사용용도(베이스·토핑·육수·전골·볶음)</li>
+        <li>제조사/원산지/포장단위</li>
+      </ul>
+      <p>
+        모딩은 <strong>“실제 매장에서 바로 사용하는 상품만”</strong> 선별하여 제공합니다.
+      </p>
+
+      <h3>② 발주·정산 통합 관리</h3>
+      <p>
+        여러 제조사에 흩어져 있던 발주/정산 내역을
+        한 화면에서 정리할 수 있습니다.
+      </p>
+      <ul>
+        <li>발주 내역 자동 기록</li>
+        <li>입금 내역 정리</li>
+        <li>세금계산서 관리(예정)</li>
+      </ul>
+      <p>
+        외식업 사장님은 <strong>회계·재고 업무가 크게 감소</strong>합니다.
+      </p>
+
+      <h3>③ 데이터 리포트 지원(예정)</h3>
+      <ul>
+        <li>메뉴별 발주 추세</li>
+        <li>계절성 발주 그래프</li>
+        <li>뷰/클릭/구매 전환 분석</li>
+      </ul>
+      <p>
+        운영에 바로 쓸 수 있는 숫자 중심으로 제공됩니다.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 3. 입점 시 중요한 정책 -->
+    <section class="section">
+      <h2>3. 입점 시 중요한 정책(필수 안내)</h2>
+
+      <h3>① 모딩의 법적 지위</h3>
+      <p>
+        모든 약관에서 모딩은
+        <strong>“통신판매중개자(중개사업자)”</strong>로서 역할을 수행합니다.
+      </p>
+      <p>즉,</p>
+      <ul>
+        <li>제조사 = 판매자</li>
+        <li>외식업 사장님 = 구매자</li>
+        <li>모딩 = 중개 플랫폼</li>
+      </ul>
+      <p>
+        모딩은 <strong>제품 제조·유통·품질·안전의 직접 당사자가 아닙니다.</strong>
+      </p>
+
+      <h3>② 수수료 및 비용</h3>
+      <ul>
+        <li>입점비 없음</li>
+        <li>상품 노출 비용 없음</li>
+        <li>정산 수수료는 PG 수수료 외 추가 없음</li>
+        <li>광고/배너는 선택(제조사 요청 시)</li>
+      </ul>
+
+      <h3>③ 데이터 보호·보안</h3>
+      <p>
+        모든 정보는
+      </p>
+      <ul>
+        <li>암호화 저장</li>
+        <li>비공개 처리</li>
+        <li>제3자 제공 금지</li>
+      </ul>
+      <p>
+        정책을 따릅니다.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 4. 입점 완료 후 기능 -->
+    <section class="section">
+      <h2>4. 입점 완료 후 제공되는 기능</h2>
+      <ul>
+        <li>제조사 전용 관리자 페이지</li>
+        <li>상품 등록·가격 변경·재고 안내</li>
+        <li>주문 알림 및 정산 조회</li>
+        <li>OEM/PB 제안 가능</li>
+        <li>발주 패턴 기반 수요 예측(예정)</li>
+      </ul>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 5. 입점 문의 -->
+    <section class="section">
+      <h2>5. 입점 문의</h2>
+      <div class="highlight-box">
+        👉 <strong>제휴·입점 문의 페이지(alliance.html)</strong><br>
+        👉 이메일: <strong>moding_inc@naver.com</strong>
+      </div>
+    </section>
+  </main>
+
+  <!-- 공통 푸터 -->
+  <footer class="footer-bar">
+    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
+    <span class="footer-item">대표자: 서희진</span>
+    <span class="footer-item">사업자등록번호: 730-87-03564</span>
+    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
+    <span class="footer-item">문의: moding_inc@naver.com</span>
+  </footer>
+
+  <!-- 복사/우클릭/단축키 방지 -->
+  <script>
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) {
+        e.preventDefault();
+      }
+    });
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
