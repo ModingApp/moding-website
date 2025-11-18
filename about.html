@@ -66,7 +66,7 @@
     }
 
     /* ------------------------------
-       BRAND IDENTITY 캡슐 + 제목
+       BRAND 헤더
     ------------------------------ */
     .brand-header {
       margin-bottom: 26px;
@@ -197,15 +197,18 @@
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
     }
 
+    /* owners.html 기준 주황/초록 그라데이션 */
     .owner-card.restaurant {
-      background: radial-gradient(circle at top left, #3b2611 0, #120603 45%, #120603 100%),
-                  linear-gradient(135deg, #FF8A00 0%, #F6C453 100%);
+      background:
+        radial-gradient(circle at top left, #3b2611 0, #120603 45%, #120603 100%),
+        linear-gradient(135deg, #FF8A00 0%, #F6C453 100%);
       border: 1px solid rgba(255, 170, 80, 0.55);
     }
 
     .owner-card.manufacturer {
-      background: radial-gradient(circle at top left, #0f3b25 0, #020c07 45%, #020c07 100%),
-                  linear-gradient(135deg, #1FAA48 0%, #72E0A3 100%);
+      background:
+        radial-gradient(circle at top left, #0f3b25 0, #020c07 45%, #020c07 100%),
+        linear-gradient(135deg, #1FAA48 0%, #72E0A3 100%);
       border: 1px solid rgba(70, 220, 140, 0.55);
     }
 
@@ -258,6 +261,40 @@
       content: "· ";
     }
 
+    /* 칩(버튼형 상자) - owners.html 디자인 공통 사용 */
+    .owner-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 14px;
+    }
+
+    .owner-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .owner-chip--orange {
+      background: linear-gradient(135deg, rgba(255, 166, 89, 0.25), rgba(255, 243, 205, 0.06));
+      border: 1px solid rgba(255, 193, 120, 0.8);
+      color: #FFE3C0;
+    }
+
+    .owner-chip--green {
+      background: linear-gradient(135deg, rgba(61, 199, 122, 0.26), rgba(160, 244, 193, 0.08));
+      border: 1px solid rgba(144, 242, 189, 0.85);
+      color: #D6FFE9;
+    }
+
     .owner-flow-title {
       font-size: 13px;
       font-weight: 600;
@@ -281,16 +318,6 @@
     .owner-flow-step {
       font-weight: 600;
       margin-right: 4px;
-    }
-
-    /* ------------------------------
-       혁신 기술 섹션 리드 문장 (상단에서 사용)
-    ------------------------------ */
-    .tech-lead {
-      font-size: 16px;
-      line-height: 1.95;
-      opacity: 0.96;
-      margin-bottom: 18px;
     }
 
     /* ------------------------------
@@ -372,43 +399,6 @@
       margin-bottom: 22px;
     }
 
-    .cta-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .cta-btn-primary,
-    .cta-btn-outline {
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-size: 13px;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: all 0.18s ease-out;
-    }
-
-    .cta-btn-primary {
-      border: 1px solid #1FAA48;
-      color: #ffffff;
-      background: #1FAA48;
-    }
-    .cta-btn-primary:hover {
-      background: #22c455;
-      border-color: #22c455;
-    }
-
-    .cta-btn-outline {
-      border: 1px solid #FF8A00;
-      color: #FF8A00;
-      background: transparent;
-    }
-    .cta-btn-outline:hover {
-      background: rgba(255, 255, 255, 0.12);
-    }
-
     .cta-note {
       font-size: 11px;
       opacity: 0.7;
@@ -444,12 +434,11 @@
        반응형 (모바일)
     ------------------------------ */
     @media (max-width: 768px) {
-      p, 
-      .text-list li,
-      .tech-lead {
+      p,
+      .text-list li {
         word-break: keep-all;
       }
-    }
+
       .container {
         padding: 28px 16px 40px;
       }
@@ -489,8 +478,7 @@
         line-height: 1.8;
       }
 
-      .philosophy-body p,
-      .philosophy-accent {
+      .philosophy-body p {
         font-size: 13px;
         line-height: 1.8;
       }
@@ -526,7 +514,7 @@
       <a href="index.html" class="back-link">← 메인으로</a>
     </header>
 
-    <!-- BRAND IDENTITY 캡슐 + 제목 -->
+    <!-- BRAND 헤더 -->
     <div class="brand-header">
       <div class="brand-tag">Company introduction</div>
       <div class="brand-title">회사소개</div>
@@ -591,6 +579,13 @@
           <li>주문 기록, 반복 주문 패턴, 시즌별 수요를 데이터로 보고 싶은 사장님</li>
         </ul>
 
+        <!-- owners.html 기준 칩 3개 -->
+        <div class="owner-chip-row">
+          <span class="owner-chip owner-chip--orange">검증된 제조사 상품</span>
+          <span class="owner-chip owner-chip--orange">관리형 발주·정산</span>
+          <span class="owner-chip owner-chip--orange">매장 상황에 맞춘 공급</span>
+        </div>
+
         <div class="owner-flow-title">외식업 사장님 이용 흐름</div>
         <ul class="owner-flow-list">
           <li><span class="owner-flow-step">① 회원가입 및 매장 등록</span>매장 정보와 기본 배송지, 담당자 정보를 입력합니다.</li>
@@ -616,6 +611,13 @@
           <li>발주·입금·전자세금계산서 내역을 한 구조 안에서 관리하고 싶은 제조사</li>
           <li>제품 판매 추이와 반복 주문 데이터를 보고 생산·영업 계획을 세우고 싶은 팀</li>
         </ul>
+
+        <!-- owners.html 기준 칩 3개 -->
+        <div class="owner-chip-row">
+          <span class="owner-chip owner-chip--green">B2B 판로 확대</span>
+          <span class="owner-chip owner-chip--green">정산·세금계산서 정리</span>
+          <span class="owner-chip owner-chip--green">프랜차이즈·OEM 협업</span>
+        </div>
 
         <div class="owner-flow-title">식품 제조사 이용 흐름</div>
         <ul class="owner-flow-list">
