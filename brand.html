@@ -8,6 +8,12 @@
   />
   <title>브랜드 아이덴티티 | 모딩(Moding)</title>
 
+  <!-- 1+2+3 통합 meta description -->
+  <meta
+    name="description"
+    content="모딩(Moding)의 브랜드 아이덴티티를 소개합니다. 제조사와 외식업 사장님을 잇는 플랫폼 철학, 네이밍(Modoo+ing), 로고, 컬러 시스템, 톤앤매너를 한눈에 볼 수 있는 공식 가이드입니다."
+  />
+
   <style>
     /* ------------------------------
        공통 초기화
@@ -45,7 +51,7 @@
     }
 
     /* ------------------------------
-       메인 컨테이너
+       메인 컨테이너 (860px 공통 기준)
     ------------------------------ */
     .container {
       max-width: 860px;
@@ -284,6 +290,36 @@
       background: linear-gradient(135deg, #5b3c20, #8c5a2b);
     }
 
+    /* owners 기준 역할 배지 (외식업/제조사) */
+    .role-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    .badge-role {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid #2b2b2b;
+      background: #090909;
+      opacity: 0.95;
+    }
+
+    .badge-role.restaurant {
+      border-color: rgba(245, 156, 26, 0.9);
+      background: rgba(245, 156, 26, 0.15);
+      color: #f5a623;
+    }
+
+    .badge-role.manufacturer {
+      border-color: rgba(31, 219, 79, 0.9);
+      background: rgba(11, 143, 58, 0.16);
+      color: #1fdb4f;
+    }
+
     /* ------------------------------
        톤앤매너
     ------------------------------ */
@@ -493,6 +529,12 @@
         </div>
       </div>
 
+      <!-- 외식업/제조사 역할 배지 (owners 스타일 수치 적용) -->
+      <div class="role-badges">
+        <span class="badge-role restaurant">FOR RESTAURANT · 외식업</span>
+        <span class="badge-role manufacturer">FOR MANUFACTURER · 제조사</span>
+      </div>
+
       <p>
         모딩의 로고는 B2B 거래의 세 축을 하나의 길로 모으는 구조를 표현합니다.<br />
         부드러운 라운드 형태는 따뜻함과 신뢰를, 균형 잡힌 비례는<br />
@@ -631,6 +673,10 @@
           e.preventDefault();
         }
       }
+    });
+  </script>
+</body>
+</html>
     });
   </script>
 </body>
