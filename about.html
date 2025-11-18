@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회사소개 | 모딩(Moding)</title>
-  <meta name="description" content="모딩(Moding)은 식품 제조사와 외식업 사장님을 안전하게 연결하는 B2B Food-SaaS 플랫폼입니다. 제조사와 매장의 거래·정산·데이터 관리를 한곳에서 볼 수 있는 모딩의 탄생 배경과 구조적 문제 해결 전략을 소개합니다.">
+  <meta name="description" content="모딩(Moding)은 식품 제조사와 외식업 사장님을 안전하게 연결하는 B2B Food-SaaS 플랫폼입니다. 모딩의 탄생 배경과 구조적 문제 해결 전략을 소개합니다.">
+
   <style>
     /* ------------------------------
        공통 초기화 스타일
@@ -25,8 +26,13 @@
       flex-direction: column;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     /* ------------------------------
-       메인 컨테이너 레이아웃
+       메인 컨테이너 레이아웃 (860px 고정)
     ------------------------------ */
     .container {
       max-width: 860px;
@@ -56,17 +62,21 @@
       width: auto;
     }
 
+    .header-brand {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
     .back-link {
       font-size: 13px;
       color: #cccccc;
-      text-decoration: none;
     }
     .back-link:hover {
       text-decoration: underline;
     }
 
     /* ------------------------------
-       BRAND 헤더
+       BRAND HEADER
     ------------------------------ */
     .brand-header {
       margin-bottom: 26px;
@@ -109,7 +119,7 @@
     }
 
     h2 {
-      font-size: 30px;
+      font-size: 26px;
       color: #FF8A00;
     }
 
@@ -135,6 +145,7 @@
       opacity: 0.9;
       margin-bottom: 14px;
     }
+
     .intro-logo-inline {
       height: 40px;
       width: auto;
@@ -142,182 +153,195 @@
       margin-right: 2px;
     }
 
-    /* 리스트 스타일 */
     .text-list {
       list-style: none;
       margin: 8px 0 12px;
       padding-left: 0;
     }
+
     .text-list li {
       font-size: 15px;
       line-height: 1.9;
       opacity: 0.9;
     }
+
     .text-list li::before {
       content: "· ";
     }
 
-    /* ------------------------------
-       섹션 구분선
-    ------------------------------ */
     .divider {
       border-bottom: 1px solid #222;
       margin: 40px 0;
     }
 
     /* ------------------------------
-       FOR OWNERS 섹션 (외식업 / 제조업 카드)
+       공통 링크 스타일
     ------------------------------ */
+    .link-inline {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+      opacity: 0.9;
+    }
+
+    .link-inline:hover {
+      background: linear-gradient(90deg, #0B8F3A 0%, #0B8F3A 50%, #F59C1A 50%, #F59C1A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ===============================
+       owners 디자인 기반 카드 SECTION
+       (외식업 / 제조사 2단 레이아웃)
+    =============================== */
+
+    .owner-section {
+      margin-top: 16px;
+    }
+
     .owner-section-title {
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: #ffffff;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
     }
 
     .owner-section-sub {
       font-size: 14px;
-      line-height: 1.9;
+      line-height: 1.8;
       opacity: 0.9;
-      margin-bottom: 24px;
+      margin-bottom: 14px;
     }
 
     .owner-grid {
-      display: flex;
-      flex-wrap: wrap;
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px;
-      margin-top: 8px;
     }
 
     .owner-card {
-      flex: 1 1 0;
-      min-width: 260px;
-      border-radius: 18px;
-      padding: 24px 20px 22px;
-      color: #ffffff;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+      border-radius: 20px;
+      padding: 18px 20px 20px;
+      border: 1px solid #1a1a1a;
+      background: #080808;
     }
 
-    /* owners.html 기준 주황/초록 그라데이션 */
-    .owner-card.restaurant {
-      background:
-        radial-gradient(circle at top left, #3b2611 0, #120603 45%, #120603 100%),
-        linear-gradient(135deg, #FF8A00 0%, #F6C453 100%);
-      border: 1px solid rgba(255, 170, 80, 0.55);
-    }
-
-    .owner-card.manufacturer {
-      background:
-        radial-gradient(circle at top left, #0f3b25 0, #020c07 45%, #020c07 100%),
-        linear-gradient(135deg, #1FAA48 0%, #72E0A3 100%);
-      border: 1px solid rgba(70, 220, 140, 0.55);
-    }
-
-    .owner-badge {
-      display: inline-block;
+    .owner-tag {
       font-size: 11px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      opacity: 0.92;
-      margin-bottom: 10px;
-    }
-
-    .owner-title {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .owner-desc {
-      font-size: 14px;
-      line-height: 1.9;
-      opacity: 0.92;
-      margin-bottom: 12px;
-    }
-
-    .owner-list-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-top: 6px;
-      margin-bottom: 6px;
-      opacity: 0.96;
-    }
-
-    .owner-list {
-      list-style: none;
-      padding-left: 0;
-      margin: 0 0 10px;
-    }
-
-    .owner-list li {
-      font-size: 13px;
-      line-height: 1.8;
-      opacity: 0.9;
-    }
-
-    .owner-list li::before {
-      content: "· ";
-    }
-
-    /* 칩(버튼형 상자) - owners.html 디자인 공통 사용 */
-    .owner-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 10px 0 14px;
-    }
-
-    .owner-chip {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 500;
-      white-space: nowrap;
-      letter-spacing: 0.02em;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(4px);
-    }
-
-    .owner-chip--orange {
-      background: linear-gradient(135deg, rgba(255, 166, 89, 0.25), rgba(255, 243, 205, 0.06));
-      border: 1px solid rgba(255, 193, 120, 0.8);
-      color: #FFE3C0;
-    }
-
-    .owner-chip--green {
-      background: linear-gradient(135deg, rgba(61, 199, 122, 0.26), rgba(160, 244, 193, 0.08));
-      border: 1px solid rgba(144, 242, 189, 0.85);
-      color: #D6FFE9;
-    }
-
-    .owner-flow-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin: 10px 0 6px;
-      opacity: 0.96;
-    }
-
-    .owner-flow-list {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-
-    .owner-flow-list li {
-      font-size: 13px;
-      line-height: 1.7;
-      opacity: 0.9;
+      opacity: 0.7;
       margin-bottom: 4px;
     }
 
-    .owner-flow-step {
+    .owner-title {
+      font-size: 16px;
       font-weight: 600;
-      margin-right: 4px;
+      margin-bottom: 8px;
+    }
+
+    .owner-text {
+      font-size: 13px;
+      line-height: 1.8;
+      opacity: 0.92;
+      margin-bottom: 8px;
+    }
+
+    .owner-list {
+      font-size: 13px;
+      line-height: 1.8;
+      opacity: 0.92;
+      margin-bottom: 8px;
+      padding-left: 1.1em;
+    }
+
+    .owner-list li {
+      margin-bottom: 3px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid #2b2b2b;
+      background: #090909;
+      opacity: 0.95;
+    }
+
+    .owner-flow {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .owner-flow-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .owner-flow-list {
+      margin-top: 4px;
+      font-size: 13px;
+      line-height: 1.8;
+      opacity: 0.92;
+      padding-left: 1.1em;
+    }
+
+    .owner-flow-list li {
+      margin-bottom: 3px;
+    }
+
+    /* ---- 외식업(주황) / 제조사(초록) 테마: owners 기준 수치 ---- */
+
+    .owner-card.restaurant {
+      border-color: rgba(245, 156, 26, 0.8);
+      background: radial-gradient(
+        circle at top left,
+        rgba(245, 156, 26, 0.52) 0%,
+        #050505 55%
+      );
+    }
+
+    .owner-card.restaurant .owner-tag,
+    .owner-card.restaurant .owner-title,
+    .owner-card.restaurant .owner-flow-title {
+      color: #F5A623;
+    }
+
+    .owner-card.restaurant .badge {
+      border-color: rgba(245, 156, 26, 0.9);
+      background: rgba(245, 156, 26, 0.15);
+      color: #F5A623;
+    }
+
+    .owner-card.manufacturer {
+      border-color: rgba(11, 143, 58, 0.9);
+      background: radial-gradient(
+        circle at top left,
+        rgba(11, 143, 58, 0.55) 0%,
+        #050505 55%
+      );
+    }
+
+    .owner-card.manufacturer .owner-tag,
+    .owner-card.manufacturer .owner-title,
+    .owner-card.manufacturer .owner-flow-title {
+      color: #1FDB4F;
+    }
+
+    .owner-card.manufacturer .badge {
+      border-color: rgba(31, 219, 79, 0.9);
+      background: rgba(11, 143, 58, 0.16);
+      color: #1FDB4F;
     }
 
     /* ------------------------------
@@ -434,17 +458,12 @@
        반응형 (모바일)
     ------------------------------ */
     @media (max-width: 768px) {
-      p,
-      .text-list li {
-        word-break: keep-all;
-      }
-
       .container {
         padding: 28px 16px 40px;
       }
 
       h1 { font-size: 28px; }
-      h2 { font-size: 24px; }
+      h2 { font-size: 22px; }
       h3 { font-size: 18px; }
 
       p,
@@ -492,29 +511,31 @@
         font-size: 20px;
       }
 
+      /* 카드 한 줄로 세로 배치 */
       .owner-grid {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        gap: 18px;
       }
     }
   </style>
 </head>
+
 <body
   oncontextmenu="return false"
   onselectstart="return false"
   ondragstart="return false"
 >
-
   <main class="container">
     <!-- 상단 로고 + 뒤로가기 -->
     <header class="header">
       <div class="header-left">
         <img src="모딩로고.png" alt="Moding Logo" class="header-logo">
-        <span style="font-size:14px; opacity:0.9;">Moding Inc.</span>
+        <span class="header-brand">Moding Inc.</span>
       </div>
       <a href="index.html" class="back-link">← 메인으로</a>
     </header>
 
-    <!-- BRAND 헤더 -->
+    <!-- BRAND HEADER -->
     <div class="brand-header">
       <div class="brand-tag">Company introduction</div>
       <div class="brand-title">회사소개</div>
@@ -522,7 +543,7 @@
 
     <!-- SECTION 1 - 모딩 소개 -->
     <p class="intro-first">
-      <img src="모딩로고(가로형).png" alt="Moding" class="intro-logo-inline">은<br> 
+      <img src="모딩로고(가로형).png" alt="Moding" class="intro-logo-inline">은<br>
       식품 제조사와 외식업 사장님이<br>
       더 빠르고 더 안전하게 연결될 수 있도록 설계된<br>
       B2B Food-SaaS 플랫폼입니다.
@@ -539,98 +560,111 @@
 
     <div class="divider"></div>
 
-    <!-- SECTION 2 - 모딩이 필요한 이유 -->
-    <h2>모딩이 필요한 이유</h2>
-    <p>
-      식품 제조 시장과 외식업 시장은 빠르게 변화하고 있지만,<br>
-      거래와 정산, 제품 정보 관리는 여전히 비효율이 많습니다.
-    </p>
-    <p>
-      제조사는 판로 확보가 어렵고,<br>
-      외식업 사장님은 믿을 수 있는 제품을 찾기 위해 많은 시간을 사용합니다.
-    </p>
-    <p>
-      모딩은 이러한 구조적 문제를 해결하기 위해 탄생했습니다.
-    </p>
+    <!-- SECTION 2 - 함께하는 사장님들 (owners 스타일 카드) -->
+    <section class="owner-section">
+      <h2 class="owner-section-title">모딩과 함께하는 두 주인공</h2>
+      <p class="owner-section-sub">
+        한쪽에는 상품을 만드는 제조사, 다른 한쪽에는 메뉴를 완성하는 매장이 있습니다.<br>
+        모딩은 이 두 흐름을 한 구조 안에서 정리해, 모두가 편안한 거래를 돕습니다.
+      </p>
+
+      <div class="owner-grid">
+        <!-- 외식업 카드 -->
+        <article class="owner-card restaurant">
+          <div class="owner-tag">FOR RESTAURANT</div>
+          <h3 class="owner-title">외식업 사장님</h3>
+          <p class="owner-text">
+            한식·중식·일식·양식·요리주점·카페·배달전문점·프랜차이즈 등,
+            매장에서 사용할 소스·원부재료·밀키트를 안정적으로 공급받고 싶은 사장님을 위한 안내입니다.
+          </p>
+          <ul class="owner-list">
+            <li>사업자등록증이 있는 외식업 매장</li>
+            <li>메뉴 개발에 필요한 소스·육류·밀키트를 찾고 있는 브랜드</li>
+            <li>여러 협력업체 발주·정산을 한 번에 보고 싶은 본사</li>
+          </ul>
+          <div class="badge-row">
+            <div class="badge">검증된 제조사 상품</div>
+            <div class="badge">편리한 발주·정산</div>
+            <div class="badge">매장 상황에 맞춘 공급</div>
+          </div>
+
+          <div class="owner-flow">
+            <div class="owner-flow-title">외식업 사장님 이용 흐름</div>
+            <ol class="owner-flow-list">
+              <li><strong>회원가입 및 사업자 인증</strong> – 사업자등록증 기준으로 계정을 생성합니다.</li>
+              <li><strong>매장 프로필 등록</strong> – 상호 및 업종, 주력메뉴, 필요품목 등을 입력합니다.</li>
+              <li><strong>상품 탐색 및 발주</strong> – 카테고리별로 상품을 둘러보고 필요한 제품을 선택해 발주합니다.</li>
+              <li><strong>배송 / 수령 확인</strong> – 출고·배송 상태를 확인하고, 이상 유무를 체크합니다.</li>
+              <li><strong>정산·세금계산서 확인</strong> – 정산 예정일과 세금계산서 발행 내역을 한 번에 확인합니다.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 제조사 카드 -->
+        <article class="owner-card manufacturer">
+          <div class="owner-tag">FOR MANUFACTURER</div>
+          <h3 class="owner-title">식품 제조사</h3>
+          <p class="owner-text">
+            소스·육류/생선 가공품·밀키트·냉동/냉장 완제품 등
+            외식업 매장을 대상으로 B2B 공급이 가능한 식품 제조사를 위한 안내입니다.
+          </p>
+          <ul class="owner-list">
+            <li>식육/식품 기타 제조가공업 등 인허가를 갖춘 공장</li>
+            <li>B2B 상품의 판로를 넓히고 싶은 제조사</li>
+            <li>발주·입금·세금계산서 관리를 편하게 하고 싶은 업체</li>
+          </ul>
+          <div class="badge-row">
+            <div class="badge">B2B 판로 확대</div>
+            <div class="badge">정산·세금계산서 정리</div>
+            <div class="badge">프랜차이즈·OEM 협업</div>
+          </div>
+
+          <div class="owner-flow">
+            <div class="owner-flow-title">식품 제조사 이용 흐름</div>
+            <ol class="owner-flow-list">
+              <li><strong>제휴·입점 문의</strong> – 공장 기본 정보와 주요 품목을 남겨주시면 담당자가 연락드립니다.</li>
+              <li><strong>공장·상품 검토</strong> – 인허가, 생산 가능량, 품질 기준 등을 함께 확인합니다.</li>
+              <li><strong>계약 및 상품 등록</strong> – 가격, 배송방법, 리드타임, 정산 조건을 정하고 상품을 등록합니다.</li>
+              <li><strong>발주·출고·배송</strong> – 모딩에서 들어오는 발주를 확인하고 출고·배송을 진행합니다.</li>
+              <li><strong>정산 및 데이터</strong> – 정산 내역과 거래 데이터를 확인하며, 전자세금계산서 발행을 처리합니다.</li>
+            </ol>
+          </div>
+        </article>
+      </div>
+    </section>
 
     <div class="divider"></div>
 
-    <!-- SECTION 3 - 외식업 / 제조업 투컬럼 카드 -->
-    <h3 class="owner-section-title">함께 사용하는 두 주인공, 외식업 사장님과 식품 제조사</h3>
-    <p class="owner-section-sub">
-      모딩은 한쪽은 상품을 만드는 제조사, 다른 한쪽은 매장을 운영하는 외식업 사장님이 함께 사용하는 B2B Food-SaaS 플랫폼입니다.<br>
-      두 흐름을 한 구조 안에서 정리해, 서로가 편리하게 거래하고 관리할 수 있도록 돕습니다.
+    <!-- SECTION 3 - 모딩의 혁신 기술 (기존 내용 유지) -->
+    <h2>모딩의 혁신 기술</h2>
+
+    <p>
+      모딩은 단순한 온라인 도매몰이 아니라,<br>
+      거래·결제·정산·데이터 관리가 하나의 구조로 연결된 B2B Food-SaaS 플랫폼입니다.
     </p>
 
-    <section class="owner-grid">
-      <!-- 외식업 카드 -->
-      <article class="owner-card restaurant">
-        <div class="owner-badge">FOR RESTAURANT</div>
-        <div class="owner-title">외식업 사장님</div>
-        <p class="owner-desc">
-          한식·중식·일식·양식·요리주점·카페·배달전문·프랜차이즈 등,<br>
-          매장에서 사용할 소스·육수·밀키트·완제품을 안정적으로 공급받고 싶은 사장님을 위한 안내입니다.
-        </p>
+    <ul class="text-list">
+      <li>
+        자동화된 정산 시스템 : 복잡한 수기 정산 없이
+        결제→정산→내역 관리가 한 흐름으로 처리됩니다.
+      </li>
+      <li>
+        전자세금계산서 연동 : 제조사와 외식업 사장님 모두
+        전자동 발행 시스템을 통해 별도의 세금계산서 정리 작업이 필요 없습니다.
+      </li>
+      <li>
+        데이터 기반 분석 도구 : 상품 판매 추이, 반복 주문 패턴, 시즌별 수요 등
+        실제 매장 운영과 제조사의 생산 및 판매 계획에 도움이 되는 정보를 제공합니다.
+      </li>
+      <li>
+        안전하고 투명한 거래 환경 : 모딩은 ‘통신판매중개자’의 지위를 명확히 하여
+        제조·유통·품질·안전의 직접 당사자가 아니며,
+        양 당사자가 효율적으로 거래할 수 있는 기술 기반만을 제공합니다.
+      </li>
+    </ul>
 
-        <div class="owner-list-title">이런 사장님께 모딩이 필요합니다</div>
-        <ul class="owner-list">
-          <li>매장에 필요한 소스·육수·밀키트를 한 번에 찾고 싶은 매장</li>
-          <li>여러 제조사와 거래하지만 주문·정산 내역을 한 화면에서 관리하고 싶은 매장</li>
-          <li>주문 기록, 반복 주문 패턴, 시즌별 수요를 데이터로 보고 싶은 사장님</li>
-        </ul>
-
-        <!-- owners.html 기준 칩 3개 -->
-        <div class="owner-chip-row">
-          <span class="owner-chip owner-chip--orange">검증된 제조사 상품</span>
-          <span class="owner-chip owner-chip--orange">관리형 발주·정산</span>
-          <span class="owner-chip owner-chip--orange">매장 상황에 맞춘 공급</span>
-        </div>
-
-        <div class="owner-flow-title">외식업 사장님 이용 흐름</div>
-        <ul class="owner-flow-list">
-          <li><span class="owner-flow-step">① 회원가입 및 매장 등록</span>매장 정보와 기본 배송지, 담당자 정보를 입력합니다.</li>
-          <li><span class="owner-flow-step">② 상품 탐색·비교</span>각 제조사가 등록한 소스·육수·밀키트를 한 곳에서 비교·선택합니다.</li>
-          <li><span class="owner-flow-step">③ 주문 및 결제</span>필요 수량을 선택해 주문하고, 결제까지 한 번에 완료합니다.</li>
-          <li><span class="owner-flow-step">④ 배송·수령·검수</span>배송된 상품의 수량·상태를 확인하고, 이상 유무를 체크합니다.</li>
-          <li><span class="owner-flow-step">⑤ 정산·내역 확인</span>주문·결제·전자세금계산서 연동 내역을 모딩 화면에서 한 번에 확인합니다.</li>
-        </ul>
-      </article>
-
-      <!-- 제조사 카드 -->
-      <article class="owner-card manufacturer">
-        <div class="owner-badge">FOR MANUFACTURER</div>
-        <div class="owner-title">식품 제조사</div>
-        <p class="owner-desc">
-          소스·육수·양념·가공품·밀키트·냉동/냉장 완제품 등<br>
-          외식업 매장 대상으로 B2B 공급이 가능한 식품 제조사를 위한 안내입니다.
-        </p>
-
-        <div class="owner-list-title">이런 제조사에 모딩이 필요합니다</div>
-        <ul class="owner-list">
-          <li>B2B용 판로를 넓히고, 다양한 외식업 매장과 연결되고 싶은 공장</li>
-          <li>발주·입금·전자세금계산서 내역을 한 구조 안에서 관리하고 싶은 제조사</li>
-          <li>제품 판매 추이와 반복 주문 데이터를 보고 생산·영업 계획을 세우고 싶은 팀</li>
-        </ul>
-
-        <!-- owners.html 기준 칩 3개 -->
-        <div class="owner-chip-row">
-          <span class="owner-chip owner-chip--green">B2B 판로 확대</span>
-          <span class="owner-chip owner-chip--green">정산·세금계산서 정리</span>
-          <span class="owner-chip owner-chip--green">프랜차이즈·OEM 협업</span>
-        </div>
-
-        <div class="owner-flow-title">식품 제조사 이용 흐름</div>
-        <ul class="owner-flow-list">
-          <li><span class="owner-flow-step">① 입점 문의</span>공장 기본 정보와 주요 제품 정보를 전달하면, 담당자가 연락을 드립니다.</li>
-          <li><span class="owner-flow-step">② 상품 등록</span>가격, 상세설명, 리드타임, 공급 조건 등 정보를 입력해 상품을 등록합니다.</li>
-          <li><span class="owner-flow-step">③ 주문 접수 및 출고</span>매장 주문을 확인하고, 출고·배송 과정에서 필요한 정보를 시스템에 반영합니다.</li>
-          <li><span class="owner-flow-step">④ 정산 및 데이터</span>발주·입금·전자세금계산서 연동 내역과 판매 데이터를 확인하며, 향후 계획에 활용합니다.</li>
-        </ul>
-      </article>
-    </section>
-
-    <!-- SECTION 4 - 모딩 철학 -->
-    <div class="philosophy-wrap">
+    <!-- SECTION 4 - 운영 철학 -->
+    <section class="philosophy-wrap">
       <div class="philosophy-tag">PHILOSOPHY</div>
       <h2 class="philosophy-title">모딩의 운영 철학</h2>
 
@@ -640,16 +674,25 @@
         현장의 언어를 이해하는 만큼,<br>
         현장에서 정말 필요로 하는 기능만 남기고<br>
         불필요한 것들은 과감히 덜어냅니다.
-        조용히, 그러나 단단하게.<br>
-        현장에서 오래 쓰이는 도구를 만드는 것이<br>
-        모딩의 첫 번째 원칙입니다.<br><br>
-        우리는 단기적인 성과와 실적보다<br>
-        제조사와 사장님이 오래 함께 갈 수 있는<br>
-        건강한 거래 구조를 우선합니다.<br><br>
-        모딩은 가격 덤핑 경쟁, 복잡하고 불투명한 <br>
-        수수료 구조는 지양합니다.
       </p>
-    </div>
+
+      <div class="philosophy-body">
+        <p>
+          조용히, 그러나 단단하게.<br>
+          현장에서 오래 쓰이는 도구를 만드는 것이<br>
+          모딩의 첫 번째 원칙입니다.
+        </p>
+        <p>
+          우리는 단기적인 성과와 실적보다<br>
+          제조사와 사장님이 오래 함께 갈 수 있는<br>
+          건강한 거래 구조를 우선합니다.
+        </p>
+        <p>
+          모딩은 가격 덤핑 경쟁, 복잡하고 불투명한<br>
+          수수료 구조는 지양합니다.
+        </p>
+      </div>
+    </section>
 
     <!-- SECTION 5 - CTA -->
     <section class="cta-section">
@@ -678,7 +721,7 @@
     <span class="footer-item">문의: moding_inc@naver.com</span>
   </footer>
 
-  <!-- 복사 / 단축키 방지 -->
+  <!-- 복사 / 단축키 방지 (기존 유지) -->
   <script>
     document.addEventListener("copy", function (e) {
       e.preventDefault();
