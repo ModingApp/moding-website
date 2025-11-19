@@ -126,8 +126,14 @@
       text-decoration:none;
       font-weight:600;
       transition:0.2s;
-      width:170px;
       text-align:center;
+
+      /* ▼ 버튼 크기 통일용 추가 */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:56px;
+      width:200px;
     }
 
     .btn-green {
@@ -200,10 +206,11 @@
     }
 
     .about-title {
-      font-size:13px;
+      font-size:15px;              /* 기존 13px → 15px */
       letter-spacing:0.18em;
       color:var(--moding-green);
       margin-bottom:10px;
+      font-weight:700;             /* 굵게 추가 */
     }
 
     .about-tagline {
@@ -392,6 +399,7 @@
       .btn {
         width:100%;
         max-width:260px;
+        height:52px;
       }
       .download-btn {
         width:100%;
