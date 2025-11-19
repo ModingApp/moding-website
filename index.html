@@ -1,71 +1,357 @@
-/* 768px 이하: 태블릿/일반 스마트폰 공통 조정 */
-@media (max-width: 768px) {
-  .container {
-    padding: 32px 20px 40px;
-  }
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모딩(Moding) | B2B Food-SaaS 플랫폼</title>
 
-  .hero {
-    padding: 56px 0 40px;  /* 위 여백 줄이기 */
-  }
+  <meta name="description" content="식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼 모딩(Moding). 정산, 주문, 데이터 관리까지 한 곳에서.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Moding">
+  <meta property="og:title" content="B2B Food-SaaS 플랫폼, 모딩(Moding)">
+  <meta property="og:description" content="식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼. 빠르고 정확한 정산, 주문관리, 데이터 기반 운영 자동화.">
+  <meta property="og:url" content="https://moding.app/">
+  <meta property="og:image" content="https://moding.app/모딩로고.png">
 
-  .hero-title {
-    font-size: 26px;       /* 제목 글자 조금 줄이기 */
-    line-height: 1.4;
-  }
+  <style>
+    :root {
+      --moding-green: #238B22;
+      --moding-orange: #FF8C00;
+      --bg-light: #F7F9F8;
+      --text-main: #1F3B1F;
+      --text-sub: #555555;
+    }
 
-  .hero-sub {
-    font-size: 16px;
-  }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
-  .about {
-    margin-top: 56px;
-    padding: 38px 18px 42px;
-  }
+    body {
+      font-family:-apple-system, BlinkMacSystemFont,"Noto Sans KR",sans-serif;
+      background:var(--bg-light);
+      color:var(--text-main);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
 
-  .about-desc {
-    font-size: 16px;
-  }
-}
+    .container {
+      width:100%;
+      max-width:860px;
+      margin:0 auto;
+      padding:40px 24px;
+    }
 
-/* 600px 이하: 갤럭시 S급 좁은 화면 최적화 */
-@media (max-width: 600px) {
-  .nav {
-    padding: 12px 16px;
-    flex-direction: column;     /* 로고 위, 메뉴 아래 세로 배치 */
-    align-items: flex-start;
-    row-gap: 8px;
-  }
+    /* HEADER */
+    header {
+      width:100%;
+      border-bottom:1px solid #e1e4e2;
+      background:#ffffff;
+    }
 
-  .nav-left img {
-    width: 150px;               /* 로고 살짝 줄임 */
-  }
+    .nav {
+      max-width:860px;
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      column-gap:24px;
+    }
 
-  .nav-right {
-    font-size: 14px;
-    gap: 16px;
-    flex-wrap: wrap;            /* About / Services / Alliance가 자연스럽게 감기도록 */
-  }
+    .nav-left img {
+      width:160px;
+      height:auto;
+      display:block;
+    }
 
-  .hero {
-    padding: 44px 0 34px;       /* 상단 공백 더 줄임 */
-  }
+    .nav-right {
+      display:flex;
+      align-items:center;
+      gap:20px;
+      font-size:15px;
+    }
 
-  .hero-title {
-    font-size: 23px;
-  }
+    .nav-right a {
+      text-decoration:none;
+      color:var(--moding-green);
+      font-weight:500;
+      white-space:nowrap;
+      transition:0.2s;
+    }
 
-  .hero-sub {
-    font-size: 15px;
-  }
+    .nav-right a:hover {
+      color:var(--moding-orange);
+    }
 
-  .btn-group {
-    flex-direction: column;     /* 서비스소개 / 제휴버튼 위아래 정렬 */
-    align-items: center;
-    gap: 10px;
-  }
+    /* HERO */
+    .hero {
+      text-align:center;
+      padding:72px 0 56px;
+    }
 
-  .download-btn {
-    width: 100%;
-    max-width: 260px;           /* 다운로드 버튼도 화면 폭에 맞게 */
-  }
-}
+    .hero-title {
+      font-size:30px;
+      font-weight:700;
+      line-height:1.35;
+      margin-bottom:18px;
+      color:var(--moding-green);
+    }
+
+    .hero-sub {
+      font-size:17px;
+      opacity:0.9;
+      margin-bottom:34px;
+      line-height:1.6;
+      color:var(--text-main);
+    }
+
+    .btn-group {
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      margin-bottom:36px;
+      flex-wrap:wrap;
+    }
+
+    .btn {
+      padding:14px 22px;
+      border-radius:14px;
+      font-size:15px;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.2s;
+    }
+
+    .btn-green {
+      background:var(--moding-green);
+      color:#ffffff;
+      border:2px solid var(--moding-green);
+    }
+    .btn-green:hover {
+      background:#1c6f1c;
+      border-color:#1c6f1c;
+    }
+
+    .btn-orange {
+      background:var(--moding-orange);
+      color:#ffffff;
+      border:2px solid var(--moding-orange);
+    }
+    .btn-orange:hover {
+      background:#e67800;
+      border-color:#e67800;
+    }
+
+    /* DOWNLOAD */
+    .download-wrapper {
+      margin-top:32px;
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .download-btn {
+      padding:14px 20px;
+      font-size:14px;
+      border-radius:18px;
+      text-decoration:none;
+      border:2px solid var(--moding-green);
+      color:var(--moding-green);
+      background:#ffffff;
+      font-weight:600;
+      width:210px;
+      text-align:center;
+      transition:0.2s;
+    }
+    .download-btn:hover {
+      background:var(--moding-green);
+      color:#ffffff;
+    }
+
+    /* ABOUT */
+    .about {
+      margin-top:70px;
+      padding:46px 24px 50px;
+      background:#ffffff;
+      border-radius:22px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,0.04);
+    }
+
+    .about-title {
+      font-size:13px;
+      letter-spacing:0.18em;
+      color:var(--moding-green);
+      margin-bottom:14px;
+    }
+
+    .about-desc {
+      font-size:17px;
+      line-height:1.7;
+      color:var(--text-sub);
+      margin-bottom:10px;
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top:auto;
+      padding:22px 10px;
+      font-size:12px;
+      color:#777;
+      text-align:center;
+      border-top:1px solid #e1e4e2;
+      line-height:1.8;
+      background:#ffffff;
+      width:100%;
+    }
+
+    /* 복사/드래그 방지 */
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select:none;
+      user-select:none;
+    }
+    img { user-drag:none; pointer-events:none; }
+    input,textarea{user-select:text;pointer-events:auto;}
+
+    /* ===============================
+       반응형: 태블릿 & 모바일 보정
+       =============================== */
+
+    @media (max-width: 768px) {
+      .container {
+        padding:32px 20px 40px;
+      }
+      .hero {
+        padding:56px 0 40px;
+      }
+      .hero-title {
+        font-size:26px;
+      }
+      .hero-sub {
+        font-size:16px;
+      }
+      .btn-group {
+        gap:12px;
+      }
+      .about {
+        margin-top:56px;
+        padding:38px 18px 42px;
+      }
+      .about-desc {
+        font-size:16px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        padding:12px 16px;
+        flex-direction:column;
+        align-items:flex-start;
+        row-gap:8px;
+      }
+      .nav-left img {
+        width:150px;
+      }
+      .nav-right {
+        font-size:14px;
+        gap:16px;
+        flex-wrap:wrap;
+      }
+      .hero {
+        padding:44px 0 34px;
+      }
+      .hero-title {
+        font-size:23px;
+      }
+      .hero-sub {
+        font-size:15px;
+      }
+      .btn-group {
+        flex-direction:column;
+        align-items:center;
+      }
+      .download-btn {
+        width:100%;
+        max-width:260px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="nav-left">
+      <img src="모딩로고.png" alt="Moding Logo">
+    </div>
+    <div class="nav-right">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="alliance.html">Alliance</a>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <section class="hero">
+    <h1 class="hero-title">
+      식품 제조사와 외식업 사장님을 잇는<br>B2B Food-SaaS 플랫폼
+    </h1>
+    <p class="hero-sub">
+      제품 공급·발주·정산·데이터까지 한 번에.<br>
+      모딩에서 쉽고 빠르게 연결하세요.
+    </p>
+
+    <div class="btn-group">
+      <a class="btn btn-green" href="services.html">서비스 소개</a>
+      <a class="btn btn-orange" href="alliance.html">제휴·입점 문의</a>
+    </div>
+
+    <div class="download-wrapper">
+      <a class="download-btn" href="#">Google Play (Coming Soon)</a>
+      <a class="download-btn" href="#">App Store (Coming Soon)</a>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="about-title">ABOUT MODING</div>
+    <p class="about-desc">
+      모딩(Moding)은 좋은 제품을 가진 식품 제조사와<br>
+      검증된 상품을 찾는 외식업 사장님을 연결합니다.
+    </p>
+    <p class="about-desc">
+      주문·정산·데이터를 한 곳에서 관리하며,<br>
+      사장님의 시간을 절약하는 B2B Food-SaaS 플랫폼입니다.
+    </p>
+  </section>
+</div>
+
+<footer>
+  주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+  통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
+  대구광역시 달서구 달구벌대로 1698, 6층
+</footer>
+
+<script>
+  document.addEventListener("contextmenu", function (e) {
+    if (!e.target.closest("input, textarea, a")) e.preventDefault();
+  });
+  document.addEventListener("dragstart", function (e) {
+    if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+  document.addEventListener("keydown", function (e) {
+    const key=e.key.toLowerCase();
+    if ((e.ctrlKey||e.metaKey) && !e.target.closest("input,textarea")) {
+      if(["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+    }
+  });
+  document.addEventListener("copy", function (e) {
+    if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+</script>
+
+</body>
+</html>
+```0
