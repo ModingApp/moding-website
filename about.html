@@ -13,22 +13,44 @@
   <meta property="og:url" content="https://moding.app/about.html">
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
-  <!-- 🔥 공통 헤더 스타일/스크립트 -->
-  <link rel="stylesheet" href="assets/common/mobile-nav.css">
-  <script defer src="assets/common/mobile-nav.js"></script>
-
   <style>
+    .top-return {
+      display:flex;
+      justify-content:flex-end;
+      margin-bottom:12px;
+    }
+
+    .top-return-btn {
+      font-size:12px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid var(--moding-green);
+      color:var(--moding-green);
+      background:#ffffff;
+      text-decoration:none;
+      font-weight:500;
+      transition:0.2s;
+    }
+
+    .top-return-btn:hover {
+      background:var(--moding-green);
+      color:#ffffff;
+    }
 
     :root {
       --moding-green: #238B22;
       --moding-orange: #FF8C00;
-      --moding-brown: #8B5A2B;
+      --moding-brown: #8B5A2B; /* 로고 나무색 계열 */
       --bg-light: #F7F9F8;
       --text-main: #1F3B1F;
       --text-sub: #555555;
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+    * {
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
     body {
       font-family:-apple-system, BlinkMacSystemFont,"Noto Sans KR",sans-serif;
@@ -48,29 +70,53 @@
       padding:40px 24px;
     }
 
-    /* 돌아가기 버튼 */
-    .top-return {
-      display:flex;
-      justify-content:flex-end;
-      margin-bottom:12px;
-    }
-    .top-return-btn {
-      font-size:12px;
-      padding:6px 12px;
-      border-radius:999px;
-      border:1px solid var(--moding-green);
-      color:var(--moding-green);
+    /* HEADER */
+    header {
+      width:100%;
+      border-bottom:1px solid #e1e4e2;
       background:#ffffff;
+    }
+
+    .nav {
+      max-width:860px;
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      column-gap:24px;
+    }
+
+    .nav-left img {
+      width:160px;
+      height:auto;
+      display:block;
+    }
+
+    .nav-right {
+      display:flex;
+      align-items:center;
+      gap:20px;
+      font-size:15px;
+    }
+
+    .nav-right a {
       text-decoration:none;
+      color:var(--moding-green);
       font-weight:500;
+      white-space:nowrap;
+      transition:0.2s;
     }
 
-    .top-return-btn:hover {
-      background:var(--moding-green);
-      color:#ffffff;
+    .nav-right a:hover {
+      color:var(--moding-orange);
     }
 
-    /* HERO */
+    .nav-right a.active {
+      color:var(--moding-orange);
+    }
+
+    /* HERO ABOUT */
     .hero-about {
       padding:60px 0 46px;
     }
@@ -97,7 +143,7 @@
       opacity:0.9;
     }
 
-    /* 섹션 공통 */
+    /* COMMON SECTION TITLES */
     .section-title {
       font-size:14px;
       letter-spacing:0.18em;
@@ -112,7 +158,7 @@
       margin-bottom:16px;
     }
 
-    /* philosophy */
+    /* PHILOSOPHY */
     .philosophy {
       margin-top:52px;
     }
@@ -139,19 +185,23 @@
       margin-bottom:6px;
     }
 
+    .philosophy-tags {
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
     .philosophy-tag {
-      display:inline-block;
       font-size:11px;
       padding:4px 10px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,0.35);
       color:#f5f7f6;
       background:rgba(255,255,255,0.04);
-      margin-right:6px;
-      margin-top:8px;
     }
 
-    /* Values */
+    /* VALUES (우리가 만드는 가치) */
     .values {
       margin-top:60px;
       margin-bottom:10px;
@@ -174,14 +224,24 @@
       flex:1 1 0;
       min-width:230px;
       border-radius:20px;
-      padding:18px;
+      padding:18px 18px 16px;
+      font-size:14px;
+      line-height:1.7;
       background:#ffffff;
       box-shadow:0 6px 18px rgba(0,0,0,0.04);
     }
 
-    .value-card.green { border:2px solid var(--moding-green); }
-    .value-card.orange { border:2px solid var(--moding-orange); }
-    .value-card.neutral { border:2px solid var(--moding-brown); }
+    .value-card.green {
+      border:2px solid var(--moding-green);
+    }
+
+    .value-card.orange {
+      border:2px solid var(--moding-orange);
+    }
+
+    .value-card.neutral {
+      border:2px solid var(--moding-brown);
+    }
 
     .value-title {
       font-size:14px;
@@ -199,26 +259,46 @@
       border-radius:999px;
       border:1px solid rgba(0,0,0,0.12);
       background:#ffffff;
+      color:var(--text-sub);
     }
 
-    .value-card.green .value-badge { color:var(--moding-green); border-color:var(--moding-green); }
-    .value-card.orange .value-badge { color:var(--moding-orange); border-color:var(--moding-orange); }
-    .value-card.neutral .value-badge { color:var(--moding-brown); border-color:var(--moding-brown); }
+    .value-card.green .value-badge {
+      border-color:var(--moding-green);
+      color:var(--moding-green);
+    }
 
-    .value-card ul { list-style:none; padding:0; }
+    .value-card.orange .value-badge {
+      border-color:var(--moding-orange);
+      color:var(--moding-orange);
+    }
+
+    .value-card.neutral .value-badge {
+      border-color:var(--moding-brown);
+      color:var(--moding-brown);
+    }
+
+    .value-card ul {
+      list-style:none;
+      margin:0;
+      padding-left:0;
+    }
+
     .value-card li {
       position:relative;
       padding-left:14px;
       margin-bottom:4px;
       color:var(--text-sub);
     }
+
     .value-card li::before {
       content:"•";
       position:absolute;
       left:0;
+      top:0;
       color:rgba(0,0,0,0.35);
     }
 
+    /* FOOTER */
     footer {
       margin-top:auto;
       padding:22px 10px;
@@ -226,163 +306,243 @@
       color:#777;
       text-align:center;
       border-top:1px solid #e1e4e2;
+      line-height:1.8;
       background:#ffffff;
       width:100%;
     }
 
-    /* 복사 방지 */
+    /* 복사/드래그 방지 */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select:none;
       user-select:none;
     }
-    img { user-drag:none; pointer-events:none; }
-    input,textarea{user-select:text;pointer-events:auto;}
 
-    /* 반응형 */
-    @media (max-width:600px) {
-      .hero-about-title { font-size:22px; }
-      .hero-about-sub { font-size:15px; }
+    img {
+      user-drag:none;
+      pointer-events:none;
+    }
+
+    input,
+    textarea {
+      user-select:text;
+      pointer-events:auto;
+    }
+
+    /* ===============================
+       반응형: 태블릿 & 모바일 보정
+       =============================== */
+    @media (max-width: 768px) {
+      .container {
+        padding:32px 20px 40px;
+      }
+      .hero-about {
+        padding:46px 0 34px;
+      }
+      .hero-about-title {
+        font-size:24px;
+      }
+      .hero-about-sub {
+        font-size:16px;
+      }
+      .philosophy-box {
+        padding:22px 18px 20px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        padding:12px 16px;
+        flex-direction:column;
+        align-items:center;
+        row-gap:8px;
+      }
+      .nav-left img {
+        width:150px;
+      }
+      .nav-right {
+        font-size:14px;
+        gap:16px;
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+      .hero-about-title {
+        font-size:22px;
+      }
+      .hero-about-sub {
+        font-size:15px;
+      }
+      .values-grid {
+        gap:12px;
+      }
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <div class="nav">
+      <div class="nav-left">
+        <img src="모딩로고.png" alt="Moding Logo">
+      </div>
+      <div class="nav-right">
+        <a href="about.html" class="active">About</a>
+        <a href="brand.html">Brand</a>
+        <a href="services.html">Services</a>
+        <a href="alliance.html">Alliance</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+    </div>
+  </header>
 
-<!-- 🔥 공통 헤더 자동 로딩 -->
-<div id="site-header"></div>
-<script>
-  fetch("assets/common/header.html")
-    .then(res => res.text())
-    .then(html => document.getElementById("site-header").innerHTML = html);
-</script>
+  <div class="container">
 
-<div class="container">
+    <div class="top-return">
+      <a href="index.html" class="top-return-btn">메인 화면으로</a>
+    </div>
 
-  <div class="top-return">
-    <a href="index.html" class="top-return-btn">메인 화면으로</a>
+    <!-- HERO ABOUT -->
+    <section class="hero-about">
+      <h1 class="hero-about-title">
+        현장을 가장 잘 아는 사람들이 만드는<br>
+        B2B Food-SaaS, 모딩(Moding)
+      </h1>
+      <p class="hero-about-sub">
+        모딩은 식품 제조사와 외식업 사장님이 서로의 일을 더 잘할 수 있도록 돕는<br>
+        현장 기반 B2B Food-SaaS 플랫폼입니다.
+      </p>
+      <p class="hero-about-meta">
+        20년 가까운 외식업·제조 경험을 바탕으로, 복잡한 정산·발주·데이터를<br>
+        ‘사장님의 언어’로 풀어낸 도구를 만들고 있습니다.
+      </p>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section class="philosophy">
+      <div class="section-title">PHILOSOPHY</div>
+      <div class="section-subtitle">현장의 언어로 만드는 B2B 도구</div>
+
+      <div class="philosophy-box">
+        <div class="philosophy-lead">
+          “우리는 외식업과 식품 제조, 두 현장을 모두 이해합니다.”
+        </div>
+
+        <p class="philosophy-text">
+          모딩의 경영진은 외식업과 식품 제조업의 현장을 오랫동안 직접 경험했습니다.
+          매장에서 좋은 제품 컨택부터 발주·정산·세금계산서 처리에 시간이 얼마나 소모되는지,
+          좋은 제품을 만든 제조사가 마땅한 판로를 찾지 못해 어려움을 겪는 현실도 잘 알고 있습니다.
+        </p>
+
+        <p class="philosophy-text">
+          그래서 모딩은 한쪽만을 위한 도구를 만들지 않습니다.
+          외식업 사장님께는 원재료·소스·밀키트를 찾는 시간을 줄여드리고,
+          제조사 사장님께는 홍보·영업·거래처 관리에 드는 부담을 획기적으로 줄여드립니다.
+          두 업종이 서로 더 빠르고 정확하게 연결될 수 있도록 돕는 것이 모딩의 역할입니다.
+        </p>
+
+        <p class="philosophy-text">
+          우리는 기술을 위한 기술을 만들지 않습니다.
+          사장님이 매일 반복하는 일, 불필요한 관리 업무를 줄여주는 것부터 시작합니다.
+          발주·정산·데이터 흐름이 한 화면에서 보이며,
+          현장에서 바로 이해되는 언어와 구조로 설계됩니다.
+        </p>
+
+        <p class="philosophy-text">
+          “사장님이 제품을 더 잘 만들고, 매장을 더 안정적으로 운영할 수 있도록 돕는 것.”
+          이것이 모딩이 서비스를 설계하는 가장 중요한 기준입니다.
+        </p>
+
+        <span class="philosophy-tag">현장의 언어</span>
+        <span class="philosophy-tag">단순한 구조</span>
+        <span class="philosophy-tag">직관적 흐름</span>
+        <span class="philosophy-tag">데이터 기반 운영</span>
+        <span class="philosophy-tag">원스톱 정산 자동화</span>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values">
+      <div class="section-title">VALUES</div>
+      <div class="section-subtitle">모딩이 만드는 가치</div>
+
+      <p class="values-desc">
+        모딩은 “누가 무엇을 위해 이 플랫폼을 쓰는가?”에 초점을 맞춥니다.
+        식품 제조사, 외식업 사장님, 그리고 두 현장을 잇는 플랫폼으로서의 역할까지,
+        각자의 가치를 분명하게 설계합니다.
+      </p>
+
+      <div class="values-grid">
+        <!-- 제조사 카드 -->
+        <div class="value-card green">
+          <div class="value-title">
+            식품 제조사
+            <span class="value-badge">판로 확대</span>
+          </div>
+          <ul>
+            <li>신규 매장 거래처를 쉽게 확보할 수 있는 온라인 채널</li>
+            <li>발주·정산·계산서가 자동으로 처리되는 시스템</li>
+            <li>제품(소스·원재료·PB/OEM)별 주문량을 한눈에 관리</li>
+            <li>예측 가능한 반복 발주로 생산 계획을 안정화</li>
+          </ul>
+        </div>
+
+        <!-- 외식업 사장님 카드 -->
+        <div class="value-card orange">
+          <div class="value-title">
+            외식업 사장님
+            <span class="value-badge">운영 효율</span>
+          </div>
+          <ul>
+            <li>필요한 제품을 한 번에 비교하고 바로 발주</li>
+            <li>정산·계산서가 자동 반영되는 운영 시스템</li>
+            <li>소스·원재료·밀키트를 손쉽게 찾고 주문</li>
+            <li>업무 시간을 줄이고 "매장 운영" 에 집중할 수 있는 구조</li>
+          </ul>
+        </div>
+
+        <!-- 플랫폼 가치 카드 -->
+        <div class="value-card neutral">
+          <div class="value-title">
+            모딩 플랫폼
+            <span class="value-badge">투명한 중개</span>
+          </div>
+          <ul>
+            <li>상품 거래의 당사자가 아닌, 통신판매중개자로서의 명확한 역할</li>
+            <li>제조사↔매장 간 거래 흐름과 정산 구조를 투명하게 관리</li>
+            <li>PG와 연동된 정산 데이터로 실질적인 매출·원가 관리 지원</li>
+            <li>플랫폼이 아닌 “사장님 편”에 서는 B2B 서비스 지향</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
   </div>
 
-  <!-- HERO -->
-  <section class="hero-about">
-    <h1 class="hero-about-title">
-      현장을 가장 잘 아는 사람들이 만드는<br>
-      B2B Food-SaaS, 모딩(Moding)
-    </h1>
-    <p class="hero-about-sub">
-      모딩은 식품 제조사와 외식업 사장님이 서로의 일을 더 잘할 수 있도록 돕는<br>
-      현장 기반 B2B Food-SaaS 플랫폼입니다.
-    </p>
-    <p class="hero-about-meta">
-      20년 가까운 외식업·제조 경험을 바탕으로, 복잡한 정산·발주·데이터를<br>
-      ‘사장님의 언어’로 풀어낸 도구를 만들고 있습니다.
-    </p>
-  </section>
+  <footer>
+    주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+    통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
+    대구광역시 달서구 달구벌대로 1698, 6층
+  </footer>
 
-  <!-- PHILOSOPHY -->
-  <section class="philosophy">
-    <div class="section-title">PHILOSOPHY</div>
-    <div class="section-subtitle">현장의 언어로 만드는 B2B 도구</div>
+  <script>
+    /* 복사/드래그 방지 */
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) e.preventDefault();
+    });
 
-    <div class="philosophy-box">
-      <div class="philosophy-lead">“우리는 외식업과 식품 제조, 두 현장을 모두 이해합니다.”</div>
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) e.preventDefault();
+    });
 
-      <p class="philosophy-text">
-        모딩의 경영진은 외식업과 식품 제조업의 현장을 오랫동안 직접 경험했습니다.
-        매장에서 좋은 제품 컨택부터 발주·정산·세금계산서 처리에 시간이 얼마나 소모되는지,
-        좋은 제품을 만든 제조사가 마땅한 판로를 찾지 못해 어려움을 겪는 현실도 잘 알고 있습니다.
-      </p>
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
+        if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+      }
+    });
 
-      <p class="philosophy-text">
-        그래서 모딩은 한쪽만을 위한 도구를 만들지 않습니다.
-        외식업 사장님께는 원재료·소스·밀키트를 찾는 시간을 줄여드리고,
-        제조사 사장님께는 홍보·영업·거래처 관리에 드는 부담을 획기적으로 줄여드립니다.
-      </p>
-
-      <p class="philosophy-text">
-        우리는 기술을 위한 기술을 만들지 않습니다.
-        사장님이 매일 반복하는 일, 불필요한 관리 업무를 줄여주는 것부터 시작합니다.
-        발주·정산·데이터 흐름이 한 화면에서 보이며,
-        현장에서 바로 이해되는 언어와 구조로 설계됩니다.
-      </p>
-
-      <p class="philosophy-text">
-        “사장님이 제품을 더 잘 만들고, 매장을 더 안정적으로 운영할 수 있도록 돕는 것.”
-        이것이 모딩이 서비스를 설계하는 가장 중요한 기준입니다.
-      </p>
-
-      <span class="philosophy-tag">현장의 언어</span>
-      <span class="philosophy-tag">단순한 구조</span>
-      <span class="philosophy-tag">직관적 흐름</span>
-      <span class="philosophy-tag">데이터 기반 운영</span>
-      <span class="philosophy-tag">원스톱 정산 자동화</span>
-    </div>
-  </section>
-
-  <!-- VALUES -->
-  <section class="values">
-    <div class="section-title">VALUES</div>
-    <div class="section-subtitle">모딩이 만드는 가치</div>
-
-    <p class="values-desc">
-      모딩은 “누가 무엇을 위해 이 플랫폼을 쓰는가?”에 초점을 맞춥니다.<br>
-      식품 제조사, 외식업 사장님, 그리고 두 현장을 잇는 플랫폼으로서의 역할까지,<br>
-      각자의 가치를 분명하게 설계합니다.
-    </p>
-
-    <div class="values-grid">
-
-      <div class="value-card green">
-        <div class="value-title">
-          식품 제조사 <span class="value-badge">판로 확대</span>
-        </div>
-        <ul>
-          <li>신규 매장 거래처를 쉽게 확보할 수 있는 온라인 채널</li>
-          <li>발주·정산·계산서가 자동 처리되는 시스템</li>
-          <li>제품 별 주문량을 한눈에 관리</li>
-          <li>반복 발주로 생산 계획 안정화</li>
-        </ul>
-      </div>
-
-      <div class="value-card orange">
-        <div class="value-title">
-          외식업 사장님 <span class="value-badge">운영 효율</span>
-        </div>
-        <ul>
-          <li>필요한 제품을 한 번에 비교하고 바로 발주</li>
-          <li>정산·계산서 자동 반영</li>
-          <li>소스/원재료/밀키트 빠른 탐색</li>
-          <li>업무 시간을 줄여 매장 운영 집중</li>
-        </ul>
-      </div>
-
-      <div class="value-card neutral">
-        <div class="value-title">
-          모딩 플랫폼 <span class="value-badge">투명한 중개</span>
-        </div>
-        <ul>
-          <li>당사자가 아닌 통신판매중개자로서의 명확한 역할</li>
-          <li>제조사↔매장 정산 흐름 투명 관리</li>
-          <li>PG 연동 정산 데이터 기반 운영</li>
-          <li>“플랫폼”이 아닌 “사장님 편”의 서비스</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-</div>
-
-<footer>
-  주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
-  통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
-  대구광역시 달서구 달구벌대로 1698, 6층
-</footer>
-
-<script>
-  /* 복사 방지 */
-  document.addEventListener("contextmenu", function (e) {
-    if (!e.target.closest("input, textarea, a")) e.preventDefault();
-  });
-</script>
-
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) e.preventDefault();
+    });
+  </script>
 </body>
 </html>
