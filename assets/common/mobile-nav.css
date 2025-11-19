@@ -1,1 +1,238 @@
+:root {
+  --moding-green: #238B22;
+  --moding-orange: #FF8C00;
+  --nav-bg-dark: #111c14;
+  --max-width: 860px;
+}
+
+/* 상단 헤더 공통 */
+.site-header {
+  width: 100%;
+  background: var(--nav-bg-dark);
+  color: #ffffff;
+  position: relative;
+  z-index: 100;
+}
+
+.nav-bar {
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 24px;
+}
+
+/* 로고 */
+.nav-logo img {
+  display: block;
+  height: 34px;
+  width: auto;
+}
+
+/* 기본 메뉴 (PC/태블릿) */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #f8f9f7;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.2s, opacity 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--moding-orange);
+}
+
+.nav-links a.active {
+  color: var(--moding-orange);
+}
+
+/* 햄버거 버튼 */
+.nav-toggle {
+  display: none; /* 기본은 숨김 (모바일에서만 보이게) */
+  width: 38px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: transparent;
+  padding: 6px 8px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: #ffffff;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+/* 모바일 패널 */
+.mobile-nav-panel {
+  position: fixed;
+  top: 0;
+  right: -80%;
+  width: 80%;
+  max-width: 320px;
+  height: 100vh;
+  background: #132019;
+  color: #ffffff;
+  box-shadow: -6px 0 24px rgba(0,0,0,0.45);
+  transition: right 0.25s ease-out;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav-inner {
+  padding: 18px 18px 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.mobile-logo-text {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-close {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* 모바일 메뉴 리스트 */
+.mobile-nav-menu,
+.mobile-nav-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-nav-menu a,
+.mobile-nav-meta a {
+  text-decoration: none;
+  color: #f5f7f6;
+  font-size: 16px;
+  padding: 8px 4px;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.mobile-nav-menu a:hover,
+.mobile-nav-meta a:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--moding-orange);
+}
+
+.mobile-nav-section {
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.mobile-nav-section-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.mobile-nav-footer {
+  margin-top: auto;
+  font-size: 11px;
+  opacity: 0.7;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+/* 오버레이 */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s;
+  z-index: 110;
+}
+
+/* nav-open 상태일 때 */
+body.nav-open .mobile-nav-panel {
+  right: 0;
+}
+
+body.nav-open .nav-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 햄버거 아이콘 애니메이션 (선택) */
+body.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(4px) rotate(45deg);
+}
+body.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+body.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* 반응형 설정 */
+@media (max-width: 768px) {
+  .nav-inner {
+    padding: 10px 16px;
+  }
+
+  .nav-logo img {
+    height: 30px;
+  }
+
+  .nav-links {
+    display: none; /* 모바일에서는 기본 메뉴 숨김 */
+  }
+
+  .nav-toggle {
+    display: flex; /* 모바일에서만 보이게 */
+  }
+}
+
+/* 태블릿 이상(PC)에서 모바일 패널 숨기긴 하지만,
+   JS로 nav-open 안 붙이면 원래 안 보입니다 */
+@media (min-width: 769px) {
+  .mobile-nav-panel,
+  .nav-overlay {
+    display: none;
+  }
+}
 
