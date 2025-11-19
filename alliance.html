@@ -94,6 +94,7 @@
       letter-spacing:0.18em;
       color:var(--moding-green);
       margin-bottom:10px;
+      text-transform:uppercase;
     }
 
     .section-subtitle {
@@ -105,20 +106,7 @@
 
     /* HERO ALLIANCE */
     .hero-alliance {
-      padding:60px 0 46px;
-    }
-
-    .hero-badge {
-      display:inline-block;
-      font-size:11px;
-      font-weight:600;
-      letter-spacing:0.16em;
-      padding:3px 10px;
-      border-radius:999px;
-      border:1px solid rgba(35,139,34,0.3);
-      color:var(--moding-green);
-      margin-bottom:12px;
-      background:#ffffff;
+      padding:56px 0 42px;
     }
 
     .hero-alliance-title {
@@ -145,7 +133,7 @@
 
     /* WHO WE WORK WITH */
     .who-partners {
-      margin-top:52px;
+      margin-top:48px;
     }
 
     .who-grid {
@@ -215,30 +203,34 @@
     }
 
     .value-card {
-      border-radius:20px;
-      padding:18px 18px 16px;
-      background:#ffffff;
-      border:2px solid var(--moding-brown);
-      box-shadow:0 6px 18px rgba(0,0,0,0.04);
+      border-radius:22px;
+      padding:24px 22px 22px;
+      background:linear-gradient(135deg,#111c14,#1b3724);
+      box-shadow:0 10px 30px rgba(0,0,0,0.04);
       font-size:14px;
       line-height:1.7;
-      color:var(--text-sub);
+      color:#f5f7f6;
     }
 
     .value-title {
-      font-size:14px;
+      font-size:15px;
       font-weight:600;
-      margin-bottom:8px;
-      color:var(--text-main);
+      margin-bottom:10px;
+      color:#ffffff;
     }
 
     .value-text + .value-text {
       margin-top:4px;
     }
 
+    .value-card strong {
+      color:#ffffff;
+      font-weight:600;
+    }
+
     /* JOINING FLOW */
     .flow-block {
-      margin-top:54px;
+      margin-top:52px;
     }
 
     .flow-desc {
@@ -297,7 +289,7 @@
 
     /* CTA CONTACT */
     .cta-contact {
-      margin-top:60px;
+      margin-top:56px;
       text-align:center;
     }
 
@@ -385,13 +377,23 @@
         padding:32px 20px 40px;
       }
       .hero-alliance {
-        padding:46px 0 34px;
+        padding:44px 0 34px;
       }
       .hero-alliance-title {
         font-size:24px;
       }
       .hero-alliance-sub {
         font-size:16px;
+      }
+      .hero-alliance-meta {
+        font-size:13px;
+      }
+      .section-subtitle {
+        font-size:17px;
+      }
+      .value-card {
+        padding:22px 18px 20px;
+        font-size:13.5px;
       }
     }
 
@@ -421,6 +423,10 @@
       .cta-buttons {
         gap:12px;
       }
+      .who-card,
+      .step-card {
+        min-width:100%;
+      }
       .cta-btn {
         width:100%;
         max-width:280px;
@@ -447,7 +453,6 @@
 <div class="container">
   <!-- HERO -->
   <section class="hero-alliance">
-    <div class="hero-badge">PARTNERSHIP & ALLIANCE</div>
     <h1 class="hero-alliance-title">
       제휴·입점 안내
     </h1>
@@ -471,12 +476,10 @@
         <div class="who-type">식품 제조사 사장님</div>
         <div class="who-tag">제조사 사용자</div>
         <p class="who-text">
-          자체 공장 또는 OEM 생산을 운영하며,
-          좋은 제품을 가지고 B2B 거래를 확장하고 싶은 사장님.
+          자체 공장 또는 OEM 생산을 운영하며, 좋은 제품을 가지고 B2B 거래를 확장하고 싶은 사장님.
         </p>
         <p class="who-text">
-          판로 확보뿐 아니라 발주·정산·세금계산서 발행까지
-          한 번에 관리하고 싶은 제조사에게 적합합니다.
+          판로 확보뿐 아니라 발주·정산·세금계산서 발행까지 한 번에 관리하고 싶은 제조사에게 적합합니다.
         </p>
         <p class="who-text">
           PB·OEM, 장기 공급 계약 등 함께 성장할 파트너를 찾는 분을 환영합니다.
@@ -487,12 +490,10 @@
         <div class="who-type">외식업 사장님</div>
         <div class="who-tag">매장 사용자</div>
         <p class="who-text">
-          소스·원재료·밀키트 운영을 체계적으로 관리하고 싶은 매장,
-          검증된 제조사 상품을 활용해 메뉴를 구성하고 싶은 사장님.
+          소스·원재료·밀키트 운영을 체계적으로 관리하고 싶은 매장, 검증된 제조사 상품을 활용해 메뉴를 구성하고 싶은 사장님.
         </p>
         <p class="who-text">
-          발주·정산·세금계산서를 반복 관리하는 시간을 줄이고,
-          매장 운영과 손님 경험에 집중하고 싶은 분에게 적합합니다.
+          발주·정산·세금계산서를 반복 관리하는 시간을 줄이고, 매장 운영과 손님 경험에 집중하고 싶은 분에게 적합합니다.
         </p>
         <p class="who-text">
           장기 거래가 가능한 제조사와 안정적인 공급 구조를 만들고 싶은 사장님을 기다립니다.
@@ -549,7 +550,7 @@
         </div>
         <p class="step-text">
           제조사는 제품, 공정, 인허가 및 공급 구조를,
-          외식업은 업종, 메뉴 구성, 발주·정산 방식 등을 함께 확인합니다.
+          외식업은 업종, 메뉴 구성, 발주·정산 방식을 함께 확인합니다.
         </p>
       </div>
 
