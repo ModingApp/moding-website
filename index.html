@@ -3,410 +3,275 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>모든 사장님을 위한 B2B Food-SaaS 플랫폼, 모딩(Moding)</title>
-   
-  <meta name="description" content="모딩(Moding)은 식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼입니다. 좋은 제품을 가진 제조사와 검증된 상품을 찾는 매장을 한 곳에서 이어드립니다.">
+  <title>모딩(Moding) | B2B Food-SaaS 플랫폼</title>
 
+  <!-- Meta -->
+  <meta name="description" content="식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼 모딩(Moding). 정산, 주문, 데이터 관리까지 한 곳에서.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
-  <meta property="og:title" content="모든 사장님을 위한 B2B Food-SaaS 플랫폼, 모딩(Moding)">
-  <meta property="og:description" content="식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼, 모딩(Moding)">
+  <meta property="og:title" content="B2B Food-SaaS 플랫폼, 모딩(Moding)">
+  <meta property="og:description" content="식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼. 빠르고 정확한 정산, 주문관리, 데이터 기반 운영 자동화.">
   <meta property="og:url" content="https://moding.app/">
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body, *:not(input):not(textarea) {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    img, .nocopy-img {
-      -webkit-user-drag: none;
-      user-drag: none;
-      pointer-events: none;
-    }
-
-    input, textarea {
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
-      pointer-events: auto;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
-      background: #0b0b0b;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont,"Noto Sans KR",sans-serif;
+      background:#ffffff;
+      color:#0B5043;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
     }
 
-    .wrapper {
-      width: 100%;
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 40px 24px 32px;
-      text-align: center;
-      flex: 0 0 auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
+    /* 공통 레이아웃 */
+    .container {
+      width:100%;
+      max-width:860px;
+      margin:0 auto;
+      padding:40px 24px;
     }
 
-    .type-box {
-      margin-bottom: 24px;
+    /* 상단 네비 */
+    header {
+      width:100%;
+      border-bottom:1px solid #eaeaea;
+      background:#ffffff;
     }
 
-    .line1,
-    .line2 {
-      font-size: 28px;
-      opacity: 0.9;
-      margin-bottom: 4px;
-      white-space: nowrap;
+    .nav {
+      max-width:860px;
+      margin:0 auto;
+      padding:16px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
     }
 
-    .logo {
-      margin: 16px 0 24px 0;
+    .nav-left img {
+      width:160px;
+      height:auto;
     }
 
-    .logo img {
-      width: 380px;
-      max-width: 100%;
-      height: auto;
+    .nav-right a {
+      margin-left:24px;
+      text-decoration:none;
+      color:#0B5043;
+      font-size:15px;
+      font-weight:500;
+      transition:0.2s;
     }
 
-    .desc1 {
-      font-size: 20px;
-      line-height: 1.6;
-      opacity: 0.9;
-      margin-bottom: 6px;
+    .nav-right a:hover {
+      color:#FF7A21;
     }
 
-    .desc2 {
-      font-size: 26px;
-      line-height: 1.4;
-      margin-bottom: 18px;
-      animation: fadeBlink 2.4s ease-in-out infinite;
+    /* Hero 영역 */
+    .hero {
+      text-align:center;
+      padding:80px 0 64px;
     }
 
-    @keyframes fadeBlink {
-      0%, 100% { opacity: 0.35; }
-      50%      { opacity: 1; }
+    .hero-title {
+      font-size:32px;
+      font-weight:700;
+      line-height:1.3;
+      margin-bottom:16px;
+      color:#0B5043;
     }
 
-    .top-links-wrapper {
-      margin-top: 4px;
-      margin-bottom: 8px;
+    .hero-sub {
+      font-size:18px;
+      opacity:0.85;
+      margin-bottom:36px;
+      line-height:1.6;
     }
 
-    .top-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0;
-      font-size: 14px;
-      opacity: 0.8;
+    /* 버튼 */
+    .btn-group {
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      margin-bottom:40px;
     }
 
-    .top-links a {
-      color: #f0f0f0;
-      text-decoration: none;
-      pointer-events: auto;
-      transition: all 0.16s ease-out;
+    .btn {
+      padding:14px 22px;
+      border-radius:10px;
+      font-size:15px;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.2s;
     }
 
-    .top-links .divider {
-     margin: 0 10px;
-     color: rgba(255,255,255,0.6);
-     pointer-events: none; /* 클릭/hover 영향 제외 */
-     user-select: none;
-}
-
-    /* 🔥 상단 메뉴 Green/Orange 반반 hover 적용 */
-    .top-links a:hover {
-      background: linear-gradient(
-        90deg,
-        #0B8F3A 0%,
-        #0B8F3A 50%,
-        #F59C1A 50%,
-        #F59C1A 100%
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-decoration: none;
+    .btn-green {
+      background:#0B5043;
+      color:#ffffff;
+      border:2px solid #0B5043;
+    }
+    .btn-green:hover {
+      background:#093E38;
+      border-color:#093E38;
     }
 
-    .about-section {
-      width: 100%;
-      max-width: 960px;
-      margin: 40px auto 32px;
-      padding: 32px 24px 36px;
-      border-top: 1px solid #262626;
-      border-bottom: 1px solid #262626;
-      background: #080808;
+    .btn-orange {
+      background:#FF7A21;
+      color:#ffffff;
+      border:2px solid #FF7A21;
+    }
+    .btn-orange:hover {
+      background:#E86A14;
+      border-color:#E86A14;
+    }
+
+    /* Download Buttons */
+    .download-wrapper {
+      margin-top:40px;
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .download-btn {
+      padding:14px 20px;
+      font-size:14px;
+      border-radius:12px;
+      text-decoration:none;
+      border:2px solid #0B5043;
+      color:#0B5043;
+      background:#ffffff;
+      font-weight:600;
+      width:180px;
+      text-align:center;
+      transition:0.2s;
+    }
+    .download-btn:hover {
+      background:#0B5043;
+      color:#ffffff;
+    }
+
+    /* About Section */
+    .about {
+      margin-top:80px;
+      padding:50px 24px;
+      background:#F7F9F8;
+      border-radius:20px;
+      text-align:center;
     }
 
     .about-title {
-      font-size: 12px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      text-align: center;
-      margin-bottom: 22px;
+      font-size:14px;
+      letter-spacing:0.15em;
+      color:#0B5043;
+      margin-bottom:14px;
     }
 
-    .about-grid {
-      display: flex;
-      justify-content: center;
-      gap: 80px;
-      max-width: 520px;
-      margin: 0 auto;
+    .about-desc {
+      font-size:18px;
+      line-height:1.6;
+      opacity:0.9;
+      margin-bottom:12px;
     }
 
-    .about-col {
-      text-align: center;
+    /* Footer */
+    footer {
+      margin-top:auto;
+      padding:22px 10px;
+      font-size:13px;
+      color:#666;
+      text-align:center;
+      border-top:1px solid #eaeaea;
+      line-height:1.8;
     }
 
-    .about-col-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 8px;
+    /* 복사/우클릭 방지 */
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select:none;
+      user-select:none;
     }
-
-    .about-col ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-
-    .about-col li {
-      font-size: 13px;
-      line-height: 1.9;
-      opacity: 0.9;
-    }
-
-    .about-col li a {
-      color: #f0f0f0;
-      text-decoration: none;
-      pointer-events: auto;
-      position: relative;
-      display: inline-block;
-      transition: all 0.16s ease-out;
-    }
-
-    .about-col li a:hover {
-      background: linear-gradient(
-        90deg,
-        #0B8F3A 0%,
-        #0B8F3A 50%,
-        #F59C1A 50%,
-        #F59C1A 100%
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .footer-bar {
-      width: 100%;
-      border-top: 1px solid #222;
-      background: #0b0b0b;
-      padding: 12px 16px;
-      font-size: 11px;
-      color: #9d9d9d;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .footer-item::after {
-      content: "·";
-      margin-left: 8px;
-    }
-    .footer-item:last-child::after {
-      content: "";
-      margin: 0;
-    }
-
-    @media (max-width: 768px) {
-      .wrapper {
-        padding: 32px 18px 24px;
-      }
-
-      .line1,
-      .line2 {
-        font-size: 22px;
-        white-space: normal;
-      }
-
-      .desc1 {
-        font-size: 18px;
-      }
-
-      .desc2 {
-        font-size: 20px;
-      }
-
-      .about-section {
-        margin: 32px auto 24px;
-        padding: 24px 18px 28px;
-      }
-
-      .about-grid {
-        gap: 32px;
-      }
-
-      .about-col-title {
-        font-size: 14px;
-      }
-
-      .about-col li {
-        font-size: 12px;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .top-links {
-        max-width: 520px;
-        margin: 0 auto;
-        justify-content: center;
-      }
-    }
+    img { user-drag:none; pointer-events:none; }
+    input,textarea{user-select:text;pointer-events:auto;}
   </style>
 </head>
 
 <body>
-  <div class="wrapper">
-    <div class="type-box">
-      <div id="line1" class="line1"></div>
-      <div id="line2" class="line2"></div>
+
+<header>
+  <div class="nav">
+    <div class="nav-left">
+      <img src="모딩로고.png" alt="Moding Logo">
     </div>
-
-    <div class="logo">
-      <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
-    </div>
-
-    <p class="desc1">식품제조·외식업 사장님을 위한<br>B2B Food-SaaS 플랫폼</p>
-    <p class="desc2">Coming Soon</p>
-
-    <div class="top-links-wrapper">
-     <nav class="top-links">
-        <a href="about.html">회사소개</a>
-        <span class="divider">|</span>
-        <a href="brand.html">브랜드 아이덴티티</a>
-        <span class="divider">|</span>
-        <a href="location.html">오시는 길</a>
-    </nav>
+    <div class="nav-right">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="alliance.html">Alliance</a>
     </div>
   </div>
+</header>
 
-  <section class="about-section">
-    <div class="about-title">ABOUT MODING</div>
+<div class="container">
 
-    <div class="about-grid">
-      <div class="about-col">
-        <div class="about-col-title">서비스 안내</div>
-        <ul>
-          <li><a href="services.html">서비스 소개</a></li>
-          <li><a href="owners.html">사장님 안내</a></li>
-          <li><a href="entry.html">입점 안내</a></li>
-          <li><a href="alliance.html">제휴·입점 문의</a></li>
-        </ul>
-      </div>
+  <section class="hero">
+    <h1 class="hero-title">
+      식품 제조사와 외식업 사장님을 잇는<br>B2B Food-SaaS 플랫폼
+    </h1>
+    <p class="hero-sub">
+      제품 공급·발주·정산·데이터까지 한 번에.<br>
+      모딩에서 쉽고 빠르게 연결하세요.
+    </p>
 
-      <div class="about-col">
-        <div class="about-col-title">정책·고객지원</div>
-        <ul>
-          <li><a href="terms.html">이용약관</a></li>
-          <li><a href="privacy.html">개인정보처리방침</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="notice.html">공지사항</a></li>
-          <li><a href="resources.html">자료실</a></li>
-        </ul>
-      </div>
+    <div class="btn-group">
+      <a class="btn btn-green" href="services.html">서비스 소개</a>
+      <a class="btn btn-orange" href="alliance.html">제휴·입점 문의</a>
+    </div>
+
+    <!-- 다운로드 버튼 2개 (Coming Soon) -->
+    <div class="download-wrapper">
+      <a class="download-btn" href="#">Google Play (Coming Soon)</a>
+      <a class="download-btn" href="#">App Store (Coming Soon)</a>
     </div>
   </section>
 
-  <footer class="footer-bar">
-    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
-    <span class="footer-item">대표자: 서희진</span>
-    <span class="footer-item">사업자등록번호: 730-87-03564</span>
-    <span class="footer-item">통신판매업신고번호: 제2025-대구달서-1367호</span>
-    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
-    <span class="footer-item">문의: moding_inc@naver.com</span>
-  </footer>
+  <section class="about">
+    <div class="about-title">ABOUT MODING</div>
+    <p class="about-desc">
+      모딩(Moding)은 좋은 제품을 가진 식품 제조사와<br>
+      검증된 상품을 찾는 외식업 사장님을 연결합니다.
+    </p>
+    <p class="about-desc">
+      주문·정산·데이터를 한 곳에서 관리하며<br>
+      사장님의 시간을 절약하는 B2B Food-SaaS 플랫폼입니다.
+    </p>
+  </section>
 
-  <script>
-    window.onload = function () {
-      const text1 = "모든 사장님을 위한";
-      const text2 = "모든 것을 담은 플랫폼";
+</div>
 
-      const el1 = document.getElementById("line1");
-      const el2 = document.getElementById("line2");
+<footer>
+  주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+  통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
+  대구광역시 달서구 달구벌대로 1698, 6층
+</footer>
 
-      let i = 0, j = 0;
+<script>
+  document.addEventListener("contextmenu", function (e) {
+    if (!e.target.closest("input, textarea, a")) e.preventDefault();
+  });
+  document.addEventListener("dragstart", function (e) {
+    if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+  document.addEventListener("keydown", function (e) {
+    const key=e.key.toLowerCase();
+    if ((e.ctrlKey||e.metaKey) && !e.target.closest("input,textarea")) {
+      if(["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+    }
+  });
+  document.addEventListener("copy", function (e) {
+    if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+</script>
 
-      function typeLine1() {
-        if (i < text1.length) {
-          el1.textContent += text1[i];
-          i++;
-          setTimeout(typeLine1, 90);
-        } else {
-          setTimeout(typeLine2, 250);
-        }
-      }
-
-      function typeLine2() {
-        if (j < text2.length) {
-          el2.textContent += text2[j];
-          j++;
-          setTimeout(typeLine2, 90);
-        }
-      }
-
-      typeLine1();
-    };
-
-    document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) {
-        e.preventDefault();
-      }
-    });
-
-    document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
-    });
-
-    document.addEventListener("keydown", function (e) {
-      const key = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
-        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
-          e.preventDefault();
-        }
-      }
-    });
-
-    document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
-    });
-  </script>
 </body>
 </html>
