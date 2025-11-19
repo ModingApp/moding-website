@@ -184,6 +184,31 @@
       color:var(--text-sub);
     }
 
+    /* FEATURES BOX - ABOUT 페이지 녹색 그라데이션 스타일 적용 */
+    .features-box {
+      margin-top:10px;
+      border-radius:22px;
+      padding:26px 24px 24px;
+      background:linear-gradient(135deg,#111c14,#1b3724);
+      color:#f5f7f6;
+      box-shadow:0 12px 32px rgba(0,0,0,0.25);
+    }
+
+    .features-box .features-desc {
+      color:rgba(245,247,246,0.9);
+    }
+
+    .features-box .feature-card {
+      background:rgba(0,0,0,0.12);
+      border-color:rgba(245,247,246,0.35);
+      box-shadow:none;
+    }
+
+    .features-box .feature-title,
+    .features-box .feature-text {
+      color:#f5f7f6;
+    }
+
     /* FLOW SECTIONS */
     .flow-block {
       margin-top:60px;
@@ -299,6 +324,9 @@
       .hero-services-sub {
         font-size:16px;
       }
+      .features-box {
+        padding:22px 18px 20px;
+      }
     }
 
     @media (max-width: 600px) {
@@ -364,42 +392,45 @@
   <section class="features">
     <div class="section-title">KEY FEATURES</div>
     <div class="section-subtitle">모딩에서 한 번에 해결되는 핵심 기능</div>
-    <p class="features-desc">
-      모딩은 제조사와 외식업 사장님이 매일 반복하는 업무를 기준으로 설계했습니다.
-      발주·정산·데이터를 하나의 흐름으로 묶어, 최소한의 조작으로 운영이 돌아가도록 돕습니다.
-    </p>
 
-    <div class="features-grid">
-      <div class="feature-card green">
-        <div class="feature-title">상품·거래 관리</div>
-        <p class="feature-text">
-          제조사가 등록한 상품과 거래 내역을 한 화면에서 관리합니다.
-          주문 상태, 공급 이력, 매출 흐름을 직관적으로 확인할 수 있습니다.
-        </p>
-      </div>
+    <div class="features-box">
+      <p class="features-desc">
+        모딩은 제조사와 외식업 사장님이 매일 반복하는 업무를 기준으로 설계했습니다.
+        발주·정산·데이터를 하나의 흐름으로 묶어, 최소한의 조작으로 운영이 돌아가도록 돕습니다.
+      </p>
 
-      <div class="feature-card orange">
-        <div class="feature-title">발주·주문 관리</div>
-        <p class="feature-text">
-          외식업 사장님은 필요한 상품을 한 번에 장바구니에 담고 발주할 수 있습니다.
-          주문 이력과 납품 내역이 자동으로 정리됩니다.
-        </p>
-      </div>
+      <div class="features-grid">
+        <div class="feature-card green">
+          <div class="feature-title">상품·거래 관리</div>
+          <p class="feature-text">
+            제조사가 등록한 상품과 거래 내역을 한 화면에서 관리합니다.
+            주문 상태, 공급 이력, 매출 흐름을 직관적으로 확인할 수 있습니다.
+          </p>
+        </div>
 
-      <div class="feature-card neutral">
-        <div class="feature-title">정산·PG 연동</div>
-        <p class="feature-text">
-          PG 결제 데이터를 기반으로 정산 예정 금액이 자동 집계됩니다.
-          제조사별·기간별 정산 내역을 모딩 대시보드에서 한 번에 확인할 수 있습니다.
-        </p>
-      </div>
+        <div class="feature-card orange">
+          <div class="feature-title">발주·주문 관리</div>
+          <p class="feature-text">
+            외식업 사장님은 필요한 상품을 한 번에 장바구니에 담고 발주할 수 있습니다.
+            주문 이력과 납품 내역이 자동으로 정리됩니다.
+          </p>
+        </div>
 
-      <div class="feature-card green">
-        <div class="feature-title">데이터 리포트</div>
-        <p class="feature-text">
-          판매 추이, 발주 패턴, 정산 내역 등 핵심 데이터를 시기별로 정리해 제공합니다.
-          감으로 하던 결정을 데이터 기반으로 바꾸는 데 도움을 줍니다.
-        </p>
+        <div class="feature-card neutral">
+          <div class="feature-title">정산·PG 연동</div>
+          <p class="feature-text">
+            PG 결제 데이터를 기반으로 정산 금액이 자동 집계됩니다.
+            제조사별·기간별 정산 내역을 모딩 대시보드에서 한 번에 확인할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="feature-card green">
+          <div class="feature-title">데이터 리포트</div>
+          <p class="feature-text">
+            판매 추이, 발주 패턴, 정산 내역 등 핵심 데이터를 시기별로 정리해 제공합니다.
+            감으로 하던 결정을 데이터 기반으로 바꾸는 데 도움을 줍니다.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -410,7 +441,7 @@
     <div class="section-subtitle">거래 흐름 (상품 공급 기준)</div>
     <p class="flow-desc">
       상품 거래의 법적 당사자는 언제나 “제조사 ↔ 외식업 매장”입니다.
-      모딩은 이 거래 과정이 더 빠르고, 더 정확하게 흘러가도록 돕는 역할을 합니다.
+      모딩는 이 거래 과정이 더 빠르고, 더 정확하게 흘러가도록 돕는 역할을 합니다.
     </p>
 
     <div class="flow-steps">
@@ -475,8 +506,8 @@
       <div class="step-card orange">
         <div class="step-header">
           <span class="step-badge">STEP 1</span>
-          <span class="step-title">매장 결제 → 정산 시스템 자동수집</span>
-        </div> <br>
+          <span class="step-title">매장 결제 → 정산 시스템 자동 수집</span>
+        </div>
         <p class="step-text">
           외식업 매장이 모딩을 통해 주문 대금을 결제하면,
           결제 정보가 <strong>모딩 정산 시스템에 자동 반영</strong>됩니다.
@@ -486,10 +517,10 @@
       <div class="step-card orange">
         <div class="step-header">
           <span class="step-badge">STEP 2</span>
-          <span class="step-title">PG·정산 데이터 자동정리</span>
-        </div> <br>
+          <span class="step-title">PG·정산 데이터 자동 정리</span>
+        </div>
         <p class="step-text">
-          PG 결제 내역, 입금 예정 금액, 수수료 등이
+          PG 결제 내역, 입금 금액, 수수료 등이
           모딩 대시보드에 자동으로 집계·정리됩니다.
         </p>
       </div>
@@ -497,8 +528,8 @@
       <div class="step-card orange">
         <div class="step-header">
           <span class="step-badge">STEP 3</span>
-          <span class="step-title">제조사 대금 자동정산</span>
-        </div> <br>
+          <span class="step-title">제조사 대금 자동 정산 계산</span>
+        </div>
         <p class="step-text">
           공급 완료 기준으로 제조사별 정산 금액이
           <strong>모딩 시스템에서 자동 계산·정리</strong>됩니다.
