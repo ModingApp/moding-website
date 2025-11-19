@@ -17,6 +17,7 @@
     :root {
       --moding-green: #238B22;
       --moding-orange: #FF8C00;
+      --moding-brown: #8B5A2B; /* 로고 나무색 계열 */
       --bg-light: #F7F9F8;
       --text-main: #1F3B1F;
       --text-sub: #555555;
@@ -114,7 +115,7 @@
       opacity:0.9;
     }
 
-    /* PHILOSOPHY */
+    /* COMMON SECTION TITLES */
     .section-title {
       font-size:14px;
       letter-spacing:0.18em;
@@ -129,6 +130,7 @@
       margin-bottom:16px;
     }
 
+    /* PHILOSOPHY */
     .philosophy {
       margin-top:52px;
     }
@@ -196,22 +198,21 @@
       padding:18px 18px 16px;
       font-size:14px;
       line-height:1.7;
-      box-shadow:0 8px 22px rgba(0,0,0,0.06);
+      background:#ffffff;
+      box-shadow:0 6px 18px rgba(0,0,0,0.04);
     }
 
+    /* 값 카드 테두리 전부 진한 라인 + 내부 흰색 */
     .value-card.green {
-      background:linear-gradient(145deg,#E4F3E6,#F3FBF4);
-      border:1px solid rgba(35,139,34,0.22);
+      border:2px solid var(--moding-green);
     }
 
     .value-card.orange {
-      background:linear-gradient(145deg,#FFEAD3,#FFF6EA);
-      border:1px solid rgba(255,140,0,0.24);
+      border:2px solid var(--moding-orange);
     }
 
     .value-card.neutral {
-      background:linear-gradient(145deg,#EEF2F0,#F8FAF9);
-      border:1px solid #d7e0db;
+      border:2px solid var(--moding-brown);
     }
 
     .value-title {
@@ -229,8 +230,24 @@
       padding:3px 9px;
       border-radius:999px;
       border:1px solid rgba(0,0,0,0.12);
-      background:rgba(255,255,255,0.85);
+      background:#ffffff;
       color:var(--text-sub);
+    }
+
+    /* 뱃지도 카드 테두리 색상과 동일하게 */
+    .value-card.green .value-badge {
+      border-color:var(--moding-green);
+      color:var(--moding-green);
+    }
+
+    .value-card.orange .value-badge {
+      border-color:var(--moding-orange);
+      color:var(--moding-orange);
+    }
+
+    .value-card.neutral .value-badge {
+      border-color:var(--moding-brown);
+      color:var(--moding-brown);
     }
 
     .value-card ul {
@@ -283,16 +300,17 @@
       padding:16px 18px 14px;
       font-size:14px;
       line-height:1.7;
+      background:#ffffff;
+      box-shadow:0 5px 16px rgba(0,0,0,0.04);
     }
 
+    /* 모딩의 역할 = 초록 테두리, 제조사와 매장 = 주황 테두리 */
     .broker-col.role {
-      background:linear-gradient(145deg,#E4F3E6,#F3FBF4);
-      border:1px solid rgba(35,139,34,0.22);
+      border:2px solid var(--moding-green);
     }
 
     .broker-col.structure {
-      background:linear-gradient(145deg,#EEF2F0,#F8FAF9);
-      border:1px solid #d7e0db;
+      border:2px solid var(--moding-orange);
     }
 
     .broker-title {
@@ -600,18 +618,20 @@
     <div class="flow">
       <div class="flow-label">거래 흐름</div>
       <div class="flow-pills">
+        <span class="pill green">외식업 사장님</span>
+        <span class="pill-arrow">→</span>
         <span class="pill green">식품 제조사</span>
         <span class="pill-arrow">→</span>
-        <span class="pill">상품 공급 · 세금계산서</span>
+        <span class="pill green">상품 공급</span>
         <span class="pill-arrow">→</span>
-        <span class="pill green">외식업 사장님(매장)</span>
+        <span class="pill green">배송 및 자동 계산서 발행</span>
       </div>
 
       <div class="flow-label" style="margin-top:10px;">정산 흐름</div>
       <div class="flow-pills">
         <span class="pill orange">Moding</span>
         <span class="pill-arrow">→</span>
-        <span class="pill orange">중개 수수료 계산서 발행</span>
+        <span class="pill orange">제조사 대금 정산 및 수수료 계산서 발행</span>
       </div>
     </div>
   </section>
