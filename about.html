@@ -41,156 +41,7 @@
       padding:40px 24px 48px;
     }
 
-    /* HEADER (index.html과 동일 베이스) */
-    header {
-      width:100%;
-      border-bottom:1px solid #e1e4e2;
-      background:#ffffff;
-    }
-
-    .nav {
-      max-width:860px;
-      margin:0 auto;
-      padding:14px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      column-gap:24px;
-    }
-
-    .nav-left img {
-      width:160px;
-      height:auto;
-      display:block;
-    }
-
-    .nav-right {
-      display:flex;
-      align-items:center;
-      gap:20px;
-      font-size:15px;
-    }
-
-    .nav-right a {
-      text-decoration:none;
-      color:var(--moding-green);
-      font-weight:500;
-      white-space:nowrap;
-      transition:0.2s;
-    }
-
-    .nav-right a:hover {
-      color:var(--moding-orange);
-    }
-
-    .nav-right a.active {
-      color:var(--moding-orange);
-    }
-
-    /* HERO (회사소개 인트로) */
-    .hero-about {
-      text-align:center;
-      padding:52px 0 40px;
-    }
-
-    .hero-about-title {
-      font-size:26px;
-      font-weight:700;
-      margin-bottom:10px;
-      color:var(--moding-green);
-    }
-
-    .hero-about-sub {
-      font-size:16px;
-      line-height:1.6;
-      color:var(--text-sub);
-    }
-
-    /* PHILOSOPHY 섹션 (현장의 언어) */
-    .philosophy {
-      margin-top:40px;
-      padding:40px 26px 42px;
-      border-radius:22px;
-      background:radial-gradient(circle at top, #12351e 0, #050f08 55%, #020805 100%);
-      color:#ffffff;
-      text-align:center;
-      box-shadow:0 18px 40px rgba(0,0,0,0.45);
-    }
-
-    .philo-pill {
-      display:inline-block;
-      padding:4px 16px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.24);
-      font-size:11px;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      margin-bottom:16px;
-      color:rgba(255,255,255,0.8);
-    }
-
-    .philo-title {
-      font-size:22px;
-      font-weight:700;
-      margin-bottom:18px;
-      color:var(--moding-orange);
-    }
-
-    .philo-text {
-      font-size:15px;
-      line-height:1.8;
-      opacity:0.9;
-    }
-
-    .philo-text p {
-      margin-bottom:10px;
-    }
-
-    /* VALUE 섹션 (우리가 만드는 가치) */
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회사소개 | 모딩(Moding)</title>
-
-  <meta name="description" content="모딩(Moding)은 식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼입니다. 현장의 언어를 이해하는 사람들로 이루어진 팀이, 오래 쓰이는 도구를 만듭니다.">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Moding">
-  <meta property="og:title" content="회사소개 | 모딩(Moding)">
-  <meta property="og:description" content="식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼 모딩(Moding)의 운영 철학과 중개 구조를 소개합니다.">
-  <meta property="og:url" content="https://moding.app/about.html">
-  <meta property="og:image" content="https://moding.app/모딩로고.png">
-
-  <style>
-    :root {
-      --moding-green: #238B22;
-      --moding-orange: #FF8C00;
-      --bg-light: #F7F9F8;
-      --text-main: #1F3B1F;
-      --text-sub: #555555;
-    }
-
-    * { margin:0; padding:0; box-sizing:border-box; }
-
-    body {
-      font-family:-apple-system, BlinkMacSystemFont,"Noto Sans KR",sans-serif;
-      background:var(--bg-light);
-      color:var(--text-main);
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-    }
-
-    .container {
-      width:100%;
-      max-width:860px;
-      margin:0 auto;
-      padding:40px 24px 48px;
-    }
-
-    /* HEADER (index.html과 동일 베이스) */
+    /* HEADER (index.html과 동일) */
     header {
       width:100%;
       border-bottom:1px solid #e1e4e2;
@@ -336,7 +187,6 @@
       border:1px solid #dde4df;
     }
 
-    /* index about 카드 스타일과 비슷하게 컬러 입힘 */
     .value-card.green {
       background:linear-gradient(145deg,#E4F3E6,#F3FBF4);
       border:1px solid rgba(35,139,34,0.22);
@@ -424,10 +274,20 @@
       font-size:13px;
       line-height:1.7;
       color:var(--text-sub);
-      background:#f8faf9;
       border-radius:16px;
-      border:1px solid #dde4df;
       padding:14px 14px 12px;
+      box-shadow:0 6px 16px rgba(0,0,0,0.04);
+    }
+
+    /* 색감: 위 value-card와 통일 */
+    .broker-col.left {
+      background:linear-gradient(145deg,#E4F3E6,#F3FBF4);
+      border:1px solid rgba(35,139,34,0.22);
+    }
+
+    .broker-col.right {
+      background:linear-gradient(145deg,#EEF2F0,#F8FAF9);
+      border:1px solid #d7e0db;
     }
 
     .broker-col ul {
@@ -443,16 +303,15 @@
       display:flex;
       align-items:center;
       gap:6px;
-      flex-wrap:nowrap;        /* 줄바꿈 방지 */
-      overflow-x:auto;         /* 좁은 화면에서는 가로 스크롤 */
+      flex-wrap:wrap;          /* 작은 화면에서는 줄바꿈 허용 */
+      justify-content:center;  /* 가운데 정렬 */
       margin-top:8px;
-      padding-bottom:2px;
     }
 
     .flow-box {
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid var(--moding-green); /* 테두리 색상 */
+      border:1px solid var(--moding-green);
       background:#ffffff;
       font-size:12px;
       white-space:nowrap;
@@ -476,7 +335,7 @@
       margin-top:10px;
     }
 
-    /* FOOTER (index.html과 동일) */
+    /* FOOTER */
     footer {
       margin-top:auto;
       padding:22px 10px;
@@ -497,10 +356,7 @@
     img { user-drag:none; pointer-events:none; }
     input,textarea{user-select:text;pointer-events:auto;}
 
-    /* ===============================
-       반응형: 태블릿 & 모바일 보정
-       =============================== */
-
+    /* 반응형 보정 */
     @media (max-width: 768px) {
       .container {
         padding:32px 20px 40px;
@@ -545,6 +401,11 @@
       .hero-about-sub {
         font-size:14px;
       }
+
+      .flow-box {
+        font-size:11px;
+        padding:5px 8px;
+      }
     }
   </style>
 </head>
@@ -566,7 +427,7 @@
 
 <div class="container">
 
-  <!-- HERO: 회사소개 인트로 -->
+  <!-- HERO -->
   <section class="hero-about">
     <h1 class="hero-about-title">모딩(Moding)에 대하여</h1>
     <p class="hero-about-sub">
@@ -576,7 +437,7 @@
     </p>
   </section>
 
-  <!-- PHILOSOPHY: 현장의 언어 -->
+  <!-- PHILOSOPHY -->
   <section class="philosophy">
     <div class="philo-pill">PHILOSOPHY</div>
     <h2 class="philo-title">모딩의 운영 철학</h2>
@@ -596,7 +457,7 @@
     </div>
   </section>
 
-  <!-- VALUE: 우리가 만드는 가치 -->
+  <!-- VALUE -->
   <section class="value-section">
     <h2 class="value-title">우리가 만드는 가치</h2>
     <p class="value-sub">
@@ -646,7 +507,7 @@
     </div>
   </section>
 
-  <!-- BROKER: 중개 구조 설명 -->
+  <!-- BROKER -->
   <section class="broker-section">
     <h2 class="broker-title">모딩의 중개 구조</h2>
     <p class="broker-sub">
@@ -655,7 +516,7 @@
     </p>
 
     <div class="broker-layout">
-      <div class="broker-col">
+      <div class="broker-col left">
         <strong>모딩의 역할</strong>
         <ul>
           <li>식품 제조사와 외식업 매장을 연결하는 B2B 중개 플랫폼</li>
@@ -669,7 +530,7 @@
         </p>
       </div>
 
-      <div class="broker-col">
+      <div class="broker-col right">
         <strong>제조사와 매장의 구조</strong>
         <ul>
           <li>상품의 제조·유통·품질 책임은 각 제조사에게 있습니다.</li>
