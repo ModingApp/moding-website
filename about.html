@@ -176,6 +176,7 @@
     /* VALUES (우리가 만드는 가치) */
     .values {
       margin-top:60px;
+      margin-bottom:10px;
     }
 
     .values-desc {
@@ -202,7 +203,6 @@
       box-shadow:0 6px 18px rgba(0,0,0,0.04);
     }
 
-    /* 값 카드 테두리 전부 진한 라인 + 내부 흰색 */
     .value-card.green {
       border:2px solid var(--moding-green);
     }
@@ -234,7 +234,6 @@
       color:var(--text-sub);
     }
 
-    /* 뱃지도 카드 테두리 색상과 동일하게 */
     .value-card.green .value-badge {
       border-color:var(--moding-green);
       color:var(--moding-green);
@@ -269,122 +268,6 @@
       left:0;
       top:0;
       color:rgba(0,0,0,0.35);
-    }
-
-    /* BROKER SECTION (모딩의 중개 구조) */
-    .broker-section {
-      margin-top:64px;
-      margin-bottom:10px;
-    }
-
-    .broker-lead {
-      font-size:14px;
-      line-height:1.7;
-      color:var(--text-sub);
-      margin-bottom:16px;
-    }
-
-    .broker-grid {
-      display:flex;
-      flex-wrap:wrap;
-      gap:16px;
-      justify-content:center;
-      margin-top:10px;
-      margin-bottom:18px;
-    }
-
-    .broker-col {
-      flex:1 1 0;
-      min-width:230px;
-      border-radius:18px;
-      padding:16px 18px 14px;
-      font-size:14px;
-      line-height:1.7;
-      background:#ffffff;
-      box-shadow:0 5px 16px rgba(0,0,0,0.04);
-    }
-
-    /* 모딩의 역할 = 초록 테두리, 제조사와 매장 = 주황 테두리 */
-    .broker-col.role {
-      border:2px solid var(--moding-green);
-    }
-
-    .broker-col.structure {
-      border:2px solid var(--moding-orange);
-    }
-
-    .broker-title {
-      font-size:14px;
-      font-weight:600;
-      margin-bottom:6px;
-      color:var(--text-main);
-    }
-
-    .broker-col ul {
-      list-style:none;
-      margin:0;
-      padding-left:0;
-    }
-
-    .broker-col li {
-      position:relative;
-      padding-left:14px;
-      margin-bottom:4px;
-      color:var(--text-sub);
-    }
-
-    .broker-col li::before {
-      content:"•";
-      position:absolute;
-      left:0;
-      top:0;
-      color:rgba(0,0,0,0.35);
-    }
-
-    /* FLOW PILLS */
-    .flow {
-      margin-top:6px;
-    }
-
-    .flow-label {
-      font-size:13px;
-      font-weight:600;
-      margin-bottom:8px;
-      color:var(--text-main);
-    }
-
-    .flow-pills {
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      align-items:center;
-      max-width:100%;
-    }
-
-    .pill {
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:12px;
-      line-height:1.4;
-      white-space:nowrap;
-      background:#ffffff;
-      border:1px solid rgba(0,0,0,0.12);
-    }
-
-    .pill.green {
-      border-color:var(--moding-green);
-      color:var(--moding-green);
-    }
-
-    .pill.orange {
-      border-color:var(--moding-orange);
-      color:var(--moding-orange);
-    }
-
-    .pill-arrow {
-      font-size:14px;
-      color:#999999;
-      padding:0 2px;
     }
 
     /* FOOTER */
@@ -452,8 +335,7 @@
       .hero-about-sub {
         font-size:15px;
       }
-      .values-grid,
-      .broker-grid {
+      .values-grid {
         gap:12px;
       }
     }
@@ -576,62 +458,6 @@
           <li>PG와 연동된 정산 데이터로 실질적인 매출·원가 관리 지원</li>
           <li>플랫폼이 아닌 “사장님 편”에 서는 B2B 서비스 지향</li>
         </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- BROKER SECTION -->
-  <section class="broker-section">
-    <div class="section-title">STRUCTURE</div>
-    <div class="section-subtitle">모딩의 중개 구조</div>
-    <p class="broker-lead">
-      모딩(Moding)은 상품을 직접 제조하거나 판매하는 회사가 아닙니다.
-      식품 제조사와 외식업 사장님 사이에서 거래를 연결하고,
-      정산 흐름을 안전하게 관리하는 “통신판매중개자”입니다.
-    </p>
-
-    <div class="broker-grid">
-      <!-- 모딩 역할 -->
-      <div class="broker-col role">
-        <div class="broker-title">모딩의 역할</div>
-        <ul>
-          <li>제조사와 매장의 B2B 거래를 연결하는 플랫폼 운영</li>
-          <li>PG를 통한 결제·정산 흐름 관리 및 내역 제공</li>
-          <li>클레임·문의 접수를 돕는 중개 창구 역할</li>
-          <li>거래 데이터를 바탕으로 한 매출·발주 리포트 제공</li>
-        </ul>
-      </div>
-
-      <!-- 구조 설명 -->
-      <div class="broker-col structure">
-        <div class="broker-title">제조사와 매장의 구조</div>
-        <ul>
-          <li>상품 공급자: 식품 제조사</li>
-          <li>상품 구매자: 외식업 사장님(매장)</li>
-          <li>상품 세금계산서: 제조사 → 매장 직접 발행</li>
-          <li>모딩은 중개 수수료에 대해서만 별도 용역 세금계산서 발행</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- FLOW PILLS -->
-    <div class="flow">
-      <div class="flow-label">거래 흐름</div>
-      <div class="flow-pills">
-        <span class="pill green">외식업 사장님</span>
-        <span class="pill-arrow">→</span>
-        <span class="pill green">식품 제조사</span>
-        <span class="pill-arrow">→</span>
-        <span class="pill green">상품 공급</span>
-        <span class="pill-arrow">→</span>
-        <span class="pill green">배송 및 자동 계산서 발행</span>
-      </div>
-
-      <div class="flow-label" style="margin-top:10px;">정산 흐름</div>
-      <div class="flow-pills">
-        <span class="pill orange">Moding</span>
-        <span class="pill-arrow">→</span>
-        <span class="pill orange">제조사 대금 정산 및 수수료 계산서 발행</span>
       </div>
     </div>
   </section>
