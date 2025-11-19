@@ -97,6 +97,21 @@
       color:var(--moding-green);
     }
 
+    /* 히어로 문구 깜빡임 효과 */
+    .hero-blink {
+      display:inline-block;
+      animation: heroBlink 1.8s ease-in-out infinite;
+    }
+
+    @keyframes heroBlink {
+      0%, 60%, 100% {
+        opacity:1;
+      }
+      30% {
+        opacity:0;
+      }
+    }
+
     .hero-sub {
       font-size:17px;
       opacity:0.9;
@@ -242,11 +257,35 @@
       gap:8px;
     }
 
+    /* 제목 컬러: 모딩 고유 색상 적용 */
+    .about-col.green .about-col-title {
+      color:var(--moding-green);
+    }
+    .about-col.orange .about-col-title {
+      color:var(--moding-orange);
+    }
+
+    /* 뱃지 공통 스타일 + 컬러별 세부 스타일 */
     .about-chip {
       font-size:11px;
-      padding:2px 8px;
+      padding:3px 10px;
       border-radius:999px;
-      background:rgba(255,255,255,0.6);
+      font-weight:600;
+      border-width:1px;
+      border-style:solid;
+      background:#ffffff;
+    }
+    .about-col.green .about-chip {
+      border-color:var(--moding-green);
+      color:var(--moding-green);
+      box-shadow:0 0 0 1px rgba(35,139,34,0.10);
+      background:rgba(255,255,255,0.96);
+    }
+    .about-col.orange .about-chip {
+      border-color:var(--moding-orange);
+      color:var(--moding-orange);
+      box-shadow:0 0 0 1px rgba(255,140,0,0.12);
+      background:rgba(255,255,255,0.97);
     }
 
     .about-col ul {
@@ -392,7 +431,9 @@
 <div class="container">
   <section class="hero">
     <h1 class="hero-title">
-      식품 제조사와 외식업 사장님을 잇는<br>B2B Food-SaaS 플랫폼
+      <span class="hero-blink">
+        식품 제조사와 외식업 사장님을 잇는<br>B2B Food-SaaS 플랫폼
+      </span>
     </h1>
     <p class="hero-sub">
       제품 공급·발주·정산·데이터까지 한 번에.<br>
