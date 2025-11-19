@@ -97,19 +97,10 @@
       color:var(--moding-green);
     }
 
-    /* 히어로 문구 깜빡임 효과 */
-    .hero-blink {
+    /* 타이핑 라인 */
+    .hero-line {
       display:inline-block;
-      animation: heroBlink 1.8s ease-in-out infinite;
-    }
-
-    @keyframes heroBlink {
-      0%, 60%, 100% {
-        opacity:1;
-      }
-      30% {
-        opacity:0;
-      }
+      min-height:1.4em; /* 로딩 중 높이 유지 */
     }
 
     .hero-sub {
@@ -246,6 +237,7 @@
       text-align:left;
       font-size:14px;
       line-height:1.6;
+      background:#ffffff;
     }
 
     .about-col-title {
@@ -265,27 +257,25 @@
       color:var(--moding-orange);
     }
 
-    /* 뱃지 공통 스타일 + 컬러별 세부 스타일 */
+    /* 뱃지 스타일 — 서비스 CTA와 톤 맞춘 선명한 pill */
     .about-chip {
       font-size:11px;
-      padding:3px 10px;
+      padding:4px 12px;
       border-radius:999px;
       font-weight:600;
-      border-width:1px;
-      border-style:solid;
       background:#ffffff;
+      border-width:1.5px;
+      border-style:solid;
     }
+
     .about-col.green .about-chip {
       border-color:var(--moding-green);
       color:var(--moding-green);
-      box-shadow:0 0 0 1px rgba(35,139,34,0.10);
-      background:rgba(255,255,255,0.96);
     }
+
     .about-col.orange .about-chip {
       border-color:var(--moding-orange);
       color:var(--moding-orange);
-      box-shadow:0 0 0 1px rgba(255,140,0,0.12);
-      background:rgba(255,255,255,0.97);
     }
 
     .about-col ul {
@@ -309,14 +299,15 @@
       color:rgba(0,0,0,0.35);
     }
 
+    /* 카드 박스: 서비스 CTA와 통일된 명확한 컬러 톤 */
     .about-col.green {
-      background:linear-gradient(145deg,#E4F3E6,#F3FBF4);
-      border:1px solid rgba(35,139,34,0.16);
+      border:2px solid var(--moding-green);
+      box-shadow:0 4px 14px rgba(0,0,0,0.06);
     }
 
     .about-col.orange {
-      background:linear-gradient(145deg,#FFEAD3,#FFF6EA);
-      border:1px solid rgba(255,140,0,0.18);
+      border:2px solid var(--moding-orange);
+      box-shadow:0 4px 14px rgba(0,0,0,0.06);
     }
 
     /* FOOTER */
@@ -431,9 +422,8 @@
 <div class="container">
   <section class="hero">
     <h1 class="hero-title">
-      <span class="hero-blink">
-        식품 제조사와 외식업 사장님을 잇는<br>B2B Food-SaaS 플랫폼
-      </span>
+      <span class="hero-line hero-line1"></span><br>
+      <span class="hero-line hero-line2"></span>
     </h1>
     <p class="hero-sub">
       제품 공급·발주·정산·데이터까지 한 번에.<br>
@@ -497,6 +487,7 @@
 </footer>
 
 <script>
+  /* 복사/드래그 방지 */
   document.addEventListener("contextmenu", function (e) {
     if (!e.target.closest("input, textarea, a")) e.preventDefault();
   });
@@ -504,13 +495,45 @@
     if (!e.target.closest("input, textarea")) e.preventDefault();
   });
   document.addEventListener("keydown", function (e) {
-    const key=e.key.toLowerCase();
-    if ((e.ctrlKey||e.metaKey) && !e.target.closest("input,textarea")) {
-      if(["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+    const key = e.key.toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
+      if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
     }
   });
   document.addEventListener("copy", function (e) {
     if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+
+  /* 히어로 타이핑 효과 */
+  document.addEventListener("DOMContentLoaded", function() {
+    const line1Text = "모든 사장님을 위한";
+    const line2Text = "모든 것을 담은 플랫폼";
+
+    const line1El = document.querySelector(".hero-line1");
+    const line2El = document.querySelector(".hero-line2");
+
+    const speed = 90;   // 글자 출력 속도 (ms)
+    const delayBetweenLines = 400; // 1행 완료 후 2행 시작까지 딜레이
+
+    function typeLine(text, el, callback) {
+      let idx = 0;
+      function step() {
+        if (idx <= text.length) {
+          el.textContent = text.slice(0, idx);
+          idx++;
+          setTimeout(step, speed);
+        } else if (typeof callback === "function") {
+          callback();
+        }
+      }
+      step();
+    }
+
+    typeLine(line1Text, line1El, function() {
+      setTimeout(function() {
+        typeLine(line2Text, line2El);
+      }, delayBetweenLines);
+    });
   });
 </script>
 
