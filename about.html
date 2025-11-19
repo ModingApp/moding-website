@@ -14,6 +14,30 @@
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
   <style>
+
+    .top-return {
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:12px;
+}
+
+.top-return-btn {
+  font-size:12px;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid var(--moding-green);
+  color:var(--moding-green);
+  background:#ffffff;
+  text-decoration:none;
+  font-weight:500;
+  transition:0.2s;
+}
+
+.top-return-btn:hover {
+  background:var(--moding-green);
+  color:#ffffff;
+}
+
     :root {
       --moding-green: #238B22;
       --moding-orange: #FF8C00;
@@ -357,7 +381,12 @@
   </div>
 </header>
 
-<div class="container">
+    <div class="container">
+
+    <div class="top-return">
+    <a href="index.html" class="top-return-btn">메인 화면으로</a>
+  </div>
+
   <!-- HERO ABOUT -->
   <section class="hero-about">
     <h1 class="hero-about-title">
