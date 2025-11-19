@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회사소개 | 모딩(Moding)</title>
+  <title>About Moding | 회사소개</title>
 
-  <meta name="description" content="모딩(Moding)은 식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼입니다. 현장의 언어를 이해하는 사람들로 이루어진 팀이, 오래 쓰이는 도구를 만듭니다.">
+  <meta name="description" content="모딩(Moding)은 식품 제조사와 외식업 사장님을 현장의 언어로 연결하는 B2B Food-SaaS 플랫폼입니다.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
-  <meta property="og:title" content="회사소개 | 모딩(Moding)">
-  <meta property="og:description" content="식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼 모딩(Moding)의 운영 철학과 중개 구조를 소개합니다.">
+  <meta property="og:title" content="About Moding | 회사소개">
+  <meta property="og:description" content="현장을 가장 잘 아는 사람들이 만드는 B2B Food-SaaS, 모딩(Moding)의 철학과 가치를 소개합니다.">
   <meta property="og:url" content="https://moding.app/about.html">
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
@@ -38,10 +38,10 @@
       width:100%;
       max-width:860px;
       margin:0 auto;
-      padding:40px 24px 48px;
+      padding:40px 24px;
     }
 
-    /* HEADER (index.html과 동일) */
+    /* HEADER */
     header {
       width:100%;
       border-bottom:1px solid #e1e4e2;
@@ -87,90 +87,102 @@
       color:var(--moding-orange);
     }
 
-    /* HERO (회사소개 인트로) */
+    /* HERO ABOUT */
     .hero-about {
-      text-align:center;
-      padding:52px 0 40px;
+      padding:60px 0 46px;
     }
 
     .hero-about-title {
-      font-size:26px;
+      font-size:28px;
       font-weight:700;
-      margin-bottom:10px;
+      line-height:1.4;
       color:var(--moding-green);
+      margin-bottom:14px;
     }
 
     .hero-about-sub {
-      font-size:16px;
-      line-height:1.6;
-      color:var(--text-sub);
-    }
-
-    /* PHILOSOPHY 섹션 (현장의 언어) */
-    .philosophy {
-      margin-top:40px;
-      padding:40px 26px 42px;
-      border-radius:22px;
-      background:radial-gradient(circle at top, #12351e 0, #050f08 55%, #020805 100%);
-      color:#ffffff;
-      text-align:center;
-      box-shadow:0 18px 40px rgba(0,0,0,0.45);
-    }
-
-    .philo-pill {
-      display:inline-block;
-      padding:4px 16px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.24);
-      font-size:11px;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      margin-bottom:16px;
-      color:rgba(255,255,255,0.8);
-    }
-
-    .philo-title {
-      font-size:22px;
-      font-weight:700;
-      margin-bottom:18px;
-      color:var(--moding-orange);
-    }
-
-    .philo-text {
-      font-size:15px;
-      line-height:1.8;
-      opacity:0.9;
-    }
-
-    .philo-text p {
+      font-size:17px;
+      line-height:1.7;
+      color:var(--text-main);
       margin-bottom:10px;
     }
 
-    /* VALUE 섹션 (우리가 만드는 가치) */
-    .value-section {
-      margin-top:52px;
-      padding:38px 24px 40px;
-      background:#ffffff;
-      border-radius:22px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    .hero-about-meta {
+      font-size:14px;
+      line-height:1.6;
+      color:var(--text-sub);
+      opacity:0.9;
     }
 
-    .value-title {
-      text-align:center;
+    /* PHILOSOPHY */
+    .section-title {
+      font-size:14px;
+      letter-spacing:0.18em;
+      color:var(--moding-green);
+      margin-bottom:10px;
+    }
+
+    .section-subtitle {
       font-size:18px;
-      font-weight:700;
-      margin-bottom:8px;
+      font-weight:600;
       color:var(--text-main);
+      margin-bottom:16px;
     }
 
-    .value-sub {
-      text-align:center;
+    .philosophy {
+      margin-top:52px;
+    }
+
+    .philosophy-box {
+      margin-top:10px;
+      border-radius:22px;
+      padding:26px 24px 24px;
+      background:linear-gradient(135deg,#111c14,#1b3724);
+      color:#f5f7f6;
+      box-shadow:0 12px 32px rgba(0,0,0,0.25);
+    }
+
+    .philosophy-lead {
+      font-size:16px;
+      font-weight:600;
+      margin-bottom:12px;
+    }
+
+    .philosophy-text {
+      font-size:14px;
+      line-height:1.8;
+      opacity:0.96;
+      margin-bottom:6px;
+    }
+
+    .philosophy-tags {
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .philosophy-tag {
+      font-size:11px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.35);
+      color:#f5f7f6;
+      background:rgba(255,255,255,0.04);
+    }
+
+    /* VALUES (우리가 만드는 가치) */
+    .values {
+      margin-top:60px;
+    }
+
+    .values-desc {
       font-size:14px;
       color:var(--text-sub);
-      margin-bottom:22px;
+      margin-bottom:18px;
     }
 
-    .value-grid {
+    .values-grid {
       display:flex;
       flex-wrap:wrap;
       gap:16px;
@@ -180,11 +192,11 @@
     .value-card {
       flex:1 1 0;
       min-width:230px;
-      border-radius:18px;
-      padding:16px 18px 14px;
-      background:#ffffff;
-      box-shadow:0 6px 16px rgba(0,0,0,0.04);
-      border:1px solid #dde4df;
+      border-radius:20px;
+      padding:18px 18px 16px;
+      font-size:14px;
+      line-height:1.7;
+      box-shadow:0 8px 22px rgba(0,0,0,0.06);
     }
 
     .value-card.green {
@@ -202,137 +214,159 @@
       border:1px solid #d7e0db;
     }
 
-    .value-card-header {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:8px;
-    }
-
-    .value-icon {
-      width:22px;
-      height:22px;
-      border-radius:999px;
-      border:2px solid var(--moding-green);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:12px;
-      color:var(--moding-green);
-      font-weight:700;
-      background:#ffffff20;
-    }
-
-    .value-card.orange .value-icon {
-      border-color:var(--moding-orange);
-      color:var(--moding-orange);
-    }
-
-    .value-card-title {
+    .value-title {
       font-size:14px;
       font-weight:600;
+      margin-bottom:8px;
+      display:flex;
+      align-items:center;
+      gap:8px;
       color:var(--text-main);
     }
 
-    .value-card-body {
-      font-size:13px;
+    .value-badge {
+      font-size:11px;
+      padding:3px 9px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.12);
+      background:rgba(255,255,255,0.85);
+      color:var(--text-sub);
+    }
+
+    .value-card ul {
+      list-style:none;
+      margin:0;
+      padding-left:0;
+    }
+
+    .value-card li {
+      position:relative;
+      padding-left:14px;
+      margin-bottom:4px;
+      color:var(--text-sub);
+    }
+
+    .value-card li::before {
+      content:"•";
+      position:absolute;
+      left:0;
+      top:0;
+      color:rgba(0,0,0,0.35);
+    }
+
+    /* BROKER SECTION (모딩의 중개 구조) */
+    .broker-section {
+      margin-top:64px;
+      margin-bottom:10px;
+    }
+
+    .broker-lead {
+      font-size:14px;
       line-height:1.7;
       color:var(--text-sub);
+      margin-bottom:16px;
     }
 
-    /* BROKER 섹션 (중개 구조 설명) */
-    .broker-section {
-      margin-top:52px;
-      padding:40px 24px 42px;
-      background:#ffffff;
-      border-radius:22px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.05);
-    }
-
-    .broker-title {
-      font-size:18px;
-      font-weight:700;
-      margin-bottom:8px;
-      color:var(--text-main);
-    }
-
-    .broker-sub {
-      font-size:14px;
-      color:var(--text-sub);
-      margin-bottom:20px;
-    }
-
-    .broker-layout {
+    .broker-grid {
       display:flex;
       flex-wrap:wrap;
-      gap:20px;
+      gap:16px;
+      justify-content:center;
+      margin-top:10px;
+      margin-bottom:18px;
     }
 
     .broker-col {
       flex:1 1 0;
-      min-width:250px;
-      font-size:13px;
+      min-width:230px;
+      border-radius:18px;
+      padding:16px 18px 14px;
+      font-size:14px;
       line-height:1.7;
-      color:var(--text-sub);
-      border-radius:16px;
-      padding:14px 14px 12px;
-      box-shadow:0 6px 16px rgba(0,0,0,0.04);
     }
 
-    /* 색감: 위 value-card와 통일 */
-    .broker-col.left {
+    .broker-col.role {
       background:linear-gradient(145deg,#E4F3E6,#F3FBF4);
       border:1px solid rgba(35,139,34,0.22);
     }
 
-    .broker-col.right {
+    .broker-col.structure {
       background:linear-gradient(145deg,#EEF2F0,#F8FAF9);
       border:1px solid #d7e0db;
     }
 
+    .broker-title {
+      font-size:14px;
+      font-weight:600;
+      margin-bottom:6px;
+      color:var(--text-main);
+    }
+
     .broker-col ul {
-      margin:6px 0 0 0;
-      padding-left:16px;
+      list-style:none;
+      margin:0;
+      padding-left:0;
     }
 
     .broker-col li {
+      position:relative;
+      padding-left:14px;
       margin-bottom:4px;
+      color:var(--text-sub);
     }
 
+    .broker-col li::before {
+      content:"•";
+      position:absolute;
+      left:0;
+      top:0;
+      color:rgba(0,0,0,0.35);
+    }
+
+    /* FLOW PILLS */
     .flow {
+      margin-top:6px;
+    }
+
+    .flow-label {
+      font-size:13px;
+      font-weight:600;
+      margin-bottom:8px;
+      color:var(--text-main);
+    }
+
+    .flow-pills {
       display:flex;
+      flex-wrap:wrap;
+      gap:8px;
       align-items:center;
-      gap:6px;
-      flex-wrap:wrap;          /* 작은 화면에서는 줄바꿈 허용 */
-      justify-content:center;  /* 가운데 정렬 */
-      margin-top:8px;
+      max-width:100%;
     }
 
-    .flow-box {
-      padding:6px 10px;
+    .pill {
+      padding:4px 10px;
       border-radius:999px;
-      border:1px solid var(--moding-green);
-      background:#ffffff;
       font-size:12px;
+      line-height:1.4;
       white-space:nowrap;
-      flex:0 0 auto;
+      background:#ffffff;
+      border:1px solid rgba(0,0,0,0.12);
     }
 
-    .flow-box.orange {
+    .pill.green {
+      border-color:var(--moding-green);
+      color:var(--moding-green);
+    }
+
+    .pill.orange {
       border-color:var(--moding-orange);
       color:var(--moding-orange);
     }
 
-    .flow-arrow {
-      font-size:13px;
-      color:#a0a8a2;
-      flex:0 0 auto;
-    }
-
-    .broker-note {
-      font-size:12px;
-      color:#888;
-      margin-top:10px;
+    .pill-arrow {
+      font-size:14px;
+      color:#999999;
+      padding:0 2px;
     }
 
     /* FOOTER */
@@ -348,7 +382,7 @@
       width:100%;
     }
 
-    /* 복사/드래그 방지 (공통) */
+    /* 복사/드래그 방지 */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select:none;
       user-select:none;
@@ -356,26 +390,25 @@
     img { user-drag:none; pointer-events:none; }
     input,textarea{user-select:text;pointer-events:auto;}
 
-    /* 반응형 보정 */
+    /* ===============================
+       반응형: 태블릿 & 모바일 보정
+       =============================== */
+
     @media (max-width: 768px) {
       .container {
         padding:32px 20px 40px;
       }
       .hero-about {
-        padding:40px 0 32px;
+        padding:46px 0 34px;
       }
       .hero-about-title {
-        font-size:23px;
+        font-size:24px;
       }
       .hero-about-sub {
-        font-size:15px;
+        font-size:16px;
       }
-      .philosophy {
-        padding:32px 20px 34px;
-      }
-      .value-section,
-      .broker-section {
-        padding:32px 18px 34px;
+      .philosophy-box {
+        padding:22px 18px 20px;
       }
     }
 
@@ -396,15 +429,14 @@
         justify-content:center;
       }
       .hero-about-title {
-        font-size:21px;
+        font-size:22px;
       }
       .hero-about-sub {
-        font-size:14px;
+        font-size:15px;
       }
-
-      .flow-box {
-        font-size:11px;
-        padding:5px 8px;
+      .values-grid,
+      .broker-grid {
+        gap:12px;
       }
     }
   </style>
@@ -426,134 +458,163 @@
 </header>
 
 <div class="container">
-
-  <!-- HERO -->
+  <!-- HERO ABOUT -->
   <section class="hero-about">
-    <h1 class="hero-about-title">모딩(Moding)에 대하여</h1>
+    <h1 class="hero-about-title">
+      현장을 가장 잘 아는 사람들이 만드는<br>B2B Food-SaaS, 모딩(Moding)
+    </h1>
     <p class="hero-about-sub">
-      모딩은 식품 제조사와 외식업 사장님을 연결하는<br>
-      B2B Food-SaaS 플랫폼입니다.<br>
-      현장을 가장 잘 아는 사람들이, 오래 쓰이는 도구를 만듭니다.
+      모딩은 식품 제조사와 외식업 사장님이 서로의 일을 더 잘할 수 있도록 돕는<br>
+      현장 기반 B2B Food-SaaS 플랫폼입니다.
+    </p>
+    <p class="hero-about-meta">
+      20년 가까운 외식업·제조 경험을 바탕으로, 복잡한 정산·발주·데이터를<br>
+      ‘사장님의 언어’로 풀어낸 도구를 만들고 있습니다.
     </p>
   </section>
 
   <!-- PHILOSOPHY -->
   <section class="philosophy">
-    <div class="philo-pill">PHILOSOPHY</div>
-    <h2 class="philo-title">모딩의 운영 철학</h2>
-    <div class="philo-text">
-      <p>모딩 경영팀은 식품 제조와 외식 서비스 현장을<br>두루 경험한 사람들로 이루어져 있습니다.</p>
-      <p>현장의 언어를 이해하는 만큼,<br>
-         현장에서 정말 필요로 하는 기능만 남기고<br>
-         불필요한 것들은 과감히 덜어냅니다.</p>
-      <p>조용히, 그러나 단단하게.<br>
-         현장에서 오래 쓰이는 도구를 만드는 것이<br>
-         모딩의 첫 번째 원칙입니다.</p>
-      <p>우리는 단기적인 성과와 실적보다<br>
-         제조사와 사장님이 오래 함께 갈 수 있는<br>
-         건강한 거래 구조를 우선합니다.</p>
-      <p>모딩은 가격 덤핑 경쟁, 복잡하고 불투명한<br>
-         수수료 구조는 지양합니다.</p>
+    <div class="section-title">PHILOSOPHY</div>
+    <div class="section-subtitle">현장의 언어로 만드는 B2B 도구</div>
+
+    <div class="philosophy-box">
+      <div class="philosophy-lead">
+        “현장에서 써보지 않은 기능은 만들지 않습니다.”
+      </div>
+      <p class="philosophy-text">
+        모딩 팀은 외식업과 식품 제조 현장을 오래 경험해 왔습니다.
+        어떤 메뉴가 잘 팔리는지, 어디서 원가가 새어 나가는지,
+        정산과 세금계산서, 발주와 재고 관리가 얼마나 복잡한 일인지 몸으로 알고 있습니다.
+      </p>
+      <p class="philosophy-text">
+        그래서 모딩은 기술을 위한 기술이 아니라,
+        사장님이 매일 반복하는 일을 덜어주는 도구부터 만듭니다.
+        정산과 발주, 거래 데이터가 한눈에 보이도록,
+        현장에서 바로 이해되는 언어와 구조로 설계합니다.
+      </p>
+      <p class="philosophy-text">
+        “사장님이 내일도 가게 문을 열 수 있도록 돕는 것”,
+        그것이 모딩이 서비스를 만드는 가장 중요한 기준입니다.
+      </p>
+
+      <div class="philosophy-tags">
+        <span class="philosophy-tag">현장 경험 기반 설계</span>
+        <span class="philosophy-tag">사장님의 언어</span>
+        <span class="philosophy-tag">실용 중심 기능</span>
+        <span class="philosophy-tag">데이터로 보는 장사</span>
+      </div>
     </div>
   </section>
 
-  <!-- VALUE -->
-  <section class="value-section">
-    <h2 class="value-title">우리가 만드는 가치</h2>
-    <p class="value-sub">
-      좋은 제품을 가진 제조사와, 검증된 상품을 찾는 외식업 사장님이<br>
-      서로에게 집중할 수 있는 환경을 만드는 것이 모딩의 역할입니다.
+  <!-- VALUES -->
+  <section class="values">
+    <div class="section-title">VALUES</div>
+    <div class="section-subtitle">모딩이 만드는 가치</div>
+    <p class="values-desc">
+      모딩은 “누가 무엇을 위해 이 플랫폼을 쓰는가?”에 초점을 맞춥니다.
+      식품 제조사, 외식업 사장님, 그리고 두 현장을 잇는 플랫폼으로서의 역할까지,
+      각자의 가치를 분명하게 설계합니다.
     </p>
 
-    <div class="value-grid">
+    <div class="values-grid">
+      <!-- 제조사 카드 -->
       <div class="value-card green">
-        <div class="value-card-header">
-          <div class="value-icon">M</div>
-          <div class="value-card-title">식품 제조사에게</div>
+        <div class="value-title">
+          식품 제조사
+          <span class="value-badge">판로 확대</span>
         </div>
-        <div class="value-card-body">
-          안정적인 B2B 판로와 반복 발주를 통해<br>
-          생산 계획을 세우기 쉬운 환경을 제공합니다.<br>
-          주문·정산 현황을 한 번에 보며, 영업 대신<br>
-          제품 개발과 품질에 더 집중할 수 있도록 돕습니다.
-        </div>
+        <ul>
+          <li>검증된 외식업 매장과의 안정적인 B2B 거래 채널</li>
+          <li>주문·정산 현황을 한 번에 확인하는 온라인 대시보드</li>
+          <li>PB·OEM 등 다양한 공급 형태를 지원하는 계약 구조</li>
+          <li>단순 납품을 넘어 “브랜드 파트너”로 성장할 수 있는 발판</li>
+        </ul>
       </div>
 
+      <!-- 외식업 사장님 카드 -->
       <div class="value-card orange">
-        <div class="value-card-header">
-          <div class="value-icon">R</div>
-          <div class="value-card-title">외식업 사장님에게</div>
+        <div class="value-title">
+          외식업 사장님
+          <span class="value-badge">운영 효율</span>
         </div>
-        <div class="value-card-body">
-          매장에서 바로 쓸 수 있는 소스·원부재료·밀키트를<br>
-          한 곳에서 비교·발주할 수 있게 합니다.<br>
-          정산 일정과 거래 데이터를 정리해 보여주어<br>
-          사장님의 의사결정을 더 단순하게 만듭니다.
-        </div>
+        <ul>
+          <li>검증된 제조사 상품을 한 곳에서 비교·발주</li>
+          <li>매장 운영 일정에 맞춘 정산 주기와 데이터 리포트</li>
+          <li>소스·원부재료·밀키트까지 한 번에 연결되는 공급망</li>
+          <li>“좋은 제품 찾기”와 “장사”에 집중할 수 있는 시간 확보</li>
+        </ul>
       </div>
 
+      <!-- 플랫폼 가치 카드 -->
       <div class="value-card neutral">
-        <div class="value-card-header">
-          <div class="value-icon">P</div>
-          <div class="value-card-title">플랫폼으로서의 모딩</div>
+        <div class="value-title">
+          모딩 플랫폼
+          <span class="value-badge">투명한 중개</span>
         </div>
-        <div class="value-card-body">
-          제조와 외식업 사이의 거래 흐름을 정직하게 기록하고,<br>
-          분쟁을 줄이는 거래 규칙과 정책을 제공합니다.<br>
-          복잡한 서류와 엑셀 대신, 모딩 안에서<br>
-          발주·정산·데이터를 한 번에 관리할 수 있게 합니다.
-        </div>
+        <ul>
+          <li>상품 거래의 당사자가 아닌, 통신판매중개자로서의 명확한 역할</li>
+          <li>제조사↔매장 간 거래 흐름과 정산 구조를 투명하게 관리</li>
+          <li>PG와 연동된 정산 데이터로 실질적인 매출·원가 관리 지원</li>
+          <li>플랫폼이 아닌 “사장님 편”에 서는 B2B 서비스 지향</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- BROKER -->
+  <!-- BROKER SECTION -->
   <section class="broker-section">
-    <h2 class="broker-title">모딩의 중개 구조</h2>
-    <p class="broker-sub">
-      모딩은 통신판매중개자로서, 제조사와 외식업 사장님 사이의 거래를
-      안전하고 편리하게 연결하는 역할을 맡습니다.
+    <div class="section-title">STRUCTURE</div>
+    <div class="section-subtitle">모딩의 중개 구조</div>
+    <p class="broker-lead">
+      모딩(Moding)은 상품을 직접 제조하거나 판매하는 회사가 아닙니다.
+      식품 제조사와 외식업 사장님 사이에서 거래를 연결하고,
+      정산 흐름을 안전하게 관리하는 “통신판매중개자”입니다.
     </p>
 
-    <div class="broker-layout">
-      <div class="broker-col left">
-        <strong>모딩의 역할</strong>
+    <div class="broker-grid">
+      <!-- 모딩 역할 -->
+      <div class="broker-col role">
+        <div class="broker-title">모딩의 역할</div>
         <ul>
-          <li>식품 제조사와 외식업 매장을 연결하는 B2B 중개 플랫폼</li>
-          <li>주문·정산·데이터 확인을 위한 SaaS 도구 제공</li>
-          <li>거래 규칙과 이용약관을 통해 분쟁을 줄이는 구조 설계</li>
-          <li>플랫폼 이용 수수료에 대한 세금계산서만 발행</li>
+          <li>제조사와 매장의 B2B 거래를 연결하는 플랫폼 운영</li>
+          <li>PG를 통한 결제·정산 흐름 관리 및 내역 제공</li>
+          <li>클레임·문의 접수를 돕는 중개 창구 역할</li>
+          <li>거래 데이터를 바탕으로 한 매출·발주 리포트 제공</li>
         </ul>
-        <p class="broker-note">
-          모딩은 상품의 제조·품질·보관·배송의 직접 당사자가 아니라,
-          거래를 연결하고 기록하는 중개자로서의 위치를 분명히 합니다.
-        </p>
       </div>
 
-      <div class="broker-col right">
-        <strong>제조사와 매장의 구조</strong>
+      <!-- 구조 설명 -->
+      <div class="broker-col structure">
+        <div class="broker-title">제조사와 매장의 구조</div>
         <ul>
-          <li>상품의 제조·유통·품질 책임은 각 제조사에게 있습니다.</li>
-          <li>상품 공급에 대한 세금계산서는 제조사가 매장에게 직접 발행합니다.</li>
-          <li>모딩은 결제 및 정산 흐름을 관리하며, 거래 정보를 투명하게 제공합니다.</li>
+          <li>상품 공급자: 식품 제조사</li>
+          <li>상품 구매자: 외식업 사장님(매장)</li>
+          <li>상품 세금계산서: 제조사 → 매장 직접 발행</li>
+          <li>모딩은 중개 수수료에 대해서만 별도 용역 세금계산서 발행</li>
         </ul>
+      </div>
+    </div>
 
-        <div class="flow">
-          <div class="flow-box">제조사</div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box">상품 공급 · 세금계산서</div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box">외식업 매장</div>
-        </div>
-        <div class="flow">
-          <div class="flow-box">모딩</div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box orange">중개 수수료 계산서</div>
-        </div>
+    <!-- FLOW PILLS -->
+    <div class="flow">
+      <div class="flow-label">거래 흐름</div>
+      <div class="flow-pills">
+        <span class="pill green">식품 제조사</span>
+        <span class="pill-arrow">→</span>
+        <span class="pill">상품 공급 · 세금계산서</span>
+        <span class="pill-arrow">→</span>
+        <span class="pill green">외식업 사장님(매장)</span>
+      </div>
+
+      <div class="flow-label" style="margin-top:10px;">정산 흐름</div>
+      <div class="flow-pills">
+        <span class="pill orange">Moding</span>
+        <span class="pill-arrow">→</span>
+        <span class="pill orange">중개 수수료 계산서 발행</span>
       </div>
     </div>
   </section>
-
 </div>
 
 <footer>
@@ -563,6 +624,7 @@
 </footer>
 
 <script>
+  /* 복사/드래그 방지 */
   document.addEventListener("contextmenu", function (e) {
     if (!e.target.closest("input, textarea, a")) e.preventDefault();
   });
@@ -570,9 +632,9 @@
     if (!e.target.closest("input, textarea")) e.preventDefault();
   });
   document.addEventListener("keydown", function (e) {
-    const key=e.key.toLowerCase();
-    if ((e.ctrlKey||e.metaKey) && !e.target.closest("input,textarea")) {
-      if(["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+    const key = e.key.toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
+      if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
     }
   });
   document.addEventListener("copy", function (e) {
