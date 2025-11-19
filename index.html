@@ -128,12 +128,12 @@
       transition:0.2s;
       text-align:center;
 
-      /* ▼ 버튼 크기 통일용 추가 */
+      /* 크기 고정 + 가운데 정렬 */
       display:flex;
       align-items:center;
       justify-content:center;
       height:56px;
-      width:200px;
+      width:210px;    /* ← download-btn과 동일 폭으로 통일 */
     }
 
     .btn-green {
@@ -175,6 +175,12 @@
       width:210px;
       text-align:center;
       transition:0.2s;
+
+      /* 버튼과 동일한 높이 + 정렬 */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:56px;
     }
 
     .download-btn.google {
@@ -210,7 +216,7 @@
       letter-spacing:0.18em;
       color:var(--moding-green);
       margin-bottom:10px;
-      font-weight:700;             /* 굵게 추가 */
+      font-weight:700;             /* 굵게 */
     }
 
     .about-tagline {
@@ -256,7 +262,6 @@
       gap:8px;
     }
 
-    /* 제목 컬러: 모딩 고유 색상 적용 */
     .about-col.green .about-col-title {
       color:var(--moding-green);
     }
@@ -264,7 +269,6 @@
       color:var(--moding-orange);
     }
 
-    /* 뱃지 스타일 — 서비스 CTA와 톤 맞춘 선명한 pill */
     .about-chip {
       font-size:11px;
       padding:4px 12px;
@@ -306,7 +310,6 @@
       color:rgba(0,0,0,0.35);
     }
 
-    /* 카드 박스: 서비스 CTA와 통일된 명확한 컬러 톤 */
     .about-col.green {
       border:2px solid var(--moding-green);
       box-shadow:0 4px 14px rgba(0,0,0,0.06);
@@ -522,8 +525,8 @@
     const line1El = document.querySelector(".hero-line1");
     const line2El = document.querySelector(".hero-line2");
 
-    const speed = 90;   // 글자 출력 속도 (ms)
-    const delayBetweenLines = 400; // 1행 완료 후 2행 시작까지 딜레이
+    const speed = 90;
+    const delayBetweenLines = 400;
 
     function typeLine(text, el, callback) {
       let idx = 0;
