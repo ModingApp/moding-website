@@ -3,410 +3,548 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>서비스 소개 - 모딩(Moding)</title>
+  <title>Services | 모딩 서비스 소개</title>
+
+  <meta name="description" content="모딩(Moding)의 핵심 기능과 거래·정산 흐름을 소개합니다. 발주, 정산, 세금계산서 자동 발행까지 한 번에 관리하세요.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Moding">
+  <meta property="og:title" content="Services | 모딩 서비스 소개">
+  <meta property="og:description" content="발주·정산·세금계산서 자동 발행까지 한 화면에서 관리하는 B2B Food-SaaS 모딩(Moding)의 서비스 구조를 확인하세요.">
+  <meta property="og:url" content="https://moding.app/services.html">
+  <meta property="og:image" content="https://moding.app/모딩로고.png">
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body, *:not(input):not(textarea) {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+    :root {
+      --moding-green: #238B22;
+      --moding-orange: #FF8C00;
+      --moding-brown: #8B5A2B;
+      --bg-light: #F7F9F8;
+      --text-main: #1F3B1F;
+      --text-sub: #555555;
     }
 
-    img, .nocopy-img {
-      -webkit-user-drag: none;
-      user-drag: none;
-      pointer-events: none;
-    }
-
-    input, textarea {
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
-      pointer-events: auto;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                   "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
-      background: #050505;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      font-family:-apple-system, BlinkMacSystemFont,"Noto Sans KR",sans-serif;
+      background:var(--bg-light);
+      color:var(--text-main);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    /* 상단 로고바 */
-    .top-bar {
-      width: 100%;
-      max-width: 1024px;
-      margin: 0 auto;
-      padding: 18px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .container {
+      width:100%;
+      max-width:860px;
+      margin:0 auto;
+      padding:40px 24px;
     }
 
-    .top-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    /* HEADER */
+    header {
+      width:100%;
+      border-bottom:1px solid #e1e4e2;
+      background:#ffffff;
     }
 
-    .top-left img {
-      height: 28px;
-      width: auto;
+    .nav {
+      max-width:860px;
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      column-gap:24px;
     }
 
-    .brand-name {
-      font-size: 16px;
-      font-weight: 500;
-      opacity: 0.9;
+    .nav-left img {
+      width:160px;
+      height:auto;
+      display:block;
     }
 
-    .top-right a {
-      font-size: 13px;
-      opacity: 0.85;
+    .nav-right {
+      display:flex;
+      align-items:center;
+      gap:20px;
+      font-size:15px;
     }
 
-    .top-right a:hover {
-      text-decoration: underline;
+    .nav-right a {
+      text-decoration:none;
+      color:var(--moding-green);
+      font-weight:500;
+      white-space:nowrap;
+      transition:0.2s;
     }
 
-    /* 페이지 전체 래퍼 */
-    .page-wrap {
-      width: 100%;
-      max-width: 1024px;
-      margin: 0 auto 56px;
-      padding: 0 20px 40px;
-      flex: 1 0 auto;
+    .nav-right a:hover {
+      color:var(--moding-orange);
     }
 
-    .page-header {
-      margin: 8px 0 24px;
+    .nav-right a.active {
+      color:var(--moding-orange);
     }
 
-    .page-pill {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 999px;
-      border: 1px solid #2b2b2b;
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.8;
-      margin-bottom: 10px;
+    /* HERO SERVICES */
+    .hero-services {
+      padding:60px 0 46px;
     }
 
-    .page-title {
-      font-size: 26px;
-      font-weight: 600;
-      color: #1FDB4F;
-      margin-bottom: 10px;
+    .hero-services-title {
+      font-size:28px;
+      font-weight:700;
+      line-height:1.4;
+      color:var(--moding-green);
+      margin-bottom:14px;
     }
 
-    .page-subtitle {
-      font-size: 14px;
-      opacity: 0.88;
-      line-height: 1.8;
+    .hero-services-sub {
+      font-size:17px;
+      line-height:1.7;
+      color:var(--text-main);
+      margin-bottom:10px;
     }
 
-    /* 공통 카드 스타일 (브랜드 페이지 느낌) */
-    .card {
-      margin-top: 24px;
-      padding: 20px 22px 22px;
-      border-radius: 22px;
-      border: 1px solid #1a1a1a;
-      background: radial-gradient(circle at top left, #102815 0%, #050505 45%, #050505 100%);
+    .hero-services-meta {
+      font-size:14px;
+      line-height:1.6;
+      color:var(--text-sub);
+      opacity:0.9;
     }
 
-    .card-title {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #F5A623;
+    /* COMMON SECTION TITLES */
+    .section-title {
+      font-size:14px;
+      letter-spacing:0.18em;
+      color:var(--moding-green);
+      margin-bottom:10px;
     }
 
-    .card-title span {
-      color: #ffffff;
+    .section-subtitle {
+      font-size:18px;
+      font-weight:600;
+      color:var(--text-main);
+      margin-bottom:16px;
     }
 
-    .card-text {
-      font-size: 8px;
-      line-height: 1.9;
-      opacity: 0.92;
+    /* KEY FEATURES */
+    .features {
+      margin-top:52px;
     }
 
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
+    .features-desc {
+      font-size:14px;
+      color:var(--text-sub);
+      margin-bottom:18px;
     }
 
-    /* 🔶 상단 3개 뱃지 주황색 스타일 */
-    .pill {
-      font-size: 12px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      border: 1px solid #F5A623;
-      color: #F5A623;
-      background: radial-gradient(circle at top left,
-                                  rgba(245,166,35,0.18) 0%,
-                                  rgba(245,166,35,0.05) 45%,
-                                  rgba(5,5,5,0.98) 100%);
-      opacity: 0.98;
-      white-space: nowrap;
+    .features-grid {
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      justify-content:center;
     }
 
-    .section {
-      margin-top: 28px;
+    .feature-card {
+      flex:1 1 0;
+      min-width:230px;
+      border-radius:20px;
+      padding:18px 18px 16px;
+      font-size:14px;
+      line-height:1.7;
+      background:#ffffff;
+      box-shadow:0 6px 18px rgba(0,0,0,0.04);
+      border:2px solid #d7e0db;
     }
 
-    .section h3 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 8px;
+    .feature-card.green {
+      border-color:var(--moding-green);
     }
 
-    .section p {
-      font-size: 13px;
-      line-height: 1.9;
-      opacity: 0.92;
+    .feature-card.orange {
+      border-color:var(--moding-orange);
     }
 
-    .feature-list {
-      margin-top: 10px;
-      font-size: 13px;
-      line-height: 1.8;
-      opacity: 0.92;
+    .feature-card.neutral {
+      border-color:var(--moding-brown);
     }
 
-    .feature-list li {
-      margin-left: 1.1em;
-      margin-bottom: 3px;
+    .feature-title {
+      font-size:14px;
+      font-weight:600;
+      margin-bottom:6px;
+      color:var(--text-main);
     }
 
-    .two-columns {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 14px;
+    .feature-text {
+      font-size:14px;
+      color:var(--text-sub);
     }
 
-    /* 외식업/제조사 카드 그라데이션 */
-    .small-card.manufacturer-card {
-      border-radius: 18px;
-      border: 1px solid rgba(11, 143, 58, 0.8);
-      background:
-        radial-gradient(circle at top left, rgba(11, 143, 58, 0.6) 0%, #050505 55%),
-        #050505;
-      padding: 14px 16px 16px;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+    /* FLOW SECTIONS */
+    .flow-block {
+      margin-top:60px;
     }
 
-    .small-card.restaurant-card {
-      border-radius: 18px;
-      border: 1px solid rgba(245, 156, 26, 0.8);
-      background:
-        radial-gradient(circle at top left, rgba(245, 156, 26, 0.6) 0%, #050505 55%),
-        #050505;
-      padding: 14px 16px 16px;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+    .flow-desc {
+      font-size:14px;
+      color:var(--text-sub);
+      margin-bottom:18px;
     }
 
-    .small-card {
-      border-radius: 18px;
-      border: 1px solid #1a1a1a;
-      background: #080808;
-      padding: 14px 16px 16px;
+    .flow-steps {
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      justify-content:center;
     }
 
-    .small-card-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
+    .step-card {
+      flex:1 1 0;
+      min-width:230px;
+      border-radius:18px;
+      padding:16px 18px 14px;
+      background:#ffffff;
+      box-shadow:0 6px 18px rgba(0,0,0,0.04);
+      border:2px solid #d7e0db;
+      font-size:14px;
+      line-height:1.7;
     }
 
-    .small-card-text {
-      font-size: 13px;
-      line-height: 1.8;
-      opacity: 0.92;
+    .step-card.green {
+      border-color:var(--moding-green);
     }
 
-    .link-row {
-      margin-top: 14px;
-      font-size: 13px;
+    .step-card.orange {
+      border-color:var(--moding-orange);
     }
 
-    .link-inline {
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-underline-offset: 3px;
-      opacity: 0.9;
+    .step-header {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:6px;
     }
 
-    .link-inline:hover {
-      background: linear-gradient(90deg, #0B8F3A 0%, #0B8F3A 50%, #F59C1A 50%, #F59C1A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .step-badge {
+      font-size:11px;
+      font-weight:600;
+      padding:3px 9px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.16);
+      background:#ffffff;
+      color:var(--text-sub);
+      white-space:nowrap;
     }
 
-    /* footer (index와 동일 정보) */
-    .footer-bar {
-      width: 100%;
-      border-top: 1px solid #222;
-      background: #0b0b0b;
-      padding: 12px 16px;
-      font-size: 11px;
-      color: #9d9d9d;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      text-align: center;
-      flex-shrink: 0;
+    .step-card.green .step-badge {
+      border-color:var(--moding-green);
+      color:var(--moding-green);
     }
 
-    .footer-item::after {
-      content: "·";
-      margin-left: 8px;
+    .step-card.orange .step-badge {
+      border-color:var(--moding-orange);
+      color:var(--moding-orange);
     }
-    .footer-item:last-child::after {
-      content: "";
-      margin: 0;
+
+    .step-title {
+      font-size:14px;
+      font-weight:600;
+      color:var(--text-main);
     }
+
+    .step-text {
+      font-size:14px;
+      color:var(--text-sub);
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top:auto;
+      padding:22px 10px;
+      font-size:12px;
+      color:#777;
+      text-align:center;
+      border-top:1px solid #e1e4e2;
+      line-height:1.8;
+      background:#ffffff;
+      width:100%;
+    }
+
+    /* 복사/드래그 방지 */
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select:none;
+      user-select:none;
+    }
+    img { user-drag:none; pointer-events:none; }
+    input,textarea{user-select:text;pointer-events:auto;}
+
+    /* ===============================
+       반응형: 태블릿 & 모바일 보정
+       =============================== */
 
     @media (max-width: 768px) {
-      .top-bar { padding: 16px 14px; }
-      .page-wrap { padding: 0 14px 32px; }
-      .page-title { font-size: 22px; }
-      .card { padding: 18px 16px 20px; }
-      .two-columns { grid-template-columns: 1fr; }
+      .container {
+        padding:32px 20px 40px;
+      }
+      .hero-services {
+        padding:46px 0 34px;
+      }
+      .hero-services-title {
+        font-size:24px;
+      }
+      .hero-services-sub {
+        font-size:16px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        padding:12px 16px;
+        flex-direction:column;
+      }
+      .nav-left img {
+        width:150px;
+      }
+      .nav-right {
+        font-size:14px;
+        gap:16px;
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+      .hero-services-title {
+        font-size:22px;
+      }
+      .hero-services-sub {
+        font-size:15px;
+      }
+      .features-grid,
+      .flow-steps {
+        gap:12px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <!-- 상단 로고바 -->
-  <header class="top-bar">
-    <div class="top-left">
-      <img src="모딩로고.png" alt="Moding Logo" class="nocopy-img">
-      <div class="brand-name">Moding Inc.</div>
+
+<header>
+  <div class="nav">
+    <div class="nav-left">
+      <img src="모딩로고.png" alt="Moding Logo">
     </div>
-    <div class="top-right">
-      <a href="index.html">← 메인으로</a>
+    <div class="nav-right">
+      <a href="about.html">About</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="alliance.html">Alliance</a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- 본문 -->
-  <main class="page-wrap">
-    <header class="page-header">
-      <div class="page-pill">SERVICE OVERVIEW</div>
-      <h1 class="page-title">서비스 소개</h1>
- 
-     
-    </header>
+<div class="container">
+  <!-- HERO SERVICES -->
+  <section class="hero-services">
+    <h1 class="hero-services-title">
+      모딩이 제공하는 서비스
+    </h1>
+    <p class="hero-services-sub">
+      발주·정산·세금계산서 자동 발행까지,<br>
+      식품 제조사와 외식업 사장님 모두를 위한 B2B Food-SaaS 도구입니다.
+    </p>
+    <p class="hero-services-meta">
+      복잡한 엑셀 정리와 수작업 계산을 줄이고,<br>
+      “가게 운영”과 “좋은 제품 만들기”에 더 많은 시간을 쓰실 수 있도록 설계했습니다.
+    </p>
+  </section>
 
-    <!-- 메인 카드: 모딩이 하는 일 -->
-    <section class="card">
-      <h2 class="card-title">모든 사장님을 위한, 모든 것을 담은 플랫폼 <br> 
-      <p class="card-text">
-        
-        <h3>모딩(Moding)은 식품 제조사와 외식업 사장님, 그리고 그 사이를 잇는 기술을 하나의 구조로 묶어 주는 <strong>B2B Food-SaaS 플랫폼</strong>입니다.
-        복잡하게 흩어져 있는 거래 흐름을 하나의 구조로 단순하게 정리하고, 현장에서 오래 쓸 수 있는 도구를 만드는 것이 
-        모딩의 서비스 방향입니다.</h3> <br>
-        
-      </p>
+  <!-- KEY FEATURES -->
+  <section class="features">
+    <div class="section-title">KEY FEATURES</div>
+    <div class="section-subtitle">모딩에서 한 번에 해결되는 핵심 기능</div>
+    <p class="features-desc">
+      모딩은 제조사와 외식업 사장님이 매일 반복하는 업무를 기준으로 설계했습니다.
+      발주·정산·데이터를 하나의 흐름으로 묶어, 최소한의 조작으로 운영이 돌아가도록 돕습니다.
+    </p>
 
-      <div class="pill-row">
-        <div class="pill">소스·원부재료·밀키트 B2B 마켓</div>
-        <div class="pill">B2B 특화 주문·정산 SaaS 도구</div>
-        <div class="pill">세금계산서·정산 자동화</div>
+    <div class="features-grid">
+      <div class="feature-card green">
+        <div class="feature-title">상품·거래 관리</div>
+        <p class="feature-text">
+          제조사가 등록한 상품과 거래 내역을 한 화면에서 관리합니다.
+          주문 상태, 공급 이력, 매출 흐름을 직관적으로 확인할 수 있습니다.
+        </p>
       </div>
-    </section>
 
-    <!-- 섹션 1: 주요 기능 -->
-    <section class="section">
-      <h3>모딩이 제공하는 핵심 기능</h3>
-      <ul class="feature-list">
-        <li><strong>상품·레시피 마켓</strong> – 카테고리·용도·업종별로 상품을 찾아 발주할 수 있습니다.</li>
-        <li><strong>발주·정산 관리</strong> – 여러 제조사에 나뉘어 있던 주문/입금을 한 화면에서 정리합니다.</li>
-        <li><strong>정산 주기와 세금계산서</strong> – D+7 정산 구조와 세금계산서 자동 발행(예정)을 지원합니다.</li>
-        <li><strong>데이터 리포트(예정)</strong> – 매장·상품별 발주 추이 등, 운영에 바로 쓰는 숫자만 보여주는 것을 목표로 합니다.</li>
-      </ul>
-    </section>
+      <div class="feature-card orange">
+        <div class="feature-title">발주·주문 관리</div>
+        <p class="feature-text">
+          외식업 사장님은 필요한 상품을 한 번에 장바구니에 담고 발주할 수 있습니다.
+          주문 이력과 납품 내역이 자동으로 정리됩니다.
+        </p>
+      </div>
 
-    <!-- 섹션 2: 두 관점에서 보는 모딩 -->
-    <section class="section">
-      <h3>제조사 · 외식업 사장님, 두 관점에서의 모딩</h3>
+      <div class="feature-card neutral">
+        <div class="feature-title">정산·PG 연동</div>
+        <p class="feature-text">
+          PG 결제 데이터를 기반으로 정산 예정 금액이 자동 집계됩니다.
+          제조사별·기간별 정산 내역을 모딩 대시보드에서 한 번에 확인할 수 있습니다.
+        </p>
+      </div>
 
-      <div class="two-columns">
-        <div class="small-card manufacturer-card">
-          <div class="small-card-title">식품 제조사에게</div>
-          <p class="small-card-text">
-            판로 확보가 어려웠던 제조사에게는 새로운 B2B 채널이 됩니다.
-            모딩PB·프랜차이즈OEM 제안, 정산 구조 정리, 거래 데이터 제공 등을 통해
-            “거래처와 함께 성장하는 플랫폼”을 지향합니다.
-          </p>
+      <div class="feature-card green">
+        <div class="feature-title">데이터 리포트</div>
+        <p class="feature-text">
+          판매 추이, 발주 패턴, 정산 내역 등 핵심 데이터를 시기별로 정리해 제공합니다.
+          감으로 하던 결정을 데이터 기반으로 바꾸는 데 도움을 줍니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW 1: 거래 흐름 -->
+  <section class="flow-block">
+    <div class="section-title">FLOW ①</div>
+    <div class="section-subtitle">거래 흐름 (상품 공급 기준)</div>
+    <p class="flow-desc">
+      상품 거래의 법적 당사자는 언제나 “제조사 ↔ 외식업 매장”입니다.
+      모딩은 이 거래 과정이 더 빠르고, 더 정확하게 흘러가도록 돕는 역할을 합니다.
+    </p>
+
+    <div class="flow-steps">
+      <div class="step-card green">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">외식업 사장님 발주</span>
         </div>
+        <p class="step-text">
+          매장이 모딩에서 상품과 조건을 확인하고 주문합니다.
+          필요한 수량·납품일을 선택해 발주를 등록합니다.
+        </p>
+      </div>
 
-        <div class="small-card restaurant-card">
-          <div class="small-card-title">외식업 사장님에게</div>
-          <p class="small-card-text">
-            검증된 제조사의 소스·육류·밀키트를 한 곳에서 보고, 매장 운영에 맞는 제품을 선택해 발주할 수 있습니다.
-            발주 내역과 정산 내역을 한 곳에서 관리해 회계·재고 업무를 줄이는 것이 목표입니다.
-          </p>
+      <div class="step-card green">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">제조사 주문 승인</span>
         </div>
+        <p class="step-text">
+          식품 제조사가 주문 내역을 확인하고 공급 가능 여부를 확정합니다.
+          필요 시 출고 일정과 준비 사항을 조정할 수 있습니다.
+        </p>
       </div>
 
-      <div class="link-row"> <br>
-        보다 구체적인 이용 방식은
-        <a href="owners.html" class="link-inline">사장님 안내 페이지</a>에서 역할별로 다시 정리해 두었습니다.
+      <div class="step-card green">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">상품 공급·배송</span>
+        </div>
+        <p class="step-text">
+          제조사에서 외식업 매장으로 상품이 공급·배송됩니다.
+          출고·배송 정보는 모딩 시스템에 자동 기록됩니다.
+        </p>
       </div>
-    </section>
-  </main>
 
-  <!-- 공통 푸터 -->
-  <footer class="footer-bar">
-    <span class="footer-item">상호: 주식회사 모딩(Moding Inc.)</span>
-    <span class="footer-item">대표자: 서희진</span>
-    <span class="footer-item">사업자등록번호: 730-87-03564</span>
-    <span class="footer-item">통신판매업신고번호: 제2025-대구달서-1367호</span>
-    <span class="footer-item">주소: 대구광역시 달서구 달구벌대로 1698, 6층 607호</span>
-    <span class="footer-item">문의: moding_inc@naver.com</span>
-  </footer>
+      <div class="step-card green">
+        <div class="step-header">
+          <span class="step-badge">STEP 4</span>
+          <span class="step-title">상품 세금계산서 자동 발행</span>
+        </div>
+        <p class="step-text">
+          제조사 명의의 상품 세금계산서를
+          <strong>모딩 시스템이 자동으로 발행·전송</strong>합니다.
+          제조사는 발행 내역만 확인하면 되고, 매장은 정리된 세금계산서를 받아볼 수 있습니다.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <!-- 복사/우클릭 방지 (index와 동일 패턴) -->
-  <script>
-    document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) {
-        e.preventDefault();
-      }
-    });
-    document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
-    });
-    document.addEventListener("keydown", function (e) {
-      const key = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
-        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
-          e.preventDefault();
-        }
-      }
-    });
-    document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
-    });
-  </script>
+  <!-- FLOW 2: 정산 흐름 -->
+  <section class="flow-block">
+    <div class="section-title">FLOW ②</div>
+    <div class="section-subtitle">정산 흐름 (모딩 역할 기준)</div>
+    <p class="flow-desc">
+      모딩은 상품을 판매하는 회사가 아니라, 결제와 정산 흐름을 관리하는 중개자입니다.
+      모든 결제·정산 데이터는 모딩 시스템에서 자동으로 정리되고,
+      제조사와 매장은 각자의 역할에 집중할 수 있습니다.
+    </p>
+
+    <div class="flow-steps">
+      <div class="step-card orange">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">매장 결제 → 정산 시스템 자동 수집</span>
+        </div>
+        <p class="step-text">
+          외식업 매장이 모딩을 통해 주문 대금을 결제하면,
+          결제 정보가 <strong>모딩 정산 시스템에 자동 반영</strong>됩니다.
+        </p>
+      </div>
+
+      <div class="step-card orange">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">PG·정산 데이터 자동 정리</span>
+        </div>
+        <p class="step-text">
+          PG 결제 내역, 입금 예정 금액, 수수료 등이
+          모딩 대시보드에 자동으로 집계·정리됩니다.
+        </p>
+      </div>
+
+      <div class="step-card orange">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">제조사 대금 자동 정산 계산</span>
+        </div>
+        <p class="step-text">
+          공급 완료 기준으로 제조사별 정산 금액이
+          <strong>모딩 시스템에서 자동 계산·정리</strong>됩니다.
+          제조사는 정산 내역을 확인하고 입금을 받게 됩니다.
+        </p>
+      </div>
+
+      <div class="step-card orange">
+        <div class="step-header">
+          <span class="step-badge">STEP 4</span>
+          <span class="step-title">중개 수수료 계산서 자동 발행</span>
+        </div>
+        <p class="step-text">
+          모딩 명의의 중개 수수료 계산서가
+          <strong>자동 발행·전송</strong>됩니다.
+          상품 세금계산서(제조사→매장)와 분리된, 용역 수수료 계산서입니다.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+  통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
+  대구광역시 달서구 달구벌대로 1698, 6층
+</footer>
+
+<script>
+  /* 복사/드래그 방지 */
+  document.addEventListener("contextmenu", function (e) {
+    if (!e.target.closest("input, textarea, a")) e.preventDefault();
+  });
+  document.addEventListener("dragstart", function (e) {
+    if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+  document.addEventListener("keydown", function (e) {
+    const key = e.key.toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
+      if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+    }
+  });
+  document.addEventListener("copy", function (e) {
+    if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+</script>
+
 </body>
 </html>
