@@ -147,6 +147,155 @@
     }
 
     /* VALUE 섹션 (우리가 만드는 가치) */
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회사소개 | 모딩(Moding)</title>
+
+  <meta name="description" content="모딩(Moding)은 식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼입니다. 현장의 언어를 이해하는 사람들로 이루어진 팀이, 오래 쓰이는 도구를 만듭니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Moding">
+  <meta property="og:title" content="회사소개 | 모딩(Moding)">
+  <meta property="og:description" content="식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼 모딩(Moding)의 운영 철학과 중개 구조를 소개합니다.">
+  <meta property="og:url" content="https://moding.app/about.html">
+  <meta property="og:image" content="https://moding.app/모딩로고.png">
+
+  <style>
+    :root {
+      --moding-green: #238B22;
+      --moding-orange: #FF8C00;
+      --bg-light: #F7F9F8;
+      --text-main: #1F3B1F;
+      --text-sub: #555555;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family:-apple-system, BlinkMacSystemFont,"Noto Sans KR",sans-serif;
+      background:var(--bg-light);
+      color:var(--text-main);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .container {
+      width:100%;
+      max-width:860px;
+      margin:0 auto;
+      padding:40px 24px 48px;
+    }
+
+    /* HEADER (index.html과 동일 베이스) */
+    header {
+      width:100%;
+      border-bottom:1px solid #e1e4e2;
+      background:#ffffff;
+    }
+
+    .nav {
+      max-width:860px;
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      column-gap:24px;
+    }
+
+    .nav-left img {
+      width:160px;
+      height:auto;
+      display:block;
+    }
+
+    .nav-right {
+      display:flex;
+      align-items:center;
+      gap:20px;
+      font-size:15px;
+    }
+
+    .nav-right a {
+      text-decoration:none;
+      color:var(--moding-green);
+      font-weight:500;
+      white-space:nowrap;
+      transition:0.2s;
+    }
+
+    .nav-right a:hover {
+      color:var(--moding-orange);
+    }
+
+    .nav-right a.active {
+      color:var(--moding-orange);
+    }
+
+    /* HERO (회사소개 인트로) */
+    .hero-about {
+      text-align:center;
+      padding:52px 0 40px;
+    }
+
+    .hero-about-title {
+      font-size:26px;
+      font-weight:700;
+      margin-bottom:10px;
+      color:var(--moding-green);
+    }
+
+    .hero-about-sub {
+      font-size:16px;
+      line-height:1.6;
+      color:var(--text-sub);
+    }
+
+    /* PHILOSOPHY 섹션 (현장의 언어) */
+    .philosophy {
+      margin-top:40px;
+      padding:40px 26px 42px;
+      border-radius:22px;
+      background:radial-gradient(circle at top, #12351e 0, #050f08 55%, #020805 100%);
+      color:#ffffff;
+      text-align:center;
+      box-shadow:0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    .philo-pill {
+      display:inline-block;
+      padding:4px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.24);
+      font-size:11px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      margin-bottom:16px;
+      color:rgba(255,255,255,0.8);
+    }
+
+    .philo-title {
+      font-size:22px;
+      font-weight:700;
+      margin-bottom:18px;
+      color:var(--moding-orange);
+    }
+
+    .philo-text {
+      font-size:15px;
+      line-height:1.8;
+      opacity:0.9;
+    }
+
+    .philo-text p {
+      margin-bottom:10px;
+    }
+
+    /* VALUE 섹션 (우리가 만드는 가치) */
     .value-section {
       margin-top:52px;
       padding:38px 24px 40px;
@@ -182,8 +331,25 @@
       min-width:230px;
       border-radius:18px;
       padding:16px 18px 14px;
-      background:#f8faf9;
-      border:1px solid #e2e7e4;
+      background:#ffffff;
+      box-shadow:0 6px 16px rgba(0,0,0,0.04);
+      border:1px solid #dde4df;
+    }
+
+    /* index about 카드 스타일과 비슷하게 컬러 입힘 */
+    .value-card.green {
+      background:linear-gradient(145deg,#E4F3E6,#F3FBF4);
+      border:1px solid rgba(35,139,34,0.22);
+    }
+
+    .value-card.orange {
+      background:linear-gradient(145deg,#FFEAD3,#FFF6EA);
+      border:1px solid rgba(255,140,0,0.24);
+    }
+
+    .value-card.neutral {
+      background:linear-gradient(145deg,#EEF2F0,#F8FAF9);
+      border:1px solid #d7e0db;
     }
 
     .value-card-header {
@@ -204,6 +370,12 @@
       font-size:12px;
       color:var(--moding-green);
       font-weight:700;
+      background:#ffffff20;
+    }
+
+    .value-card.orange .value-icon {
+      border-color:var(--moding-orange);
+      color:var(--moding-orange);
     }
 
     .value-card-title {
@@ -252,10 +424,14 @@
       font-size:13px;
       line-height:1.7;
       color:var(--text-sub);
+      background:#f8faf9;
+      border-radius:16px;
+      border:1px solid #dde4df;
+      padding:14px 14px 12px;
     }
 
     .broker-col ul {
-      margin:0;
+      margin:6px 0 0 0;
       padding-left:16px;
     }
 
@@ -266,29 +442,38 @@
     .flow {
       display:flex;
       align-items:center;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:6px;
+      gap:6px;
+      flex-wrap:nowrap;        /* 줄바꿈 방지 */
+      overflow-x:auto;         /* 좁은 화면에서는 가로 스크롤 */
+      margin-top:8px;
+      padding-bottom:2px;
     }
 
     .flow-box {
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid #d9e2db;
-      background:#f8faf9;
+      border:1px solid var(--moding-green); /* 테두리 색상 */
+      background:#ffffff;
       font-size:12px;
       white-space:nowrap;
+      flex:0 0 auto;
+    }
+
+    .flow-box.orange {
+      border-color:var(--moding-orange);
+      color:var(--moding-orange);
     }
 
     .flow-arrow {
       font-size:13px;
       color:#a0a8a2;
+      flex:0 0 auto;
     }
 
     .broker-note {
       font-size:12px;
       color:#888;
-      margin-top:14px;
+      margin-top:10px;
     }
 
     /* FOOTER (index.html과 동일) */
@@ -420,7 +605,7 @@
     </p>
 
     <div class="value-grid">
-      <div class="value-card">
+      <div class="value-card green">
         <div class="value-card-header">
           <div class="value-icon">M</div>
           <div class="value-card-title">식품 제조사에게</div>
@@ -433,7 +618,7 @@
         </div>
       </div>
 
-      <div class="value-card">
+      <div class="value-card orange">
         <div class="value-card-header">
           <div class="value-icon">R</div>
           <div class="value-card-title">외식업 사장님에게</div>
@@ -446,7 +631,7 @@
         </div>
       </div>
 
-      <div class="value-card">
+      <div class="value-card neutral">
         <div class="value-card-header">
           <div class="value-icon">P</div>
           <div class="value-card-title">플랫폼으로서의 모딩</div>
@@ -499,10 +684,10 @@
           <div class="flow-arrow">→</div>
           <div class="flow-box">외식업 매장</div>
         </div>
-        <div class="flow" style="margin-top:6px;">
+        <div class="flow">
           <div class="flow-box">모딩</div>
           <div class="flow-arrow">→</div>
-          <div class="flow-box">중개 수수료 계산서</div>
+          <div class="flow-box orange">중개 수수료 계산서</div>
         </div>
       </div>
     </div>
