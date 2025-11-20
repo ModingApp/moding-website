@@ -374,6 +374,23 @@
       .values-grid {
         gap:12px;
       }
+
+      /* ▼ 모바일 전용 여백/패딩 튜닝 ▼ */
+      .hero-about {
+        padding:40px 0 26px;      /* 하단 여백 46px → 26px로 축소 */
+      }
+      .philosophy {
+        margin-top:32px;          /* 상단 마진 52px → 32px로 축소 */
+      }
+      .philosophy-box {
+        padding:22px 18px 36px;   /* 하단 패딩을 늘려 뱃지가 바닥에 붙지 않도록 */
+      }
+      .philosophy-tags {
+        margin-top:18px;          /* 텍스트와 뱃지 사이 간격 소폭 확대 */
+      }
+      .value-card {
+        padding:16px 16px 14px;   /* 모바일에서 카드 내부 패딩만 살짝 축소 */
+      }
     }
   </style>
 </head>
@@ -450,11 +467,13 @@
           이것이 모딩이 서비스를 설계하는 가장 중요한 기준입니다.
         </p>
 
-        <span class="philosophy-tag green">현장의 언어</span>
-        <span class="philosophy-tag green">단순한 구조</span>
-        <span class="philosophy-tag green">직관적 흐름</span>
-        <span class="philosophy-tag green">데이터 기반 운영</span>
-        <span class="philosophy-tag green">원스톱 정산 자동화</span>
+        <div class="philosophy-tags">
+          <span class="philosophy-tag">현장의 언어</span>
+          <span class="philosophy-tag">단순한 구조</span>
+          <span class="philosophy-tag">직관적 흐름</span>
+          <span class="philosophy-tag">데이터 기반 운영</span>
+          <span class="philosophy-tag">원스톱 정산 자동화</span>
+        </div>
       </div>
     </section>
 
