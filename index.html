@@ -103,6 +103,18 @@
       min-height:1.4em; /* 로딩 중 높이 유지 */
     }
 
+    /* 히어로 M 심볼 영역: 문구 아래에 심볼만 배치 */
+    .hero-symbol {
+      margin-bottom:22px;
+    }
+
+    .hero-symbol img {
+      height:52px;           /* 전체 로고를 사용하되, 작은 심볼 느낌으로 */
+      width:auto;
+      display:block;
+      margin:0 auto;
+    }
+
     .hero-sub {
       font-size:17px;
       opacity:0.9;
@@ -333,6 +345,28 @@
       width:100%;
     }
 
+    /* 푸터 약관 링크 라인: 기존 기획대로 상단 한 줄 */
+    .footer-links {
+      margin-bottom:4px;
+      font-size:12px;          /* 푸터 기본 폰트와 동일 크기 유지 */
+      text-align:center;
+    }
+
+    .footer-links a {
+      text-decoration:none;
+      color:var(--moding-green);
+      font-weight:500;
+    }
+
+    .footer-links a:hover {
+      color:var(--moding-orange);
+    }
+
+    .footer-links .divider {
+      margin:0 6px;
+      color:#bbbbbb;
+    }
+
     /* 복사/드래그 방지 */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select:none;
@@ -438,6 +472,12 @@
       <span class="hero-line hero-line1"></span><br>
       <span class="hero-line hero-line2"></span>
     </h1>
+
+    <!-- 메인 카피 아래 M 심볼(현재는 모딩로고 전체 사용, 향후 M 전용 파일로 교체 가능) -->
+    <div class="hero-symbol">
+      <img src="모딩로고.png" alt="Moding M Symbol">
+    </div>
+
     <p class="hero-sub">
       제품 공급·발주·정산·데이터까지 한 번에.<br>
       모딩에서 쉽고 빠르게 연결하세요.
@@ -494,6 +534,14 @@
 </div>
 
 <footer>
+  <!-- 이용약관 · 개인정보처리방침 링크 라인 -->
+  <div class="footer-links">
+    <a href="terms.html">이용약관</a>
+    <span class="divider">·</span>
+    <a href="privacy.html">개인정보처리방침</a>
+  </div>
+
+  <!-- 기존 회사 정보 -->
   주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
   통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
   대구광역시 달서구 달구벌대로 1698, 6층
