@@ -333,28 +333,6 @@
       width:100%;
     }
 
-    /* 푸터 약관 링크 라인 */
-    .footer-links {
-      margin-bottom:4px;      /* 링크와 회사 정보 사이 간격 */
-      font-size:12px;         /* 기존 푸터 폰트 크기와 동일 유지 */
-      text-align:center;
-    }
-
-    .footer-links a {
-      text-decoration:none;
-      color:var(--moding-green);   /* 기본 링크 색: 모딩 그린 */
-      font-weight:500;
-    }
-
-    .footer-links a:hover {
-      color:var(--moding-orange);  /* 호버 시 포인트 컬러 */
-    }
-
-    .footer-links .divider {
-      margin:0 6px;
-      color:#bbbbbb;
-    }
-
     /* 복사/드래그 방지 */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select:none;
@@ -516,21 +494,30 @@
 </div>
 
 <footer>
-  <!-- 이용약관 · 개인정보처리방침 링크 라인 -->
-  <div class="footer-links">
-    <a href="terms.html">이용약관</a>
-    <span class="divider">·</span>
-    <a href="privacy.html">개인정보처리방침</a>
-  </div>
-
-  <!-- 기존 회사 정보는 그대로 유지 -->
   주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
   통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
   대구광역시 달서구 달구벌대로 1698, 6층
 </footer>
 
 <script>
-  /* 히어로 타이핑 효과: 상단에 배치하여 차후 수정용이하게 정리 */
+  /* 복사/드래그 방지 */
+  document.addEventListener("contextmenu", function (e) {
+    if (!e.target.closest("input, textarea, a")) e.preventDefault();
+  });
+  document.addEventListener("dragstart", function (e) {
+    if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+  document.addEventListener("keydown", function (e) {
+    const key = e.key.toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
+      if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+    }
+  });
+  document.addEventListener("copy", function (e) {
+    if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+
+  /* 히어로 타이핑 효과 */
   document.addEventListener("DOMContentLoaded", function() {
     const line1Text = "모두의 일상을 흐름으로 잇다";
     const line2Text = "모두를 위한 단 하나의 흐름";
@@ -561,15 +548,7 @@
       }, delayBetweenLines);
     });
   });
+</script>
 
-  /* 복사/드래그 방지 */
-  document.addEventListener("contextmenu", function (e) {
-    if (!e.target.closest("input, textarea, a")) e.preventDefault();
-  });
-  document.addEventListener("dragstart", function (e) {
-    if (!e.target.closest("input, textarea")) e.preventDefault();
-  });
-  document.addEventListener("keydown", function (e) {
-    const key = e.key.toLowerCase();
-    if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
-     
+</body>
+</html>
