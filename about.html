@@ -44,6 +44,10 @@
       --bg-light: #F7F9F8;
       --text-main: #1F3B1F;
       --text-sub: #555555;
+
+      /* 공통 다크그린 패널용 */
+      --moding-green-dark-1: #0F2516;
+      --moding-green-dark-2: #122A19;
     }
 
     * {
@@ -167,18 +171,11 @@
       margin-top:10px;
       border-radius:22px;
       padding:26px 24px 24px;
-      background:linear-gradient(135deg,#111c14,#1b3724);
-      color:#f5f7f6;
-      box-shadow:0 12px 32px rgba(0,0,0,0.25);
-    }
-
-      margin-top:10px;
-      border-radius:22px;
-      padding:26px 24px 24px;
       line-height:1.8;
-      background:linear-gradient(135deg, #17681A, #238B22);
+      background:linear-gradient(135deg,var(--moding-green-dark-1),var(--moding-green-dark-2));
       color:#ffffff;
       box-shadow:0 12px 32px rgba(0,0,0,0.25);
+    }
 
     .philosophy-lead {
       font-size:16px;
