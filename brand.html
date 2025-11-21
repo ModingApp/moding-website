@@ -295,24 +295,30 @@
       margin: 8px 0 6px;
     }
 
-    .badge-role {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid #d7e0db;
-      background: #ffffff;
-      color: var(--text-sub);
-    }
+ .badge-role {
+  font-size: 11px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid #d7e0db;
+  background: #ffffff;
+  color: var(--text-sub);
+}
 
-    .badge-role.restaurant {
-      border-color: rgba(255,140,0,0.55);
-      color: var(--moding-orange);
-    }
+/* 외식업 사장님 뱃지: 주황 풀박스 + 흰 글자 */
+.badge-role.restaurant {
+  background: var(--moding-orange);
+  border-color: var(--moding-orange);
+  color: #ffffff;
+  font-weight: 600;
+}
 
-    .badge-role.manufacturer {
-      border-color: rgba(35,139,34,0.55);
-      color: var(--moding-green);
-    }
+/* 제조사 뱃지: 초록 풀박스 + 흰 글자 */
+.badge-role.manufacturer {
+  background: var(--moding-green);
+  border-color: var(--moding-green);
+  color: #ffffff;
+  font-weight: 600;
+}
 
     .color-palette {
       display: grid;
@@ -351,15 +357,15 @@
     }
 
     .color-green {
-      background: linear-gradient(135deg, #E4F3E6, #F3FBF4);
+      background: linear-gradient(#238B22, #1f7a1e);
     }
 
     .color-orange {
-      background: linear-gradient(135deg, #FFEAD3, #FFF6EA);
+      background: linear-gradient(#FF8C00, #e47d00);
     }
 
     .color-wood {
-      background: linear-gradient(135deg, #F1E0CF, #F7EFE4);
+      background: linear-gradient(#8E6A45, #7b5d3b);
     }
 
     /* ---------------------------------
