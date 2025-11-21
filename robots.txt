@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://moding.app/sitemap.xml/
+Sitemap: https://moding.app/sitemap.xml
