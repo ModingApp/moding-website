@@ -208,111 +208,114 @@
     }
 
     /* VALUES (모딩이 만드는 가치) */
-    .values {
-      margin-top:60px;
-      margin-bottom:10px;
-    }
+  .values {
+  margin-top:60px;
+  margin-bottom:10px;
+}
 
-    .values-desc {
-      font-size:14px;
-      color:var(--text-sub);
-      margin-bottom:18px;
-    }
+.values-desc {
+  font-size:14px;
+  color:var(--text-sub);
+  margin-bottom:18px;
+}
 
-    .values-grid {
-      display:flex;
-      flex-wrap:wrap;
-      gap:16px;
-      justify-content:center;
-    }
+.values-grid {
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  justify-content:center;
+}
 
-    .value-card {
-      flex:1 1 0;
-      min-width:230px;
-      border-radius:20px;
-      padding:18px 18px 16px;
-      font-size:14px;
-      line-height:1.7;
-      background:#ffffff;
-      box-shadow:0 6px 18px rgba(0,0,0,0.04);
-    }
+.value-card {
+  flex:1 1 0;
+  min-width:230px;
+  border-radius:20px;
+  padding:18px 18px 16px;
+  font-size:14px;
+  line-height:1.7;
+  background:#ffffff;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+  text-align:center; /* ⬅ 카드 상단(타이틀+뱃지)을 가운데로 */
+}
 
-    .value-card.green {
-      border:2px solid var(--moding-green);
-    }
+.value-card.green {
+  border:2px solid var(--moding-green);
+}
 
-    .value-card.orange {
-      border:2px solid var(--moding-orange);
-    }
+.value-card.orange {
+  border:2px solid var(--moding-orange);
+}
 
-    .value-card.neutral {
-      border:2px solid var(--moding-brown);
-    }
+.value-card.neutral {
+  border:2px solid var(--moding-brown);
+}
 
-    .value-title {
-      font-size:14px;
-      font-weight:600;
-      margin-bottom:8px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      color:var(--text-main);
-    }
+.value-title {
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--text-main);
+  justify-content:center; /* ⬅ 타이틀 + 뱃지 줄을 중앙 정렬 */
+}
 
-     .value-badge {
-        font-size:11px;
-        padding:3px 9px;
-        border-radius:999px;
-        border:1px solid rgba(0,0,0,0.12);
-        background:#ffffff;
-        color:var(--text-sub);
+.value-badge {
+  font-size:11px;
+  padding:3px 9px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,0.12);
+  background:#ffffff;
+  color:var(--text-sub);
 }
 
 /* 판로확대 카드: 초록 풀박스 + 흰 글자 */
-      .value-card.green .value-badge {
-        background: var(--moding-green);
-        border-color: var(--moding-green);
-        color: #ffffff;
-        font-weight: 600; /* 선택사항: 약간 굵게 */
+.value-card.green .value-badge {
+  background: var(--moding-green);
+  border-color: var(--moding-green);
+  color: #ffffff;
+  font-weight: 600; /* 선택사항: 약간 굵게 */
 }
 
 /* 운영효율 카드: 주황 풀박스 + 흰 글자 */
-      .value-card.orange .value-badge {
-        background: var(--moding-orange);
-        border-color: var(--moding-orange);
-        color: #ffffff;
-        font-weight: 600;
+.value-card.orange .value-badge {
+  background: var(--moding-orange);
+  border-color: var(--moding-orange);
+  color: #ffffff;
+  font-weight: 600;
 }
 
 /* 투명한 중개 카드: 갈색 풀박스 + 흰 글자 */
-    .value-card.neutral .value-badge {
-      background: var(--moding-brown);
-      border-color: var(--moding-brown);
-      color: #ffffff;
-      font-weight: 600;
+.value-card.neutral .value-badge {
+  background: var(--moding-brown);
+  border-color: var(--moding-brown);
+  color: #ffffff;
+  font-weight: 600;
 }
 
-    .value-card ul {
-      list-style:none;
-      margin:0;
-      padding-left:0;
+.value-card ul {
+  list-style:none;
+  margin:0;
+  padding-left:0;
+  text-align:left; /* ⬅ 리스트는 다시 왼쪽 정렬 */
 }
 
-    .value-card li {
-      position:relative;
-      padding-left:14px;
-      margin-bottom:4px;
-      color:var(--text-sub);
+.value-card li {
+  position:relative;
+  padding-left:14px;
+  margin-bottom:4px;
+  color:var(--text-sub);
 }
 
-    .value-card li::before {
-        content:"•";
-        position:absolute;
-        left:0;
-        top:0;
-        color:rgba(0,0,0,0.35);
+.value-card li::before {
+  content:"•";
+  position:absolute;
+  left:0;
+  top:0;
+  color:rgba(0,0,0,0.35);
 }
-    
+
     /* FOOTER */
     .footer-links {
       margin-bottom: 4px;
