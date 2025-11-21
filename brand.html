@@ -548,10 +548,23 @@
     <section class="section brand-hero">
       <h1>브랜드 아이덴티티</h1>
 
-      <div class="identity-hero">
-        <div class="identity-hero-title">모두의 일상을 흐름으로 잇다<br> 
-                                         모두를 위한 단 하나의 흐름                                
-        </div>
+        <div class="identity-hero">
+        <div class="identity-hero-title">
+        <span class="flow-line">모두의 일상을 흐름으로 잇다</span>
+        <span class="flow-line">모두를 위한 단 하나의 흐름</span>
+      </div>
+    </div>
+        .identity-hero-title .flow-line {
+        display: inline; /* 기본은 이어쓰기 (PC/큰 화면) */
+        }
+
+      /* 모바일일 때만 줄바꿈 */
+      @media (max-width: 768px) {
+     .identity-hero-title .flow-line {
+      display: block; /* 모바일에서는 줄 나눔 */
+  }
+}
+
         <p class="identity-hero-text">
           <span class="hero-highlight">모딩(Moding)</span>은 식품 제조사와 외식업 사장님,
           그리고 그 사이를 잇는 기술을 하나의 구조로 묶어내기 위해 탄생한 이름입니다.<br>
