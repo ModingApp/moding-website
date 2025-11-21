@@ -207,7 +207,7 @@
       background:#ffffff;
     }
 
-    /* VALUES (우리가 만드는 가치) */
+    /* VALUES (모딩이 만드는 가치) */
     .values {
       margin-top:60px;
       margin-bottom:10px;
@@ -259,50 +259,59 @@
       color:var(--text-main);
     }
 
-    .value-badge {
-      font-size:11px;
-      padding:3px 9px;
-      border-radius:999px;
-      border:1px solid rgba(0,0,0,0.12);
-      background:#ffffff;
-      color:var(--text-sub);
-    }
+     .value-badge {
+        font-size:11px;
+        padding:3px 9px;
+        border-radius:999px;
+        border:1px solid rgba(0,0,0,0.12);
+        background:#ffffff;
+        color:var(--text-sub);
+}
 
-    .value-card.green .value-badge {
-      border-color:var(--moding-green);
-      color:var(--moding-green);
-    }
+/* 판로확대 카드: 초록 풀박스 + 흰 글자 */
+      .value-card.green .value-badge {
+        background: var(--moding-green);
+        border-color: var(--moding-green);
+        color: #ffffff;
+        font-weight: 600; /* 선택사항: 약간 굵게 */
+}
 
-    .value-card.orange .value-badge {
-      border-color:var(--moding-orange);
-      color:var(--moding-orange);
-    }
+/* 운영효율 카드: 주황 풀박스 + 흰 글자 */
+      .value-card.orange .value-badge {
+        background: var(--moding-orange);
+        border-color: var(--moding-orange);
+        color: #ffffff;
+        font-weight: 600;
+}
 
+/* 투명한 중개 카드: 갈색 풀박스 + 흰 글자 */
     .value-card.neutral .value-badge {
-      border-color:var(--moding-brown);
-      color:var(--moding-brown);
-    }
+      background: var(--moding-brown);
+      border-color: var(--moding-brown);
+      color: #ffffff;
+      font-weight: 600;
+}
 
     .value-card ul {
       list-style:none;
       margin:0;
       padding-left:0;
-    }
+}
 
     .value-card li {
       position:relative;
       padding-left:14px;
       margin-bottom:4px;
       color:var(--text-sub);
-    }
+}
 
     .value-card li::before {
-      content:"•";
-      position:absolute;
-      left:0;
-      top:0;
-      color:rgba(0,0,0,0.35);
-    }
+        content:"•";
+        position:absolute;
+        left:0;
+        top:0;
+        color:rgba(0,0,0,0.35);
+}
     
     /* FOOTER */
     .footer-links {
