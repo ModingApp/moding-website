@@ -47,7 +47,7 @@
       flex:1;
     }
 
-    /* HEADER (index/about/services/alliance와 동일 틀) */
+    /* HEADER */
     header {
       width:100%;
       border-bottom:1px solid #e1e4e2;
@@ -89,9 +89,7 @@
       color:var(--moding-orange);
     }
 
-    /* 공지사항은 상단 메뉴에 고정 노출하지 않고, 인덱스/앱에서 진입하는 구조라 active 클래스 미사용 */
-
-    /* 상단 '메인 화면으로' 버튼 (다른 서브페이지와 동일 스타일) */
+    /* 상단 '메인 화면으로' 버튼 */
     .top-return {
       display:flex;
       justify-content:flex-end;
@@ -115,7 +113,7 @@
       color:#ffffff;
     }
 
-    /* 공지사항 페이지 히어로 영역 (about/services 섹션 간격 기준) */
+    /* 공지사항 히어로 영역 */
     .notice-hero {
       padding:56px 0 42px;
     }
@@ -141,7 +139,6 @@
       opacity:0.9;
     }
 
-    /* 섹션 타이틀 (services/about 공통 느낌) */
     .section-subtitle {
       font-size:18px;
       font-weight:600;
@@ -154,7 +151,7 @@
       margin:20px 0 32px;
     }
 
-    /* 공지 리스트 전체 래퍼 */
+    /* 공지 리스트 */
     .notice-section {
       margin-top:8px;
     }
@@ -165,7 +162,6 @@
       gap:12px;
     }
 
-    /* 개별 공지 카드 */
     .notice-card {
       border-radius:18px;
       background:#ffffff;
@@ -175,14 +171,12 @@
       transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
     }
 
-    /* 열려 있을 때 강조 */
     .notice-card.is-open {
       border-color:var(--moding-green);
       box-shadow:0 8px 24px rgba(0,0,0,0.06);
       background:#ffffff;
     }
 
-    /* 카드 상단 클릭 영역 (제목/날짜/태그) */
     .notice-toggle {
       width:100%;
       border:none;
@@ -254,7 +248,6 @@
       color:#8B5A2B;
     }
 
-    /* 우측 화살표 아이콘 (CSS만 사용) */
     .notice-arrow {
       flex-shrink:0;
       width:18px;
@@ -276,7 +269,6 @@
       color:#ffffff;
     }
 
-    /* 접히는 본문 영역 */
     .notice-body {
       font-size:14px;
       line-height:1.8;
@@ -293,7 +285,7 @@
 
     .notice-card.is-open .notice-body {
       margin-top:6px;
-      max-height:500px; /* 일반 공지 길이 기준, 필요 시 조정 */
+      max-height:500px;
     }
 
     .notice-body p {
@@ -309,7 +301,7 @@
       color:var(--moding-green);
     }
 
-    /* FOOTER (공통) */
+    /* FOOTER */
     footer {
       margin-top:auto;
       padding:22px 10px;
@@ -343,7 +335,7 @@
       color:#bbbbbb;
     }
 
-    /* 복사/드래그 방지 (사이트 공통 규칙) */
+    /* 복사/드래그 방지 */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select:none;
       user-select:none;
@@ -359,9 +351,7 @@
       pointer-events:auto;
     }
 
-    /* ===============================
-       반응형: 태블릿 & 모바일 보정
-       =============================== */
+    /* 반응형 */
     @media (max-width: 768px) {
       .container {
         padding:32px 20px 40px;
@@ -460,108 +450,17 @@
 
     <div class="divider"></div>
 
-    <!-- 공지사항 리스트 (아코디언 / 접히는 카드 형태) -->
+    <!-- 공지사항 리스트 (아코디언 / JS 렌더링) -->
     <section class="notice-section">
       <h2 class="section-subtitle">최근 공지</h2>
 
-      <div class="notice-list">
-
-        <!-- 공지 1: 베타 서비스 오픈 안내 (기본으로 펼쳐진 상태 예시) -->
-        <article class="notice-card is-open">
-          <button type="button" class="notice-toggle">
-            <div class="notice-header-text">
-              <div class="notice-title-text">모딩(Moding) 베타 서비스 오픈 안내</div>
-              <div class="notice-meta-row">
-                <span class="notice-date">2025-01-15</span>
-                <span class="notice-tag service">서비스 안내</span>
-              </div>
-            </div>
-            <div class="notice-arrow">▶</div>
-          </button>
-          <div class="notice-body">
-            <div class="notice-body-inner">
-              <p>
-                식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼
-                <span class="notice-highlight">모딩(Moding)</span>의 베타 서비스를 시작합니다.
-              </p>
-              <p>
-                베타 기간 동안은 핵심 기능을 중심으로 순차적으로 오픈되며,<br>
-                일부 메뉴와 화면은 정식 출시 시점에 맞춰 추가될 수 있습니다.
-              </p>
-              <p>
-                보다 안정적인 서비스 제공을 위해, 베타 기간 중에는 기능 개선 및 점검이
-                수시로 진행될 예정입니다. 이용 중 불편 사항이나 개선 의견이 있으시면
-                언제든지 문의해 주세요.
-              </p>
-            </div>
-          </div>
-        </article>
-
-        <!-- 공지 2: 정기 점검 안내 (접힌 상태 기본) -->
-        <article class="notice-card">
-          <button type="button" class="notice-toggle">
-            <div class="notice-header-text">
-              <div class="notice-title-text">모딩 시스템 정기 점검 안내 (2월 1주차)</div>
-              <div class="notice-meta-row">
-                <span class="notice-date">2025-02-03</span>
-                <span class="notice-tag update">점검/업데이트</span>
-              </div>
-            </div>
-            <div class="notice-arrow">▶</div>
-          </button>
-          <div class="notice-body">
-            <div class="notice-body-inner">
-              <p>
-                더 안정적인 서비스 제공을 위해 아래 시간 동안 시스템 정기 점검이 진행됩니다.
-              </p>
-              <p>
-                · 점검 일시: 2025-02-05(수) 02:00 ~ 05:00 (예정)<br>
-                · 점검 영향: 점검 시간 동안 앱 접속 및 일부 기능 이용이 일시적으로 제한될 수 있습니다.
-              </p>
-              <p>
-                점검 시간은 내부 사정에 따라 단축 또는 연장될 수 있으며,<br>
-                변경 사항이 있을 경우 공지를 통해 다시 안내드리겠습니다.
-              </p>
-            </div>
-          </div>
-        </article>
-
-        <!-- 공지 3: 약관 개정 안내 (접힌 상태 기본) -->
-        <article class="notice-card">
-          <button type="button" class="notice-toggle">
-            <div class="notice-header-text">
-              <div class="notice-title-text">모딩 서비스 이용약관 개정 사전 안내</div>
-              <div class="notice-meta-row">
-                <span class="notice-date">2025-02-20</span>
-                <span class="notice-tag policy">약관 안내</span>
-              </div>
-            </div>
-            <div class="notice-arrow">▶</div>
-          </button>
-          <div class="notice-body">
-            <div class="notice-body-inner">
-              <p>
-                모딩(Moding) 서비스 이용약관 일부 내용이 개정될 예정입니다.
-              </p>
-              <p>
-                · 시행 예정일: 2025-03-05<br>
-                · 주요 변경 사항: 정산 주기 관련 조항 보완, PB/OEM 상품 관련 책임 범위 명확화 등
-              </p>
-              <p>
-                자세한 개정 내용은 ‘이용약관’ 페이지에서 확인하실 수 있으며,<br>
-                개정 약관 시행일 이후 서비스를 계속 이용하시는 경우, 변경된 약관에 동의하신 것으로 간주됩니다.
-              </p>
-            </div>
-          </div>
-        </article>
-
-        <!-- 필요 시 공지 추가 (복사 후 제목/날짜/태그/본문만 교체) -->
-
+      <div class="notice-list" id="notice-list">
+        <!-- notices.js에서 공지가 렌더링됩니다. -->
       </div>
     </section>
   </main>
 
-  <!-- 공통 푸터: 약관/개인정보/오시는 길 -->
+  <!-- 공통 푸터 -->
   <footer>
     <div class="footer-links">
       <a href="terms.html">이용약관</a>
@@ -575,8 +474,8 @@
     대구광역시 달서구 달구벌대로 1698, 6층
   </footer>
 
+  <!-- 복사/드래그/단축키/복사 방지 스크립트 (공통) -->
   <script>
-    /* 우클릭/드래그/단축키/복사 방지 (사이트 공통 스크립트 형태 유지) */
     document.addEventListener("contextmenu", function (e) {
       if (!e.target.closest("input, textarea, a")) e.preventDefault();
     });
@@ -595,29 +494,9 @@
     document.addEventListener("copy", function (e) {
       if (!e.target.closest("input, textarea")) e.preventDefault();
     });
-
-    /* 공지사항 카드 아코디언: 클릭 시 펼치기/접기 */
-    document.addEventListener("DOMContentLoaded", function () {
-      const cards = document.querySelectorAll(".notice-card");
-
-      cards.forEach(function (card) {
-        const toggle = card.querySelector(".notice-toggle");
-        toggle.addEventListener("click", function () {
-          // 이미 열려 있으면 접기
-          if (card.classList.contains("is-open")) {
-            card.classList.remove("is-open");
-            return;
-          }
-
-          // 다른 카드들은 접어두고, 클릭한 카드만 열기
-          cards.forEach(function (c) {
-            c.classList.remove("is-open");
-          });
-          card.classList.add("is-open");
-        });
-      });
-    });
   </script>
 
+  <!-- notices.js: 공지 데이터 & 렌더링 -->
+  <script src="notices.js?v=1"></script>
 </body>
 </html>
