@@ -104,7 +104,7 @@
     /* 타이핑 라인 */
     .hero-line {
       display:inline-block;
-      min-height:1.4em; /* 로딩 중 높이 유지 */
+      min-height:1.4em;
     }
 
     /* 메인 카피 아래 M 심볼 */
@@ -144,7 +144,6 @@
       transition:0.2s;
       text-align:center;
 
-      /* 크기 고정 + 가운데 정렬 */
       display:flex;
       align-items:center;
       justify-content:center;
@@ -220,11 +219,12 @@
 
     /* ===========================
        NOTICE (공지사항 요약 박스)
-       - 히어로와 ABOUT 사이에 위치
        =========================== */
     .notice-section {
       margin-top:26px;
       margin-bottom:8px;
+      display:flex;              /* 중앙 정렬을 위해 추가 */
+      justify-content:center;    /* 공지 카드 가운데 정렬 */
     }
 
     .notice-card {
@@ -235,6 +235,9 @@
       box-shadow:0 6px 18px rgba(0,0,0,0.03);
       font-size:14px;
       color:var(--text-sub);
+
+      width:100%;
+      max-width:436px;           /* 서비스소개~제휴입점 버튼 폭과 맞춤 */
     }
 
     .notice-header {
@@ -457,7 +460,7 @@
     input,textarea{user-select:text;pointer-events:auto;}
 
     /* ===========================
-       반응형: 태블릿 & 모바일
+       반응형
        =========================== */
     @media (max-width: 768px) {
       .container {
@@ -525,6 +528,9 @@
       .about-grid {
         gap:12px;
       }
+      .notice-card {
+        max-width:100%; /* 모바일에서는 자연스럽게 꽉 차도록 */
+      }
     }
   </style>
 </head>
@@ -554,7 +560,6 @@
       <span class="hero-line hero-line2"></span>
     </h1>
 
-    <!-- 메인 카피 아래 M 심볼 -->
     <div class="hero-symbol">
       <img src="모딩로고(어플용-최종).png" alt="Moding M Symbol">
     </div>
@@ -575,15 +580,15 @@
     </div>
   </section>
 
-  <!-- 공지사항 요약 박스 (notice.html 연동) -->
+  <!-- 공지사항 요약 박스 -->
   <section class="notice-section">
     <div class="notice-card">
       <div class="notice-header">
         <div class="notice-title">공지사항</div>
         <a href="notice.html" class="notice-more">전체보기 &gt;</a>
       </div>
-      <ul class="notice-list" id="index-notice-list">
-        <!-- notices.js에서 최신 공지 2개 자동 렌더링 -->
+      <ul class="notice-list" data-role="home-notice-list">
+        <!-- notices.js에서 최근 2개 공지가 자동 렌더링됩니다. -->
       </ul>
     </div>
   </section>
@@ -629,7 +634,6 @@
 </div>
 
 <footer>
-  <!-- 이용약관 · 개인정보처리방침 · 오시는 길 링크 라인 -->
   <div class="footer-links">
     <a href="terms.html">이용약관</a>
     <span class="divider">·</span>
@@ -638,14 +642,10 @@
     <a href="location.html">오시는 길</a>
   </div>
 
-  <!-- 회사 정보 -->
   주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
   통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
   대구광역시 달서구 달구벌대로 1698, 6층
 </footer>
-
-<!-- 공지 데이터/렌더링 스크립트 -->
-<script src="notices.js"></script>
 
 <script>
   /* 복사/드래그 방지 */
@@ -695,13 +695,11 @@
         typeLine(line2Text, line2El);
       }, delayBetweenLines);
     });
-
-    // 인덱스 공지 2개 렌더링 호출 (notices.js에 구현되어 있어야 함)
-    if (typeof renderIndexNotices === "function") {
-      renderIndexNotices();
-    }
   });
 </script>
+
+<!-- notices.js: 최근 2개 공지 자동 렌더링 -->
+<script src="assets/js/notices.js"></script>
 
 </body>
 </html>
