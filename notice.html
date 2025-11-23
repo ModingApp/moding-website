@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>공지사항 | 모딩(Moding)</title>
 
-  <!-- 메타 정보: 공지/서비스 안내 중심 -->
-  <meta name="description" content="B2B Food-SaaS 플랫폼 모딩(Moding) 공지사항. 서비스 오픈, 점검, 업데이트 등 주요 안내를 확인하실 수 있습니다.">
+  <meta name="description" content="모딩(Moding) 공지사항 페이지입니다. 서비스 업데이트, 점검 안내, 약관 변경 등 모딩과 관련된 주요 소식을 확인하실 수 있습니다.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
   <meta property="og:title" content="공지사항 | 모딩(Moding)">
-  <meta property="og:description" content="모딩(Moding) 서비스 공지사항과 업데이트, 점검 일정을 확인하세요.">
+  <meta property="og:description" content="모딩(Moding)의 서비스 공지, 업데이트, 점검 안내 등 주요 소식을 확인해 주세요.">
   <meta property="og:url" content="https://moding.app/notice.html">
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
@@ -48,7 +47,7 @@
       flex:1;
     }
 
-    /* HEADER: index/about/services 동일 구조 */
+    /* HEADER (index/about/services/alliance와 동일 틀) */
     header {
       width:100%;
       border-bottom:1px solid #e1e4e2;
@@ -90,11 +89,9 @@
       color:var(--moding-orange);
     }
 
-    .nav-right a.active {
-      color:var(--moding-orange);
-    }
+    /* 공지사항은 상단 메뉴에 고정 노출하지 않고, 인덱스/앱에서 진입하는 구조라 active 클래스 미사용 */
 
-    /* 상단 "메인 화면으로" 버튼 */
+    /* 상단 '메인 화면으로' 버튼 (다른 서브페이지와 동일 스타일) */
     .top-return {
       display:flex;
       justify-content:flex-end;
@@ -118,154 +115,198 @@
       color:#ffffff;
     }
 
-    /* 섹션 공통 */
-    .section {
-      margin-bottom:40px;
+    /* 공지사항 페이지 히어로 영역 (about/services 섹션 간격 기준) */
+    .notice-hero {
+      padding:56px 0 42px;
     }
 
-    .section-tag {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:4px 14px;
-      border-radius:999px;
-      border:1px solid rgba(0,0,0,0.12);
-      font-size:11px;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      color:var(--moding-green);
-      margin-bottom:10px;
-      background:#ffffff;
-    }
-
-    .section-title-main {
-      font-size:26px;
+    .notice-title {
+      font-size:28px;
       font-weight:700;
       color:var(--moding-green);
-      margin-bottom:8px;
+      margin-bottom:10px;
     }
 
-    .section-subtext {
-      font-size:15px;
+    .notice-sub {
+      font-size:16px;
       line-height:1.8;
       color:var(--text-sub);
+      margin-bottom:4px;
+    }
+
+    .notice-meta {
+      font-size:14px;
+      line-height:1.7;
+      color:var(--text-sub);
+      opacity:0.9;
+    }
+
+    /* 섹션 타이틀 (services/about 공통 느낌) */
+    .section-subtitle {
+      font-size:18px;
+      font-weight:600;
+      color:var(--text-main);
+      margin-bottom:16px;
     }
 
     .divider {
       border-bottom:1px solid #dde3df;
-      margin:32px 0;
+      margin:20px 0 32px;
     }
 
-    /* 공지 리스트 영역 */
+    /* 공지 리스트 전체 래퍼 */
+    .notice-section {
+      margin-top:8px;
+    }
+
     .notice-list {
-      margin-top:28px;
       display:flex;
       flex-direction:column;
-      gap:14px;
+      gap:12px;
     }
 
+    /* 개별 공지 카드 */
     .notice-card {
-      background:#ffffff;
       border-radius:18px;
-      padding:14px 16px 12px;
+      background:#ffffff;
       border:2px solid #d7e0db;
-      box-shadow:0 6px 18px rgba(0,0,0,0.04);
-      cursor:pointer;
-      transition:0.2s;
+      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+      padding:10px 16px 10px;
+      transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
     }
 
-    .notice-card:hover {
+    /* 열려 있을 때 강조 */
+    .notice-card.is-open {
       border-color:var(--moding-green);
-      box-shadow:0 8px 22px rgba(0,0,0,0.06);
-      transform:translateY(-1px);
+      box-shadow:0 8px 24px rgba(0,0,0,0.06);
+      background:#ffffff;
     }
 
-    .notice-header {
+    /* 카드 상단 클릭 영역 (제목/날짜/태그) */
+    .notice-toggle {
+      width:100%;
+      border:none;
+      background:transparent;
+      padding:8px 2px;
       display:flex;
+      align-items:flex-start;
       justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      margin-bottom:4px;
+      gap:12px;
+      cursor:pointer;
+      text-align:left;
     }
 
-    .notice-title {
+    .notice-header-text {
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      flex:1;
+      min-width:0;
+    }
+
+    .notice-title-text {
       font-size:15px;
       font-weight:600;
       color:var(--text-main);
+      line-height:1.6;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .notice-meta-row {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      color:var(--text-sub);
     }
 
     .notice-date {
       font-size:12px;
-      color:#888888;
-      white-space:nowrap;
+      color:var(--text-sub);
     }
 
     .notice-tag {
       display:inline-flex;
       align-items:center;
-      font-size:11px;
       padding:3px 9px;
       border-radius:999px;
-      border:1px solid rgba(0,0,0,0.12);
-      color:var(--moding-green);
-      margin-bottom:6px;
-      background:#ffffff;
-    }
-
-    .notice-body {
-      font-size:14px;
-      line-height:1.7;
+      border:1px solid rgba(0,0,0,0.16);
+      font-size:11px;
       color:var(--text-sub);
-      overflow:hidden;
-      display:-webkit-box;
-      -webkit-line-clamp:2;
-      -webkit-box-orient:vertical;
-    }
-
-    /* 상세 내용은 카드 안에 숨겨두고, 클릭 시 아래로 복사 */
-    .notice-full {
-      display:none;
-    }
-
-    /* 하단 상세 카드 영역 */
-    .notice-detail-section {
-      margin-top:34px;
-    }
-
-    .notice-detail-title {
-      font-size:18px;
-      font-weight:600;
-      color:var(--text-main);
-      margin-bottom:10px;
-    }
-
-    .notice-detail-card {
+      white-space:nowrap;
       background:#ffffff;
-      border-radius:18px;
-      padding:18px 18px 16px;
-      border:2px solid var(--moding-orange);
-      box-shadow:0 8px 22px rgba(0,0,0,0.06);
+    }
+
+    .notice-tag.service {
+      border-color:var(--moding-green);
+      color:var(--moding-green);
+    }
+
+    .notice-tag.update {
+      border-color:var(--moding-orange);
+      color:var(--moding-orange);
+    }
+
+    .notice-tag.policy {
+      border-color:#8B5A2B;
+      color:#8B5A2B;
+    }
+
+    /* 우측 화살표 아이콘 (CSS만 사용) */
+    .notice-arrow {
+      flex-shrink:0;
+      width:18px;
+      height:18px;
+      border-radius:999px;
+      border:1px solid #d2d8d4;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:11px;
+      color:#9aa29d;
+      transition:transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .notice-card.is-open .notice-arrow {
+      transform:rotate(90deg);
+      background:var(--moding-green);
+      border-color:var(--moding-green);
+      color:#ffffff;
+    }
+
+    /* 접히는 본문 영역 */
+    .notice-body {
       font-size:14px;
       line-height:1.8;
       color:var(--text-sub);
-      white-space:normal;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.24s ease, margin-top 0.24s ease;
+      margin-top:0;
     }
 
-    .notice-detail-meta {
-      font-size:13px;
-      color:#888;
+    .notice-body-inner {
+      padding:2px 2px 10px 2px;
+    }
+
+    .notice-card.is-open .notice-body {
+      margin-top:6px;
+      max-height:500px; /* 일반 공지 길이 기준, 필요 시 조정 */
+    }
+
+    .notice-body p {
       margin-bottom:8px;
     }
 
-    .notice-detail-section.empty .notice-detail-card {
-      border-style:dashed;
-      border-color:#d7e0db;
-      color:#999999;
-      text-align:center;
+    .notice-body p:last-child {
+      margin-bottom:0;
     }
 
-    .notice-detail-section.empty .notice-detail-title {
-      color:#999999;
+    .notice-highlight {
+      font-weight:600;
+      color:var(--moding-green);
     }
 
     /* FOOTER (공통) */
@@ -302,38 +343,48 @@
       color:#bbbbbb;
     }
 
-    /* 복사/드래그 방지 (input/textarea 제외) */
+    /* 복사/드래그 방지 (사이트 공통 규칙) */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select:none;
       user-select:none;
     }
+
     img {
-      -webkit-user-drag:none;
       user-drag:none;
       pointer-events:none;
     }
+
     input,textarea {
       user-select:text;
       pointer-events:auto;
     }
 
-    /* 반응형 */
-    @media (max-width:768px) {
+    /* ===============================
+       반응형: 태블릿 & 모바일 보정
+       =============================== */
+    @media (max-width: 768px) {
       .container {
         padding:32px 20px 40px;
       }
-      .section-title-main {
-        font-size:23px;
+
+      .notice-hero {
+        padding:40px 0 30px;
       }
-      .section-subtext {
-        font-size:14px;
+
+      .notice-title {
+        font-size:24px;
       }
-      .notice-detail-title {
-        font-size:16px;
+
+      .notice-sub {
+        font-size:15px;
+      }
+
+      .section-subtitle {
+        font-size:17px;
       }
     }
 
-    @media (max-width:600px) {
+    @media (max-width: 600px) {
       .nav {
         padding:12px 16px;
         flex-direction:column;
@@ -351,174 +402,222 @@
         flex-wrap:wrap;
         justify-content:center;
       }
+
+      .notice-title {
+        font-size:22px;
+      }
+
+      .notice-header-text {
+        gap:2px;
+      }
+
+      .notice-title-text {
+        white-space:normal;
+      }
+
+      .notice-meta-row {
+        flex-wrap:wrap;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <div class="nav">
-    <div class="nav-left">
-      <img src="모딩로고.png" alt="Moding Logo">
+  <!-- 공통 헤더 -->
+  <header>
+    <div class="nav">
+      <div class="nav-left">
+        <img src="모딩로고.png" alt="Moding Logo">
+      </div>
+      <div class="nav-right">
+        <a href="about.html">About</a> 
+        <a href="brand.html">Brand</a>
+        <a href="services.html">Services</a>
+        <a href="alliance.html">Alliance</a>
+        <a href="faq.html">FAQ</a>  
+      </div>
     </div>
-    <div class="nav-right">
-      <a href="about.html">About</a>
-      <a href="brand.html">Brand</a>
-      <a href="services.html">Services</a>
-      <a href="alliance.html">Alliance</a>
-      <a href="faq.html">FAQ</a>
+  </header>
+
+  <main class="container">
+    <!-- 메인 화면으로 이동 버튼 -->
+    <div class="top-return">
+      <a href="index.html" class="top-return-btn">메인 화면으로</a>
     </div>
-  </div>
-</header>
 
-<main class="container">
+    <!-- 공지사항 히어로 -->
+    <section class="notice-hero">
+      <h1 class="notice-title">공지사항</h1>
+      <p class="notice-sub">
+        모딩(Moding)의 서비스 업데이트, 점검 안내, 약관 변경 등 중요한 소식을 안내드립니다.
+      </p>
+      <p class="notice-meta">
+        앱 공지사항과 연동되는 공식 안내 페이지로,<br>
+        실제 운영 시에는 관리 도구 또는 서버에서 자동으로 공지 목록이 연동될 예정입니다.
+      </p>
+    </section>
 
-  <!-- 메인 화면으로 버튼 -->
-  <div class="top-return">
-    <a href="index.html" class="top-return-btn">메인 화면으로</a>
-  </div>
+    <div class="divider"></div>
 
-  <!-- 상단 인트로 -->
-  <section class="section">
-    <div class="section-tag">NOTICE</div>
-    <h1 class="section-title-main">공지사항</h1>
-    <p class="section-subtext">
-      모딩(Moding)의 서비스 오픈, 업데이트, 점검 일정 등<br>
-      중요한 안내를 이곳에서 확인하실 수 있습니다.
-    </p>
-  </section>
+    <!-- 공지사항 리스트 (아코디언 / 접히는 카드 형태) -->
+    <section class="notice-section">
+      <h2 class="section-subtitle">최근 공지</h2>
 
-  <div class="divider"></div>
+      <div class="notice-list">
 
-  <!-- 공지 리스트 -->
-  <section class="section notice-list">
+        <!-- 공지 1: 베타 서비스 오픈 안내 (기본으로 펼쳐진 상태 예시) -->
+        <article class="notice-card is-open">
+          <button type="button" class="notice-toggle">
+            <div class="notice-header-text">
+              <div class="notice-title-text">모딩(Moding) 베타 서비스 오픈 안내</div>
+              <div class="notice-meta-row">
+                <span class="notice-date">2025-01-15</span>
+                <span class="notice-tag service">서비스 안내</span>
+              </div>
+            </div>
+            <div class="notice-arrow">▶</div>
+          </button>
+          <div class="notice-body">
+            <div class="notice-body-inner">
+              <p>
+                식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼
+                <span class="notice-highlight">모딩(Moding)</span>의 베타 서비스를 시작합니다.
+              </p>
+              <p>
+                베타 기간 동안은 핵심 기능을 중심으로 순차적으로 오픈되며,<br>
+                일부 메뉴와 화면은 정식 출시 시점에 맞춰 추가될 수 있습니다.
+              </p>
+              <p>
+                보다 안정적인 서비스 제공을 위해, 베타 기간 중에는 기능 개선 및 점검이
+                수시로 진행될 예정입니다. 이용 중 불편 사항이나 개선 의견이 있으시면
+                언제든지 문의해 주세요.
+              </p>
+            </div>
+          </div>
+        </article>
 
-    <!-- 샘플 공지 1 -->
-    <article class="notice-card">
-      <div class="notice-header">
-        <div class="notice-title">모딩(Moding) 베타 서비스 오픈 예정 안내</div>
-        <div class="notice-date">2025-11-23</div>
+        <!-- 공지 2: 정기 점검 안내 (접힌 상태 기본) -->
+        <article class="notice-card">
+          <button type="button" class="notice-toggle">
+            <div class="notice-header-text">
+              <div class="notice-title-text">모딩 시스템 정기 점검 안내 (2월 1주차)</div>
+              <div class="notice-meta-row">
+                <span class="notice-date">2025-02-03</span>
+                <span class="notice-tag update">점검/업데이트</span>
+              </div>
+            </div>
+            <div class="notice-arrow">▶</div>
+          </button>
+          <div class="notice-body">
+            <div class="notice-body-inner">
+              <p>
+                더 안정적인 서비스 제공을 위해 아래 시간 동안 시스템 정기 점검이 진행됩니다.
+              </p>
+              <p>
+                · 점검 일시: 2025-02-05(수) 02:00 ~ 05:00 (예정)<br>
+                · 점검 영향: 점검 시간 동안 앱 접속 및 일부 기능 이용이 일시적으로 제한될 수 있습니다.
+              </p>
+              <p>
+                점검 시간은 내부 사정에 따라 단축 또는 연장될 수 있으며,<br>
+                변경 사항이 있을 경우 공지를 통해 다시 안내드리겠습니다.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 공지 3: 약관 개정 안내 (접힌 상태 기본) -->
+        <article class="notice-card">
+          <button type="button" class="notice-toggle">
+            <div class="notice-header-text">
+              <div class="notice-title-text">모딩 서비스 이용약관 개정 사전 안내</div>
+              <div class="notice-meta-row">
+                <span class="notice-date">2025-02-20</span>
+                <span class="notice-tag policy">약관 안내</span>
+              </div>
+            </div>
+            <div class="notice-arrow">▶</div>
+          </button>
+          <div class="notice-body">
+            <div class="notice-body-inner">
+              <p>
+                모딩(Moding) 서비스 이용약관 일부 내용이 개정될 예정입니다.
+              </p>
+              <p>
+                · 시행 예정일: 2025-03-05<br>
+                · 주요 변경 사항: 정산 주기 관련 조항 보완, PB/OEM 상품 관련 책임 범위 명확화 등
+              </p>
+              <p>
+                자세한 개정 내용은 ‘이용약관’ 페이지에서 확인하실 수 있으며,<br>
+                개정 약관 시행일 이후 서비스를 계속 이용하시는 경우, 변경된 약관에 동의하신 것으로 간주됩니다.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 필요 시 공지 추가 (복사 후 제목/날짜/태그/본문만 교체) -->
+
       </div>
-      <span class="notice-tag">서비스 안내</span>
-      <div class="notice-body">
-        식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼 모딩(Moding)의
-        베타 서비스를 준비하고 있습니다. 정식 오픈 전까지는 기능이 순차적으로 열리며,
-        일부 메뉴가 제한적으로 제공될 수 있습니다.
-      </div>
+    </section>
+  </main>
 
-      <!-- 상세 내용 (하단 카드에 복사될 영역) -->
-      <div class="notice-full">
-        <div class="notice-detail-meta">분류: 서비스 안내 · 게시일: 2025-11-23</div>
-        <p>
-          안녕하세요. 모딩(Moding) 운영팀입니다.<br>
-          식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼
-          <strong>모딩(Moding)</strong>의 베타 서비스 오픈을 준비하고 있습니다.
-        </p>
-        <p>
-          베타 기간 동안에는 주문·정산·데이터 기능이 순차적으로 열리며,<br>
-          일부 메뉴는 테스트 목적 또는 제한된 파트너사 대상으로 먼저 제공될 수 있습니다.
-        </p>
-        <p>
-          베타 서비스의 주요 목적은 다음과 같습니다.
-        </p>
-        <ul style="padding-left:18px; margin-bottom:8px;">
-          <li style="margin-bottom:4px;">실제 외식업·제조 현장에서의 사용성 점검</li>
-          <li style="margin-bottom:4px;">정산·발주·데이터 흐름의 안정성 테스트</li>
-          <li style="margin-bottom:4px;">초기 입점사(제조사·매장)의 의견 반영 및 기능 개선</li>
-        </ul>
-        <p>
-          베타 테스트 기간 중 수집된 의견과 데이터는<br>
-          정식 오픈 시 더 안정적이고 편리한 서비스 제공을 위해 사용됩니다.
-        </p>
-        <p style="margin-top:10px;">
-          베타 서비스 일정 및 참여 방법은 추후 별도 공지 드리겠습니다.<br>
-          모딩(Moding)을 관심 있게 지켜봐 주셔서 감사합니다.
-        </p>
-      </div>
-    </article>
-
-    <!-- 필요 시 여기에 추가 공지 카드들을 같은 패턴으로 복제해서 사용 -->
-    <!--
-    <article class="notice-card">
-      ...
-      <div class="notice-full">
-        상세내용 HTML
-      </div>
-    </article>
-    -->
-
-  </section>
-
-  <!-- 하단 상세 카드 표시 영역 -->
-  <section class="section notice-detail-section empty" id="notice-detail-section">
-    <h2 class="notice-detail-title">공지 상세</h2>
-    <div class="notice-detail-card" id="notice-detail-card">
-      공지사항을 선택하시면 자세한 내용이 이곳에 표시됩니다.
+  <!-- 공통 푸터: 약관/개인정보/오시는 길 -->
+  <footer>
+    <div class="footer-links">
+      <a href="terms.html">이용약관</a>
+      <span class="divider">·</span>
+      <a href="privacy.html">개인정보처리방침</a>
+      <span class="divider">·</span>
+      <a href="location.html">오시는 길</a>
     </div>
-  </section>
+    주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+    통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
+    대구광역시 달서구 달구벌대로 1698, 6층
+  </footer>
 
-</main>
+  <script>
+    /* 우클릭/드래그/단축키/복사 방지 (사이트 공통 스크립트 형태 유지) */
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) e.preventDefault();
+    });
 
-<footer>
-  <!-- 이용약관 · 개인정보처리방침 · 오시는 길 -->
-  <div class="footer-links">
-    <a href="terms.html">이용약관</a>
-    <span class="divider">·</span>
-    <a href="privacy.html">개인정보처리방침</a>
-    <span class="divider">·</span>
-    <a href="location.html">오시는 길</a>
-  </div>
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) e.preventDefault();
+    });
 
-  주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
-  통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
-  대구광역시 달서구 달구벌대로 1698, 6층
-</footer>
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
+        if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+      }
+    });
 
-<script>
-  /* 복사/드래그/우클릭/단축키 방지 (index.html 패턴 준수) */
-  document.addEventListener("contextmenu", function (e) {
-    if (!e.target.closest("input, textarea, a")) e.preventDefault();
-  });
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) e.preventDefault();
+    });
 
-  document.addEventListener("dragstart", function (e) {
-    if (!e.target.closest("input, textarea")) e.preventDefault();
-  });
+    /* 공지사항 카드 아코디언: 클릭 시 펼치기/접기 */
+    document.addEventListener("DOMContentLoaded", function () {
+      const cards = document.querySelectorAll(".notice-card");
 
-  document.addEventListener("keydown", function (e) {
-    const key = e.key.toLowerCase();
-    if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
-      if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
-    }
-  });
+      cards.forEach(function (card) {
+        const toggle = card.querySelector(".notice-toggle");
+        toggle.addEventListener("click", function () {
+          // 이미 열려 있으면 접기
+          if (card.classList.contains("is-open")) {
+            card.classList.remove("is-open");
+            return;
+          }
 
-  document.addEventListener("copy", function (e) {
-    if (!e.target.closest("input, textarea")) e.preventDefault();
-  });
-
-  /* 공지 카드 클릭 시 하단 상세 카드에 내용 표시 */
-  document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll(".notice-card");
-    const detailSection = document.getElementById("notice-detail-section");
-    const detailCard = document.getElementById("notice-detail-card");
-
-    cards.forEach(function (card) {
-      card.addEventListener("click", function () {
-        const full = card.querySelector(".notice-full");
-        if (!full) return;
-
-        // 상세 내용 갱신
-        detailCard.innerHTML = full.innerHTML;
-        detailSection.classList.remove("empty");
-
-        // 스크롤 이동 (부드럽게)
-        detailSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
+          // 다른 카드들은 접어두고, 클릭한 카드만 열기
+          cards.forEach(function (c) {
+            c.classList.remove("is-open");
+          });
+          card.classList.add("is-open");
         });
       });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>
