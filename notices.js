@@ -1,172 +1,164 @@
-const notices = [
-  {
-    id: 1,
-    title: "모딩(Moding) 약관 업로드 안내",
-    date: "2025-11-20",
-    tag: "공지",
-    body: `
-      모딩(Moding) 플랫폼 이용약관 및 관련 정책이 
-      <strong>2025년 11월 20일</strong>자로 최종 업로드되었습니다.<br><br>
-      약관은 서비스 이용을 위한 기본 규정으로, 
-      제조사·외식업 사장님 모두에게 적용됩니다.<br><br>
-      각 페이지 하단의 ‘이용약관’ 링크를 통해 확인하실 수 있습니다.
-    `
-  },
-  {
-    id: 2,
-    title: "모딩(Moding) 기본 버전 출시 예정 안내",
-    date: "2025-11-23",
-    tag: "서비스 안내",
-    body: `
-      모딩(Moding)의 B2B Food-SaaS 기능 최소화 버전이 
-      <strong>곧 출시 예정</strong>입니다.<br><br>
-      외식업 이용 페이지(발주, 가게 관리 기능)를 중심으로 먼저 제공되며, 
-      이후 순차적으로 제조사 관리 페이지 및 세금계산서 자동화 기능 등 추가될 예정입니다.
-    `
-  }
-];
-
-
 /* =========================================================
    Moding Notices – 공지사항 데이터 & 렌더링 스크립트
    (index.html & notice.html 공통 사용)
    ========================================================= */
 
-/**
- * 공지 데이터는 여기에서만 관리합니다.
- * id는 숫자로만, date는 YYYY-MM-DD 형식으로 맞춰 주세요.
- */
+/* 공지 데이터 (여기만 수정해서 공지 추가/변경하면 됨) */
 const notices = [
   {
-    id: 1,
-    title: "모딩(Moding) 약관 업로드 안내",
-    date: "2025-11-20",
-    tag: "공지",
-    body: `
-      모딩(Moding) 플랫폼 이용약관 및 관련 정책이 
-      <strong>2025년 11월 20일</strong>자로 최종 업로드되었습니다.<br><br>
-      약관은 서비스 이용을 위한 기본 규정으로, 
-      제조사·외식업 사장님 모두에게 적용됩니다.<br><br>
-      각 페이지 하단의 ‘이용약관’ 링크를 통해 확인하실 수 있습니다.
-    `
-  },
-  {
     id: 2,
-    title: "모딩(Moding) 기본 버전 출시 예정 안내",
+    title: "모딩 기본 버전 출시 예정 안내",
     date: "2025-11-23",
     tag: "서비스 안내",
     body: `
-      모딩(Moding)의 B2B Food-SaaS 기능 최소화 버전이 
-      <strong>곧 출시 예정</strong>입니다.<br><br>
-      외식업 이용 페이지(발주, 가게 관리 기능)를 중심으로 먼저 제공되며, 
-      이후 순차적으로 제조사 관리 페이지 및 세금계산서 자동화 기능 등 추가될 예정입니다.
+      <p>
+        B2B Food-SaaS 플랫폼 <strong>모딩(Moding)</strong>의
+        기본 버전(1차 릴리즈)이 곧 공개될 예정입니다.
+      </p>
+      <p>
+        이번 기본 버전에는 제조사–외식업 간 <strong>주문·정산 흐름</strong>을
+        실제로 테스트할 수 있는 최소 기능과,<br>
+        관리자 및 정산 화면의 주요 골격이 포함됩니다.
+      </p>
+      <p>
+        정식 오픈 일정과 세부 기능 구성은 추후 공지를 통해
+        다시 한 번 안내드리겠습니다.
+      </p>
+    `
+  },
+  {
+    id: 1,
+    title: "모딩 이용약관 업로드 안내",
+    date: "2025-11-20",
+    tag: "약관 안내",
+    body: `
+      <p>
+        모딩(Moding) 서비스 이용과 관련된
+        <strong>공식 이용약관</strong>이 웹사이트 및 앱 내에 업로드되었습니다.
+      </p>
+      <p>
+        · 적용 대상: 모딩 플랫폼을 이용하는 모든 회원(제조사, 외식업 사장님 등)<br>
+        · 주요 내용: 통신판매중개자로서의 회사 지위, 정산 구조, PB/OEM 관련 책임 범위,
+          서비스 이용 제한 사유 등
+      </p>
+      <p>
+        자세한 내용은 하단 메뉴의 <strong>‘이용약관’</strong> 페이지에서
+        전문을 확인하실 수 있으며,<br>
+        약관은 공지된 날짜를 기준으로 효력이 발생합니다.
+      </p>
     `
   }
 ];
 
+/* 날짜 내림차순 정렬 헬퍼 */
+function getSortedNotices() {
+  return [...notices].sort((a, b) => b.date.localeCompare(a.date));
+}
+
 /* =========================================================
-   index.html – 최신 공지 2개만 출력
+   index.html – 최신 공지 2개만 출력 (리스트 클릭 시 notice.html 이동)
    ========================================================= */
 function renderIndexNotices() {
   const area = document.getElementById("index-notice-area");
-  if (!area) return;   // index.html이 아닐 때는 그냥 종료
+  if (!area) return;   // index.html이 아니면 종료
 
-  // 날짜 기준 내림차순 정렬 후 상위 2개
-  const latest = [...notices]
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 2);
+  const latest = getSortedNotices().slice(0, 2);
 
   area.innerHTML = latest
     .map(
       (n) => `
-        <li>
-          <a href="notice.html?notice=${n.id}" class="notice-link">
-            <span class="notice-item-title">${n.title}</span>
-            <span class="notice-item-date">${n.date}</span>
-          </a>
+        <li class="index-notice-row" onclick="goNotice(${n.id})">
+          <span class="notice-item-title">${n.title}</span>
+          <span class="notice-item-date">${n.date}</span>
         </li>
       `
     )
     .join("");
 }
 
-/* =========================================================
-   notice.html – 전체 공지 리스트 렌더링 + 아코디언
-   ========================================================= */
+/* index 공지 클릭 시 notice.html로 이동 */
+function goNotice(id) {
+  window.location.href = `notice.html?notice=${id}`;
+}
 
-/**
- * notice.html의 #notice-list 안에
- * 전체 공지 카드를 동적으로 렌더링합니다.
- * ?notice=ID 파라미터가 있으면 해당 카드만 기본 open.
- */
+/* =========================================================
+   notice.html – 전체 공지 카드형 + 접힘/펼침 기능
+   ========================================================= */
 function renderNoticeList() {
   const list = document.getElementById("notice-list");
-  if (!list) return; // notice.html이 아닐 때는 종료
+  if (!list) return; // notice.html이 아니면 종료
 
-  const params = new URLSearchParams(window.location.search);
-  const targetId = params.get("notice");
+  const sorted = getSortedNotices();
 
-  list.innerHTML = notices
-    .sort((a, b) => b.date.localeCompare(a.date)) // 최신 순 정렬
-    .map((n, idx) => {
-      const isOpen = targetId
-        ? String(n.id) === String(targetId)
-        : idx === 0; // 쿼리 없으면 첫 번째 공지 펼침
+  list.innerHTML = sorted
+    .map(
+      (n) => `
+      <article class="notice-card" data-notice-id="${n.id}">
+        <header class="notice-header" onclick="toggleNotice(${n.id})">
+          <div class="notice-title">${n.title}</div>
+          <div class="notice-date">${n.date}</div>
+        </header>
 
-      const tagClass = n.tagType ? ` ${n.tagType}` : "";
+        <span class="notice-tag">${n.tag}</span>
 
-      return `
-        <article class="notice-card${isOpen ? " is-open" : ""}" data-id="${n.id}">
-          <button type="button" class="notice-toggle">
-            <div class="notice-header-text">
-              <div class="notice-title-text">${n.title}</div>
-              <div class="notice-meta-row">
-                <span class="notice-date">${n.date}</span>
-                <span class="notice-tag${tagClass}">${n.tag}</span>
-              </div>
-            </div>
-            <div class="notice-arrow">▶</div>
-          </button>
-          <div class="notice-body">
-            <div class="notice-body-inner">
-              ${n.body}
-            </div>
-          </div>
-        </article>
-      `;
-    })
+        <div class="notice-body" id="notice-body-${n.id}">
+          ${n.body}
+        </div>
+      </article>
+    `
+    )
     .join("");
-
-  bindNoticeAccordion();
 }
 
-/**
- * 카드 아코디언(펼치기/접기) 바인딩
- */
-function bindNoticeAccordion() {
-  const cards = document.querySelectorAll(".notice-card");
-  cards.forEach((card) => {
-    const toggle = card.querySelector(".notice-toggle");
-    if (!toggle) return;
+/* 접힘 / 펼침 기능 (카드 단일 오픈) */
+function toggleNotice(id) {
+  const body = document.getElementById(`notice-body-${id}`);
+  if (!body) return;
 
-    toggle.addEventListener("click", () => {
-      // 이미 열려 있으면 닫기
-      if (card.classList.contains("is-open")) {
-        card.classList.remove("is-open");
-        return;
-      }
+  const card = body.closest(".notice-card");
+  const isOpen = body.classList.contains("open");
 
-      // 다른 카드들은 닫고 현재만 열기
-      cards.forEach((c) => c.classList.remove("is-open"));
-      card.classList.add("is-open");
-    });
-  });
+  // 모두 접기
+  document.querySelectorAll(".notice-body").forEach((b) => b.classList.remove("open"));
+  document.querySelectorAll(".notice-card").forEach((c) => c.classList.remove("is-open"));
+
+  // 원래 닫혀 있던 카드만 다시 열기
+  if (!isOpen) {
+    body.classList.add("open");
+    if (card) card.classList.add("is-open");
+  }
+}
+
+/* URL 파라미터 (?notice=ID) 가져오기 */
+function getNoticeParamId() {
+  const params = new URLSearchParams(window.location.search);
+  const idStr = params.get("notice");
+  if (!idStr) return null;
+  const num = parseInt(idStr, 10);
+  return Number.isNaN(num) ? null : num;
 }
 
 /* =========================================================
-   공통: DOM 로드 후 자동 실행
+   페이지 로드 후 자동 실행
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
-  renderIndexNotices();  // index 공지 2개
-  renderNoticeList();    // notice 전체 목록
+  // index.html 공지 2개
+  renderIndexNotices();
+
+  // notice.html 전체 리스트
+  renderNoticeList();
+
+  // notice.html인 경우: 파라미터/기본 오픈 처리
+  const listEl = document.getElementById("notice-list");
+  if (listEl) {
+    const paramId = getNoticeParamId();
+    const sorted = getSortedNotices();
+
+    if (paramId && notices.some((n) => n.id === paramId)) {
+      toggleNotice(paramId);
+    } else if (sorted.length > 0) {
+      // 파라미터 없으면 최신 공지 열어둠
+      toggleNotice(sorted[0].id);
+    }
+  }
 });
