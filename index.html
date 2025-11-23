@@ -101,13 +101,11 @@
       color:var(--moding-green);
     }
 
-    /* 타이핑 라인 */
     .hero-line {
       display:inline-block;
       min-height:1.4em;
     }
 
-    /* 메인 카피 아래 M 심볼 */
     .hero-symbol {
       margin-bottom:22px;
     }
@@ -218,10 +216,82 @@
     }
 
     /* ===========================
+       NOTICE (공지사항 요약 박스)
+       =========================== */
+    .notice-section {
+      margin-top:26px;
+      margin-bottom:8px;
+    }
+
+    .notice-card {
+      border-radius:18px;
+      padding:14px 18px 16px;
+      background:#ffffff;
+      border:1px solid rgba(35,139,34,0.45);
+      box-shadow:0 6px 18px rgba(0,0,0,0.03);
+      font-size:14px;
+      color:var(--text-sub);
+      width:100%;  /* 컨테이너 폭 100% 사용 (ABOUT와 동일) */
+    }
+
+    .notice-header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:6px;
+    }
+
+    .notice-title {
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:0.14em;
+      color:var(--moding-green);
+    }
+
+    .notice-more {
+      font-size:12px;
+      text-decoration:none;
+      color:var(--moding-green);
+      font-weight:500;
+    }
+    .notice-more:hover {
+      color:var(--moding-orange);
+    }
+
+    .notice-list {
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+
+    .notice-list li {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:13px;
+      line-height:1.7;
+      padding-top:2px;
+    }
+
+    .notice-item-title {
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      max-width:80%;
+      color:var(--text-main);
+    }
+
+    .notice-item-date {
+      font-size:11px;
+      color:#999999;
+      white-space:nowrap;
+    }
+
+    /* ===========================
        ABOUT
        =========================== */
     .about {
-      margin-top:70px;
+      margin-top:32px;
       padding:46px 24px 50px;
       background:#ffffff;
       border-radius:22px;
@@ -338,78 +408,6 @@
     }
 
     /* ===========================
-       NOTICE (공지사항 요약 박스)
-       =========================== */
-    .notice-section {
-      margin-top:32px;   /* ABOUT 아래 적당한 간격 */
-      margin-bottom:8px;
-    }
-
-    .notice-card {
-      border-radius:18px;
-      padding:14px 18px 16px;
-      background:#ffffff;
-      border:1px solid rgba(35,139,34,0.45);
-      box-shadow:0 6px 18px rgba(0,0,0,0.03);
-      font-size:14px;
-      color:var(--text-sub);
-      width:100%;        /* 컨테이너 폭 100% 사용 (ABOUT와 동일 느낌) */
-    }
-
-    .notice-header {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:6px;
-    }
-
-    .notice-title {
-      font-size:13px;
-      font-weight:600;
-      letter-spacing:0.14em;
-      color:var(--moding-green);
-    }
-
-    .notice-more {
-      font-size:12px;
-      text-decoration:none;
-      color:var(--moding-green);
-      font-weight:500;
-    }
-    .notice-more:hover {
-      color:var(--moding-orange);
-    }
-
-    .notice-list {
-      list-style:none;
-      margin:0;
-      padding:0;
-    }
-
-    .notice-list li {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:13px;
-      line-height:1.7;
-      padding-top:2px;
-    }
-
-    .notice-item-title {
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-      max-width:80%;
-      color:var(--text-main);
-    }
-
-    .notice-item-date {
-      font-size:11px;
-      color:#999999;
-      white-space:nowrap;
-    }
-
-    /* ===========================
        FOOTER
        =========================== */
     footer {
@@ -475,7 +473,7 @@
         gap:12px;
       }
       .about {
-        margin-top:56px;
+        margin-top:32px;
         padding:38px 18px 42px;
       }
       .about-desc {
@@ -573,6 +571,19 @@
     </div>
   </section>
 
+  <!-- 공지사항 요약 박스 (HERO 아래) -->
+  <section class="notice-section">
+    <div class="notice-card">
+      <div class="notice-header">
+        <div class="notice-title">공지사항</div>
+        <a href="notice.html" class="notice-more">전체보기 &gt;</a>
+      </div>
+      <ul class="notice-list" data-role="home-notice-list">
+        <!-- notices.js에서 최근 2개 공지가 자동 렌더링됩니다. -->
+      </ul>
+    </div>
+  </section>
+
   <!-- ABOUT MODING -->
   <section class="about">
     <div class="about-title">ABOUT MODING</div>
@@ -609,19 +620,6 @@
           <li>소스·원재료·밀키트의 안정적인 공급</li>
         </ul>
       </div>
-    </div>
-  </section>
-
-  <!-- 공지사항 요약 박스 (ABOUT 아래) -->
-  <section class="notice-section">
-    <div class="notice-card">
-      <div class="notice-header">
-        <div class="notice-title">공지사항</div>
-        <a href="notice.html" class="notice-more">전체보기 &gt;</a>
-      </div>
-      <ul class="notice-list" data-role="home-notice-list">
-        <!-- notices.js에서 최근 2개 공지가 자동 렌더링됩니다. -->
-      </ul>
     </div>
   </section>
 </div>
