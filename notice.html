@@ -5,19 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>공지사항 | 모딩(Moding)</title>
 
-  <!-- 공지사항 페이지 설명 -->
-  <meta name="description" content="B2B Food-SaaS 플랫폼 모딩(Moding)의 공지사항. 제조사·외식업 사장님을 위한 서비스 업데이트와 주요 안내를 확인하세요.">
+  <!-- 메타 정보: 공지/서비스 안내 중심 -->
+  <meta name="description" content="B2B Food-SaaS 플랫폼 모딩(Moding) 공지사항. 서비스 오픈, 점검, 업데이트 등 주요 안내를 확인하실 수 있습니다.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
   <meta property="og:title" content="공지사항 | 모딩(Moding)">
-  <meta property="og:description" content="모딩(Moding) 앱·웹 공지사항을 한 곳에서 확인하세요. 서비스 업데이트, 점검 일정, 정책 변경 등 중요한 안내를 제공합니다.">
+  <meta property="og:description" content="모딩(Moding) 서비스 공지사항과 업데이트, 점검 일정을 확인하세요.">
   <meta property="og:url" content="https://moding.app/notice.html">
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
   <style>
-    /* ---------------------------------
-       0. 공통 컬러 / 기본 변수
-       --------------------------------- */
     :root {
       --moding-green: #238B22;
       --moding-orange: #FF8C00;
@@ -26,449 +23,502 @@
       --text-sub: #555555;
     }
 
-    /* ---------------------------------
-       1. 초기화 & 공통 폰트
-       --------------------------------- */
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      font-size: 16px;
-      -webkit-text-size-adjust: 100%;
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
-      background: var(--bg-light);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      word-break: keep-all; /* about/services 페이지와 동일 */
+      font-family:-apple-system, BlinkMacSystemFont,"Noto Sans KR",sans-serif;
+      background:var(--bg-light);
+      color:var(--text-main);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      word-break:keep-all;
     }
 
-    /* 텍스트 선택 / 이미지 드래그 방지 (input, textarea 제외) */
-    html, body, *:not(input):not(textarea) {
-      -webkit-user-select: none;
-      user-select: none;
-    }
-    img {
-      -webkit-user-drag: none;
-      user-drag: none;
-      pointer-events: none;
-    }
-    input, textarea {
-      user-select: text;
-      pointer-events: auto;
-    }
-
-    /* ---------------------------------
-       2. 공통 레이아웃 컨테이너 (860px)
-       --------------------------------- */
     .container {
-      width: 100%;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 40px 24px 60px;
-      flex: 1;
+      width:100%;
+      max-width:860px;
+      margin:0 auto;
+      padding:40px 24px;
+      flex:1;
     }
 
-    /* ---------------------------------
-       3. 헤더 (로고 + 내비게이션)
-       index/about/services/alliance/brand와 동일 구조
-       --------------------------------- */
+    /* HEADER: index/about/services 동일 구조 */
     header {
-      width: 100%;
-      border-bottom: 1px solid #e1e4e2;
-      background: #ffffff;
+      width:100%;
+      border-bottom:1px solid #e1e4e2;
+      background:#ffffff;
     }
 
     .nav {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      column-gap: 24px;
+      max-width:860px;
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      column-gap:24px;
     }
 
     .nav-left img {
-      width: 160px;
-      height: auto;
-      display: block;
+      width:160px;
+      height:auto;
+      display:block;
     }
 
     .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      font-size: 15px;
+      display:flex;
+      align-items:center;
+      gap:20px;
+      font-size:15px;
     }
 
     .nav-right a {
-      text-decoration: none;
-      color: var(--moding-green);
-      font-weight: 500;
-      white-space: nowrap;
-      transition: 0.2s;
+      text-decoration:none;
+      color:var(--moding-green);
+      font-weight:500;
+      white-space:nowrap;
+      transition:0.2s;
     }
 
     .nav-right a:hover {
-      color: var(--moding-orange);
+      color:var(--moding-orange);
     }
 
     .nav-right a.active {
-      color: var(--moding-orange);
+      color:var(--moding-orange);
     }
 
-    /* ---------------------------------
-       4. 페이지 상단 "메인 화면으로" 버튼
-       (about/brand/services와 동일 위치/스타일)
-       --------------------------------- */
+    /* 상단 "메인 화면으로" 버튼 */
     .top-return {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 12px;
+      display:flex;
+      justify-content:flex-end;
+      margin-bottom:12px;
     }
 
     .top-return-btn {
-      font-size: 12px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--moding-green);
-      color: var(--moding-green);
-      background: #ffffff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.2s;
+      font-size:12px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid var(--moding-green);
+      color:var(--moding-green);
+      background:#ffffff;
+      text-decoration:none;
+      font-weight:500;
+      transition:0.2s;
     }
 
     .top-return-btn:hover {
-      background: var(--moding-green);
-      color: #ffffff;
+      background:var(--moding-green);
+      color:#ffffff;
     }
 
-    /* ---------------------------------
-       5. 공지사항 HERO 섹션
-       (about/services hero 간격 기준)
-       --------------------------------- */
-    .hero-notice {
-      padding: 56px 0 42px; /* brand-hero / hero-services 기준과 동일 계열 */
+    /* 섹션 공통 */
+    .section {
+      margin-bottom:40px;
     }
 
-    .hero-notice-title {
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 1.4;
-      color: var(--moding-green);
-      margin-bottom: 12px;
+    .section-tag {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:4px 14px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.12);
+      font-size:11px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:var(--moding-green);
+      margin-bottom:10px;
+      background:#ffffff;
     }
 
-    .hero-notice-sub {
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--text-main);
-      margin-bottom: 8px;
+    .section-title-main {
+      font-size:26px;
+      font-weight:700;
+      color:var(--moding-green);
+      margin-bottom:8px;
     }
 
-    .hero-notice-meta {
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--text-sub);
-      opacity: 0.9;
+    .section-subtext {
+      font-size:15px;
+      line-height:1.8;
+      color:var(--text-sub);
     }
 
-    /* ---------------------------------
-       6. 공지사항 리스트 섹션
-       --------------------------------- */
-    .notice-section {
-      margin-top: 10px;
+    .divider {
+      border-bottom:1px solid #dde3df;
+      margin:32px 0;
     }
 
-    .notice-section-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-bottom: 16px;
-    }
-
+    /* 공지 리스트 영역 */
     .notice-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      margin-top:28px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
     }
 
     .notice-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 14px 16px 12px;
-      border: 1px solid #d7e0db;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 14px;
-      line-height: 1.7;
+      background:#ffffff;
+      border-radius:18px;
+      padding:14px 16px 12px;
+      border:2px solid #d7e0db;
+      box-shadow:0 6px 18px rgba(0,0,0,0.04);
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    .notice-card:hover {
+      border-color:var(--moding-green);
+      box-shadow:0 8px 22px rgba(0,0,0,0.06);
+      transform:translateY(-1px);
     }
 
     .notice-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 2px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:4px;
     }
 
     .notice-title {
-      font-weight: 600;
-      color: var(--text-main);
-      font-size: 14px;
+      font-size:15px;
+      font-weight:600;
+      color:var(--text-main);
     }
 
     .notice-date {
-      font-size: 12px;
-      color: var(--text-sub);
-      white-space: nowrap;
+      font-size:12px;
+      color:#888888;
+      white-space:nowrap;
     }
 
     .notice-tag {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 11px;
-      border: 1px solid rgba(0,0,0,0.16);
-      color: var(--moding-orange);
-      background: #ffffff;
-      margin-top: 2px;
-      align-self: flex-start;
+      display:inline-flex;
+      align-items:center;
+      font-size:11px;
+      padding:3px 9px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.12);
+      color:var(--moding-green);
+      margin-bottom:6px;
+      background:#ffffff;
     }
 
     .notice-body {
-      font-size: 13px;
-      color: var(--text-sub);
+      font-size:14px;
+      line-height:1.7;
+      color:var(--text-sub);
+      overflow:hidden;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
     }
 
-    .notice-empty {
-      font-size: 13px;
-      color: var(--text-sub);
-      opacity: 0.8;
-      text-align: left;
-      padding: 10px 2px 0;
+    /* 상세 내용은 카드 안에 숨겨두고, 클릭 시 아래로 복사 */
+    .notice-full {
+      display:none;
     }
 
-    /* ---------------------------------
-       7. 푸터 (공통)
-       --------------------------------- */
+    /* 하단 상세 카드 영역 */
+    .notice-detail-section {
+      margin-top:34px;
+    }
+
+    .notice-detail-title {
+      font-size:18px;
+      font-weight:600;
+      color:var(--text-main);
+      margin-bottom:10px;
+    }
+
+    .notice-detail-card {
+      background:#ffffff;
+      border-radius:18px;
+      padding:18px 18px 16px;
+      border:2px solid var(--moding-orange);
+      box-shadow:0 8px 22px rgba(0,0,0,0.06);
+      font-size:14px;
+      line-height:1.8;
+      color:var(--text-sub);
+      white-space:normal;
+    }
+
+    .notice-detail-meta {
+      font-size:13px;
+      color:#888;
+      margin-bottom:8px;
+    }
+
+    .notice-detail-section.empty .notice-detail-card {
+      border-style:dashed;
+      border-color:#d7e0db;
+      color:#999999;
+      text-align:center;
+    }
+
+    .notice-detail-section.empty .notice-detail-title {
+      color:#999999;
+    }
+
+    /* FOOTER (공통) */
+    footer {
+      margin-top:auto;
+      padding:22px 10px;
+      font-size:12px;
+      color:#777;
+      text-align:center;
+      border-top:1px solid #e1e4e2;
+      line-height:1.8;
+      background:#ffffff;
+      width:100%;
+    }
+
     .footer-links {
-      margin-bottom: 4px;
-      font-size: 12px;
-      text-align: center;
+      margin-bottom:4px;
+      font-size:12px;
+      text-align:center;
     }
 
     .footer-links a {
-      text-decoration: none;
-      color: var(--moding-green);
-      font-weight: 500;
+      text-decoration:none;
+      color:var(--moding-green);
+      font-weight:500;
     }
 
     .footer-links a:hover {
-      color: var(--moding-orange);
+      color:var(--moding-orange);
     }
 
     .footer-links .divider {
-      margin: 0 6px;
-      color: #bbbbbb;
+      margin:0 6px;
+      color:#bbbbbb;
     }
 
-    footer {
-      margin-top: auto;
-      padding: 22px 10px;
-      font-size: 12px;
-      color: #777;
-      text-align: center;
-      border-top: 1px solid #e1e4e2;
-      line-height: 1.8;
-      background: #ffffff;
-      width: 100%;
+    /* 복사/드래그 방지 (input/textarea 제외) */
+    html, body, *:not(input):not(textarea) {
+      -webkit-user-select:none;
+      user-select:none;
+    }
+    img {
+      -webkit-user-drag:none;
+      user-drag:none;
+      pointer-events:none;
+    }
+    input,textarea {
+      user-select:text;
+      pointer-events:auto;
     }
 
-    /* ---------------------------------
-       8. 반응형 (태블릿 & 모바일)
-       about/services 기준
-       --------------------------------- */
-    @media (max-width: 768px) {
+    /* 반응형 */
+    @media (max-width:768px) {
       .container {
-        padding: 32px 20px 40px;
+        padding:32px 20px 40px;
       }
-
-      .hero-notice {
-        padding: 40px 0 32px;
+      .section-title-main {
+        font-size:23px;
       }
-
-      .hero-notice-title {
-        font-size: 24px;
+      .section-subtext {
+        font-size:14px;
       }
-
-      .hero-notice-sub {
-        font-size: 15px;
-      }
-
-      .hero-notice-meta {
-        font-size: 13px;
+      .notice-detail-title {
+        font-size:16px;
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width:600px) {
       .nav {
-        padding: 12px 16px;
-        flex-direction: column;
-        row-gap: 8px;
-        align-items: center;
+        padding:12px 16px;
+        flex-direction:column;
+        align-items:center;
+        row-gap:8px;
       }
 
       .nav-left img {
-        width: 150px;
+        width:150px;
       }
 
       .nav-right {
-        font-size: 14px;
-        gap: 16px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .hero-notice-title {
-        font-size: 22px;
+        font-size:14px;
+        gap:16px;
+        flex-wrap:wrap;
+        justify-content:center;
       }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- 공통 헤더 -->
-  <header>
-    <div class="nav">
-      <div class="nav-left">
-        <img src="모딩로고.png" alt="Moding Logo">
-      </div>
-      <div class="nav-right">
-        <a href="about.html">About</a>
-        <a href="brand.html">Brand</a>
-        <a href="services.html">Services</a>
-        <a href="alliance.html">Alliance</a>
-        <a href="faq.html">FAQ</a>
-      </div>
+<header>
+  <div class="nav">
+    <div class="nav-left">
+      <img src="모딩로고.png" alt="Moding Logo">
     </div>
-  </header>
-
-  <!-- 메인 컨테이너 -->
-  <main class="container">
-    <!-- 상단 "메인 화면으로" 버튼 (about/brand/services와 동일 위치) -->
-    <div class="top-return">
-      <a href="index.html" class="top-return-btn">메인 화면으로</a>
+    <div class="nav-right">
+      <a href="about.html">About</a>
+      <a href="brand.html">Brand</a>
+      <a href="services.html">Services</a>
+      <a href="alliance.html">Alliance</a>
+      <a href="faq.html">FAQ</a>
     </div>
+  </div>
+</header>
 
-    <!-- 공지사항 HERO -->
-    <section class="hero-notice">
-      <h1 class="hero-notice-title">공지사항</h1>
-      <p class="hero-notice-sub">
-        모딩(Moding)의 서비스 업데이트, 점검 일정, 운영 정책 변경 등<br>
-        중요한 소식을 한 곳에서 안내드립니다.
-      </p>
-      <p class="hero-notice-meta">
-        앱·웹 공지사항은 동일하게 관리되며, 실제 서비스 화면과 시차가 발생할 경우<br>
-        플랫폼 내부 공지(앱/웹) 내용이 우선 적용됩니다.
-      </p>
-    </section>
+<main class="container">
 
-    <!-- 공지사항 리스트 -->
-    <section class="notice-section">
-      <h2 class="notice-section-title">최근 공지</h2>
+  <!-- 메인 화면으로 버튼 -->
+  <div class="top-return">
+    <a href="index.html" class="top-return-btn">메인 화면으로</a>
+  </div>
 
-      <div class="notice-list">
-        <!-- 샘플 공지 1: 실제 운영 시 서버/관리툴 연동으로 교체 예정 -->
-        <article class="notice-card">
-          <div class="notice-header">
-            <div class="notice-title">모딩(Moding) 베타 서비스 오픈 안내</div>
-            <div class="notice-date">2025-01-15</div>
-          </div>
-          <span class="notice-tag">서비스 안내</span>
-          <div class="notice-body">
-            식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼
-            모딩(Moding)의 베타 서비스를 시작합니다. 베타 기간 동안은 기능이 순차적으로
-            열리며, 정식 오픈 전까지는 일부 메뉴가 제한적으로 제공될 수 있습니다.
-          </div>
-        </article>
+  <!-- 상단 인트로 -->
+  <section class="section">
+    <div class="section-tag">NOTICE</div>
+    <h1 class="section-title-main">공지사항</h1>
+    <p class="section-subtext">
+      모딩(Moding)의 서비스 오픈, 업데이트, 점검 일정 등<br>
+      중요한 안내를 이곳에서 확인하실 수 있습니다.
+    </p>
+  </section>
 
-        <!-- 샘플 공지 2 -->
-        <article class="notice-card">
-          <div class="notice-header">
-            <div class="notice-title">정산 주기 및 수수료 정책 사전 안내</div>
-            <div class="notice-date">2025-01-10</div>
-          </div>
-          <span class="notice-tag">정산/정책</span>
-          <div class="notice-body">
-            제조사와 외식업 사장님 모두가 예측 가능한 운영을 하실 수 있도록,
-            모딩의 기본 정산 주기와 수수료 정책을 사전에 안내드립니다.
-            실제 계약은 제조사·매장별로 별도 약정서를 통해 확정됩니다.
-          </div>
-        </article>
+  <div class="divider"></div>
 
-        <!-- 안내 문구 (향후 공지 부족 시 사용 가능) -->
-        <p class="notice-empty">
-          ※ 추후 앱·웹 내 운영되는 공지사항과 연동하여 보다 상세한 안내를 제공할 예정입니다.
+  <!-- 공지 리스트 -->
+  <section class="section notice-list">
+
+    <!-- 샘플 공지 1 -->
+    <article class="notice-card">
+      <div class="notice-header">
+        <div class="notice-title">모딩(Moding) 베타 서비스 오픈 예정 안내</div>
+        <div class="notice-date">2025-01-15</div>
+      </div>
+      <span class="notice-tag">서비스 안내</span>
+      <div class="notice-body">
+        식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼 모딩(Moding)의
+        베타 서비스를 준비하고 있습니다. 정식 오픈 전까지는 기능이 순차적으로 열리며,
+        일부 메뉴가 제한적으로 제공될 수 있습니다.
+      </div>
+
+      <!-- 상세 내용 (하단 카드에 복사될 영역) -->
+      <div class="notice-full">
+        <div class="notice-detail-meta">분류: 서비스 안내 · 게시일: 2025-01-15</div>
+        <p>
+          안녕하세요. 모딩(Moding) 운영팀입니다.<br>
+          식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼
+          <strong>모딩(Moding)</strong>의 베타 서비스 오픈을 준비하고 있습니다.
+        </p>
+        <p>
+          베타 기간 동안에는 주문·정산·데이터 기능이 순차적으로 열리며,<br>
+          일부 메뉴는 테스트 목적 또는 제한된 파트너사 대상으로 먼저 제공될 수 있습니다.
+        </p>
+        <p>
+          베타 서비스의 주요 목적은 다음과 같습니다.
+        </p>
+        <ul style="padding-left:18px; margin-bottom:8px;">
+          <li style="margin-bottom:4px;">실제 외식업·제조 현장에서의 사용성 점검</li>
+          <li style="margin-bottom:4px;">정산·발주·데이터 흐름의 안정성 테스트</li>
+          <li style="margin-bottom:4px;">초기 입점사(제조사·매장)의 의견 반영 및 기능 개선</li>
+        </ul>
+        <p>
+          베타 테스트 기간 중 수집된 의견과 데이터는<br>
+          정식 오픈 시 더 안정적이고 편리한 서비스 제공을 위해 사용됩니다.
+        </p>
+        <p style="margin-top:10px;">
+          베타 서비스 일정 및 참여 방법은 추후 별도 공지 드리겠습니다.<br>
+          모딩(Moding)을 관심 있게 지켜봐 주셔서 감사합니다.
         </p>
       </div>
-    </section>
-  </main>
+    </article>
 
-  <!-- 공통 푸터 -->
-  <footer>
-    <div class="footer-links">
-      <a href="terms.html">이용약관</a>
-      <span class="divider">·</span>
-      <a href="privacy.html">개인정보처리방침</a>
-      <span class="divider">·</span>
-      <a href="location.html">오시는 길</a>
+    <!-- 필요 시 여기에 추가 공지 카드들을 같은 패턴으로 복제해서 사용 -->
+    <!--
+    <article class="notice-card">
+      ...
+      <div class="notice-full">
+        상세내용 HTML
+      </div>
+    </article>
+    -->
+
+  </section>
+
+  <!-- 하단 상세 카드 표시 영역 -->
+  <section class="section notice-detail-section empty" id="notice-detail-section">
+    <h2 class="notice-detail-title">공지 상세</h2>
+    <div class="notice-detail-card" id="notice-detail-card">
+      공지사항을 선택하시면 자세한 내용이 이곳에 표시됩니다.
     </div>
-    주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
-    통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
-    대구광역시 달서구 달구벌대로 1698, 6층
-  </footer>
+  </section>
 
-  <!-- 공통 복사/드래그/단축키 방지 스크립트 -->
-  <script>
-    // 우클릭 방지 (input, textarea, a 제외)
-    document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) e.preventDefault();
-    });
+</main>
 
-    // 드래그 방지 (입력창 제외)
-    document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
-    });
+<footer>
+  <!-- 이용약관 · 개인정보처리방침 · 오시는 길 -->
+  <div class="footer-links">
+    <a href="terms.html">이용약관</a>
+    <span class="divider">·</span>
+    <a href="privacy.html">개인정보처리방침</a>
+    <span class="divider">·</span>
+    <a href="location.html">오시는 길</a>
+  </div>
 
-    // Ctrl/Cmd + C/X/V/S/U/P/A 차단 (입력창 제외)
-    document.addEventListener("keydown", function (e) {
-      const key = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
-        if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
-      }
-    });
+  주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+  통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
+  대구광역시 달서구 달구벌대로 1698, 6층
+</footer>
 
-    // copy 이벤트 직접 차단 (입력창 제외)
-    document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
+<script>
+  /* 복사/드래그/우클릭/단축키 방지 (index.html 패턴 준수) */
+  document.addEventListener("contextmenu", function (e) {
+    if (!e.target.closest("input, textarea, a")) e.preventDefault();
+  });
+
+  document.addEventListener("dragstart", function (e) {
+    if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    const key = e.key.toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
+      if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+    }
+  });
+
+  document.addEventListener("copy", function (e) {
+    if (!e.target.closest("input, textarea")) e.preventDefault();
+  });
+
+  /* 공지 카드 클릭 시 하단 상세 카드에 내용 표시 */
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll(".notice-card");
+    const detailSection = document.getElementById("notice-detail-section");
+    const detailCard = document.getElementById("notice-detail-card");
+
+    cards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        const full = card.querySelector(".notice-full");
+        if (!full) return;
+
+        // 상세 내용 갱신
+        detailCard.innerHTML = full.innerHTML;
+        detailSection.classList.remove("empty");
+
+        // 스크롤 이동 (부드럽게)
+        detailSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
