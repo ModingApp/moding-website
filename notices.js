@@ -42,20 +42,26 @@ const notices = [
 
 /* =========================================================
    index.html – 최신 공지 2개만 출력
+   (data-role="home-notice-list" 기준)
    ========================================================= */
 function renderIndexNotices() {
-  const area = document.getElementById("index-notice-area");
+  // ✅ index.html의 <ul class="notice-list" data-role="home-notice-list">를 찾음
+  const area =
+    document.getElementById("index-notice-area") || // 혹시 나중에 id 추가해도 대응
+    document.querySelector('[data-role="home-notice-list"]');
+
   if (!area) return;
 
   const latest = notices.slice(0, 2); // 최신 2개만
 
   area.innerHTML = latest
     .map(
-      n => `
-      <div class="index-notice-item">
-        <div class="index-notice-title">${n.title}</div>
-        <div class="index-notice-date">${n.date}</div>
-      </div>`
+      (n) => `
+      <li>
+        <span class="notice-item-title">${n.title}</span>
+        <span class="notice-item-date">${n.date}</span>
+      </li>
+    `
     )
     .join("");
 }
@@ -65,11 +71,11 @@ function renderIndexNotices() {
    ========================================================= */
 function renderNoticeList() {
   const list = document.getElementById("notice-list");
-  if (!list) return;
+  if (!list) return; // notice.html이 아닐 때는 그냥 통과
 
   list.innerHTML = notices
     .map(
-      n => `
+      (n) => `
       <article class="notice-card">
         <header class="notice-header" onclick="toggleNotice(${n.id})">
           <div class="notice-title">${n.title}</div>
@@ -82,7 +88,7 @@ function renderNoticeList() {
           ${n.body}
         </div>
       </article>
-      `
+    `
     )
     .join("");
 }
@@ -98,6 +104,6 @@ function toggleNotice(id) {
    페이지 자동 인식 후 렌더링
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
-  renderIndexNotices();
-  renderNoticeList();
+  renderIndexNotices(); // index.html 공지 2개
+  renderNoticeList();   // notice.html 전체 목록
 });
