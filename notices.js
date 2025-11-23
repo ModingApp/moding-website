@@ -6,48 +6,39 @@
 const notices = [
   {
     id: 1,
-    title: "모딩(Moding) 베타 서비스 오픈 안내",
-    date: "2025-01-15",
-    tag: "서비스 안내",
+    title: "모딩(Moding) 약관 업로드 안내",
+    date: "2025-11-20",
+    tag: "공지",
     body: `
-      식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼
-      <strong>모딩(Moding)</strong>의 베타 서비스를 시작합니다.<br><br>
-      베타 기간 동안 기능이 순차적으로 오픈되며,
-      정식 버전 공개 전까지 일부 메뉴가 제한될 수 있습니다.
+      모딩(Moding) 플랫폼 이용약관 및 관련 정책이 
+      <strong>2025년 11월 20일</strong>자로 최종 업로드되었습니다.<br><br>
+      약관은 서비스 이용을 위한 기본 규정으로, 
+      제조사·외식업 사장님 모두에게 적용됩니다.<br><br>
+      각 페이지 하단의 ‘이용약관’ 링크를 통해 확인하실 수 있습니다.
     `
   },
   {
     id: 2,
-    title: "정산 시스템 점검 예정",
-    date: "2025-02-01",
-    tag: "시스템 점검",
+    title: "모딩(Moding) 기본 버전 출시 예정 안내",
+    date: "2025-11-23",
+    tag: "서비스 안내",
     body: `
-      보다 안정적인 서비스를 제공하기 위하여<br>
-      <strong>2월 3일(월) 02:00 ~ 04:00</strong> 정산 모듈 점검이 진행됩니다.<br><br>
-      해당 시간 동안 정산 화면 접속이 일시적으로 제한됩니다.
-    `
-  },
-  {
-    id: 3,
-    title: "신규 제조사 입점 기능 추가",
-    date: "2025-02-10",
-    tag: "업데이트",
-    body: `
-      신규 제조사가 보다 쉽게 입점할 수 있도록
-      <strong>입점 신청 폼 기능</strong>이 추가되었습니다.<br><br>
-      제휴·입점 문의 페이지를 통해 확인하시기 바랍니다.
+      모딩(Moding)의 B2B Food-SaaS 기능 최소화 버전이 
+      <strong>곧 출시 예정</strong>입니다.<br><br>
+      외식업 이용 페이지(발주, 가게 관리 기능)를 중심으로 먼저 제공되며, 
+      이후 순차적으로 제조사 관리 페이지 및 세금계산서 자동화 기능 등 추가될 예정입니다.
     `
   }
 ];
 
 /* =========================================================
-   index.html – 최신 공지 2개만 출력
+   index.html – 최신 공지 2개만 출력 + 클릭 가능
    ========================================================= */
 function renderIndexNotices() {
   const area = document.getElementById("index-notice-area");
   if (!area) return;   // index.html이 아닐 때는 통과
 
-  // 날짜 기준으로 내림차순 정렬 후 상위 2개
+  // 날짜 기준 내림차순 정렬 → 상위 2개 출력
   const latest = [...notices]
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 2);
@@ -56,8 +47,10 @@ function renderIndexNotices() {
     .map(
       (n) => `
       <li>
-        <span class="notice-item-title">${n.title}</span>
-        <span class="notice-item-date">${n.date}</span>
+        <a href="notice.html?notice=${n.id}" class="notice-link">
+          <span class="notice-item-title">${n.title}</span>
+          <span class="notice-item-date">${n.date}</span>
+        </a>
       </li>
     `
     )
@@ -65,11 +58,11 @@ function renderIndexNotices() {
 }
 
 /* =========================================================
-   notice.html – 전체 공지 + 접힘/펼침 기능 (추후 사용)
+   notice.html – 전체 공지 목록 + 접힘/펼침
    ========================================================= */
 function renderNoticeList() {
   const list = document.getElementById("notice-list");
-  if (!list) return;  // notice.html이 아닐 때는 통과
+  if (!list) return;
 
   list.innerHTML = notices
     .map(
@@ -86,7 +79,7 @@ function renderNoticeList() {
           ${n.body}
         </div>
       </article>
-    `
+      `
     )
     .join("");
 }
@@ -99,9 +92,27 @@ function toggleNotice(id) {
 }
 
 /* =========================================================
-   페이지 로드 후 자동 실행
+   notice.html – 특정 공지 자동 펼침
+   ========================================================= */
+function openNoticeFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("notice");
+  if (!id) return;
+
+  setTimeout(() => {
+    toggleNotice(id);
+    const target = document.getElementById(`notice-body-${id}`);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, 80);
+}
+
+/* =========================================================
+   페이지 자동 인식 후 실행
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
-  renderIndexNotices();  // index 공지 2개
-  renderNoticeList();    // notice 전체 목록
+  renderIndexNotices();  // index.html 공지 2개
+  renderNoticeList();    // notice.html 전체 공지
+  openNoticeFromQuery(); // notice.html 자동 펼침
 });
