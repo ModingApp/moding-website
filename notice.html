@@ -48,7 +48,7 @@
     }
 
     /* ===========================
-       HEADER
+       HEADER (공통)
        =========================== */
     header {
       width:100%;
@@ -118,14 +118,14 @@
     }
 
     /* ===========================
-       공지사항 히어로 영역
+       공지사항 히어로
        =========================== */
     .notice-hero {
       padding:56px 0 42px;
     }
 
     .notice-title {
-      font-size:26px;        /* 기존보다 줄여서 사이트 톤에 맞춤 */
+      font-size:26px;
       font-weight:700;
       color:var(--moding-green);
       margin-bottom:10px;
@@ -145,6 +145,11 @@
       opacity:0.9;
     }
 
+    .divider {
+      border-bottom:1px solid #dde3df;
+      margin:20px 0 32px;
+    }
+
     .section-subtitle {
       font-size:18px;
       font-weight:600;
@@ -152,13 +157,8 @@
       margin-bottom:16px;
     }
 
-    .divider {
-      border-bottom:1px solid #dde3df;
-      margin:20px 0 32px;
-    }
-
     /* ===========================
-       공지 리스트
+       공지 리스트 카드
        =========================== */
     .notice-section {
       margin-top:8px;
@@ -185,48 +185,29 @@
       background:#ffffff;
     }
 
-    .notice-toggle {
+    .notice-header {
       width:100%;
-      border:none;
-      background:transparent;
       padding:8px 2px;
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
       gap:12px;
       cursor:pointer;
-      text-align:left;
     }
 
-    .notice-header-text {
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-      flex:1;
-      min-width:0;
-    }
-
-    .notice-title-text {
+    .notice-title {
       font-size:15px;
       font-weight:600;
       color:var(--text-main);
       line-height:1.6;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-
-    .notice-meta-row {
-      display:flex;
-      align-items:center;
-      gap:8px;
-      font-size:12px;
-      color:var(--text-sub);
+      margin:0;
     }
 
     .notice-date {
       font-size:12px;
       color:var(--text-sub);
+      white-space:nowrap;
+      margin-left:12px;
     }
 
     .notice-tag {
@@ -239,62 +220,25 @@
       color:var(--text-sub);
       white-space:nowrap;
       background:#ffffff;
+      margin:0 0 4px 2px;
     }
 
-    .notice-tag.service {
-      border-color:var(--moding-green);
-      color:var(--moding-green);
-    }
+    /* 태그 타입 색 구분이 필요하면 class로 추가해서 사용 가능
+       (지금은 notices.js에서 텍스트만 넣고 있으므로 기본만 사용) */
 
-    .notice-tag.update {
-      border-color:var(--moding-orange);
-      color:var(--moding-orange);
-    }
-
-    .notice-tag.policy {
-      border-color:#8B5A2B;
-      color:#8B5A2B;
-    }
-
-    .notice-arrow {
-      flex-shrink:0;
-      width:18px;
-      height:18px;
-      border-radius:999px;
-      border:1px solid #d2d8d4;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:11px;
-      color:#9aa29d;
-      transition:transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
-    }
-
-    .notice-card.is-open .notice-arrow {
-      transform:rotate(90deg);
-      background:var(--moding-green);
-      border-color:var(--moding-green);
-      color:#ffffff;
-    }
-
-    /* ===========================
-       접히는 본문 영역 – display 방식
-       =========================== */
     .notice-body {
       font-size:14px;
       line-height:1.8;
       color:var(--text-sub);
-      display:none;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.24s ease, margin-top 0.24s ease;
       margin-top:0;
     }
 
-    .notice-card.is-open .notice-body {
-      display:block;
+    .notice-body.open {
       margin-top:6px;
-    }
-
-    .notice-body-inner {
-      padding:2px 2px 10px 2px;
+      max-height:500px; /* 일반 공지 길이 기준, 필요 시 조정 */
     }
 
     .notice-body p {
@@ -311,7 +255,7 @@
     }
 
     /* ===========================
-       FOOTER
+       FOOTER (공통)
        =========================== */
     footer {
       margin-top:auto;
@@ -412,16 +356,12 @@
         font-size:22px;
       }
 
-      .notice-header-text {
-        gap:2px;
+      .notice-header {
+        align-items:flex-start;
       }
 
-      .notice-title-text {
-        white-space:normal;
-      }
-
-      .notice-meta-row {
-        flex-wrap:wrap;
+      .notice-date {
+        font-size:11px;
       }
     }
   </style>
@@ -470,7 +410,7 @@
       <h2 class="section-subtitle">최근 공지</h2>
 
       <div class="notice-list" id="notice-list">
-        <!-- notices.js에서 공지가 카드형으로 렌더링됩니다. -->
+        <!-- notices.js에서 공지 카드가 렌더링됩니다. -->
       </div>
     </section>
   </main>
@@ -512,6 +452,6 @@
   </script>
 
   <!-- notices.js: 공지 데이터 & 렌더링 & 아코디언 -->
-  <script src="notices.js?v=1"></script>
+  <script src="notices.js?v=2"></script>
 </body>
 </html>
