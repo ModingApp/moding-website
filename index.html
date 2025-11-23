@@ -41,7 +41,9 @@
       padding:40px 24px;
     }
 
-    /* HEADER */
+    /* ===========================
+       HEADER
+       =========================== */
     header {
       width:100%;
       border-bottom:1px solid #e1e4e2;
@@ -83,7 +85,9 @@
       color:var(--moding-orange);
     }
 
-    /* HERO */
+    /* ===========================
+       HERO
+       =========================== */
     .hero {
       text-align:center;
       padding:72px 0 56px;
@@ -103,13 +107,13 @@
       min-height:1.4em; /* 로딩 중 높이 유지 */
     }
 
-    /* 히어로 M 심볼 영역: 문구 아래에 심볼만 배치 */
+    /* 메인 카피 아래 M 심볼 */
     .hero-symbol {
       margin-bottom:22px;
     }
 
     .hero-symbol img {
-      height:52px;           /* 전체 로고를 사용하되, 작은 심볼 느낌으로 */
+      height:52px;
       width:auto;
       display:block;
       margin:0 auto;
@@ -145,7 +149,7 @@
       align-items:center;
       justify-content:center;
       height:56px;
-      width:210px;    /* ← download-btn과 동일 폭으로 통일 */
+      width:210px;
     }
 
     .btn-green {
@@ -168,7 +172,9 @@
       border-color:#e67800;
     }
 
-    /* DOWNLOAD */
+    /* ===========================
+       DOWNLOAD (스토어 버튼)
+       =========================== */
     .download-wrapper {
       margin-top:32px;
       display:flex;
@@ -188,7 +194,6 @@
       text-align:center;
       transition:0.2s;
 
-      /* 버튼과 동일한 높이 + 정렬 */
       display:flex;
       align-items:center;
       justify-content:center;
@@ -213,7 +218,81 @@
       color:#ffffff;
     }
 
-    /* ABOUT */
+    /* ===========================
+       NOTICE (공지사항 요약 박스)
+       - 히어로와 ABOUT 사이에 위치
+       =========================== */
+    .notice-section {
+      margin-top:26px;
+      margin-bottom:8px;
+    }
+
+    .notice-card {
+      border-radius:18px;
+      padding:14px 18px 16px;
+      background:#ffffff;
+      border:1px solid rgba(35,139,34,0.45); /* 모딩그린, ABOUT 박스보다 살짝 약하게 */
+      box-shadow:0 6px 18px rgba(0,0,0,0.03);
+      font-size:14px;
+      color:var(--text-sub);
+    }
+
+    .notice-header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:6px;
+    }
+
+    .notice-title {
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:0.14em;
+      color:var(--moding-green);
+    }
+
+    .notice-more {
+      font-size:12px;
+      text-decoration:none;
+      color:var(--moding-green);
+      font-weight:500;
+    }
+    .notice-more:hover {
+      color:var(--moding-orange);
+    }
+
+    .notice-list {
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+
+    .notice-list li {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:13px;
+      line-height:1.7;
+      padding-top:2px;
+    }
+
+    .notice-item-title {
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      max-width:80%;
+      color:var(--text-main);
+    }
+
+    .notice-item-date {
+      font-size:11px;
+      color:#999999;
+      white-space:nowrap;
+    }
+
+    /* ===========================
+       ABOUT
+       =========================== */
     .about {
       margin-top:70px;
       padding:46px 24px 50px;
@@ -224,11 +303,11 @@
     }
 
     .about-title {
-      font-size:15px;              /* 기존 13px → 15px */
+      font-size:15px;
       letter-spacing:0.18em;
       color:var(--moding-green);
       margin-bottom:10px;
-      font-weight:700;             /* 굵게 */
+      font-weight:700;
     }
 
     .about-tagline {
@@ -245,7 +324,6 @@
       margin-bottom:6px;
     }
 
-    /* ABOUT 내부 2컬럼 카드 */
     .about-grid {
       margin-top:22px;
       display:flex;
@@ -332,7 +410,9 @@
       box-shadow:0 4px 14px rgba(0,0,0,0.06);
     }
 
-    /* FOOTER */
+    /* ===========================
+       FOOTER
+       =========================== */
     footer {
       margin-top:auto;
       padding:22px 10px;
@@ -345,10 +425,9 @@
       width:100%;
     }
 
-    /* 푸터 약관 링크 라인: 기존 기획대로 상단 한 줄 */
     .footer-links {
       margin-bottom:4px;
-      font-size:12px;          /* 푸터 기본 폰트와 동일 크기 유지 */
+      font-size:12px;
       text-align:center;
     }
 
@@ -367,7 +446,9 @@
       color:#bbbbbb;
     }
 
-    /* 복사/드래그 방지 */
+    /* ===========================
+       복사/드래그 방지
+       =========================== */
     html, body, *:not(input):not(textarea) {
       -webkit-user-select:none;
       user-select:none;
@@ -375,10 +456,9 @@
     img { user-drag:none; pointer-events:none; }
     input,textarea{user-select:text;pointer-events:auto;}
 
-    /* ===============================
-       반응형: 태블릿 & 모바일 보정
-       =============================== */
-
+    /* ===========================
+       반응형: 태블릿 & 모바일
+       =========================== */
     @media (max-width: 768px) {
       .container {
         padding:32px 20px 40px;
@@ -467,13 +547,14 @@
 </header>
 
 <div class="container">
+  <!-- HERO 영역 -->
   <section class="hero">
     <h1 class="hero-title">
       <span class="hero-line hero-line1"></span><br>
       <span class="hero-line hero-line2"></span>
     </h1>
 
-    <!-- 메인 카피 아래 M 심볼(현재는 모딩로고 전체 사용, 향후 M 전용 파일로 교체 가능) -->
+    <!-- 메인 카피 아래 M 심볼 -->
     <div class="hero-symbol">
       <img src="모딩로고(어플용-최종).png" alt="Moding M Symbol">
     </div>
@@ -494,6 +575,28 @@
     </div>
   </section>
 
+  <!-- 공지사항 요약 박스 (notice.html 연동) -->
+  <section class="notice-section">
+    <div class="notice-card">
+      <div class="notice-header">
+        <div class="notice-title">공지사항</div>
+        <a href="notice.html" class="notice-more">전체보기 &gt;</a>
+      </div>
+      <ul class="notice-list">
+        <!-- 실제 운영 시, 최신 공지 1~2개 제목을 서버/스크립트로 교체 -->
+        <li>
+          <span class="notice-item-title">[안내] 모딩(Moding) 베타 서비스 오픈 예정 안내</span>
+          <span class="notice-item-date">2025-01-10</span>
+        </li>
+        <li>
+          <span class="notice-item-title">[점검] 시스템 정기 점검 일정 사전 안내</span>
+          <span class="notice-item-date">2025-01-03</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ABOUT MODING -->
   <section class="about">
     <div class="about-title">ABOUT MODING</div>
     <div class="about-tagline">제조사와 외식업을 한 화면에서 연결하는 B2B Food-SaaS 플랫폼</div>
@@ -512,9 +615,9 @@
           <span class="about-chip">판로 확대</span>
         </div>
         <ul>
-         <li>안정적인 공급 채널 확보</li>
-         <li>주문·정산 흐름을 한 화면에서 관리</li>
-         <li>PB·OEM 등 다양한 협업 방식 지원</li>
+          <li>안정적인 공급 채널 확보</li>
+          <li>주문·정산 흐름을 한 화면에서 관리</li>
+          <li>PB·OEM 등 다양한 협업 방식 지원</li>
         </ul>
       </div>
 
@@ -534,14 +637,16 @@
 </div>
 
 <footer>
-  <!-- 이용약관 · 개인정보처리방침 링크 라인 -->
+  <!-- 이용약관 · 개인정보처리방침 · 오시는 길 링크 라인 -->
   <div class="footer-links">
     <a href="terms.html">이용약관</a>
     <span class="divider">·</span>
     <a href="privacy.html">개인정보처리방침</a>
+    <span class="divider">·</span>
+    <a href="location.html">오시는 길</a>
   </div>
 
-  <!-- 기존 회사 정보 -->
+  <!-- 회사 정보 -->
   주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
   통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
   대구광역시 달서구 달구벌대로 1698, 6층
