@@ -42,17 +42,15 @@ const notices = [
 
 /* =========================================================
    index.html – 최신 공지 2개만 출력
-   (data-role="home-notice-list" 기준)
    ========================================================= */
 function renderIndexNotices() {
-  // ✅ index.html의 <ul class="notice-list" data-role="home-notice-list">를 찾음
-  const area =
-    document.getElementById("index-notice-area") || // 혹시 나중에 id 추가해도 대응
-    document.querySelector('[data-role="home-notice-list"]');
+  const area = document.getElementById("index-notice-area");
+  if (!area) return;   // index.html이 아닐 때는 통과
 
-  if (!area) return;
-
-  const latest = notices.slice(0, 2); // 최신 2개만
+  // 날짜 기준으로 내림차순 정렬 후 상위 2개
+  const latest = [...notices]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 2);
 
   area.innerHTML = latest
     .map(
@@ -67,11 +65,11 @@ function renderIndexNotices() {
 }
 
 /* =========================================================
-   notice.html – 전체 공지 + 접힘/펼침 기능
+   notice.html – 전체 공지 + 접힘/펼침 기능용 (나중에 사용)
    ========================================================= */
 function renderNoticeList() {
   const list = document.getElementById("notice-list");
-  if (!list) return; // notice.html이 아닐 때는 그냥 통과
+  if (!list) return;  // notice.html이 아닐 때는 통과
 
   list.innerHTML = notices
     .map(
@@ -101,9 +99,9 @@ function toggleNotice(id) {
 }
 
 /* =========================================================
-   페이지 자동 인식 후 렌더링
+   페이지 로드 후 자동 실행
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
-  renderIndexNotices(); // index.html 공지 2개
-  renderNoticeList();   // notice.html 전체 목록
+  renderIndexNotices();  // index 공지 2개
+  renderNoticeList();    // notice 전체 목록
 });
