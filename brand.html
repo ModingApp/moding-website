@@ -78,7 +78,7 @@
 
     /* ---------------------------------
        3. 헤더 (로고 + 내비게이션)
-       index/about/services/alliance 동일 구조
+       index/about/services/alliance/brand 공통 구조
        --------------------------------- */
     header {
       width: 100%;
@@ -153,6 +153,8 @@
 
     /* ---------------------------------
        5. 공통 타이틀 / 텍스트 스타일
+       h1/h2/h3는 필요 시 사용,
+       섹션 타이틀은 .section-title / .section-subtitle로 관리
        --------------------------------- */
     h1 {
       font-size: 28px;
@@ -192,7 +194,26 @@
     }
 
     /* ---------------------------------
-       6. 브랜드 인트로 카드
+       5-1. 섹션 타이틀 (services.html과 공통 규격)
+       .section-title : 상단 영문 라벨 (초록)
+       .section-subtitle : 실제 섹션 제목 (진한 본문색)
+       --------------------------------- */
+    .section-title {
+      font-size:14px;
+      letter-spacing:0.18em;
+      color:var(--moding-green);
+      margin-bottom:10px;
+    }
+
+    .section-subtitle {
+      font-size:18px;
+      font-weight:600;
+      color:var(--text-main);
+      margin-bottom:16px;
+    }
+
+    /* ---------------------------------
+       6. 브랜드 인트로 카드 (그라데이션 박스)
        --------------------------------- */
     .brand-hero {
       padding:56px 0 42px;
@@ -228,6 +249,8 @@
 
     /* ---------------------------------
        7. 네이밍 섹션 (Modoo + ing)
+       브랜드 네임 의미 카드(.name-card)는
+       모딩 그린 테두리로 통일
        --------------------------------- */
     .name-badge {
       display: inline-flex;
@@ -258,7 +281,7 @@
       padding: 14px 14px 16px;
       border-radius: 16px;
       background: #ffffff;
-      border: 1px solid #d7e0db;
+      border: 2px solid var(--moding-green); /* 모딩 그린 테두리 (네이밍 카드) */
       box-shadow: 0 6px 18px rgba(0,0,0,0.03);
     }
 
@@ -305,30 +328,30 @@
       margin: 8px 0 6px;
     }
 
- .badge-role {
-  font-size: 11px;
-  padding: 4px 9px;
-  border-radius: 999px;
-  border: 1px solid #d7e0db;
-  background: #ffffff;
-  color: var(--text-sub);
-}
+    .badge-role {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid #d7e0db;
+      background: #ffffff;
+      color: var(--text-sub);
+    }
 
-/* 외식업 사장님 뱃지: 주황 풀박스 + 흰 글자 */
-.badge-role.restaurant {
-  background: var(--moding-orange);
-  border-color: var(--moding-orange);
-  color: #ffffff;
-  font-weight: 600;
-}
+    /* 외식업 사장님 뱃지: 주황 풀박스 + 흰 글자 */
+    .badge-role.restaurant {
+      background: var(--moding-orange);
+      border-color: var(--moding-orange);
+      color: #ffffff;
+      font-weight: 600;
+    }
 
-/* 제조사 뱃지: 초록 풀박스 + 흰 글자 */
-.badge-role.manufacturer {
-  background: var(--moding-green);
-  border-color: var(--moding-green);
-  color: #ffffff;
-  font-weight: 600;
-}
+    /* 제조사 뱃지: 초록 풀박스 + 흰 글자 */
+    .badge-role.manufacturer {
+      background: var(--moding-green);
+      border-color: var(--moding-green);
+      color: #ffffff;
+      font-weight: 600;
+    }
 
     .color-palette {
       display: grid;
@@ -380,6 +403,8 @@
 
     /* ---------------------------------
        9. 톤앤매너 카드
+       브랜드 톤앤매너(.tone-item)는
+       모딩 오렌지 테두리로 통일
        --------------------------------- */
     .tone-grid {
       display: grid;
@@ -392,7 +417,7 @@
       padding: 14px 14px 16px;
       border-radius: 16px;
       background: #ffffff;
-      border: 1px solid #d7e0db;
+      border: 2px solid var(--moding-orange); /* 모딩 오렌지 테두리 (톤앤매너 카드) */
       box-shadow: 0 6px 18px rgba(0,0,0,0.03);
     }
 
@@ -556,34 +581,28 @@
 
     <!-- 1) 브랜드 인트로 -->
     <section class="section brand-hero">
-  <h1>브랜드 아이덴티티</h1>
+      <h1>브랜드 아이덴티티</h1>
 
-  <div class="identity-hero">
+      <div class="identity-hero">
+        <div class="identity-hero-title">
+          <span class="flow-line">모두의 일상을 흐름으로 잇다</span>
+          <span class="flow-line">모두를 위한 단 하나의 흐름</span>
+        </div>
 
-    <div class="identity-hero-title">
-      <span class="flow-line">모두의 일상을 흐름으로 잇다</span>
-      <span class="flow-line">모두를 위한 단 하나의 흐름</span>
-    </div>
-
-    <p class="identity-hero-text">
-      <span class="hero-highlight">모딩(Moding)</span>은 식품 제조사와 외식업 사장님,
-      그리고 그 사이를 잇는 기술을 하나의 구조로 묶어내기 위해 탄생한 이름입니다.<br>
-      복잡한 거래 흐름을 단순하게 만들고, 현장에서 오래 쓰이는 도구를 만드는 것이 모딩의 브랜드 방향입니다.
-    </p>
-
-  </div>
-</section>
-
-
-      
-
-  
+        <p class="identity-hero-text">
+          <span class="hero-highlight">모딩(Moding)</span>은 식품 제조사와 외식업 사장님,
+          그리고 그 사이를 잇는 기술을 하나의 구조로 묶어내기 위해 탄생한 이름입니다.<br>
+          복잡한 거래 흐름을 단순하게 만들고, 현장에서 오래 쓰이는 도구를 만드는 것이 모딩의 브랜드 방향입니다.
+        </p>
+      </div>
+    </section>
 
     <div class="divider"></div>
 
     <!-- 2) 네이밍 철학 (Modoo + ing) -->
     <section class="section">
-      <h2>브랜드 네임의 의미</h2>
+      <div class="section-title">BRAND NAME</div>
+      <div class="section-subtitle">브랜드 네임의 의미</div>
 
       <div class="name-badge">
         <span>Moding</span>
@@ -624,7 +643,8 @@
 
     <!-- 3) 로고 & 컬러 시스템 -->
     <section class="section">
-      <h2>로고 아이덴티티</h2>
+      <div class="section-title">LOGO IDENTITY</div>
+      <div class="section-subtitle">로고 아이덴티티</div>
 
       <div class="logo-row">
         <img src="모딩로고.png" alt="Moding Logo" class="logo-main">
@@ -688,7 +708,8 @@
 
     <!-- 4) 브랜드 톤앤매너 -->
     <section class="section">
-      <h2>브랜드 톤앤매너</h2>
+      <div class="section-title">TONE &amp; MANNER</div>
+      <div class="section-subtitle">브랜드 톤앤매너</div>
 
       <p>
         모딩의 커뮤니케이션은<br>
@@ -734,7 +755,9 @@
 
     <!-- 5) 브랜드 아이덴티티 요약 -->
     <section class="section">
-      <h2>브랜드 아이덴티티 요약</h2>
+      <div class="section-title">BRAND SUMMARY</div>
+      <div class="section-subtitle">브랜드 아이덴티티 요약</div>
+
       <p class="summary-text">
         모딩(Moding)은 단순한 “식품 B2B 플랫폼”이 아니라,<br>
         <strong>제조사 – 외식업 사장님 – 기술</strong>이 하나로 연결된 생태계를 지향합니다.
@@ -756,16 +779,15 @@
 
   <!-- 공통 푸터 -->
   <footer>
-  <div class="footer-links">
-    <a href="terms.html">이용약관</a>
-    <span class="divider">·</span>
-    <a href="privacy.html">개인정보처리방침</a>
-  </div>
-  주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
-  통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
-  대구광역시 달서구 달구벌대로 1698, 6층
-</footer>
-
+    <div class="footer-links">
+      <a href="terms.html">이용약관</a>
+      <span class="divider">·</span>
+      <a href="privacy.html">개인정보처리방침</a>
+    </div>
+    주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+    통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
+    대구광역시 달서구 달구벌대로 1698, 6층
+  </footer>
 
   <!-- 공통 복사/드래그/단축키 방지 스크립트 -->
   <script>
