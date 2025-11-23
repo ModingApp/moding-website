@@ -65,7 +65,7 @@ function renderIndexNotices() {
 }
 
 /* =========================================================
-   notice.html – 전체 공지 + 접힘/펼침 기능용 (나중에 사용)
+   notice.html – 전체 공지 + 접힘/펼침 기능 (추후 사용)
    ========================================================= */
 function renderNoticeList() {
   const list = document.getElementById("notice-list");
