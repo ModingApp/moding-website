@@ -528,8 +528,13 @@ function bindEvents() {
 
     for (const [key, value] of formData.entries()) {
       if (value instanceof File && value.name) {
+        const isMultiple = form.elements[key]?.multiple;
         const promise = fileToImgOrBase64(value).then((fileData) => {
-          formObject[key] = fileData; 
+          if (isMultiple) {
+            (formObject[key] ??= []).push(fileData);
+          } else {
+            formObject[key] = fileData;
+          }
         });
         filePromises.push(promise);
       } else if (!(value instanceof File)) {
@@ -542,7 +547,7 @@ function bindEvents() {
 
       const response = await fetch(GAS_WEB_APP_URL, {
         method: "POST",
-        mode: "cors", 
+        mode: "cors",
         headers: { "Content-Type": "text/plain" },
         body: JSON.stringify(formObject)
       });
