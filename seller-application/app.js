@@ -45,6 +45,7 @@ const corporateNumberInput = document.querySelector("#corporateNumber");
 const zipCodeInput = document.querySelector("#zipCode");
 const addressInput = document.querySelector("#address");
 const addressDetailInput = document.querySelector("#addressDetail");
+const sigunguCodeInput = document.querySelector("#sigunguCode");
 const searchAddressButton = document.querySelector("#searchAddressButton");
 const postcodeModal = document.querySelector("#postcodeModal");
 const postcodeLayer = document.querySelector("#postcodeLayer");
@@ -56,6 +57,8 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const ALLOWED_FILE_TYPES = ["application/pdf", "image/jpeg", "image/png"];
 const POSTCODE_SCRIPT_URL = "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
 const previewUrls = new WeakMap();
+
+const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz1yL9WsQYOIvZVGZWI2-_qq-kdiezUQWhIdgGCcbYTe2XFHF07ODOlbzQxUrW9Umn7/exec";
 
 const validators = {
   email: {
@@ -165,6 +168,20 @@ function revokePreviewUrls(box) {
 function clearFilePreview(box) {
   revokePreviewUrls(box);
   box.querySelector(".upload-preview")?.remove();
+}
+
+function fileToImgOrBase64(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      resolve({
+        base64: reader.result.split(",")[1],
+        mimeType: file.type,
+        fileName: file.name
+      });
+    };
+    reader.readAsDataURL(file);
+  });
 }
 
 function createPreviewCard(file, box) {
@@ -378,7 +395,7 @@ async function openPostcodeSearch() {
       zipCodeInput.value = data.zonecode;
       addressInput.value = buildAddress(data);
       addressDetailInput.value = "";
-
+      if (sigunguCodeInput) sigunguCodeInput.value = data.sigunguCode;
       validateField(zipCodeInput);
       validateField(addressInput);
       validateField(addressDetailInput);
@@ -504,17 +521,53 @@ function bindEvents() {
     }
 
     setLoading(true);
-    await new Promise((resolve) => window.setTimeout(resolve, 900));
-    setLoading(false);
 
-    alert("판매자 입점 신청이 완료되었습니다.");
-    showToast("신청서가 성공적으로 제출되었습니다.");
-    form.reset();
-    resetUploadStates();
-    populateDependentSelect(foodCategory, foodSubCategory, categoryData, "세부 카테고리를 선택해주세요", "1차 카테고리를 먼저 선택해주세요");
-    populateDependentSelect(permitCategory, permitSubCategory, permitCategoryData, "허가 소분류를 선택해주세요", "대분류를 먼저 선택해주세요");
-    handleBusinessTypeChange();
-    form.querySelectorAll("[aria-invalid]").forEach((field) => field.setAttribute("aria-invalid", "false"));
+    const formData = new FormData(form);
+    const formObject = {};
+    const filePromises = [];
+
+    for (const [key, value] of formData.entries()) {
+      if (value instanceof File && value.name) {
+        const promise = fileToImgOrBase64(value).then((fileData) => {
+          formObject[key] = fileData; 
+        });
+        filePromises.push(promise);
+      } else if (!(value instanceof File)) {
+        formObject[key] = value;
+      }
+    }
+
+    try {
+      await Promise.all(filePromises);
+
+      const response = await fetch(GAS_WEB_APP_URL, {
+        method: "POST",
+        mode: "cors", 
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify(formObject)
+      });
+
+      if (!response.ok) throw new Error();
+
+      const result = await response.json();
+
+      if (result.result === "success") {
+        alert("판매자 입점 신청이 완료되었습니다.");
+        form.reset();
+        resetUploadStates();
+        populateDependentSelect(foodCategory, foodSubCategory, categoryData, "세부 카테고리를 선택해주세요", "1차 카테고리를 먼저 선택해주세요");
+        populateDependentSelect(permitCategory, permitSubCategory, permitCategoryData, "허가 소분류를 선택해주세요", "대분류를 먼저 선택해주세요");
+        handleBusinessTypeChange();
+        form.querySelectorAll("[aria-invalid]").forEach((field) => field.setAttribute("aria-invalid", "false"));
+      } else {
+        throw new Error();
+      }
+
+    } catch (error) {
+      alert("제출 중 오류가 발생했습니다.");
+    } finally {
+      setLoading(false);
+    }
   });
 }
 

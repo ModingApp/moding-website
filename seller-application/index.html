@@ -102,6 +102,7 @@
                 <input id="zipCode" name="zipCode" type="text" inputmode="numeric" data-required data-validate="zipCode" placeholder="주소 검색으로 입력" readonly />
                 <button type="button" class="secondary-button" id="searchAddressButton">주소 검색</button>
               </div>
+              <input type="hidden" id="sigunguCode" name="sigunguCode" />
               <p class="error-message" data-error-for="zipCode"></p>
             </div>
 
@@ -186,6 +187,12 @@
                 </select>
                 <p class="error-message" data-error-for="permitSubCategory"></p>
               </div>
+            </div>
+
+            <div class="field field-wide">
+              <label for="estimatedItems">예상 판매 품목 수 <span class="required">*</span></label>
+              <input id="estimatedItems" name="estimatedItems" type="number" min="0" value="0" data-required/>
+              <p class="error-message" data-error-for="estimatedItems"></p>
             </div>
 
             <div class="field-row field-account">
