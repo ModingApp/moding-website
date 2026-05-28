@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>판매자 입점 신청</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="page-header">
+        <p class="eyebrow">Seller Onboarding</p>
+        <h1>판매자 입점 신청</h1>
+        <p class="lead">판매자 입점을 위한 신청 페이지입니다. 모든 정보를 정확하게 입력해주세요.</p>
+      </header>
+
+      <form id="sellerForm" class="form-layout" novalidate>
+        <section class="form-card" aria-labelledby="account-title">
+          <div class="section-heading">
+            <span class="section-index">01</span>
+            <div>
+              <h2 id="account-title">계정 정보</h2>
+              <p>담당자 계정 생성에 필요한 기본 정보를 입력해주세요.</p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="name">이름 <span class="required">*</span></label>
+              <input id="name" name="name" type="text" autocomplete="name" data-required placeholder="홍길동" />
+              <p class="error-message" data-error-for="name"></p>
+            </div>
+
+            <div class="field">
+              <label for="email">이메일 <span class="required">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" data-required data-validate="email" placeholder="seller@example.com" />
+              <p class="error-message" data-error-for="email"></p>
+            </div>
+
+            <div class="field">
+              <label for="phone">연락처 <span class="required">*</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" data-required data-validate="phone" placeholder="010-1234-5678" />
+              <p class="error-message" data-error-for="phone"></p>
+            </div>
+
+            <div class="field">
+              <label for="loginId">희망 아이디 <span class="required">*</span></label>
+              <input id="loginId" name="loginId" type="text" data-required data-validate="loginId" placeholder="seller123" />
+              <p class="hint">영문 소문자와 숫자만 사용할 수 있습니다.</p>
+              <p class="error-message" data-error-for="loginId"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-card" aria-labelledby="business-title">
+          <div class="section-heading">
+            <span class="section-index">02</span>
+            <div>
+              <h2 id="business-title">사업자 정보</h2>
+              <p>사업자등록증과 일치하는 정보를 입력해주세요.</p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="companyName">상호명 <span class="required">*</span></label>
+              <input id="companyName" name="companyName" type="text" data-required placeholder="주식회사 예시푸드" />
+              <p class="error-message" data-error-for="companyName"></p>
+            </div>
+
+            <div class="field">
+              <label for="ceoName">대표자명 <span class="required">*</span></label>
+              <input id="ceoName" name="ceoName" type="text" data-required placeholder="김대표" />
+              <p class="error-message" data-error-for="ceoName"></p>
+            </div>
+
+            <div class="field field-wide">
+              <label for="businessType">사업자 유형 <span class="required">*</span></label>
+              <select id="businessType" name="businessType" data-required>
+                <option value="">사업자 유형을 선택해주세요</option>
+                <option value="sole">개인사업자</option>
+                <option value="corporation">법인사업자</option>
+              </select>
+              <p class="error-message" data-error-for="businessType"></p>
+            </div>
+
+            <div class="field field-wide">
+              <label for="businessNumber">사업자등록번호 <span class="required">*</span></label>
+              <input id="businessNumber" name="businessNumber" type="text" inputmode="numeric" data-required data-validate="businessNumber" placeholder="123-45-67890" />
+              <p class="error-message" data-error-for="businessNumber"></p>
+            </div>
+
+            <div class="field field-wide hidden" id="corporateNumberField">
+              <label for="corporateNumber">법인번호 <span class="required">*</span></label>
+              <input id="corporateNumber" name="corporateNumber" type="text" inputmode="numeric" data-validate="corporateNumber" placeholder="123456-1234567" />
+              <p class="error-message" data-error-for="corporateNumber"></p>
+            </div>
+
+            <div class="field field-wide">
+              <label for="zipCode">우편번호 <span class="required">*</span></label>
+              <div class="input-action">
+                <input id="zipCode" name="zipCode" type="text" inputmode="numeric" data-required data-validate="zipCode" placeholder="주소 검색으로 입력" readonly />
+                <button type="button" class="secondary-button" id="searchAddressButton">주소 검색</button>
+              </div>
+              <p class="error-message" data-error-for="zipCode"></p>
+            </div>
+
+            <div class="field field-wide">
+              <label for="address">주소 <span class="required">*</span></label>
+              <input id="address" name="address" type="text" data-required placeholder="주소 검색으로 입력해주세요" readonly />
+              <p class="error-message" data-error-for="address"></p>
+            </div>
+
+            <div class="field field-wide">
+              <label for="addressDetail">상세주소 <span class="required">*</span></label>
+              <input id="addressDetail" name="addressDetail" type="text" data-required placeholder="10층 1001호" />
+              <p class="error-message" data-error-for="addressDetail"></p>
+            </div>
+
+            <div class="field">
+              <label for="businessCondition">업태 <span class="required">*</span></label>
+              <input id="businessCondition" name="businessCondition" type="text" data-required placeholder="도소매" />
+              <p class="error-message" data-error-for="businessCondition"></p>
+            </div>
+
+            <div class="field">
+              <label for="businessItem">종목 <span class="required">*</span></label>
+              <input id="businessItem" name="businessItem" type="text" data-required placeholder="식품" />
+              <p class="error-message" data-error-for="businessItem"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-card" aria-labelledby="seller-title">
+          <div class="section-heading">
+            <span class="section-index">03</span>
+            <div>
+              <h2 id="seller-title">판매자 정보</h2>
+              <p>업종 카테고리, 인허가 유형, 정산 계좌 정보를 등록해주세요.</p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field field-wide">
+              <label for="taxType">과세 유형 <span class="required">*</span></label>
+              <select id="taxType" name="taxType" data-required>
+                <option value="">과세 유형을 선택해주세요</option>
+                <option value="general">일반과세자</option>
+                <option value="simplified">간이과세자</option>
+                <option value="exempt">면세사업자</option>
+              </select>
+              <p class="error-message" data-error-for="taxType"></p>
+            </div>
+
+            <div class="field-row field-pair">
+              <div class="field">
+                <label for="foodCategory">업종 카테고리 1차 <span class="required">*</span></label>
+                <select id="foodCategory" name="foodCategory" data-required>
+                  <option value="">카테고리를 선택해주세요</option>
+                </select>
+                <p class="error-message" data-error-for="foodCategory"></p>
+              </div>
+
+              <div class="field">
+                <label for="foodSubCategory">업종 카테고리 2차 <span class="required">*</span></label>
+                <select id="foodSubCategory" name="foodSubCategory" data-required disabled>
+                  <option value="">1차 카테고리를 먼저 선택해주세요</option>
+                </select>
+                <p class="error-message" data-error-for="foodSubCategory"></p>
+              </div>
+            </div>
+
+            <div class="field-row field-pair">
+              <div class="field">
+                <label for="permitCategory">허가 카테고리 대분류 <span class="required">*</span></label>
+                <select id="permitCategory" name="permitCategory" data-required>
+                  <option value="">허가 대분류를 선택해주세요</option>
+                </select>
+                <p class="error-message" data-error-for="permitCategory"></p>
+              </div>
+
+              <div class="field">
+                <label for="permitSubCategory">허가 카테고리 소분류 <span class="required">*</span></label>
+                <select id="permitSubCategory" name="permitSubCategory" data-required disabled>
+                  <option value="">대분류를 먼저 선택해주세요</option>
+                </select>
+                <p class="error-message" data-error-for="permitSubCategory"></p>
+              </div>
+            </div>
+
+            <div class="field-row field-account">
+              <div class="field">
+                <label for="bankName">정산 계좌 은행명 <span class="required">*</span></label>
+                <select id="bankName" name="bankName" data-required>
+                  <option value="">은행을 선택해주세요</option>
+                  <option>국민은행</option>
+                  <option>신한은행</option>
+                  <option>우리은행</option>
+                  <option>하나은행</option>
+                  <option>기업은행</option>
+                  <option>농협은행</option>
+                  <option>카카오뱅크</option>
+                  <option>토스뱅크</option>
+                </select>
+                <p class="error-message" data-error-for="bankName"></p>
+              </div>
+
+              <div class="field">
+                <label for="accountNumber">정산 계좌번호 <span class="required">*</span></label>
+                <input id="accountNumber" name="accountNumber" type="text" inputmode="numeric" data-required data-validate="accountNumber" placeholder="숫자만 입력" />
+                <p class="error-message" data-error-for="accountNumber"></p>
+              </div>
+
+              <div class="field">
+                <label for="accountHolder">정산 계좌 예금주명 <span class="required">*</span></label>
+                <input id="accountHolder" name="accountHolder" type="text" data-required placeholder="주식회사 예시푸드" />
+                <p class="error-message" data-error-for="accountHolder"></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-card" aria-labelledby="documents-title">
+          <div class="section-heading">
+            <span class="section-index">04</span>
+            <div>
+              <h2 id="documents-title">서류 제출</h2>
+              <p>PDF, JPG, PNG 파일만 가능하며 각 파일은 10MB 이하로 업로드해주세요.</p>
+            </div>
+          </div>
+
+          <div class="upload-grid">
+            <div class="upload-field" data-upload-box>
+              <label for="businessLicenseFile">사업자등록증 <span class="required">*</span></label>
+              <input id="businessLicenseFile" name="businessLicenseFile" type="file" accept=".pdf,.jpg,.jpeg,.png" data-required data-file-input />
+              <div class="dropzone" tabindex="0" role="button" aria-controls="businessLicenseFile">
+                <strong>파일을 끌어오거나 선택</strong>
+                <span>PDF, JPG, PNG / 최대 10MB</span>
+              </div>
+              <p class="file-status" data-file-status>업로드 전</p>
+              <p class="error-message" data-error-for="businessLicenseFile"></p>
+            </div>
+
+            <div class="upload-field" data-upload-box>
+              <label for="bankbookFile">통장사본 <span class="required">*</span></label>
+              <input id="bankbookFile" name="bankbookFile" type="file" accept=".pdf,.jpg,.jpeg,.png" data-required data-file-input />
+              <div class="dropzone" tabindex="0" role="button" aria-controls="bankbookFile">
+                <strong>파일을 끌어오거나 선택</strong>
+                <span>PDF, JPG, PNG / 최대 10MB</span>
+              </div>
+              <p class="file-status" data-file-status>업로드 전</p>
+              <p class="error-message" data-error-for="bankbookFile"></p>
+            </div>
+
+            <div class="upload-field" data-upload-box>
+              <label for="operationPermitFile">영업허가증 <span class="required">*</span></label>
+              <input id="operationPermitFile" name="operationPermitFile" type="file" accept=".pdf,.jpg,.jpeg,.png" data-required data-file-input />
+              <div class="dropzone" tabindex="0" role="button" aria-controls="operationPermitFile">
+                <strong>파일을 끌어오거나 선택</strong>
+                <span>PDF, JPG, PNG / 최대 10MB</span>
+              </div>
+              <p class="file-status" data-file-status>업로드 전</p>
+              <p class="error-message" data-error-for="operationPermitFile"></p>
+            </div>
+
+            <div class="upload-field" data-upload-box>
+              <label for="salesPermitFile">판매허가증 <span class="required">*</span></label>
+              <input id="salesPermitFile" name="salesPermitFile" type="file" accept=".pdf,.jpg,.jpeg,.png" data-required data-file-input />
+              <div class="dropzone" tabindex="0" role="button" aria-controls="salesPermitFile">
+                <strong>파일을 끌어오거나 선택</strong>
+                <span>PDF, JPG, PNG / 최대 10MB</span>
+              </div>
+              <p class="file-status" data-file-status>업로드 전</p>
+              <p class="error-message" data-error-for="salesPermitFile"></p>
+            </div>
+
+            <div class="upload-field upload-field-wide" data-upload-box>
+              <label for="additionalDocuments">기타서류</label>
+              <input id="additionalDocuments" name="additionalDocuments" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple data-file-input />
+              <div class="dropzone" tabindex="0" role="button" aria-controls="additionalDocuments">
+                <strong>기타서류를 제한 없이 추가</strong>
+                <span>여러 파일 선택 가능 / PDF, JPG, PNG / 파일당 최대 10MB</span>
+              </div>
+              <p class="file-status" data-file-status>선택된 기타서류 없음</p>
+              <p class="error-message" data-error-for="additionalDocuments"></p>
+            </div>
+          </div>
+        </section>
+
+        <div class="sticky-submit">
+          <div class="submit-summary">
+            <strong>입점 신청서 제출</strong>
+            <span>필수 항목과 서류를 모두 확인해주세요.</span>
+          </div>
+          <button type="submit" class="submit-button" id="submitButton">
+            <span class="spinner" aria-hidden="true"></span>
+            <span data-submit-text>신청서 제출</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="postcode-modal" id="postcodeModal" aria-hidden="true">
+      <div class="postcode-backdrop" data-postcode-close></div>
+      <section class="postcode-panel" role="dialog" aria-modal="true" aria-labelledby="postcode-title">
+        <div class="postcode-header">
+          <div>
+            <h2 id="postcode-title">주소 검색</h2>
+            <p>검색 결과에서 주소를 선택하면 자동으로 입력됩니다.</p>
+          </div>
+          <button type="button" class="postcode-close" data-postcode-close aria-label="주소 검색 닫기">×</button>
+        </div>
+        <div class="postcode-layer" id="postcodeLayer"></div>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

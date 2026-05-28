@@ -155,6 +155,51 @@
       opacity:0.9;
     }
 
+    .hero-alliance .cta-btn {
+      position:relative;
+      overflow:hidden;
+      margin-top:18px;
+      background:#238B22;
+      border-color:#238B22;
+      color:#ffffff;
+      box-shadow:0 10px 26px rgba(35,139,34,0.32);
+    }
+
+    .hero-alliance .cta-btn:hover {
+      background:#1c6f1c;
+      border-color:#1c6f1c;
+      box-shadow:0 14px 34px rgba(35,139,34,0.42);
+      transform:translateY(-1px);
+    }
+
+    .hero-alliance .cta-btn::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        110deg,
+        transparent 0%,
+        transparent 38%,
+        rgba(255,255,255,0.18) 45%,
+        rgba(255,255,255,0.55) 50%,
+        rgba(255,255,255,0.18) 55%,
+        transparent 62%,
+        transparent 100%
+      );
+      transform:translateX(-120%);
+      animation:ctaShine 3.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+
+    @keyframes ctaShine {
+      0%, 58% {
+        transform:translateX(-120%);
+      }
+      82%, 100% {
+        transform:translateX(120%);
+      }
+    }
+
     /* WHO WE WORK WITH */
     .who-partners {
       margin-top:48px;
@@ -478,6 +523,9 @@
         width:100%;
         max-width:280px;
       }
+      .hero-alliance .cta-btn {
+        max-width:none;
+      }
     }
   </style>
 </head>
@@ -520,6 +568,11 @@
       모딩은 누구 한쪽만을 위한 플랫폼이 아닙니다.<br>
       식품 제조사와 외식업 사장님, 두 분 모두가 모딩의 사용자이자 고객입니다.
     </p>
+    <a
+      href="seller-application/index.html"
+      class="cta-btn">
+      모딩 초기 판매자 입점 신청
+    </a>
   </section>
 
   <!-- WHO WE WORK WITH -->
