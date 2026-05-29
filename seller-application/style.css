@@ -415,6 +415,78 @@ select:disabled {
   min-height: 118px;
 }
 
+.agreement-card {
+  scroll-margin-top: 24px;
+}
+
+.agreement-box {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  background: #f9fafb;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.agreement-file-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 13px;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border: 1px solid #b9dfb8;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.agreement-file-link:hover,
+.agreement-file-link:focus {
+  transform: translateY(-1px);
+  color: #ffffff;
+  background: var(--primary);
+}
+
+.agreement-checkbox {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 0;
+  color: var(--text);
+  cursor: pointer;
+  line-height: 1.6;
+}
+
+.agreement-checkbox input {
+  width: 18px;
+  height: 18px;
+  margin: 3px 0 0;
+  padding: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.agreement-checkbox input[aria-invalid="true"] {
+  outline: 3px solid rgba(220, 38, 38, 0.14);
+  outline-offset: 2px;
+}
+
+.agreement-checkbox strong {
+  color: var(--danger);
+}
+
+.agreement-note {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
 .sticky-submit {
   position: sticky;
   bottom: 18px;

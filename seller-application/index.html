@@ -200,14 +200,36 @@
                 <label for="bankName">정산 계좌 은행명 <span class="required">*</span></label>
                 <select id="bankName" name="bankName" data-required>
                   <option value="">은행을 선택해주세요</option>
-                  <option>국민은행</option>
-                  <option>신한은행</option>
+                  <option>한국산업은행</option>
+                  <option>IBK기업은행</option>
+                  <option>KB국민은행</option>
+                  <option>Sh수협은행</option>
+                  <option>NH농협은행</option>
+                  <option>단위농협</option>
                   <option>우리은행</option>
+                  <option>SC제일은행</option>
+                  <option>씨티은행</option>
+                  <option>수협중앙회</option>
+                  <option>iM뱅크(대구)</option>
+                  <option>부산은행</option>
+                  <option>광주은행</option>
+                  <option>제주은행</option>
+                  <option>전북은행</option>
+                  <option>경남은행</option>
+                  <option>새마을금고</option>
+                  <option>신협</option>
+                  <option>저축은행중앙회</option>
+                  <option>홍콩상하이은행</option>
+                  <option>Bank of America</option>
+                  <option>산림조합</option>
+                  <option>중국건설은행</option>
+                  <option>우체국예금보험</option>
                   <option>하나은행</option>
-                  <option>기업은행</option>
-                  <option>농협은행</option>
+                  <option>신한은행</option>
+                  <option>케이뱅크</option>
                   <option>카카오뱅크</option>
                   <option>토스뱅크</option>
+                  <option>SBI저축은행</option>
                 </select>
                 <p class="error-message" data-error-for="bankName"></p>
               </div>
@@ -291,6 +313,26 @@
               <p class="file-status" data-file-status>선택된 기타서류 없음</p>
               <p class="error-message" data-error-for="additionalDocuments"></p>
             </div>
+          </div>
+        </section>
+
+        <section class="form-card agreement-card" aria-labelledby="agreement-title">
+          <div class="section-heading">
+            <span class="section-index">05</span>
+            <div>
+              <h2 id="agreement-title">동의 확인</h2>
+              <p>사전 입점 신청을 위한 필수 동의 항목을 확인해주세요.</p>
+            </div>
+          </div>
+
+          <div class="agreement-box">
+            <a class="agreement-file-link" href="./(주)모딩-사전가입자 동의약관.pdf" target="_blank" rel="noopener">사전 입점 신청 동의서 PDF 보기</a>
+            <label class="agreement-checkbox" for="preApplicationAgreement">
+              <input id="preApplicationAgreement" name="preApplicationAgreement" type="checkbox" data-required />
+              <span>사전 입점 신청 개인정보 수집·이용 및 플랫폼 이전등록 동의서 내용을 확인하였으며, 이에 동의합니다. <strong>(필수)</strong></span>
+            </label>
+            <p class="agreement-note">※ 정식 입점 및 서비스 이용 시 모딩 서비스 이용약관, 판매자 이용약관, 정산정책 및 개인정보처리방침에 별도로 동의해야 합니다.</p>
+            <p class="error-message" data-error-for="preApplicationAgreement"></p>
           </div>
         </section>
 
