@@ -317,7 +317,7 @@ function resetUploadStates() {
 }
 
 function handleBusinessTypeChange() {
-  const isCorporation = businessType.value === "corporation";
+  const isCorporation = businessType.value === "법인사업자";
   corporateNumberField.classList.toggle("hidden", !isCorporation);
   corporateNumberInput.toggleAttribute("data-required", isCorporation);
   corporateNumberInput.value = "";
