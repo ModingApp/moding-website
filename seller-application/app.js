@@ -20,19 +20,26 @@ const categoryData = {
 };
 
 const permitCategoryData = {
-  "식품제조·가공업": ["소스·양념", "장류", "향신료", "드레싱", "절임식품", "김치", "젓갈", "수산가공품", "건어물", "어묵·연육가공품", "냉동식품", "즉석조리식품", "HMR", "밀키트", "면류", "만두", "떡류", "두부·콩가공품", "곡류가공품", "과자·스낵", "베이커리", "디저트", "빙과류", "초콜릿·캔디", "음료베이스", "분말식품", "농축식품", "식용유지", "조미식품", "건강식품"],
+  "식품제조·가공업": ["소스·양념", "장류", "향신료", "드레싱", "절임식품", "김치", "젓갈", "수산가공품", "건어물", "어묵·연육가공품", "냉동식품", "즉석조리식품", "HMR", "밀키트", "면류", "만두", "떡류", "두부·콩가공품", "곡류가공품", "과자·스낵", "베이커리", "디저트", "빙과류", "초콜릿·캔디", "음료베이스", "분말식품", "농축식품", "식용유지", "조미식품", "건강식품", "커피·원두가공", "차류"],
   "식품첨가물제조업": ["향미증진제", "산도조절제", "보존료", "착색료", "감미료", "유화제", "혼합제제"],
-  "즉석판매제조가공업": ["반찬", "김치", "즉석조리식품", "도시락", "샐러드", "베이커리", "디저트"],
   "식품소분업": ["향신료", "분말류", "소스", "가공식품", "곡류", "견과류"],
   "식육가공업": ["햄", "소시지", "베이컨", "돈까스", "양념육", "훈제육", "건조육", "육가공식품", "내장가공품"],
   "식육포장처리업": ["우육", "돈육", "계육", "오리", "양고기", "기타축육"],
+  "축산물판매업": ["식육판매업", "식육부산물전문판매업", "우유류판매업", "축산물수입판매업", "축산물유통전문판매업", "식용란수집판매업"],
+  "알가공업": ["액란", "난가공품", "알가공품"],
   "유가공업": ["치즈", "버터", "크림", "연유", "분유", "요거트", "유제품가공품"],
   "식용란선별포장업": ["계란"],
-  "주류제조·판매면허": ["탁주", "약주", "청주", "맥주", "과실주", "증류주", "리큐르", "기타주류"],
   "수산물가공업": ["수산물가공품", "건조수산물", "염장수산물", "훈제수산물", "해조류가공품"],
-  "식품보존업": ["건조식품", "훈연식품", "염장식품", "당절임식품"],
+  "수산물도매·중도매": ["활어중도매인", "선어중도매인", "패류중도매인", "갑각류중도매인", "수산물도매업자", "수산물산지유통인", "수산물매매참가인", "수산물시장도매인", "회센터·수산시장판매자"],
+  "수입식품등 수입·판매업": ["수입식품", "수입축산물", "수입수산물", "수입건강기능식품"],
+  "주류제조면허": ["탁주", "약주", "청주", "맥주", "과실주", "증류주", "리큐르", "기타주류"],
+  "주류판매업면허": ["종합주류도매업", "특정주류도매업", "주류수입업"],
   "건강기능식품제조업": ["건강기능식품"],
-  "건강기능식품전문제조업": ["건강기능식품"]
+  "건강기능식품전문제조업": ["건강기능식품"],
+  "건강기능식품벤처제조업": ["건강기능식품"],
+  "건강기능식품일반판매업": ["건강기능식품"],
+  "건강기능식품유통전문판매업": ["건강기능식품"],
+  "맞춤형건강기능식품판매업": ["맞춤형건강기능식품"]
 };
 
 const form = document.querySelector("#sellerForm");
@@ -53,8 +60,20 @@ const postcodeModal = document.querySelector("#postcodeModal");
 const postcodeLayer = document.querySelector("#postcodeLayer");
 const foodCategory = document.querySelector("#foodCategory");
 const foodSubCategory = document.querySelector("#foodSubCategory");
+const foodCategoryEtcInput = document.querySelector("#foodCategoryEtc");
+const foodCategoryEtcRow = document.querySelector("#foodCategoryEtcRow");
+const foodSubCategoryField = document.querySelector("#foodSubCategoryField");
+const foodSubCategoryEtcField = document.querySelector("#foodSubCategoryEtcField");
+const foodSubCategoryEtcInput = document.querySelector("#foodSubCategoryEtc");
+const foodSubCategoryEtc2Input = document.querySelector("#foodSubCategoryEtc2");
 const permitCategory = document.querySelector("#permitCategory");
 const permitSubCategory = document.querySelector("#permitSubCategory");
+const permitCategoryEtcInput = document.querySelector("#permitCategoryEtc");
+const permitCategoryEtcRow = document.querySelector("#permitCategoryEtcRow");
+const permitSubCategoryField = document.querySelector("#permitSubCategoryField");
+const permitSubCategoryEtcField = document.querySelector("#permitSubCategoryEtcField");
+const permitSubCategoryEtcInput = document.querySelector("#permitSubCategoryEtc");
+const permitSubCategoryEtc2Input = document.querySelector("#permitSubCategoryEtc2");
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const ALLOWED_FILE_TYPES = ["application/pdf", "image/jpeg", "image/png"];
 const POSTCODE_SCRIPT_URL = "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
@@ -103,6 +122,41 @@ function createOption(value, text = value) {
 
 function populatePrimarySelect(select, data) {
   Object.keys(data).forEach((key) => select.append(createOption(key)));
+  select.append(createOption("기타", "기타 (직접 입력)"));
+}
+
+function handleEtcSelect(selectEl, etcRow, etcInput, subCategoryField, subCategorySelect, subEtc2Input, subEtcField, subEtcInput) {
+  const isEtc = selectEl.value === "기타";
+  // 1차 기타 선택 시: 드롭박스 행 숨기고 직접입력 행(etcRow) 노출
+  subCategoryField.classList.toggle("hidden", isEtc);
+  etcRow.classList.toggle("hidden", !isEtc);
+  etcInput.toggleAttribute("data-required", isEtc);
+  if (isEtc) {
+    // 2차 드롭박스 비우고, 2차 드롭박스용 기타입력칸도 닫기
+    subCategorySelect.innerHTML = "";
+    subCategorySelect.append(createOption("", ""));
+    subCategorySelect.disabled = true;
+    subCategorySelect.removeAttribute("data-required");
+    if (subEtcField) subEtcField.classList.add("hidden");
+    if (subEtcInput) subEtcInput.value = "";
+    if (subEtc2Input) subEtc2Input.value = "";
+    etcInput.focus();
+  } else {
+    etcInput.value = "";
+    setError(etcInput, "");
+    subCategorySelect.setAttribute("data-required", "");
+    if (subEtc2Input) subEtc2Input.value = "";
+  }
+}
+
+function handleSubEtcSelect(subSelectEl, subEtcField, subEtcInput) {
+  const isEtc = subSelectEl.value === "기타";
+  subEtcField.classList.toggle("hidden", !isEtc);
+  if (isEtc) {
+    subEtcInput.focus();
+  } else {
+    subEtcInput.value = "";
+  }
 }
 
 function populateDependentSelect(parentSelect, childSelect, data, placeholder, emptyPlaceholder) {
@@ -117,6 +171,7 @@ function populateDependentSelect(parentSelect, childSelect, data, placeholder, e
 
   childSelect.append(createOption("", placeholder));
   data[selected].forEach((item) => childSelect.append(createOption(item)));
+  childSelect.append(createOption("기타", "기타 (직접 입력)"));
   childSelect.disabled = false;
 }
 
@@ -489,14 +544,32 @@ function bindEvents() {
     }
 
     if (field === foodCategory) {
-      populateDependentSelect(foodCategory, foodSubCategory, categoryData, "세부 카테고리를 선택해주세요", "1차 카테고리를 먼저 선택해주세요");
+      handleEtcSelect(foodCategory, foodCategoryEtcRow, foodCategoryEtcInput, foodSubCategoryField, foodSubCategory, foodSubCategoryEtc2Input, foodSubCategoryEtcField, foodSubCategoryEtcInput);
+      if (foodCategory.value !== "기타") {
+        populateDependentSelect(foodCategory, foodSubCategory, categoryData, "세부 카테고리를 선택해주세요", "1차 카테고리를 먼저 선택해주세요");
+      }
       validateField(foodCategory);
       validateField(foodSubCategory);
       return;
     }
 
+    if (field === foodSubCategory) {
+      handleSubEtcSelect(foodSubCategory, foodSubCategoryEtcField, foodSubCategoryEtcInput);
+      validateField(foodSubCategory);
+      return;
+    }
+
+    if (field === permitSubCategory) {
+      handleSubEtcSelect(permitSubCategory, permitSubCategoryEtcField, permitSubCategoryEtcInput);
+      validateField(permitSubCategory);
+      return;
+    }
+
     if (field === permitCategory) {
-      populateDependentSelect(permitCategory, permitSubCategory, permitCategoryData, "허가 소분류를 선택해주세요", "대분류를 먼저 선택해주세요");
+      handleEtcSelect(permitCategory, permitCategoryEtcRow, permitCategoryEtcInput, permitSubCategoryField, permitSubCategory, permitSubCategoryEtc2Input, permitSubCategoryEtcField, permitSubCategoryEtcInput);
+      if (permitCategory.value !== "기타") {
+        populateDependentSelect(permitCategory, permitSubCategory, permitCategoryData, "허가 소분류를 선택해주세요", "대분류를 먼저 선택해주세요");
+      }
       validateField(permitCategory);
       validateField(permitSubCategory);
       return;
@@ -583,6 +656,29 @@ function bindEvents() {
       }
     }
 
+    // 기타 직접 입력 값을 "기타(내용)" 형식으로 병합
+    // 1차 기타 → 1차=기타(내용), 2차=etcRow 2차 입력값(Etc2)
+    if (formObject.foodCategory === "기타") {
+      formObject.foodCategory = formObject.foodCategoryEtc ? `기타(${formObject.foodCategoryEtc})` : "기타";
+      formObject.foodSubCategory = formObject.foodSubCategoryEtc2 || "";
+    } else if (formObject.foodSubCategory === "기타") {
+      // 2차만 기타 → 2차 드롭박스 아래 입력값
+      formObject.foodSubCategory = formObject.foodSubCategoryEtc ? `기타(${formObject.foodSubCategoryEtc})` : "기타";
+    }
+    delete formObject.foodCategoryEtc;
+    delete formObject.foodSubCategoryEtc;
+    delete formObject.foodSubCategoryEtc2;
+
+    if (formObject.permitCategory === "기타") {
+      formObject.permitCategory = formObject.permitCategoryEtc ? `기타(${formObject.permitCategoryEtc})` : "기타";
+      formObject.permitSubCategory = formObject.permitSubCategoryEtc2 || "";
+    } else if (formObject.permitSubCategory === "기타") {
+      formObject.permitSubCategory = formObject.permitSubCategoryEtc ? `기타(${formObject.permitSubCategoryEtc})` : "기타";
+    }
+    delete formObject.permitCategoryEtc;
+    delete formObject.permitSubCategoryEtc;
+    delete formObject.permitSubCategoryEtc2;
+
     try {
       await Promise.all(filePromises);
 
@@ -605,6 +701,22 @@ function bindEvents() {
         resetUploadStates();
         populateDependentSelect(foodCategory, foodSubCategory, categoryData, "세부 카테고리를 선택해주세요", "1차 카테고리를 먼저 선택해주세요");
         populateDependentSelect(permitCategory, permitSubCategory, permitCategoryData, "허가 소분류를 선택해주세요", "대분류를 먼저 선택해주세요");
+        foodCategoryEtcRow.classList.add("hidden");
+        foodCategoryEtcInput.removeAttribute("data-required");
+        foodCategoryEtcInput.value = "";
+        foodSubCategoryField.classList.remove("hidden");
+        foodSubCategoryEtcField.classList.add("hidden");
+        foodSubCategoryEtcInput.value = "";
+        foodSubCategoryEtc2Input.value = "";
+        foodSubCategory.setAttribute("data-required", "");
+        permitCategoryEtcRow.classList.add("hidden");
+        permitCategoryEtcInput.removeAttribute("data-required");
+        permitCategoryEtcInput.value = "";
+        permitSubCategoryField.classList.remove("hidden");
+        permitSubCategoryEtcField.classList.add("hidden");
+        permitSubCategoryEtcInput.value = "";
+        permitSubCategoryEtc2Input.value = "";
+        permitSubCategory.setAttribute("data-required", "");
         handleBusinessTypeChange();
         form.querySelectorAll("[aria-invalid]").forEach((field) => field.setAttribute("aria-invalid", "false"));
       } else {

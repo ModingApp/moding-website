@@ -152,11 +152,11 @@
               </select>
               <p class="error-message" data-error-for="taxType"></p>
             </div>
-
+            
+            <p style="margin: 0; color: #FF8C00; font-size: 13px; font-weight: 600; line-height: 0;">
+                 판매자는 알고리즘 적용을 받고자 하는 업종으로 선택하시면 됩니다. </p>
             <div class="field-row field-pair">
               <div class="field">
-                <p style="margin: 0 0 6px; color: #FF8C00; font-size: 13px; font-weight: 600; line-height: 1.4;">
-                 판매자는 알고리즘 적용을 받고자 하는 업종으로 선택하시면 됩니다. </p>
                 <label for="foodCategory">업종 카테고리 1차 <span class="required">*</span></label>
                 <select id="foodCategory" name="foodCategory" data-required>
                   <option value="">카테고리를 선택해주세요</option>
@@ -164,19 +164,33 @@
                 <p class="error-message" data-error-for="foodCategory"></p>
               </div>
 
-              <div class="field">
+              <div class="field" id="foodSubCategoryField">
                 <label for="foodSubCategory">업종 카테고리 2차 <span class="required">*</span></label>
                 <select id="foodSubCategory" name="foodSubCategory" data-required disabled>
                   <option value="">1차 카테고리를 먼저 선택해주세요</option>
                 </select>
                 <p class="error-message" data-error-for="foodSubCategory"></p>
+                <div id="foodSubCategoryEtcField" class="hidden" style="margin-top:10px;">
+                  <input id="foodSubCategoryEtc" name="foodSubCategoryEtc" type="text" placeholder="세부 업종을 직접 입력해주세요 (선택사항)" />
+                </div>
               </div>
             </div>
-
+            <div class="field-row field-pair hidden" id="foodCategoryEtcRow">
+              <div class="field" id="foodCategoryEtcField">
+                <label for="foodCategoryEtc">업종 카테고리 1차 직접 입력 <span class="required">*</span></label>
+                <input id="foodCategoryEtc" name="foodCategoryEtc" type="text" placeholder="업종 카테고리를 직접 입력해주세요" />
+                <p class="error-message" data-error-for="foodCategoryEtc"></p>
+              </div>
+              <div class="field" id="foodSubCategoryEtc2Field">
+                <label for="foodSubCategoryEtc2">업종 카테고리 2차 직접 입력</label>
+                <input id="foodSubCategoryEtc2" name="foodSubCategoryEtc2" type="text" placeholder="세부 업종을 직접 입력해주세요 (선택사항)" />
+              </div>
+            </div>
+            
+            <p style="margin: 0; color: #FF8C00; font-size: 13px; font-weight: 600; line-height: 0;">
+                판매자의 정확한 업종을 선택해주세요. </p>
             <div class="field-row field-pair">
               <div class="field">
-                <p style="margin: 0 0 6px; color: #FF8C00; font-size: 13px; font-weight: 600; line-height: 1.4;">
-                판매자의 정확한 업종을 선택해주세요. </p>
                 <label for="permitCategory">허가 카테고리 대분류 <span class="required">*</span></label>
                 <select id="permitCategory" name="permitCategory" data-required>
                   <option value="">허가 대분류를 선택해주세요</option>
@@ -184,15 +198,29 @@
                 <p class="error-message" data-error-for="permitCategory"></p>
               </div>
 
-              <div class="field">
+              <div class="field" id="permitSubCategoryField">
                 <label for="permitSubCategory">허가 카테고리 소분류 <span class="required">*</span></label>
                 <select id="permitSubCategory" name="permitSubCategory" data-required disabled>
                   <option value="">대분류를 먼저 선택해주세요</option>
                 </select>
                 <p class="error-message" data-error-for="permitSubCategory"></p>
+                <div id="permitSubCategoryEtcField" class="hidden" style="margin-top:10px;">
+                  <input id="permitSubCategoryEtc" name="permitSubCategoryEtc" type="text" placeholder="세부 허가 항목을 직접 입력해주세요 (선택사항)" />
+                </div>
               </div>
             </div>
-
+            <div class="field-row field-pair hidden" id="permitCategoryEtcRow">
+              <div class="field" id="permitCategoryEtcField">
+                <label for="permitCategoryEtc">허가 카테고리 대분류 직접 입력 <span class="required">*</span></label>
+                <input id="permitCategoryEtc" name="permitCategoryEtc" type="text" placeholder="허가 카테고리를 직접 입력해주세요" />
+                <p class="error-message" data-error-for="permitCategoryEtc"></p>
+              </div>
+              <div class="field" id="permitSubCategoryEtc2Field">
+                <label for="permitSubCategoryEtc2">허가 카테고리 소분류 직접 입력</label>
+                <input id="permitSubCategoryEtc2" name="permitSubCategoryEtc2" type="text" placeholder="세부 허가 항목을 직접 입력해주세요 (선택사항)" />
+              </div>
+            </div>
+            
             <div class="field field-wide">
               <label for="estimatedItems">예상 판매 품목 수 <span class="required">*</span></label>
               <input id="estimatedItems" name="estimatedItems" type="number" min="0" value="0" data-required/>

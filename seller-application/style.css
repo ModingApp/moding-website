@@ -769,3 +769,14 @@ select:disabled {
     border-radius: 16px;
   }
 }
+
+
+/* 기타 직접 입력 필드 간격 */
+.etc-input-field {
+  margin-top: 10px;
+}
+
+/* 1차 기타 선택 시 2차 드롭박스 숨김 */
+.field.is-hidden-by-etc {
+  display: none;
+}
