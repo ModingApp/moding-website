@@ -39,6 +39,8 @@ const form = document.querySelector("#sellerForm");
 const submitButton = document.querySelector("#submitButton");
 const submitText = document.querySelector("[data-submit-text]");
 const toast = document.querySelector("#toast");
+const submitOverlay = document.querySelector("#submitOverlay");
+const submitOverlayText = document.querySelector("#submitOverlayText");
 const businessType = document.querySelector("#businessType");
 const corporateNumberField = document.querySelector("#corporateNumberField");
 const corporateNumberInput = document.querySelector("#corporateNumber");
@@ -57,6 +59,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const ALLOWED_FILE_TYPES = ["application/pdf", "image/jpeg", "image/png"];
 const POSTCODE_SCRIPT_URL = "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
 const previewUrls = new WeakMap();
+const SUBMIT_PROGRESS_MESSAGES = ["제출 정보를 최적화 중", "제출 사진을 최적화 중", "모딩에 판매자 신청 중"];
 
 const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz1yL9WsQYOIvZVGZWI2-_qq-kdiezUQWhIdgGCcbYTe2XFHF07ODOlbzQxUrW9Umn7/exec";
 
@@ -307,6 +310,29 @@ function setLoading(isLoading) {
   submitText.textContent = isLoading ? "제출 중..." : "신청서 제출";
 }
 
+function wait(ms) {
+  return new Promise((resolve) => window.setTimeout(resolve, ms));
+}
+
+function showSubmitOverlay() {
+  submitOverlayText.textContent = SUBMIT_PROGRESS_MESSAGES[0];
+  submitOverlay.classList.add("is-visible");
+  submitOverlay.setAttribute("aria-hidden", "false");
+}
+
+function hideSubmitOverlay() {
+  submitOverlay.classList.remove("is-visible");
+  submitOverlay.setAttribute("aria-hidden", "true");
+}
+
+async function runSubmitProgress() {
+  showSubmitOverlay();
+  await wait(3000);
+  submitOverlayText.textContent = SUBMIT_PROGRESS_MESSAGES[1];
+  await wait(3000);
+  submitOverlayText.textContent = SUBMIT_PROGRESS_MESSAGES[2];
+}
+
 function resetUploadStates() {
   document.querySelectorAll("[data-upload-box]").forEach((box) => {
     const input = box.querySelector("[data-file-input]");
@@ -535,6 +561,7 @@ function bindEvents() {
     }
 
     setLoading(true);
+    const progressPromise = runSubmitProgress();
 
     const formData = new FormData(form);
     const formObject = {};
@@ -569,8 +596,10 @@ function bindEvents() {
       if (!response.ok) throw new Error();
 
       const result = await response.json();
+      await progressPromise;
 
       if (result.result === "success") {
+        hideSubmitOverlay();
         alert("판매자 입점 신청이 완료되었습니다.");
         form.reset();
         resetUploadStates();
@@ -583,8 +612,11 @@ function bindEvents() {
       }
 
     } catch (error) {
+      await progressPromise;
+      hideSubmitOverlay();
       alert("제출 중 오류가 발생했습니다.");
     } finally {
+      hideSubmitOverlay();
       setLoading(false);
     }
   });
