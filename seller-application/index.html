@@ -325,15 +325,15 @@
             </div>
 
             <div class="upload-field" data-upload-box>
-              <label for="salesPermitFile">통신판매업신고증 <span class="required">*</span></label>
-              <input id="salesPermitFile" name="salesPermitFile" type="file" accept=".pdf,.jpg,.jpeg,.png" data-required data-file-input />
-              <div class="dropzone" tabindex="0" role="button" aria-controls="salesPermitFile">
-                <strong>파일을 끌어오거나 선택</strong>
-                <span>PDF, JPG, PNG / 최대 10MB</span>
+               <label for="salesPermitFile">통신판매업신고증 <span class="optional">(보유 시)</span></label>
+               <input id="salesPermitFile" name="salesPermitFile" type="file" accept=".pdf,.jpg,.jpeg,.png" data-file-input />
+               <div class="dropzone" tabindex="0" role="button" aria-controls="salesPermitFile">
+                 <strong>파일을 끌어오거나 선택</strong>
+                 <span>PDF, JPG, PNG / 최대 10MB</span>
+               </div>
+               <p class="file-status" data-file-status>업로드 전</p>
+               <p class="error-message" data-error-for="salesPermitFile"></p>
               </div>
-              <p class="file-status" data-file-status>업로드 전</p>
-              <p class="error-message" data-error-for="salesPermitFile"></p>
-            </div>
 
             <div class="upload-field upload-field-wide" data-upload-box>
               <label for="additionalDocuments">기타증빙서류</label>
