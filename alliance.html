@@ -527,6 +527,24 @@
         max-width:none;
       }
     }
+
+    .hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.hero-buttons .cta-btn {
+  margin-top: 0;
+}
+
+@media (max-width: 600px) {
+  .hero-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
   </style>
 </head>
 
@@ -573,6 +591,15 @@
       class="cta-btn">
       모딩 초기 판매자 입점 신청
     </a>
+      <a
+    href="files/moding_seller_proposal.pdf"
+    target="_blank"
+    rel="noopener"
+    class="cta-btn">
+    판매자 제안서 보기
+   </a>
+  </div>
+    
   </section>
 
   <!-- WHO WE WORK WITH -->
