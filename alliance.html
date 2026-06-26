@@ -1,80 +1,1364 @@
-/* =========================================================
-   7. 입점 가능 상품군
-   ========================================================= */
-.category-section {
-  padding: 36px 0 18px;
-  text-align: center;
-}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- =========================================================
+       기본 메타 정보
+       ========================================================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-.category-list {
-  max-width: 820px;
-  margin: 26px auto 0;
-  padding: 28px 24px;
-  border-radius: 30px;
-  background: #ffffff;
-  box-shadow: var(--shadow-card);
-  border: 1px solid rgba(35, 139, 34, 0.12);
-}
+  <title>Alliance | 모딩 공급 파트너 입점 안내</title>
 
-.category-line {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px 13px;
-  font-size: clamp(20px, 2.6vw, 30px);
-  font-weight: 900;
-  line-height: 1.45;
-  letter-spacing: -0.045em;
-  color: var(--moding-green);
-}
+  <meta name="description" content="모딩(Moding)은 외식업 사장님에게 특수하고 우수한 상품을 소개하는 B2B 식품 거래 앱입니다. 좋은 상품을 가진 공급 파트너의 입점 문의를 기다립니다.">
 
-.category-line + .category-line {
-  margin-top: 8px;
-}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Moding">
+  <meta property="og:title" content="Alliance | 모딩 공급 파트너 입점 안내">
+  <meta property="og:description" content="좋은 상품을 가진 공급 파트너를 찾습니다. 모딩과 함께 더 많은 외식업 매장에 상품을 소개하세요.">
+  <meta property="og:url" content="https://moding.app/alliance.html">
+  <meta property="og:image" content="https://moding.app/모딩로고.png">
 
-.category-item {
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-}
+  <style>
+    /* =========================================================
+       1. 브랜드 컬러 / 공통 변수
+       ========================================================= */
+    :root {
+      --moding-green: #238B22;
+      --moding-green-dark: #1c6f1c;
+      --moding-orange: #FF8C00;
+      --moding-orange-dark: #e67800;
+      --moding-brown: #8B5A2B;
 
-.category-item.orange {
-  color: var(--moding-orange);
-}
+      --kakao-yellow: #FEE500;
+      --kakao-yellow-dark: #f4d900;
+      --kakao-text: #191919;
 
-.category-dot {
-  color: rgba(31, 59, 31, 0.25);
-  font-weight: 700;
-}
+      --bg-light: #F7F9F8;
+      --bg-white: #ffffff;
 
-.category-info {
-  max-width: 720px;
-  margin: 18px auto 0;
-  padding: 16px 18px;
-  border-radius: 18px;
-  background: rgba(35, 139, 34, 0.055);
-  border: 1px solid rgba(35, 139, 34, 0.16);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 10px;
-  text-align: left;
-}
+      --text-main: #1F3B1F;
+      --text-sub: #666666;
 
-.category-info-label {
-  flex-shrink: 0;
-  padding: 4px 9px;
-  border-radius: 999px;
-  background: var(--moding-green);
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 900;
-  line-height: 1;
-}
+      --border-light: #e1e4e2;
+      --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.06);
+      --shadow-hero: 0 16px 42px rgba(0, 0, 0, 0.14);
+      --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.08);
+    }
 
-.category-info-text {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--text-sub);
-}
+    /* =========================================================
+       2. Reset / 기본 설정
+       ========================================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      word-break: keep-all;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =========================================================
+       3. Header / Navigation
+       ========================================================= */
+    header {
+      width: 100%;
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .nav {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      width: 136px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--moding-green);
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--moding-orange);
+    }
+
+    /* =========================================================
+       4. 상단 메인 화면 이동 버튼
+       ========================================================= */
+    .top-return {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 26px;
+    }
+
+    .top-return-btn {
+      padding: 8px 15px;
+      border-radius: 999px;
+      border: 1.5px solid var(--moding-green);
+      background: #ffffff;
+      color: var(--moding-green);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .top-return-btn:hover {
+      background: var(--moding-green);
+      color: #ffffff;
+    }
+
+    /* =========================================================
+       5. 공통 타이포
+       ========================================================= */
+    main {
+      flex: 1;
+      width: 100%;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      padding: 7px 15px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(35, 139, 34, 0.28);
+      background: #ffffff;
+      color: var(--moding-green);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+    }
+
+    .alliance-title {
+      font-size: clamp(30px, 4.2vw, 48px);
+      font-weight: 850;
+      line-height: 1.28;
+      letter-spacing: -0.045em;
+      color: var(--moding-green);
+      margin-bottom: 20px;
+    }
+
+    .alliance-title .orange {
+      color: var(--moding-orange);
+    }
+
+    .section-label {
+      margin-bottom: 9px;
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.18em;
+      color: var(--moding-green);
+    }
+
+    .section-heading {
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 850;
+      line-height: 1.32;
+      letter-spacing: -0.04em;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-sub);
+    }
+
+    /* =========================================================
+       6. Alliance Hero
+       ========================================================= */
+    .alliance-hero {
+      width: 100%;
+      text-align: center;
+      padding: 48px 0 30px;
+    }
+
+    .alliance-sub {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.75;
+      color: var(--text-main);
+    }
+
+    .partner-banner {
+      position: relative;
+      margin: 34px auto 0;
+      max-width: 980px;
+      min-height: 270px;
+      padding: 38px 32px;
+      border-radius: 30px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255, 140, 0, 0.26), transparent 27%),
+        radial-gradient(circle at 88% 76%, rgba(255, 255, 255, 0.22), transparent 28%),
+        linear-gradient(135deg, #17681A, #2FA530);
+      color: #ffffff;
+      box-shadow: var(--shadow-hero);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .partner-banner::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      right: -42px;
+      top: -52px;
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    .partner-banner::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 42px;
+      left: -38px;
+      bottom: -48px;
+      background: rgba(255, 140, 0, 0.22);
+      transform: rotate(12deg);
+    }
+
+    .partner-banner-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .banner-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+    }
+
+    .banner-title {
+      font-size: clamp(30px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.18;
+      letter-spacing: -0.055em;
+      color: #ffffff;
+      margin-bottom: 18px;
+    }
+
+    .banner-title .orange {
+      color: #FFD28A;
+    }
+
+    .banner-text {
+      font-size: 17px;
+      font-weight: 550;
+      line-height: 1.72;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    /* =========================================================
+       7. 입점 가능 상품군
+       ========================================================= */
+    .category-section {
+      padding: 36px 0 18px;
+      text-align: center;
+    }
+
+    .category-list {
+      max-width: 820px;
+      margin: 26px auto 0;
+      padding: 28px 24px;
+      border-radius: 30px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(35, 139, 34, 0.12);
+    }
+
+    .category-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px 13px;
+      font-size: clamp(20px, 2.6vw, 30px);
+      font-weight: 900;
+      line-height: 1.45;
+      letter-spacing: -0.045em;
+      color: var(--moding-green);
+    }
+
+    .category-line + .category-line {
+      margin-top: 8px;
+    }
+
+    .category-item {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .category-item.orange {
+      color: var(--moding-orange);
+    }
+
+    .category-dot {
+      color: rgba(31, 59, 31, 0.25);
+      font-weight: 700;
+    }
+
+    .category-info {
+      max-width: 720px;
+      margin: 18px auto 0;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(35, 139, 34, 0.055);
+      border: 1px solid rgba(35, 139, 34, 0.16);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .category-info-label {
+      flex-shrink: 0;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--moding-green);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .category-info-text {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-sub);
+    }
+
+    /* =========================================================
+       8. 모딩과 함께하면
+       ========================================================= */
+    .partner-value {
+      padding: 34px 0 22px;
+    }
+
+    .partner-value-header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .value-card {
+      position: relative;
+      min-height: 220px;
+      padding: 26px 24px 24px;
+      border-radius: 28px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(22px);
+      animation: cardFadeUp 0.75s ease forwards;
+    }
+
+    .value-card:nth-child(1) {
+      animation-delay: 0.06s;
+    }
+
+    .value-card:nth-child(2) {
+      animation-delay: 0.16s;
+    }
+
+    .value-card:nth-child(3) {
+      animation-delay: 0.26s;
+    }
+
+    .value-card.green {
+      border: 2px solid var(--moding-green);
+    }
+
+    .value-card.orange {
+      border: 2px solid var(--moding-orange);
+    }
+
+    .value-card.brown {
+      border: 2px solid var(--moding-brown);
+    }
+
+    .value-number {
+      position: absolute;
+      right: 18px;
+      top: 8px;
+      font-size: 66px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      opacity: 0.08;
+      color: #000000;
+    }
+
+    .value-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .value-card.green .value-badge {
+      background: var(--moding-green);
+    }
+
+    .value-card.orange .value-badge {
+      background: var(--moding-orange);
+    }
+
+    .value-card.brown .value-badge {
+      background: var(--moding-brown);
+    }
+
+    .value-title {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 12px;
+      font-size: 23px;
+      font-weight: 900;
+      line-height: 1.28;
+      letter-spacing: -0.045em;
+      color: var(--text-main);
+    }
+
+    .value-title .orange {
+      color: var(--moding-orange);
+    }
+
+    .value-desc {
+      position: relative;
+      z-index: 1;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-sub);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .value-card {
+        transition:
+          transform 0.24s ease,
+          box-shadow 0.24s ease;
+      }
+
+      .value-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-soft);
+      }
+    }
+
+    /* =========================================================
+       9. 판매자 입점 문의
+       ========================================================= */
+    .contact-section {
+      padding: 34px 0 68px;
+      text-align: center;
+    }
+
+    .contact-box {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 34px 24px;
+      border-radius: 32px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(35, 139, 34, 0.12);
+    }
+
+    .contact-title {
+      margin-bottom: 14px;
+      font-size: clamp(25px, 3.5vw, 38px);
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: -0.05em;
+      color: var(--moding-green);
+    }
+
+    .contact-title .orange {
+      color: var(--moding-orange);
+    }
+
+    .contact-desc {
+      max-width: 620px;
+      margin: 0 auto 24px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-sub);
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .contact-btn {
+      min-width: 220px;
+      min-height: 58px;
+      padding: 14px 22px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .contact-btn.kakao {
+      background: var(--kakao-yellow);
+      border: 2px solid var(--kakao-yellow);
+      color: var(--kakao-text);
+      box-shadow: 0 10px 24px rgba(254, 229, 0, 0.22);
+    }
+
+    .contact-btn.kakao:hover {
+      background: var(--kakao-yellow-dark);
+      border-color: var(--kakao-yellow-dark);
+    }
+
+    .contact-btn.email {
+      appearance: none;
+      background: var(--moding-green);
+      border: 2px solid var(--moding-green);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(35, 139, 34, 0.22);
+    }
+
+    .contact-btn.email:hover {
+      background: var(--moding-green-dark);
+      border-color: var(--moding-green-dark);
+    }
+
+    .guide-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 8px;
+      color: var(--moding-green);
+      font-size: 13px;
+      font-weight: 850;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(35, 139, 34, 0.35);
+    }
+
+    .guide-link:hover {
+      color: var(--moding-orange);
+      border-color: rgba(255, 140, 0, 0.4);
+    }
+
+    .contact-note {
+      margin-top: 14px;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: #777777;
+    }
+
+    .copyable {
+      -webkit-user-select: text;
+      user-select: text;
+      color: var(--moding-green);
+      font-weight: 850;
+    }
+
+    /* =========================================================
+       10. Footer
+       ========================================================= */
+    footer {
+      width: 100%;
+      margin-top: auto;
+      padding: 24px 10px;
+      background: var(--bg-white);
+      border-top: 1px solid var(--border-light);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #777777;
+    }
+
+    .footer-links {
+      margin-bottom: 5px;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--moding-green);
+      font-weight: 700;
+    }
+
+    .footer-links a:hover {
+      color: var(--moding-orange);
+    }
+
+    .footer-links .divider {
+      margin: 0 6px;
+      color: #bbbbbb;
+    }
+
+    /* =========================================================
+       11. 복사 / 드래그 방지
+       ========================================================= */
+    html,
+    body,
+    *:not(input):not(textarea):not(.copyable) {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+
+    input,
+    textarea {
+      user-select: text;
+      pointer-events: auto;
+    }
+
+    /* =========================================================
+       12. Animation
+       ========================================================= */
+    @keyframes cardFadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .value-card {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+
+      .nav-menu a,
+      .top-return-btn,
+      .contact-btn {
+        transition: none;
+      }
+    }
+
+    /* =========================================================
+       13. Responsive / 노트북 · 태블릿
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .container {
+        max-width: 960px;
+      }
+
+      .value-grid {
+        gap: 14px;
+      }
+    }
+
+    /* =========================================================
+       14. Responsive / 태블릿 세로
+       ========================================================= */
+    @media (max-width: 820px) {
+      .nav {
+        padding: 14px 20px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .nav-logo img {
+        width: 124px;
+      }
+
+      .nav-menu {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 14px;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+
+      .top-return {
+        padding-top: 22px;
+      }
+
+      .alliance-hero {
+        padding: 42px 0 30px;
+      }
+
+      .alliance-sub {
+        font-size: 16px;
+      }
+
+      .partner-banner {
+        margin-top: 34px;
+        min-height: 260px;
+        padding: 34px 24px;
+        border-radius: 28px;
+      }
+
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .value-card {
+        min-height: auto;
+      }
+    }
+
+    /* =========================================================
+       15. Responsive / 일반 스마트폰
+       ========================================================= */
+    @media (max-width: 640px) {
+      .nav-logo img {
+        width: 116px;
+      }
+
+      .nav-menu {
+        gap: 14px;
+        font-size: 13px;
+      }
+
+      .top-return {
+        padding-top: 18px;
+      }
+
+      .top-return-btn {
+        font-size: 12px;
+        padding: 7px 13px;
+      }
+
+      .alliance-hero {
+        padding: 36px 0 26px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        padding: 6px 13px;
+        margin-bottom: 16px;
+      }
+
+      .alliance-title {
+        font-size: clamp(27px, 8vw, 34px);
+        line-height: 1.34;
+      }
+
+      .alliance-sub {
+        font-size: 15px;
+        line-height: 1.72;
+      }
+
+      .partner-banner {
+        min-height: 250px;
+        padding: 30px 20px;
+        border-radius: 26px;
+      }
+
+      .banner-kicker {
+        font-size: 11px;
+      }
+
+      .banner-title {
+        font-size: clamp(28px, 9vw, 38px);
+      }
+
+      .banner-text {
+        font-size: 14px;
+      }
+
+      .category-section {
+        padding: 32px 0 16px;
+      }
+
+      .section-heading {
+        font-size: 24px;
+      }
+
+      .section-desc {
+        font-size: 14px;
+      }
+
+      .category-list {
+        margin-top: 22px;
+        padding: 24px 18px;
+        border-radius: 26px;
+      }
+
+      .category-line {
+        gap: 7px 9px;
+        font-size: clamp(19px, 6vw, 25px);
+        line-height: 1.5;
+      }
+
+      .category-info {
+        margin-top: 16px;
+        padding: 15px 14px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+      }
+
+      .category-info-text {
+        font-size: 12.5px;
+      }
+
+      .partner-value {
+        padding: 30px 0 18px;
+      }
+
+      .partner-value-header {
+        margin-bottom: 20px;
+      }
+
+      .value-card {
+        padding: 26px 20px 24px;
+        border-radius: 26px;
+      }
+
+      .value-number {
+        font-size: 62px;
+      }
+
+      .value-title {
+        font-size: 22px;
+      }
+
+      .value-desc {
+        font-size: 13.5px;
+      }
+
+      .contact-section {
+        padding: 28px 0 52px;
+      }
+
+      .contact-box {
+        padding: 30px 20px;
+        border-radius: 26px;
+      }
+
+      .contact-title {
+        font-size: 28px;
+      }
+
+      .contact-desc {
+        font-size: 14px;
+      }
+
+      .contact-btn {
+        width: 100%;
+        max-width: 300px;
+        min-height: 56px;
+        font-size: 14px;
+      }
+    }
+
+    /* =========================================================
+       16. Responsive / 매우 좁은 화면
+       ========================================================= */
+    @media (max-width: 380px) {
+      .nav {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .nav-logo img {
+        width: 108px;
+      }
+
+      .nav-menu {
+        gap: 11px;
+        font-size: 12px;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .alliance-hero {
+        padding: 32px 0 24px;
+      }
+
+      .alliance-title {
+        font-size: 25px;
+        letter-spacing: -0.04em;
+      }
+
+      .partner-banner {
+        border-radius: 24px;
+        padding: 30px 18px;
+      }
+
+      .value-card {
+        padding: 24px 18px 22px;
+      }
+
+      footer {
+        padding: 22px 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- =======================================================
+         HEADER
+         ======================================================= -->
+    <header>
+      <nav class="nav" aria-label="주요 메뉴">
+
+        <a href="index.html" class="nav-logo" aria-label="모딩 홈으로 이동">
+          <img src="모딩로고.png" alt="Moding Logo">
+        </a>
+
+        <div class="nav-menu">
+          <a href="about.html">About</a>
+          <a href="brand.html">Brand</a>
+          <a href="services.html">Services</a>
+          <a href="alliance.html" class="active">Alliance</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+
+      </nav>
+    </header>
+
+    <!-- =======================================================
+         MAIN
+         ======================================================= -->
+    <main>
+
+      <div class="container">
+        <div class="top-return">
+          <a href="index.html" class="top-return-btn">메인 화면으로</a>
+        </div>
+      </div>
+
+      <!-- ALLIANCE HERO -->
+      <section class="alliance-hero">
+        <div class="container">
+
+          <div class="eyebrow">ALLIANCE MODING</div>
+
+          <h1 class="alliance-title">
+            좋은 상품을 가진<br>
+            <span class="orange">공급 파트너를 찾습니다.</span>
+          </h1>
+
+          <p class="alliance-sub">
+            모딩은 외식업 사장님에게<br>
+            특수하고 우수한 상품을 소개하는 B2B 식품 거래 앱입니다.
+          </p>
+
+          <div class="partner-banner" aria-label="공급 파트너 안내 배너">
+            <div class="partner-banner-inner">
+              <div class="banner-kicker">FOR PARTNER</div>
+
+              <div class="banner-title">
+                우리 상품을<br>
+                <span class="orange">더 많은 매장에.</span>
+              </div>
+
+              <p class="banner-text">
+                좋은 상품이 필요한 매장에 더 쉽게 닿을 수 있도록,<br>
+                모딩이 상품 소개와 거래 흐름을 함께 정리합니다.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CATEGORY -->
+      <section class="category-section">
+        <div class="container">
+
+          <div class="section-label">PRODUCT CATEGORY</div>
+
+          <h2 class="section-heading">
+            어떤 상품이 입점할 수 있나요?
+          </h2>
+
+          <p class="section-desc">
+            외식업 매장에 필요한 식품·식자재 상품이라면 모딩과 함께할 수 있습니다.
+          </p>
+
+          <div class="category-list" aria-label="입점 가능 상품군">
+            <div class="category-line">
+              <span class="category-item">특수 식자재</span>
+              <span class="category-dot">·</span>
+              <span class="category-item orange">가공식품</span>
+              <span class="category-dot">·</span>
+              <span class="category-item">소스·양념</span>
+            </div>
+
+            <div class="category-line">
+              <span class="category-item orange">안주류</span>
+              <span class="category-dot">·</span>
+              <span class="category-item">카페·디저트</span>
+              <span class="category-dot">·</span>
+              <span class="category-item orange">주류·수입식품</span>
+            </div>
+
+            <div class="category-info">
+              <span class="category-info-label">안내</span>
+              <p class="category-info-text">
+                주류·수입식품 등 별도 인허가 확인이 필요한 상품은
+                관련 서류 확인 후 입점이 진행됩니다.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VALUE -->
+      <section class="partner-value">
+        <div class="container">
+
+          <div class="partner-value-header">
+            <div class="section-label">PARTNER VALUE</div>
+
+            <h2 class="section-heading">
+              모딩과 함께하면
+            </h2>
+
+            <p class="section-desc">
+              좋은 상품이 더 잘 보이고, 필요한 매장과 더 쉽게 연결될 수 있습니다.
+            </p>
+          </div>
+
+          <div class="value-grid">
+
+            <article class="value-card green">
+              <div class="value-number">01</div>
+              <div class="value-badge">노출</div>
+
+              <h3 class="value-title">
+                좋은 상품이<br>
+                <span class="orange">더 잘 보이도록</span>
+              </h3>
+
+              <p class="value-desc">
+                상품의 강점과 활용 장면이 외식업 사장님에게 더 쉽게 전달될 수 있도록 소개합니다.
+              </p>
+            </article>
+
+            <article class="value-card orange">
+              <div class="value-number">02</div>
+              <div class="value-badge">연결</div>
+
+              <h3 class="value-title">
+                필요한 매장과<br>
+                <span class="orange">더 빠르게 연결</span>
+              </h3>
+
+              <p class="value-desc">
+                상품을 찾는 매장과 공급 파트너가 하나의 플랫폼 안에서 더 자연스럽게 만날 수 있도록 돕습니다.
+              </p>
+            </article>
+
+            <article class="value-card brown">
+              <div class="value-number">03</div>
+              <div class="value-badge">정리</div>
+
+              <h3 class="value-title">
+                주문·결제·증빙<br>
+                <span class="orange">흐름까지 정리</span>
+              </h3>
+
+              <p class="value-desc">
+                거래가 반복될수록 복잡해지는 주문, 결제, 증빙 흐름을 모딩 안에서 더 간단하게 정리합니다.
+              </p>
+            </article>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="contact-section">
+        <div class="container">
+
+          <div class="contact-box">
+            <h2 class="contact-title">
+              판매자<br>
+              <span class="orange">입점 문의</span>
+            </h2>
+
+            <p class="contact-desc">
+              모딩에 상품 입점을 희망하시거나 제휴 상담이 필요하신 경우,
+              편한 방법으로 문의해 주세요.
+            </p>
+
+            <div class="contact-buttons">
+              <a
+                href="https://pf.kakao.com/_CixjCX/friend"
+                class="contact-btn kakao"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                카카오톡 문의하기
+              </a>
+
+              <button
+                type="button"
+                class="contact-btn email"
+                onclick="copyPartnerEmail()"
+              >
+                이메일 주소 복사하기
+              </button>
+            </div>
+
+            <a
+              href="seller-application/Moding_Inc_Seller.pdf"
+              class="guide-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              공급 파트너 안내서 보기
+            </a>
+
+            <p class="contact-note">
+              이메일 문의는 <span class="copyable">partner@moding.app</span> 로 보내 주세요.<br>
+              판매자 회원가입은 모딩 앱에서 진행하실 수 있습니다.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- =======================================================
+         FOOTER
+         ======================================================= -->
+    <footer>
+      <div class="footer-links">
+        <a href="terms.html">이용약관</a>
+        <span class="divider">·</span>
+        <a href="privacy.html">개인정보처리방침</a>
+        <span class="divider">·</span>
+        <a href="location.html">오시는 길</a>
+      </div>
+
+      주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+      통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
+      대구광역시 달서구 달구벌대로 1870, 7층
+    </footer>
+
+  </div>
+
+  <script>
+    /* =========================================================
+       이메일 주소 복사
+       ========================================================= */
+    function copyPartnerEmail() {
+      const email = "partner@moding.app";
+
+      function showCopiedMessage() {
+        alert("이메일 주소가 복사되었습니다.\n" + email);
+      }
+
+      function showManualMessage() {
+        alert("이메일 주소를 복사해 주세요.\n" + email);
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email)
+          .then(showCopiedMessage)
+          .catch(function () {
+            fallbackCopyEmail(email);
+          });
+      } else {
+        fallbackCopyEmail(email);
+      }
+    }
+
+    function fallbackCopyEmail(email) {
+      const textarea = document.createElement("textarea");
+      textarea.value = email;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      textarea.style.top = "0";
+
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+
+      try {
+        const copied = document.execCommand("copy");
+        document.body.removeChild(textarea);
+
+        if (copied) {
+          alert("이메일 주소가 복사되었습니다.\n" + email);
+        } else {
+          alert("이메일 주소를 복사해 주세요.\n" + email);
+        }
+      } catch (err) {
+        document.body.removeChild(textarea);
+        alert("이메일 주소를 복사해 주세요.\n" + email);
+      }
+    }
+
+    /* =========================================================
+       복사 / 드래그 방지
+       ========================================================= */
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a, button, .copyable")) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
+
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea, .copyable")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea, .copyable")) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
