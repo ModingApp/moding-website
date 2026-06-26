@@ -227,7 +227,7 @@
       max-width: 980px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1.35fr 1fr;
+      grid-template-columns: 1.28fr 1fr;
       gap: 16px;
       text-align: left;
     }
@@ -239,7 +239,10 @@
       box-shadow: var(--shadow-card);
       border: 1px solid rgba(35, 139, 34, 0.12);
       padding: 26px 24px;
-      min-height: 170px;
+      min-height: 172px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
 
     .address-card {
@@ -264,29 +267,38 @@
 
     .address-main {
       margin-bottom: 10px;
-      font-size: clamp(20px, 2.5vw, 29px);
-      font-weight: 900;
-      line-height: 1.36;
-      letter-spacing: -0.045em;
+      font-size: clamp(18px, 2.1vw, 24px);
+      font-weight: 850;
+      line-height: 1.42;
+      letter-spacing: -0.04em;
       color: var(--text-main);
     }
 
     .address-sub {
-      font-size: 14px;
+      margin-top: auto;
+      font-size: 13px;
       line-height: 1.7;
       color: var(--text-sub);
     }
 
-    .visit-text {
-      font-size: 15px;
-      font-weight: 650;
-      line-height: 1.75;
+    .visit-main {
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: 850;
+      line-height: 1.5;
+      letter-spacing: -0.03em;
       color: var(--text-main);
     }
 
-    .visit-text span {
+    .visit-main span {
       color: var(--moding-orange);
       font-weight: 900;
+    }
+
+    .visit-sub {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-sub);
     }
 
     /* =========================================================
@@ -399,11 +411,10 @@
 
     /* =========================================================
        9. 복사 / 드래그 방지
-       - 지도 영역은 예외 처리
        ========================================================= */
     html,
     body,
-    *:not(input):not(textarea):not(#map):not(#map *) {
+    *:not(input):not(textarea) {
       -webkit-user-select: none;
       user-select: none;
     }
@@ -414,8 +425,11 @@
       pointer-events: none;
     }
 
-    #map img,
-    #map * {
+    #map,
+    #map *,
+    #map img {
+      -webkit-user-select: auto;
+      user-select: auto;
       pointer-events: auto;
     }
 
@@ -523,14 +537,27 @@
       .visit-card {
         padding: 24px 20px;
         border-radius: 26px;
+        min-height: auto;
       }
 
       .address-main {
-        font-size: clamp(20px, 6vw, 25px);
+        font-size: clamp(19px, 5.7vw, 23px);
+        line-height: 1.45;
       }
 
-      .visit-text {
-        font-size: 14px;
+      .address-sub {
+        margin-top: 8px;
+        font-size: 12.5px;
+      }
+
+      .visit-main {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .visit-sub {
+        font-size: 13px;
+        line-height: 1.7;
       }
 
       .map-section {
@@ -669,9 +696,13 @@
             <div class="visit-card">
               <div class="info-label">VISIT NOTICE</div>
 
-              <p class="visit-text">
-                방문은 <span>사전 예약자</span>에 한해 가능합니다.<br>
-                보안 및 출입 관리를 위해 방문 전 일정을 확인해 주세요.
+              <p class="visit-main">
+                방문은 <span>사전 예약자</span>에 한해 가능합니다.
+              </p>
+
+              <p class="visit-sub">
+                보안 및 출입 관리를 위해<br>
+                방문 전 일정을 확인해 주세요.
               </p>
             </div>
 
