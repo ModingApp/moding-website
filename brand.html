@@ -10,7 +10,7 @@
   <title>브랜드 아이덴티티 | 모딩(Moding)</title>
 
   <meta name="description"
-        content="모딩(Moding)의 브랜드 아이덴티티를 소개합니다. Mode+ing의 의미에서 출발한 이름, 로고, 컬러 시스템, 톤앤매너를 한눈에 볼 수 있는 공식 브랜드 가이드입니다.">
+        content="모딩(Moding)의 브랜드 아이덴티티를 소개합니다. Mode+ing의 의미에서 출발한 이름, 로고, 컬러 시스템을 한눈에 볼 수 있는 공식 브랜드 가이드입니다.">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
@@ -174,20 +174,6 @@
       margin-bottom: 16px;
     }
 
-    h2 {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--moding-orange);
-      margin-bottom: 10px;
-    }
-
-    h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 8px;
-    }
-
     p {
       font-size: 15px;
       line-height: 1.85;
@@ -221,6 +207,21 @@
       font-weight: 600;
       color: var(--text-main);
       margin-bottom: 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      padding: 7px 15px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(35, 139, 34, 0.28);
+      background: #ffffff;
+      color: var(--moding-green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
     }
 
     /* =========================================================
@@ -265,7 +266,7 @@
 
     /* =========================================================
        7. 네이밍 섹션
-       - 색 흐름: Green → Orange
+       색 흐름: Green → Orange
        ========================================================= */
     .name-badge {
       display: inline-flex;
@@ -322,8 +323,7 @@
 
     /* =========================================================
        8. 로고 & 컬러 시스템
-       - 컴팩트한 구조
-       - 색 흐름: Green → Orange → Wood
+       컴팩트 구조 / 색 흐름: Green → Orange → Wood
        ========================================================= */
     .logo-row {
       display: flex;
@@ -433,54 +433,7 @@
     }
 
     /* =========================================================
-       9. 톤앤매너
-       - 4개 → 2개로 축소
-       - 색 흐름: Green → Orange
-       ========================================================= */
-    .tone-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 12px;
-    }
-
-    .tone-item {
-      padding: 14px 14px 16px;
-      border-radius: 16px;
-      background: #ffffff;
-      box-shadow: var(--shadow-card);
-    }
-
-    .tone-item.green {
-      border: 2px solid var(--moding-green);
-    }
-
-    .tone-item.orange {
-      border: 2px solid var(--moding-orange);
-    }
-
-    .tone-title {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .tone-item.green .tone-title {
-      color: var(--moding-green);
-    }
-
-    .tone-item.orange .tone-title {
-      color: var(--moding-orange);
-    }
-
-    .tone-text {
-      font-size: 13px;
-      line-height: 1.75;
-      color: var(--text-sub);
-    }
-
-    /* =========================================================
-       10. Footer
+       9. Footer
        ========================================================= */
     footer {
       width: 100%;
@@ -516,7 +469,7 @@
     }
 
     /* =========================================================
-       11. 복사 / 드래그 방지
+       10. 복사 / 드래그 방지
        ========================================================= */
     html,
     body,
@@ -538,7 +491,7 @@
     }
 
     /* =========================================================
-       12. Responsive
+       11. Responsive
        ========================================================= */
     @media (max-width: 768px) {
       .container {
@@ -553,12 +506,14 @@
         font-size: 23px;
       }
 
-      h2 {
-        font-size: 20px;
-      }
-
       p {
         font-size: 14px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        padding: 6px 13px;
+        margin-bottom: 14px;
       }
 
       .identity-hero {
@@ -578,8 +533,7 @@
       }
 
       .name-grid,
-      .color-palette,
-      .tone-grid {
+      .color-palette {
         grid-template-columns: 1fr;
       }
 
@@ -669,6 +623,8 @@
 
       <!-- 1) 브랜드 인트로 -->
       <section class="section brand-hero">
+        <div class="eyebrow">BRAND MODING</div>
+
         <h1>브랜드 아이덴티티</h1>
 
         <div class="identity-hero">
@@ -783,37 +739,6 @@
                 함께 자라는 생태계와 연결 구조를 상징합니다.<br>
                 좋은 상품과 필요한 매장을 잇는 역할을 나타냅니다.
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="section-divider"></div>
-
-      <!-- 4) 브랜드 톤앤매너 -->
-      <section class="section">
-        <div class="section-title">TONE &amp; MANNER</div>
-        <div class="section-subtitle">브랜드 톤앤매너</div>
-
-        <p>
-          모딩의 커뮤니케이션은<br>
-          <strong>화려한 수식어보다, 현장에서 실제로 도움이 되는 말을 우선합니다.</strong>
-        </p>
-
-        <div class="tone-grid">
-          <div class="tone-item green">
-            <div class="tone-title">현장의 언어</div>
-            <div class="tone-text">
-              실제 현장에서 쓰이는 말에 가깝게,<br>
-              불필요한 표현은 덜어내고 꼭 필요한 언어로 전달합니다.
-            </div>
-          </div>
-
-          <div class="tone-item orange">
-            <div class="tone-title">신뢰 기반 파트너십</div>
-            <div class="tone-text">
-              단기적인 연결보다,<br>
-              오래 함께 갈 수 있는 구조와 관계를 우선합니다.
             </div>
           </div>
         </div>
