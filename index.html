@@ -38,6 +38,7 @@
       --border-light: #e1e4e2;
       --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.08);
       --shadow-card: 0 14px 34px rgba(0, 0, 0, 0.10);
+      --shadow-card-hover: 0 20px 44px rgba(0, 0, 0, 0.13);
     }
 
     /* =========================================================
@@ -168,69 +169,11 @@
     }
 
     /* =========================================================
-       5. 메인 비주얼 이미지 3장 영역
-       - iOS_1.png / iOS_2.png / iOS_3.png 파일을 index.html과 같은 위치에 업로드
-       - 3장이 동시에 노출됨
-       - 최초 진입 시에만 순서대로 부드럽게 등장
-       ========================================================= */
-    .hero-visual-section {
-      width: 100%;
-      margin: 44px auto 34px;
-    }
-
-    .hero-visual-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      align-items: start;
-    }
-
-    .hero-visual-card {
-      width: 100%;
-      border-radius: 28px;
-      background: #ffffff;
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(26px) scale(0.98);
-      animation: visualFadeUp 0.8s ease forwards;
-    }
-
-    .hero-visual-card:nth-child(1) {
-      animation-delay: 0.08s;
-    }
-
-    .hero-visual-card:nth-child(2) {
-      animation-delay: 0.22s;
-    }
-
-    .hero-visual-card:nth-child(3) {
-      animation-delay: 0.36s;
-    }
-
-    .hero-visual-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* 데스크탑에서만 살짝 떠오르는 느낌 */
-    @media (hover: hover) and (pointer: fine) {
-      .hero-visual-card {
-        transition: transform 0.22s ease, box-shadow 0.22s ease;
-      }
-
-      .hero-visual-card:hover {
-        transform: translateY(-4px) scale(1.01);
-        box-shadow: var(--shadow-soft);
-      }
-    }
-
-    /* =========================================================
-       6. 다운로드 버튼
+       5. 다운로드 버튼
+       - 포스터보다 위에 배치
        ========================================================= */
     .download-wrapper {
-      margin-top: 32px;
+      margin-top: 28px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -256,7 +199,8 @@
         background 0.2s ease,
         color 0.2s ease,
         border-color 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .download-btn:hover {
@@ -266,6 +210,7 @@
     .download-btn.google {
       border: 2px solid var(--moding-green);
       color: var(--moding-green);
+      animation: downloadPulse 2.8s ease-in-out infinite;
     }
 
     .download-btn.google:hover {
@@ -294,10 +239,72 @@
     }
 
     .download-note {
-      margin-top: 14px;
+      margin-top: 12px;
+      margin-bottom: 0;
       font-size: 13px;
       color: #777777;
       line-height: 1.6;
+    }
+
+    /* =========================================================
+       6. 메인 비주얼 이미지 3장 영역
+       - iOS_1.png / iOS_2.png / iOS_3.png 파일을 index.html과 같은 위치에 업로드
+       - 3장이 동시에 노출됨
+       - 간격을 좁혀 하나의 캠페인 시리즈처럼 보이도록 처리
+       ========================================================= */
+    .hero-visual-section {
+      width: 100%;
+      margin: 36px auto 34px;
+    }
+
+    .hero-visual-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      align-items: start;
+    }
+
+    .hero-visual-card {
+      width: 100%;
+      border-radius: 28px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(28px) scale(0.98);
+      animation: posterFadeUp 0.85s ease forwards;
+    }
+
+    .hero-visual-card:nth-child(1) {
+      animation-delay: 0.08s;
+    }
+
+    .hero-visual-card:nth-child(2) {
+      animation-delay: 0.24s;
+    }
+
+    .hero-visual-card:nth-child(3) {
+      animation-delay: 0.40s;
+    }
+
+    .hero-visual-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 데스크탑에서만 포스터 hover 효과 */
+    @media (hover: hover) and (pointer: fine) {
+      .hero-visual-card {
+        transition:
+          transform 0.24s ease,
+          box-shadow 0.24s ease;
+      }
+
+      .hero-visual-card:hover {
+        transform: translateY(-6px) scale(1.012);
+        box-shadow: var(--shadow-card-hover);
+      }
     }
 
     /* =========================================================
@@ -362,10 +369,24 @@
     /* =========================================================
        9. Animation
        ========================================================= */
-    @keyframes visualFadeUp {
+    @keyframes posterFadeUp {
       to {
         opacity: 1;
         transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes downloadPulse {
+      0% {
+        box-shadow: 0 0 0 rgba(35, 139, 34, 0);
+      }
+
+      50% {
+        box-shadow: 0 10px 26px rgba(35, 139, 34, 0.16);
+      }
+
+      100% {
+        box-shadow: 0 0 0 rgba(35, 139, 34, 0);
       }
     }
 
@@ -378,6 +399,10 @@
       .hero-visual-card {
         opacity: 1;
         transform: none;
+        animation: none;
+      }
+
+      .download-btn.google {
         animation: none;
       }
 
@@ -400,7 +425,7 @@
       }
 
       .hero-visual-grid {
-        gap: 14px;
+        gap: 8px;
       }
 
       .hero-visual-card {
@@ -443,12 +468,16 @@
         font-size: clamp(29px, 6.2vw, 40px);
       }
 
+      .download-wrapper {
+        margin-top: 26px;
+      }
+
       .hero-visual-section {
-        margin-top: 36px;
+        margin-top: 34px;
       }
 
       .hero-visual-grid {
-        gap: 12px;
+        gap: 8px;
       }
 
       .hero-visual-card {
@@ -480,33 +509,8 @@
         line-height: 1.34;
       }
 
-      .hero-visual-section {
-        margin: 32px calc(50% - 50vw) 26px;
-        overflow: hidden;
-      }
-
-      .hero-visual-grid {
-        display: flex;
-        gap: 14px;
-        overflow-x: auto;
-        padding: 6px 20px 20px;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .hero-visual-grid::-webkit-scrollbar {
-        display: none;
-      }
-
-      .hero-visual-card {
-        flex: 0 0 78%;
-        max-width: 380px;
-        border-radius: 22px;
-        scroll-snap-align: center;
-      }
-
       .download-wrapper {
-        margin-top: 28px;
+        margin-top: 26px;
         gap: 12px;
       }
 
@@ -521,6 +525,46 @@
         margin-left: auto;
         margin-right: auto;
         word-break: keep-all;
+      }
+
+      .hero-visual-section {
+        margin: 32px calc(50% - 50vw) 26px;
+        overflow: hidden;
+      }
+
+      .hero-visual-grid {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 6px 16px 20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        animation: mobileSlideHint 1.1s ease 0.8s 1;
+      }
+
+      .hero-visual-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .hero-visual-card {
+        flex: 0 0 78%;
+        max-width: 380px;
+        border-radius: 22px;
+        scroll-snap-align: center;
+      }
+
+      @keyframes mobileSlideHint {
+        0% {
+          transform: translateX(0);
+        }
+
+        45% {
+          transform: translateX(-18px);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
       }
     }
 
@@ -555,14 +599,14 @@
         letter-spacing: -0.04em;
       }
 
-      .hero-visual-card {
-        flex-basis: 84%;
-      }
-
       .download-btn {
         max-width: 280px;
         min-height: 56px;
         font-size: 14px;
+      }
+
+      .hero-visual-card {
+        flex-basis: 84%;
       }
 
       footer {
@@ -579,12 +623,12 @@
         padding: 34px 0 36px;
       }
 
-      .hero-visual-section {
-        margin-top: 28px;
+      .download-wrapper {
+        margin-top: 22px;
       }
 
-      .download-wrapper {
-        margin-top: 24px;
+      .hero-visual-section {
+        margin-top: 28px;
       }
     }
   </style>
@@ -629,6 +673,41 @@
             <span class="orange">오늘부터 모딩하세요 :)</span>
           </h1>
 
+          <!-- 다운로드 버튼 -->
+          <div class="download-wrapper" aria-label="앱 다운로드">
+
+            <!-- Android 다운로드 링크 -->
+            <a
+              class="download-btn google"
+              href="https://play.google.com/store/apps/details?id=com.moding.application"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Android<br>다운로드
+            </a>
+
+            <!--
+              iOS 준비중 버튼
+              App Store 링크가 나오면:
+              1) class에서 disabled 삭제
+              2) href="#"를 실제 App Store 링크로 교체
+              3) 문구를 iOS 다운로드로 변경
+            -->
+            <a
+              class="download-btn apple disabled"
+              href="#"
+              aria-disabled="true"
+              tabindex="-1"
+            >
+              iOS<br>준비중
+            </a>
+
+          </div>
+
+          <p class="download-note">
+            iOS 버전은 App Store 등록 완료 후 다운로드가 가능합니다.
+          </p>
+
           <!--
             메인 비주얼 3장
             파일 업로드 위치:
@@ -666,41 +745,6 @@
 
             </div>
           </div>
-
-          <!-- 다운로드 버튼 -->
-          <div class="download-wrapper" aria-label="앱 다운로드">
-
-            <!-- Android 다운로드 링크 -->
-            <a
-              class="download-btn google"
-              href="https://play.google.com/store/apps/details?id=com.moding.application"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Android<br>다운로드
-            </a>
-
-            <!--
-              iOS 준비중 버튼
-              App Store 링크가 나오면:
-              1) class에서 disabled 삭제
-              2) href="#"를 실제 App Store 링크로 교체
-              3) 문구를 iOS 다운로드로 변경
-            -->
-            <a
-              class="download-btn apple disabled"
-              href="#"
-              aria-disabled="true"
-              tabindex="-1"
-            >
-              iOS<br>준비중
-            </a>
-
-          </div>
-
-          <p class="download-note">
-            iOS 버전은 App Store 등록 완료 후 다운로드가 가능합니다.
-          </p>
 
         </div>
       </section>
