@@ -1,779 +1,1229 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <!-- =========================================================
+       기본 메타 정보
+       ========================================================= -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alliance | 제휴·입점 안내</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <meta name="description" content="모든 사장님을 위한 B2B Food-SaaS 모딩(Moding)의 제휴·입점 안내. 식품 제조사와 외식업 사장님 모두를 위한 가입·문의 페이지입니다.">
+  <title>Alliance | 모딩 공급 파트너 입점 안내</title>
+
+  <meta name="description" content="모딩(Moding)은 외식업 사장님에게 특수하고 우수한 상품을 소개하는 B2B 식품 거래 앱입니다. 좋은 상품을 가진 공급 파트너의 입점 문의를 기다립니다.">
+
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
-  <meta property="og:title" content="Alliance | 모딩 제휴·입점 안내">
-  <meta property="og:description" content="좋은 제품을 만드는 제조사와 운영에 진심인 외식업 사장님을 한 곳에서 연결하는 B2B Food-SaaS 모딩(Moding)의 제휴·입점 안내.">
+  <meta property="og:title" content="Alliance | 모딩 공급 파트너 입점 안내">
+  <meta property="og:description" content="좋은 상품을 가진 공급 파트너를 찾습니다. 모딩과 함께 더 많은 외식업 매장에 상품을 소개하세요.">
   <meta property="og:url" content="https://moding.app/alliance.html">
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
   <style>
-  /* 메인으로 화면 디자인 설정 */
-    .top-return {
-  display:flex;
-  justify-content:flex-end;
-  margin-bottom:16px;
-}
-
-.top-return-btn {
-  font-size:12px;
-  padding:6px 12px;
-  border-radius:999px;
-  border:1px solid var(--moding-green);
-  color:var(--moding-green);
-  background:#ffffff;
-  text-decoration:none;
-  font-weight:500;
-  transition:0.2s;
-}
-
-.top-return-btn:hover {
-  background:var(--moding-green);
-  color:#ffffff;
-}
-
+    /* =========================================================
+       1. 브랜드 컬러 / 공통 변수
+       ========================================================= */
     :root {
       --moding-green: #238B22;
+      --moding-green-dark: #1c6f1c;
       --moding-orange: #FF8C00;
+      --moding-orange-dark: #e67800;
       --moding-brown: #8B5A2B;
+
+      --kakao-yellow: #FEE500;
+      --kakao-yellow-dark: #f4d900;
+      --kakao-text: #191919;
+
       --bg-light: #F7F9F8;
+      --bg-white: #ffffff;
+
       --text-main: #1F3B1F;
-      --text-sub: #555555;
+      --text-sub: #666666;
+
+      --border-light: #e1e4e2;
+      --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.06);
+      --shadow-hero: 0 16px 42px rgba(0, 0, 0, 0.14);
+      --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.08);
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+    /* =========================================================
+       2. Reset / 기본 설정
+       ========================================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
 
     body {
-      font-family:-apple-system, BlinkMacSystemFont,"Noto Sans KR",sans-serif;
-      background:var(--bg-light);
-      color:var(--text-main);
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      word-break: keep-all;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     .container {
-      width:100%;
-      max-width:860px;
-      margin:0 auto;
-      padding:40px 24px;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
-    /* HEADER */
+    /* =========================================================
+       3. Header / Navigation
+       - About / Brand / Services 기준과 통일
+       ========================================================= */
     header {
-      width:100%;
-      border-bottom:1px solid #e1e4e2;
-      background:#ffffff;
+      width: 100%;
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-light);
     }
 
     .nav {
-      max-width:860px;
-      margin:0 auto;
-      padding:14px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      column-gap:24px;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
     }
 
-    .nav-left img {
-      width:160px;
-      height:auto;
-      display:block;
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
     }
 
-    .nav-right {
-      display:flex;
-      align-items:center;
-      gap:20px;
-      font-size:15px;
+    .nav-logo img {
+      width: 136px;
+      height: auto;
     }
 
-    .nav-right a {
-      text-decoration:none;
-      color:var(--moding-green);
-      font-weight:500;
-      white-space:nowrap;
-      transition:0.2s;
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
+      font-size: 15px;
+      font-weight: 700;
     }
 
-    .nav-right a:hover {
-      color:var(--moding-orange);
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--moding-green);
+      white-space: nowrap;
+      transition: color 0.2s ease;
     }
 
-    .nav-right a.active {
-      color:var(--moding-orange);
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--moding-orange);
     }
 
-    /* COMMON TITLES */
-    .section-title {
-      font-size:13px;
-      letter-spacing:0.18em;
-      color:var(--moding-green);
-      margin-bottom:10px;
-      text-transform:uppercase;
+    /* =========================================================
+       4. 상단 메인 화면 이동 버튼
+       ========================================================= */
+    .top-return {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 26px;
     }
 
-    .section-subtitle {
-      font-size:18px;
-      font-weight:600;
-      color:var(--text-main);
-      margin-bottom:16px;
+    .top-return-btn {
+      padding: 8px 15px;
+      border-radius: 999px;
+      border: 1.5px solid var(--moding-green);
+      background: #ffffff;
+      color: var(--moding-green);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
     }
 
-    /* HERO ALLIANCE */
-    .hero-alliance {
-      padding:56px 0 42px;
+    .top-return-btn:hover {
+      background: var(--moding-green);
+      color: #ffffff;
     }
 
-    .hero-alliance-title {
-      font-size:28px;
-      font-weight:700;
-      line-height:1.4;
-      color:var(--moding-green);
-      margin-bottom:12px;
+    /* =========================================================
+       5. 공통 타이포
+       ========================================================= */
+    main {
+      flex: 1;
+      width: 100%;
     }
 
-    .hero-alliance-sub {
-      font-size:17px;
-      line-height:1.7;
-      color:var(--text-main);
-      margin-bottom:10px;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      padding: 7px 15px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(35, 139, 34, 0.28);
+      background: #ffffff;
+      color: var(--moding-green);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
     }
 
-    .hero-alliance-meta {
-      font-size:14px;
-      line-height:1.6;
-      color:var(--text-sub);
-      opacity:0.9;
+    .alliance-title {
+      font-size: clamp(30px, 4.2vw, 48px);
+      font-weight: 850;
+      line-height: 1.28;
+      letter-spacing: -0.045em;
+      color: var(--moding-green);
+      margin-bottom: 20px;
     }
 
-    .hero-alliance .cta-btn {
-      position:relative;
-      overflow:hidden;
-      margin-top:18px;
-      background:#238B22;
-      border-color:#238B22;
-      color:#ffffff;
-      box-shadow:0 10px 26px rgba(35,139,34,0.32);
+    .alliance-title .orange {
+      color: var(--moding-orange);
     }
 
-    .hero-alliance .cta-btn:hover {
-      background:#1c6f1c;
-      border-color:#1c6f1c;
-      box-shadow:0 14px 34px rgba(35,139,34,0.42);
-      transform:translateY(-1px);
+    .section-label {
+      margin-bottom: 9px;
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.18em;
+      color: var(--moding-green);
     }
 
-    .hero-alliance .cta-btn::after {
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(
-        110deg,
-        transparent 0%,
-        transparent 38%,
-        rgba(255,255,255,0.18) 45%,
-        rgba(255,255,255,0.55) 50%,
-        rgba(255,255,255,0.18) 55%,
-        transparent 62%,
-        transparent 100%
-      );
-      transform:translateX(-120%);
-      animation:ctaShine 3.8s ease-in-out infinite;
-      pointer-events:none;
+    .section-heading {
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 850;
+      line-height: 1.32;
+      letter-spacing: -0.04em;
+      color: var(--text-main);
+      margin-bottom: 14px;
     }
 
-    @keyframes ctaShine {
-      0%, 58% {
-        transform:translateX(-120%);
-      }
-      82%, 100% {
-        transform:translateX(120%);
-      }
+    .section-desc {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-sub);
     }
 
-    /* WHO WE WORK WITH */
-    .who-partners {
-      margin-top:48px;
+    /* =========================================================
+       6. Alliance Hero
+       ========================================================= */
+    .alliance-hero {
+      width: 100%;
+      text-align: center;
+      padding: 48px 0 30px;
     }
 
-    .who-grid {
-      display:flex;
-      flex-wrap:wrap;
-      gap:16px;
-      justify-content:center;
+    .alliance-sub {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.75;
+      color: var(--text-main);
     }
 
-    .who-card {
-      flex:1 1 0;
-      min-width:230px;
-      border-radius:20px;
-      padding:18px 18px 16px;
-      background:#ffffff;
-      border:2px solid #d7e0db;
-      box-shadow:0 6px 18px rgba(0,0,0,0.04);
-      font-size:14px;
-      line-height:1.7;
+    .partner-banner {
+      position: relative;
+      margin: 34px auto 0;
+      max-width: 980px;
+      min-height: 270px;
+      padding: 38px 32px;
+      border-radius: 30px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255, 140, 0, 0.26), transparent 27%),
+        radial-gradient(circle at 88% 76%, rgba(255, 255, 255, 0.22), transparent 28%),
+        linear-gradient(135deg, #17681A, #2FA530);
+      color: #ffffff;
+      box-shadow: var(--shadow-hero);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .who-card.green {
-      border-color:var(--moding-green);
+    .partner-banner::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      right: -42px;
+      top: -52px;
+      background: rgba(255, 255, 255, 0.13);
     }
 
-    .who-card.orange {
-      border-color:var(--moding-orange);
+    .partner-banner::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 42px;
+      left: -38px;
+      bottom: -48px;
+      background: rgba(255, 140, 0, 0.22);
+      transform: rotate(12deg);
     }
 
-    .who-type {
-      font-size:13px;
-      font-weight:600;
-      margin-bottom:4px;
-      color:var(--text-main);
+    .partner-banner-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
     }
 
-    .who-tag {
-      display:inline-block;
-      font-size:11px;
-      padding:2px 7px;
-      border-radius:999px;
-      border:1px solid rgba(0,0,0,0.14);
-      background:#ffffff;
-      color:var(--text-sub);
-      margin-bottom:8px;
+    .banner-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.12em;
     }
 
-    .who-card.green .who-tag {
-      border-color:var(--moding-green);
-      color:var(--moding-green);
+    .banner-title {
+      font-size: clamp(30px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.18;
+      letter-spacing: -0.055em;
+      color: #ffffff;
+      margin-bottom: 18px;
     }
 
-    .who-card.orange .who-tag {
-      border-color:var(--moding-orange);
-      color:var(--moding-orange);
+    .banner-title .orange {
+      color: #FFD28A;
     }
 
-    .who-text {
-      font-size:14px;
-      color:var(--text-sub);
-      margin-bottom:4px;
+    .banner-text {
+      font-size: 17px;
+      font-weight: 550;
+      line-height: 1.72;
+      color: rgba(255, 255, 255, 0.92);
     }
 
-    /* SHARED VALUE */
-    .shared-value {
-      margin-top:46px;
+    /* =========================================================
+       7. 입점 가능 상품군
+       ========================================================= */
+    .category-section {
+      padding: 36px 0 18px;
+      text-align: center;
+    }
+
+    .category-chips {
+      max-width: 820px;
+      margin: 24px auto 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .category-chip {
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1.5px solid rgba(35, 139, 34, 0.18);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.035);
+    }
+
+    .category-chip.orange {
+      border-color: rgba(255, 140, 0, 0.26);
+      color: var(--moding-orange);
+    }
+
+    .category-note {
+      max-width: 720px;
+      margin: 16px auto 0;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: #777777;
+    }
+
+    /* =========================================================
+       8. 모딩과 함께하면
+       ========================================================= */
+    .partner-value {
+      padding: 34px 0 22px;
+    }
+
+    .partner-value-header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
     }
 
     .value-card {
-      margin-top:10px;
-      border-radius:22px;
-      padding:26px 24px 24px;
-      line-height:1.8;
-      background:linear-gradient(135deg, #17681A, #2FA530);
-      color:#ffffff;
-      box-shadow:0 12px 32px rgba(0,0,0,0.25);
+      position: relative;
+      min-height: 220px;
+      padding: 26px 24px 24px;
+      border-radius: 28px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(22px);
+      animation: cardFadeUp 0.75s ease forwards;
     }
-    
+
+    .value-card:nth-child(1) {
+      animation-delay: 0.06s;
+    }
+
+    .value-card:nth-child(2) {
+      animation-delay: 0.16s;
+    }
+
+    .value-card:nth-child(3) {
+      animation-delay: 0.26s;
+    }
+
+    .value-card.green {
+      border: 2px solid var(--moding-green);
+    }
+
+    .value-card.orange {
+      border: 2px solid var(--moding-orange);
+    }
+
+    .value-card.brown {
+      border: 2px solid var(--moding-brown);
+    }
+
+    .value-number {
+      position: absolute;
+      right: 18px;
+      top: 8px;
+      font-size: 66px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      opacity: 0.08;
+      color: #000000;
+    }
+
+    .value-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .value-card.green .value-badge {
+      background: var(--moding-green);
+    }
+
+    .value-card.orange .value-badge {
+      background: var(--moding-orange);
+    }
+
+    .value-card.brown .value-badge {
+      background: var(--moding-brown);
+    }
 
     .value-title {
-      font-size:15px;
-      font-weight:600;
-      margin-bottom:10px;
-      color:#ffffff;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 12px;
+      font-size: 23px;
+      font-weight: 900;
+      line-height: 1.28;
+      letter-spacing: -0.045em;
+      color: var(--text-main);
     }
 
-    .value-text + .value-text {
-      margin-top:4px;
+    .value-title .orange {
+      color: var(--moding-orange);
     }
 
-    .value-card strong {
-      color:#ffffff;
-      font-weight:600;
+    .value-desc {
+      position: relative;
+      z-index: 1;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-sub);
     }
 
-    /* JOINING FLOW */
-    .flow-block {
-      margin-top:52px;
+    @media (hover: hover) and (pointer: fine) {
+      .value-card {
+        transition:
+          transform 0.24s ease,
+          box-shadow 0.24s ease;
+      }
+
+      .value-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-soft);
+      }
     }
 
-    .flow-desc {
-      font-size:14px;
-      color:var(--text-sub);
-      margin-bottom:18px;
+    /* =========================================================
+       9. 판매자 입점 문의
+       ========================================================= */
+    .contact-section {
+      padding: 34px 0 68px;
+      text-align: center;
     }
 
-    .flow-steps {
-      display:flex;
-      flex-wrap:wrap;
-      gap:16px;
-      justify-content:center;
+    .contact-box {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 34px 24px;
+      border-radius: 32px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(35, 139, 34, 0.12);
     }
 
-    .step-card {
-      flex:1 1 0;
-      min-width:230px;
-      border-radius:18px;
-      padding:16px 18px 14px;
-      background:#ffffff;
-      border:2px solid #d7e0db;
-      box-shadow:0 6px 18px rgba(0,0,0,0.04);
-      font-size:14px;
-      line-height:1.7;
+    .contact-title {
+      margin-bottom: 14px;
+      font-size: clamp(25px, 3.5vw, 38px);
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: -0.05em;
+      color: var(--moding-green);
     }
 
-    .step-header {
-      display:flex;
-      align-items:center;
-      gap:8px;
-      margin-bottom:6px;
+    .contact-title .orange {
+      color: var(--moding-orange);
     }
 
-    .step-badge {
-      font-size:11px;
-      font-weight:600;
-      padding:3px 9px;
-      border-radius:999px;
-      border:1px solid rgba(0,0,0,0.16);
-      background:#ffffff;
-      color:var(--text-sub);
-      white-space:nowrap;
+    .contact-desc {
+      max-width: 620px;
+      margin: 0 auto 24px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-sub);
     }
 
-    .step-title {
-      font-size:14px;
-      font-weight:600;
-      color:var(--text-main);
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
-    .step-text {
-      font-size:14px;
-      color:var(--text-sub);
+    .contact-btn {
+      min-width: 220px;
+      min-height: 58px;
+      padding: 14px 22px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
-    /* CTA CONTACT */
-    .cta-contact {
-      margin-top:56px;
-      text-align:center;
+    .contact-btn:hover {
+      transform: translateY(-2px);
     }
 
-    .cta-desc {
-      font-size:14px;
-      color:var(--text-sub);
-      margin-bottom:18px;
-      line-height:1.7;
+    .contact-btn.kakao {
+      background: var(--kakao-yellow);
+      border: 2px solid var(--kakao-yellow);
+      color: var(--kakao-text);
+      box-shadow: 0 10px 24px rgba(254, 229, 0, 0.22);
     }
 
-    .cta-buttons {
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      justify-content:center;
-      margin-bottom:12px;
+    .contact-btn.kakao:hover {
+      background: var(--kakao-yellow-dark);
+      border-color: var(--kakao-yellow-dark);
     }
 
-    .cta-btn {
-      display:inline-block;
-      min-width:220px;
-      padding:13px 20px;
-      border-radius:16px;
-      font-size:14px;
-      font-weight:600;
-      text-decoration:none;
-      text-align:center;
-      border:2px solid transparent;
-      transition:0.2s;
-      white-space:nowrap;
+    .contact-btn.email {
+      background: var(--moding-green);
+      border: 2px solid var(--moding-green);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(35, 139, 34, 0.22);
     }
 
-    .cta-btn.green {
-      background:var(--moding-green);
-      border-color:var(--moding-green);
-      color:#ffffff;
+    .contact-btn.email:hover {
+      background: var(--moding-green-dark);
+      border-color: var(--moding-green-dark);
     }
 
-    .cta-btn.green:hover {
-      background:#1c6f1c;
-      border-color:#1c6f1c;
+    .guide-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 8px;
+      color: var(--moding-green);
+      font-size: 13px;
+      font-weight: 850;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(35, 139, 34, 0.35);
     }
 
-    .cta-btn.orange {
-      background:var(--moding-orange);
-      border-color:var(--moding-orange);
-      color:#ffffff;
+    .guide-link:hover {
+      color: var(--moding-orange);
+      border-color: rgba(255, 140, 0, 0.4);
     }
 
-    .cta-btn.orange:hover {
-      background:#e67800;
-      border-color:#e67800;
+    .contact-note {
+      margin-top: 14px;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: #777777;
     }
 
-    .cta-note {
-      font-size:12px;
-      color:#777;
-      line-height:1.8;
+    /* =========================================================
+       10. Footer
+       ========================================================= */
+    footer {
+      width: 100%;
+      margin-top: auto;
+      padding: 24px 10px;
+      background: var(--bg-white);
+      border-top: 1px solid var(--border-light);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #777777;
     }
-
-    /* FOOTER */
 
     .footer-links {
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       font-size: 12px;
       text-align: center;
-}
+    }
 
     .footer-links a {
       text-decoration: none;
       color: var(--moding-green);
-      font-weight: 500;
-}
+      font-weight: 700;
+    }
 
     .footer-links a:hover {
       color: var(--moding-orange);
-}
+    }
 
     .footer-links .divider {
       margin: 0 6px;
       color: #bbbbbb;
-}
-
-    footer {
-      margin-top:auto;
-      padding:22px 10px;
-      font-size:12px;
-      color:#777;
-      text-align:center;
-      border-top:1px solid #e1e4e2;
-      line-height:1.8;
-      background:#ffffff;
-      width:100%;
     }
 
-    /* 복사/드래그 방지 */
-    html, body, *:not(input):not(textarea) {
-      -webkit-user-select:none;
-      user-select:none;
+    /* =========================================================
+       11. 복사 / 드래그 방지
+       ========================================================= */
+    html,
+    body,
+    *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      user-select: none;
     }
-    img { user-drag:none; pointer-events:none; }
-    input,textarea{user-select:text;pointer-events:auto;}
 
-    /* 반응형 */
-    @media (max-width: 768px) {
-      .container {
-        padding:32px 20px 40px;
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+
+    input,
+    textarea {
+      user-select: text;
+      pointer-events: auto;
+    }
+
+    /* =========================================================
+       12. Animation
+       ========================================================= */
+    @keyframes cardFadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      .hero-alliance {
-        padding:44px 0 34px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
-      .hero-alliance-title {
-        font-size:24px;
-      }
-      .hero-alliance-sub {
-        font-size:16px;
-      }
-      .hero-alliance-meta {
-        font-size:13px;
-      }
-      .section-subtitle {
-        font-size:17px;
-      }
+
       .value-card {
-        padding:22px 18px 20px;
-        font-size:13.5px;
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+
+      .nav-menu a,
+      .top-return-btn,
+      .contact-btn {
+        transition: none;
       }
     }
 
-    @media (max-width: 600px) {
+    /* =========================================================
+       13. Responsive / 노트북 · 태블릿
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .container {
+        max-width: 960px;
+      }
+
+      .value-grid {
+        gap: 14px;
+      }
+    }
+
+    /* =========================================================
+       14. Responsive / 태블릿 세로
+       ========================================================= */
+    @media (max-width: 820px) {
       .nav {
-        padding:12px 16px;
-        flex-direction:column;
-        row-gap:8px;
+        padding: 14px 20px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
       }
-      .nav-left img {
-        width:150px;
+
+      .nav-logo img {
+        width: 124px;
       }
-      .nav-right {
-        font-size:14px;
-        gap:16px;
-        flex-wrap:wrap;
-        justify-content:center;
+
+      .nav-menu {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 14px;
       }
-      .hero-alliance-title {
-        font-size:22px;
+
+      .container {
+        padding: 0 20px;
       }
-      .hero-alliance-sub {
-        font-size:15px;
+
+      .top-return {
+        padding-top: 22px;
       }
-      .who-grid,
-      .flow-steps,
-      .cta-buttons {
-        gap:12px;
+
+      .alliance-hero {
+        padding: 42px 0 30px;
       }
-      .who-card,
-      .step-card {
-        min-width:100%;
+
+      .alliance-sub {
+        font-size: 16px;
       }
-      .cta-btn {
-        width:100%;
-        max-width:280px;
+
+      .partner-banner {
+        margin-top: 34px;
+        min-height: 260px;
+        padding: 34px 24px;
+        border-radius: 28px;
       }
-      .hero-alliance .cta-btn {
-        max-width:none;
+
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .value-card {
+        min-height: auto;
       }
     }
 
-    .hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 18px;
-}
+    /* =========================================================
+       15. Responsive / 일반 스마트폰
+       ========================================================= */
+    @media (max-width: 640px) {
+      .nav-logo img {
+        width: 116px;
+      }
 
-.hero-buttons .cta-btn {
-  margin-top: 0;
-}
+      .nav-menu {
+        gap: 14px;
+        font-size: 13px;
+      }
 
-@media (max-width: 600px) {
-  .hero-buttons {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
+      .top-return {
+        padding-top: 18px;
+      }
+
+      .top-return-btn {
+        font-size: 12px;
+        padding: 7px 13px;
+      }
+
+      .alliance-hero {
+        padding: 36px 0 26px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        padding: 6px 13px;
+        margin-bottom: 16px;
+      }
+
+      .alliance-title {
+        font-size: clamp(27px, 8vw, 34px);
+        line-height: 1.34;
+      }
+
+      .alliance-sub {
+        font-size: 15px;
+        line-height: 1.72;
+      }
+
+      .partner-banner {
+        min-height: 250px;
+        padding: 30px 20px;
+        border-radius: 26px;
+      }
+
+      .banner-kicker {
+        font-size: 11px;
+      }
+
+      .banner-title {
+        font-size: clamp(28px, 9vw, 38px);
+      }
+
+      .banner-text {
+        font-size: 14px;
+      }
+
+      .category-section {
+        padding: 32px 0 16px;
+      }
+
+      .section-heading {
+        font-size: 24px;
+      }
+
+      .section-desc {
+        font-size: 14px;
+      }
+
+      .category-chip {
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+
+      .partner-value {
+        padding: 30px 0 18px;
+      }
+
+      .partner-value-header {
+        margin-bottom: 20px;
+      }
+
+      .value-card {
+        padding: 26px 20px 24px;
+        border-radius: 26px;
+      }
+
+      .value-number {
+        font-size: 62px;
+      }
+
+      .value-title {
+        font-size: 22px;
+      }
+
+      .value-desc {
+        font-size: 13.5px;
+      }
+
+      .contact-section {
+        padding: 28px 0 52px;
+      }
+
+      .contact-box {
+        padding: 30px 20px;
+        border-radius: 26px;
+      }
+
+      .contact-title {
+        font-size: 28px;
+      }
+
+      .contact-desc {
+        font-size: 14px;
+      }
+
+      .contact-btn {
+        width: 100%;
+        max-width: 300px;
+        min-height: 56px;
+        font-size: 14px;
+      }
+    }
+
+    /* =========================================================
+       16. Responsive / 매우 좁은 화면
+       ========================================================= */
+    @media (max-width: 380px) {
+      .nav {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .nav-logo img {
+        width: 108px;
+      }
+
+      .nav-menu {
+        gap: 11px;
+        font-size: 12px;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .alliance-hero {
+        padding: 32px 0 24px;
+      }
+
+      .alliance-title {
+        font-size: 25px;
+        letter-spacing: -0.04em;
+      }
+
+      .partner-banner {
+        border-radius: 24px;
+        padding: 30px 18px;
+      }
+
+      .value-card {
+        padding: 24px 18px 22px;
+      }
+
+      footer {
+        padding: 22px 14px;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <div class="page">
 
-<header>
-  <div class="nav">
-    <div class="nav-left">
-      <img src="모딩로고.png" alt="Moding Logo">
-    </div>
-    <div class="nav-right">
-      <a href="about.html">About</a>
-      <a href="brand.html">Brand</a>   
-      <a href="services.html">Services</a>
-      <a href="alliance.html" class="active">Alliance</a>
-      <a href="faq.html">FAQ</a>  
-    </div>
+    <!-- =======================================================
+         HEADER
+         ======================================================= -->
+    <header>
+      <nav class="nav" aria-label="주요 메뉴">
+
+        <!-- 상단 로고 -->
+        <a href="index.html" class="nav-logo" aria-label="모딩 홈으로 이동">
+          <img src="모딩로고.png" alt="Moding Logo">
+        </a>
+
+        <!-- 상단 메뉴 -->
+        <div class="nav-menu">
+          <a href="about.html">About</a>
+          <a href="brand.html">Brand</a>
+          <a href="services.html">Services</a>
+          <a href="alliance.html" class="active">Alliance</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+
+      </nav>
+    </header>
+
+    <!-- =======================================================
+         MAIN
+         ======================================================= -->
+    <main>
+
+      <div class="container">
+        <div class="top-return">
+          <a href="index.html" class="top-return-btn">메인 화면으로</a>
+        </div>
+      </div>
+
+      <!-- ALLIANCE HERO -->
+      <section class="alliance-hero">
+        <div class="container">
+
+          <div class="eyebrow">ALLIANCE MODING</div>
+
+          <h1 class="alliance-title">
+            좋은 상품을 가진<br>
+            <span class="orange">공급 파트너를 찾습니다.</span>
+          </h1>
+
+          <p class="alliance-sub">
+            모딩은 외식업 사장님에게<br>
+            특수하고 우수한 상품을 소개하는 B2B 식품 거래 앱입니다.
+          </p>
+
+          <div class="partner-banner" aria-label="공급 파트너 안내 배너">
+            <div class="partner-banner-inner">
+              <div class="banner-kicker">FOR PARTNER</div>
+
+              <div class="banner-title">
+                우리 상품을<br>
+                <span class="orange">더 많은 매장에.</span>
+              </div>
+
+              <p class="banner-text">
+                좋은 상품이 필요한 매장에 더 쉽게 닿을 수 있도록,<br>
+                모딩이 상품 소개와 거래 흐름을 함께 정리합니다.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CATEGORY -->
+      <section class="category-section">
+        <div class="container">
+
+          <div class="section-label">PRODUCT CATEGORY</div>
+          <h2 class="section-heading">
+            어떤 상품이 입점할 수 있나요?
+          </h2>
+          <p class="section-desc">
+            외식업 매장에 필요한 식품·식자재 상품이라면 모딩과 함께할 수 있습니다.
+          </p>
+
+          <div class="category-chips" aria-label="입점 가능 상품군">
+            <span class="category-chip">특수 식자재</span>
+            <span class="category-chip orange">가공식품</span>
+            <span class="category-chip">소스·양념</span>
+            <span class="category-chip orange">안주류</span>
+            <span class="category-chip">카페·디저트</span>
+            <span class="category-chip orange">주류·수입식품</span>
+          </div>
+
+          <p class="category-note">
+            주류·수입식품 등 별도 인허가 확인이 필요한 상품은 관련 서류 확인 후 입점이 진행됩니다.
+          </p>
+
+        </div>
+      </section>
+
+      <!-- VALUE -->
+      <section class="partner-value">
+        <div class="container">
+
+          <div class="partner-value-header">
+            <div class="section-label">PARTNER VALUE</div>
+            <h2 class="section-heading">
+              모딩과 함께하면
+            </h2>
+            <p class="section-desc">
+              좋은 상품이 더 잘 보이고, 필요한 매장과 더 쉽게 연결될 수 있습니다.
+            </p>
+          </div>
+
+          <div class="value-grid">
+
+            <!-- 01 -->
+            <article class="value-card green">
+              <div class="value-number">01</div>
+              <div class="value-badge">노출</div>
+
+              <h3 class="value-title">
+                좋은 상품이<br>
+                <span class="orange">더 잘 보이도록</span>
+              </h3>
+
+              <p class="value-desc">
+                상품의 강점과 활용 장면이 외식업 사장님에게 더 쉽게 전달될 수 있도록 소개합니다.
+              </p>
+            </article>
+
+            <!-- 02 -->
+            <article class="value-card orange">
+              <div class="value-number">02</div>
+              <div class="value-badge">연결</div>
+
+              <h3 class="value-title">
+                필요한 매장과<br>
+                <span class="orange">더 빠르게 연결</span>
+              </h3>
+
+              <p class="value-desc">
+                상품을 찾는 매장과 공급 파트너가 하나의 플랫폼 안에서 더 자연스럽게 만날 수 있도록 돕습니다.
+              </p>
+            </article>
+
+            <!-- 03 -->
+            <article class="value-card brown">
+              <div class="value-number">03</div>
+              <div class="value-badge">정리</div>
+
+              <h3 class="value-title">
+                주문·결제·증빙<br>
+                <span class="orange">흐름까지 정리</span>
+              </h3>
+
+              <p class="value-desc">
+                거래가 반복될수록 복잡해지는 주문, 결제, 증빙 흐름을 모딩 안에서 더 간단하게 정리합니다.
+              </p>
+            </article>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="contact-section">
+        <div class="container">
+
+          <div class="contact-box">
+            <h2 class="contact-title">
+              판매자<br>
+              <span class="orange">입점 문의</span>
+            </h2>
+
+            <p class="contact-desc">
+              모딩에 상품 입점을 희망하시거나 제휴 상담이 필요하신 경우,
+              편한 방법으로 문의해 주세요.
+            </p>
+
+            <div class="contact-buttons">
+              <a
+                href="https://pf.kakao.com/_CixjCX/friend"
+                class="contact-btn kakao"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                카카오톡 문의하기
+              </a>
+
+              <a
+                href="mailto:partner@moding.app?subject=%5B%EB%AA%A8%EB%94%A9%20%EA%B3%B5%EA%B8%89%20%ED%8C%8C%ED%8A%B8%EB%84%88%20%EC%9E%85%EC%A0%90%20%EB%AC%B8%EC%9D%98%5D&body=%ED%9A%8C%EC%82%AC%EB%AA%85%20%2F%20%EB%8B%B4%EB%8B%B9%EC%9E%90%EB%AA%85%20%2F%20%EC%97%B0%EB%9D%BD%EC%B2%98%20%2F%20%EC%A3%BC%EC%9A%94%20%EC%83%81%ED%92%88%EA%B5%B0%EC%9D%84%20%EC%A0%81%EC%96%B4%20%EC%A3%BC%EC%84%B8%EC%9A%94."
+                class="contact-btn email"
+              >
+                이메일 문의하기
+              </a>
+            </div>
+
+            <a
+              href="seller-application/Moding_Inc_Seller.pdf"
+              class="guide-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              공급 파트너 안내서 보기
+            </a>
+
+            <p class="contact-note">
+              판매자 회원가입은 모딩 앱에서 진행하실 수 있습니다.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- =======================================================
+         FOOTER
+         ======================================================= -->
+    <footer>
+      <div class="footer-links">
+        <a href="terms.html">이용약관</a>
+        <span class="divider">·</span>
+        <a href="privacy.html">개인정보처리방침</a>
+        <span class="divider">·</span>
+        <a href="location.html">오시는 길</a>
+      </div>
+
+      주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+      통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
+      대구광역시 달서구 달구벌대로 1870, 7층
+    </footer>
+
   </div>
-</header>
 
-<div class="container">
+  <script>
+    /* =========================================================
+       복사 / 드래그 방지
+       ========================================================= */
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) {
+        e.preventDefault();
+      }
+    });
 
-   <!-- 메인화면으로 -->
-  <div class="top-return">
-  <a href="index.html" class="top-return-btn">메인 화면으로</a>
-</div>
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
 
-  
-  <!-- HERO -->
-  <section class="hero-alliance">
-    <h1 class="hero-alliance-title">
-      제휴·입점 안내
-    </h1>
-    <p class="hero-alliance-sub">
-      모든 사장님을 위한, 모든 것을 담은 B2B Food-SaaS 모딩(Moding).<br>
-      좋은 제품을 만드는 제조사와 운영에 진심인 외식업 사장님을 한 곳에서 연결합니다.
-    </p>
-    <p class="hero-alliance-meta">
-      모딩은 누구 한쪽만을 위한 플랫폼이 아닙니다.<br>
-      식품 제조사와 외식업 사장님, 두 분 모두가 모딩의 사용자이자 고객입니다.
-    </p>
-    <a
-      href="seller-application/index.html"
-      class="cta-btn">
-      모딩 초기 판매자 입점 신청
-    </a>
-     <a
-    href="seller-application/Moding_Inc_Seller.pdf"
-    target="_blank"
-    rel="noopener"
-    class="cta-btn">
-    판매자제안서 다운로드
-  </a>
-</div>
-    
-  </section>
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
 
-  <!-- WHO WE WORK WITH -->
-  <section class="who-partners">
-    <div class="section-title">WHO WE WORK WITH</div>
-    <div class="section-subtitle">모딩과 함께하는 사장님들</div>
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
 
-    <div class="who-grid">
-      <div class="who-card green">
-        <div class="who-type">식품 제조사 사장님</div>
-        <div class="who-tag">제조사 사용자</div>
-        <p class="who-text">
-          자체 공장 또는 OEM 생산을 운영하며, 좋은 제품을 가지고 B2B 거래를 확장하고 싶은 사장님.
-        </p>
-        <p class="who-text">
-          판로 확보뿐 아니라 발주·정산·세금계산서 발행까지 한 번에 관리하고 싶은 제조사에게 적합합니다.
-        </p>
-        <p class="who-text">
-          PB·OEM, 장기 공급 계약 등 함께 성장할 파트너를 찾는 분을 환영합니다.
-        </p>
-      </div>
-
-      <div class="who-card orange">
-        <div class="who-type">외식업 사장님</div>
-        <div class="who-tag">매장 사용자</div>
-        <p class="who-text">
-          소스·원재료·밀키트 운영을 체계적으로 관리하고 싶은 매장, 검증된 제조사 상품을 활용해 메뉴를 구성하고 싶은 사장님.
-        </p>
-        <p class="who-text">
-          발주·정산·세금계산서를 반복 관리하는 시간을 줄이고, 매장 운영과 손님 경험에 집중하고 싶은 분에게 적합합니다.
-        </p>
-        <p class="who-text">
-          장기 거래가 가능한 제조사와 안정적인 공급 구조를 만들고 싶은 사장님을 기다립니다.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SHARED VALUE -->
-  <section class="shared-value">
-    <div class="section-title">VALUE</div>
-    <div class="section-subtitle">모든 사장님께 드리는 공통 가치</div>
-
-    <div class="value-card">
-      <div class="value-title">거래 구조는 단순하게, 운영은 더 똑똑하게</div>
-      <p class="value-text">
-        상품 거래의 법적 당사자는 언제나 <strong>“제조사 ↔ 외식업 매장”</strong>으로 명확하게 유지됩니다.
-      </p>
-      <p class="value-text">
-        모딩은 상품을 대신 판매하는 회사가 아니라,
-        결제·정산·세금계산서를 자동화하는 <strong>B2B 중개·SaaS 도구</strong>입니다.
-      </p>
-      <p class="value-text">
-        반복적으로 쌓이는 엑셀 작업과 정산 정리를 줄이고,
-        사장님이 가장 잘하는 일, <strong>좋은 제품을 만들고 매장을 운영하는 일</strong>에 집중할 수 있도록 돕습니다.
-      </p>
-    </div>
-  </section>
-
-  <!-- JOINING FLOW -->
-  <section class="flow-block">
-    <div class="section-title">JOINING FLOW</div>
-    <div class="section-subtitle">제휴·입점 진행 단계</div>
-    <p class="flow-desc">
-      제조사와 외식업 모두, 크게 네 단계만 거치면 모딩과 함께 운영을 시작하실 수 있습니다.
-    </p>
-
-    <div class="flow-steps">
-      <div class="step-card">
-        <div class="step-header">
-          <span class="step-badge">STEP 1</span>
-          <span class="step-title">문의 접수</span>
-        </div>
-        <p class="step-text">
-          회사·매장 정보와 담당자 연락처를 간단히 남겨 주시면 됩니다.
-          제조사·외식업 여부와 현재 운영 형태 정도만 알려주셔도 충분합니다.
-        </p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-header">
-          <span class="step-badge">STEP 2</span>
-          <span class="step-title">서비스·상품 구조 확인</span>
-        </div>
-        <p class="step-text">
-          제조사는 제품, 공정, 인허가 및 공급 구조를,
-          외식업은 업종, 메뉴 구성, 발주·정산 방식을 함께 확인합니다.
-        </p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-header">
-          <span class="step-badge">STEP 3</span>
-          <span class="step-title">조건 및 범위 합의</span>
-        </div>
-        <p class="step-text">
-          공급 품목, 정산 구조, 이용 방식 등을 정리합니다.
-          사장님께 과도한 부담이 가지 않도록 현실적인 선에서 맞춰갑니다.
-        </p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-header">
-          <span class="step-badge">STEP 4</span>
-          <span class="step-title">계정 생성 및 온보딩</span>
-        </div>
-        <p class="step-text">
-          모딩 시스템에 계정을 생성하고,
-          발주·정산·데이터 기능을 사용하면서 실제 거래를 시작합니다.
-          이후에도 운영 과정에서 필요한 내용은 함께 조정해 나갑니다.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA CONTACT -->
-  <section class="cta-contact">
-    <div class="section-title">CONTACT</div>
-    <div class="section-subtitle">제휴·입점 문의하기</div>
-    <p class="cta-desc">
-      아래 버튼 중 사장님께 맞는 항목을 눌러 메일을 열어 주세요.<br>
-      남겨 주신 연락처로 모딩에서 순서대로 연락드리겠습니다.
-    </p>
-
-<div class="cta-buttons">
-  <a
-    class="cta-btn green"
-    href="mailto:partner@moding.app?subject=%5B%EB%AA%A8%EB%94%A9%20%EC%8B%9D%ED%92%88%20%EC%A0%9C%EC%A1%B0%EC%82%AC%20%EB%AC%B8%EC%9D%98%5D&body=%ED%9A%8C%EC%82%AC%EB%AA%85%20%2F%20%EC%84%B1%ED%95%A8%20%2F%20%EC%97%B0%EB%9D%BD%EC%B2%98%EB%A5%BC%20%EC%A0%81%EC%96%B4%20%EC%A3%BC%EC%84%B8%EC%9A%94.">
-    식품 제조사 문의 열기
-  </a>
-
-  <a
-    class="cta-btn orange"
-    href="mailto:partner@moding.app?subject=%5B%EB%AA%A8%EB%94%A9%20%EC%99%B8%EC%8B%9D%EC%97%85%20%EC%82%AC%EC%9E%A5%EB%8B%98%20%EB%AC%B8%EC%9D%98%5D&body=%EB%A7%A4%EC%9E%A5%EB%AA%85%20%2F%20%EC%84%B1%ED%95%A8%20%2F%20%EC%97%B0%EB%9D%BD%EC%B2%98%EB%A5%BC%20%EC%A0%81%EC%96%B4%20%EC%A3%BC%EC%84%B8%EC%9A%94.">
-    외식업 사장님 문의 열기
-  </a>
-</div>
-
-    <div class="cta-note">
-      메일이 더 편하시면 <strong>partner@moding.app</strong> 로 직접 보내 주셔도 됩니다.
-    </div>
-  </section>
-</div>
-
-<footer>
-  <div class="footer-links">
-    <a href="terms.html">이용약관</a>
-    <span class="divider">·</span>
-    <a href="privacy.html">개인정보처리방침</a>
-    <span class="divider">·</span>
-    <a href="location.html">오시는 길</a>
-  </div>
-  주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
-  통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
-  대구광역시 달서구 달구벌대로 1870, 7층
-</footer>
-
-<script>
-  document.addEventListener("contextmenu", function (e) {
-    if (!e.target.closest("input, textarea, a")) e.preventDefault();
-  });
-  document.addEventListener("dragstart", function (e) {
-    if (!e.target.closest("input, textarea")) e.preventDefault();
-  });
-  document.addEventListener("keydown", function (e) {
-    const key = e.key.toLowerCase();
-    if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
-      if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
-    }
-  });
-  document.addEventListener("copy", function (e) {
-    if (!e.target.closest("input, textarea")) e.preventDefault();
-  });
-</script>
-
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
