@@ -38,7 +38,7 @@
       --border-light: #e1e4e2;
       --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.08);
       --shadow-card: 0 14px 34px rgba(0, 0, 0, 0.10);
-      --shadow-card-hover: 0 20px 44px rgba(0, 0, 0, 0.13);
+      --shadow-card-hover: 0 22px 48px rgba(0, 0, 0, 0.14);
     }
 
     /* =========================================================
@@ -162,6 +162,10 @@
       letter-spacing: -0.045em;
       color: var(--moding-green);
       margin-bottom: 0;
+
+      opacity: 0;
+      transform: translateY(18px);
+      animation: heroTextUp 0.72s ease forwards;
     }
 
     .hero-title .orange {
@@ -171,6 +175,7 @@
     /* =========================================================
        5. 다운로드 버튼
        - 포스터보다 위에 배치
+       - 버튼과 안내문도 순차 등장
        ========================================================= */
     .download-wrapper {
       margin-top: 28px;
@@ -179,6 +184,10 @@
       align-items: center;
       gap: 16px;
       flex-wrap: wrap;
+
+      opacity: 0;
+      transform: translateY(14px);
+      animation: heroTextUp 0.72s ease 0.18s forwards;
     }
 
     .download-btn {
@@ -244,6 +253,10 @@
       font-size: 13px;
       color: #777777;
       line-height: 1.6;
+
+      opacity: 0;
+      transform: translateY(12px);
+      animation: heroTextUp 0.72s ease 0.30s forwards;
     }
 
     /* =========================================================
@@ -251,6 +264,7 @@
        - iOS_1.png / iOS_2.png / iOS_3.png 파일을 index.html과 같은 위치에 업로드
        - 3장이 동시에 노출됨
        - 간격을 좁혀 하나의 캠페인 시리즈처럼 보이도록 처리
+       - 진입 시 순차 등장
        ========================================================= */
     .hero-visual-section {
       width: 100%;
@@ -270,21 +284,22 @@
       background: #ffffff;
       box-shadow: var(--shadow-card);
       overflow: hidden;
+
       opacity: 0;
-      transform: translateY(28px) scale(0.98);
-      animation: posterFadeUp 0.85s ease forwards;
+      transform: translateY(34px) scale(0.97);
+      animation: posterFadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
     .hero-visual-card:nth-child(1) {
-      animation-delay: 0.08s;
+      animation-delay: 0.42s;
     }
 
     .hero-visual-card:nth-child(2) {
-      animation-delay: 0.24s;
+      animation-delay: 0.56s;
     }
 
     .hero-visual-card:nth-child(3) {
-      animation-delay: 0.40s;
+      animation-delay: 0.70s;
     }
 
     .hero-visual-card img {
@@ -369,6 +384,13 @@
     /* =========================================================
        9. Animation
        ========================================================= */
+    @keyframes heroTextUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @keyframes posterFadeUp {
       to {
         opacity: 1;
@@ -396,6 +418,9 @@
         scroll-behavior: auto;
       }
 
+      .hero-title,
+      .download-wrapper,
+      .download-note,
       .hero-visual-card {
         opacity: 1;
         transform: none;
@@ -539,7 +564,7 @@
         padding: 6px 16px 20px;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        animation: mobileSlideHint 1.1s ease 0.8s 1;
+        animation: mobileSlideHint 1.1s ease 1.05s 1;
       }
 
       .hero-visual-grid::-webkit-scrollbar {
