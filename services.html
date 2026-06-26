@@ -37,7 +37,7 @@
 
       --border-light: #e1e4e2;
       --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.06);
-      --shadow-hero: 0 16px 42px rgba(0, 0, 0, 0.16);
+      --shadow-hero: 0 16px 42px rgba(0, 0, 0, 0.14);
       --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.08);
     }
 
@@ -224,7 +224,7 @@
       line-height: 1.32;
       letter-spacing: -0.04em;
       color: var(--text-main);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .section-desc {
@@ -241,7 +241,7 @@
     .services-hero {
       width: 100%;
       text-align: center;
-      padding: 48px 0 34px;
+      padding: 48px 0 30px;
     }
 
     .service-sub {
@@ -255,11 +255,11 @@
 
     .visual-banner {
       position: relative;
-      margin: 42px auto 0;
+      margin: 34px auto 0;
       max-width: 980px;
-      min-height: 310px;
-      padding: 44px 34px;
-      border-radius: 34px;
+      min-height: 270px;
+      padding: 38px 32px;
+      border-radius: 30px;
       overflow: hidden;
       background:
         radial-gradient(circle at 16% 20%, rgba(255, 140, 0, 0.28), transparent 26%),
@@ -339,9 +339,10 @@
     /* =========================================================
        7. 핵심 서비스 카드
        - HTML/CSS로 이미지형 카드처럼 구성
+       - 하단 칩 삭제 / 겹침 방지
        ========================================================= */
     .service-core {
-      padding: 42px 0 24px;
+      padding: 36px 0 20px;
     }
 
     .service-core-header {
@@ -357,9 +358,9 @@
 
     .poster-card {
       position: relative;
-      min-height: 330px;
-      padding: 28px 24px 24px;
-      border-radius: 30px;
+      min-height: 285px;
+      padding: 26px 24px 24px;
+      border-radius: 28px;
       background: #ffffff;
       box-shadow: var(--shadow-card);
       overflow: hidden;
@@ -397,7 +398,7 @@
       position: absolute;
       right: 18px;
       top: 8px;
-      font-size: 74px;
+      font-size: 72px;
       font-weight: 900;
       line-height: 1;
       letter-spacing: -0.06em;
@@ -433,7 +434,7 @@
       position: relative;
       z-index: 1;
       margin-bottom: 14px;
-      font-size: 26px;
+      font-size: 25px;
       font-weight: 900;
       line-height: 1.25;
       letter-spacing: -0.045em;
@@ -447,10 +448,10 @@
     .poster-copy {
       position: relative;
       z-index: 1;
-      margin-bottom: 22px;
+      margin-bottom: 16px;
       font-size: 15px;
-      font-weight: 600;
-      line-height: 1.7;
+      font-weight: 650;
+      line-height: 1.68;
       color: var(--text-main);
     }
 
@@ -460,36 +461,6 @@
       font-size: 14px;
       line-height: 1.75;
       color: var(--text-sub);
-    }
-
-    .poster-chip-list {
-      position: absolute;
-      left: 24px;
-      bottom: 22px;
-      right: 24px;
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .mini-chip {
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: rgba(35, 139, 34, 0.06);
-      color: var(--text-sub);
-      font-size: 11px;
-      font-weight: 750;
-      border: 1px solid rgba(35, 139, 34, 0.16);
-    }
-
-    .poster-card.orange .mini-chip {
-      background: rgba(255, 140, 0, 0.07);
-      border-color: rgba(255, 140, 0, 0.18);
-    }
-
-    .poster-card.brown .mini-chip {
-      background: rgba(139, 90, 43, 0.07);
-      border-color: rgba(139, 90, 43, 0.18);
     }
 
     /* 데스크탑 hover */
@@ -508,24 +479,25 @@
 
     /* =========================================================
        8. 짧은 리듬형 하단 섹션
+       - 하단 태그 삭제 / 문장 중심
        ========================================================= */
     .rhythm-section {
-      padding: 34px 0 68px;
+      padding: 26px 0 64px;
       text-align: center;
     }
 
     .rhythm-box {
-      max-width: 840px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 34px 24px;
-      border-radius: 32px;
+      padding: 32px 24px;
+      border-radius: 30px;
       background: #ffffff;
       box-shadow: var(--shadow-card);
       border: 1px solid rgba(35, 139, 34, 0.12);
     }
 
     .rhythm-title {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       font-size: clamp(28px, 4vw, 44px);
       font-weight: 900;
       line-height: 1.22;
@@ -541,30 +513,6 @@
       font-size: 16px;
       line-height: 1.75;
       color: var(--text-sub);
-    }
-
-    .rhythm-tags {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 18px;
-    }
-
-    .rhythm-tag {
-      padding: 7px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 850;
-      background: rgba(35, 139, 34, 0.07);
-      color: var(--moding-green);
-      border: 1px solid rgba(35, 139, 34, 0.16);
-    }
-
-    .rhythm-tag.orange {
-      background: rgba(255, 140, 0, 0.08);
-      color: var(--moding-orange);
-      border-color: rgba(255, 140, 0, 0.20);
     }
 
     /* =========================================================
@@ -665,7 +613,7 @@
       }
 
       .poster-card {
-        min-height: 330px;
+        min-height: 300px;
       }
     }
 
@@ -709,8 +657,8 @@
 
       .visual-banner {
         margin-top: 34px;
-        min-height: 280px;
-        padding: 36px 24px;
+        min-height: 260px;
+        padding: 34px 24px;
         border-radius: 28px;
       }
 
@@ -719,7 +667,7 @@
       }
 
       .poster-card {
-        min-height: 280px;
+        min-height: auto;
       }
     }
 
@@ -766,8 +714,8 @@
       }
 
       .visual-banner {
-        min-height: 260px;
-        padding: 32px 20px;
+        min-height: 250px;
+        padding: 30px 20px;
         border-radius: 26px;
       }
 
@@ -784,7 +732,7 @@
       }
 
       .service-core {
-        padding: 34px 0 18px;
+        padding: 32px 0 18px;
       }
 
       .service-core-header {
@@ -800,8 +748,7 @@
       }
 
       .poster-card {
-        min-height: 300px;
-        padding: 26px 20px 22px;
+        padding: 26px 20px 24px;
         border-radius: 26px;
       }
 
@@ -817,14 +764,12 @@
         font-size: 14px;
       }
 
-      .poster-chip-list {
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
+      .poster-desc {
+        font-size: 13.5px;
       }
 
       .rhythm-section {
-        padding: 30px 0 52px;
+        padding: 28px 0 52px;
       }
 
       .rhythm-box {
@@ -995,12 +940,6 @@
                 특수 식자재, 가공식품, 소스, 안주류, 카페·디저트, 주류까지.
                 사장님 가게에 어울리는 상품을 더 쉽게 찾을 수 있습니다.
               </p>
-
-              <div class="poster-chip-list">
-                <span class="mini-chip">특수 식자재</span>
-                <span class="mini-chip">소스</span>
-                <span class="mini-chip">안주류</span>
-              </div>
             </article>
 
             <!-- 02 -->
@@ -1022,12 +961,6 @@
                 상품 구매 부담은 줄이고,
                 사장님이 가게 운영 상황에 맞게 선택할 수 있는 폭을 넓힙니다.
               </p>
-
-              <div class="poster-chip-list">
-                <span class="mini-chip">카드결제</span>
-                <span class="mini-chip">운영자금</span>
-                <span class="mini-chip">구매 부담 완화</span>
-              </div>
             </article>
 
             <!-- 03 -->
@@ -1048,12 +981,6 @@
                 구매한 상품에 대해 판매자 명의의 세금계산서가 자동 발행되는 구조로 운영됩니다.
                 사장님은 정리된 증빙을 확인하면 됩니다.
               </p>
-
-              <div class="poster-chip-list">
-                <span class="mini-chip">판매자 명의</span>
-                <span class="mini-chip">자동 발행</span>
-                <span class="mini-chip">증빙 정리</span>
-              </div>
             </article>
 
           </div>
@@ -1076,12 +1003,6 @@
               사장님은 메뉴와 매장 운영에 집중하세요.<br>
               상품 발견과 거래 흐름은 모딩이 더 쉽게 만들겠습니다.
             </p>
-
-            <div class="rhythm-tags">
-              <span class="rhythm-tag">좋은 상품 발견</span>
-              <span class="rhythm-tag orange">카드결제</span>
-              <span class="rhythm-tag">세금계산서 정리</span>
-            </div>
           </div>
 
         </div>
