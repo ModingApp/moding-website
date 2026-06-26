@@ -1,859 +1,1469 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <!-- =========================================================
+       기본 메타 정보
+       ========================================================= -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
   <title>FAQ | 모딩(Moding)</title>
 
-  <meta name="description" content="모딩(Moding) B2B Food-SaaS 플랫폼 이용 시 식품 제조사와 외식업 사장님이 자주 묻는 질문을 정리한 페이지입니다.">
+  <meta name="description" content="모딩(Moding) 이용, 상품 구매, 입점 문의, 결제·세금계산서, 앱 사용과 관련해 자주 묻는 질문을 정리한 페이지입니다.">
+
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
   <meta property="og:title" content="FAQ | 모딩(Moding)">
-  <meta property="og:description" content="모딩(Moding) 플랫폼 이용, 입점, 주문·정산과 관련하여 자주 묻는 질문을 한곳에 모았습니다.">
+  <meta property="og:description" content="모딩 이용, 상품 구매, 입점 문의, 결제·증빙과 관련하여 자주 묻는 질문을 한곳에 모았습니다.">
   <meta property="og:url" content="https://moding.app/faq.html">
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
   <style>
-    .top-return {
-      display:flex;
-      justify-content:flex-end;
-      margin-bottom:12px;
-    }
-
-    .top-return-btn {
-      font-size:12px;
-      padding:6px 12px;
-      border-radius:999px;
-      border:1px solid var(--moding-green);
-      color:var(--moding-green);
-      background:#ffffff;
-      text-decoration:none;
-      font-weight:500;
-      transition:0.2s;
-    }
-
-    .top-return-btn:hover {
-      background:var(--moding-green);
-      color:#ffffff;
-    }
-
+    /* =========================================================
+       1. 브랜드 컬러 / 공통 변수
+       ========================================================= */
     :root {
       --moding-green: #238B22;
+      --moding-green-dark: #1c6f1c;
       --moding-orange: #FF8C00;
-      --moding-brown: #8B5A2B; /* 로고 나무색 계열 */
+      --moding-orange-dark: #e67800;
+      --moding-brown: #8B5A2B;
+
       --bg-light: #F7F9F8;
+      --bg-white: #ffffff;
+
       --text-main: #1F3B1F;
-      --text-sub: #555555;
+      --text-sub: #666666;
+
+      --border-light: #e1e4e2;
+      --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.06);
+      --shadow-hero: 0 16px 42px rgba(0, 0, 0, 0.14);
+      --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.08);
     }
 
+    /* =========================================================
+       2. Reset / 기본 설정
+       ========================================================= */
     * {
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
-      font-family:-apple-system, BlinkMacSystemFont,"Noto Sans KR",sans-serif;
-      background:var(--bg-light);
-      color:var(--text-main);
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       word-break: keep-all;
     }
 
-    .container {
-      width:100%;
-      max-width:860px;
-      margin:0 auto;
-      padding:40px 24px;
+    a {
+      color: inherit;
     }
 
-    /* HEADER */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =========================================================
+       3. Header / Navigation
+       ========================================================= */
     header {
-      width:100%;
-      border-bottom:1px solid #e1e4e2;
-      background:#ffffff;
+      width: 100%;
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-light);
     }
 
     .nav {
-      max-width:860px;
-      margin:0 auto;
-      padding:14px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      column-gap:24px;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
     }
 
-    .nav-left img {
-      width:160px;
-      height:auto;
-      display:block;
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
     }
 
-    .nav-right {
-      display:flex;
-      align-items:center;
-      gap:20px;
-      font-size:15px;
+    .nav-logo img {
+      width: 136px;
+      height: auto;
     }
 
-    .nav-right a {
-      text-decoration:none;
-      color:var(--moding-green);
-      font-weight:500;
-      white-space:nowrap;
-      transition:0.2s;
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
+      font-size: 15px;
+      font-weight: 700;
     }
 
-    .nav-right a:hover {
-      color:var(--moding-orange);
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--moding-green);
+      white-space: nowrap;
+      transition: color 0.2s ease;
     }
 
-    .nav-right a.active {
-      color:var(--moding-orange);
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--moding-orange);
     }
 
-    /* HERO FAQ */
-    .hero-faq {
-      padding:60px 0 34px;
-    }
-   
-    .hero-faq-title {
-      font-size:26px;
-      font-weight:700;
-      line-height:1.5;
-      color:var(--moding-green);
-      margin-bottom:12px;
+    /* =========================================================
+       4. 상단 메인 화면 이동 버튼
+       ========================================================= */
+    .top-return {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 26px;
     }
 
-    .hero-faq-sub {
-      font-size:16px;
-      line-height:1.7;
-      color:var(--text-main);
-      margin-bottom:8px;
+    .top-return-btn {
+      padding: 8px 15px;
+      border-radius: 999px;
+      border: 1.5px solid var(--moding-green);
+      background: #ffffff;
+      color: var(--moding-green);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
     }
 
-    .hero-faq-meta {
-      font-size:14px;
-      line-height:1.6;
-      color:var(--text-sub);
-      opacity:0.95;
+    .top-return-btn:hover {
+      background: var(--moding-green);
+      color: #ffffff;
     }
 
-    /* SECTION TITLES */
-    .section-title {
-      font-size:14px;
-      letter-spacing:0.18em;
-      color:var(--moding-green);
-      margin-bottom:10px;
+    /* =========================================================
+       5. 공통 타이포
+       ========================================================= */
+    main {
+      flex: 1;
+      width: 100%;
     }
 
-    .section-subtitle {
-      font-size:18px;
-      font-weight:600;
-      color:var(--text-main);
-      margin-bottom:16px;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      padding: 7px 15px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(35, 139, 34, 0.28);
+      background: #ffffff;
+      color: var(--moding-green);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
     }
 
-    /* FAQ INTRO BOX */
-    .faq-intro {
-      margin-top:32px;
-      margin-bottom:10px;
+    .faq-title {
+      font-size: clamp(30px, 4.2vw, 48px);
+      font-weight: 850;
+      line-height: 1.28;
+      letter-spacing: -0.045em;
+      color: var(--moding-green);
+      margin-bottom: 20px;
     }
 
-    .faq-intro-box {
-      border-radius:18px;
-      padding:18px 18px 16px;
-      background:linear-gradient(135deg, #17681A, #2FA530);
-      color:#f5f7f6;
-      box-shadow:0 10px 26px rgba(0,0,0,0.22);
+    .faq-title .orange {
+      color: var(--moding-orange);
     }
 
-    .faq-intro-title {
-      font-size:15px;
-      font-weight:600;
-      margin-bottom:8px;
+    .section-label {
+      margin-bottom: 9px;
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.18em;
+      color: var(--moding-green);
     }
 
-    .faq-intro-text {
-      font-size:14px;
-      line-height:1.7;
-      opacity:0.96;
+    .section-heading {
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 850;
+      line-height: 1.32;
+      letter-spacing: -0.04em;
+      color: var(--text-main);
+      margin-bottom: 14px;
     }
 
-    .faq-intro-tags {
-      margin-top:12px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
+    .section-desc {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-sub);
     }
 
-    .faq-intro-tag {
-     font-size:11px;
-     padding:4px 10px;
-     border-radius:999px;
-     background:#ffffff;            /* ← 전체 배경 흰색 */
-     color:#238B22;                 /* ← 글자색 모딩그린 */
-     border:1px solid #238B22;      /* ← 테두리도 모딩그린 */
-}
+    strong {
+      color: var(--text-main);
+      font-weight: 850;
+    }
 
-    /* FAQ CATEGORIES */
+    /* =========================================================
+       6. FAQ Hero
+       ========================================================= */
+    .faq-hero {
+      width: 100%;
+      text-align: center;
+      padding: 48px 0 30px;
+    }
+
+    .faq-sub {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.75;
+      color: var(--text-main);
+    }
+
+    .faq-banner {
+      position: relative;
+      margin: 34px auto 0;
+      max-width: 980px;
+      min-height: 270px;
+      padding: 38px 32px;
+      border-radius: 30px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255, 140, 0, 0.26), transparent 27%),
+        radial-gradient(circle at 88% 76%, rgba(255, 255, 255, 0.22), transparent 28%),
+        linear-gradient(135deg, #17681A, #2FA530);
+      color: #ffffff;
+      box-shadow: var(--shadow-hero);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .faq-banner::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      right: -42px;
+      top: -52px;
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    .faq-banner::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 42px;
+      left: -38px;
+      bottom: -48px;
+      background: rgba(255, 140, 0, 0.22);
+      transform: rotate(12deg);
+    }
+
+    .faq-banner-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .banner-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+    }
+
+    .banner-title {
+      font-size: clamp(30px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.18;
+      letter-spacing: -0.055em;
+      color: #ffffff;
+      margin-bottom: 18px;
+    }
+
+    .banner-title .orange {
+      color: #FFD28A;
+    }
+
+    .banner-text {
+      font-size: 17px;
+      font-weight: 550;
+      line-height: 1.72;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    /* =========================================================
+       7. FAQ Overview
+       ========================================================= */
+    .faq-overview {
+      padding: 36px 0 18px;
+      text-align: center;
+    }
+
+    .overview-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .overview-card {
+      padding: 22px 18px;
+      border-radius: 24px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(35, 139, 34, 0.12);
+      text-align: left;
+    }
+
+    .overview-card.green {
+      border-top: 4px solid var(--moding-green);
+    }
+
+    .overview-card.orange {
+      border-top: 4px solid var(--moding-orange);
+    }
+
+    .overview-card.brown {
+      border-top: 4px solid var(--moding-brown);
+    }
+
+    .overview-number {
+      margin-bottom: 12px;
+      color: var(--moding-green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .overview-title {
+      margin-bottom: 8px;
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.35;
+      letter-spacing: -0.035em;
+      color: var(--text-main);
+    }
+
+    .overview-desc {
+      font-size: 13px;
+      line-height: 1.72;
+      color: var(--text-sub);
+    }
+
+    /* =========================================================
+       8. FAQ Sections
+       ========================================================= */
     .faq-sections {
-      margin-top:40px;
+      padding: 34px 0 68px;
     }
 
     .faq-category {
-      margin-bottom:26px;
+      margin-bottom: 34px;
+    }
+
+    .faq-category:last-child {
+      margin-bottom: 0;
     }
 
     .faq-category-head {
-      margin-bottom:8px;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
-    .faq-category-desc {
-      font-size:14px;
-      color:var(--text-sub);
-      margin-bottom:10px;
-    }
-
-    .faq-pills {
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-bottom:12px;
-    }
-
-    .faq-pill {
-      font-size:11px;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid rgba(0,0,0,0.1);
-      background:#ffffff;
-      color:var(--text-sub);
-    }
-
-    .faq-pill.green {
-      border-color:var(--moding-green);
-      color:var(--moding-green);
-    }
-
-    .faq-pill.orange {
-      border-color:var(--moding-orange);
-      color:var(--moding-orange);
-    }
-
-    /* FAQ ITEM LIST */
     .faq-list {
-      border-radius:18px;
-      background:#ffffff;
-      box-shadow:0 6px 18px rgba(0,0,0,0.04);
-      padding:10px 14px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      border-radius: 28px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(35, 139, 34, 0.12);
     }
 
-    details.faq-item {
-      border-bottom:1px solid #edf0ec;
-      padding:8px 0;
+    .faq-item {
+      border-bottom: 1px solid #edf0ec;
+      padding: 4px 0;
     }
 
-    details.faq-item:last-child {
-      border-bottom:none;
+    .faq-item:last-child {
+      border-bottom: none;
     }
 
-    details.faq-item[open] {
-      background:#fafcf9;
-      border-radius:12px;
-      padding:10px 10px 10px;
-      margin:4px -4px;
+    .faq-item[open] {
+      background: #fbfdfb;
+      border-radius: 18px;
+      margin: 5px -6px;
+      padding: 4px 6px;
+      border-bottom-color: transparent;
     }
 
-    details.faq-item summary {
-      list-style:none;
-      cursor:pointer;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 8px;
     }
 
-    details.faq-item summary::-webkit-details-marker {
-      display:none;
+    .faq-item summary::-webkit-details-marker {
+      display: none;
     }
 
     .faq-q {
-      font-size:14px;
-      font-weight:600;
-      line-height:1.6;
-      color:var(--text-main);
-      display:flex;
-      gap:6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 850;
+      line-height: 1.6;
+      color: var(--text-main);
     }
 
     .faq-q-prefix {
-      font-size:12px;
-      color:var(--moding-green);
-      font-weight:700;
-      margin-top:1px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--moding-orange);
+      font-size: 13px;
+      font-weight: 900;
     }
 
     .faq-toggle {
-      flex-shrink:0;
-      width:18px;
-      height:18px;
-      border-radius:999px;
-      border:1px solid rgba(0,0,0,0.2);
-      font-size:11px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--text-sub);
-      margin-top:3px;
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      margin-top: 2px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(35, 139, 34, 0.28);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--moding-green);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1;
     }
 
-    details[open] .faq-toggle {
-      border-color:var(--moding-green);
-      color:var(--moding-green);
+    .faq-toggle::before {
+      content: "+";
+    }
+
+    .faq-item[open] .faq-toggle {
+      background: var(--moding-green);
+      border-color: var(--moding-green);
+      color: #ffffff;
+    }
+
+    .faq-item[open] .faq-toggle::before {
+      content: "−";
     }
 
     .faq-a {
-      margin-top:6px;
-      padding-left:20px;
-      font-size:13px;
-      line-height:1.8;
-      color:var(--text-sub);
+      padding: 0 42px 18px 35px;
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text-sub);
     }
 
-    .faq-a strong {
-      color:var(--text-main);
-      font-weight:600;
+    .faq-a ul {
+      margin-top: 8px;
+      padding-left: 18px;
     }
 
-    /* FOOTER */
+    .faq-a li {
+      margin: 4px 0;
+    }
+
+    .faq-a .note {
+      display: block;
+      margin-top: 10px;
+      color: #777777;
+      font-size: 12.5px;
+      line-height: 1.7;
+    }
+
+    /* =========================================================
+       9. Contact CTA
+       ========================================================= */
+    .faq-contact {
+      padding: 0 0 70px;
+      text-align: center;
+    }
+
+    .contact-box {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 34px 24px;
+      border-radius: 32px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(35, 139, 34, 0.12);
+    }
+
+    .contact-title {
+      margin-bottom: 14px;
+      font-size: clamp(25px, 3.5vw, 38px);
+      font-weight: 900;
+      line-height: 1.25;
+      letter-spacing: -0.05em;
+      color: var(--moding-green);
+    }
+
+    .contact-title .orange {
+      color: var(--moding-orange);
+    }
+
+    .contact-desc {
+      max-width: 620px;
+      margin: 0 auto 22px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-sub);
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-btn {
+      min-width: 220px;
+      min-height: 56px;
+      padding: 14px 22px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .contact-btn.green {
+      background: var(--moding-green);
+      border: 2px solid var(--moding-green);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(35, 139, 34, 0.22);
+    }
+
+    .contact-btn.green:hover {
+      background: var(--moding-green-dark);
+      border-color: var(--moding-green-dark);
+    }
+
+    .contact-btn.orange {
+      background: var(--moding-orange);
+      border: 2px solid var(--moding-orange);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(255, 140, 0, 0.22);
+    }
+
+    .contact-btn.orange:hover {
+      background: var(--moding-orange-dark);
+      border-color: var(--moding-orange-dark);
+    }
+
+    /* =========================================================
+       10. Footer
+       ========================================================= */
+    footer {
+      width: 100%;
+      margin-top: auto;
+      padding: 24px 10px;
+      background: var(--bg-white);
+      border-top: 1px solid var(--border-light);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #777777;
+    }
 
     .footer-links {
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       font-size: 12px;
       text-align: center;
-}
+    }
 
     .footer-links a {
       text-decoration: none;
       color: var(--moding-green);
-      font-weight: 500;
-}
+      font-weight: 700;
+    }
 
     .footer-links a:hover {
       color: var(--moding-orange);
-}
+    }
 
     .footer-links .divider {
       margin: 0 6px;
       color: #bbbbbb;
-}
-
-    
-    footer {
-      margin-top:auto;
-      padding:22px 10px;
-      font-size:12px;
-      color:#777;
-      text-align:center;
-      border-top:1px solid #e1e4e2;
-      line-height:1.8;
-      background:#ffffff;
-      width:100%;
     }
 
-    /* 복사/드래그 방지 */
-    html, body, *:not(input):not(textarea) {
-      -webkit-user-select:none;
-      user-select:none;
+    /* =========================================================
+       11. 복사 / 드래그 방지
+       ========================================================= */
+    html,
+    body,
+    *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      user-select: none;
     }
 
     img {
-      user-drag:none;
-      pointer-events:none;
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
     }
 
     input,
     textarea {
-      user-select:text;
-      pointer-events:auto;
+      user-select: text;
+      pointer-events: auto;
     }
 
-    /* 반응형 */
-    @media (max-width: 768px) {
+    /* =========================================================
+       12. Responsive / 노트북 · 태블릿
+       ========================================================= */
+    @media (max-width: 1024px) {
       .container {
-        padding:32px 20px 40px;
+        max-width: 960px;
       }
-      .hero-faq {
-        padding:46px 0 30px;
-      }
-      .hero-faq-title {
-        font-size:22px;
-      }
-      .hero-faq-sub {
-        font-size:15px;
-      }
-      .faq-intro-box {
-        padding:16px 16px 14px;
+
+      .overview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 600px) {
+    /* =========================================================
+       13. Responsive / 태블릿 세로
+       ========================================================= */
+    @media (max-width: 820px) {
       .nav {
-        padding:12px 16px;
-        flex-direction:column;
-        align-items:center;
-        row-gap:8px;
+        padding: 14px 20px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
       }
-      .nav-left img {
-        width:150px;
+
+      .nav-logo img {
+        width: 124px;
       }
-      .nav-right {
-        font-size:14px;
-        gap:16px;
-        flex-wrap:wrap;
-        justify-content:center;
+
+      .nav-menu {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 14px;
       }
-      .hero-faq-title {
-        font-size:21px;
+
+      .container {
+        padding: 0 20px;
       }
-      .hero-faq-sub {
-        font-size:14.5px;
+
+      .top-return {
+        padding-top: 22px;
+      }
+
+      .faq-hero {
+        padding: 42px 0 30px;
+      }
+
+      .faq-sub {
+        font-size: 16px;
+      }
+
+      .faq-banner {
+        margin-top: 34px;
+        min-height: 260px;
+        padding: 34px 24px;
+        border-radius: 28px;
+      }
+    }
+
+    /* =========================================================
+       14. Responsive / 일반 스마트폰
+       ========================================================= */
+    @media (max-width: 640px) {
+      .nav-logo img {
+        width: 116px;
+      }
+
+      .nav-menu {
+        gap: 14px;
+        font-size: 13px;
+      }
+
+      .top-return {
+        padding-top: 18px;
+      }
+
+      .top-return-btn {
+        font-size: 12px;
+        padding: 7px 13px;
+      }
+
+      .faq-hero {
+        padding: 36px 0 26px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        padding: 6px 13px;
+        margin-bottom: 16px;
+      }
+
+      .faq-title {
+        font-size: clamp(27px, 8vw, 34px);
+        line-height: 1.34;
+      }
+
+      .faq-sub {
+        font-size: 15px;
+        line-height: 1.72;
+      }
+
+      .faq-banner {
+        min-height: 250px;
+        padding: 30px 20px;
+        border-radius: 26px;
+      }
+
+      .banner-kicker {
+        font-size: 11px;
+      }
+
+      .banner-title {
+        font-size: clamp(28px, 9vw, 38px);
+      }
+
+      .banner-text {
+        font-size: 14px;
+      }
+
+      .faq-overview {
+        padding: 32px 0 16px;
+      }
+
+      .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .overview-card {
+        padding: 20px 18px;
+        border-radius: 22px;
+      }
+
+      .section-heading {
+        font-size: 24px;
+      }
+
+      .section-desc {
+        font-size: 14px;
+      }
+
+      .faq-sections {
+        padding: 30px 0 52px;
+      }
+
+      .faq-category {
+        margin-bottom: 30px;
+      }
+
+      .faq-list {
+        padding: 8px 10px;
+        border-radius: 24px;
+      }
+
+      .faq-item summary {
+        padding: 15px 6px;
+        gap: 10px;
+      }
+
+      .faq-q {
+        font-size: 14.5px;
+      }
+
+      .faq-toggle {
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+      }
+
+      .faq-a {
+        padding: 0 34px 16px 28px;
+        font-size: 13.3px;
+        line-height: 1.8;
+      }
+
+      .faq-contact {
+        padding: 0 0 52px;
+      }
+
+      .contact-box {
+        padding: 30px 20px;
+        border-radius: 26px;
+      }
+
+      .contact-title {
+        font-size: 28px;
+      }
+
+      .contact-desc {
+        font-size: 14px;
+      }
+
+      .contact-btn {
+        width: 100%;
+        max-width: 300px;
+        min-height: 56px;
+        font-size: 14px;
+      }
+    }
+
+    /* =========================================================
+       15. Responsive / 매우 좁은 화면
+       ========================================================= */
+    @media (max-width: 380px) {
+      .nav {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .nav-logo img {
+        width: 108px;
+      }
+
+      .nav-menu {
+        gap: 11px;
+        font-size: 12px;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .faq-hero {
+        padding: 32px 0 24px;
+      }
+
+      .faq-title {
+        font-size: 25px;
+        letter-spacing: -0.04em;
+      }
+
+      .faq-banner {
+        border-radius: 24px;
+        padding: 30px 18px;
+      }
+
+      .faq-a {
+        padding-left: 24px;
+        padding-right: 26px;
+      }
+
+      footer {
+        padding: 22px 14px;
       }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="nav">
-      <div class="nav-left">
-        <img src="모딩로고.png" alt="Moding Logo">
-      </div>
-      <div class="nav-right">
-        <a href="about.html">About</a>
-        <a href="brand.html">Brand</a>
-        <a href="services.html">Services</a>
-        <a href="alliance.html">Alliance</a>
-        <a href="faq.html" class="active">FAQ</a>
-      </div>
-    </div>
-  </header>
+  <div class="page">
 
-  <div class="container">
+    <!-- =======================================================
+         HEADER
+         ======================================================= -->
+    <header>
+      <nav class="nav" aria-label="주요 메뉴">
 
-    <div class="top-return">
-      <a href="index.html" class="top-return-btn">메인 화면으로</a>
-    </div>
+        <a href="index.html" class="nav-logo" aria-label="모딩 홈으로 이동">
+          <img src="모딩로고.png" alt="Moding Logo">
+        </a>
 
-    <!-- HERO FAQ -->
-    <section class="hero-faq">
- 
-      <h1 class="hero-faq-title">
-        모딩(Moding)을 처음 쓰는<br>
-        식품 제조사와 외식업 사장님을 위한 Q&A
-      </h1>
-      <p class="hero-faq-sub">
-        모딩은 식품 제조사와 외식업 사장님이 서로의 일을 더 잘할 수 있도록 돕는
-        B2B Food-SaaS 플랫폼입니다.
-      </p>
-      <p class="hero-faq-meta">
-        “처음 가입했을 때”, “입점·주문·정산을 진행할 때”
-        자주 나오는 질문들을 정리했습니다.
-      </p>
-    </section>
-
-    <!-- INTRO -->
-    <section class="faq-intro">
-      <div class="section-title">OVERVIEW</div>
-      <div class="section-subtitle">FAQ 안내</div>
-
-      <div class="faq-intro-box">
-        <div class="faq-intro-title">
-          자주 묻는 질문, 네 가지 관점에서 정리했습니다.
-        </div>
-        <div class="faq-intro-text">
-          모딩은 <strong>식품 제조사</strong>와 <strong>외식업 사장님</strong>을 연결하는
-          통신판매중개 B2B 플랫폼입니다. 아래 FAQ는<br>
-          ① 공통 구조, ② 제조사, ③ 외식업 매장, ④ 앱·계정 이용 네 가지 관점으로 구성되어 있습니다.
-        </div>
-        <div class="faq-intro-tags">
-          <span class="faq-intro-tag">플랫폼 구조</span>
-          <span class="faq-intro-tag">제조사 입점</span>
-          <span class="faq-intro-tag">매장 발주·정산</span>
-          <span class="faq-intro-tag">앱·계정 관리</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ SECTIONS -->
-    <section class="faq-sections">
-
-      <!-- 1. 공통 질문 -->
-      <div class="faq-category">
-        <div class="faq-category-head">
-          <div class="section-title">SECTION 01</div>
-          <div class="section-subtitle">모딩 플랫폼에 대한 공통 질문</div>
-        </div>
-        <p class="faq-category-desc">
-          모딩의 기본 역할, 책임 구조, 어떤 사장님들이 사용하면 좋은지에 대한 질문입니다.
-        </p>
-        <div class="faq-pills">
-          <span class="faq-pill green">플랫폼 구조</span>
-          <span class="faq-pill green">중개자 역할</span>
+        <div class="nav-menu">
+          <a href="about.html">About</a>
+          <a href="brand.html">Brand</a>
+          <a href="services.html">Services</a>
+          <a href="alliance.html">Alliance</a>
+          <a href="faq.html" class="active">FAQ</a>
         </div>
 
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>모딩(Moding)은 한 줄로 어떤 서비스인가요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              모딩은 <strong>식품 제조사</strong>와 <strong>외식업 사장님</strong>이
-              소스·완제품·원재료·PB/OEM 상품을 안전하게 사고 팔 수 있도록 연결해 주는
-              <strong>B2B Food-SaaS 통신판매중개 플랫폼</strong>입니다.
-            </div>
-          </details>
+      </nav>
+    </header>
 
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>모딩은 판매자가 아니라 “중개자”라고 하는데, 무슨 뜻인가요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              모딩은 <strong>상품의 제조·유통 당사자</strong>가 아니라,
-              <strong>거래를 중개하는 통신판매중개자</strong>입니다.<br><br>
-              · 상품의 제조, 품질, 표시·광고, 배송, 세금계산서 발행 책임 → <strong>각 제조사</strong><br>
-              · 주문·결제·정산 흐름을 앱으로 정리하고, 거래 구조를 투명하게 관리하는 역할 → <strong>모딩</strong><br><br>
-              라고 나뉘며, 이 책임 구조는 이용약관과 정책에 명확히 반영됩니다.
-            </div>
-          </details>
+    <!-- =======================================================
+         MAIN
+         ======================================================= -->
+    <main>
 
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>어떤 사장님들이 모딩을 사용하면 특히 도움이 되나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              대략 다음과 같은 경우에 모딩이 적합합니다.<br><br>
-              · 새로운 매장 거래처를 찾고 싶은 <strong>식품 제조사</strong><br>
-              · 소스·완제품·밀키트를 안정적으로 공급받고 싶은 <strong>식당·주점·카페 사장님</strong><br>
-              · 발주·정산·계산서 관리를 엑셀이나 수기로 하고 있어 <strong>시간이 많이 드는 분</strong><br><br>
-              복잡한 절차는 최소화하고, “사장님이 매장과 제품에 집중할 수 있도록” 설계된 B2B 도구를 지향합니다.
-            </div>
-          </details>
+      <div class="container">
+        <div class="top-return">
+          <a href="index.html" class="top-return-btn">메인 화면으로</a>
         </div>
       </div>
 
-      <!-- 2. 식품 제조사용 질문 -->
-      <div class="faq-category">
-        <div class="faq-category-head">
-          <div class="section-title">SECTION 02</div>
-          <div class="section-subtitle">식품 제조사 · 입점 · 정산 관련</div>
+      <!-- FAQ HERO -->
+      <section class="faq-hero">
+        <div class="container">
+
+          <div class="eyebrow">FAQ MODING</div>
+
+          <h1 class="faq-title">
+            자주 묻는<br>
+            <span class="orange">질문을 정리했습니다.</span>
+          </h1>
+
+          <p class="faq-sub">
+            모딩 이용, 상품 구매, 입점 문의, 결제·증빙과 관련해<br>
+            자주 확인하시는 내용을 한곳에 모았습니다.
+          </p>
+
+          <div class="faq-banner" aria-label="모딩 FAQ 안내 배너">
+            <div class="faq-banner-inner">
+              <div class="banner-kicker">MODING Q&A</div>
+
+              <div class="banner-title">
+                처음이어도<br>
+                <span class="orange">쉽게 확인할 수 있도록.</span>
+              </div>
+
+              <p class="banner-text">
+                구매자와 공급 파트너가 가장 자주 묻는 질문을<br>
+                실제 이용 흐름에 맞춰 간단하게 정리했습니다.
+              </p>
+            </div>
+          </div>
+
         </div>
-        <p class="faq-category-desc">
-          모딩에 입점하려는 식품 제조사, PB/OEM 생산을 계획 중인 제조사 관점의 질문입니다.
-        </p>
-        <div class="faq-pills">
-          <span class="faq-pill green">입점 절차</span>
-          <span class="faq-pill green">상품 등록</span>
-          <span class="faq-pill green">정산 방식</span>
+      </section>
+
+      <!-- FAQ OVERVIEW -->
+      <section class="faq-overview">
+        <div class="container">
+
+          <div class="section-label">FAQ OVERVIEW</div>
+
+          <h2 class="section-heading">
+            어떤 내용을 확인할 수 있나요?
+          </h2>
+
+          <p class="section-desc">
+            모딩의 기본 구조부터 구매, 입점, 결제·증빙, 앱 이용까지 주요 질문을 구분해 두었습니다.
+          </p>
+
+          <div class="overview-grid">
+
+            <article class="overview-card green">
+              <div class="overview-number">01</div>
+              <h3 class="overview-title">모딩 기본 구조</h3>
+              <p class="overview-desc">
+                모딩이 어떤 서비스인지, 상품과 거래 책임 구조가 어떻게 나뉘는지 확인할 수 있습니다.
+              </p>
+            </article>
+
+            <article class="overview-card orange">
+              <div class="overview-number">02</div>
+              <h3 class="overview-title">구매자 이용</h3>
+              <p class="overview-desc">
+                외식업 사장님이 상품을 찾고, 주문하고, 결제할 때 자주 묻는 내용을 정리했습니다.
+              </p>
+            </article>
+
+            <article class="overview-card green">
+              <div class="overview-number">03</div>
+              <h3 class="overview-title">공급 파트너 입점</h3>
+              <p class="overview-desc">
+                좋은 상품을 가진 공급 파트너가 모딩에 입점할 때 필요한 내용을 확인할 수 있습니다.
+              </p>
+            </article>
+
+            <article class="overview-card brown">
+              <div class="overview-number">04</div>
+              <h3 class="overview-title">결제·증빙·앱 이용</h3>
+              <p class="overview-desc">
+                카드결제, 세금계산서, 사업자 정보, 앱 다운로드 등 실무 이용 내용을 모았습니다.
+              </p>
+            </article>
+
+          </div>
+
         </div>
+      </section>
 
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>제조사가 모딩에 입점하려면 어떤 절차를 거치나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              기본 흐름은 다음과 같습니다.<br><br>
-              1) <strong>제조사 회원가입</strong> (사업자 정보 입력)<br>
-              2) <strong>식품 유형·허가 정보</strong> 등 간단한 입점 신청서 작성<br>
-              3) 모딩의 기본 심사(식품위생 관련 필수 요건, 사업자 정보 등 확인)<br>
-              4) 승인 후, <strong>상품 등록 → 거래 조건 협의 → 판매 시작</strong><br><br>
-              세부 서류나 조건은 정식 오픈 시 별도로 안내드릴 예정입니다.
-            </div>
-          </details>
+      <!-- FAQ SECTIONS -->
+      <section class="faq-sections">
+        <div class="container">
 
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>상품 등록 시 어떤 정보를 필수로 넣어야 하나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              최소한 다음 항목은 필수 입력 대상입니다.<br><br>
-              · 상품명, 규격(중량/용량), 박스 단위<br>
-              · 판매 단가, 최소 주문 수량<br>
-              · 식품 유형, 원재료명, 알레르기 유발 성분 표시<br>
-              · 배송 방식(택배/직배송/화물 등)과 출고 가능 요일<br><br>
-              추가 이미지·상세 설명은 선택이지만, 실제 매장 발주에 도움이 되므로
-              되도록 풍부하게 입력하는 것을 권장합니다.
+          <!-- SECTION 01 -->
+          <div class="faq-category">
+            <div class="faq-category-head">
+              <div class="section-label">SECTION 01</div>
+              <h2 class="section-heading">
+                모딩 기본 구조
+              </h2>
+              <p class="section-desc">
+                모딩이 어떤 서비스인지, 거래 구조가 어떻게 나뉘는지에 대한 질문입니다.
+              </p>
             </div>
-          </details>
 
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>세금계산서는 모딩이 발행하나요, 제조사가 발행하나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              상품 세금계산서는 <strong>제조사가 식당(구매자)에게 직접 발행</strong>합니다.<br><br>
-              모딩은 주문·결제 데이터를 정리해 <strong>정산 리포트</strong>를 제공하고,
-              제조사가 세금계산서를 발행하는 데 필요한 정보(공급가, 수수료, 거래내역)를
-              한 번에 확인할 수 있도록 돕습니다.
-            </div>
-          </details>
+            <div class="faq-list">
 
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>정산 주기와 수수료 구조는 어떻게 되나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              정산 주기(예: 주 단위, 월 단위)와 수수료율은
-              <strong>제조사와 모딩 간의 계약</strong>에서 개별적으로 합의됩니다.<br><br>
-              기본 원칙은 다음과 같습니다.<br>
-              · 매출 대금은 PG사를 거쳐 정산<br>
-              · 모딩 수수료를 제외한 금액을 <strong>제조사 몫</strong>으로 정리<br>
-              · 정산 내역은 모딩 화면에서 투명하게 확인 가능<br><br>
-              구체적인 수수료율·정산일은 정식 제휴 시 별도 계약서로 안내됩니다.
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>모딩은 한 줄로 어떤 서비스인가요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  모딩은 외식업 사장님이 필요한 식품·식자재 상품을 더 쉽게 찾고,
+                  공급 파트너의 좋은 상품이 더 많은 매장에 소개될 수 있도록 돕는
+                  <strong>B2B 식품 거래 앱</strong>입니다.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>모딩이 직접 상품을 판매하는 건가요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  모딩은 상품을 직접 제조하거나 판매하는 회사가 아니라,
+                  <strong>상품을 제공하는 판매자와 구매자를 연결하는 통신판매중개자</strong>입니다.
+                  상품의 품질, 표시, 배송, 교환·환불 등 상품 자체에 관한 책임은 원칙적으로 해당 판매자에게 있습니다.
+                  <span class="note">
+                    단, 거래 과정에서 문의나 클레임이 발생하면 모딩 고객센터를 통해 접수와 확인을 도울 수 있습니다.
+                  </span>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>누가 모딩을 이용할 수 있나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  모딩은 사업자 기반의 B2B 거래를 전제로 합니다.
+                  구매자는 식당, 주점, 카페 등 외식업 매장을 운영하는 사업자이며,
+                  판매자는 식품·식자재 상품을 공급할 수 있는 사업자입니다.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>일반 쇼핑몰과 어떤 점이 다른가요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  일반 소비자용 쇼핑몰이 아니라, 외식업 매장 운영에 필요한 상품을 찾고 거래하는
+                  <strong>사업자용 식품 거래 구조</strong>에 가깝습니다.
+                  상품 탐색, 주문, 결제, 세금계산서 등 B2B 거래에서 필요한 흐름을 앱 안에서 더 쉽게 정리하는 것을 목표로 합니다.
+                </div>
+              </details>
+
             </div>
-          </details>
+          </div>
+
+          <!-- SECTION 02 -->
+          <div class="faq-category">
+            <div class="faq-category-head">
+              <div class="section-label">SECTION 02</div>
+              <h2 class="section-heading">
+                구매자 이용
+              </h2>
+              <p class="section-desc">
+                외식업 사장님이 상품을 찾고 주문할 때 자주 묻는 질문입니다.
+              </p>
+            </div>
+
+            <div class="faq-list">
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>어떤 상품을 찾을 수 있나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  특수 식자재, 가공식품, 소스·양념, 안주류, 카페·디저트, 주류·수입식품 등
+                  외식업 매장에 필요한 다양한 상품군을 다룹니다.
+                  흔한 상품보다 매장 메뉴에 차이를 만들 수 있는 상품을 더 쉽게 발견할 수 있도록 구성하고 있습니다.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>구매자는 어떻게 가입하나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  모딩 앱에서 회원가입 후 사업자 정보를 입력하면 이용할 수 있습니다.
+                  사업자 정보는 주문, 세금계산서, 거래 확인에 사용되므로 실제 사업자등록 정보와 일치하게 입력해 주세요.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>주문은 어떤 방식으로 진행되나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  앱에서 상품을 확인하고 수량을 선택한 뒤 주문·결제를 진행합니다.
+                  주문 접수 후 판매자가 주문을 확인하고 출고 또는 배송을 진행합니다.
+                  상품별 최소 주문 수량, 출고 가능 요일, 배송 방식은 상품 상세 화면에서 확인할 수 있습니다.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>상품에 문제가 있으면 어디로 문의하나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  상품 불량, 오배송, 파손 등 문제가 발생한 경우 모딩 고객센터를 통해 접수할 수 있습니다.
+                  모딩은 접수 내용과 거래 기록을 확인하고, 판매자와 협의가 필요한 부분을 안내합니다.
+                  상품의 품질·배송 책임은 원칙적으로 해당 판매자에게 있습니다.
+                </div>
+              </details>
+
+            </div>
+          </div>
+
+          <!-- SECTION 03 -->
+          <div class="faq-category">
+            <div class="faq-category-head">
+              <div class="section-label">SECTION 03</div>
+              <h2 class="section-heading">
+                공급 파트너 입점
+              </h2>
+              <p class="section-desc">
+                모딩에 상품을 소개하고 싶은 공급 파트너를 위한 질문입니다.
+              </p>
+            </div>
+
+            <div class="faq-list">
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>판매자 입점은 어떻게 문의하나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  Alliance 페이지의 <strong>카카오톡 문의하기</strong> 또는 <strong>이메일 문의</strong>를 통해 상담을 요청할 수 있습니다.
+                  상품군, 회사명, 담당자 연락처, 주요 상품 정보를 함께 남겨주시면 확인이 더 빠릅니다.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>어떤 판매자가 입점할 수 있나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  식품·식자재 상품을 외식업 매장에 공급할 수 있는 사업자라면 입점 검토가 가능합니다.
+                  상품군에 따라 사업자등록증, 영업신고증, 통신판매업 신고, HACCP, 수입 관련 서류 등
+                  필요한 서류 확인이 진행될 수 있습니다.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>주류나 수입식품도 입점할 수 있나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  주류·수입식품 등 별도 인허가 확인이 필요한 상품은 관련 서류 확인 후 입점이 진행됩니다.
+                  판매 자격, 허가 범위, 상품 특성에 따라 입점 가능 여부와 거래 방식이 달라질 수 있습니다.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>판매자 회원가입은 어디서 하나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  판매자 회원가입은 모딩 앱에서 진행할 수 있습니다.
+                  다만 입점 상담이 필요한 경우 Alliance 페이지에서 먼저 문의해 주시면
+                  상품군과 운영 방식에 맞춰 안내드릴 수 있습니다.
+                </div>
+              </details>
+
+            </div>
+          </div>
+
+          <!-- SECTION 04 -->
+          <div class="faq-category">
+            <div class="faq-category-head">
+              <div class="section-label">SECTION 04</div>
+              <h2 class="section-heading">
+                결제·증빙·앱 이용
+              </h2>
+              <p class="section-desc">
+                카드결제, 세금계산서, 사업자 정보, 앱 사용과 관련된 질문입니다.
+              </p>
+            </div>
+
+            <div class="faq-list">
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>카드결제가 가능한가요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  모딩은 식당 운영 중 현금 흐름 부담을 줄일 수 있도록 카드결제 구조를 제공합니다.
+                  결제 가능 여부와 조건은 상품, 판매자, 결제수단에 따라 달라질 수 있습니다.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>세금계산서는 누가 발행하나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  상품 거래에 대한 세금계산서는 원칙적으로 <strong>판매자 명의</strong>로 구매자에게 발행됩니다.
+                  모딩은 주문·결제·정산 흐름을 정리하고, 거래 내역을 확인할 수 있도록 돕는 역할을 합니다.
+                  <span class="note">
+                    카드결제 내역과 세금계산서 증빙 처리 방식은 사업장 세무 처리 기준에 따라 확인이 필요할 수 있습니다.
+                  </span>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>사업자 정보는 어디서 수정하나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  앱 내 마이페이지 또는 사업자 정보 관리 화면에서 수정할 수 있습니다.
+                  사업자 정보는 세금계산서, 정산, 주문 확인에 사용되므로 변경 시 정확하게 입력해 주세요.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <div class="faq-q">
+                    <span class="faq-q-prefix">Q.</span>
+                    <span>모딩 앱은 어디에서 다운로드하나요?</span>
+                  </div>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+
+                <div class="faq-a">
+                  홈페이지 메인 화면의 앱 다운로드 버튼을 통해 설치할 수 있습니다.
+                  Android는 Google Play를 통해 제공되며, iOS는 App Store 등록 후 순차적으로 안내될 예정입니다.
+                </div>
+              </details>
+
+            </div>
+          </div>
+
         </div>
+      </section>
+
+      <!-- CONTACT CTA -->
+      <section class="faq-contact">
+        <div class="container">
+
+          <div class="contact-box">
+            <h2 class="contact-title">
+              원하는 답을<br>
+              <span class="orange">찾지 못하셨나요?</span>
+            </h2>
+
+            <p class="contact-desc">
+              입점 문의는 Alliance 페이지에서, 서비스 이용 문의는 모딩 고객센터를 통해 확인해 주세요.
+            </p>
+
+            <div class="contact-buttons">
+              <a href="alliance.html" class="contact-btn green">
+                입점 문의 보기
+              </a>
+
+              <a href="index.html" class="contact-btn orange">
+                메인으로 이동
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- =======================================================
+         FOOTER
+         ======================================================= -->
+    <footer>
+      <div class="footer-links">
+        <a href="terms.html">이용약관</a>
+        <span class="divider">·</span>
+        <a href="privacy.html">개인정보처리방침</a>
+        <span class="divider">·</span>
+        <a href="location.html">오시는 길</a>
       </div>
 
-      <!-- 3. 외식업 사장님 질문 -->
-      <div class="faq-category">
-        <div class="faq-category-head">
-          <div class="section-title">SECTION 03</div>
-          <div class="section-subtitle">외식업 사장님 · 주문 · 정산 관련</div>
-        </div>
-        <p class="faq-category-desc">
-          식당·주점·카페 등 외식업 사장님이 모딩을 통해 발주·결제·정산을 진행할 때 궁금해하시는 내용입니다.
-        </p>
-        <div class="faq-pills">
-          <span class="faq-pill green">발주·주문</span>
-          <span class="faq-pill green">정산·계산서</span>
-          <span class="faq-pill green">클레임 처리</span>
-        </div>
+      주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+      통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
+      대구광역시 달서구 달구벌대로 1870, 7층
+    </footer>
 
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>외식업 사장님은 어떻게 회원가입을 하면 되나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              회원가입 흐름은 다음과 같습니다.<br><br>
-              1) 앱 설치 후 <strong>휴대폰 번호로 기본 회원가입</strong><br>
-              2) <strong>사업자등록증 정보</strong> 및 매장 정보를 추가 입력<br>
-              3) 승인 후, 카테고리별 상품을 열람·주문 가능<br><br>
-              사업자 정보는 정산과 계산서 발행에 직접 연결되므로,
-              실제 사업장 정보와 일치하도록 등록해 주시는 것이 중요합니다.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>발주는 어떤 방식으로 진행되나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              기본적인 발주 흐름은 다음과 같습니다.<br><br>
-              1) 카테고리/제조사/상품명을 기준으로 상품 선택<br>
-              2) 수량·박스단위·옵션 입력 후 장바구니 담기<br>
-              3) 장바구니에서 최종 확인 후 결제 진행<br>
-              4) 제조사가 주문을 확인하고 출고/배송 처리<br><br>
-              일부 상품은 유통 구조상 <strong>최소 주문 수량</strong>이나
-              <strong>요일별 출고 제한</strong>이 있을 수 있으며,
-              이는 상품 상세 화면에 미리 안내됩니다.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>결제 후 영수증과 세금계산서는 어디에서 확인하나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              · 결제 영수증: 앱 내 <strong>주문/결제 내역</strong> 메뉴에서 바로 확인 가능<br>
-              · 세금계산서: 각 제조사가 발행한 계산서를 기준으로 하며,<br>
-              &nbsp;&nbsp;발행 여부·금액 정보는 모딩 화면에서 함께 확인할 수 있도록 제공할 예정입니다.<br><br>
-              모딩은 거래 흐름과 정산 데이터를 정리해 보여주는 역할을 하며,
-              세금계산서의 법적 발행 주체는 <strong>제조사</strong>입니다.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>상품 불량·오배송·파손이 발생하면 어디에 클레임을 걸어야 하나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              원칙은 다음과 같습니다.<br><br>
-              1) 먼저 해당 상품의 <strong>제조사</strong>에 직접 연락해 교환·환불 여부를 협의합니다.<br>
-              2) 연락이 어렵거나 문제가 반복되는 경우, 모딩 고객센터를 통해
-                 <strong>중개 지원·사실 확인</strong>을 요청하실 수 있습니다.<br><br>
-              모딩은 분쟁 중재와 기록 정리에 집중하며,
-              품질·제조상의 책임은 각 제조사에 있습니다.
-            </div>
-          </details>
-        </div>
-      </div>
-
-      <!-- 4. 앱 · 계정 · 기술 질문 -->
-      <div class="faq-category">
-        <div class="faq-category-head">
-          <div class="section-title">SECTION 04</div>
-          <div class="section-subtitle">앱 설치 · 계정 · 알림 설정</div>
-        </div>
-        <p class="faq-category-desc">
-          모딩 앱 설치, 로그인, 비밀번호, 알림 설정 등 기술 사용 측면에서 자주 나오는 질문입니다.
-        </p>
-        <div class="faq-pills">
-          <span class="faq-pill green">앱 설치</span>
-          <span class="faq-pill green">계정 관리</span>
-          <span class="faq-pill green">알림 설정</span>
-        </div>
-
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>모딩 앱은 어디에서 다운로드할 수 있나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              정식 오픈 시 <strong>Google Play / App Store</strong>에서 “모딩(Moding)”을 검색해 설치할 수 있으며,<br>
-              홈페이지 하단의 앱 다운로드 버튼과도 연동될 예정입니다.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>비밀번호를 잊어버렸습니다. 어떻게 재설정하나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              로그인 화면에서 <strong>“비밀번호 재설정”</strong> 버튼을 선택한 뒤,<br>
-              가입 시 등록한 휴대폰 번호 또는 이메일로 인증을 받고 새로운 비밀번호를 설정하시면 됩니다.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>주소·연락처·사업자 정보는 어디에서 수정할 수 있나요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              앱 내 <strong>마이페이지 → 사업자 정보 관리</strong>에서 수정할 수 있습니다.<br>
-              이 정보는 <strong>정산 및 계산서 발행</strong>에 직접 연결되므로,
-              실제 사업자등록증과 동일하게 유지해 주시는 것이 중요합니다.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>
-              <div class="faq-q">
-                <span class="faq-q-prefix">Q.</span>
-                <span>주문 알림·정산 알림이 너무 많이 옵니다. 조절이 가능한가요?</span>
-              </div>
-              <div class="faq-toggle">＋</div>
-            </summary>
-            <div class="faq-a">
-              추후 제공될 <strong>알림 설정 메뉴</strong>에서<br>
-              · 주문 관련 알림<br>
-              · 출고/배송 상태 알림<br>
-              · 정산·정기 안내 알림<br>
-              등의 수신 여부를 On/Off 형태로 조절할 수 있도록 구성할 예정입니다.
-            </div>
-          </details>
-        </div>
-      </div>
-
-    </section>
   </div>
-
-  <footer>
-  <div class="footer-links">
-    <a href="terms.html">이용약관</a>
-    <span class="divider">·</span>
-    <a href="privacy.html">개인정보처리방침</a>
-    <span class="divider">·</span>
-    <a href="location.html">오시는 길</a>
-  </div>
-  주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
-  통신판매업신고: 제2025-대구달서-1367호 · moding_inc@naver.com<br>
-  대구광역시 달서구 달구벌대로 1870, 7층
-</footer>
-
 
   <script>
-    /* 복사/드래그 방지 */
+    /* =========================================================
+       복사 / 드래그 방지
+       ========================================================= */
     document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) e.preventDefault();
+      if (!e.target.closest("input, textarea, a, button, summary")) {
+        e.preventDefault();
+      }
     });
 
     document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
     });
 
     document.addEventListener("keydown", function (e) {
       const key = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
-        if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
       }
     });
 
     document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
     });
   </script>
 </body>
