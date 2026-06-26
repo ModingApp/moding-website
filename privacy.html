@@ -1,124 +1,170 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <!-- =========================================================
+       기본 메타 정보
+       ========================================================= -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
   <title>개인정보처리방침 | 모딩(Moding)</title>
 
-  <meta name="description" content="B2B Food-SaaS 플랫폼 모딩(Moding)의 개인정보처리방침 안내 페이지입니다.">
+  <meta name="description" content="모딩(Moding)의 개인정보처리방침입니다. 주식회사 모딩은 개인정보 보호법 등 관련 법령에 따라 이용자의 개인정보를 안전하게 처리합니다.">
+
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
-  <meta property="og:title" content="모딩(Moding) 개인정보처리방침">
-  <meta property="og:description" content="식품 제조사와 외식업 사장님을 위한 B2B Food-SaaS 플랫폼 모딩(Moding)의 개인정보처리방침입니다.">
+  <meta property="og:title" content="개인정보처리방침 | 모딩(Moding)">
+  <meta property="og:description" content="모딩 개인정보처리방침. 개인정보 처리 목적, 처리 항목, 보유기간, 제3자 제공, 처리위탁 및 정보주체의 권리를 안내합니다.">
   <meta property="og:url" content="https://moding.app/privacy.html">
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
   <style>
+    /* =========================================================
+       1. 브랜드 컬러 / 공통 변수
+       ========================================================= */
     :root {
       --moding-green: #238B22;
+      --moding-green-dark: #1c6f1c;
       --moding-orange: #FF8C00;
+      --moding-orange-dark: #e67800;
+      --moding-brown: #8B5A2B;
+
       --bg-light: #F7F9F8;
+      --bg-white: #ffffff;
+
       --text-main: #1F3B1F;
-      --text-sub: #555555;
+      --text-sub: #666666;
+
+      --border-light: #e1e4e2;
+      --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.06);
+      --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.08);
     }
 
+    /* =========================================================
+       2. Reset / 기본 설정
+       ========================================================= */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
       background: var(--bg-light);
       color: var(--text-main);
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      word-break: keep-all;
     }
 
-    html, body, *:not(input):not(textarea) {
-      -webkit-user-select: none;
-      user-select: none;
+    a {
+      color: inherit;
     }
+
     img {
-      -webkit-user-drag: none;
-      user-drag: none;
-      pointer-events: none;
-    }
-    input, textarea {
-      user-select: text;
-      pointer-events: auto;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 40px 24px 60px;
-      flex: 1;
-    }
-
-    /* 헤더 (공통) */
-    header {
-      width: 100%;
-      border-bottom: 1px solid #e1e4e2;
-      background: #ffffff;
-    }
-
-    .nav {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      column-gap: 24px;
-    }
-
-    .nav-left img {
-      width: 160px;
+      max-width: 100%;
       height: auto;
       display: block;
     }
 
-    .nav-right {
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =========================================================
+       3. Header / Navigation
+       ========================================================= */
+    header {
+      width: 100%;
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .nav {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 24px;
       display: flex;
       align-items: center;
-      gap: 20px;
-      font-size: 15px;
+      justify-content: space-between;
+      gap: 28px;
     }
 
-    .nav-right a {
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      width: 136px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .nav-menu a {
       text-decoration: none;
       color: var(--moding-green);
-      font-weight: 500;
       white-space: nowrap;
-      transition: 0.2s;
+      transition: color 0.2s ease;
     }
 
-    .nav-right a:hover {
+    .nav-menu a:hover,
+    .nav-menu a.active {
       color: var(--moding-orange);
     }
 
-    /* 페이지 상단 "메인 화면으로" 버튼 (공통) */
+    /* =========================================================
+       4. 상단 메인 화면 이동 버튼
+       ========================================================= */
     .top-return {
+      width: 100%;
       display: flex;
       justify-content: flex-end;
-      margin-bottom: 12px;
+      padding-top: 26px;
     }
 
     .top-return-btn {
-      font-size: 12px;
-      padding: 6px 12px;
+      padding: 8px 15px;
       border-radius: 999px;
-      border: 1px solid var(--moding-green);
-      color: var(--moding-green);
+      border: 1.5px solid var(--moding-green);
       background: #ffffff;
+      color: var(--moding-green);
       text-decoration: none;
-      font-weight: 500;
-      transition: 0.2s;
+      font-size: 12px;
+      font-weight: 800;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
     }
 
     .top-return-btn:hover {
@@ -126,79 +172,263 @@
       color: #ffffff;
     }
 
-    /* 타이틀 영역 (brand/terms와 수직 여백 맞춤) */
-    .policy-hero {
-      padding: 56px 0 24px;
-      margin-bottom: 18px;
-    }
-
-    .policy-title {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--moding-green);
-      margin-bottom: 10px;
-    }
-
-    .policy-subtitle {
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text-sub);
-    }
-
-    /* 본문 카드 (약관/개인정보 공통 카드) */
-    .policy-card {
-      margin-top: 24px;
-      padding: 24px 20px 26px;
-      background: #ffffff;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-      font-size: 13px;
-      color: var(--text-sub);
-      line-height: 1.8;
-    }
-
-    .policy-card h2 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin: 18px 0 8px;
-    }
-
-    .policy-card h3 {
-      font-size: 14px;
-      font-weight: 600;
-      margin: 14px 0 6px;
-      color: var(--text-main);
-    }
-
-    .policy-card p {
-      margin-bottom: 8px;
-    }
-
-    .policy-card ol,
-    .policy-card ul {
-      margin: 6px 0 10px 18px;
-    }
-
-    .policy-card li {
-      margin-bottom: 4px;
-    }
-
-    /* 푸터 (공통) */
-    footer {
-      margin-top: auto;
-      padding: 22px 10px;
-      font-size: 12px;
-      color: #777;
-      text-align: center;
-      border-top: 1px solid #e1e4e2;
-      line-height: 1.8;
-      background: #ffffff;
+    /* =========================================================
+       5. 공통 타이포
+       ========================================================= */
+    main {
+      flex: 1;
       width: 100%;
     }
 
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      padding: 7px 15px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(35, 139, 34, 0.28);
+      background: #ffffff;
+      color: var(--moding-green);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+    }
+
+    .policy-title {
+      font-size: clamp(30px, 4.2vw, 48px);
+      font-weight: 850;
+      line-height: 1.28;
+      letter-spacing: -0.045em;
+      color: var(--moding-green);
+      margin-bottom: 20px;
+    }
+
+    .policy-title .orange {
+      color: var(--moding-orange);
+    }
+
+    .policy-sub {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.75;
+      color: var(--text-main);
+    }
+
+    strong {
+      color: var(--text-main);
+      font-weight: 850;
+    }
+
+    /* =========================================================
+       6. Privacy Hero
+       ========================================================= */
+    .policy-hero {
+      width: 100%;
+      text-align: center;
+      padding: 48px 0 30px;
+    }
+
+    .policy-summary {
+      max-width: 880px;
+      margin: 34px auto 0;
+      padding: 26px 24px;
+      border-radius: 30px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(35, 139, 34, 0.12);
+      text-align: left;
+      border-left: 5px solid var(--moding-green);
+    }
+
+    .summary-label {
+      margin-bottom: 12px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      color: var(--moding-green);
+    }
+
+    .summary-text {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--text-sub);
+    }
+
+    .summary-meta {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #edf0ec;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: #777777;
+    }
+
+    /* =========================================================
+       7. Privacy Document
+       ========================================================= */
+    .policy-section {
+      padding: 22px 0 68px;
+    }
+
+    .policy-card {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 34px 32px;
+      border-radius: 30px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(35, 139, 34, 0.12);
+    }
+
+    .policy-doc-title {
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 2px solid rgba(35, 139, 34, 0.12);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 900;
+      line-height: 1.35;
+      letter-spacing: -0.045em;
+      color: var(--text-main);
+    }
+
+    .policy-article {
+      padding: 24px 0;
+      border-bottom: 1px solid #edf0ec;
+    }
+
+    .policy-article:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .policy-article h3 {
+      margin-bottom: 12px;
+      font-size: 19px;
+      font-weight: 900;
+      line-height: 1.45;
+      letter-spacing: -0.035em;
+      color: var(--moding-green);
+    }
+
+    .policy-article h4 {
+      margin: 18px 0 8px;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.55;
+      color: var(--text-main);
+    }
+
+    .policy-article p {
+      margin-bottom: 10px;
+      font-size: 14.5px;
+      line-height: 1.9;
+      color: var(--text-sub);
+    }
+
+    .policy-article p:last-child {
+      margin-bottom: 0;
+    }
+
+    .policy-list {
+      margin-top: 8px;
+    }
+
+    .policy-list li {
+      list-style: none;
+      margin-bottom: 8px;
+      font-size: 14.5px;
+      line-height: 1.9;
+      color: var(--text-sub);
+    }
+
+    .policy-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-box {
+      margin: 12px 0 16px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(35, 139, 34, 0.045);
+      border: 1px solid rgba(35, 139, 34, 0.14);
+    }
+
+    .detail-box.orange {
+      background: rgba(255, 140, 0, 0.045);
+      border-color: rgba(255, 140, 0, 0.18);
+    }
+
+    .detail-title {
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .detail-box p,
+    .detail-box li {
+      font-size: 13.5px;
+      line-height: 1.85;
+    }
+
+    .detail-box ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    .sub-list {
+      margin: 6px 0 0 0;
+      padding-left: 0;
+    }
+
+    .sub-list div {
+      margin: 3px 0;
+      font-size: 14.5px;
+      line-height: 1.85;
+      color: var(--text-sub);
+    }
+
+    .policy-effective {
+      margin-top: 28px;
+      padding: 20px 22px;
+      border-radius: 22px;
+      background: rgba(255, 140, 0, 0.055);
+      border: 1px solid rgba(255, 140, 0, 0.22);
+    }
+
+    .policy-effective-title {
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--moding-orange);
+    }
+
+    .policy-effective-text {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--text-sub);
+    }
+
+    /* =========================================================
+       8. Footer
+       ========================================================= */
+    footer {
+      width: 100%;
+      margin-top: auto;
+      padding: 24px 10px;
+      background: var(--bg-white);
+      border-top: 1px solid var(--border-light);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #777777;
+    }
+
     .footer-links {
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       font-size: 12px;
       text-align: center;
     }
@@ -206,7 +436,7 @@
     .footer-links a {
       text-decoration: none;
       color: var(--moding-green);
-      font-weight: 500;
+      font-weight: 700;
     }
 
     .footer-links a:hover {
@@ -218,234 +448,906 @@
       color: #bbbbbb;
     }
 
-    @media (max-width: 768px) {
+    /* =========================================================
+       9. 복사 / 드래그 방지
+       ========================================================= */
+    html,
+    body,
+    *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+
+    input,
+    textarea {
+      user-select: text;
+      pointer-events: auto;
+    }
+
+    /* =========================================================
+       10. Responsive / 노트북 · 태블릿
+       ========================================================= */
+    @media (max-width: 1024px) {
       .container {
-        padding: 32px 20px 40px;
-      }
-      .policy-title {
-        font-size: 24px;
-      }
-      .policy-subtitle {
-        font-size: 14px;
-      }
-      .policy-card {
-        padding: 20px 16px 22px;
+        max-width: 960px;
       }
     }
 
-    @media (max-width: 600px) {
+    /* =========================================================
+       11. Responsive / 태블릿 세로
+       ========================================================= */
+    @media (max-width: 820px) {
       .nav {
-        padding: 12px 16px;
+        padding: 14px 20px;
         flex-direction: column;
-        row-gap: 8px;
+        justify-content: center;
+        gap: 10px;
       }
 
-      .nav-left img {
-        width: 150px;
+      .nav-logo img {
+        width: 124px;
       }
 
-      .nav-right {
-        font-size: 14px;
+      .nav-menu {
         gap: 16px;
         flex-wrap: wrap;
         justify-content: center;
+        font-size: 14px;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+
+      .top-return {
+        padding-top: 22px;
+      }
+
+      .policy-hero {
+        padding: 42px 0 30px;
+      }
+
+      .policy-sub {
+        font-size: 16px;
+      }
+
+      .policy-card {
+        padding: 30px 26px;
+      }
+    }
+
+    /* =========================================================
+       12. Responsive / 일반 스마트폰
+       ========================================================= */
+    @media (max-width: 640px) {
+      .nav-logo img {
+        width: 116px;
+      }
+
+      .nav-menu {
+        gap: 14px;
+        font-size: 13px;
+      }
+
+      .top-return {
+        padding-top: 18px;
+      }
+
+      .top-return-btn {
+        font-size: 12px;
+        padding: 7px 13px;
+      }
+
+      .policy-hero {
+        padding: 36px 0 26px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        padding: 6px 13px;
+        margin-bottom: 16px;
+      }
+
+      .policy-title {
+        font-size: clamp(27px, 8vw, 34px);
+        line-height: 1.34;
+      }
+
+      .policy-sub {
+        font-size: 15px;
+        line-height: 1.72;
+      }
+
+      .policy-summary {
+        margin-top: 28px;
+        padding: 24px 20px;
+        border-radius: 26px;
+      }
+
+      .summary-text {
+        font-size: 14px;
+      }
+
+      .policy-section {
+        padding: 18px 0 52px;
+      }
+
+      .policy-card {
+        padding: 28px 20px;
+        border-radius: 26px;
+      }
+
+      .policy-doc-title {
+        font-size: 24px;
+      }
+
+      .policy-article {
+        padding: 22px 0;
+      }
+
+      .policy-article h3 {
+        font-size: 17px;
+      }
+
+      .policy-article h4 {
+        font-size: 14px;
+      }
+
+      .policy-article p,
+      .policy-list li,
+      .sub-list div {
+        font-size: 13.5px;
+        line-height: 1.85;
+      }
+
+      .detail-box {
+        padding: 15px 14px;
+        border-radius: 16px;
+      }
+
+      .detail-box p,
+      .detail-box li {
+        font-size: 13px;
+      }
+
+      .policy-effective {
+        padding: 18px 16px;
+        border-radius: 20px;
+      }
+    }
+
+    /* =========================================================
+       13. Responsive / 매우 좁은 화면
+       ========================================================= */
+    @media (max-width: 380px) {
+      .nav {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .nav-logo img {
+        width: 108px;
+      }
+
+      .nav-menu {
+        gap: 11px;
+        font-size: 12px;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .policy-hero {
+        padding: 32px 0 24px;
+      }
+
+      .policy-title {
+        font-size: 25px;
+        letter-spacing: -0.04em;
+      }
+
+      .policy-card {
+        padding: 26px 18px;
+      }
+
+      footer {
+        padding: 22px 14px;
       }
     }
   </style>
 </head>
+
 <body>
+  <div class="page">
 
-  <!-- 공통 헤더 -->
-  <header>
-    <div class="nav">
-      <div class="nav-left">
-        <img src="모딩로고.png" alt="Moding Logo">
+    <!-- =======================================================
+         HEADER
+         ======================================================= -->
+    <header>
+      <nav class="nav" aria-label="주요 메뉴">
+
+        <a href="index.html" class="nav-logo" aria-label="모딩 홈으로 이동">
+          <img src="모딩로고.png" alt="Moding Logo">
+        </a>
+
+        <div class="nav-menu">
+          <a href="about.html">About</a>
+          <a href="brand.html">Brand</a>
+          <a href="services.html">Services</a>
+          <a href="alliance.html">Alliance</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+
+      </nav>
+    </header>
+
+    <!-- =======================================================
+         MAIN
+         ======================================================= -->
+    <main>
+
+      <div class="container">
+        <div class="top-return">
+          <a href="index.html" class="top-return-btn">메인 화면으로</a>
+        </div>
       </div>
-      <div class="nav-right">
-        <a href="about.html">About</a>
-        <a href="brand.html">Brand</a>
-        <a href="services.html">Services</a>
-        <a href="alliance.html">Alliance</a>
-        <a href="faq.html">FAQ</a>
-      </div>
-    </div>
-  </header>
 
-  <!-- 메인 컨테이너 -->
-  <main class="container">
+      <!-- PRIVACY HERO -->
+      <section class="policy-hero">
+        <div class="container">
 
-    <!-- 메인 화면으로 버튼 -->
-    <div class="top-return">
-      <a href="index.html" class="top-return-btn">메인 화면으로</a>
-    </div>
+          <div class="eyebrow">PRIVACY MODING</div>
 
-    <!-- 타이틀 영역 (POLICY 텍스트 제거됨) -->
-    <section class="policy-hero">
-      <h1 class="policy-title">개인정보처리방침</h1>
-      <p class="policy-subtitle">
-        주식회사 모딩(Moding Inc.)은 개인정보 보호법 등 관련 법령을 준수하며, 정보주체의 개인정보를 안전하게 처리하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.
-      </p>
-    </section>
+          <h1 class="policy-title">
+            개인정보<br>
+            <span class="orange">처리방침</span>
+          </h1>
 
-    <section class="policy-card">
-  <h2>제1조(목적)</h2>
-  <p>
-    주식회사 모딩(이하 “회사”)은 개인정보 보호법 등 관련 법령에 따라 이용자의 개인정보를 보호하고
-    이와 관련한 고충을 신속하고 원활하게 처리하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.
-  </p>
+          <p class="policy-sub">
+            주식회사 모딩은 개인정보 보호법 등 관련 법령에 따라<br>
+            이용자의 개인정보를 안전하게 처리합니다.
+          </p>
 
-  <h2>제2조(개인정보의 처리 목적)</h2>
-  <p>
-    회사는 다음의 목적을 위하여 개인정보를 처리합니다.<br>
-    처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며,
-    이용 목적이 변경되는 경우에는 관련 법령에 따라 별도의 동의를 받는 등 필요한 조치를 이행합니다.
-  </p>
-  <p>
-    1. 회원가입 및 회원관리: 회원 식별, 본인 확인, 계정 관리, 부정이용 방지 등<br>
-    2. 거래처리: 주문, 결제, 배송, 거래 이행 등<br>
-    3. 정산처리: 대금 정산, 계좌 확인, 사업자 정보 확인 등<br>
-    4. 고객상담 및 민원처리: 문의 접수, 불만 처리, 분쟁 대응 등
-  </p>
+          <div class="policy-summary">
+            <div class="summary-label">NOTICE</div>
 
-  <h2>제3조(개인정보의 처리 및 보유 기간)</h2>
-  <p>
-    ① 회사는 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 기간 내에서 개인정보를 처리·보유합니다.<br>
-    ② 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.
-  </p>
-  <p>
-    1. 회원정보: 회원 탈퇴 시까지<br>
-    2. 거래정보: 관련 법령에 따른 보존기간까지
-  </p>
-  <p>
-    관련 법령에 따른 보존 기간은 다음과 같습니다.<br>
-    - 계약 또는 청약철회 등에 관한 기록: 5년<br>
-    - 대금결제 및 재화 등의 공급에 관한 기록: 5년<br>
-    - 소비자 불만 또는 분쟁처리에 관한 기록: 3년<br>
-    - 표시·광고에 관한 기록: 6개월
-  </p>
+            <p class="summary-text">
+              주식회사 모딩(이하 “회사”)은 개인정보 보호법 등 관련 법령에 따라 이용자의 개인정보를 보호하고,
+              개인정보와 관련한 고충을 신속하고 원활하게 처리하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.
+            </p>
 
-  <h2>제4조(개인정보의 제3자 제공)</h2>
-  <p>
-    ① 회사는 정보주체의 개인정보를 제2조에서 명시한 범위 내에서만 처리하며, 원칙적으로 외부에 제공하지 않습니다.<br>
-    ② 다만 다음의 경우에는 예외로 합니다.
-  </p>
-  <p>
-    1. 이용자가 사전에 동의한 경우<br>
-    2. 법령에 의하여 제공이 요구되는 경우
-  </p>
-  <p>
-    회사의 서비스 제공 과정에서 다음과 같이 개인정보가 제공될 수 있습니다.<br>
-    - 판매자(공급사): 주문 처리 및 배송을 위하여 이름, 연락처, 배송지<br>
-    - PG사: 결제 처리를 위하여 결제정보<br>
-    - 택배사: 배송 수행을 위하여 이름, 연락처, 주소
-  </p>
+            <p class="summary-meta">
+              본 방침은 모딩(Moding)의 회원가입, 사업자 확인, 상품 거래, 주문·결제·배송,
+              정산, 세금계산서 처리, 주류상품 거래, 안심번호, 쿠폰·프로모션 운영 및 고객상담 과정에서
+              처리하는 개인정보의 기준과 절차를 안내합니다.
+            </p>
+          </div>
 
-  <h2>제5조(개인정보의 처리 위탁)</h2>
-  <p>
-    회사는 원활한 서비스 제공을 위하여 다음과 같이 개인정보 처리업무를 위탁할 수 있습니다.
-  </p>
-  <p>
-    1. 회원가입 처리: 회원 식별 및 관리<br>
-    수집 항목: 아이디, 비밀번호, 이름, 연락처, 이메일
-  </p>
-  <p>
-    2. 거래처리: 주문, 결제, 배송<br>
-    수집 항목: 사업자정보, 배송지 정보, 연락처
-  </p>
-  <p>
-    3. 정산처리: 대금 정산<br>
-    수집 항목: 계좌정보, 사업자등록정보
-  </p>
-  <p>
-    4. 고객상담: 문의 및 민원 처리<br>
-    수집 항목: 이름, 연락처, 문의내용
-  </p>
-  <p>
-    회사는 서비스 운영을 위하여 다음의 수탁업체에 개인정보 처리업무를 위탁할 수 있습니다.<br>
-    - PG사: 결제 처리<br>
-    - 택배사: 배송 처리<br>
-    - 클라우드 서비스사: 데이터 보관 및 시스템 유지
-  </p>
+        </div>
+      </section>
 
-  <h2>제6조(정보주체의 권리·의무 및 행사방법)</h2>
-  <p>
-    ① 정보주체는 언제든지 개인정보 열람, 정정, 삭제, 처리정지 요구 등의 권리를 행사할 수 있습니다.<br>
-    ② 권리 행사는 회사에 서면, 전자우편 등을 통하여 요청할 수 있습니다.
-  </p>
+      <!-- PRIVACY DOCUMENT -->
+      <section class="policy-section">
+        <div class="container">
 
-  <h2>제7조(개인정보의 파기)</h2>
-  <p>
-    ① 회사는 개인정보 보유기간의 경과, 처리 목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체 없이 해당 개인정보를 파기합니다.<br>
-    ② 전자적 파일 형태의 정보는 복구 불가능한 기술적 방법을 사용하여 삭제합니다.
-  </p>
+          <article class="policy-card">
 
-  <h2>제8조(개인정보의 안전성 확보 조치)</h2>
-  <p>
-    회사는 개인정보의 안전성 확보를 위하여 다음과 같은 조치를 취합니다.<br>
-    1. 관리적 조치: 내부관리계획 수립 및 교육<br>
-    2. 기술적 조치: 접근권한 관리, 암호화, 보안프로그램 설치<br>
-    3. 물리적 조치: 보호구역 설정 및 출입 통제
-  </p>
+            <h2 class="policy-doc-title">
+              개인정보처리방침
+            </h2>
 
-  <h2>제9조(개인정보 보호책임자)</h2>
-  <p>
-    회사는 개인정보 처리에 관한 업무를 총괄하여 책임지고, 개인정보 관련 문의를 처리하기 위하여 아래와 같이 개인정보 보호책임자를 지정합니다.
-  </p>
-  <p>
-    담당부서: 운영실<br>
-    책임자: 강전욱<br>
-    연락처: 010-9100-1108<br>
-    이메일: dev@moding.app
-  </p>
+            <section class="policy-article">
+              <h3>제1조(목적)</h3>
 
-  <h2>제10조(개인정보 처리방침 변경)</h2>
-  <p>
-    ① 본 방침은 시행일로부터 적용됩니다.<br>
-    ② 내용 변경 시 사전에 공지합니다.
-  </p>
+              <p>
+                본 개인정보처리방침은 회사가 운영하는 B2B Food-SaaS 플랫폼 “모딩(Moding)”의 회원가입, 사업자 확인,
+                상품 거래, 주문·결제·배송, 정산, 지급대행기관 등록, 계좌 실명확인, 고객확인제도(KYC) 이행,
+                세금계산서 처리, 주류상품 거래, 안심번호 등 거래 연락 중계 수단 제공, 쿠폰·프로모션 운영 및 고객상담 과정에서
+                처리하는 개인정보의 처리 기준과 절차를 정함을 목적으로 합니다.
+              </p>
+            </section>
 
-  <h2>부칙</h2>
-  <p>
-    본 방침은 2025년 11월 8일부터 시행합니다.
-  </p>
-</section>
-  </main>
+            <section class="policy-article">
+              <h3>제2조(개인정보의 처리 목적)</h3>
 
-  <!-- 공통 푸터 -->
-  <footer>
+              <p>
+                회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며,
+                이용 목적이 변경되는 경우에는 관련 법령에 따라 별도의 동의를 받는 등 필요한 조치를 이행합니다.
+              </p>
+
+              <ul class="policy-list">
+                <li>① 회원가입, 회원 식별 및 회원 관리</li>
+                <li>② 사업자등록정보 확인, 사업자 상태 확인, 휴업·폐업 여부 확인, 과세유형 및 인허가 정보 확인</li>
+                <li>③ 판매자 입점 심사, 구매자 승인, 판매자·구매자 권한 관리</li>
+                <li>④ 상품 주문, 결제, 배송, 교환, 반품, 환불, 클레임 처리 등 거래 이행</li>
+                <li>⑤ 정산 처리, 지급대행기관 등록, 계좌 실명확인, 고객확인제도(KYC) 이행, 수수료 산정, 세금계산서 또는 계산서 발행·연동</li>
+                <li>⑥ 주류상품 구매 또는 판매 권한 확인, 주류상품 관련 자격 확인, 승인 사업장 주소 확인</li>
+                <li>⑦ 주류상품 거래 담당자의 본인확인 및 성인 여부 확인</li>
+                <li>⑧ 일반 배송지, 사업장 주소, 승인 사업장 주소, 주류 수령 주소의 확인 및 관리</li>
+                <li>⑨ 수령인 정보 제공, 배송 및 거래 연락 중계, 판매자 안심번호 등 거래 연락 중계 수단 제공, 구매자·판매자 간 불필요한 실제 연락처 노출 최소화</li>
+                <li>⑩ 쿠폰, 포인트, 마일리지, 프로모션 혜택의 지급, 사용, 회수, 환불 및 부정사용 방지</li>
+                <li>⑪ 부정거래, 우회거래, 허위정보 제출, 법령 위반 의심 거래의 확인 및 분쟁 대응</li>
+                <li>⑫ 고객상담, 민원 처리, 고지사항 전달, 서비스 공지, 주문·배송·정산·쿠폰 관련 안내 발송</li>
+                <li>⑬ 앱 푸시 알림 발송, 서비스 알림 제공, 알림 수신 설정 관리</li>
+                <li>⑭ 서비스 개선, 보안 관리, 접속기록 관리, 장애 대응 및 시스템 운영</li>
+              </ul>
+            </section>
+
+            <section class="policy-article">
+              <h3>제3조(처리하는 개인정보 항목)</h3>
+
+              <p>
+                회사는 서비스 제공을 위하여 다음의 개인정보 및 사업자 정보를 처리할 수 있습니다.
+              </p>
+
+              <div class="detail-box">
+                <div class="detail-title">1. 회원가입 및 회원관리</div>
+                <p>
+                  처리 목적: 회원 식별, 계정 생성, 로그인, 회원 관리<br>
+                  처리 항목: 아이디, 비밀번호, 이름, 연락처, 이메일, 회원 유형, 가입일, 서비스 이용 상태
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">2. 사업자 확인 및 자격 확인</div>
+                <p>
+                  처리 목적: 사업자 자격 확인, 사업자등록 상태 확인, 휴업·폐업 여부 확인, 식품·주류·수입·제조·가공·유통·판매 관련 인허가, 면허, 등록, 신고, 인증 및 상품 적법성 확인<br>
+                  처리 항목: 상호명, 사업자등록번호, 대표자명, 개업일자, 사업장 주소, 사업자등록증,
+                  보유한 경우 통신판매업 신고 정보, 식품·주류·수입·제조·가공·유통·판매 관련 인허가,
+                  면허, 등록, 신고, 인증, 검사, 성적서, 품목보고 등 관련 증빙자료,
+                  기타 회사가 사업자 자격 및 상품 적법성 확인을 위하여 요구하는 자료
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">3. 판매자 입점 및 상품 거래 관리</div>
+                <p>
+                  처리 목적: 판매자 입점 심사, 상품 등록, 상품 판매, 거래 관리, 지급대행기관 등록 및 정산 지급 관리<br>
+                  처리 항목: 판매자명, 상호명, 사업자등록번호, 대표자명, 대표자 생년월일, 담당자명, 담당자 연락처,
+                  담당자 이메일, 사업장 주소, 상품정보, 배송방식, 정산계좌 정보,
+                  정산 및 수수료 세금계산서 수신 이메일, 상품 등록 및 거래 관련 정보
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">4. 구매자 승인 및 주문 처리</div>
+                <p>
+                  처리 목적: 구매자 승인, 상품 주문, 결제, 배송, 클레임 처리<br>
+                  처리 항목: 구매자명, 담당자명, 연락처, 이메일, 사업자 정보, 주문정보, 결제정보, 배송지 정보, 클레임 내용, 상담 내용
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">5. 주류상품 권한 확인</div>
+                <p>
+                  처리 목적: 주류상품 구매·판매 권한 확인, 승인 사업장 주소 확인, 주류상품 거래 관리<br>
+                  처리 항목: 사업자등록증, 주류상품 구매·판매와 관련된 면허, 허가, 신고, 등록 또는 이에 준하는 자격 확인 자료,
+                  담당자명, 담당자 연락처, 승인 사업장 주소, 주류 권한 신청 및 승인 내역
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">6. 본인확인 및 성인확인</div>
+                <p>
+                  처리 목적: 주류상품 거래 담당자의 본인확인, CI/DI 확인 및 성인 여부 확인<br>
+                  처리 항목: 이름, 생년월일, 휴대전화번호, CI, DI, 성인확인 결과, 본인확인 결과값, 인증일시
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">7. 배송지 및 주소 관리</div>
+                <p>
+                  처리 목적: 상품 배송, 배송지 확인, 주류상품 승인 사업장 주소 확인<br>
+                  처리 항목: 수령인명, 연락처, 주소, 상세주소, 우편번호, 일반 배송지, 사업장 주소, 승인 사업장 주소, 주류 수령 주소, 배송 요청사항
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">8. 안심번호 등 거래 연락 중계 운영</div>
+                <p>
+                  처리 목적: 판매자 연락처 보호, 거래 연락 중계, 개인정보 보호, 우회거래 방지, 분쟁 대응<br>
+                  처리 항목: 실제 연락처, 안심번호, 주문번호, 안심번호 매핑정보, 통화 연결 여부, 발신·수신 시각 등 안심번호 또는 거래 연락 중계 운영에 필요한 이용기록
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">9. 결제 및 정산 처리</div>
+                <p>
+                  처리 목적: 결제 처리, 환불 처리, 정산 처리, 지급대행 처리, 지급대행기관 등록, 계좌 실명확인, 고객확인제도(KYC) 이행, 수수료 산정<br>
+                  처리 항목: 주문정보, 결제정보, 결제수단 정보, 환불정보, 정산정보, 계좌정보, 은행명, 예금주, 계좌번호,
+                  대표자명, 대표자 생년월일, 거래금액, 수수료 정보, 정산 상태, 지급대행 처리 정보,
+                  PG 정산 상태, 계좌 실명확인 결과, 고객확인제도(KYC) 진행 상태 및 결과
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">10. 세금계산서 또는 계산서 처리</div>
+                <p>
+                  처리 목적: 세금계산서 또는 계산서 발행·연동, 증빙 관리<br>
+                  처리 항목: 사업자등록정보, 상호명, 대표자명, 사업장 주소, 이메일, 거래정보,
+                  공급가액, 부가세, 과세·면세 구분, 세금계산서 발행 상태
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">11. 쿠폰 및 프로모션 운영</div>
+                <p>
+                  처리 목적: 쿠폰 지급, 사용, 회수, 환불, 부정사용 방지, 프로모션 운영<br>
+                  처리 항목: 쿠폰 발급 내역, 쿠폰 사용 내역, 쿠폰 유효기간, 적용 주문정보, 환불정보, 프로모션 참여 내역
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">12. 인허가·면허·인증 정보 표시</div>
+                <p>
+                  처리 목적: 판매자 자격 확인 결과 표시, 상품 신뢰도 제공, 구매자의 거래 판단 지원, 법령 준수 및 분쟁 대응<br>
+                  처리 항목: 인허가명, 면허명, 인증명, 등록·신고명, 발급기관, 유효기간,
+                  허가·신고·등록·인증번호 일부 또는 전체, 확인 여부, 상품 또는 판매자와 연결된 인허가·인증 정보
+                </p>
+                <p>
+                  회사는 판매자가 제출한 서류 원본을 원칙적으로 외부에 공개하지 않으며,
+                  상품 신뢰도 제공 및 거래 판단 지원을 위하여 필요한 범위에서 확인 여부 또는 일부 정보를 표시할 수 있습니다.
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">13. 고객상담 및 민원 처리</div>
+                <p>
+                  처리 목적: 문의 응대, 민원 처리, 분쟁 대응<br>
+                  처리 항목: 이름, 연락처, 이메일, 문의내용, 주문정보, 상담내용, 첨부자료, 처리결과
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">14. 앱 푸시 및 서비스 알림 발송</div>
+                <p>
+                  처리 목적: 주문, 배송, 정산, 쿠폰, 사업자 승인, 주류상품 권한 승인, 클레임 처리 등 서비스 이용 관련 알림 발송<br>
+                  처리 항목: 회원정보, 기기정보, 앱 푸시 토큰, 알림 수신 설정, 주문정보, 배송정보, 쿠폰정보, 승인 상태 정보
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">15. 서비스 이용 및 보안 관리</div>
+                <p>
+                  처리 목적: 서비스 이용기록 관리, 부정이용 방지, 보안관리, 장애 대응<br>
+                  처리 항목: 접속기록, 접속 IP, 기기정보, 브라우저 정보, 서비스 이용기록, 로그인 기록, 오류 및 장애 기록
+                </p>
+              </div>
+            </section>
+
+            <section class="policy-article">
+              <h3>제4조(개인정보의 처리 및 보유 기간)</h3>
+
+              <p>
+                ① 회사는 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집할 때 동의받은 기간 내에서 개인정보를 처리·보유합니다.
+              </p>
+              <p>
+                ② 회사는 개인정보의 처리 목적이 달성되거나 보유기간이 경과한 경우 지체 없이 해당 개인정보를 파기합니다.
+                다만 관련 법령에 따라 보존이 필요한 경우에는 해당 법령에서 정한 기간 동안 보관합니다.
+              </p>
+              <p>
+                ③ 주요 개인정보의 보유 및 이용기간은 다음과 같습니다.
+              </p>
+
+              <div class="detail-box">
+                <div class="detail-title">주요 개인정보 보유 및 이용기간</div>
+                <ul>
+                  <li>1. 회원정보: 회원 탈퇴 시까지 / 회원 관리, 서비스 제공, 부정이용 방지</li>
+                  <li>2. 사업자 확인 정보: 회원 탈퇴 시까지 또는 관련 법령에 따른 보존기간까지 / 사업자 자격 확인, 거래 및 정산 관리, 세금계산서 처리</li>
+                  <li>3. 거래정보: 관련 법령에 따른 보존기간까지 / 계약 또는 청약철회, 대금결제, 재화 공급, 세금계산서 처리, 분쟁 대응</li>
+                  <li>4. 정산, 지급대행 및 세금계산서 정보: 관련 법령에 따른 보존기간까지 / 정산 관리, 지급대행 처리, 계좌 실명확인, 고객확인제도(KYC) 이행, 세금계산서 또는 계산서 발행·보관, 회계 처리</li>
+                  <li>5. 주류 권한 확인 정보: 주류 권한 유지 기간 및 권한 종료 후 1년 / 주류상품 거래 자격 확인, 법령 준수, 분쟁 대응</li>
+                  <li>6. 본인확인 및 성인확인 결과: 확인일로부터 1년 또는 주류 권한 유지 기간 / 주류상품 거래 담당자 확인, 부정 이용 방지</li>
+                  <li>7. 안심번호 매핑정보: 거래 완료 후 3개월 또는 분쟁 처리 종료 시까지 / 거래 연락 중계, 우회거래 방지, 분쟁 대응</li>
+                  <li>8. 쿠폰 및 프로모션 이용 기록: 쿠폰 유효기간 종료 후 1년 또는 관련 법령 보존기간까지 / 쿠폰 사용, 환불, 회수, 부정사용 방지</li>
+                  <li>9. 고객상담 및 민원 처리 기록: 상담 완료 후 3년 / 소비자 불만 및 분쟁 처리</li>
+                  <li>10. 앱 푸시 및 알림 발송 정보: 회원 탈퇴 시까지. 단, 광고성 알림 관련 정보는 수신 동의 철회 시까지 / 서비스 필수 알림 발송, 알림 수신 설정 관리, 장애 대응, 광고성 정보 수신 동의 관리</li>
+                </ul>
+              </div>
+
+              <p>
+                ④ 관련 법령에 따른 보존기간은 다음과 같습니다.
+              </p>
+
+              <ul class="policy-list">
+                <li>1. 계약 또는 청약철회 등에 관한 기록: 5년</li>
+                <li>2. 대금결제 및 재화 등의 공급에 관한 기록: 5년</li>
+                <li>3. 소비자 불만 또는 분쟁처리에 관한 기록: 3년</li>
+                <li>4. 표시·광고에 관한 기록: 6개월</li>
+                <li>5. 세금계산서, 계산서, 장부 및 증빙서류 등 세법상 보존자료: 관련 법령에서 정한 기간</li>
+              </ul>
+            </section>
+
+            <section class="policy-article">
+              <h3>제5조(개인정보의 제3자 제공)</h3>
+
+              <p>
+                ① 회사는 정보주체의 개인정보를 제2조에서 명시한 범위 내에서만 처리하며, 원칙적으로 외부에 제공하지 않습니다.
+              </p>
+              <p>
+                ② 다만 다음 각 호의 경우에는 개인정보를 제3자에게 제공할 수 있습니다.
+              </p>
+
+              <ul class="policy-list">
+                <li>1. 정보주체가 사전에 동의한 경우</li>
+                <li>2. 법령에 따라 제공이 요구되는 경우</li>
+                <li>3. 거래 이행을 위하여 필요한 범위에서 판매자, 구매자, 배송 관련 주체 등에게 제공이 필요한 경우</li>
+                <li>4. 수사기관, 감독기관, 법원 등 관계기관의 적법한 요청이 있는 경우</li>
+              </ul>
+
+              <p>
+                ③ 회사는 주문 확인, 상품 출고, 배송, 클레임 처리 등 거래 이행을 위하여 필요한 범위에서 판매자에게
+                구매자의 주문정보, 배송정보, 수령인명, 배송지 및 수령인 연락처를 제공합니다.
+                회사는 개인정보 보호 및 거래 안정성 확보를 위하여 구매자에게 판매자의 실제 연락처 대신 안심번호 등 대체 연락수단을 제공할 수 있습니다.
+                안심번호는 해당 거래의 이행 및 분쟁 대응에 필요한 범위에서만 이용할 수 있으며,
+                거래 종료, 주문 취소, 분쟁 종결 또는 회사가 정한 기간 경과 시 비활성화되거나 회수될 수 있습니다.
+              </p>
+
+              <p>
+                ④ 주류상품 거래의 경우 회사는 주류 구매 권한 확인, 승인 사업장 주소 확인, 배송 및 거래 이행을 위하여 필요한 범위에서
+                판매자에게 구매자의 사업자 정보, 승인 사업장 주소, 주문정보, 배송지 정보, 수령인명 및 수령인 연락처를 제공할 수 있습니다.
+              </p>
+
+              <p>
+                ⑤ 회사는 상품 신뢰도 제공, 구매자의 거래 판단 지원 및 법령 준수를 위하여 판매자가 제출한 사업자 정보,
+                인허가 정보, 면허 정보, 인증 정보의 확인 여부 또는 일부 정보를 플랫폼 내 상품 상세,
+                판매자 정보 화면 또는 거래 관련 화면에 표시할 수 있습니다.
+                단, 서류 원본은 회사가 필요하다고 판단하거나 판매자가 별도로 동의한 경우를 제외하고 외부에 공개하지 않습니다.
+              </p>
+
+              <p>
+                ⑥ 개인정보 제3자 제공 현황은 다음과 같습니다.
+              </p>
+
+              <div class="detail-box">
+                <div class="detail-title">1. 제공받는 자: 판매자</div>
+                <p>
+                  제공 목적: 주문 확인, 상품 공급, 배송 및 거래 이행, 클레임 처리<br>
+                  제공 항목: 주문정보, 배송지 정보, 수령인명, 수령인 연락처, 클레임 정보<br>
+                  보유 및 이용기간: 거래 완료 후 3개월 또는 관련 법령에 따른 보존기간 종료 시까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">2. 제공받는 자: 주류상품 판매자</div>
+                <p>
+                  제공 목적: 주류상품 거래 이행, 승인 사업장 주소 확인, 배송 및 세금계산서 처리<br>
+                  제공 항목: 사업자 정보, 승인 사업장 주소, 주문정보, 배송지 정보, 수령인명, 수령인 연락처<br>
+                  보유 및 이용기간: 거래 완료 후 3개월 또는 관련 법령에 따른 보존기간 종료 시까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">3. 제공받는 자: 구매자</div>
+                <p>
+                  제공 목적: 주문 확인, 거래 이행, 세금계산서 또는 계산서 확인, 클레임 처리, 상품 신뢰도 확인<br>
+                  제공 항목: 판매자의 상호명, 사업자등록정보, 상품정보, 세금계산서 발행 정보, 배송 관련 정보, 인허가·면허·인증 확인 정보<br>
+                  보유 및 이용기간: 거래 완료 후 3개월 또는 관련 법령에 따른 보존기간 종료 시까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">4. 제공받는 자: 국세청 사업자등록정보 조회 서비스</div>
+                <p>
+                  제공 목적: 사업자등록 상태 및 진위 확인, 계속사업자 여부 확인<br>
+                  제공 항목: 사업자등록번호, 대표자명, 개업일자 등 사업자 진위 확인에 필요한 정보<br>
+                  보유 및 이용기간: 해당 기관 또는 관련 법령에서 정한 기간
+                </p>
+              </div>
+
+              <p>
+                ⑦ 정보주체는 개인정보의 제3자 제공에 동의하지 않을 권리가 있습니다.
+                다만 거래 이행, 사업자 확인, 주류 권한 확인 또는 정산 처리에 필요한 정보 제공에 동의하지 않을 경우 서비스 이용이 제한될 수 있습니다.
+              </p>
+            </section>
+
+            <section class="policy-article">
+              <h3>제6조(개인정보의 처리 위탁)</h3>
+
+              <p>
+                ① 회사는 원활한 서비스 제공을 위하여 다음과 같이 개인정보 처리업무를 위탁할 수 있습니다.
+              </p>
+              <p>
+                ② 회사는 위탁계약 체결 시 개인정보 보호법 등 관련 법령에 따라 수탁자가 개인정보를 안전하게 처리하도록
+                필요한 사항을 계약서 등에 반영하고, 수탁자의 개인정보 처리 현황을 관리·감독합니다.
+              </p>
+              <p>
+                ③ 개인정보 처리 위탁 내역은 다음과 같습니다.
+              </p>
+
+              <div class="detail-box">
+                <div class="detail-title">1. 토스페이먼츠, 케이지이니시스 주식회사</div>
+                <p>
+                  위탁업무: 결제 처리, 결제 결과 연동, 환불 처리, 정산 및 지급대행 관련 업무, 계좌 실명확인, 고객확인제도(KYC) 이행 지원<br>
+                  처리항목: 주문정보, 결제정보, 결제수단 정보, 환불정보, 정산정보, 지급대행 처리 정보, 계좌정보, 은행명,
+                  예금주, 계좌번호, 대표자명, 대표자 생년월일, 계좌 실명확인 결과, 고객확인제도(KYC) 진행 상태 및 결과<br>
+                  보유 및 이용기간: 위탁계약 종료 시 또는 관련 법령에 따른 보존기간 종료 시까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">2. 나이스평가정보주식회사</div>
+                <p>
+                  위탁업무: 담당자 본인확인, CI/DI 확인, 성인 여부 확인<br>
+                  처리항목: 이름, 생년월일, 휴대전화번호, CI, DI, 본인확인 결과값, 성인확인 결과값, 인증일시<br>
+                  보유 및 이용기간: 위탁계약 종료 시 또는 관련 법령에 따른 보존기간 종료 시까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">3. 팝빌</div>
+                <p>
+                  위탁업무: 전자세금계산서 처리<br>
+                  처리항목: 사업자등록정보, 이메일, 거래정보<br>
+                  보유 및 이용기간: 거래 완료 후 즉시 파기 또는 관련 법령에 따른 보존기간 종료 시까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">4. 주식회사 한진</div>
+                <p>
+                  위탁업무: 배송서비스 연계 및 가입 지원<br>
+                  처리항목: 상호명, 사업자정보, 담당자 정보, 이름, 연락처, 주소, 주문정보<br>
+                  보유 및 이용기간: 배송 완료 후 즉시 파기 또는 관련 법령에 따른 보존기간 종료 시까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">5. 세종텔레콤주식회사</div>
+                <p>
+                  위탁업무: 판매자 안심번호 부여 및 거래 연락 중계<br>
+                  처리항목: 이름, 연락처, 주문정보, 안심번호 매핑정보, 통화 연결 기록<br>
+                  보유 및 이용기간: 거래 완료 후 회사가 정한 기간 또는 관련 법령에 따른 보존기간 종료 시까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">6. 스윗트래커</div>
+                <p>
+                  위탁업무: 배송조회 및 송장 상태 연동<br>
+                  처리항목: 이름, 연락처, 주소, 송장정보, 주문정보<br>
+                  보유 및 이용기간: 배송 완료 후 즉시 파기 또는 관련 법령에 따른 보존기간 종료 시까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">7. Amazon Web Services, Inc.</div>
+                <p>
+                  위탁업무: 클라우드 인프라 제공, 데이터 보관 및 시스템 운영<br>
+                  처리항목: 회원정보, 사업자정보, 거래정보, 주문정보, 정산정보, 서비스 이용기록<br>
+                  보유 및 이용기간: 위탁계약 종료 시 또는 관련 법령에 따른 보존기간 종료 시까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">8. Google LLC 또는 Firebase Cloud Messaging</div>
+                <p>
+                  위탁업무: Android 앱 푸시 알림 발송<br>
+                  처리항목: 앱 푸시 토큰, 기기정보, 알림 수신 설정, 주문정보, 배송정보, 쿠폰정보, 승인 상태 정보<br>
+                  보유 및 이용기간: 위탁계약 종료 시 또는 회원 탈퇴 시까지, 단 관련 법령에 따른 보존기간이 있는 경우 해당 기간까지
+                </p>
+              </div>
+
+              <div class="detail-box">
+                <div class="detail-title">9. Apple Inc. 또는 Apple Push Notification service</div>
+                <p>
+                  위탁업무: iOS 앱 푸시 알림 발송<br>
+                  처리항목: 앱 푸시 토큰, 기기정보, 알림 수신 설정, 알림 발송 정보<br>
+                  보유 및 이용기간: 위탁계약 종료 시 또는 회원 탈퇴 시까지, 단 관련 법령에 따른 보존기간이 있는 경우 해당 기간까지
+                </p>
+              </div>
+            </section>
+
+            <section class="policy-article">
+              <h3>제7조(국외 이전에 관한 사항)</h3>
+
+              <p>
+                ① 회사는 원칙적으로 개인정보를 국내에서 처리·보관합니다.
+              </p>
+              <p>
+                ② 다만 클라우드 인프라, 앱 푸시 알림, 보안관리 또는 서비스 운영 과정에서 개인정보의 국외 이전이 발생하는 경우,
+                회사는 관련 법령에 따라 이전받는 자, 이전 국가, 이전 항목, 이전 목적, 보유 및 이용기간 등을 별도로 고지하거나 본 개인정보처리방침에 반영합니다.
+              </p>
+            </section>
+
+            <section class="policy-article">
+              <h3>제8조(정보주체의 권리·의무 및 행사방법)</h3>
+
+              <p>
+                ① 정보주체는 회사에 대해 언제든지 개인정보 열람, 정정, 삭제, 처리정지, 동의 철회 등의 권리를 행사할 수 있습니다.
+              </p>
+              <p>
+                ② 권리 행사는 회사에 서면, 전자우편, 고객센터 등을 통하여 요청할 수 있으며, 회사는 관련 법령에 따라 지체 없이 조치합니다.
+              </p>
+              <p>
+                ③ 정보주체가 개인정보의 오류 등에 대한 정정 또는 삭제를 요구한 경우, 회사는 정정 또는 삭제를 완료할 때까지 해당 개인정보를 이용하거나 제공하지 않습니다.
+              </p>
+              <p>
+                ④ 정보주체는 자신의 개인정보를 최신의 상태로 정확하게 제공하여야 하며,
+                부정확한 정보 제공으로 인하여 발생한 불이익에 대하여 회사는 책임을 부담하지 않습니다.
+              </p>
+              <p>
+                ⑤ 정보주체는 타인의 개인정보를 침해하거나 도용하여서는 아니 되며,
+                이를 위반하여 발생한 책임은 해당 정보주체에게 있습니다.
+              </p>
+            </section>
+
+            <section class="policy-article">
+              <h3>제9조(만 14세 미만 아동의 개인정보 처리)</h3>
+
+              <p>
+                회사는 사업자 회원을 대상으로 서비스를 제공하므로 원칙적으로 만 14세 미만 아동의 개인정보를 수집하지 않습니다.
+                만 14세 미만 아동의 개인정보가 수집된 사실을 확인한 경우 회사는 지체 없이 해당 정보를 삭제하거나 필요한 조치를 취합니다.
+              </p>
+            </section>
+
+            <section class="policy-article">
+              <h3>제10조(개인정보의 파기)</h3>
+
+              <p>
+                ① 회사는 개인정보 보유기간의 경과, 처리 목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체 없이 해당 개인정보를 파기합니다.
+              </p>
+              <p>
+                ② 다만 관련 법령에 따라 보존이 필요한 경우에는 해당 개인정보를 별도로 분리하여 보관할 수 있습니다.
+              </p>
+              <p>
+                ③ 전자적 파일 형태의 정보는 복구 불가능한 기술적 방법을 사용하여 삭제합니다.
+              </p>
+              <p>
+                ④ 종이 문서에 기록된 개인정보는 분쇄하거나 소각하는 방법으로 파기합니다.
+              </p>
+            </section>
+
+            <section class="policy-article">
+              <h3>제11조(개인정보의 안전성 확보 조치)</h3>
+
+              <p>
+                회사는 개인정보의 안전성 확보를 위하여 다음과 같은 조치를 취합니다.
+              </p>
+
+              <ul class="policy-list">
+                <li>1. 관리적 조치: 내부관리계획 수립, 개인정보 취급자 교육, 접근권한 관리</li>
+                <li>2. 기술적 조치: 개인정보처리시스템 접근통제, 암호화, 접속기록 보관, 보안프로그램 설치 및 갱신</li>
+                <li>3. 물리적 조치: 자료보관 장소의 접근통제, 보호구역 설정 및 출입 통제</li>
+              </ul>
+            </section>
+
+            <section class="policy-article">
+              <h3>제12조(자동 수집 장치의 설치·운영 및 거부)</h3>
+
+              <p>
+                ① 회사는 서비스 이용 과정에서 접속기록, 쿠키, 기기정보, 로그정보 등 자동 생성 정보를 수집할 수 있습니다.
+              </p>
+              <p>
+                ② 회사는 자동 생성 정보를 서비스 이용 분석, 보안관리, 장애 대응, 부정이용 방지 및 서비스 개선 목적으로 이용할 수 있습니다.
+              </p>
+              <p>
+                ③ 이용자는 브라우저 설정 등을 통하여 쿠키 저장을 거부할 수 있습니다.
+                다만 쿠키 저장을 거부할 경우 일부 서비스 이용이 제한될 수 있습니다.
+              </p>
+            </section>
+
+            <section class="policy-article">
+              <h3>제13조(개인정보 보호책임자)</h3>
+
+              <p>
+                회사는 개인정보 처리에 관한 업무를 총괄하여 책임지고, 개인정보 관련 문의를 처리하기 위하여 아래와 같이 개인정보 보호책임자를 지정합니다.
+              </p>
+
+              <div class="detail-box orange">
+                <p>
+                  1. 담당부서: 운영실<br>
+                  2. 개인정보 보호책임자: 강전욱<br>
+                  3. 이메일: cs@moding.app<br>
+                  4. 기타 문의: 앱 또는 웹 내 고객센터/문의하기
+                </p>
+              </div>
+
+              <p>
+                ※ 회사가 별도 고객센터 전화번호를 운영하는 경우 플랫폼 내 고객센터 화면을 통해 안내합니다.
+              </p>
+              <p>
+                정보주체는 회사의 서비스를 이용하면서 발생한 모든 개인정보 보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자에게 문의할 수 있습니다.
+              </p>
+            </section>
+
+            <section class="policy-article">
+              <h3>제14조(권익침해 구제방법)</h3>
+
+              <p>
+                정보주체는 개인정보 침해로 인한 구제를 받기 위하여 개인정보침해신고센터, 개인정보분쟁조정위원회 등 관계기관에 상담 또는 분쟁조정을 신청할 수 있습니다.
+              </p>
+
+              <ul class="policy-list">
+                <li>1. 개인정보침해신고센터: 국번 없이 118</li>
+                <li>2. 개인정보분쟁조정위원회: 1833-6972</li>
+                <li>3. 대검찰청: 국번 없이 1301</li>
+                <li>4. 경찰청: 국번 없이 182</li>
+              </ul>
+            </section>
+
+            <section class="policy-article">
+              <h3>제15조(개인정보 처리방침의 변경)</h3>
+
+              <p>
+                ① 본 개인정보처리방침은 시행일로부터 적용됩니다.
+              </p>
+              <p>
+                ② 회사는 개인정보처리방침을 변경하는 경우 변경 내용과 시행일을 플랫폼 또는 회사가 정한 방법을 통하여 공지합니다.
+              </p>
+            </section>
+
+            <div class="policy-effective">
+              <div class="policy-effective-title">부칙</div>
+              <p class="policy-effective-text">
+                본 방침은 2026년 7월 1일부터 시행합니다.
+              </p>
+            </div>
+
+          </article>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- =======================================================
+         FOOTER
+         ======================================================= -->
+    <footer>
       <div class="footer-links">
-    <a href="terms.html">이용약관</a>
-    <span class="divider">·</span>
-    <a href="privacy.html">개인정보처리방침</a>
-    <span class="divider">·</span>
-    <a href="location.html">오시는 길</a>
-    </div>
-    주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
-    통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
-    대구광역시 달서구 달구벌대로 1870, 7층
-  </footer>
+        <a href="terms.html">이용약관</a>
+        <span class="divider">·</span>
+        <a href="privacy.html">개인정보처리방침</a>
+        <span class="divider">·</span>
+        <a href="location.html">오시는 길</a>
+      </div>
 
-  <!-- 복사/드래그/단축키 방지 스크립트 (공통) -->
+      주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+      통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
+      대구광역시 달서구 달구벌대로 1870, 7층
+    </footer>
+
+  </div>
+
   <script>
+    /* =========================================================
+       복사 / 드래그 방지
+       ========================================================= */
     document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) e.preventDefault();
+      if (!e.target.closest("input, textarea, a, button")) {
+        e.preventDefault();
+      }
     });
 
     document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
     });
 
     document.addEventListener("keydown", function (e) {
       const key = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
-        if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
+
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
+        }
       }
     });
 
     document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) e.preventDefault();
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
     });
   </script>
-
 </body>
 </html>
