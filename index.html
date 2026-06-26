@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <!-- ===========================
+  <!-- =========================================================
        기본 메타 정보
-       =========================== -->
+       ========================================================= -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <title>모딩(Moding) | 메뉴에 맞는 상품을 찾는 새로운 방식</title>
+  <title>모딩(Moding) | 사장님! 오늘부터 모딩하세요</title>
 
   <meta name="description" content="모딩(Moding)은 외식업 사장님이 메뉴에 맞는 식품·식자재 상품을 쉽게 찾을 수 있도록 돕는 B2B 식품 거래 앱입니다.">
 
-  <!-- Open Graph / SNS 공유용 -->
+  <!-- SNS 공유 / 카카오톡 미리보기용 -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
-  <meta property="og:title" content="모딩(Moding) | 메뉴에 맞는 상품을 찾는 새로운 방식">
-  <meta property="og:description" content="사장님! 오늘부터 모딩하세요. 메뉴에 맞는 상품을 모딩 앱에서 확인하세요.">
+  <meta property="og:title" content="모딩(Moding) | 사장님! 오늘부터 모딩하세요">
+  <meta property="og:description" content="메뉴에 맞는 상품을 모딩 앱에서 확인하세요.">
   <meta property="og:url" content="https://moding.app/">
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
@@ -33,10 +33,11 @@
       --bg-white: #ffffff;
 
       --text-main: #1F3B1F;
-      --text-sub: #555555;
+      --text-sub: #666666;
 
       --border-light: #e1e4e2;
-      --shadow-soft: 0 14px 36px rgba(0, 0, 0, 0.08);
+      --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.08);
+      --shadow-card: 0 14px 34px rgba(0, 0, 0, 0.10);
     }
 
     /* =========================================================
@@ -50,6 +51,7 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
@@ -81,7 +83,7 @@
 
     .container {
       width: 100%;
-      max-width: 1120px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -97,9 +99,9 @@
 
     .nav {
       width: 100%;
-      max-width: 1120px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 18px 24px;
+      padding: 16px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -110,10 +112,11 @@
       display: inline-flex;
       align-items: center;
       text-decoration: none;
+      flex-shrink: 0;
     }
 
     .nav-logo img {
-      width: 160px;
+      width: 136px;
       height: auto;
     }
 
@@ -123,7 +126,7 @@
       justify-content: flex-end;
       gap: 22px;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .nav-menu a {
@@ -148,58 +151,45 @@
     .hero {
       width: 100%;
       text-align: center;
-      padding: 72px 0 68px;
+      padding: 70px 0 68px;
     }
 
     .hero-title {
-      font-size: 38px;
-      font-weight: 800;
-      line-height: 1.32;
-      letter-spacing: -0.04em;
+      font-size: clamp(30px, 4.2vw, 48px);
+      font-weight: 850;
+      line-height: 1.28;
+      letter-spacing: -0.045em;
       color: var(--moding-green);
-      margin-bottom: 20px;
+      margin-bottom: 0;
     }
 
-    .hero-line {
-      display: inline-block;
-      min-height: 1.35em;
-    }
-
-    .hero-line2 {
+    .hero-title .orange {
       color: var(--moding-orange);
-    }
-
-    .hero-sub {
-      margin-top: 28px;
-      font-size: 18px;
-      font-weight: 500;
-      line-height: 1.6;
-      color: var(--text-main);
     }
 
     /* =========================================================
        5. 메인 비주얼 이미지 3장 영역
-       - iOS1.png / iOS2.png / iOS3.png 파일을 index.html과 같은 위치에 업로드
-       - 한 장씩 사라지는 슬라이드가 아니라 3장이 동시에 노출됨
+       - iOS_1.png / iOS_2.png / iOS_3.png 파일을 index.html과 같은 위치에 업로드
+       - 3장이 동시에 노출됨
        - 최초 진입 시에만 순서대로 부드럽게 등장
        ========================================================= */
     .hero-visual-section {
       width: 100%;
-      margin: 42px auto 34px;
+      margin: 44px auto 34px;
     }
 
     .hero-visual-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
-      align-items: center;
+      align-items: start;
     }
 
     .hero-visual-card {
       width: 100%;
       border-radius: 28px;
       background: #ffffff;
-      box-shadow: var(--shadow-soft);
+      box-shadow: var(--shadow-card);
       overflow: hidden;
       opacity: 0;
       transform: translateY(26px) scale(0.98);
@@ -211,11 +201,11 @@
     }
 
     .hero-visual-card:nth-child(2) {
-      animation-delay: 0.24s;
+      animation-delay: 0.22s;
     }
 
     .hero-visual-card:nth-child(3) {
-      animation-delay: 0.40s;
+      animation-delay: 0.36s;
     }
 
     .hero-visual-card img {
@@ -224,11 +214,23 @@
       display: block;
     }
 
+    /* 데스크탑에서만 살짝 떠오르는 느낌 */
+    @media (hover: hover) and (pointer: fine) {
+      .hero-visual-card {
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      .hero-visual-card:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: var(--shadow-soft);
+      }
+    }
+
     /* =========================================================
        6. 다운로드 버튼
        ========================================================= */
     .download-wrapper {
-      margin-top: 30px;
+      margin-top: 32px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -238,13 +240,13 @@
 
     .download-btn {
       width: 220px;
-      min-height: 58px;
+      min-height: 60px;
       padding: 13px 20px;
       border-radius: 18px;
       background: #ffffff;
       text-decoration: none;
       font-size: 15px;
-      font-weight: 800;
+      font-weight: 850;
       line-height: 1.25;
       display: flex;
       align-items: center;
@@ -322,7 +324,7 @@
     .footer-links a {
       text-decoration: none;
       color: var(--moding-green);
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .footer-links a:hover {
@@ -367,16 +369,34 @@
       }
     }
 
-    /* =========================================================
-       10. Responsive / 태블릿
-       ========================================================= */
-    @media (max-width: 900px) {
-      .hero {
-        padding: 58px 0 56px;
+    /* 사용자가 애니메이션 줄이기를 설정한 경우 */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
 
-      .hero-title {
-        font-size: 34px;
+      .hero-visual-card {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+
+      .download-btn,
+      .nav-menu a {
+        transition: none;
+      }
+    }
+
+    /* =========================================================
+       10. Responsive / 노트북 · 태블릿 · 폴드 펼침
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .container {
+        max-width: 960px;
+      }
+
+      .hero {
+        padding: 62px 0 58px;
       }
 
       .hero-visual-grid {
@@ -384,15 +404,15 @@
       }
 
       .hero-visual-card {
-        border-radius: 22px;
+        border-radius: 24px;
       }
     }
 
     /* =========================================================
-       11. Responsive / 모바일
-       - 모바일에서는 3장을 작게 우겨넣지 않고 가로 스크롤 카드형으로 노출
+       11. Responsive / 태블릿 세로 · 폴드 펼침 좁은 화면
+       - 3장 모두 한 화면에 보이도록 유지
        ========================================================= */
-    @media (max-width: 768px) {
+    @media (max-width: 820px) {
       .nav {
         padding: 14px 20px;
         flex-direction: column;
@@ -401,7 +421,7 @@
       }
 
       .nav-logo img {
-        width: 150px;
+        width: 124px;
       }
 
       .nav-menu {
@@ -416,20 +436,52 @@
       }
 
       .hero {
-        padding: 48px 0 46px;
+        padding: 50px 0 50px;
       }
 
       .hero-title {
-        font-size: 30px;
-      }
-
-      .hero-sub {
-        margin-top: 24px;
-        font-size: 16px;
+        font-size: clamp(29px, 6.2vw, 40px);
       }
 
       .hero-visual-section {
-        margin: 34px calc(50% - 50vw) 28px;
+        margin-top: 36px;
+      }
+
+      .hero-visual-grid {
+        gap: 12px;
+      }
+
+      .hero-visual-card {
+        border-radius: 20px;
+      }
+    }
+
+    /* =========================================================
+       12. Responsive / 일반 스마트폰 · 아이폰
+       - 세로 포스터 3장을 억지로 축소하지 않고 가로 스크롤 카드로 노출
+       - 한 장씩 자동 전환은 아니며, 3장이 모두 존재함
+       ========================================================= */
+    @media (max-width: 640px) {
+      .nav-logo img {
+        width: 116px;
+      }
+
+      .nav-menu {
+        gap: 14px;
+        font-size: 13px;
+      }
+
+      .hero {
+        padding: 42px 0 44px;
+      }
+
+      .hero-title {
+        font-size: clamp(26px, 8vw, 34px);
+        line-height: 1.34;
+      }
+
+      .hero-visual-section {
+        margin: 32px calc(50% - 50vw) 26px;
         overflow: hidden;
       }
 
@@ -437,7 +489,7 @@
         display: flex;
         gap: 14px;
         overflow-x: auto;
-        padding: 6px 20px 18px;
+        padding: 6px 20px 20px;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
       }
@@ -447,56 +499,92 @@
       }
 
       .hero-visual-card {
-        flex: 0 0 74%;
+        flex: 0 0 78%;
         max-width: 380px;
         border-radius: 22px;
         scroll-snap-align: center;
       }
 
       .download-wrapper {
-        margin-top: 26px;
+        margin-top: 28px;
         gap: 12px;
       }
 
       .download-btn {
         width: 100%;
-        max-width: 280px;
-        min-height: 56px;
+        max-width: 300px;
+        min-height: 58px;
+      }
+
+      .download-note {
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        word-break: keep-all;
       }
     }
 
     /* =========================================================
-       12. Responsive / 작은 모바일
+       13. Responsive / 아이폰 SE · 갤럭시 폴드 접은 화면 등 매우 좁은 화면
        ========================================================= */
-    @media (max-width: 480px) {
+    @media (max-width: 380px) {
+      .nav {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
       .nav-logo img {
-        width: 140px;
+        width: 108px;
       }
 
       .nav-menu {
-        gap: 13px;
-        font-size: 13px;
+        gap: 11px;
+        font-size: 12px;
+      }
+
+      .container {
+        padding: 0 16px;
       }
 
       .hero {
-        padding: 42px 0 42px;
+        padding: 36px 0 40px;
       }
 
       .hero-title {
-        font-size: 26px;
-        line-height: 1.34;
-      }
-
-      .hero-sub {
-        font-size: 15px;
+        font-size: 24px;
+        letter-spacing: -0.04em;
       }
 
       .hero-visual-card {
-        flex-basis: 82%;
+        flex-basis: 84%;
+      }
+
+      .download-btn {
+        max-width: 280px;
+        min-height: 56px;
+        font-size: 14px;
       }
 
       footer {
-        padding: 22px 16px;
+        padding: 22px 14px;
+      }
+    }
+
+    /* =========================================================
+       14. Responsive / 가로모드 스마트폰
+       - 세로 공간이 부족한 가로모드에서 상하 여백 축소
+       ========================================================= */
+    @media (max-height: 520px) and (orientation: landscape) {
+      .hero {
+        padding: 34px 0 36px;
+      }
+
+      .hero-visual-section {
+        margin-top: 28px;
+      }
+
+      .download-wrapper {
+        margin-top: 24px;
       }
     }
   </style>
@@ -537,14 +625,14 @@
 
           <!-- 메인 카피 -->
           <h1 class="hero-title">
-            <span class="hero-line hero-line1" data-text="메뉴에 맞는 상품을 찾는">메뉴에 맞는 상품을 찾는</span><br>
-            <span class="hero-line hero-line2" data-text="새로운 방식">새로운 방식</span>
+            사장님!<br>
+            <span class="orange">오늘부터 모딩하세요 :)</span>
           </h1>
 
           <!--
             메인 비주얼 3장
             파일 업로드 위치:
-            index.html과 같은 위치에 iOS1.png, iOS2.png, iOS3.png 업로드
+            index.html과 같은 위치에 iOS_1.png, iOS_2.png, iOS_3.png 업로드
           -->
           <div class="hero-visual-section" aria-label="모딩 서비스 소개 이미지">
             <div class="hero-visual-grid">
@@ -554,6 +642,7 @@
                   src="iOS_1.png"
                   alt="메뉴에 맞는 상품을 찾는 새로운 방식"
                   loading="eager"
+                  decoding="async"
                 >
               </div>
 
@@ -562,6 +651,7 @@
                   src="iOS_2.png"
                   alt="메뉴 경쟁력은 상품 선택에서 시작됩니다"
                   loading="eager"
+                  decoding="async"
                 >
               </div>
 
@@ -570,16 +660,12 @@
                   src="iOS_3.png"
                   alt="흔하지 않은 상품이 흔하지 않은 매장을 만듭니다"
                   loading="eager"
+                  decoding="async"
                 >
               </div>
 
             </div>
           </div>
-
-          <!-- 서브 카피 -->
-          <p class="hero-sub">
-            사장님! 오늘부터 모딩하세요~
-          </p>
 
           <!-- 다운로드 버튼 -->
           <div class="download-wrapper" aria-label="앱 다운로드">
@@ -669,53 +755,6 @@
       if (!e.target.closest("input, textarea")) {
         e.preventDefault();
       }
-    });
-
-    /* =========================================================
-       히어로 타이핑 효과
-       - HTML에는 기본 문구를 넣어두고,
-         JS가 실행되면 한 번 지운 뒤 다시 타이핑합니다.
-       - JS가 꺼져 있어도 문구는 그대로 보입니다.
-       ========================================================= */
-    document.addEventListener("DOMContentLoaded", function () {
-      const line1El = document.querySelector(".hero-line1");
-      const line2El = document.querySelector(".hero-line2");
-
-      if (!line1El || !line2El) return;
-
-      const line1Text = line1El.dataset.text || line1El.textContent;
-      const line2Text = line2El.dataset.text || line2El.textContent;
-
-      const speed = 90;
-      const delayBetweenLines = 360;
-
-      line1El.textContent = "";
-      line2El.textContent = "";
-
-      function typeLine(text, element, callback) {
-        let index = 0;
-
-        function step() {
-          if (index <= text.length) {
-            element.textContent = text.slice(0, index);
-            index += 1;
-            setTimeout(step, speed);
-            return;
-          }
-
-          if (typeof callback === "function") {
-            callback();
-          }
-        }
-
-        step();
-      }
-
-      typeLine(line1Text, line1El, function () {
-        setTimeout(function () {
-          typeLine(line2Text, line2El);
-        }, delayBetweenLines);
-      });
     });
   </script>
 </body>
