@@ -34,11 +34,12 @@
       --bg-white: #ffffff;
 
       --text-main: #1F3B1F;
-      --text-sub: #555555;
+      --text-sub: #666666;
 
       --border-light: #e1e4e2;
-      --shadow-card: 0 6px 18px rgba(0, 0, 0, 0.03);
-      --shadow-hero: 0 12px 32px rgba(0, 0, 0, 0.18);
+      --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.06);
+      --shadow-hero: 0 16px 42px rgba(0, 0, 0, 0.14);
+      --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.08);
     }
 
     /* =========================================================
@@ -85,15 +86,14 @@
 
     .container {
       width: 100%;
-      max-width: 860px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 40px 24px 54px;
-      flex: 1;
+      padding: 0 24px;
     }
 
     /* =========================================================
        3. Header / Navigation
-       - About 페이지와 폭/로고 크기 통일
+       - About / Services / Alliance 기준과 통일
        ========================================================= */
     header {
       width: 100%;
@@ -112,19 +112,19 @@
       gap: 28px;
     }
 
-    .nav-left {
+    .nav-logo {
       display: inline-flex;
       align-items: center;
+      text-decoration: none;
       flex-shrink: 0;
     }
 
-    .nav-left img {
+    .nav-logo img {
       width: 136px;
       height: auto;
-      display: block;
     }
 
-    .nav-right {
+    .nav-menu {
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -133,15 +133,15 @@
       font-weight: 700;
     }
 
-    .nav-right a {
+    .nav-menu a {
       text-decoration: none;
       color: var(--moding-green);
       white-space: nowrap;
       transition: color 0.2s ease;
     }
 
-    .nav-right a:hover,
-    .nav-right a.active {
+    .nav-menu a:hover,
+    .nav-menu a.active {
       color: var(--moding-orange);
     }
 
@@ -149,19 +149,20 @@
        4. 상단 메인 화면 이동 버튼
        ========================================================= */
     .top-return {
+      width: 100%;
       display: flex;
       justify-content: flex-end;
-      margin-bottom: 12px;
+      padding-top: 26px;
     }
 
     .top-return-btn {
-      font-size: 12px;
       padding: 8px 15px;
       border-radius: 999px;
       border: 1.5px solid var(--moding-green);
-      color: var(--moding-green);
       background: #ffffff;
+      color: var(--moding-green);
       text-decoration: none;
+      font-size: 12px;
       font-weight: 800;
       transition:
         background 0.2s ease,
@@ -176,34 +177,17 @@
 
     /* =========================================================
        5. 공통 타이포
-       - About 페이지의 초록 타이포 결에 맞춤
        ========================================================= */
-    p {
-      font-size: 15px;
-      line-height: 1.85;
-      color: var(--text-sub);
-      margin-bottom: 10px;
-    }
-
-    strong {
-      color: var(--text-main);
-      font-weight: 750;
-    }
-
-    .section {
-      margin-bottom: 36px;
-    }
-
-    .section-divider {
-      border-bottom: 1px solid #dde3df;
-      margin: 30px 0;
+    main {
+      flex: 1;
+      width: 100%;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       padding: 7px 15px;
       border-radius: 999px;
       border: 1.5px solid rgba(35, 139, 34, 0.28);
@@ -220,7 +204,11 @@
       line-height: 1.28;
       letter-spacing: -0.045em;
       color: var(--moding-green);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+    }
+
+    .brand-title .orange {
+      color: var(--moding-orange);
     }
 
     .section-label {
@@ -237,84 +225,186 @@
       line-height: 1.32;
       letter-spacing: -0.04em;
       color: var(--text-main);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-sub);
+    }
+
+    strong {
+      color: var(--text-main);
+      font-weight: 850;
     }
 
     /* =========================================================
-       6. 브랜드 인트로
+       6. Brand Hero
        ========================================================= */
     .brand-hero {
-      padding: 54px 0 34px;
+      width: 100%;
+      text-align: center;
+      padding: 48px 0 30px;
     }
 
-    .identity-hero {
-      margin-top: 10px;
-      border-radius: 22px;
-      padding: 24px 22px 22px;
+    .brand-sub {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 18px;
+      font-weight: 500;
       line-height: 1.75;
-      background: linear-gradient(135deg, #17681A, #2FA530);
+      color: var(--text-main);
+    }
+
+    .identity-banner {
+      position: relative;
+      margin: 34px auto 0;
+      max-width: 980px;
+      min-height: 270px;
+      padding: 38px 32px;
+      border-radius: 30px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255, 140, 0, 0.26), transparent 27%),
+        radial-gradient(circle at 88% 76%, rgba(255, 255, 255, 0.22), transparent 28%),
+        linear-gradient(135deg, #17681A, #2FA530);
       color: #ffffff;
       box-shadow: var(--shadow-hero);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .identity-hero-title {
-      font-size: 18px;
-      font-weight: 850;
-      margin-bottom: 10px;
+    .identity-banner::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      right: -42px;
+      top: -52px;
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    .identity-banner::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 42px;
+      left: -38px;
+      bottom: -48px;
+      background: rgba(255, 140, 0, 0.22);
+      transform: rotate(12deg);
+    }
+
+    .identity-banner-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .banner-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.26);
       color: #ffffff;
-      letter-spacing: -0.025em;
-    }
-
-    .identity-hero-title .flow-line {
-      display: inline;
-    }
-
-    .identity-hero-text {
-      font-size: 14px;
-      line-height: 1.85;
-      color: #f1f5f3;
-      margin-bottom: 0;
-    }
-
-    .hero-highlight {
+      font-size: 12px;
       font-weight: 850;
+      letter-spacing: 0.12em;
+    }
+
+    .banner-title {
+      font-size: clamp(30px, 5vw, 54px);
+      font-weight: 900;
+      line-height: 1.18;
+      letter-spacing: -0.055em;
       color: #ffffff;
+      margin-bottom: 18px;
+    }
+
+    .banner-title .orange {
+      color: #FFD28A;
+    }
+
+    .banner-text {
+      font-size: 17px;
+      font-weight: 550;
+      line-height: 1.72;
+      color: rgba(255, 255, 255, 0.92);
     }
 
     /* =========================================================
-       7. 네이밍 섹션
-       색 흐름: Green → Orange
+       7. Brand Name
        ========================================================= */
+    .brand-name-section {
+      padding: 36px 0 22px;
+      text-align: center;
+    }
+
     .name-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      padding: 6px 10px;
+      gap: 7px;
+      margin: 22px auto 22px;
+      padding: 8px 13px;
       border-radius: 999px;
       background: rgba(35, 139, 34, 0.06);
-      border: 1px solid rgba(35, 139, 34, 0.35);
+      border: 1.5px solid rgba(35, 139, 34, 0.28);
       color: var(--text-main);
-      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 700;
     }
 
     .name-badge span:first-child {
-      font-weight: 850;
+      font-weight: 900;
       color: var(--moding-green);
     }
 
+    .name-intro {
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-sub);
+    }
+
     .name-grid {
+      max-width: 980px;
+      margin: 26px auto 0;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
-      margin-top: 12px;
     }
 
     .name-card {
-      padding: 16px 16px 18px;
-      border-radius: 18px;
+      position: relative;
+      min-height: 220px;
+      padding: 26px 24px 24px;
+      border-radius: 28px;
       background: #ffffff;
       box-shadow: var(--shadow-card);
+      overflow: hidden;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(22px);
+      animation: cardFadeUp 0.75s ease forwards;
+    }
+
+    .name-card:nth-child(1) {
+      animation-delay: 0.06s;
+    }
+
+    .name-card:nth-child(2) {
+      animation-delay: 0.16s;
     }
 
     .name-card.green {
@@ -325,60 +415,128 @@
       border: 2px solid var(--moding-orange);
     }
 
-    .name-card-title {
-      font-size: 15px;
+    .name-number {
+      position: absolute;
+      right: 18px;
+      top: 8px;
+      font-size: 66px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      opacity: 0.08;
+      color: #000000;
+    }
+
+    .name-card-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      color: #ffffff;
+      font-size: 12px;
       font-weight: 850;
-      margin-bottom: 7px;
+    }
+
+    .name-card.green .name-card-badge {
+      background: var(--moding-green);
+    }
+
+    .name-card.orange .name-card-badge {
+      background: var(--moding-orange);
+    }
+
+    .name-card-title {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 12px;
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.28;
+      letter-spacing: -0.045em;
       color: var(--text-main);
-      letter-spacing: -0.02em;
+    }
+
+    .name-card-title .orange {
+      color: var(--moding-orange);
     }
 
     .name-card-desc {
-      font-size: 13px;
+      position: relative;
+      z-index: 1;
+      font-size: 14px;
       line-height: 1.75;
       color: var(--text-sub);
     }
 
+    @media (hover: hover) and (pointer: fine) {
+      .name-card {
+        transition:
+          transform 0.24s ease,
+          box-shadow 0.24s ease;
+      }
+
+      .name-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-soft);
+      }
+    }
+
     /* =========================================================
-       8. 로고 & 컬러 시스템
-       컴팩트 구조 / 색 흐름: Green → Orange → Wood
+       8. Logo Identity
        ========================================================= */
+    .logo-section {
+      padding: 34px 0 68px;
+      text-align: center;
+    }
+
+    .logo-box {
+      max-width: 980px;
+      margin: 26px auto 0;
+      padding: 32px 28px;
+      border-radius: 32px;
+      background: #ffffff;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(35, 139, 34, 0.12);
+      text-align: left;
+    }
+
     .logo-row {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-top: 4px;
-      margin-bottom: 10px;
+      gap: 16px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
 
     .logo-main {
-      height: 34px;
+      height: 38px;
       width: auto;
       pointer-events: none;
     }
 
     .logo-caption {
-      font-size: 13px;
-      line-height: 1.55;
+      font-size: 14px;
+      line-height: 1.6;
       color: var(--text-sub);
     }
 
     .logo-caption strong {
-      font-weight: 850;
       color: var(--text-main);
+      font-weight: 850;
     }
 
     .role-badges {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 6px 0 10px;
+      margin: 10px 0 14px;
     }
 
     .badge-role {
-      font-size: 10.5px;
-      padding: 4px 9px;
+      font-size: 11px;
+      padding: 5px 10px;
       border-radius: 999px;
       border: 1px solid #d7e0db;
       background: #ffffff;
@@ -401,45 +559,47 @@
     }
 
     .compact-text {
+      max-width: 820px;
       font-size: 14px;
-      line-height: 1.75;
-      margin-bottom: 8px;
+      line-height: 1.8;
+      color: var(--text-sub);
+      margin-bottom: 0;
     }
 
     .color-palette {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 14px;
+      gap: 16px;
+      margin-top: 24px;
     }
 
     .color-chip {
-      border-radius: 14px;
+      border-radius: 20px;
       overflow: hidden;
       border: 1px solid #d7e0db;
       background: #ffffff;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.035);
     }
 
     .color-chip-top {
-      height: 44px;
+      height: 54px;
     }
 
     .color-chip-body {
-      padding: 10px 12px 12px;
-      min-height: 124px;
+      padding: 14px 15px 16px;
+      min-height: 130px;
     }
 
     .color-chip-label {
-      font-size: 12.5px;
-      font-weight: 850;
-      margin-bottom: 4px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 6px;
       color: var(--text-main);
       letter-spacing: -0.01em;
     }
 
     .color-chip-desc {
-      font-size: 11.5px;
+      font-size: 12.5px;
       line-height: 1.75;
       color: var(--text-sub);
     }
@@ -515,7 +675,48 @@
     }
 
     /* =========================================================
-       11. Responsive
+       11. Animation
+       ========================================================= */
+    @keyframes cardFadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .name-card {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+
+      .nav-menu a,
+      .top-return-btn {
+        transition: none;
+      }
+    }
+
+    /* =========================================================
+       12. Responsive / 노트북 · 태블릿
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .container {
+        max-width: 960px;
+      }
+
+      .name-grid,
+      .color-palette {
+        gap: 14px;
+      }
+    }
+
+    /* =========================================================
+       13. Responsive / 태블릿 세로
        ========================================================= */
     @media (max-width: 820px) {
       .nav {
@@ -525,60 +726,38 @@
         gap: 10px;
       }
 
-      .nav-left img {
+      .nav-logo img {
         width: 124px;
       }
 
-      .nav-right {
+      .nav-menu {
         gap: 16px;
         flex-wrap: wrap;
         justify-content: center;
         font-size: 14px;
       }
-    }
 
-    @media (max-width: 768px) {
       .container {
-        padding: 32px 20px 40px;
+        padding: 0 20px;
+      }
+
+      .top-return {
+        padding-top: 22px;
       }
 
       .brand-hero {
-        padding: 40px 0 30px;
+        padding: 42px 0 30px;
       }
 
-      .brand-title {
-        font-size: clamp(27px, 8vw, 34px);
-        line-height: 1.34;
-      }
-
-      p {
-        font-size: 14px;
-      }
-
-      .eyebrow {
-        font-size: 12px;
-        padding: 6px 13px;
-        margin-bottom: 14px;
-      }
-
-      .section-heading {
-        font-size: 24px;
-      }
-
-      .identity-hero {
-        padding: 18px 18px 20px;
-      }
-
-      .identity-hero-title {
+      .brand-sub {
         font-size: 16px;
       }
 
-      .identity-hero-title .flow-line {
-        display: block;
-      }
-
-      .identity-hero-text {
-        font-size: 13px;
+      .identity-banner {
+        margin-top: 34px;
+        min-height: 260px;
+        padding: 34px 24px;
+        border-radius: 28px;
       }
 
       .name-grid,
@@ -586,59 +765,183 @@
         grid-template-columns: 1fr;
       }
 
+      .name-card {
+        min-height: auto;
+      }
+
+      .logo-box {
+        padding: 28px 24px;
+      }
+    }
+
+    /* =========================================================
+       14. Responsive / 일반 스마트폰
+       ========================================================= */
+    @media (max-width: 640px) {
+      .nav-logo img {
+        width: 116px;
+      }
+
+      .nav-menu {
+        gap: 14px;
+        font-size: 13px;
+      }
+
+      .top-return {
+        padding-top: 18px;
+      }
+
+      .top-return-btn {
+        font-size: 12px;
+        padding: 7px 13px;
+      }
+
+      .brand-hero {
+        padding: 36px 0 26px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        padding: 6px 13px;
+        margin-bottom: 16px;
+      }
+
+      .brand-title {
+        font-size: clamp(27px, 8vw, 34px);
+        line-height: 1.34;
+      }
+
+      .brand-sub {
+        font-size: 15px;
+        line-height: 1.72;
+      }
+
+      .identity-banner {
+        min-height: 250px;
+        padding: 30px 20px;
+        border-radius: 26px;
+      }
+
+      .banner-kicker {
+        font-size: 11px;
+      }
+
+      .banner-title {
+        font-size: clamp(28px, 9vw, 38px);
+      }
+
+      .banner-text {
+        font-size: 14px;
+      }
+
+      .brand-name-section {
+        padding: 32px 0 18px;
+      }
+
+      .section-heading {
+        font-size: 24px;
+      }
+
+      .section-desc,
+      .name-intro {
+        font-size: 14px;
+      }
+
+      .name-badge {
+        flex-direction: column;
+        gap: 2px;
+        font-size: 12px;
+      }
+
+      .name-card {
+        padding: 26px 20px 24px;
+        border-radius: 26px;
+      }
+
+      .name-number {
+        font-size: 62px;
+      }
+
+      .name-card-title {
+        font-size: 22px;
+      }
+
+      .name-card-desc {
+        font-size: 13.5px;
+      }
+
+      .logo-section {
+        padding: 28px 0 52px;
+      }
+
+      .logo-box {
+        padding: 28px 20px;
+        border-radius: 26px;
+      }
+
       .logo-main {
-        height: 30px;
+        height: 32px;
       }
 
       .logo-caption {
-        font-size: 12.5px;
+        font-size: 13px;
       }
 
-      .badge-role {
-        font-size: 10px;
-        padding: 4px 8px;
+      .compact-text {
+        font-size: 13.5px;
       }
 
-      .color-palette {
-        gap: 12px;
+      .color-chip-top {
+        height: 48px;
       }
 
       .color-chip-body {
         min-height: auto;
-        padding: 10px 12px 12px;
-      }
-
-      .color-chip-label {
-        font-size: 12px;
-      }
-
-      .color-chip-desc {
-        font-size: 11.5px;
       }
     }
 
+    /* =========================================================
+       15. Responsive / 매우 좁은 화면
+       ========================================================= */
     @media (max-width: 380px) {
-      .container {
-        padding: 28px 16px 38px;
-      }
-
       .nav {
         padding-left: 14px;
         padding-right: 14px;
       }
 
-      .nav-left img {
+      .nav-logo img {
         width: 108px;
       }
 
-      .nav-right {
+      .nav-menu {
         gap: 11px;
         font-size: 12px;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .brand-hero {
+        padding: 32px 0 24px;
       }
 
       .brand-title {
         font-size: 25px;
         letter-spacing: -0.04em;
+      }
+
+      .identity-banner {
+        border-radius: 24px;
+        padding: 30px 18px;
+      }
+
+      .name-card {
+        padding: 24px 18px 22px;
+      }
+
+      .logo-box {
+        padding: 26px 18px;
       }
 
       footer {
@@ -655,151 +958,205 @@
          HEADER
          ======================================================= -->
     <header>
-      <div class="nav">
-        <div class="nav-left">
-          <img src="모딩로고.png" alt="Moding Logo">
-        </div>
+      <nav class="nav" aria-label="주요 메뉴">
 
-        <div class="nav-right">
+        <a href="index.html" class="nav-logo" aria-label="모딩 홈으로 이동">
+          <img src="모딩로고.png" alt="Moding Logo">
+        </a>
+
+        <div class="nav-menu">
           <a href="about.html">About</a>
           <a href="brand.html" class="active">Brand</a>
           <a href="services.html">Services</a>
           <a href="alliance.html">Alliance</a>
           <a href="faq.html">FAQ</a>
         </div>
-      </div>
+
+      </nav>
     </header>
 
     <!-- =======================================================
          MAIN
          ======================================================= -->
-    <main class="container">
+    <main>
 
-      <!-- 메인 화면으로 버튼 -->
-      <div class="top-return">
-        <a href="index.html" class="top-return-btn">메인 화면으로</a>
+      <div class="container">
+        <div class="top-return">
+          <a href="index.html" class="top-return-btn">메인 화면으로</a>
+        </div>
       </div>
 
-      <!-- 1) 브랜드 인트로 -->
-      <section class="section brand-hero">
-        <div class="eyebrow">BRAND MODING</div>
+      <!-- BRAND HERO -->
+      <section class="brand-hero">
+        <div class="container">
 
-        <h1 class="brand-title">브랜드 아이덴티티</h1>
+          <div class="eyebrow">BRAND MODING</div>
 
-        <div class="identity-hero">
-          <div class="identity-hero-title">
-            <span class="flow-line">내 가게에 새로운 모드를.</span>
-            <span class="flow-line">모두에게 새로운 연결을.</span>
-          </div>
+          <h1 class="brand-title">
+            브랜드<br>
+            <span class="orange">아이덴티티</span>
+          </h1>
 
-          <p class="identity-hero-text">
-            <span class="hero-highlight">모딩(Moding)</span>은
-            가게에 새로운 방식을 더해가는 감각에서 출발한 이름입니다.<br>
-            좋은 상품과 필요한 매장이 각자의 방식으로 만나고,
-            모두가 더 편하게 연결되는 B2B 식품 플랫폼을 지향합니다.
+          <p class="brand-sub">
+            모딩이라는 이름과 로고에는<br>
+            좋은 상품과 필요한 매장을 연결하는 방향이 담겨 있습니다.
           </p>
+
+          <div class="identity-banner" aria-label="모딩 브랜드 아이덴티티 배너">
+            <div class="identity-banner-inner">
+              <div class="banner-kicker">MODE + ING</div>
+
+              <div class="banner-title">
+                내 가게에 새로운 모드를.<br>
+                <span class="orange">모두에게 새로운 연결을.</span>
+              </div>
+
+              <p class="banner-text">
+                모딩(Moding)은 가게에 새로운 방식을 더해가는 감각에서 출발한 이름입니다.<br>
+                좋은 상품과 필요한 매장이 각자의 방식으로 만나고,
+                모두가 더 편하게 연결되는 B2B 식품 플랫폼을 지향합니다.
+              </p>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <div class="section-divider"></div>
+      <!-- BRAND NAME -->
+      <section class="brand-name-section">
+        <div class="container">
 
-      <!-- 2) 네이밍 철학 -->
-      <section class="section">
-        <div class="section-label">BRAND NAME</div>
-        <h2 class="section-heading">브랜드 네임의 의미</h2>
+          <div class="section-label">BRAND NAME</div>
 
-        <div class="name-badge">
-          <span>Moding</span>
-          <span>= Mode + ing / 모두의 연결</span>
-        </div>
+          <h2 class="section-heading">
+            브랜드 네임의 의미
+          </h2>
 
-        <p>
-          <strong>모딩(Moding)은 ‘Mode’와 ‘ing’의 감각을 중심으로, 모두가 연결되는 플랫폼의 방향을 함께 담은 이름입니다.</strong>
-        </p>
+          <p class="section-desc">
+            모딩은 Mode + ing의 감각을 중심으로, 모두가 연결되는 플랫폼의 방향을 함께 담은 이름입니다.
+          </p>
 
-        <div class="name-grid">
-          <div class="name-card green">
-            <div class="name-card-title">Mode + ing</div>
-            <div class="name-card-desc">
-              정해진 방식에 맞추는 것이 아니라,<br>
-              사장님이 원하는 방향으로<br>
-              가게의 모드를 바꿔가는 과정을 뜻합니다.
-            </div>
+          <div class="name-badge">
+            <span>Moding</span>
+            <span>= Mode + ing / 모두의 연결</span>
           </div>
 
-          <div class="name-card orange">
-            <div class="name-card-title">모두의 연결</div>
-            <div class="name-card-desc">
-              좋은 상품, 필요한 매장, 공급 파트너, 모딩까지.<br>
-              서로 다른 현장이 하나의 구조 안에서<br>
-              더 쉽게 연결되는 방향을 담고 있습니다.
-            </div>
+          <p class="name-intro">
+            정해진 방식에 맞추는 것이 아니라, 사장님이 원하는 방향으로 가게의 모드를 바꿔가는 과정.
+            그리고 좋은 상품, 필요한 매장, 공급 파트너, 모딩이 하나의 구조 안에서 더 쉽게 연결되는 방향을 담고 있습니다.
+          </p>
+
+          <div class="name-grid">
+
+            <article class="name-card green">
+              <div class="name-number">01</div>
+              <div class="name-card-badge">Mode + ing</div>
+
+              <h3 class="name-card-title">
+                가게의 방식을<br>
+                <span class="orange">바꿔가는 과정</span>
+              </h3>
+
+              <p class="name-card-desc">
+                정해진 방식에 맞추는 것이 아니라,
+                사장님이 원하는 방향으로 가게의 모드를 바꿔가는 과정을 뜻합니다.
+              </p>
+            </article>
+
+            <article class="name-card orange">
+              <div class="name-number">02</div>
+              <div class="name-card-badge">모두의 연결</div>
+
+              <h3 class="name-card-title">
+                서로 다른 현장을<br>
+                <span class="orange">하나의 구조로</span>
+              </h3>
+
+              <p class="name-card-desc">
+                좋은 상품, 필요한 매장, 공급 파트너, 모딩까지.
+                서로 다른 현장이 하나의 구조 안에서 더 쉽게 연결되는 방향을 담고 있습니다.
+              </p>
+            </article>
+
           </div>
+
         </div>
       </section>
 
-      <div class="section-divider"></div>
+      <!-- LOGO IDENTITY -->
+      <section class="logo-section">
+        <div class="container">
 
-      <!-- 3) 로고 & 컬러 시스템 -->
-      <section class="section">
-        <div class="section-label">LOGO IDENTITY</div>
-        <h2 class="section-heading">로고 아이덴티티</h2>
+          <div class="section-label">LOGO IDENTITY</div>
 
-        <div class="logo-row">
-          <img src="모딩로고.png" alt="Moding Logo" class="logo-main">
+          <h2 class="section-heading">
+            로고 아이덴티티
+          </h2>
 
-          <div class="logo-caption">
-            <strong>좋은 상품 · 외식업 사장님 · 모딩을<br>
-            하나의 구조로 묶어낸 모노그램 형태의 로고입니다.</strong>
-          </div>
-        </div>
+          <p class="section-desc">
+            모딩의 로고와 컬러는 좋은 상품, 외식업 사장님, 그리고 연결의 구조를 표현합니다.
+          </p>
 
-        <div class="role-badges">
-          <span class="badge-role partner">FOR PARTNER · 공급 파트너</span>
-          <span class="badge-role restaurant">FOR RESTAURANT · 외식업</span>
-        </div>
+          <div class="logo-box">
 
-        <p class="compact-text">
-          모딩의 로고는 좋은 상품과 필요한 매장, 그리고 플랫폼의 연결 구조를 표현합니다.<br>
-          부드러운 라운드 형태는 따뜻함과 신뢰를, 균형 잡힌 비례는 안정성과 중심성을 상징합니다.
-        </p>
+            <div class="logo-row">
+              <img src="모딩로고.png" alt="Moding Logo" class="logo-main">
 
-        <div class="color-palette">
-          <!-- Green -->
-          <div class="color-chip">
-            <div class="color-chip-top color-green"></div>
-            <div class="color-chip-body">
-              <div class="color-chip-label">Green – 좋은 상품</div>
-              <div class="color-chip-desc">
-                신뢰할 수 있는 상품과 정직한 공급을 상징합니다.<br>
-                건강한 거래의 바탕이 되는 색입니다.
+              <div class="logo-caption">
+                <strong>좋은 상품 · 외식업 사장님 · 모딩을<br>
+                하나의 구조로 묶어낸 모노그램 형태의 로고입니다.</strong>
               </div>
             </div>
+
+            <div class="role-badges">
+              <span class="badge-role partner">FOR PARTNER · 공급 파트너</span>
+              <span class="badge-role restaurant">FOR RESTAURANT · 외식업</span>
+            </div>
+
+            <p class="compact-text">
+              모딩의 로고는 좋은 상품과 필요한 매장, 그리고 플랫폼의 연결 구조를 표현합니다.
+              부드러운 라운드 형태는 따뜻함과 신뢰를, 균형 잡힌 비례는 안정성과 중심성을 상징합니다.
+            </p>
+
+            <div class="color-palette">
+
+              <div class="color-chip">
+                <div class="color-chip-top color-green"></div>
+                <div class="color-chip-body">
+                  <div class="color-chip-label">Green – 좋은 상품</div>
+                  <div class="color-chip-desc">
+                    신뢰할 수 있는 상품과 정직한 공급을 상징합니다.<br>
+                    건강한 거래의 바탕이 되는 색입니다.
+                  </div>
+                </div>
+              </div>
+
+              <div class="color-chip">
+                <div class="color-chip-top color-orange"></div>
+                <div class="color-chip-body">
+                  <div class="color-chip-label">Orange – 외식업 사장님</div>
+                  <div class="color-chip-desc">
+                    에너지, 실행력, 빠른 선택을 의미합니다.<br>
+                    바쁜 매장과 살아있는 현장을 대표하는 색입니다.
+                  </div>
+                </div>
+              </div>
+
+              <div class="color-chip">
+                <div class="color-chip-top color-wood"></div>
+                <div class="color-chip-body">
+                  <div class="color-chip-label">Wood – 연결과 성장</div>
+                  <div class="color-chip-desc">
+                    함께 자라는 생태계와 연결 구조를 상징합니다.<br>
+                    좋은 상품과 필요한 매장을 잇는 역할을 나타냅니다.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
           </div>
 
-          <!-- Orange -->
-          <div class="color-chip">
-            <div class="color-chip-top color-orange"></div>
-            <div class="color-chip-body">
-              <div class="color-chip-label">Orange – 외식업 사장님</div>
-              <div class="color-chip-desc">
-                에너지, 실행력, 빠른 선택을 의미합니다.<br>
-                바쁜 매장과 살아있는 현장을 대표하는 색입니다.
-              </div>
-            </div>
-          </div>
-
-          <!-- Wood -->
-          <div class="color-chip">
-            <div class="color-chip-top color-wood"></div>
-            <div class="color-chip-body">
-              <div class="color-chip-label">Wood – 연결과 성장</div>
-              <div class="color-chip-desc">
-                함께 자라는 생태계와 연결 구조를 상징합니다.<br>
-                좋은 상품과 필요한 매장을 잇는 역할을 나타냅니다.
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -824,10 +1181,10 @@
 
   </div>
 
-  <!-- =========================================================
-       복사 / 드래그 / 단축키 방지
-       ========================================================= -->
   <script>
+    /* =========================================================
+       복사 / 드래그 방지
+       ========================================================= */
     document.addEventListener("contextmenu", function (e) {
       if (!e.target.closest("input, textarea, a")) {
         e.preventDefault();
