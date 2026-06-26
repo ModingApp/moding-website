@@ -1,746 +1,722 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <!-- ===========================
+       기본 메타 정보
+       =========================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>모딩(Moding) | B2B Food-SaaS 플랫폼</title>
 
-  <meta name="description" content="식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼 모딩(Moding). 정산, 주문, 데이터 관리까지 한 곳에서.">
+  <title>모딩(Moding) | 메뉴에 맞는 상품을 찾는 새로운 방식</title>
+
+  <meta name="description" content="모딩(Moding)은 외식업 사장님이 메뉴에 맞는 식품·식자재 상품을 쉽게 찾을 수 있도록 돕는 B2B 식품 거래 앱입니다.">
+
+  <!-- Open Graph / SNS 공유용 -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
-  <meta property="og:title" content="B2B Food-SaaS 플랫폼, 모딩(Moding)">
-  <meta property="og:description" content="식품 제조사와 외식업 사장님을 연결하는 B2B Food-SaaS 플랫폼. 빠르고 정확한 정산, 주문관리, 데이터 기반 운영 자동화.">
+  <meta property="og:title" content="모딩(Moding) | 메뉴에 맞는 상품을 찾는 새로운 방식">
+  <meta property="og:description" content="사장님! 오늘부터 모딩하세요. 메뉴에 맞는 상품을 모딩 앱에서 확인하세요.">
   <meta property="og:url" content="https://moding.app/">
   <meta property="og:image" content="https://moding.app/모딩로고.png">
 
   <style>
+    /* =========================================================
+       1. 브랜드 컬러 / 공통 변수
+       ========================================================= */
     :root {
       --moding-green: #238B22;
+      --moding-green-dark: #1c6f1c;
       --moding-orange: #FF8C00;
+      --moding-orange-dark: #e67800;
+
       --bg-light: #F7F9F8;
+      --bg-white: #ffffff;
+
       --text-main: #1F3B1F;
       --text-sub: #555555;
+
+      --border-light: #e1e4e2;
+      --shadow-soft: 0 14px 36px rgba(0, 0, 0, 0.08);
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+    /* =========================================================
+       2. Reset / 기본 설정
+       ========================================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      font-family:-apple-system, BlinkMacSystemFont,"Noto Sans KR",sans-serif;
-      background:var(--bg-light);
-      color:var(--text-main);
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     .container {
-      width:100%;
-      max-width:860px;
-      margin:0 auto;
-      padding:40px 24px;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
-    /* ===========================
-       HEADER
-       =========================== */
+    /* =========================================================
+       3. Header / Navigation
+       ========================================================= */
     header {
-      width:100%;
-      border-bottom:1px solid #e1e4e2;
-      background:#ffffff;
+      width: 100%;
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-light);
     }
 
     .nav {
-      max-width:860px;
-      margin:0 auto;
-      padding:14px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      column-gap:24px;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
     }
 
-    .nav-left img {
-      width:160px;
-      height:auto;
-      display:block;
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
     }
 
-    .nav-right {
-      display:flex;
-      align-items:center;
-      gap:20px;
-      font-size:15px;
+    .nav-logo img {
+      width: 160px;
+      height: auto;
     }
 
-    .nav-right a {
-      text-decoration:none;
-      color:var(--moding-green);
-      font-weight:500;
-      white-space:nowrap;
-      transition:0.2s;
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
+      font-size: 15px;
+      font-weight: 600;
     }
 
-    .nav-right a:hover {
-      color:var(--moding-orange);
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--moding-green);
+      white-space: nowrap;
+      transition: color 0.2s ease;
     }
 
-    /* ===========================
-       HERO
-       =========================== */
+    .nav-menu a:hover {
+      color: var(--moding-orange);
+    }
+
+    /* =========================================================
+       4. Main / Hero
+       ========================================================= */
+    main {
+      flex: 1;
+      width: 100%;
+    }
+
     .hero {
-      text-align:center;
-      padding:72px 0 56px;
+      width: 100%;
+      text-align: center;
+      padding: 72px 0 68px;
     }
-   .hero-title {
-    font-size:30px;
-    font-weight:700;
-    line-height:1.35;
-    margin-bottom:18px;
-    color:var(--moding-green);
-}
 
-.hero-line2 {
-  color: var(--moding-orange);
-}
     .hero-title {
-      font-size:30px;
-      font-weight:700;
-      line-height:1.35;
-      margin-bottom:18px;
-      color:var(--moding-green);
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.32;
+      letter-spacing: -0.04em;
+      color: var(--moding-green);
+      margin-bottom: 20px;
     }
 
     .hero-line {
-      display:inline-block;
-      min-height:1.4em;
+      display: inline-block;
+      min-height: 1.35em;
     }
 
-    .hero-symbol {
-      margin-bottom:22px;
-    }
-
-    .hero-symbol img {
-      height:52px;
-      width:auto;
-      display:block;
-      margin:0 auto;
+    .hero-line2 {
+      color: var(--moding-orange);
     }
 
     .hero-sub {
-      font-size:17px;
-      opacity:0.9;
-      margin-bottom:34px;
-      line-height:1.6;
-      color:var(--text-main);
+      margin-top: 28px;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: var(--text-main);
     }
 
-    .btn-group {
-      display:flex;
-      justify-content:center;
-      gap:16px;
-      margin-bottom:36px;
-      flex-wrap:wrap;
+    /* =========================================================
+       5. 메인 비주얼 이미지 3장 영역
+       - iOS1.png / iOS2.png / iOS3.png 파일을 index.html과 같은 위치에 업로드
+       - 한 장씩 사라지는 슬라이드가 아니라 3장이 동시에 노출됨
+       - 최초 진입 시에만 순서대로 부드럽게 등장
+       ========================================================= */
+    .hero-visual-section {
+      width: 100%;
+      margin: 42px auto 34px;
     }
 
-    .btn {
-      padding:14px 22px;
-      border-radius:14px;
-      font-size:15px;
-      text-decoration:none;
-      font-weight:600;
-      transition:0.2s;
-      text-align:center;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height:56px;
-      width:210px;
+    .hero-visual-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: center;
     }
 
-    .btn-green {
-      background:var(--moding-green);
-      color:#ffffff;
-      border:2px solid var(--moding-green);
-    }
-    .btn-green:hover {
-      background:#1c6f1c;
-      border-color:#1c6f1c;
-    }
-
-    .btn-orange {
-      background:var(--moding-orange);
-      color:#ffffff;
-      border:2px solid var(--moding-orange);
-    }
-    .btn-orange:hover {
-      background:#e67800;
-      border-color:#e67800;
+    .hero-visual-card {
+      width: 100%;
+      border-radius: 28px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(26px) scale(0.98);
+      animation: visualFadeUp 0.8s ease forwards;
     }
 
-    /* ===========================
-       DOWNLOAD (스토어 버튼)
-       =========================== */
+    .hero-visual-card:nth-child(1) {
+      animation-delay: 0.08s;
+    }
+
+    .hero-visual-card:nth-child(2) {
+      animation-delay: 0.24s;
+    }
+
+    .hero-visual-card:nth-child(3) {
+      animation-delay: 0.40s;
+    }
+
+    .hero-visual-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* =========================================================
+       6. 다운로드 버튼
+       ========================================================= */
     .download-wrapper {
-      margin-top:32px;
-      display:flex;
-      justify-content:center;
-      gap:16px;
-      flex-wrap:wrap;
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     .download-btn {
-      padding:14px 20px;
-      font-size:14px;
-      border-radius:18px;
-      text-decoration:none;
-      background:#ffffff;
-      font-weight:600;
-      width:210px;
-      text-align:center;
-      transition:0.2s;
+      width: 220px;
+      min-height: 58px;
+      padding: 13px 20px;
+      border-radius: 18px;
+      background: #ffffff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.25;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
 
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height:56px;
+    .download-btn:hover {
+      transform: translateY(-2px);
     }
 
     .download-btn.google {
-      border:2px solid var(--moding-green);
-      color:var(--moding-green);
+      border: 2px solid var(--moding-green);
+      color: var(--moding-green);
     }
+
     .download-btn.google:hover {
-      background:var(--moding-green);
-      color:#ffffff;
+      background: var(--moding-green);
+      border-color: var(--moding-green);
+      color: #ffffff;
     }
 
     .download-btn.apple {
-      border:2px solid var(--moding-orange);
-      color:var(--moding-orange);
+      border: 2px solid var(--moding-orange);
+      color: var(--moding-orange);
     }
+
     .download-btn.apple:hover {
-      background:var(--moding-orange);
-      color:#ffffff;
+      background: var(--moding-orange);
+      border-color: var(--moding-orange);
+      color: #ffffff;
     }
 
-    /* ===========================
-       NOTICE (공지사항 요약 박스)
-       =========================== */
-    .notice-section {
-      margin-top:26px;
-      margin-bottom:8px;
+    /* iOS 준비중 상태 */
+    .download-btn.disabled {
+      opacity: 0.55;
+      cursor: default;
+      pointer-events: none;
+      transform: none;
     }
 
-    .notice-card {
-      border-radius:18px;
-      padding:14px 18px 16px;
-      background:#ffffff;
-      border:1px solid rgba(35,139,34,0.45);
-      box-shadow:0 6px 18px rgba(0,0,0,0.03);
-      font-size:14px;
-      color:var(--text-sub);
-      width:100%;
+    .download-note {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #777777;
+      line-height: 1.6;
     }
 
-    .notice-header {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:6px;
-    }
-
-    .notice-title {
-      font-size:13px;
-      font-weight:600;
-      letter-spacing:0.14em;
-      color:var(--moding-green);
-    }
-
-    .notice-more {
-      font-size:12px;
-      text-decoration:none;
-      color:var(--moding-green);
-      font-weight:500;
-    }
-    .notice-more:hover {
-      color:var(--moding-orange);
-    }
-
-    .notice-list {
-      list-style:none;
-      margin:0;
-      padding:0;
-    }
-
-    .notice-list li {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:13px;
-      line-height:1.7;
-      padding-top:2px;
-    }
-
-    .notice-item-title {
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-      max-width:80%;
-      color:var(--text-main);
-      transition:0.2s;
-    }
-
-    .notice-item-date {
-      font-size:11px;
-      color:#999999;
-      white-space:nowrap;
-    }
-
-    /* 🔗 공지 한 줄 전체를 클릭 가능하게 + hover 시 제목 오렌지 */
-    .notice-link {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      text-decoration:none;
-      color:inherit;
-      width:100%;
-    }
-    .notice-link:hover .notice-item-title {
-      color:var(--moding-orange);
-    }
-
-    /* ===========================
-       ABOUT
-       =========================== */
-    .about {
-      margin-top:32px;
-      padding:46px 24px 50px;
-      background:#ffffff;
-      border-radius:22px;
-      text-align:center;
-      box-shadow:0 10px 30px rgba(0,0,0,0.04);
-    }
-
-    .about-title {
-      font-size:15px;
-      letter-spacing:0.18em;
-      color:var(--moding-green);
-      margin-bottom:10px;
-      font-weight:700;
-    }
-
-    .about-tagline {
-      font-size:15px;
-      color:var(--text-main);
-      opacity:0.9;
-      margin-bottom:16px;
-    }
-
-    .about-desc {
-      font-size:16px;
-      line-height:1.7;
-      color:var(--text-sub);
-      margin-bottom:6px;
-    }
-
-    .about-grid {
-      margin-top:22px;
-      display:flex;
-      gap:16px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-
-    .about-col {
-      flex:1 1 0;
-      min-width:230px;
-      border-radius:18px;
-      padding:16px 18px 14px;
-      text-align:left;
-      font-size:14px;
-      line-height:1.6;
-      background:#ffffff;
-    }
-
-    .about-col-title {
-      font-size:14px;
-      font-weight:600;
-      margin-bottom:6px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .about-col.green .about-col-title {
-      color:var(--moding-green);
-    }
-    .about-col.orange .about-col-title {
-      color:var(--moding-orange);
-    }
-
-    .about-chip {
-      font-size:11px;
-      padding:4px 12px;
-      border-radius:999px;
-      font-weight:600;
-      background:#ffffff;
-      border-width:1.5px;
-      border-style:solid;
-    }
-
-    .about-col.green .about-chip {
-      border-color:var(--moding-green);
-      color:var(--moding-green);
-    }
-
-    .about-col.orange .about-chip {
-      border-color:var(--moding-orange);
-      color:var(--moding-orange);
-    }
-
-    .about-col ul {
-      list-style:none;
-      margin:0;
-      padding-left:0;
-    }
-
-    .about-col li {
-      position:relative;
-      padding-left:14px;
-      margin-bottom:4px;
-      color:var(--text-sub);
-    }
-
-    .about-col li::before {
-      content:"•";
-      position:absolute;
-      left:0;
-      top:0;
-      color:rgba(0,0,0,0.35);
-    }
-
-    .about-col.green {
-      border:2px solid var(--moding-green);
-      box-shadow:0 4px 14px rgba(0,0,0,0.06);
-    }
-
-    .about-col.orange {
-      border:2px solid var(--moding-orange);
-      box-shadow:0 4px 14px rgba(0,0,0,0.06);
-    }
-
-    /* ===========================
-       FOOTER
-       =========================== */
+    /* =========================================================
+       7. Footer
+       ========================================================= */
     footer {
-      margin-top:auto;
-      padding:22px 10px;
-      font-size:12px;
-      color:#777;
-      text-align:center;
-      border-top:1px solid #e1e4e2;
-      line-height:1.8;
-      background:#ffffff;
-      width:100%;
+      width: 100%;
+      margin-top: auto;
+      padding: 24px 10px;
+      background: var(--bg-white);
+      border-top: 1px solid var(--border-light);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #777777;
     }
 
     .footer-links {
-      margin-bottom:4px;
-      font-size:12px;
-      text-align:center;
+      margin-bottom: 5px;
+      font-size: 12px;
+      text-align: center;
     }
 
     .footer-links a {
-      text-decoration:none;
-      color:var(--moding-green);
-      font-weight:500;
+      text-decoration: none;
+      color: var(--moding-green);
+      font-weight: 600;
     }
 
     .footer-links a:hover {
-      color:var(--moding-orange);
+      color: var(--moding-orange);
     }
 
     .footer-links .divider {
-      margin:0 6px;
-      color:#bbbbbb;
+      margin: 0 6px;
+      color: #bbbbbb;
     }
 
-    /* ===========================
-       복사/드래그 방지
-       =========================== */
-    html, body, *:not(input):not(textarea) {
-      -webkit-user-select:none;
-      user-select:none;
+    /* =========================================================
+       8. 복사 / 드래그 방지
+       기존 홈페이지 정책 유지
+       ========================================================= */
+    html,
+    body,
+    *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      user-select: none;
     }
-    img { user-drag:none; pointer-events:none; }
-    input,textarea{user-select:text;pointer-events:auto;}
 
-    /* ===========================
-       반응형
-       =========================== */
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+
+    input,
+    textarea {
+      user-select: text;
+      pointer-events: auto;
+    }
+
+    /* =========================================================
+       9. Animation
+       ========================================================= */
+    @keyframes visualFadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* =========================================================
+       10. Responsive / 태블릿
+       ========================================================= */
+    @media (max-width: 900px) {
+      .hero {
+        padding: 58px 0 56px;
+      }
+
+      .hero-title {
+        font-size: 34px;
+      }
+
+      .hero-visual-grid {
+        gap: 14px;
+      }
+
+      .hero-visual-card {
+        border-radius: 22px;
+      }
+    }
+
+    /* =========================================================
+       11. Responsive / 모바일
+       - 모바일에서는 3장을 작게 우겨넣지 않고 가로 스크롤 카드형으로 노출
+       ========================================================= */
     @media (max-width: 768px) {
+      .nav {
+        padding: 14px 20px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .nav-logo img {
+        width: 150px;
+      }
+
+      .nav-menu {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 14px;
+      }
+
       .container {
-        padding:32px 20px 40px;
+        padding: 0 20px;
       }
+
       .hero {
-        padding:56px 0 40px;
+        padding: 48px 0 46px;
       }
+
       .hero-title {
-        font-size:26px;
+        font-size: 30px;
       }
+
       .hero-sub {
-        font-size:16px;
+        margin-top: 24px;
+        font-size: 16px;
       }
-      .btn-group {
-        gap:12px;
+
+      .hero-visual-section {
+        margin: 34px calc(50% - 50vw) 28px;
+        overflow: hidden;
       }
-      .about {
-        margin-top:32px;
-        padding:38px 18px 42px;
+
+      .hero-visual-grid {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        padding: 6px 20px 18px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
       }
-      .about-desc {
-        font-size:15px;
+
+      .hero-visual-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .hero-visual-card {
+        flex: 0 0 74%;
+        max-width: 380px;
+        border-radius: 22px;
+        scroll-snap-align: center;
+      }
+
+      .download-wrapper {
+        margin-top: 26px;
+        gap: 12px;
+      }
+
+      .download-btn {
+        width: 100%;
+        max-width: 280px;
+        min-height: 56px;
       }
     }
 
-    @media (max-width: 600px) {
-      .nav {
-        padding:12px 16px;
-        flex-direction:column;
-        align-items:center;
-        row-gap:8px;
+    /* =========================================================
+       12. Responsive / 작은 모바일
+       ========================================================= */
+    @media (max-width: 480px) {
+      .nav-logo img {
+        width: 140px;
       }
-      .nav-left img {
-        width:150px;
+
+      .nav-menu {
+        gap: 13px;
+        font-size: 13px;
       }
-      .nav-right {
-        font-size:14px;
-        gap:16px;
-        flex-wrap:wrap;
-        justify-content:center;
-      }
+
       .hero {
-        padding:44px 0 34px;
+        padding: 42px 0 42px;
       }
+
       .hero-title {
-        font-size:23px;
+        font-size: 26px;
+        line-height: 1.34;
       }
+
       .hero-sub {
-        font-size:15px;
-      }
-      .btn-group {
-        flex-direction:column;
-        align-items:center;
-      }
-      .btn {
-        width:100%;
-        max-width:260px;
-        height:52px;
-      }
-      .download-btn {
-        width:100%;
-        max-width:260px;
-      }
-      .about-grid {
-        gap:12px;
-      }
-      .notice-card {
-        max-width:100%;
+        font-size: 15px;
       }
 
-      /* 모바일에서 공지 한 줄 정렬 보정 */
-      .notice-list li {
-        flex-direction:column;
-        align-items:flex-start;
-        padding:4px 0;
+      .hero-visual-card {
+        flex-basis: 82%;
       }
 
-      .notice-item-title {
-        max-width:100%;
-        white-space:normal;
-        margin-bottom:2px;
-      }
-
-      .notice-item-date {
-        font-size:11px;
+      footer {
+        padding: 22px 16px;
       }
     }
   </style>
 </head>
 
 <body>
+  <div class="page">
 
-<header>
-  <div class="nav">
-    <div class="nav-left">
-      <img src="모딩로고.png" alt="Moding Logo">
-    </div>
-    <div class="nav-right">
-      <a href="about.html">About</a> 
-      <a href="brand.html">Brand</a>
-      <a href="services.html">Services</a>
-      <a href="alliance.html">Alliance</a>
-      <a href="faq.html">FAQ</a>  
-    </div>
-  </div>
-</header>
+    <!-- =======================================================
+         HEADER
+         ======================================================= -->
+    <header>
+      <nav class="nav" aria-label="주요 메뉴">
 
-<div class="container">
-  <!-- HERO 영역 -->
-  <section class="hero">
-    <h1 class="hero-title">
-      <span class="hero-line hero-line1"></span><br>
-      <span class="hero-line hero-line2"></span>
-    </h1>
-     
-    <div class="hero-symbol">
-      <img src="모딩로고(어플용-최종).png" alt="Moding M Symbol">
-    </div>
+        <!-- 상단 로고 -->
+        <a href="index.html" class="nav-logo" aria-label="모딩 홈으로 이동">
+          <img src="모딩로고.png" alt="Moding Logo">
+        </a>
 
-    <p class="hero-sub">
-      사장님! 오늘부터 모딩하세요~<br>
-      
-    </p>
-
-    <div class="btn-group">
-      <a class="btn btn-green" href="services.html">서비스 소개</a>
-      <a class="btn btn-orange" href="alliance.html">제휴·입점 문의</a>
-    </div>
-
-   <div class="download-wrapper">
-  <a 
-    class="download-btn google" 
-    href="https://play.google.com/store/apps/details?id=com.moding.application"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Android<br>다운로드
-  </a>
-
-  
-</div>
-
-  <!-- 공지사항 요약 박스 (HERO 아래) -->
-  <section class="notice-section">
-    <div class="notice-card">
-      <div class="notice-header">
-        <div class="notice-title">공지사항</div>
-        <a href="notice.html" class="notice-more">전체보기 &gt;</a>
-      </div>
-      <ul class="notice-list" id="index-notice-area">
-        <!-- notices.js에서 최신 공지 2개가 자동 렌더링됩니다. -->
-      </ul>
-    </div>
-  </section>
-
-  <!-- ABOUT MODING -->
-  <section class="about">
-    <div class="about-title">ABOUT MODING</div>
-    <div class="about-tagline">제조사와 외식업을 한 화면에서 연결하는 B2B Food-SaaS 플랫폼</div>
-
-    <p class="about-desc">
-      모딩(Moding)은 좋은 제품을 가진 식품 제조사와 검증된 상품을 찾는 외식업 사장님을 연결합니다.
-    </p>
-    <p class="about-desc">
-      주문·정산·데이터를 한 곳에서 관리하며, 사장님의 시간을 절약하는 B2B Food-SaaS 플랫폼입니다.
-    </p>
-
-    <div class="about-grid">
-      <div class="about-col green">
-        <div class="about-col-title">
-          식품 제조사
-          <span class="about-chip">판로 확대</span>
+        <!-- 상단 메뉴 -->
+        <div class="nav-menu">
+          <a href="about.html">About</a>
+          <a href="brand.html">Brand</a>
+          <a href="services.html">Services</a>
+          <a href="alliance.html">Alliance</a>
+          <a href="faq.html">FAQ</a>
         </div>
-        <ul>
-          <li>안정적인 공급 채널 확보</li>
-          <li>주문·정산 흐름을 한 화면에서 관리</li>
-          <li>PB·OEM 등 다양한 협업 방식 지원</li>
-        </ul>
-      </div>
 
-      <div class="about-col orange">
-        <div class="about-col-title">
-          외식업 사장님
-          <span class="about-chip">운영 최적화</span>
+      </nav>
+    </header>
+
+    <!-- =======================================================
+         MAIN
+         ======================================================= -->
+    <main>
+      <section class="hero">
+        <div class="container">
+
+          <!-- 메인 카피 -->
+          <h1 class="hero-title">
+            <span class="hero-line hero-line1" data-text="메뉴에 맞는 상품을 찾는">메뉴에 맞는 상품을 찾는</span><br>
+            <span class="hero-line hero-line2" data-text="새로운 방식">새로운 방식</span>
+          </h1>
+
+          <!--
+            메인 비주얼 3장
+            파일 업로드 위치:
+            index.html과 같은 위치에 iOS1.png, iOS2.png, iOS3.png 업로드
+          -->
+          <div class="hero-visual-section" aria-label="모딩 서비스 소개 이미지">
+            <div class="hero-visual-grid">
+
+              <div class="hero-visual-card">
+                <img
+                  src="iOS1.png"
+                  alt="메뉴에 맞는 상품을 찾는 새로운 방식"
+                  loading="eager"
+                >
+              </div>
+
+              <div class="hero-visual-card">
+                <img
+                  src="iOS2.png"
+                  alt="메뉴 경쟁력은 상품 선택에서 시작됩니다"
+                  loading="eager"
+                >
+              </div>
+
+              <div class="hero-visual-card">
+                <img
+                  src="iOS3.png"
+                  alt="흔하지 않은 상품이 흔하지 않은 매장을 만듭니다"
+                  loading="eager"
+                >
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 서브 카피 -->
+          <p class="hero-sub">
+            사장님! 오늘부터 모딩하세요~
+          </p>
+
+          <!-- 다운로드 버튼 -->
+          <div class="download-wrapper" aria-label="앱 다운로드">
+
+            <!-- Android 다운로드 링크 -->
+            <a
+              class="download-btn google"
+              href="https://play.google.com/store/apps/details?id=com.moding.application"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Android<br>다운로드
+            </a>
+
+            <!--
+              iOS 준비중 버튼
+              App Store 링크가 나오면:
+              1) class에서 disabled 삭제
+              2) href="#"를 실제 App Store 링크로 교체
+              3) 문구를 iOS 다운로드로 변경
+            -->
+            <a
+              class="download-btn apple disabled"
+              href="#"
+              aria-disabled="true"
+              tabindex="-1"
+            >
+              iOS<br>준비중
+            </a>
+
+          </div>
+
+          <p class="download-note">
+            iOS 버전은 App Store 등록 완료 후 다운로드가 가능합니다.
+          </p>
+
         </div>
-        <ul>
-          <li>여러 제조사의 제품을 한 곳에서 이용</li>
-          <li>매장 운영에 맞춘 발주·입고 관리</li>
-          <li>소스·원재료·밀키트의 안정적인 공급</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-</div>
+      </section>
+    </main>
 
-<footer>
-  <div class="footer-links">
-    <a href="terms.html">이용약관</a>
-    <span class="divider">·</span>
-    <a href="privacy.html">개인정보처리방침</a>
-    <span class="divider">·</span>
-    <a href="location.html">오시는 길</a>
+    <!-- =======================================================
+         FOOTER
+         ======================================================= -->
+    <footer>
+      <div class="footer-links">
+        <a href="terms.html">이용약관</a>
+        <span class="divider">·</span>
+        <a href="privacy.html">개인정보처리방침</a>
+        <span class="divider">·</span>
+        <a href="location.html">오시는 길</a>
+      </div>
+
+      주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+      통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
+      대구광역시 달서구 달구벌대로 1870, 7층
+    </footer>
+
   </div>
 
-  주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
-  통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
-  대구광역시 달서구 달구벌대로 1870, 7층
-</footer>
+  <script>
+    /* =========================================================
+       복사 / 드래그 방지
+       ========================================================= */
+    document.addEventListener("contextmenu", function (e) {
+      if (!e.target.closest("input, textarea, a")) {
+        e.preventDefault();
+      }
+    });
 
-<script>
-  /* 복사/드래그 방지 */
-  document.addEventListener("contextmenu", function (e) {
-    if (!e.target.closest("input, textarea, a")) e.preventDefault();
-  });
-  document.addEventListener("dragstart", function (e) {
-    if (!e.target.closest("input, textarea")) e.preventDefault();
-  });
-  document.addEventListener("keydown", function (e) {
-    const key = e.key.toLowerCase();
-    if ((e.ctrlKey || e.metaKey) && !e.target.closest("input,textarea")) {
-      if (["c","x","v","s","u","p","a"].includes(key)) e.preventDefault();
-    }
-  });
-  document.addEventListener("copy", function (e) {
-    if (!e.target.closest("input, textarea")) e.preventDefault();
-  });
+    document.addEventListener("dragstart", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
 
-  /* 히어로 타이핑 효과 */
-  document.addEventListener("DOMContentLoaded", function() {
-    const line1Text = "메뉴에 맞는 상품을 찾는 ";
-    const line2Text = "새로운 방식";
+    document.addEventListener("keydown", function (e) {
+      const key = e.key.toLowerCase();
 
-    const line1El = document.querySelector(".hero-line1");
-    const line2El = document.querySelector(".hero-line2");
-
-    const speed = 90;
-    const delayBetweenLines = 400;
-
-    function typeLine(text, el, callback) {
-      let idx = 0;
-      function step() {
-        if (idx <= text.length) {
-          el.textContent = text.slice(0, idx);
-          idx++;
-          setTimeout(step, speed);
-        } else if (typeof callback === "function") {
-          callback();
+      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
+        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
+          e.preventDefault();
         }
       }
-      step();
-    }
-
-    typeLine(line1Text, line1El, function() {
-      setTimeout(function() {
-        typeLine(line2Text, line2El);
-      }, delayBetweenLines);
     });
-  });
-</script>
 
-<!-- notices.js: 최근 2개 공지 자동 렌더링 -->
-<script src="notices.js?v=1"></script>
+    document.addEventListener("copy", function (e) {
+      if (!e.target.closest("input, textarea")) {
+        e.preventDefault();
+      }
+    });
+
+    /* =========================================================
+       히어로 타이핑 효과
+       - HTML에는 기본 문구를 넣어두고,
+         JS가 실행되면 한 번 지운 뒤 다시 타이핑합니다.
+       - JS가 꺼져 있어도 문구는 그대로 보입니다.
+       ========================================================= */
+    document.addEventListener("DOMContentLoaded", function () {
+      const line1El = document.querySelector(".hero-line1");
+      const line2El = document.querySelector(".hero-line2");
+
+      if (!line1El || !line2El) return;
+
+      const line1Text = line1El.dataset.text || line1El.textContent;
+      const line2Text = line2El.dataset.text || line2El.textContent;
+
+      const speed = 90;
+      const delayBetweenLines = 360;
+
+      line1El.textContent = "";
+      line2El.textContent = "";
+
+      function typeLine(text, element, callback) {
+        let index = 0;
+
+        function step() {
+          if (index <= text.length) {
+            element.textContent = text.slice(0, index);
+            index += 1;
+            setTimeout(step, speed);
+            return;
+          }
+
+          if (typeof callback === "function") {
+            callback();
+          }
+        }
+
+        step();
+      }
+
+      typeLine(line1Text, line1El, function () {
+        setTimeout(function () {
+          typeLine(line2Text, line2El);
+        }, delayBetweenLines);
+      });
+    });
+  </script>
 </body>
 </html>
