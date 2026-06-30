@@ -703,11 +703,19 @@
       border-color: var(--moding-green-dark);
     }
 
+    .guide-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0 12px;
+      margin-top: 10px;
+    }
+
     .guide-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-top: 8px;
       color: var(--moding-green);
       font-size: 13px;
       font-weight: 850;
@@ -718,6 +726,22 @@
     .guide-link:hover {
       color: var(--moding-orange);
       border-color: rgba(255, 140, 0, 0.4);
+    }
+
+    .guide-link.promotion {
+      color: var(--moding-orange);
+      border-bottom-color: rgba(255, 140, 0, 0.45);
+    }
+
+    .guide-link.promotion:hover {
+      color: var(--moding-green);
+      border-color: rgba(35, 139, 34, 0.4);
+    }
+
+    .guide-divider {
+      color: #c9c9c9;
+      font-size: 13px;
+      font-weight: 600;
     }
 
     .contact-note {
@@ -1051,6 +1075,15 @@
         min-height: 56px;
         font-size: 14px;
       }
+
+      .guide-links {
+        gap: 0 10px;
+      }
+
+      .guide-link,
+      .guide-divider {
+        font-size: 12.5px;
+      }
     }
 
     /* =========================================================
@@ -1095,6 +1128,15 @@
 
       .value-card {
         padding: 24px 18px 22px;
+      }
+
+      .guide-links {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .guide-divider {
+        display: none;
       }
 
       footer {
@@ -1250,7 +1292,7 @@
             </a>
 
             <p class="hanjin-banner-caption">
-              <strong>본 프로모션은 한진 원클릭 택배서비스 신청 안내 배너이며, 위 배너를 통해 가입 시 모딩 제휴 프로모션 요율이 적용됩니다.</strong><br>
+              <strong>본 배너는 한진 원클릭 택배서비스 신청 안내 배너이며, 배너를 통해 가입 시 모딩 제휴 프로모션 요율이 적용됩니다.</strong><br>
               택배 서비스 가입 및 이용 조건은 한진택배 운영 기준에 따르며, 모딩은 배송 서비스를 직접 제공하지 않습니다.
             </p>
           </div>
@@ -1357,18 +1399,32 @@
               </button>
             </div>
 
-            <a
-              href="seller-application/Moding_Inc_Seller.pdf"
-              class="guide-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              공급 파트너 안내서 보기
-            </a>
+            <div class="guide-links">
+              <a
+                href="seller-application/Moding_Inc_Seller.pdf"
+                class="guide-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                파트너사 입점 안내서 보기
+              </a>
+
+              <span class="guide-divider">|</span>
+
+              <a
+                href="/seller-promotion.png"
+                class="guide-link promotion"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                파트너사 혜택 안내서 보기
+              </a>
+            </div>
 
             <p class="contact-note">
               이메일 문의는 <span class="copyable">partner@moding.app</span> 로 보내 주세요.<br>
-              판매자 회원가입은 모딩 앱에서 진행하실 수 있습니다.
+              판매자 회원가입은 모딩 앱에서 진행하실 수 있습니다.<br>
+              파트너사 혜택은 입점을 희망하는 판매자 대상 안내입니다.
             </p>
           </div>
 
