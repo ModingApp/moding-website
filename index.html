@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -176,17 +177,15 @@
     }
 
     /* =========================================================
-       5. 다운로드 버튼
-       - 포스터보다 위에 배치
-       - 버튼과 안내문도 순차 등장
+       5. 공통 다운로드 버튼
+       - /download/ 페이지에서 iPhone · Android 자동 분기
+       - 기존 초록 · 주황 브랜드 컬러 유지
        ========================================================= */
     .download-wrapper {
       margin-top: 28px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
 
       opacity: 0;
       transform: translateY(14px);
@@ -194,60 +193,103 @@
     }
 
     .download-btn {
-      width: 220px;
-      min-height: 60px;
-      padding: 13px 20px;
-      border-radius: 18px;
-      background: #ffffff;
+      position: relative;
+      width: 300px;
+      min-height: 66px;
+      padding: 13px 24px;
+      border-radius: 20px;
+
+      background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(135deg, var(--moding-green), var(--moding-orange)) border-box;
+
+      border: 2px solid transparent;
+      color: var(--moding-green);
       text-decoration: none;
-      font-size: 15px;
-      font-weight: 850;
-      line-height: 1.25;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
+      gap: 13px;
+
+      box-shadow:
+        0 12px 28px rgba(35, 139, 34, 0.13),
+        0 4px 12px rgba(255, 140, 0, 0.06);
+
+      animation: downloadPulse 2.8s ease-in-out infinite;
+
       transition:
         background 0.2s ease,
         color 0.2s ease,
-        border-color 0.2s ease,
         transform 0.2s ease,
         box-shadow 0.2s ease;
     }
 
     .download-btn:hover {
-      transform: translateY(-2px);
-    }
+      transform: translateY(-3px);
 
-    .download-btn.google {
-      border: 2px solid var(--moding-green);
-      color: var(--moding-green);
-      animation: downloadPulse 2.8s ease-in-out infinite;
-    }
+      background:
+        linear-gradient(135deg, var(--moding-green), var(--moding-orange)) padding-box,
+        linear-gradient(135deg, var(--moding-green), var(--moding-orange)) border-box;
 
-    .download-btn.google:hover {
-      background: var(--moding-green);
-      border-color: var(--moding-green);
       color: #ffffff;
+
+      box-shadow:
+        0 18px 38px rgba(35, 139, 34, 0.17),
+        0 8px 22px rgba(255, 140, 0, 0.15);
     }
 
-    .download-btn.apple {
-      border: 2px solid var(--moding-orange);
+    .download-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: rgba(255, 140, 0, 0.12);
       color: var(--moding-orange);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 19px;
+      font-weight: 950;
+      line-height: 1;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease;
     }
 
-    .download-btn.apple:hover {
-      background: var(--moding-orange);
-      border-color: var(--moding-orange);
+    .download-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .download-btn-main {
+      display: block;
+      font-size: 17px;
+      font-weight: 950;
+      line-height: 1.25;
+      letter-spacing: -0.035em;
+    }
+
+    .download-btn-sub {
+      display: block;
+      margin-top: 3px;
+      font-size: 11.5px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--moding-orange);
+      letter-spacing: -0.01em;
+      transition: color 0.2s ease;
+    }
+
+    .download-btn:hover .download-icon {
+      background: rgba(255, 255, 255, 0.2);
       color: #ffffff;
     }
 
-    /* iOS 준비중 상태 */
-    .download-btn.disabled {
-      opacity: 0.55;
-      cursor: default;
-      pointer-events: none;
-      transform: none;
+    .download-btn:hover .download-btn-sub {
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .download-note {
@@ -403,15 +445,21 @@
 
     @keyframes downloadPulse {
       0% {
-        box-shadow: 0 0 0 rgba(35, 139, 34, 0);
+        box-shadow:
+          0 12px 28px rgba(35, 139, 34, 0.10),
+          0 4px 12px rgba(255, 140, 0, 0.04);
       }
 
       50% {
-        box-shadow: 0 10px 26px rgba(35, 139, 34, 0.16);
+        box-shadow:
+          0 16px 34px rgba(35, 139, 34, 0.18),
+          0 7px 18px rgba(255, 140, 0, 0.10);
       }
 
       100% {
-        box-shadow: 0 0 0 rgba(35, 139, 34, 0);
+        box-shadow:
+          0 12px 28px rgba(35, 139, 34, 0.10),
+          0 4px 12px rgba(255, 140, 0, 0.04);
       }
     }
 
@@ -430,7 +478,7 @@
         animation: none;
       }
 
-      .download-btn.google {
+      .download-btn {
         animation: none;
       }
 
@@ -539,17 +587,18 @@
 
       .download-wrapper {
         margin-top: 26px;
-        gap: 12px;
       }
 
       .download-btn {
         width: 100%;
-        max-width: 300px;
-        min-height: 58px;
+        max-width: 320px;
+        min-height: 64px;
+        padding-left: 21px;
+        padding-right: 21px;
       }
 
       .download-note {
-        max-width: 300px;
+        max-width: 320px;
         margin-left: auto;
         margin-right: auto;
         word-break: keep-all;
@@ -629,8 +678,23 @@
 
       .download-btn {
         max-width: 280px;
-        min-height: 56px;
-        font-size: 14px;
+        min-height: 60px;
+        padding-left: 17px;
+        padding-right: 17px;
+      }
+
+      .download-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 17px;
+      }
+
+      .download-btn-main {
+        font-size: 16px;
+      }
+
+      .download-btn-sub {
+        font-size: 11px;
       }
 
       .hero-visual-card {
@@ -701,39 +765,24 @@
             <span class="orange">오늘부터 모딩하세요 :)</span>
           </h1>
 
-          <!-- 다운로드 버튼 -->
-          <div class="download-wrapper" aria-label="앱 다운로드">
-
-            <!-- Android 다운로드 링크 -->
+          <!-- 공통 앱 다운로드 버튼 -->
+          <div class="download-wrapper" aria-label="모딩 앱 다운로드">
             <a
-              class="download-btn google"
-              href="https://play.google.com/store/apps/details?id=com.moding.application"
-              target="_blank"
-              rel="noopener noreferrer"
+              class="download-btn"
+              href="/download/"
+              aria-label="모딩 앱 다운로드 페이지로 이동"
             >
-              Android<br>다운로드
-            </a>
+              <span class="download-icon" aria-hidden="true">↓</span>
 
-            <!--
-              iOS 준비중 버튼
-              App Store 링크가 나오면:
-              1) class에서 disabled 삭제
-              2) href="#"를 실제 App Store 링크로 교체
-              3) 문구를 iOS 다운로드로 변경
-            -->
-            <a
-              class="download-btn apple"
-              href="https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982"
-              aria-disabled="true"
-              tabindex="-1"
-            >
-              iOS<br>다운로드
+              <span class="download-text">
+                <span class="download-btn-main">모딩 앱 다운로드</span>
+                <span class="download-btn-sub">iPhone · Android 자동 연결</span>
+              </span>
             </a>
-
           </div>
 
           <p class="download-note">
-            
+            사용 중인 기기에 맞는 스토어로 자동 이동합니다.
           </p>
 
           <!--
@@ -831,3 +880,4 @@
   </script>
 </body>
 </html>
+```
