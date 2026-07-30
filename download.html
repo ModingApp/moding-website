@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="ko">
 <head>
@@ -7,17 +8,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <title>모딩 앱 다운로드</title>
+  <title>모딩 앱 다운로드 | Android · iOS 설치</title>
 
-  <meta name="description" content="모딩(Moding) 앱 다운로드 페이지입니다. 사용 중인 기기에 맞는 스토어로 이동합니다.">
-  <meta name="robots" content="noindex, nofollow">
+  <meta
+    name="description"
+    content="모딩(Moding) 앱 다운로드 페이지입니다. Android와 iPhone에서 모딩 앱을 설치할 수 있으며, 사용 중인 기기에 맞는 스토어로 자동 이동합니다."
+  >
 
-<!-- SNS 공유 / 카카오톡 미리보기용 -->
+  <!-- 검색엔진 수집 허용 -->
+  <meta name="robots" content="index, follow">
+
+  <!-- 다운로드 페이지 공식 주소 -->
+  <link rel="canonical" href="https://moding.app/download/">
+
+  <!-- SNS 공유 / 카카오톡 미리보기용 -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
-  <meta property="og:title" content="모딩(Moding) | 사장님! 오늘부터 모딩하세요">
-  <meta property="og:description" content="메뉴에 맞는 상품을 모딩 앱에서 확인하세요.">
-  <meta property="og:url" content="https://moding.app/">
+  <meta property="og:title" content="모딩 앱 다운로드 | Android · iOS 설치">
+  <meta property="og:description" content="사용 중인 기기에 맞는 스토어에서 모딩 앱을 설치해 주세요.">
+  <meta property="og:url" content="https://moding.app/download/">
   <meta property="og:image" content="https://moding.app/og-image.png">
   <meta property="og:image:width" content="500">
   <meta property="og:image:height" content="500">
@@ -25,22 +34,39 @@
 
   <!-- =========================================================
        기기별 자동 분기
+       - 일반 휴대폰 사용자는 각 스토어로 자동 이동
+       - 검색로봇은 페이지 내용을 수집할 수 있도록 이동 제외
        ========================================================= -->
   <script>
-    const androidUrl = "https://play.google.com/store/apps/details?id=com.moding.application";
-    const iosUrl = "https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982";
+    const androidUrl =
+      "https://play.google.com/store/apps/details?id=com.moding.application";
 
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const iosUrl =
+      "https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982";
+
+    const ua =
+      navigator.userAgent ||
+      navigator.vendor ||
+      window.opera ||
+      "";
+
+    /* 네이버·구글 등 주요 검색로봇 확인 */
+    const isBot =
+      /bot|crawl|crawler|spider|slurp|yeti|naver|googlebot|bingbot|daum/i.test(ua);
 
     const isAndroid = /android/i.test(ua);
+
     const isIOS =
       /iPhone|iPad|iPod/i.test(ua) ||
       (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
-    if (isAndroid) {
-      window.location.replace(androidUrl);
-    } else if (isIOS) {
-      window.location.replace(iosUrl);
+    /* 검색로봇은 자동 이동시키지 않음 */
+    if (!isBot) {
+      if (isAndroid) {
+        window.location.replace(androidUrl);
+      } else if (isIOS) {
+        window.location.replace(iosUrl);
+      }
     }
   </script>
 
@@ -75,15 +101,36 @@
 
     body {
       min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans KR",
+        "Apple SD Gothic Neo",
+        sans-serif;
+
       background:
-        radial-gradient(circle at 18% 18%, rgba(255, 140, 0, 0.18), transparent 28%),
-        radial-gradient(circle at 88% 78%, rgba(35, 139, 34, 0.18), transparent 30%),
-        linear-gradient(135deg, #F7F9F8 0%, #EEF6EF 100%);
+        radial-gradient(
+          circle at 18% 18%,
+          rgba(255, 140, 0, 0.18),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 88% 78%,
+          rgba(35, 139, 34, 0.18),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #F7F9F8 0%,
+          #EEF6EF 100%
+        );
+
       color: var(--text-main);
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       padding: 26px;
       word-break: keep-all;
     }
@@ -125,11 +172,15 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+
       margin-bottom: 14px;
       padding: 7px 14px;
+
       border-radius: 999px;
       border: 1.5px solid rgba(35, 139, 34, 0.25);
+
       color: var(--moding-green);
+
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.08em;
@@ -137,10 +188,12 @@
 
     h1 {
       margin-bottom: 12px;
+
       font-size: 30px;
       font-weight: 900;
       line-height: 1.28;
       letter-spacing: -0.045em;
+
       color: var(--moding-green);
     }
 
@@ -150,8 +203,10 @@
 
     .desc {
       margin-bottom: 26px;
+
       font-size: 15px;
       line-height: 1.75;
+
       color: var(--text-sub);
     }
 
@@ -164,11 +219,14 @@
       min-height: 58px;
       border-radius: 18px;
       text-decoration: none;
+
       font-size: 15px;
       font-weight: 900;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       transition:
         transform 0.2s ease,
         background 0.2s ease,
@@ -199,9 +257,46 @@
 
     .note {
       margin-top: 18px;
+
       font-size: 12px;
       line-height: 1.65;
+
       color: #888888;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      margin-top: 14px;
+
+      color: var(--moding-green);
+      text-decoration: none;
+
+      font-size: 12px;
+      font-weight: 850;
+
+      border-bottom: 1px solid rgba(35, 139, 34, 0.3);
+
+      transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .home-link:hover {
+      color: var(--moding-orange);
+      border-color: rgba(255, 140, 0, 0.4);
+    }
+
+    /* 검색엔진이 페이지 성격을 이해할 수 있는 실제 본문 */
+    .download-info {
+      margin-top: 18px;
+
+      font-size: 12px;
+      line-height: 1.7;
+
+      color: #999999;
     }
 
     /* =========================================================
@@ -241,7 +336,11 @@
   <main class="download-wrap">
     <section class="download-card" aria-label="모딩 앱 다운로드">
 
-      <img src="모딩로고.png" alt="Moding Logo" class="logo">
+      <img
+        src="/모딩로고.png"
+        alt="모딩 Moding 로고"
+        class="logo"
+      >
 
       <div class="eyebrow">MODING APP</div>
 
@@ -259,6 +358,8 @@
         <a
           href="https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982"
           class="store-btn ios"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           iPhone 앱 다운로드
         </a>
@@ -266,6 +367,8 @@
         <a
           href="https://play.google.com/store/apps/details?id=com.moding.application"
           class="store-btn android"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Android 앱 다운로드
         </a>
@@ -275,7 +378,17 @@
         PC에서 접속한 경우 사용하는 휴대폰에 맞는 스토어를 선택해 주세요.
       </p>
 
+      <a href="/" class="home-link">
+        모딩 공식 홈페이지로 이동
+      </a>
+
+      <p class="download-info">
+        모딩은 외식업 사장님을 위한 식품·식자재 거래 앱입니다.<br>
+        Android와 iPhone에서 모딩 앱을 설치할 수 있습니다.
+      </p>
+
     </section>
   </main>
 </body>
 </html>
+```
