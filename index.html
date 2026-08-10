@@ -1141,6 +1141,343 @@
         animation: none !important;
       }
     }
+  
+    /* =========================================================
+       STABILITY FIX · 1P / Mobile / Delivery / Final Phone
+       ========================================================= */
+
+    /* 1P는 scene-inner가 바깥 Grid가 되지 않게 하여
+       hero-variant의 2열 구조가 정확히 전체 폭을 사용하도록 함 */
+    .scene-intro .scene-inner {
+      display: block;
+      position: relative;
+    }
+
+    .scene-intro .hero-variant {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 1P 추가 오브젝트 */
+    .hero-a-shell,
+    .hero-a-leaf,
+    .hero-b-shell {
+      transform-origin: center;
+      animation: extraObjectFloat 4.5s ease-in-out infinite;
+    }
+
+    .hero-a-leaf {
+      animation-delay: .35s;
+    }
+
+    .hero-b-shell {
+      animation-delay: .5s;
+    }
+
+    @keyframes extraObjectFloat {
+      0%,100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-7px) rotate(3deg); }
+    }
+
+    /* 연결 페이지의 이동 박스가 실제 곡선을 따라가도록 보정 */
+    @keyframes parcelTravel {
+      0% {
+        transform: translate(0, 0);
+        opacity: 0;
+      }
+      12% {
+        opacity: 1;
+      }
+      50% {
+        transform: translate(150px, -54px);
+        opacity: 1;
+      }
+      88% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(300px, 0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes parcelTravelWide {
+      0% {
+        transform: translate(0, 0);
+        opacity: 0;
+      }
+      12% {
+        opacity: 1;
+      }
+      50% {
+        transform: translate(165px, -57px);
+        opacity: 1;
+      }
+      88% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(330px, 0);
+        opacity: 0;
+      }
+    }
+
+    /* 4P 움직임은 과하지 않게 */
+    @keyframes truckAlive {
+      0%,100% { transform: translateX(-3px); }
+      50% { transform: translateX(10px); }
+    }
+
+    @keyframes boxHop {
+      0%,100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-3px) rotate(1deg); }
+    }
+
+    /* 5P 휴대폰을 조금 더 넓은 비율로 */
+    .phone {
+      width: clamp(245px, 21vw, 325px);
+      aspect-ratio: 0.56;
+    }
+
+    /* =========================================================
+       MOBILE STABILITY
+       - PC Grid를 단순히 접는 것이 아니라 모바일 전용 배치
+       ========================================================= */
+    @media (max-width: 820px) {
+      .scene-inner,
+      .scene-intro .scene-inner {
+        display: block;
+        position: relative;
+        padding: 0 20px;
+      }
+
+      .hero-variant,
+      .hero-variant.is-selected {
+        display: none;
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .hero-variant.is-selected {
+        display: block;
+      }
+
+      .scene-copy,
+      .hero-copy {
+        position: absolute;
+        top: clamp(32px, 5.5vh, 54px);
+        left: 20px;
+        right: 20px;
+        z-index: 6;
+        align-self: auto;
+      }
+
+      .scene-art,
+      .hero-art {
+        position: absolute;
+        left: 50%;
+        right: auto;
+        bottom: 54px;
+        width: min(92vw, 540px);
+        height: 42%;
+        max-height: none;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        opacity: 0;
+        transform: translate(-50%, 20px);
+      }
+
+      .scene.is-active .scene-art,
+      .scene.is-active .hero-art {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
+      .scene-art svg,
+      .hero-art svg {
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        object-fit: contain;
+      }
+
+      /* 모바일 타이틀과 그림 사이를 더 안정적으로 확보 */
+      .scene-copy h1,
+      .scene-copy h2,
+      .hero-copy h1 {
+        font-size: clamp(40px, 10.4vw, 52px);
+        line-height: 1.07;
+      }
+
+      .scene-copy p,
+      .hero-copy p {
+        margin-top: 16px;
+        font-size: 17px;
+        line-height: 1.55;
+      }
+
+      .hero-download-area {
+        margin-top: 20px;
+      }
+
+      /* 마지막 페이지는 모바일에서 세로형으로 전환 */
+      .final-main {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 8px;
+        padding: 22px 20px 10px;
+      }
+
+      .final-copy {
+        order: 1;
+        align-self: end;
+        text-align: left;
+      }
+
+      .final-phone-wrap {
+        order: 2;
+        align-self: center;
+      }
+
+      .phone {
+        width: min(44vw, 220px);
+        aspect-ratio: 0.56;
+      }
+
+      .final-copy h2 {
+        font-size: clamp(34px, 9vw, 46px);
+      }
+
+      .final-copy p {
+        font-size: 15px;
+      }
+
+      .site-footer {
+        font-size: 9.5px;
+        line-height: 1.5;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .scene-inner,
+      .scene-intro .scene-inner {
+        padding: 0 18px;
+      }
+
+      .scene-copy,
+      .hero-copy {
+        top: 28px;
+        left: 18px;
+        right: 18px;
+      }
+
+      .scene-copy h1,
+      .scene-copy h2,
+      .hero-copy h1 {
+        font-size: clamp(39px, 11vw, 48px);
+      }
+
+      .scene-copy p,
+      .hero-copy p {
+        font-size: 16px;
+      }
+
+      .scene-art,
+      .hero-art {
+        bottom: 48px;
+        width: min(94vw, 500px);
+        height: 39%;
+      }
+
+      .final-main {
+        padding: 18px 18px 8px;
+      }
+
+      .phone {
+        width: min(48vw, 195px);
+      }
+
+      .final-copy h2 {
+        font-size: clamp(31px, 9vw, 40px);
+      }
+
+      .final-copy p {
+        font-size: 13.5px;
+      }
+
+      .final-download {
+        font-size: 15px;
+      }
+
+      .site-footer {
+        font-size: 8.8px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .scene-copy,
+      .hero-copy {
+        top: 24px;
+        left: 16px;
+        right: 16px;
+      }
+
+      .scene-copy h1,
+      .scene-copy h2,
+      .hero-copy h1 {
+        font-size: 37px;
+      }
+
+      .scene-copy p,
+      .hero-copy p {
+        font-size: 15px;
+      }
+
+      .scene-art,
+      .hero-art {
+        height: 37%;
+      }
+
+      .phone {
+        width: min(49vw, 180px);
+      }
+    }
+
+    /* 낮은 화면에서도 카피/일러스트 충돌 방지 */
+    @media (max-height: 700px) and (max-width: 820px) {
+      .scene-copy,
+      .hero-copy {
+        top: 18px;
+      }
+
+      .scene-copy h1,
+      .scene-copy h2,
+      .hero-copy h1 {
+        font-size: clamp(32px, 7.4vh, 42px);
+      }
+
+      .scene-copy p,
+      .hero-copy p {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .scene-art,
+      .hero-art {
+        bottom: 42px;
+        height: 35%;
+      }
+
+      .hero-download-area {
+        margin-top: 13px;
+      }
+    }
+
   </style>
 </head>
 
@@ -1363,6 +1700,46 @@
                 />
               </g>
 
+
+              <!-- 조개 -->
+              <g class="hero-a-shell">
+                <path
+                  d="M96 292
+                     C107 254 149 242 181 262
+                     C207 280 204 321 173 341
+                     C138 355 98 330 96 292 Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="7"
+                />
+                <path
+                  d="M112 278 L166 335
+                     M131 258 L179 319
+                     M102 305 L157 347"
+                  class="svg-line"
+                  stroke="#FF8C00"
+                  stroke-width="4"
+                />
+              </g>
+
+              <!-- 채소/잎 -->
+              <g class="hero-a-leaf">
+                <path
+                  d="M346 104
+                     C381 68 431 73 448 105
+                     C421 132 379 139 346 104 Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="7"
+                />
+                <path
+                  d="M349 105 C379 107 411 101 439 87"
+                  class="svg-line"
+                  stroke="#FF8C00"
+                  stroke-width="5"
+                />
+              </g>
+
             </svg>
           </div>
         </div>
@@ -1447,6 +1824,26 @@
                   class="svg-line"
                   stroke="#FF8C00"
                   stroke-width="7"
+                />
+              </g>
+
+
+              <g class="hero-b-shell">
+                <path
+                  d="M145 348
+                     C155 316 190 305 217 322
+                     C240 338 237 373 211 389
+                     C181 401 147 380 145 348 Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="6"
+                />
+                <path
+                  d="M158 337 L204 383
+                     M175 320 L216 369"
+                  class="svg-line"
+                  stroke="#FF8C00"
+                  stroke-width="4"
                 />
               </g>
 
@@ -1567,7 +1964,7 @@
               />
 
               <!-- 이동 박스 -->
-              <g class="hero-c-parcel" transform="translate(274 300)">
+              <g class="hero-c-parcel" transform="translate(274 303)">
                 <rect x="0" y="0" width="34" height="30" rx="6" fill="#FF8C00"/>
                 <path
                   d="M5 9 H29 M17 0 V30"
@@ -1783,7 +2180,7 @@
               stroke-dasharray="12 16"
             />
 
-            <g class="connect-parcel" transform="translate(267 303)">
+            <g class="connect-parcel" transform="translate(267 306)">
               <rect x="0" y="0" width="34" height="30" rx="6" fill="#FF8C00"/>
               <path
                 d="M5 9 H29 M17 0 V30"
@@ -1833,7 +2230,7 @@
           <svg viewBox="0 0 720 520">
 
             <!-- 박스 -->
-            <g class="delivery-box" transform="translate(220 135)">
+            <g class="delivery-box" transform="translate(145 145)">
               <path
                 d="M0 48 L66 18 L132 48 L66 81 Z"
                 fill="none"
@@ -1863,8 +2260,17 @@
               />
             </g>
 
+            <!-- 배송 경로 -->
+            <path
+              d="M270 286 C302 293 322 310 346 326"
+              class="svg-line"
+              stroke="rgba(255,255,255,.65)"
+              stroke-width="4"
+              stroke-dasharray="9 13"
+            />
+
             <!-- 트럭 -->
-            <g class="delivery-truck" transform="translate(308 274)">
+            <g class="delivery-truck" transform="translate(330 300)">
               <path
                 d="M0 28 H173 V115 H0 Z"
                 fill="none"
@@ -2135,6 +2541,95 @@
        ========================================================= */
     const snapRoot = document.getElementById("snapRoot");
     const scenes = Array.from(document.querySelectorAll(".scene"));
+
+
+    /* =========================================================
+       1P TOP REFRESH
+       - PC: 1P 최상단에서 위로 휠을 충분히 올리면 새로고침
+       - Mobile: 1P 최상단에서 아래로 당기기(Pull-down)하면 새로고침
+       ========================================================= */
+    let topRefreshWheelAmount = 0;
+    let topRefreshLocked = false;
+
+    function doTopRefresh() {
+      if (topRefreshLocked) return;
+
+      topRefreshLocked = true;
+      window.location.reload();
+    }
+
+    snapRoot.addEventListener(
+      "wheel",
+      (event) => {
+        if (snapRoot.scrollTop > 1) {
+          topRefreshWheelAmount = 0;
+          return;
+        }
+
+        if (event.deltaY < 0) {
+          topRefreshWheelAmount += Math.abs(event.deltaY);
+
+          if (topRefreshWheelAmount >= 150) {
+            doTopRefresh();
+          }
+        } else {
+          topRefreshWheelAmount = 0;
+        }
+      },
+      { passive: true }
+    );
+
+    let pullRefreshStartY = null;
+    let pullRefreshEligible = false;
+
+    snapRoot.addEventListener(
+      "touchstart",
+      (event) => {
+        if (
+          snapRoot.scrollTop <= 1 &&
+          event.touches.length === 1
+        ) {
+          pullRefreshStartY = event.touches[0].clientY;
+          pullRefreshEligible = true;
+        } else {
+          pullRefreshStartY = null;
+          pullRefreshEligible = false;
+        }
+      },
+      { passive: true }
+    );
+
+    snapRoot.addEventListener(
+      "touchmove",
+      (event) => {
+        if (
+          !pullRefreshEligible ||
+          pullRefreshStartY === null ||
+          event.touches.length !== 1
+        ) {
+          return;
+        }
+
+        const pullDistance =
+          event.touches[0].clientY -
+          pullRefreshStartY;
+
+        if (pullDistance >= 110) {
+          doTopRefresh();
+        }
+      },
+      { passive: true }
+    );
+
+    snapRoot.addEventListener(
+      "touchend",
+      () => {
+        pullRefreshStartY = null;
+        pullRefreshEligible = false;
+      },
+      { passive: true }
+    );
+
     const indicatorButtons = Array.from(
       document.querySelectorAll(
         ".page-indicator button[data-target]"
