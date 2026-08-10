@@ -25,20 +25,20 @@
 
   <style>
     /* =========================================================
-       🔒 LOCK 02. 모딩 브랜드 컬러 / 공통 규격
+       🔒 LOCK 02. 브랜드 / 공통 규격
        ========================================================= */
     :root {
       --moding-green: #238B22;
-      --moding-green-dark: #1c6f1c;
+      --moding-green-dark: #1C6F1C;
       --moding-orange: #FF8C00;
-      --moding-orange-dark: #e67800;
+      --moding-orange-dark: #E67800;
 
       --page-max: 1180px;
       --page-pad: 24px;
       --header-height: 84px;
 
-      --white: #ffffff;
-      --black: #090909;
+      --white: #FFFFFF;
+      --black: #050505;
     }
 
     /* =========================================================
@@ -97,8 +97,8 @@
 
     /* =========================================================
        02. HEADER
-       - PC: 기존 1180 / 24 규격
-       - Mobile: 로고 + 햄버거
+       - PC: 기존 공통규격
+       - Mobile: 세로형 로고 + 햄버거
        ========================================================= */
     .site-header {
       position: fixed;
@@ -106,7 +106,7 @@
       z-index: 1000;
       width: 100%;
       background: #fff;
-      border-bottom: 1px solid #e1e4e2;
+      border-bottom: 1px solid #E1E4E2;
     }
 
     .nav {
@@ -120,15 +120,14 @@
       gap: 28px;
     }
 
-    /* 🔒 기존 세로형 모딩 로고 원본 비율 유지 */
     .nav-logo {
       display: inline-flex;
       align-items: center;
-      justify-content: flex-start;
       flex: 0 0 auto;
       text-decoration: none;
     }
 
+    /* 🔒 세로형 원본 로고 비율 유지 */
     .nav-logo img {
       width: auto;
       height: 52px;
@@ -149,7 +148,7 @@
       text-decoration: none;
       color: var(--moding-green);
       white-space: nowrap;
-      transition: color 0.2s ease;
+      transition: color .2s ease;
     }
 
     .nav-menu a:hover {
@@ -163,20 +162,17 @@
       padding: 0;
       border: 0;
       background: transparent;
-      cursor: pointer;
       color: var(--moding-green);
+      cursor: pointer;
     }
 
     .menu-toggle span {
       display: block;
-      width: 27px;
+      width: 28px;
       height: 3px;
       margin: 5px auto;
       border-radius: 999px;
       background: currentColor;
-      transition:
-        transform 0.25s ease,
-        opacity 0.25s ease;
     }
 
     /* =========================================================
@@ -185,14 +181,14 @@
     .mobile-menu-overlay {
       position: fixed;
       inset: 0;
-      z-index: 1200;
+      z-index: 1300;
       display: none;
       flex-direction: column;
-      background: #050505;
+      background: var(--black);
       color: #fff;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.24s ease;
+      transition: opacity .22s ease;
     }
 
     .mobile-menu-overlay.is-open {
@@ -201,8 +197,8 @@
     }
 
     .mobile-menu-head {
-      min-height: 82px;
-      padding: 14px 24px;
+      min-height: 78px;
+      padding: 12px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -227,13 +223,14 @@
 
     .mobile-menu-body {
       flex: 1;
-      padding: 46px 28px 34px;
+      padding: 44px 28px 34px;
       display: flex;
       flex-direction: column;
+      min-height: 0;
     }
 
     .mobile-menu-title {
-      margin-bottom: 32px;
+      margin-bottom: 34px;
       font-size: clamp(34px, 9vw, 46px);
       line-height: 1.12;
       letter-spacing: -0.055em;
@@ -288,6 +285,7 @@
       overscroll-behavior-y: contain;
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
+      background: var(--moding-green);
     }
 
     .scene {
@@ -305,27 +303,27 @@
       scroll-snap-stop: always;
     }
 
-    .scene-inner {
+    .scene-frame {
       width: 100%;
       max-width: var(--page-max);
       height: 100%;
       margin: 0 auto;
-      padding: 34px var(--page-pad) 52px;
+      padding: 36px var(--page-pad) 52px;
 
       display: grid;
-      grid-template-columns: minmax(0, .93fr) minmax(0, 1.07fr);
+      grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
       align-items: center;
-      gap: 34px;
+      gap: 36px;
     }
 
     .scene-copy {
       position: relative;
       z-index: 5;
       opacity: 0;
-      transform: translateY(26px);
+      transform: translateY(24px);
       transition:
-        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity .7s cubic-bezier(.22,1,.36,1),
+        transform .7s cubic-bezier(.22,1,.36,1);
     }
 
     .scene.is-active .scene-copy {
@@ -334,9 +332,8 @@
     }
 
     .scene-copy h1,
-    .scene-copy h2,
-    .hero-copy h1 {
-      font-size: clamp(50px, 4.55vw, 78px);
+    .scene-copy h2 {
+      font-size: clamp(50px, 4.5vw, 78px);
       line-height: 1.08;
       letter-spacing: -0.06em;
       font-weight: 950;
@@ -344,13 +341,11 @@
     }
 
     .scene-copy h1 em,
-    .scene-copy h2 em,
-    .hero-copy h1 em {
+    .scene-copy h2 em {
       color: var(--moding-orange);
     }
 
-    .scene-copy p,
-    .hero-copy p {
+    .scene-copy p {
       margin-top: 26px;
       font-size: clamp(18px, 1.55vw, 22px);
       line-height: 1.65;
@@ -359,30 +354,30 @@
       color: rgba(255,255,255,.84);
     }
 
-    .scene-art,
-    .hero-art {
+    .scene-art {
       position: relative;
-      width: 100%;
-      min-width: 0;
       z-index: 2;
-
+      min-width: 0;
       opacity: 0;
-      transform: translateY(26px);
+      transform: translateY(24px);
       transition:
-        opacity 0.8s 0.08s ease,
-        transform 0.8s 0.08s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity .8s .08s ease,
+        transform .8s .08s cubic-bezier(.22,1,.36,1);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .scene.is-active .scene-art,
-    .scene.is-active .hero-art {
+    .scene.is-active .scene-art {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .scene-art svg,
-    .hero-art svg {
-      width: 100%;
+    .scene-art svg {
+      width: min(100%, 620px);
       height: auto;
+      max-height: 72vh;
       overflow: visible;
     }
 
@@ -394,17 +389,19 @@
     }
 
     /* =========================================================
-       05. 1P RANDOM HERO
-       - 3종 중 하나 선택
-       - 같은 레이아웃 / 같은 규격
+       05. HERO RANDOM 3종
        ========================================================= */
+    .scene-intro .scene-frame {
+      display: block;
+    }
+
     .hero-variant {
       display: none;
-      grid-template-columns: minmax(0, .93fr) minmax(0, 1.07fr);
-      align-items: center;
-      gap: 34px;
       width: 100%;
       height: 100%;
+      grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+      align-items: center;
+      gap: 36px;
     }
 
     .hero-variant.is-selected {
@@ -412,16 +409,65 @@
     }
 
     .hero-copy {
+      position: relative;
+      z-index: 5;
       opacity: 0;
-      transform: translateY(26px);
+      transform: translateY(24px);
       transition:
-        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity .7s cubic-bezier(.22,1,.36,1),
+        transform .7s cubic-bezier(.22,1,.36,1);
     }
 
     .scene.is-active .hero-copy {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(50px, 4.5vw, 78px);
+      line-height: 1.08;
+      letter-spacing: -0.06em;
+      font-weight: 950;
+      color: #fff;
+    }
+
+    .hero-copy h1 em {
+      color: var(--moding-orange);
+    }
+
+    .hero-copy p {
+      margin-top: 26px;
+      font-size: clamp(18px, 1.55vw, 22px);
+      line-height: 1.65;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      color: rgba(255,255,255,.84);
+    }
+
+    .hero-art {
+      position: relative;
+      min-width: 0;
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity .8s .08s ease,
+        transform .8s .08s cubic-bezier(.22,1,.36,1);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scene.is-active .hero-art {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-art svg {
+      width: min(100%, 620px);
+      height: auto;
+      max-height: 72vh;
+      overflow: visible;
     }
 
     .hero-download-area {
@@ -447,140 +493,65 @@
       transform: translateY(-2px);
     }
 
-    .hero-download .download-arrow-mark {
+    .download-arrow-mark {
       color: var(--moding-orange);
       font-size: 17px;
       line-height: 1;
     }
 
-    /* Hero A */
-    .hero-a-box {
+    /* =========================================================
+       06. ILLUSTRATION MOTION
+       ========================================================= */
+    .float-a {
       transform-origin: center;
-      animation: heroFloat 4.6s ease-in-out infinite;
+      animation: floatA 4.6s ease-in-out infinite;
     }
 
-    .hero-a-fish {
+    .float-b {
       transform-origin: center;
-      animation: fishMove 4s ease-in-out infinite;
+      animation: floatB 4.1s .25s ease-in-out infinite;
     }
 
-    .hero-a-meat {
+    .float-c {
       transform-origin: center;
-      animation: meatMove 4.2s .2s ease-in-out infinite;
+      animation: floatC 4.4s .5s ease-in-out infinite;
     }
 
-    .hero-a-sauce {
-      transform-origin: 50% 90%;
-      animation: sauceMove 3.8s .45s ease-in-out infinite;
-    }
-
-    /* Hero B */
-    .hero-b-lens {
-      transform-origin: center;
-      animation: lensMove 5.5s ease-in-out infinite;
-    }
-
-    .hero-b-item {
-      transform-origin: center;
-      animation: itemFloat 4.2s ease-in-out infinite;
-    }
-
-    /* Hero C */
-    .hero-c-parcel {
-      animation: parcelTravel 4.4s ease-in-out infinite;
-    }
-
-    @keyframes heroFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-7px); }
-    }
-
-    @keyframes fishMove {
-      0%,100% { transform: translate(0,0) rotate(-2deg); }
-      50% { transform: translate(10px,-7px) rotate(2deg); }
-    }
-
-    @keyframes meatMove {
+    @keyframes floatA {
       0%,100% { transform: translateY(0) rotate(0); }
-      50% { transform: translateY(-8px) rotate(-2deg); }
+      50% { transform: translateY(-7px) rotate(2deg); }
     }
 
-    @keyframes sauceMove {
-      0%,100% { transform: rotate(-2deg); }
-      50% { transform: rotate(3deg); }
+    @keyframes floatB {
+      0%,100% { transform: translate(0,0) rotate(-1deg); }
+      50% { transform: translate(8px,-5px) rotate(2deg); }
     }
 
-    @keyframes lensMove {
-      0%,100% { transform: translate(0,0) rotate(0); }
-      50% { transform: translate(10px,-7px) rotate(2deg); }
-    }
-
-    @keyframes itemFloat {
+    @keyframes floatC {
       0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-7px); }
+      50% { transform: translateY(-5px); }
     }
 
-    @keyframes parcelTravel {
-      0% { transform: translateX(0); opacity: 0; }
-      12% { opacity: 1; }
-      50% { transform: translateX(150px); opacity: 1; }
-      88% { opacity: 1; }
-      100% { transform: translateX(300px); opacity: 0; }
-    }
-
-    /* =========================================================
-       06. 2P / DISCOVER
-       - 돋보기 + 식품 3개만
-       ========================================================= */
-    .discovery-art {
-      animation: subtleArtFloat 5s ease-in-out infinite;
-    }
-
-    /* =========================================================
-       07. 3P / CONNECT
-       - 판매자 / 가게 / 연결선 하나
-       ========================================================= */
-    .connect-parcel {
-      animation: parcelTravelWide 4.8s ease-in-out infinite;
-    }
-
-    @keyframes parcelTravelWide {
-      0% { transform: translateX(0); opacity: 0; }
-      12% { opacity: 1; }
-      50% { transform: translateX(165px); opacity: 1; }
-      88% { opacity: 1; }
-      100% { transform: translateX(330px); opacity: 0; }
-    }
-
-    /* =========================================================
-       08. 4P / DELIVERY
-       - 트럭 + 박스 하나
-       ========================================================= */
     .delivery-truck {
-      animation: truckAlive 4.2s ease-in-out infinite;
+      animation: truckMove 4.2s ease-in-out infinite;
     }
 
     .delivery-box {
-      animation: boxHop 3.8s .15s ease-in-out infinite;
+      animation: boxMove 4s .15s ease-in-out infinite;
     }
 
-    @keyframes truckAlive {
-      0%,100% { transform: translateX(-4px); }
-      50% { transform: translateX(15px); }
+    @keyframes truckMove {
+      0%,100% { transform: translateX(-3px); }
+      50% { transform: translateX(8px); }
     }
 
-    @keyframes boxHop {
-      0%,100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-8px) rotate(2deg); }
-    }
-
-    @keyframes subtleArtFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+    @keyframes boxMove {
+      0%,100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-3px) rotate(1deg); }
     }
 
     /* =========================================================
-       09. 5P / DOWNLOAD + BLACK FOOTER
+       07. 5P / FINAL
        ========================================================= */
     .scene-final {
       display: flex;
@@ -593,20 +564,21 @@
       width: 100%;
       max-width: var(--page-max);
       margin: 0 auto;
-      padding: 28px var(--page-pad) 22px;
+      padding: 28px var(--page-pad) 20px;
 
       display: grid;
-      grid-template-columns: minmax(320px, .85fr) minmax(0, 1.15fr);
+      grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
       align-items: center;
-      gap: 74px;
+      gap: 72px;
     }
 
     .final-phone-wrap {
       display: flex;
       align-items: center;
       justify-content: center;
+
       opacity: 0;
-      transform: translateY(26px) rotate(-2deg);
+      transform: translateY(24px) rotate(-2deg);
       transition:
         opacity .8s .08s ease,
         transform .8s .08s cubic-bezier(.22,1,.36,1);
@@ -619,8 +591,8 @@
 
     .phone {
       position: relative;
-      width: clamp(205px, 19vw, 280px);
-      aspect-ratio: .50;
+      width: clamp(250px, 21vw, 325px);
+      aspect-ratio: .58;
       padding: 12px;
       border: 3px solid rgba(255,255,255,.9);
       border-radius: 44px;
@@ -637,7 +609,7 @@
       height: 18px;
       transform: translateX(-50%);
       border-radius: 999px;
-      background: #0d2610;
+      background: #0D2610;
       z-index: 2;
     }
 
@@ -646,13 +618,13 @@
       height: 100%;
       border-radius: 33px;
       overflow: hidden;
-      background: #f7faf7;
+      background: #F7FAF7;
       padding: 48px 16px 18px;
       color: #183219;
     }
 
     .phone-logo {
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 950;
       color: var(--moding-green);
       letter-spacing: -0.04em;
@@ -662,7 +634,7 @@
       height: 13px;
       margin-top: 14px;
       border-radius: 999px;
-      background: #e9efe9;
+      background: #E9EFE9;
     }
 
     .phone-line.short { width: 64%; }
@@ -679,8 +651,8 @@
     .phone-card::before {
       content: "";
       display: block;
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 12px;
       background:
         linear-gradient(
@@ -697,7 +669,7 @@
       height: 9px;
       margin-top: 10px;
       border-radius: 999px;
-      background: #e7eee7;
+      background: #E7EEE7;
     }
 
     .final-copy {
@@ -751,8 +723,8 @@
       flex: 0 0 auto;
       width: 100%;
       padding: 17px 20px 18px;
+      background: var(--black);
       border-top: 1px solid rgba(255,255,255,.10);
-      background: #050505;
       text-align: center;
       font-size: 11.5px;
       line-height: 1.6;
@@ -779,7 +751,7 @@
     }
 
     /* =========================================================
-       10. NEXT ARROW
+       08. NEXT ARROW
        ========================================================= */
     .scene-next {
       position: absolute;
@@ -826,7 +798,7 @@
     }
 
     /* =========================================================
-       11. PAGE INDICATOR
+       09. PAGE INDICATOR (PC only)
        ========================================================= */
     .page-indicator {
       position: fixed;
@@ -860,10 +832,11 @@
     }
 
     /* =========================================================
-       12. RESPONSIVE
+       10. RESPONSIVE · Tablet / Mobile
+       - 모바일은 PC를 접는 방식이 아니라 전용 Grid
        ========================================================= */
     @media (max-width: 1024px) {
-      .scene-inner,
+      .scene-frame,
       .final-main {
         max-width: 960px;
       }
@@ -890,43 +863,52 @@
         display: flex;
       }
 
-      .scene-inner {
-        padding: 28px 20px 44px;
+      .scene-frame {
+        padding: 26px 20px 48px;
+        display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: auto minmax(0,1fr);
-        align-content: center;
-        gap: 10px;
+        grid-template-rows: auto minmax(0, 1fr);
+        align-items: stretch;
+        gap: 14px;
       }
 
-      .hero-variant {
+      .scene-intro .scene-frame {
+        display: block;
+        padding: 0 20px;
+      }
+
+      .hero-variant,
+      .hero-variant.is-selected {
         grid-template-columns: 1fr;
-        grid-template-rows: auto minmax(0,1fr);
-        gap: 10px;
+        grid-template-rows: auto minmax(0, 1fr);
+        align-items: stretch;
+        gap: 14px;
       }
 
       .scene-copy,
       .hero-copy {
-        align-self: end;
+        align-self: start;
+        padding-top: 8px;
       }
 
       .scene-copy h1,
       .scene-copy h2,
       .hero-copy h1 {
-        font-size: clamp(40px, 10.5vw, 54px);
-        line-height: 1.08;
+        font-size: clamp(40px, 10.8vw, 54px);
+        line-height: 1.07;
       }
 
       .scene-copy p,
       .hero-copy p {
-        margin-top: 18px;
+        margin-top: 16px;
         font-size: 17px;
-        line-height: 1.58;
+        line-height: 1.55;
       }
 
       .scene-art,
       .hero-art {
+        min-height: 0;
         align-self: end;
-        max-height: 44vh;
         display: flex;
         align-items: flex-end;
         justify-content: center;
@@ -934,12 +916,14 @@
 
       .scene-art svg,
       .hero-art svg {
-        width: min(100%, 540px);
+        width: min(92vw, 540px);
+        height: auto;
         max-height: 42vh;
+        object-fit: contain;
       }
 
       .hero-download-area {
-        margin-top: 22px;
+        margin-top: 20px;
       }
 
       .hero-download {
@@ -950,23 +934,38 @@
         display: none;
       }
 
+      /* 5P 모바일 전용 */
       .final-main {
-        padding: 24px 20px 12px;
-        grid-template-columns: .72fr 1fr;
-        gap: 20px;
+        padding: 18px 20px 10px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 10px;
+      }
+
+      .final-copy {
+        order: 1;
+        align-self: start;
+      }
+
+      .final-phone-wrap {
+        order: 2;
+        min-height: 0;
+        align-self: center;
       }
 
       .phone {
-        width: min(35vw, 190px);
+        width: min(44vw, 210px);
+        aspect-ratio: .58;
       }
 
       .final-copy h2 {
-        font-size: clamp(32px, 8.2vw, 44px);
+        font-size: clamp(34px, 9vw, 46px);
       }
 
       .final-copy p {
         margin-top: 14px;
-        font-size: 14px;
+        font-size: 15px;
       }
 
       .final-download {
@@ -976,6 +975,7 @@
 
       .site-footer {
         font-size: 9.5px;
+        line-height: 1.5;
       }
     }
 
@@ -988,53 +988,45 @@
         height: 44px;
       }
 
-      .menu-toggle {
-        width: 42px;
-        height: 42px;
+      .scene-frame {
+        padding: 24px 18px 46px;
       }
 
-      .scene-inner {
-        padding: 26px 18px 42px;
+      .scene-intro .scene-frame {
+        padding: 0 18px;
       }
 
       .scene-copy h1,
       .scene-copy h2,
       .hero-copy h1 {
-        font-size: clamp(40px, 11.6vw, 50px);
+        font-size: clamp(39px, 11.2vw, 48px);
       }
 
       .scene-copy p,
       .hero-copy p {
         font-size: 16px;
-        line-height: 1.55;
-      }
-
-      .scene-art,
-      .hero-art {
-        max-height: 41vh;
       }
 
       .scene-art svg,
       .hero-art svg {
+        width: min(94vw, 500px);
         max-height: 39vh;
       }
 
       .final-main {
-        grid-template-columns: .62fr 1fr;
-        padding: 18px 16px 10px;
-        gap: 14px;
+        padding: 16px 18px 8px;
       }
 
       .phone {
-        width: min(36vw, 150px);
+        width: min(46vw, 190px);
       }
 
       .final-copy h2 {
-        font-size: clamp(29px, 8.6vw, 39px);
+        font-size: clamp(31px, 9vw, 40px);
       }
 
       .final-copy p {
-        font-size: 13px;
+        font-size: 13.5px;
       }
 
       .site-footer {
@@ -1053,7 +1045,12 @@
         height: 40px;
       }
 
-      .scene-inner {
+      .scene-frame {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .scene-intro .scene-frame {
         padding-left: 16px;
         padding-right: 16px;
       }
@@ -1061,41 +1058,49 @@
       .scene-copy h1,
       .scene-copy h2,
       .hero-copy h1 {
-        font-size: 38px;
+        font-size: 37px;
       }
 
       .scene-copy p,
       .hero-copy p {
         font-size: 15px;
       }
+
+      .phone {
+        width: min(48vw, 178px);
+      }
     }
 
-    @media (max-height: 620px) {
-      .scene-inner {
+    @media (max-height: 700px) and (max-width: 820px) {
+      .scene-frame {
         padding-top: 16px;
-        padding-bottom: 34px;
+        padding-bottom: 38px;
       }
 
       .scene-copy h1,
       .scene-copy h2,
       .hero-copy h1 {
-        font-size: clamp(34px, 7vh, 50px);
+        font-size: clamp(32px, 7.2vh, 42px);
       }
 
       .scene-copy p,
       .hero-copy p {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .hero-download-area {
         margin-top: 12px;
-        font-size: 14.5px;
       }
 
       .scene-art svg,
       .hero-art svg {
-        max-height: 44vh;
+        max-height: 35vh;
       }
     }
 
     /* =========================================================
-       13. COPY / DRAG PROTECTION
+       11. COPY / DRAG PROTECTION
        ========================================================= */
     html,
     body,
@@ -1117,7 +1122,7 @@
     }
 
     /* =========================================================
-       14. REDUCED MOTION
+       12. REDUCED MOTION
        ========================================================= */
     @media (prefers-reduced-motion: reduce) {
       .snap-root {
@@ -1143,338 +1148,70 @@
     }
   
     /* =========================================================
-       STABILITY FIX · 1P / Mobile / Delivery / Final Phone
+       FINAL TECH PATCH · 짧은 모바일 화면 보호
        ========================================================= */
-
-    /* 1P는 scene-inner가 바깥 Grid가 되지 않게 하여
-       hero-variant의 2열 구조가 정확히 전체 폭을 사용하도록 함 */
-    .scene-intro .scene-inner {
-      display: block;
-      position: relative;
-    }
-
-    .scene-intro .hero-variant {
-      width: 100%;
-      height: 100%;
-    }
-
-    /* 1P 추가 오브젝트 */
-    .hero-a-shell,
-    .hero-a-leaf,
-    .hero-b-shell {
-      transform-origin: center;
-      animation: extraObjectFloat 4.5s ease-in-out infinite;
-    }
-
-    .hero-a-leaf {
-      animation-delay: .35s;
-    }
-
-    .hero-b-shell {
-      animation-delay: .5s;
-    }
-
-    @keyframes extraObjectFloat {
-      0%,100% { transform: translateY(0) rotate(0); }
-      50% { transform: translateY(-7px) rotate(3deg); }
-    }
-
-    /* 연결 페이지의 이동 박스가 실제 곡선을 따라가도록 보정 */
-    @keyframes parcelTravel {
-      0% {
-        transform: translate(0, 0);
-        opacity: 0;
-      }
-      12% {
-        opacity: 1;
-      }
-      50% {
-        transform: translate(150px, -54px);
-        opacity: 1;
-      }
-      88% {
-        opacity: 1;
-      }
-      100% {
-        transform: translate(300px, 0);
-        opacity: 0;
-      }
-    }
-
-    @keyframes parcelTravelWide {
-      0% {
-        transform: translate(0, 0);
-        opacity: 0;
-      }
-      12% {
-        opacity: 1;
-      }
-      50% {
-        transform: translate(165px, -57px);
-        opacity: 1;
-      }
-      88% {
-        opacity: 1;
-      }
-      100% {
-        transform: translate(330px, 0);
-        opacity: 0;
-      }
-    }
-
-    /* 4P 움직임은 과하지 않게 */
-    @keyframes truckAlive {
-      0%,100% { transform: translateX(-3px); }
-      50% { transform: translateX(10px); }
-    }
-
-    @keyframes boxHop {
-      0%,100% { transform: translateY(0) rotate(-1deg); }
-      50% { transform: translateY(-3px) rotate(1deg); }
-    }
-
-    /* 5P 휴대폰을 조금 더 넓은 비율로 */
-    .phone {
-      width: clamp(245px, 21vw, 325px);
-      aspect-ratio: 0.56;
-    }
-
-    /* =========================================================
-       MOBILE STABILITY
-       - PC Grid를 단순히 접는 것이 아니라 모바일 전용 배치
-       ========================================================= */
-    @media (max-width: 820px) {
-      .scene-inner,
-      .scene-intro .scene-inner {
-        display: block;
-        position: relative;
-        padding: 0 20px;
-      }
-
-      .hero-variant,
-      .hero-variant.is-selected {
-        display: none;
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
-
-      .hero-variant.is-selected {
-        display: block;
-      }
-
-      .scene-copy,
-      .hero-copy {
-        position: absolute;
-        top: clamp(32px, 5.5vh, 54px);
-        left: 20px;
-        right: 20px;
-        z-index: 6;
-        align-self: auto;
-      }
-
-      .scene-art,
-      .hero-art {
-        position: absolute;
-        left: 50%;
-        right: auto;
-        bottom: 54px;
-        width: min(92vw, 540px);
-        height: 42%;
-        max-height: none;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-
-        opacity: 0;
-        transform: translate(-50%, 20px);
-      }
-
-      .scene.is-active .scene-art,
-      .scene.is-active .hero-art {
-        opacity: 1;
-        transform: translate(-50%, 0);
-      }
-
-      .scene-art svg,
-      .hero-art svg {
-        width: 100%;
-        height: 100%;
-        max-height: none;
-        object-fit: contain;
-      }
-
-      /* 모바일 타이틀과 그림 사이를 더 안정적으로 확보 */
-      .scene-copy h1,
-      .scene-copy h2,
-      .hero-copy h1 {
-        font-size: clamp(40px, 10.4vw, 52px);
-        line-height: 1.07;
-      }
-
-      .scene-copy p,
-      .hero-copy p {
-        margin-top: 16px;
-        font-size: 17px;
-        line-height: 1.55;
-      }
-
-      .hero-download-area {
-        margin-top: 20px;
-      }
-
-      /* 마지막 페이지는 모바일에서 세로형으로 전환 */
-      .final-main {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto minmax(0, 1fr);
-        align-items: center;
-        gap: 8px;
-        padding: 22px 20px 10px;
-      }
-
-      .final-copy {
-        order: 1;
-        align-self: end;
-        text-align: left;
-      }
-
-      .final-phone-wrap {
-        order: 2;
-        align-self: center;
-      }
-
-      .phone {
-        width: min(44vw, 220px);
-        aspect-ratio: 0.56;
-      }
-
-      .final-copy h2 {
-        font-size: clamp(34px, 9vw, 46px);
-      }
-
-      .final-copy p {
-        font-size: 15px;
-      }
-
-      .site-footer {
-        font-size: 9.5px;
-        line-height: 1.5;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .scene-inner,
-      .scene-intro .scene-inner {
-        padding: 0 18px;
-      }
-
-      .scene-copy,
-      .hero-copy {
-        top: 28px;
-        left: 18px;
-        right: 18px;
-      }
-
-      .scene-copy h1,
-      .scene-copy h2,
-      .hero-copy h1 {
-        font-size: clamp(39px, 11vw, 48px);
-      }
-
-      .scene-copy p,
-      .hero-copy p {
-        font-size: 16px;
-      }
-
-      .scene-art,
-      .hero-art {
-        bottom: 48px;
-        width: min(94vw, 500px);
-        height: 39%;
-      }
-
-      .final-main {
-        padding: 18px 18px 8px;
-      }
-
-      .phone {
-        width: min(48vw, 195px);
-      }
-
-      .final-copy h2 {
-        font-size: clamp(31px, 9vw, 40px);
-      }
-
-      .final-copy p {
-        font-size: 13.5px;
-      }
-
-      .final-download {
-        font-size: 15px;
-      }
-
-      .site-footer {
-        font-size: 8.8px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .scene-copy,
-      .hero-copy {
-        top: 24px;
-        left: 16px;
-        right: 16px;
-      }
-
-      .scene-copy h1,
-      .scene-copy h2,
-      .hero-copy h1 {
-        font-size: 37px;
-      }
-
-      .scene-copy p,
-      .hero-copy p {
-        font-size: 15px;
-      }
-
-      .scene-art,
-      .hero-art {
-        height: 37%;
-      }
-
-      .phone {
-        width: min(49vw, 180px);
-      }
-    }
-
-    /* 낮은 화면에서도 카피/일러스트 충돌 방지 */
     @media (max-height: 700px) and (max-width: 820px) {
-      .scene-copy,
-      .hero-copy {
-        top: 18px;
+      .scene-final .final-main {
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 6px;
+        padding-top: 12px;
+        padding-bottom: 6px;
       }
 
-      .scene-copy h1,
-      .scene-copy h2,
-      .hero-copy h1 {
-        font-size: clamp(32px, 7.4vh, 42px);
+      .scene-final .final-phone-wrap {
+        min-height: 0;
+        overflow: hidden;
       }
 
-      .scene-copy p,
-      .hero-copy p {
+      .scene-final .phone {
+        width: auto;
+        height: min(29vh, 205px);
+        max-height: 205px;
+        aspect-ratio: 0.58;
+      }
+
+      .scene-final .final-copy h2 {
+        font-size: clamp(28px, 6.8vh, 38px);
+      }
+
+      .scene-final .final-copy p {
+        margin-top: 8px;
+        font-size: 13px;
+      }
+
+      .scene-final .final-download {
         margin-top: 10px;
         font-size: 14px;
       }
 
-      .scene-art,
-      .hero-art {
-        bottom: 42px;
-        height: 35%;
+      .scene-final .site-footer {
+        padding-top: 8px;
+        padding-bottom: 9px;
+        font-size: 8.4px;
+        line-height: 1.42;
+      }
+    }
+
+    @media (max-height: 620px) and (max-width: 820px) {
+      .scene-final .phone {
+        height: min(25vh, 170px);
+        max-height: 170px;
       }
 
-      .hero-download-area {
-        margin-top: 13px;
+      .scene-final .final-copy h2 {
+        font-size: clamp(25px, 6.2vh, 34px);
+      }
+
+      .scene-final .final-copy p {
+        font-size: 12px;
+      }
+
+      .scene-final .final-download {
+        font-size: 13px;
+      }
+
+      .scene-final .site-footer {
+        font-size: 7.8px;
       }
     }
 
@@ -1518,7 +1255,7 @@
   </header>
 
   <!-- =======================================================
-       MOBILE MENU OVERLAY
+       MOBILE MENU
        ======================================================= -->
   <div
     class="mobile-menu-overlay"
@@ -1570,7 +1307,7 @@
       data-page="1"
       aria-label="모딩 소개"
     >
-      <div class="scene-inner">
+      <div class="scene-frame">
 
         <!-- HERO A -->
         <div class="hero-variant" data-hero="0">
@@ -1598,42 +1335,42 @@
           </div>
 
           <div class="hero-art" aria-hidden="true">
-            <svg viewBox="0 0 720 520">
+            <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-              <!-- 박스 -->
-              <g class="hero-a-box">
+              <!-- 열린 박스 -->
+              <g class="float-c">
                 <path
-                  d="M220 310 L360 256 L500 310 L360 366 Z"
+                  d="M220 305 L360 250 L500 305 L360 362 Z"
                   class="svg-line"
                   stroke="#fff"
                   stroke-width="7"
                 />
                 <path
-                  d="M220 310 V404 L360 468 V366"
+                  d="M220 305 V398 L360 466 V362"
                   class="svg-line"
                   stroke="#fff"
                   stroke-width="7"
                 />
                 <path
-                  d="M500 310 V404 L360 468"
+                  d="M500 305 V398 L360 466"
                   class="svg-line"
                   stroke="#fff"
                   stroke-width="7"
                 />
                 <path
-                  d="M220 310 L180 270 L316 220 L360 256"
+                  d="M220 305 L179 264 L316 214 L360 250"
                   class="svg-line"
                   stroke="#fff"
                   stroke-width="7"
                 />
                 <path
-                  d="M500 310 L540 270 L404 220 L360 256"
+                  d="M500 305 L541 264 L404 214 L360 250"
                   class="svg-line"
                   stroke="#fff"
                   stroke-width="7"
                 />
                 <path
-                  d="M326 322 Q360 340 394 322"
+                  d="M326 319 Q360 338 394 319"
                   class="svg-line"
                   stroke="#FF8C00"
                   stroke-width="8"
@@ -1641,42 +1378,41 @@
               </g>
 
               <!-- 생선 -->
-              <g class="hero-a-fish">
+              <g class="float-b">
                 <path
-                  d="M116 180
-                     C166 140 232 143 270 178
-                     C232 210 166 214 116 180 Z"
+                  d="M120 178
+                     C168 140 235 143 272 176
+                     C235 208 168 213 120 178 Z"
                   class="svg-line"
                   stroke="#fff"
                   stroke-width="7"
                 />
                 <path
-                  d="M116 180 L78 151 L82 199 Z"
+                  d="M120 178 L82 150 L86 198 Z"
                   class="svg-line"
                   stroke="#fff"
                   stroke-width="7"
                 />
-                <circle cx="236" cy="174" r="5" fill="#FF8C00"/>
+                <circle cx="239" cy="172" r="5" fill="#FF8C00"/>
               </g>
 
               <!-- 육가공 -->
-              <g class="hero-a-meat">
+              <g class="float-a">
                 <path
-                  d="M478 142
-                     C495 121 529 124 540 143
-                     C558 137 571 153 568 169
-                     C581 183 569 207 547 208
-                     C535 225 504 225 491 208
-                     C470 208 463 184 476 170
-                     C468 156 469 149 478 142 Z"
+                  d="M466 126
+                     C486 103 526 107 539 129
+                     C560 122 577 141 573 162
+                     C590 179 575 209 550 211
+                     C535 232 498 231 482 211
+                     C458 211 448 183 464 165
+                     C454 149 455 136 466 126 Z"
                   fill="none"
                   stroke="#fff"
                   stroke-width="7"
-                  stroke-linecap="round"
                   stroke-linejoin="round"
                 />
                 <path
-                  d="M488 183 Q520 164 553 185"
+                  d="M477 183 Q516 158 557 183"
                   class="svg-line"
                   stroke="#FF8C00"
                   stroke-width="6"
@@ -1684,56 +1420,55 @@
               </g>
 
               <!-- 소스 -->
-              <g class="hero-a-sauce">
+              <g class="float-c">
                 <path
-                  d="M544 254 L628 254 L618 380 Q586 397 554 380 Z"
+                  d="M538 244 L627 244 L617 376 Q583 395 550 376 Z"
                   fill="none"
                   stroke="#fff"
                   stroke-width="7"
                   stroke-linejoin="round"
                 />
                 <path
-                  d="M561 278 H612"
+                  d="M556 271 H610"
                   class="svg-line"
                   stroke="#FF8C00"
                   stroke-width="7"
                 />
               </g>
 
-
               <!-- 조개 -->
-              <g class="hero-a-shell">
+              <g class="float-a">
                 <path
-                  d="M96 292
-                     C107 254 149 242 181 262
-                     C207 280 204 321 173 341
-                     C138 355 98 330 96 292 Z"
+                  d="M92 290
+                     C104 251 148 239 181 260
+                     C208 279 205 322 173 342
+                     C137 357 95 331 92 290 Z"
                   fill="none"
                   stroke="#fff"
                   stroke-width="7"
                 />
                 <path
-                  d="M112 278 L166 335
-                     M131 258 L179 319
-                     M102 305 L157 347"
+                  d="M108 276 L166 337
+                     M129 255 L181 319
+                     M100 304 L158 349"
                   class="svg-line"
                   stroke="#FF8C00"
                   stroke-width="4"
                 />
               </g>
 
-              <!-- 채소/잎 -->
-              <g class="hero-a-leaf">
+              <!-- 채소 잎 -->
+              <g class="float-b">
                 <path
-                  d="M346 104
-                     C381 68 431 73 448 105
-                     C421 132 379 139 346 104 Z"
+                  d="M322 91
+                     C360 54 414 59 433 93
+                     C405 123 358 131 322 91 Z"
                   fill="none"
                   stroke="#fff"
                   stroke-width="7"
                 />
                 <path
-                  d="M349 105 C379 107 411 101 439 87"
+                  d="M326 92 C358 95 394 88 424 74"
                   class="svg-line"
                   stroke="#FF8C00"
                   stroke-width="5"
@@ -1748,8 +1483,8 @@
         <div class="hero-variant" data-hero="1">
           <div class="hero-copy">
             <h1>
-              늘 보던 것 말고,<br>
-              <em>새로운 상품</em>을.
+              새로운 상품을<br>
+              <em>찾고 싶을 때.</em>
             </h1>
 
             <p>
@@ -1772,99 +1507,89 @@
           <div class="hero-art" aria-hidden="true">
             <svg viewBox="0 0 720 520">
 
-              <!-- 식품 3개 -->
-              <g class="hero-b-item">
-                <path
-                  d="M116 210 C156 178 211 181 242 207 C211 234 156 237 116 210 Z"
-                  class="svg-line"
-                  stroke="#fff"
-                  stroke-width="7"
-                />
-                <path
-                  d="M116 210 L84 187 L88 225 Z"
-                  class="svg-line"
-                  stroke="#fff"
-                  stroke-width="7"
-                />
-                <circle cx="213" cy="205" r="5" fill="#FF8C00"/>
-              </g>
+              <!-- 식품 4종 -->
+              <path
+                d="M121 215 C163 181 219 185 251 212 C219 240 163 244 121 215 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+              />
+              <path
+                d="M121 215 L86 191 L90 231 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <circle cx="219" cy="210" r="5" fill="#FF8C00"/>
 
-              <g class="hero-b-item" style="animation-delay:.25s">
-                <path
-                  d="M308 148
-                     C325 128 358 130 368 149
-                     C385 144 397 159 394 175
-                     C408 189 395 213 374 214
-                     C360 231 331 231 318 214
-                     C298 214 290 191 303 176
-                     C296 164 298 155 308 148 Z"
-                  fill="none"
-                  stroke="#fff"
-                  stroke-width="7"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M318 188 Q346 171 377 188"
-                  class="svg-line"
-                  stroke="#FF8C00"
-                  stroke-width="6"
-                />
-              </g>
+              <path
+                d="M302 159
+                   C320 138 354 140 365 160
+                   C383 154 397 170 394 187
+                   C408 201 395 225 373 226
+                   C359 243 329 243 315 226
+                   C295 226 287 202 300 188
+                   C293 174 294 165 302 159 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M315 198 Q344 179 376 198"
+                class="svg-line"
+                stroke="#FF8C00"
+                stroke-width="6"
+              />
 
-              <g class="hero-b-item" style="animation-delay:.5s">
-                <path
-                  d="M488 210 L574 210 L565 330 Q532 348 499 330 Z"
-                  fill="none"
-                  stroke="#fff"
-                  stroke-width="7"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M505 236 H557"
-                  class="svg-line"
-                  stroke="#FF8C00"
-                  stroke-width="7"
-                />
-              </g>
+              <path
+                d="M478 213 L568 213 L559 337 Q525 355 491 337 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M496 239 H551"
+                class="svg-line"
+                stroke="#FF8C00"
+                stroke-width="7"
+              />
 
-
-              <g class="hero-b-shell">
-                <path
-                  d="M145 348
-                     C155 316 190 305 217 322
-                     C240 338 237 373 211 389
-                     C181 401 147 380 145 348 Z"
-                  fill="none"
-                  stroke="#fff"
-                  stroke-width="6"
-                />
-                <path
-                  d="M158 337 L204 383
-                     M175 320 L216 369"
-                  class="svg-line"
-                  stroke="#FF8C00"
-                  stroke-width="4"
-                />
-              </g>
+              <path
+                d="M166 343
+                   C177 309 214 298 242 315
+                   C266 331 264 369 236 386
+                   C205 399 168 377 166 343 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="6"
+              />
+              <path
+                d="M179 331 L229 381
+                   M197 313 L242 365"
+                class="svg-line"
+                stroke="#FF8C00"
+                stroke-width="4"
+              />
 
               <!-- 돋보기 -->
-              <g class="hero-b-lens">
-                <circle
-                  cx="360"
-                  cy="278"
-                  r="135"
-                  fill="none"
-                  stroke="#fff"
-                  stroke-width="9"
-                />
-                <path
-                  d="M458 376 L556 474"
-                  class="svg-line"
-                  stroke="#fff"
-                  stroke-width="18"
-                />
-                <circle cx="360" cy="278" r="9" fill="#FF8C00"/>
-              </g>
+              <circle
+                cx="360"
+                cy="287"
+                r="142"
+                fill="none"
+                stroke="#fff"
+                stroke-width="10"
+              />
+              <path
+                d="M462 391 L560 489"
+                class="svg-line"
+                stroke="#fff"
+                stroke-width="19"
+              />
+              <circle cx="360" cy="287" r="9" fill="#FF8C00"/>
 
             </svg>
           </div>
@@ -1898,80 +1623,96 @@
           <div class="hero-art" aria-hidden="true">
             <svg viewBox="0 0 720 520">
 
-              <!-- 판매자 박스 -->
-              <g transform="translate(100 215)">
+              <!-- 공급 박스 -->
+              <g transform="translate(88 214)">
                 <path
-                  d="M0 44 L82 8 L164 44 L82 82 Z"
+                  d="M0 45 L84 8 L168 45 L84 84 Z"
                   fill="none"
                   stroke="#fff"
                   stroke-width="7"
                   stroke-linejoin="round"
                 />
                 <path
-                  d="M0 44 V126 L82 164 V82"
+                  d="M0 45 V130 L84 169 V84"
                   fill="none"
                   stroke="#fff"
                   stroke-width="7"
                   stroke-linejoin="round"
                 />
                 <path
-                  d="M164 44 V126 L82 164"
+                  d="M168 45 V130 L84 169"
                   fill="none"
                   stroke="#fff"
                   stroke-width="7"
                   stroke-linejoin="round"
                 />
+                <!-- 박스 라벨 -->
                 <path
-                  d="M82 8 V82"
-                  class="svg-line"
+                  d="M46 104 C62 91 85 93 98 103 C85 115 62 116 46 104 Z"
+                  fill="none"
                   stroke="#FF8C00"
-                  stroke-width="7"
+                  stroke-width="4"
+                />
+                <path
+                  d="M46 104 L34 95 L36 111 Z"
+                  fill="none"
+                  stroke="#FF8C00"
+                  stroke-width="4"
+                  stroke-linejoin="round"
                 />
               </g>
 
-              <!-- 가게 -->
-              <g transform="translate(490 205)">
+              <!-- 식당 -->
+              <g transform="translate(493 201)">
                 <path
-                  d="M10 91 H150 V185 H10 Z"
+                  d="M12 98 H153 V193 H12 Z"
                   fill="none"
                   stroke="#fff"
                   stroke-width="7"
                 />
                 <path
-                  d="M0 91 L22 45 H138 L160 91"
+                  d="M2 98 L25 49 H140 L163 98"
                   fill="none"
                   stroke="#fff"
                   stroke-width="7"
                   stroke-linejoin="round"
                 />
                 <path
-                  d="M18 66 H143"
+                  d="M20 72 H146"
                   class="svg-line"
                   stroke="#FF8C00"
                   stroke-width="14"
                   stroke-dasharray="19 15"
                 />
-                <rect x="66" y="127" width="34" height="58" rx="5" fill="#FF8C00"/>
+                <rect x="72" y="134" width="34" height="59" rx="5" fill="#FF8C00"/>
               </g>
 
-              <!-- 연결선 -->
+              <!-- 실제 경로 -->
               <path
-                d="M275 315 C345 254 424 254 487 315"
+                id="heroRoute"
+                d="M267 321 C348 252 430 252 493 321"
                 class="svg-line"
-                stroke="#fff"
-                stroke-width="6"
-                stroke-dasharray="12 16"
+                stroke="rgba(255,255,255,.82)"
+                stroke-width="5"
+                stroke-dasharray="11 15"
               />
 
-              <!-- 이동 박스 -->
-              <g class="hero-c-parcel" transform="translate(274 303)">
-                <rect x="0" y="0" width="34" height="30" rx="6" fill="#FF8C00"/>
+              <!-- 경로를 따라가는 상품 -->
+              <g>
+                <rect x="-17" y="-15" width="34" height="30" rx="6" fill="#FF8C00"/>
                 <path
-                  d="M5 9 H29 M17 0 V30"
+                  d="M-12 -6 H12 M0 -15 V15"
                   class="svg-line"
                   stroke="#fff"
                   stroke-width="3"
                 />
+                <animateMotion
+                  dur="4.2s"
+                  repeatCount="indefinite"
+                  rotate="auto"
+                >
+                  <mpath href="#heroRoute" xlink:href="#heroRoute"/>
+                </animateMotion>
               </g>
 
             </svg>
@@ -1989,7 +1730,7 @@
     </section>
 
     <!-- =====================================================
-         2P
+         2P · DISCOVER
          ===================================================== -->
     <section
       id="page2"
@@ -1997,7 +1738,7 @@
       data-page="2"
       aria-label="새로운 상품을 찾을 때"
     >
-      <div class="scene-inner">
+      <div class="scene-frame">
 
         <div class="scene-copy">
           <h2>
@@ -2011,41 +1752,41 @@
           </p>
         </div>
 
-        <div class="scene-art discovery-art" aria-hidden="true">
+        <div class="scene-art" aria-hidden="true">
           <svg viewBox="0 0 720 520">
 
             <!-- 생선 -->
             <path
-              d="M137 244 C178 210 235 214 266 241 C235 269 178 272 137 244 Z"
+              d="M123 224 C164 191 220 194 251 220 C220 247 164 250 123 224 Z"
               fill="none"
               stroke="#fff"
               stroke-width="7"
             />
             <path
-              d="M137 244 L103 220 L107 259 Z"
+              d="M123 224 L89 200 L93 239 Z"
               fill="none"
               stroke="#fff"
               stroke-width="7"
               stroke-linejoin="round"
             />
-            <circle cx="234" cy="239" r="5" fill="#FF8C00"/>
+            <circle cx="219" cy="219" r="5" fill="#FF8C00"/>
 
             <!-- 육가공 -->
             <path
-              d="M304 175
-                 C322 154 355 156 366 176
-                 C383 171 396 186 393 202
-                 C407 216 395 240 373 241
-                 C360 258 329 258 316 241
-                 C296 241 288 217 301 203
-                 C294 190 295 181 304 175 Z"
+              d="M301 164
+                 C319 143 353 145 365 164
+                 C383 159 396 175 393 191
+                 C407 205 395 230 373 231
+                 C359 248 329 248 316 231
+                 C295 231 287 207 300 192
+                 C293 179 294 170 301 164 Z"
               fill="none"
               stroke="#fff"
               stroke-width="7"
               stroke-linejoin="round"
             />
             <path
-              d="M316 214 Q345 195 376 214"
+              d="M315 203 Q344 184 376 203"
               class="svg-line"
               stroke="#FF8C00"
               stroke-width="6"
@@ -2053,30 +1794,48 @@
 
             <!-- 소스 -->
             <path
-              d="M478 230 L566 230 L557 350 Q523 368 490 350 Z"
+              d="M480 220 L570 220 L561 344 Q527 362 493 344 Z"
               fill="none"
               stroke="#fff"
               stroke-width="7"
               stroke-linejoin="round"
             />
             <path
-              d="M496 256 H549"
+              d="M498 247 H553"
               class="svg-line"
               stroke="#FF8C00"
               stroke-width="7"
             />
 
+            <!-- 조개 -->
+            <path
+              d="M166 351
+                 C177 318 214 307 242 324
+                 C266 340 264 378 236 395
+                 C205 408 168 385 166 351 Z"
+              fill="none"
+              stroke="#fff"
+              stroke-width="6"
+            />
+            <path
+              d="M179 339 L229 389
+                 M197 321 L242 373"
+              class="svg-line"
+              stroke="#FF8C00"
+              stroke-width="4"
+            />
+
             <!-- 돋보기 -->
             <circle
-              cx="356"
+              cx="360"
               cy="292"
-              r="138"
+              r="144"
               fill="none"
               stroke="#fff"
               stroke-width="10"
             />
             <path
-              d="M454 391 L556 493"
+              d="M463 397 L562 496"
               class="svg-line"
               stroke="#fff"
               stroke-width="19"
@@ -2096,7 +1855,7 @@
     </section>
 
     <!-- =====================================================
-         3P
+         3P · CONNECT
          ===================================================== -->
     <section
       id="page3"
@@ -2104,7 +1863,7 @@
       data-page="3"
       aria-label="판매자와 외식업 사장님 연결"
     >
-      <div class="scene-inner">
+      <div class="scene-frame">
 
         <div class="scene-copy">
           <h2>
@@ -2121,73 +1880,95 @@
         <div class="scene-art" aria-hidden="true">
           <svg viewBox="0 0 720 520">
 
-            <!-- 판매자 -->
-            <g transform="translate(92 218)">
+            <!-- 공급자 -->
+            <g transform="translate(86 216)">
               <path
-                d="M0 44 L82 8 L164 44 L82 82 Z"
+                d="M0 45 L86 8 L172 45 L86 85 Z"
                 fill="none"
                 stroke="#fff"
                 stroke-width="7"
                 stroke-linejoin="round"
               />
               <path
-                d="M0 44 V126 L82 164 V82"
+                d="M0 45 V132 L86 171 V85"
                 fill="none"
                 stroke="#fff"
                 stroke-width="7"
                 stroke-linejoin="round"
               />
               <path
-                d="M164 44 V126 L82 164"
+                d="M172 45 V132 L86 171"
                 fill="none"
                 stroke="#fff"
                 stroke-width="7"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M47 105 C63 92 87 94 100 105 C87 116 63 118 47 105 Z"
+                fill="none"
+                stroke="#FF8C00"
+                stroke-width="4"
+              />
+              <path
+                d="M47 105 L35 96 L37 112 Z"
+                fill="none"
+                stroke="#FF8C00"
+                stroke-width="4"
                 stroke-linejoin="round"
               />
             </g>
 
             <!-- 가게 -->
-            <g transform="translate(490 206)">
+            <g transform="translate(494 202)">
               <path
-                d="M12 94 H151 V187 H12 Z"
+                d="M12 98 H154 V194 H12 Z"
                 fill="none"
                 stroke="#fff"
                 stroke-width="7"
               />
               <path
-                d="M2 94 L24 48 H139 L161 94"
+                d="M2 98 L25 49 H141 L164 98"
                 fill="none"
                 stroke="#fff"
                 stroke-width="7"
                 stroke-linejoin="round"
               />
               <path
-                d="M20 69 H145"
+                d="M20 72 H147"
                 class="svg-line"
                 stroke="#FF8C00"
                 stroke-width="14"
                 stroke-dasharray="19 15"
               />
-              <rect x="70" y="130" width="34" height="57" rx="5" fill="#FF8C00"/>
+              <rect x="73" y="135" width="34" height="59" rx="5" fill="#FF8C00"/>
             </g>
 
-            <!-- 한 줄 연결 -->
+            <!-- 연결 -->
             <path
-              d="M267 318 C344 253 425 253 488 318"
+              id="connectRoute"
+              d="M268 322 C349 250 431 250 494 322"
               class="svg-line"
-              stroke="#fff"
-              stroke-width="6"
-              stroke-dasharray="12 16"
+              stroke="rgba(255,255,255,.82)"
+              stroke-width="5"
+              stroke-dasharray="11 15"
             />
 
-            <g class="connect-parcel" transform="translate(267 306)">
-              <rect x="0" y="0" width="34" height="30" rx="6" fill="#FF8C00"/>
+            <g>
+              <rect x="-17" y="-15" width="34" height="30" rx="6" fill="#FF8C00"/>
               <path
-                d="M5 9 H29 M17 0 V30"
+                d="M-12 -6 H12 M0 -15 V15"
                 class="svg-line"
                 stroke="#fff"
                 stroke-width="3"
               />
+              <animateMotion
+                dur="4.2s"
+                repeatCount="indefinite"
+                rotate="auto"
+              >
+                <mpath href="#connectRoute" xlink:href="#connectRoute"/>
+              </animateMotion>
             </g>
 
           </svg>
@@ -2204,7 +1985,7 @@
     </section>
 
     <!-- =====================================================
-         4P
+         4P · DELIVERY
          ===================================================== -->
     <section
       id="page4"
@@ -2212,7 +1993,7 @@
       data-page="4"
       aria-label="택배와 직배송"
     >
-      <div class="scene-inner">
+      <div class="scene-frame">
 
         <div class="scene-copy">
           <h2>
@@ -2229,80 +2010,90 @@
         <div class="scene-art" aria-hidden="true">
           <svg viewBox="0 0 720 520">
 
-            <!-- 박스 -->
-            <g class="delivery-box" transform="translate(145 145)">
+            <!-- 택배 박스: 왼쪽 -->
+            <g class="delivery-box" transform="translate(86 263)">
               <path
-                d="M0 48 L66 18 L132 48 L66 81 Z"
+                d="M0 45 L70 13 L140 45 L70 80 Z"
                 fill="none"
                 stroke="#fff"
                 stroke-width="7"
                 stroke-linejoin="round"
               />
               <path
-                d="M0 48 V111 L66 143 V81"
+                d="M0 45 V116 L70 151 V80"
                 fill="none"
                 stroke="#fff"
                 stroke-width="7"
                 stroke-linejoin="round"
               />
               <path
-                d="M132 48 V111 L66 143"
+                d="M140 45 V116 L70 151"
                 fill="none"
                 stroke="#fff"
                 stroke-width="7"
                 stroke-linejoin="round"
               />
               <path
-                d="M66 18 V81"
+                d="M70 13 V80"
                 class="svg-line"
                 stroke="#FF8C00"
                 stroke-width="7"
               />
             </g>
 
-            <!-- 배송 경로 -->
+            <!-- 택배 경로 -->
             <path
-              d="M270 286 C302 293 322 310 346 326"
+              d="M245 349 C286 315 320 311 356 327"
               class="svg-line"
-              stroke="rgba(255,255,255,.65)"
+              stroke="rgba(255,255,255,.62)"
               stroke-width="4"
               stroke-dasharray="9 13"
             />
 
-            <!-- 트럭 -->
-            <g class="delivery-truck" transform="translate(330 300)">
+            <!-- 직배송 트럭: 오른쪽 -->
+            <g class="delivery-truck" transform="translate(357 288)">
               <path
-                d="M0 28 H173 V115 H0 Z"
+                d="M0 25 H179 V112 H0 Z"
                 fill="none"
                 stroke="#fff"
                 stroke-width="7"
                 stroke-linejoin="round"
               />
               <path
-                d="M173 55 H228 L260 86 V115 H173 Z"
+                d="M179 53 H233 L264 83 V112 H179 Z"
                 fill="none"
                 stroke="#fff"
                 stroke-width="7"
                 stroke-linejoin="round"
               />
-              <rect x="191" y="68" width="36" height="24" rx="4" fill="#FF8C00"/>
-              <circle cx="58" cy="125" r="19" fill="#fff"/>
-              <circle cx="207" cy="125" r="19" fill="#fff"/>
-              <circle cx="58" cy="125" r="8" fill="#238B22"/>
-              <circle cx="207" cy="125" r="8" fill="#238B22"/>
+              <rect x="196" y="66" width="36" height="24" rx="4" fill="#FF8C00"/>
+
+              <!-- 적재칸 식품 -->
               <path
-                d="M53 68 C74 50 106 52 122 67 C106 83 74 85 53 68 Z"
+                d="M43 67 C63 51 93 53 108 66 C93 81 63 83 43 67 Z"
                 fill="none"
                 stroke="#FF8C00"
-                stroke-width="6"
+                stroke-width="5"
               />
               <path
-                d="M53 68 L36 56 L38 77 Z"
+                d="M43 67 L27 56 L29 75 Z"
                 fill="none"
                 stroke="#FF8C00"
-                stroke-width="6"
+                stroke-width="5"
                 stroke-linejoin="round"
               />
+              <path
+                d="M126 53 L154 53 L151 91 Q140 98 129 91 Z"
+                fill="none"
+                stroke="#FF8C00"
+                stroke-width="5"
+                stroke-linejoin="round"
+              />
+
+              <circle cx="58" cy="123" r="19" fill="#fff"/>
+              <circle cx="211" cy="123" r="19" fill="#fff"/>
+              <circle cx="58" cy="123" r="8" fill="#238B22"/>
+              <circle cx="211" cy="123" r="8" fill="#238B22"/>
             </g>
 
           </svg>
@@ -2319,7 +2110,7 @@
     </section>
 
     <!-- =====================================================
-         5P
+         5P · DOWNLOAD + FOOTER
          ===================================================== -->
     <section
       id="page5"
@@ -2328,19 +2119,6 @@
       aria-label="모딩 앱 다운로드"
     >
       <div class="final-main">
-
-        <div class="final-phone-wrap" aria-hidden="true">
-          <div class="phone">
-            <div class="phone-screen">
-              <div class="phone-logo">MODING</div>
-              <div class="phone-line mid"></div>
-              <div class="phone-line short"></div>
-              <div class="phone-card"></div>
-              <div class="phone-card"></div>
-              <div class="phone-card"></div>
-            </div>
-          </div>
-        </div>
 
         <div class="final-copy">
           <h2>
@@ -2362,9 +2140,22 @@
           </a>
         </div>
 
+        <div class="final-phone-wrap" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-logo">MODING</div>
+              <div class="phone-line mid"></div>
+              <div class="phone-line short"></div>
+              <div class="phone-card"></div>
+              <div class="phone-card"></div>
+              <div class="phone-card"></div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- 🔒 LOCK 03. 기존 Footer 정보 -->
+      <!-- 🔒 LOCK 03. 기존 Footer -->
       <footer class="site-footer">
         <div class="footer-links">
           <a href="terms.html">이용약관</a>
@@ -2383,7 +2174,7 @@
   </main>
 
   <!-- =======================================================
-       PAGE INDICATOR · PC only
+       PAGE INDICATOR · PC ONLY
        ======================================================= -->
   <nav class="page-indicator" id="pageIndicator" aria-label="페이지 이동">
     <button type="button" class="is-active" data-target="page1" aria-label="1페이지로 이동"></button>
@@ -2415,15 +2206,16 @@
     syncHeaderHeight();
 
     if ("ResizeObserver" in window && siteHeader) {
-      const headerResizeObserver = new ResizeObserver(syncHeaderHeight);
+      const headerResizeObserver =
+        new ResizeObserver(syncHeaderHeight);
+
       headerResizeObserver.observe(siteHeader);
     }
 
     window.addEventListener("resize", syncHeaderHeight);
 
     /* =========================================================
-       1P HERO RANDOM
-       - 같은 세션에서 직전 Hero와 연속 중복 방지
+       1P RANDOM HERO
        ========================================================= */
     const heroVariants = Array.from(
       document.querySelectorAll(".hero-variant")
@@ -2432,9 +2224,13 @@
     function chooseHeroVariant() {
       if (!heroVariants.length) return;
 
-      const lastHero = Number(
-        sessionStorage.getItem("modingLastHero")
-      );
+      const storedHero =
+        sessionStorage.getItem("modingLastHero");
+
+      const lastHero =
+        storedHero === null
+          ? -1
+          : Number(storedHero);
 
       const candidates = heroVariants
         .map((_, index) => index)
@@ -2465,40 +2261,69 @@
     /* =========================================================
        MOBILE MENU
        ========================================================= */
-    const menuToggle = document.getElementById("menuToggle");
-    const menuClose = document.getElementById("menuClose");
+    const menuToggle =
+      document.getElementById("menuToggle");
+
+    const menuClose =
+      document.getElementById("menuClose");
+
     const mobileMenuOverlay =
       document.getElementById("mobileMenuOverlay");
 
     function openMobileMenu() {
       mobileMenuOverlay.classList.add("is-open");
-      mobileMenuOverlay.setAttribute("aria-hidden", "false");
-      menuToggle.setAttribute("aria-expanded", "true");
+      mobileMenuOverlay.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+      menuToggle.setAttribute(
+        "aria-expanded",
+        "true"
+      );
     }
 
     function closeMobileMenu() {
       mobileMenuOverlay.classList.remove("is-open");
-      mobileMenuOverlay.setAttribute("aria-hidden", "true");
-      menuToggle.setAttribute("aria-expanded", "false");
+      mobileMenuOverlay.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+      menuToggle.setAttribute(
+        "aria-expanded",
+        "false"
+      );
     }
 
-    menuToggle.addEventListener("click", openMobileMenu);
-    menuClose.addEventListener("click", closeMobileMenu);
+    menuToggle.addEventListener(
+      "click",
+      openMobileMenu
+    );
+
+    menuClose.addEventListener(
+      "click",
+      closeMobileMenu
+    );
 
     document
       .querySelectorAll(".mobile-menu-links a")
       .forEach((link) => {
-        link.addEventListener("click", closeMobileMenu);
+        link.addEventListener(
+          "click",
+          closeMobileMenu
+        );
       });
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeMobileMenu();
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") {
+          closeMobileMenu();
+        }
       }
-    });
+    );
 
     /* =========================================================
-       🔒 LOCK 04. 홈페이지 다운로드 버튼 직접 분기
+       🔒 LOCK 04. 다운로드 자동 분기
        ========================================================= */
     function openModingStore(event) {
       const androidUrl =
@@ -2513,13 +2338,18 @@
         window.opera ||
         "";
 
-      const platform = navigator.platform || "";
+      const platform =
+        navigator.platform || "";
 
-      const isAndroid = /android/i.test(ua);
+      const isAndroid =
+        /android/i.test(ua);
 
       const isIOS =
         /iPhone|iPad|iPod/i.test(ua) ||
-        (platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        (
+          platform === "MacIntel" &&
+          navigator.maxTouchPoints > 1
+        );
 
       if (isAndroid) {
         event.preventDefault();
@@ -2537,104 +2367,22 @@
     }
 
     /* =========================================================
-       PAGE ACTIVE / INDICATOR
+       SCENE / INDICATOR
        ========================================================= */
-    const snapRoot = document.getElementById("snapRoot");
-    const scenes = Array.from(document.querySelectorAll(".scene"));
+    const snapRoot =
+      document.getElementById("snapRoot");
 
+    const scenes =
+      Array.from(
+        document.querySelectorAll(".scene")
+      );
 
-    /* =========================================================
-       1P TOP REFRESH
-       - PC: 1P 최상단에서 위로 휠을 충분히 올리면 새로고침
-       - Mobile: 1P 최상단에서 아래로 당기기(Pull-down)하면 새로고침
-       ========================================================= */
-    let topRefreshWheelAmount = 0;
-    let topRefreshLocked = false;
-
-    function doTopRefresh() {
-      if (topRefreshLocked) return;
-
-      topRefreshLocked = true;
-      window.location.reload();
-    }
-
-    snapRoot.addEventListener(
-      "wheel",
-      (event) => {
-        if (snapRoot.scrollTop > 1) {
-          topRefreshWheelAmount = 0;
-          return;
-        }
-
-        if (event.deltaY < 0) {
-          topRefreshWheelAmount += Math.abs(event.deltaY);
-
-          if (topRefreshWheelAmount >= 150) {
-            doTopRefresh();
-          }
-        } else {
-          topRefreshWheelAmount = 0;
-        }
-      },
-      { passive: true }
-    );
-
-    let pullRefreshStartY = null;
-    let pullRefreshEligible = false;
-
-    snapRoot.addEventListener(
-      "touchstart",
-      (event) => {
-        if (
-          snapRoot.scrollTop <= 1 &&
-          event.touches.length === 1
-        ) {
-          pullRefreshStartY = event.touches[0].clientY;
-          pullRefreshEligible = true;
-        } else {
-          pullRefreshStartY = null;
-          pullRefreshEligible = false;
-        }
-      },
-      { passive: true }
-    );
-
-    snapRoot.addEventListener(
-      "touchmove",
-      (event) => {
-        if (
-          !pullRefreshEligible ||
-          pullRefreshStartY === null ||
-          event.touches.length !== 1
-        ) {
-          return;
-        }
-
-        const pullDistance =
-          event.touches[0].clientY -
-          pullRefreshStartY;
-
-        if (pullDistance >= 110) {
-          doTopRefresh();
-        }
-      },
-      { passive: true }
-    );
-
-    snapRoot.addEventListener(
-      "touchend",
-      () => {
-        pullRefreshStartY = null;
-        pullRefreshEligible = false;
-      },
-      { passive: true }
-    );
-
-    const indicatorButtons = Array.from(
-      document.querySelectorAll(
-        ".page-indicator button[data-target]"
-      )
-    );
+    const indicatorButtons =
+      Array.from(
+        document.querySelectorAll(
+          ".page-indicator button[data-target]"
+        )
+      );
 
     function setActiveScene(scene) {
       scenes.forEach((item) => {
@@ -2660,115 +2408,246 @@
       });
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              b.intersectionRatio -
-              a.intersectionRatio
-          );
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter(
+              (entry) => entry.isIntersecting
+            )
+            .sort(
+              (a, b) =>
+                b.intersectionRatio -
+                a.intersectionRatio
+            );
 
-        if (
-          visible.length > 0 &&
-          visible[0].intersectionRatio >= 0.55
-        ) {
-          setActiveScene(visible[0].target);
+          if (
+            visible.length > 0 &&
+            visible[0].intersectionRatio >= 0.55
+          ) {
+            setActiveScene(
+              visible[0].target
+            );
+          }
+        },
+        {
+          root: snapRoot,
+          threshold: [
+            0.30,
+            0.55,
+            0.70,
+            0.90
+          ]
         }
-      },
-      {
-        root: snapRoot,
-        threshold: [0.30, 0.55, 0.70, 0.90]
-      }
-    );
+      );
 
     scenes.forEach((scene) => {
       observer.observe(scene);
     });
 
     /* =========================================================
-       INDICATOR CLICK
+       NEXT / INDICATOR CLICK
        ========================================================= */
-    indicatorButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const target = document.getElementById(
-          button.dataset.target
-        );
+    function scrollToScene(id) {
+      const target =
+        document.getElementById(id);
 
-        if (!target) return;
+      if (!target) return;
 
-        target.scrollIntoView({
-          behavior: window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-          ).matches
-            ? "auto"
-            : "smooth",
-          block: "start"
-        });
+      target.scrollIntoView({
+        behavior: window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches
+          ? "auto"
+          : "smooth",
+        block: "start"
       });
+    }
+
+    indicatorButtons.forEach((button) => {
+      button.addEventListener(
+        "click",
+        () => {
+          scrollToScene(
+            button.dataset.target
+          );
+        }
+      );
     });
 
-    /* =========================================================
-       1~4P NEXT ARROW CLICK
-       ========================================================= */
     document
-      .querySelectorAll(".scene-next[data-next]")
+      .querySelectorAll(
+        ".scene-next[data-next]"
+      )
       .forEach((button) => {
-        button.addEventListener("click", () => {
-          const target = document.getElementById(
-            button.dataset.next
-          );
-
-          if (!target) return;
-
-          target.scrollIntoView({
-            behavior: window.matchMedia(
-              "(prefers-reduced-motion: reduce)"
-            ).matches
-              ? "auto"
-              : "smooth",
-            block: "start"
-          });
-        });
+        button.addEventListener(
+          "click",
+          () => {
+            scrollToScene(
+              button.dataset.next
+            );
+          }
+        );
       });
+
+    /* =========================================================
+       1P TOP REFRESH
+       - PC: 최상단에서 위로 휠
+       - Mobile: 최상단에서 아래로 당기기
+       ========================================================= */
+    let refreshLock = false;
+    let wheelPull = 0;
+
+    function refreshFromTop() {
+      if (refreshLock) return;
+      refreshLock = true;
+      window.location.reload();
+    }
+
+    snapRoot.addEventListener(
+      "wheel",
+      (event) => {
+        if (snapRoot.scrollTop > 1) {
+          wheelPull = 0;
+          return;
+        }
+
+        if (event.deltaY < 0) {
+          wheelPull += Math.abs(event.deltaY);
+
+          if (wheelPull >= 160) {
+            refreshFromTop();
+          }
+        } else {
+          wheelPull = 0;
+        }
+      },
+      { passive: true }
+    );
+
+    let touchStartY = null;
+    let touchRefreshReady = false;
+
+    snapRoot.addEventListener(
+      "touchstart",
+      (event) => {
+        if (
+          snapRoot.scrollTop <= 1 &&
+          event.touches.length === 1
+        ) {
+          touchStartY =
+            event.touches[0].clientY;
+
+          touchRefreshReady = true;
+        } else {
+          touchStartY = null;
+          touchRefreshReady = false;
+        }
+      },
+      { passive: true }
+    );
+
+    snapRoot.addEventListener(
+      "touchmove",
+      (event) => {
+        if (
+          !touchRefreshReady ||
+          touchStartY === null ||
+          event.touches.length !== 1
+        ) {
+          return;
+        }
+
+        const pullDistance =
+          event.touches[0].clientY -
+          touchStartY;
+
+        if (pullDistance >= 110) {
+          refreshFromTop();
+        }
+      },
+      { passive: true }
+    );
+
+    snapRoot.addEventListener(
+      "touchend",
+      () => {
+        touchStartY = null;
+        touchRefreshReady = false;
+      },
+      { passive: true }
+    );
 
     /* =========================================================
        🔒 LOCK 05. 복사 / 드래그 방지
        ========================================================= */
-    document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a")) {
-        e.preventDefault();
-      }
-    });
-
-    document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
-    });
-
-    document.addEventListener("keydown", function (e) {
-      const key = e.key.toLowerCase();
-
-      if (
-        (e.ctrlKey || e.metaKey) &&
-        !e.target.closest("input, textarea")
-      ) {
+    document.addEventListener(
+      "contextmenu",
+      function (e) {
         if (
-          ["c", "x", "v", "s", "u", "p", "a"].includes(key)
+          !e.target.closest(
+            "input, textarea, a"
+          )
         ) {
           e.preventDefault();
         }
       }
-    });
+    );
 
-    document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
+    document.addEventListener(
+      "dragstart",
+      function (e) {
+        if (
+          !e.target.closest(
+            "input, textarea"
+          )
+        ) {
+          e.preventDefault();
+        }
       }
-    });
-  </script>
+    );
 
+    document.addEventListener(
+      "keydown",
+      function (e) {
+        const key =
+          e.key.toLowerCase();
+
+        if (
+          (e.ctrlKey || e.metaKey) &&
+          !e.target.closest(
+            "input, textarea"
+          )
+        ) {
+          if (
+            [
+              "c",
+              "x",
+              "v",
+              "s",
+              "u",
+              "p",
+              "a"
+            ].includes(key)
+          ) {
+            e.preventDefault();
+          }
+        }
+      }
+    );
+
+    document.addEventListener(
+      "copy",
+      function (e) {
+        if (
+          !e.target.closest(
+            "input, textarea"
+          )
+        ) {
+          e.preventDefault();
+        }
+      }
+    );
+  </script>
 </body>
 </html>
