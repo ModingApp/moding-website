@@ -10,7 +10,7 @@
   <title>모딩(Moding) | 사장님의 가게에 새로운 선택지를</title>
   <meta
     name="description"
-    content="모딩(Moding)은 외식업 사장님이 새로운 식품을 발견하고 식품제조사와 연결될 수 있도록 돕는 B2B 식품 거래 앱입니다."
+    content="모딩(Moding)은 외식업 사장님이 새로운 식품을 발견하고 판매자와 연결될 수 있도록 돕는 B2B 식품 거래 앱입니다."
   >
 
   <meta property="og:type" content="website">
@@ -118,7 +118,6 @@
       align-items: center;
       justify-content: space-between;
       gap: 28px;
-      overflow: visible;
     }
 
     .nav-logo {
@@ -533,12 +532,6 @@
       50% { transform: translateY(-5px); }
     }
 
-    .delivery-truck,
-    .delivery-box {
-      transform-box: fill-box;
-      transform-origin: center;
-    }
-
     .delivery-truck {
       animation: truckMove 4.2s ease-in-out infinite;
     }
@@ -859,19 +852,11 @@
       }
 
       .nav-menu {
-        display: none !important;
+        display: none;
       }
 
       .menu-toggle {
-        position: relative;
-        z-index: 1002;
-        flex: 0 0 44px;
-        margin-left: auto;
-
-        display: flex !important;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        display: block;
       }
 
       .mobile-menu-overlay {
@@ -1281,7 +1266,7 @@
           </div>
 
           <div class="hero-art" aria-hidden="true">
-            <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg viewBox="0 0 720 520">
 
               <!-- 열린 박스 -->
               <g class="float-c">
@@ -1451,7 +1436,7 @@
           </div>
 
           <div class="hero-art" aria-hidden="true">
-            <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg viewBox="0 0 720 520">
 
               <!-- 식품 4종 -->
               <path
@@ -1550,7 +1535,7 @@
             </h1>
 
             <p>
-              전국의 식품제조사와 외식업 사장님을 연결합니다.
+              전국의 판매자와 외식업 사장님을 연결합니다.
             </p>
 
             <div class="hero-download-area">
@@ -1567,7 +1552,7 @@
           </div>
 
           <div class="hero-art" aria-hidden="true">
-            <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg viewBox="0 0 720 520">
 
               <!-- 공급 박스 -->
               <g transform="translate(88 214)">
@@ -1657,7 +1642,7 @@
                   repeatCount="indefinite"
                   rotate="auto"
                 >
-                  <mpath href="#heroRoute" xlink:href="#heroRoute"/>
+                  <mpath href="#heroRoute"/>
                 </animateMotion>
               </g>
 
@@ -1699,7 +1684,7 @@
         </div>
 
         <div class="scene-art" aria-hidden="true">
-          <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <svg viewBox="0 0 720 520">
 
             <!-- 생선 -->
             <path
@@ -1807,7 +1792,7 @@
       id="page3"
       class="scene"
       data-page="3"
-      aria-label="식품제조사와 외식업 사장님 연결"
+      aria-label="판매자와 외식업 사장님 연결"
     >
       <div class="scene-frame">
 
@@ -1818,13 +1803,13 @@
           </h2>
 
           <p>
-            모딩은 식품제조사와<br>
+            모딩은 식품 판매자와<br>
             외식업 사장님을 연결합니다.
           </p>
         </div>
 
         <div class="scene-art" aria-hidden="true">
-          <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <svg viewBox="0 0 720 520">
 
             <!-- 공급자 -->
             <g transform="translate(86 216)">
@@ -1913,7 +1898,7 @@
                 repeatCount="indefinite"
                 rotate="auto"
               >
-                <mpath href="#connectRoute" xlink:href="#connectRoute"/>
+                <mpath href="#connectRoute"/>
               </animateMotion>
             </g>
 
@@ -1954,11 +1939,10 @@
         </div>
 
         <div class="scene-art" aria-hidden="true">
-          <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <svg viewBox="0 0 720 520">
 
             <!-- 택배 박스: 왼쪽 -->
-            <g transform="translate(86 263)">
-              <g class="delivery-box">
+            <g class="delivery-box" transform="translate(86 263)">
               <path
                 d="M0 45 L70 13 L140 45 L70 80 Z"
                 fill="none"
@@ -1986,7 +1970,6 @@
                 stroke="#FF8C00"
                 stroke-width="7"
               />
-              </g>
             </g>
 
             <!-- 택배 경로 -->
@@ -1999,8 +1982,7 @@
             />
 
             <!-- 직배송 트럭: 오른쪽 -->
-            <g transform="translate(357 288)">
-              <g class="delivery-truck">
+            <g class="delivery-truck" transform="translate(357 288)">
               <path
                 d="M0 25 H179 V112 H0 Z"
                 fill="none"
@@ -2043,7 +2025,6 @@
               <circle cx="211" cy="123" r="19" fill="#fff"/>
               <circle cx="58" cy="123" r="8" fill="#238B22"/>
               <circle cx="211" cy="123" r="8" fill="#238B22"/>
-              </g>
             </g>
 
           </svg>
@@ -2174,13 +2155,9 @@
     function chooseHeroVariant() {
       if (!heroVariants.length) return;
 
-      const savedHero =
-        sessionStorage.getItem("modingLastHero");
-
-      const lastHero =
-        savedHero === null
-          ? -1
-          : Number(savedHero);
+      const lastHero = Number(
+        sessionStorage.getItem("modingLastHero")
+      );
 
       const candidates = heroVariants
         .map((_, index) => index)
@@ -2230,7 +2207,6 @@
         "aria-expanded",
         "true"
       );
-      snapRoot.style.overflowY = "hidden";
     }
 
     function closeMobileMenu() {
@@ -2243,7 +2219,6 @@
         "aria-expanded",
         "false"
       );
-      snapRoot.style.overflowY = "auto";
     }
 
     menuToggle.addEventListener(
