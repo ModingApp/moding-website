@@ -722,7 +722,9 @@
 
     /* =========================================================
        🔒 INDEX MASTER 09 · 5P FINAL + FOOTER
-       Footer 공간을 먼저 확보하고 본문은 남은 영역만 사용
+       FINAL LOCK
+       Footer 공간을 먼저 확보하고
+       휴대폰은 남은 세로 영역에 맞춰 전체 노출
        ========================================================= */
     .scene-final {
       display: flex;
@@ -734,7 +736,6 @@
     .final-main {
       flex: 1 1 auto;
       min-height: 0;
-      overflow: hidden;
       width: 100%;
       max-width: var(--page-max);
       margin: 0 auto;
@@ -1005,7 +1006,9 @@
         font-size: 9px;
       }
 
-      /* 5P */
+      /* 5P FINAL MASTER
+         Footer 높이를 먼저 확보하고
+         남은 세로 공간에 휴대폰 전체를 맞춤 */
       .final-main {
         grid-template-columns: 1fr;
         grid-template-rows: auto minmax(0, 1fr);
@@ -1020,18 +1023,24 @@
 
       .final-phone-wrap {
         min-height: 0;
-        overflow: hidden;
+        height: 100%;
         align-self: stretch;
-        align-items: flex-start;
+        display: flex;
+        align-items: center;
         justify-content: center;
-        padding-top: 20px;
+        padding-top: 16px;
+        padding-bottom: 4px;
       }
 
       .phone {
-        width: clamp(165px, 40vw, 190px);
+        height: min(100%, 318px);
+        width: auto;
+        max-width: 190px;
+        aspect-ratio: .54;
         margin: 0 auto;
         padding: 8px;
         border-radius: 34px;
+        flex: 0 1 auto;
       }
 
       .phone::before {
@@ -1043,8 +1052,12 @@
         border-radius: 26px;
       }
 
+      .final-copy p {
+        max-width: 360px;
+      }
+
       .app-cta-final {
-        margin-top: 15px;
+        margin-top: 13px;
       }
 
       .site-footer {
@@ -1080,11 +1093,13 @@
       }
 
       .final-phone-wrap {
-        padding-top: 18px;
+        padding-top: 14px;
       }
 
       .phone {
-        width: clamp(158px, 40vw, 182px);
+        height: min(100%, 300px);
+        width: auto;
+        max-width: 182px;
       }
     }
 
@@ -1136,16 +1151,19 @@
       }
 
       .final-main {
-        padding-top: 10px;
-        padding-bottom: 5px;
+        padding-top: 8px;
+        padding-bottom: 4px;
       }
 
       .final-phone-wrap {
-        padding-top: 8px;
+        padding-top: 6px;
+        padding-bottom: 2px;
       }
 
       .phone {
-        width: 145px;
+        height: min(100%, 248px);
+        width: auto;
+        max-width: 145px;
       }
 
       .site-footer {
@@ -1851,8 +1869,7 @@
           <div class="final-kicker">GET MODING</div>
 
           <h2>
-            이제<br>
-            우리 가게에도<br>
+            이제 우리 가게에도<br>
             <em>모딩을</em>
           </h2>
 
