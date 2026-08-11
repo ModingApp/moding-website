@@ -785,132 +785,95 @@
       color: rgba(255,255,255,.28);
     }
 
-    /* VERTICAL NEXT
-       실제 SVG 화살표 사용: PC에서도 확실히 보이도록 */
-    .scene-next {
-      position: absolute;
-      z-index: 60;
-      left: 50%;
-      bottom: 26px;
-      width: 54px;
-      height: 42px;
+    /* =========================================================
+       BOTTOM NAVIGATION
+       INDEX ← ABOUT → BRAND
+       ========================================================= */
+    .scene-next,
+    .site-side-nav {
+      width: 48px;
+      height: 48px;
       padding: 0;
-      border: 0;
-      background: transparent;
-      color: var(--green);
+      border: 1px solid rgba(35,139,34,.10);
+      border-radius: 50%;
+      background: rgba(255,255,255,.98);
+      box-shadow:
+        0 8px 24px rgba(0,0,0,.12),
+        inset 0 0 0 1px rgba(255,255,255,.45);
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      transform: translateX(-50%);
-      animation: nextArrow 1.45s ease-in-out infinite;
-      filter: drop-shadow(0 2px 3px rgba(0,0,0,.12));
+      text-decoration: none;
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
     }
 
-    .green .scene-next {
-      color: #fff;
+    .scene-next:hover,
+    .site-side-nav:hover {
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.16),
+        inset 0 0 0 1px rgba(255,255,255,.55);
     }
 
-    .scene-next svg {
-      display: block;
-      width: 100%;
-      height: 100%;
+    .scene-next svg,
+    .site-side-nav svg {
+      width: 24px;
+      height: 24px;
       overflow: visible;
+      pointer-events: none;
     }
 
-    .scene-next path {
+    .scene-next path,
+    .site-side-nav path {
       fill: none;
       stroke: currentColor;
-      stroke-width: 4.5;
+      stroke-width: 3.8;
       stroke-linecap: round;
       stroke-linejoin: round;
       vector-effect: non-scaling-stroke;
     }
 
-    @keyframes nextArrow {
-      0%,100% { transform: translate(-50%,0); }
-      50% { transform: translate(-50%,9px); }
+    .scene-next {
+      position: absolute;
+      z-index: 60;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      animation: nextArrowAlive 1.5s ease-in-out infinite;
     }
 
-    /* SIDE PAGE NAV */
+    .scene-next:hover {
+      transform: translate(-50%, -3px);
+    }
+
+    @keyframes nextArrowAlive {
+      0%,100% { transform: translate(-50%,0); }
+      50% { transform: translate(-50%,6px); }
+    }
+
     .site-side-nav {
       position: fixed;
       z-index: 910;
-      top: 50%;
-      transform: translateY(-50%);
-      min-width: 46px;
-      height: 46px;
-      padding: 0 14px;
-      border: 1px solid rgba(35,139,34,.18);
-      border-radius: 999px;
-      background: rgba(255,255,255,.95);
-      box-shadow: 0 8px 28px rgba(20,50,20,.08);
-      color: var(--green);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .04em;
-      backdrop-filter: blur(7px);
-      transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        color .2s ease;
-    }
-
-    .site-side-nav:hover {
-      color: var(--orange);
-      box-shadow: 0 12px 34px rgba(20,50,20,.12);
+      bottom: 18px;
     }
 
     .site-side-nav.prev {
-      left: 14px;
+      left: 18px;
     }
 
     .site-side-nav.next {
-      right: 14px;
+      right: 18px;
     }
 
-    .site-side-nav.prev:hover {
-      transform: translate(-3px, -50%);
-    }
-
+    .site-side-nav.prev:hover,
     .site-side-nav.next:hover {
-      transform: translate(3px, -50%);
-    }
-
-    .side-arrow {
-      font-size: 22px;
-      line-height: 1;
-      color: var(--orange);
-    }
-
-    /* PAGE DOTS */
-    .page-indicator {
-      position: fixed;
-      z-index: 820;
-      right: 82px;
-      top: calc(var(--header-height) + (var(--scene-height) / 2));
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-
-    .page-indicator button {
-      width: 7px;
-      height: 7px;
-      padding: 0;
-      border: 0;
-      border-radius: 999px;
-      background: rgba(35,139,34,.28);
-      cursor: pointer;
-      transition: all .2s ease;
-    }
-
-    .page-indicator button.is-active {
-      height: 22px;
-      background: var(--orange);
+      transform: translateY(-3px);
     }
 
     /* RESPONSIVE */
@@ -919,13 +882,6 @@
         gap: 30px;
       }
 
-      .site-side-nav {
-        padding: 0 11px;
-      }
-
-      .site-side-nav .side-label {
-        display: none;
-      }
     }
 
     @media (max-width: 820px) {
@@ -1118,18 +1074,18 @@
         font-size: 9px;
       }
 
-      .page-indicator {
-        display: none;
+      .scene-next,
+      .site-side-nav {
+        width: 42px;
+        height: 42px;
+      }
+
+      .scene-next {
+        bottom: 12px;
       }
 
       .site-side-nav {
-        top: auto;
         bottom: 12px;
-        transform: none;
-        min-width: 42px;
-        height: 42px;
-        padding: 0 10px;
-        background: rgba(255,255,255,.96);
       }
 
       .site-side-nav.prev {
@@ -1140,15 +1096,15 @@
         right: 12px;
       }
 
+      .scene-next svg,
+      .site-side-nav svg {
+        width: 21px;
+        height: 21px;
+      }
+
       .site-side-nav.prev:hover,
       .site-side-nav.next:hover {
         transform: none;
-      }
-
-      .scene-next {
-        bottom: 16px;
-        width: 48px;
-        height: 38px;
       }
     }
 
@@ -1301,7 +1257,14 @@
         transition: none !important;
       }
     }
-  </style>
+  
+    @media (prefers-reduced-motion: reduce) {
+      .scene-next {
+        animation: none !important;
+      }
+    }
+
+</style>
 </head>
 
 <body>
@@ -1372,32 +1335,26 @@
     </div>
   </div>
 
-  <!-- 사이트 좌우 이동 -->
+  <!-- 하단 사이트 이동 -->
   <a
     href="index.html"
     class="site-side-nav prev"
-    aria-label="이전 페이지: Index"
+    aria-label="이전 사이트 페이지: Index"
   >
-    <span class="side-arrow">‹</span>
-    <span class="side-label">INDEX</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M16 5 L9 12 L16 19"/>
+    </svg>
   </a>
 
   <a
     href="brand.html"
     class="site-side-nav next"
-    aria-label="다음 페이지: Brand"
+    aria-label="다음 사이트 페이지: Brand"
   >
-    <span class="side-label">BRAND</span>
-    <span class="side-arrow">›</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8 5 L15 12 L8 19"/>
+    </svg>
   </a>
-
-  <nav class="page-indicator" id="pageIndicator" aria-label="About 페이지 이동">
-    <button type="button" class="is-active" data-target="page1" aria-label="1페이지"></button>
-    <button type="button" data-target="page2" aria-label="2페이지"></button>
-    <button type="button" data-target="page3" aria-label="3페이지"></button>
-    <button type="button" data-target="page4" aria-label="4페이지"></button>
-    <button type="button" data-target="page5" aria-label="5페이지"></button>
-  </nav>
 
   <main class="snap-root" id="snapRoot">
 
@@ -1609,8 +1566,8 @@
       </div>
 
       <button class="scene-next" type="button" data-next="page2" aria-label="다음 About 장면">
-        <svg viewBox="0 0 54 42" aria-hidden="true">
-          <path d="M12 15 L27 29 L42 15"/>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
     </section>
@@ -1661,8 +1618,8 @@
       </div>
 
       <button class="scene-next" type="button" data-next="page3" aria-label="다음 About 장면">
-        <svg viewBox="0 0 54 42" aria-hidden="true">
-          <path d="M12 15 L27 29 L42 15"/>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
     </section>
@@ -1713,8 +1670,8 @@
       </div>
 
       <button class="scene-next" type="button" data-next="page4" aria-label="다음 About 장면">
-        <svg viewBox="0 0 54 42" aria-hidden="true">
-          <path d="M12 15 L27 29 L42 15"/>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
     </section>
@@ -1766,8 +1723,8 @@
       </div>
 
       <button class="scene-next" type="button" data-next="page5" aria-label="다음 About 장면">
-        <svg viewBox="0 0 54 42" aria-hidden="true">
-          <path d="M12 15 L27 29 L42 15"/>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
     </section>
@@ -1816,9 +1773,7 @@
     const siteHeader = document.querySelector(".site-header");
     const snapRoot = document.getElementById("snapRoot");
     const scenes = Array.from(document.querySelectorAll(".scene"));
-    const indicatorButtons = Array.from(
-      document.querySelectorAll(".page-indicator button[data-target]")
-    );
+    const indicatorButtons = [];
 
     function syncViewport() {
       const headerHeight = siteHeader
@@ -1935,12 +1890,6 @@
           scrollToScene(button.dataset.next);
         });
       });
-
-    indicatorButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        scrollToScene(button.dataset.target);
-      });
-    });
 
     /* Horizontal site swipe:
        right swipe -> Index / left swipe -> Brand
