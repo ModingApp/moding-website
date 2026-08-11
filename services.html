@@ -2382,6 +2382,107 @@
         stroke-dashoffset: 0 !important;
       }
     }
+
+    /* =========================================================
+       SERVICES 4P FINAL
+       5P 폐기 / 거래 증빙 페이지에서 종료
+       ========================================================= */
+    #serviceInvoice.service-last {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    #serviceInvoice.service-last > .container {
+      flex: 1 1 auto;
+      min-height: 0;
+      height: auto;
+      padding-top: 28px;
+      padding-bottom: 18px;
+      display: grid !important;
+      align-items: center;
+    }
+
+    #serviceInvoice.service-last .service-grid {
+      align-self: center;
+    }
+
+    #serviceInvoice.service-last .site-footer {
+      flex: 0 0 auto;
+      width: 100%;
+      margin: 0;
+      padding: 18px 20px 20px;
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.58);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    #serviceInvoice.service-last .site-footer .footer-links a {
+      color: rgba(255,255,255,.9);
+    }
+
+    /* 4P는 마지막 장면이므로 중앙 아래 화살표 없음 */
+    #serviceInvoice.service-last .section-next {
+      display: none !important;
+    }
+
+    @media (max-width: 820px) {
+      #serviceInvoice.service-last > .container {
+        padding-top: 18px;
+        padding-bottom: 10px;
+      }
+
+      #serviceInvoice.service-last .service-grid {
+        height: 100%;
+        grid-template-rows: auto minmax(0, 1fr) !important;
+      }
+
+      #serviceInvoice.service-last .service-visual {
+        padding-bottom: 4px !important;
+      }
+
+      #serviceInvoice.service-last .service-visual svg {
+        max-height: 23vh !important;
+      }
+
+      #serviceInvoice.service-last .site-footer {
+        font-size: 9px;
+        padding: 14px 16px 16px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #serviceInvoice.service-last > .container {
+        padding-top: 14px;
+        padding-bottom: 8px;
+      }
+
+      #serviceInvoice.service-last .service-visual svg {
+        max-height: 21vh !important;
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+      #serviceInvoice.service-last > .container {
+        padding-top: 8px;
+        padding-bottom: 6px;
+      }
+
+      #serviceInvoice.service-last .service-note {
+        display: none;
+      }
+
+      #serviceInvoice.service-last .service-visual svg {
+        max-height: 18vh !important;
+      }
+
+      #serviceInvoice.service-last .site-footer {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
 </style>
 </head>
 
@@ -2742,7 +2843,7 @@
     </section>
 
     <!-- 4P 세금계산서 -->
-    <section id="serviceInvoice" class="section scene service-panel">
+    <section id="serviceInvoice" class="section scene service-panel service-last">
       <div class="container service-grid">
 
         <div class="service-copy reveal">
@@ -2793,130 +2894,22 @@
 
       </div>
 
-    
-      <button
-        type="button"
-        class="section-next"
-        data-scroll-target="serviceFinal"
-        aria-label="다음 서비스 장면으로 이동"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M5 8 L12 15 L19 8"/>
-        </svg>
-      </button>
+      <footer class="site-footer">
+        <div class="footer-links">
+          <a href="terms.html">이용약관</a>
+          <span class="divider">·</span>
+          <a href="privacy.html">개인정보처리방침</a>
+          <span class="divider">·</span>
+          <a href="location.html">오시는 길</a>
+        </div>
+
+        주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+        통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
+        대구광역시 달서구 달구벌대로 1870, 7층
+      </footer>
+
 
     </section>
-
-    <!-- 5P FINAL CTA -->
-    <section id="serviceFinal" class="section scene final-section">
-      <div class="container final-grid">
-
-        <div class="final-copy reveal">
-          <div class="section-kicker">MODING SERVICE FLOW</div>
-
-          <h2>
-            찾고.<br>
-            결제하고.<br>
-            <em>정리까지.</em>
-          </h2>
-
-          <p>
-            새로운 상품을 발견하는 순간부터,
-            주문과 카드결제, 이후의 증빙까지.<br>
-            모딩 하나로 조금 더 단순한 흐름을 경험해보세요.
-          </p>
-
-          <div class="service-flow" aria-label="서비스 흐름">
-            <span class="flow-chip">상품 발견</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-chip">카드결제</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-chip">거래 증빙</span>
-          </div>
-
-          <a
-            href="/download.html"
-            class="download-button"
-            onclick="openModingStore(event)"
-            aria-label="모딩 앱 다운로드"
-          >
-            <span>모딩 앱 다운로드</span>
-          </a>
-        </div>
-
-        <!-- 실제 DOM 좌표를 읽어 자동 연결되는 화살표 -->
-        <div class="dynamic-download-arrow reveal" id="dynamicDownloadArrow" aria-hidden="true">
-          <svg id="dynamicDownloadArrowSvg">
-            <path
-              id="dynamicArrowShadow"
-              class="dynamic-arrow-shadow"
-              pathLength="100"
-            />
-            <path
-              id="dynamicArrowBody"
-              class="dynamic-arrow-body"
-              pathLength="100"
-            />
-            <path
-              id="dynamicArrowHeadA"
-              class="dynamic-arrow-head"
-              pathLength="100"
-            />
-            <path
-              id="dynamicArrowHeadB"
-              class="dynamic-arrow-head"
-              pathLength="100"
-            />
-          </svg>
-        </div>
-
-        <div class="final-visual reveal">
-          <div class="phone-stage" aria-hidden="true">
-            <div class="phone-ring"></div>
-
-            <div class="phone-card a">
-              <strong>상품 발견</strong>
-              필요한 식재료와 메뉴 아이템을
-              더 쉽게 살펴볼 수 있습니다.
-            </div>
-
-            <div class="phone-shell">
-              <div class="phone-speaker"></div>
-
-              <div class="phone-screen">
-                <img
-                  src="moding-app-main.jpeg"
-                  alt="모딩 앱 메인 화면"
-                  loading="eager"
-                  decoding="async"
-                >
-              </div>
-            </div>
-
-            <div class="phone-card b">
-              <strong>결제와 정리</strong>
-              주문 이후의 결제 흐름과
-              증빙까지 더 분명하게.
-            </div>
-          </div>
-        </div>
-
-      </div>
-    
-  <footer class="site-footer">
-    <div class="footer-links">
-      <a href="terms.html">이용약관</a>
-      <span class="divider">·</span>
-      <a href="privacy.html">개인정보처리방침</a>
-      <span class="divider">·</span>
-      <a href="location.html">오시는 길</a>
-    </div>
-
-    주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
-    통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
-    대구광역시 달서구 달구벌대로 1870, 7층
-  </footer>
-  </section>
 
   </main>
 
@@ -2959,7 +2952,7 @@
         if (!sceneHeight) return;
 
         const index = Math.round(snapRoot.scrollTop / sceneHeight);
-        const safeIndex = Math.max(0, Math.min(index, 4));
+        const safeIndex = Math.max(0, Math.min(index, 3));
 
         snapRoot.scrollTo({
           top: safeIndex * sceneHeight,
@@ -3079,7 +3072,10 @@
           const nearestIndex =
             Math.round(snapRoot.scrollTop / sceneHeight);
 
-          const exactTop = nearestIndex * sceneHeight;
+          const safeIndex =
+            Math.max(0, Math.min(nearestIndex, 3));
+
+          const exactTop = safeIndex * sceneHeight;
 
           if (Math.abs(snapRoot.scrollTop - exactTop) > 1) {
             snapRoot.scrollTo({
@@ -3254,199 +3250,3260 @@
         }
       }
     );
-  
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Services | 모딩 서비스</title>
+
+  <meta
+    name="description"
+    content="모딩(Moding)은 외식업 사장님이 새로운 상품을 발견하고, 카드결제로 주문하고, 세금계산서까지 더 간단하게 이어갈 수 있도록 돕는 B2B 식품 거래 서비스입니다."
+  >
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Moding">
+  <meta property="og:title" content="Services | 찾고, 결제하고, 정리까지">
+  <meta property="og:description" content="상품 발견부터 카드결제, 거래 증빙까지. 식당의 식품 주문을 조금 더 단순하게.">
+  <meta property="og:url" content="https://moding.app/services.html">
+  <meta property="og:image" content="https://moding.app/og-image.png">
+  <meta property="og:image:width" content="500">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:type" content="image/png">
+
+  <style>
+    :root {
+      --green: #238B22;
+      --green-dark: #1C6F1C;
+      --orange: #FF8C00;
+
+      --white: #FFFFFF;
+      --black: #050505;
+      --ink: #173119;
+      --sub: #687269;
+      --line: #E2E8E2;
+      --soft: #F4F7F4;
+      --mint: #EDF5ED;
+
+      --page-max: 1180px;
+      --page-pad: 24px;
+      --header-height: 84px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      min-height: 100%;
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      background: #fff;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans KR",
+        "Apple SD Gothic Neo",
+        sans-serif;
+      background: #fff;
+      color: var(--ink);
+      word-break: keep-all;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    em {
+      font-style: normal;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 0 var(--page-pad);
+    }
 
     /* =========================================================
-       DYNAMIC DOWNLOAD ARROW
-       하드코딩 좌표 없이 실제 버튼/휴대폰 좌표를 자동 계산
+       HEADER
        ========================================================= */
-    const dynamicArrowWrap = document.getElementById("dynamicDownloadArrow");
-    const dynamicArrowSvg = document.getElementById("dynamicDownloadArrowSvg");
-    const dynamicArrowShadow = document.getElementById("dynamicArrowShadow");
-    const dynamicArrowBody = document.getElementById("dynamicArrowBody");
-    const dynamicArrowHeadA = document.getElementById("dynamicArrowHeadA");
-    const dynamicArrowHeadB = document.getElementById("dynamicArrowHeadB");
-    const finalGrid = document.querySelector("#serviceFinal .final-grid");
-    const finalPhone = document.querySelector("#serviceFinal .phone-shell");
-    const finalDownloadButton = document.querySelector("#serviceFinal .download-button");
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      width: 100%;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
 
-    let dynamicArrowRaf = null;
+    .nav {
+      width: 100%;
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 16px var(--page-pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      overflow: visible;
+    }
 
-    function setDynamicArrowPath() {
-      if (
-        !dynamicArrowWrap ||
-        !dynamicArrowSvg ||
-        !dynamicArrowBody ||
-        !dynamicArrowShadow ||
-        !dynamicArrowHeadA ||
-        !dynamicArrowHeadB ||
-        !finalGrid ||
-        !finalPhone ||
-        !finalDownloadButton
-      ) {
-        return;
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      width: auto;
+      height: 52px;
+      max-height: 52px;
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .nav-menu a {
+      color: var(--green);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color .2s ease;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: var(--orange);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 28px;
+      height: 3px;
+      margin: 5px auto;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    /* =========================================================
+       MOBILE MENU
+       ========================================================= */
+    .mobile-menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1300;
+      display: none;
+      flex-direction: column;
+      background: var(--black);
+      color: #fff;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease;
+    }
+
+    .mobile-menu-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu-head {
+      min-height: 78px;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-menu-head img {
+      width: auto;
+      height: 46px;
+      object-fit: contain;
+    }
+
+    .menu-close {
+      width: 44px;
+      height: 44px;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-size: 36px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .mobile-menu-body {
+      flex: 1;
+      min-height: 0;
+      padding: 44px 28px 34px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-menu-title {
+      margin-bottom: 34px;
+      font-size: clamp(34px, 9vw, 46px);
+      line-height: 1.12;
+      letter-spacing: -0.055em;
+      font-weight: 950;
+    }
+
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .mobile-menu-links a {
+      width: fit-content;
+      color: #fff;
+      text-decoration: none;
+      font-size: 25px;
+      font-weight: 850;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .mobile-menu-links a.active,
+    .mobile-menu-links a:hover {
+      color: var(--orange);
+    }
+
+    .mobile-menu-company {
+      margin-top: auto;
+      padding-top: 34px;
+      color: rgba(255,255,255,.58);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    /* =========================================================
+       COMMON
+       ========================================================= */
+    main {
+      padding-top: var(--header-height);
+    }
+
+    .section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-kicker {
+      margin-bottom: 18px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .18em;
+    }
+
+    .section-title {
+      font-size: clamp(42px, 5.2vw, 76px);
+      line-height: 1.06;
+      letter-spacing: -0.06em;
+      font-weight: 950;
+    }
+
+    .section-title em {
+      color: var(--orange);
+    }
+
+    .section-desc {
+      margin-top: 22px;
+      max-width: 680px;
+      color: var(--sub);
+      font-size: clamp(16px, 1.35vw, 19px);
+      line-height: 1.75;
+      letter-spacing: -0.025em;
+      font-weight: 650;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .service-hero {
+      min-height: calc(100vh - var(--header-height));
+      min-height: calc(100dvh - var(--header-height));
+      background: var(--green);
+      color: #fff;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-frame {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr);
+      align-items: center;
+      gap: 54px;
+      padding-top: 58px;
+      padding-bottom: 58px;
+    }
+
+    .hero-kicker {
+      margin-bottom: 22px;
+      color: rgba(255,255,255,.72);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .18em;
+    }
+
+    .hero-title {
+      font-size: clamp(52px, 5.8vw, 86px);
+      line-height: 1.04;
+      letter-spacing: -0.065em;
+      font-weight: 950;
+    }
+
+    .hero-title em {
+      color: var(--orange);
+    }
+
+    .hero-desc {
+      margin-top: 28px;
+      max-width: 590px;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(17px, 1.5vw, 21px);
+      line-height: 1.7;
+      font-weight: 700;
+    }
+
+    .hero-art {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .hero-art svg {
+      width: min(100%, 620px);
+      height: auto;
+      overflow: visible;
+    }
+
+    .hero-step {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: heroStepFloat 4.8s ease-in-out infinite;
+    }
+
+    .hero-step.delay1 { animation-delay: .4s; }
+    .hero-step.delay2 { animation-delay: .8s; }
+
+    @keyframes heroStepFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-trail {
+      stroke-dasharray: 10 12;
+      animation: heroTrailMove 4.8s linear infinite;
+    }
+
+    @keyframes heroTrailMove {
+      to { stroke-dashoffset: -44; }
+    }
+
+    .hero-dot {
+      animation: heroDotMove 6s ease-in-out infinite;
+    }
+
+    @keyframes heroDotMove {
+      0%   { transform: translate(116px, 220px); }
+      30%  { transform: translate(310px, 220px); }
+      65%  { transform: translate(500px, 220px); }
+      100% { transform: translate(116px, 220px); }
+    }
+
+    /* =========================================================
+       SERVICE PANELS
+       ========================================================= */
+    .service-panel {
+      padding: 122px 0;
+    }
+
+    .service-panel.alt {
+      background: var(--soft);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: 64px;
+    }
+
+    .service-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .service-visual svg {
+      width: min(100%, 560px);
+      height: auto;
+      overflow: visible;
+    }
+
+    .service-copy {
+      min-width: 0;
+    }
+
+    .service-copy h3 {
+      font-size: clamp(38px, 4.5vw, 68px);
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+      font-weight: 950;
+    }
+
+    .service-copy h3 em {
+      color: var(--orange);
+    }
+
+    .service-copy p {
+      margin-top: 22px;
+      max-width: 560px;
+      color: var(--sub);
+      font-size: 16px;
+      line-height: 1.8;
+      font-weight: 650;
+    }
+
+    .service-note {
+      margin-top: 24px;
+      color: var(--green);
+      font-size: 14px;
+      line-height: 1.75;
+      font-weight: 850;
+    }
+
+    /* 상품 발견 모션 */
+    .search-lens {
+      animation: lensMove 7.8s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    @keyframes lensMove {
+      0%, 10%   { transform: translate(-85px, -34px); }
+      30%, 40%  { transform: translate(40px, -92px); }
+      58%, 68%  { transform: translate(132px, 18px); }
+      86%, 100% { transform: translate(-34px, 108px); }
+    }
+
+    .search-focus {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: focusPulse 7.8s ease-in-out infinite;
+    }
+
+    .search-focus.delay1 { animation-delay: 1.8s; }
+    .search-focus.delay2 { animation-delay: 3.8s; }
+    .search-focus.delay3 { animation-delay: 5.8s; }
+
+    @keyframes focusPulse {
+      0%, 18%, 100% { transform: scale(1); }
+      8%, 12% { transform: scale(1.12); }
+    }
+
+    /* 카드결제 모션 */
+    .pay-card {
+      animation: cardSlide 4.8s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .pay-check {
+      opacity: 0;
+      animation: checkPop 4.8s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    @keyframes cardSlide {
+      0%, 15% { transform: translateX(90px); }
+      42%, 60% { transform: translateX(0); }
+      100% { transform: translateX(90px); }
+    }
+
+    @keyframes checkPop {
+      0%, 44% { opacity: 0; transform: scale(.7); }
+      50%, 76% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(.85); }
+    }
+
+    /* 세금계산서 모션 */
+    .invoice-sheet {
+      animation: invoiceRise 4.8s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .invoice-stamp {
+      opacity: 0;
+      animation: stampDrop 4.8s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    @keyframes invoiceRise {
+      0%, 18% { transform: translateY(54px); opacity: .2; }
+      38%, 78% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(18px); opacity: .8; }
+    }
+
+    @keyframes stampDrop {
+      0%, 46% { opacity: 0; transform: translateY(-26px) scale(.84); }
+      56%, 84% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-8px) scale(.95); }
+    }
+
+    /* =========================================================
+       FINAL CTA
+       ========================================================= */
+    .final-section {
+      background: #fff;
+      padding: 124px 0 118px;
+    }
+
+    .final-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+      align-items: center;
+      gap: 64px;
+    }
+
+    .final-copy h2 {
+      font-size: clamp(44px, 5.1vw, 76px);
+      line-height: 1.06;
+      letter-spacing: -0.06em;
+      font-weight: 950;
+    }
+
+    .final-copy h2 em {
+      color: var(--orange);
+    }
+
+    .final-copy p {
+      margin-top: 22px;
+      max-width: 540px;
+      color: var(--sub);
+      font-size: 16px;
+      line-height: 1.8;
+      font-weight: 650;
+    }
+
+    .service-flow {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 14px;
+      color: var(--green);
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .flow-chip {
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: var(--mint);
+      border: 1px solid #D6E7D6;
+    }
+
+    .flow-arrow {
+      color: var(--orange);
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .download-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 60px;
+      margin-top: 34px;
+      padding: 0 28px;
+      border-radius: 999px;
+      border: 0;
+      background: var(--green);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 950;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 16px 40px rgba(35,139,34,.22);
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+    }
+
+    .download-button:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 48px rgba(35,139,34,.26);
+    }
+
+    .download-button span:last-child {
+      color: var(--orange);
+      font-size: 18px;
+    }
+
+    .final-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .phone-stage {
+      position: relative;
+      width: min(100%, 600px);
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-ring {
+      position: absolute;
+      inset: 12% 4%;
+      border-radius: 999px;
+      background: radial-gradient(
+        circle at center,
+        rgba(35,139,34,.10) 0%,
+        rgba(35,139,34,.03) 54%,
+        rgba(35,139,34,0) 75%
+      );
+      filter: blur(8px);
+    }
+
+    .phone-card {
+      position: absolute;
+      width: 170px;
+      min-height: 92px;
+      padding: 16px 16px 14px;
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 44px rgba(20,50,20,.08);
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--sub);
+      font-weight: 700;
+    }
+
+    .phone-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .phone-card.a {
+      left: 0;
+      top: 10%;
+      transform: rotate(-7deg);
+    }
+
+    .phone-card.b {
+      right: 0;
+      bottom: 10%;
+      transform: rotate(6deg);
+    }
+
+    .phone-shell {
+      position: relative;
+      z-index: 2;
+      width: min(78vw, 290px);
+      aspect-ratio: .54;
+      padding: 12px;
+      border-radius: 44px;
+      background: #111;
+      box-shadow:
+        0 28px 80px rgba(15,20,15,.22),
+        inset 0 0 0 1px rgba(255,255,255,.10);
+    }
+
+    .phone-speaker {
+      position: absolute;
+      z-index: 3;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 86px;
+      height: 10px;
+      border-radius: 999px;
+      background: #222;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 34px;
+      background: #F6FAF6;
+    }
+
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* =========================================================
+       SECTION NEXT ARROW
+       ========================================================= */
+    .section-next {
+      position: absolute;
+      z-index: 40;
+      left: 50%;
+      bottom: 24px;
+      width: 54px;
+      height: 42px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      cursor: pointer;
+      transform: translateX(-50%);
+      animation: serviceArrowAlive 1.45s ease-in-out infinite;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,.10));
+    }
+
+    .service-hero .section-next {
+      color: #fff;
+    }
+
+    .section-next svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .section-next path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 4.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    @keyframes serviceArrowAlive {
+      0%,100% { transform: translate(-50%,0); }
+      50% { transform: translate(-50%,9px); }
+    }
+
+
+    /* =========================================================
+       SITE SIDE NAV
+       BRAND ← SERVICES → ALLIANCE
+       ========================================================= */
+    .site-side-nav {
+      position: fixed;
+      z-index: 910;
+      top: 50%;
+      min-width: 48px;
+      height: 46px;
+      padding: 0 14px;
+      border: 1px solid rgba(35,139,34,.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 8px 28px rgba(20,50,20,.08);
+      color: var(--green);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      transform: translateY(-50%);
+      backdrop-filter: blur(7px);
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        color .2s ease;
+    }
+
+    .site-side-nav:hover {
+      color: var(--orange);
+      box-shadow: 0 12px 34px rgba(20,50,20,.12);
+    }
+
+    .site-side-nav.prev {
+      left: 14px;
+    }
+
+    .site-side-nav.next {
+      right: 14px;
+    }
+
+    .site-side-nav.prev:hover {
+      transform: translate(-3px, -50%);
+    }
+
+    .site-side-nav.next:hover {
+      transform: translate(3px, -50%);
+    }
+
+    .site-side-nav .side-arrow {
+      color: var(--orange);
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    .site-footer {
+      width: 100%;
+      padding: 22px 20px 24px;
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,.08);
+      text-align: center;
+      color: rgba(255,255,255,.58);
+      font-size: 11.5px;
+      line-height: 1.65;
+    }
+
+    .footer-links {
+      margin-bottom: 5px;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,.9);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .footer-links a:hover {
+      color: var(--orange);
+    }
+
+    .divider {
+      margin: 0 6px;
+      color: rgba(255,255,255,.28);
+    }
+
+    /* =========================================================
+       REVEAL
+       ========================================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition:
+        opacity .75s ease,
+        transform .75s cubic-bezier(.22,1,.36,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .hero-frame,
+      .service-grid,
+      .final-grid {
+        gap: 42px;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .nav {
+        padding: 12px 20px;
       }
 
-      const gridRect = finalGrid.getBoundingClientRect();
-      const phoneRect = finalPhone.getBoundingClientRect();
-      const buttonRect = finalDownloadButton.getBoundingClientRect();
-
-      const width = Math.max(1, Math.round(gridRect.width));
-      const height = Math.max(1, Math.round(gridRect.height));
-
-      dynamicArrowSvg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-      dynamicArrowSvg.setAttribute("preserveAspectRatio", "none");
-
-      const mobile = window.matchMedia("(max-width: 820px)").matches;
-
-      let startX;
-      let startY;
-      let endX;
-      let endY;
-      let d;
-
-      if (!mobile) {
-        /*
-         * PC:
-         * 휴대폰 왼쪽 하단 → 부드럽게 왼쪽으로 우회 → 다운로드 버튼 오른쪽
-         */
-        startX = phoneRect.left - gridRect.left - 10;
-        startY = phoneRect.top - gridRect.top + phoneRect.height * 0.66;
-
-        endX = buttonRect.right - gridRect.left + 8;
-        endY = buttonRect.top - gridRect.top + buttonRect.height * 0.52;
-
-        const distance = Math.max(120, startX - endX);
-        const c1x = startX - distance * 0.22;
-        const c1y = startY + 18;
-
-        const c2x = endX + distance * 0.58;
-        const c2y = endY + 54;
-
-        const midX = endX + distance * 0.42;
-        const midY = endY + 40;
-
-        d = [
-          `M ${startX.toFixed(1)} ${startY.toFixed(1)}`,
-          `C ${c1x.toFixed(1)} ${c1y.toFixed(1)},`,
-          `${(startX - distance * 0.40).toFixed(1)} ${(startY + 42).toFixed(1)},`,
-          `${midX.toFixed(1)} ${midY.toFixed(1)}`,
-          `C ${(endX + distance * 0.27).toFixed(1)} ${(endY + 32).toFixed(1)},`,
-          `${(endX + distance * 0.12).toFixed(1)} ${(endY + 8).toFixed(1)},`,
-          `${endX.toFixed(1)} ${endY.toFixed(1)}`
-        ].join(" ");
-      } else {
-        /*
-         * 모바일:
-         * 휴대폰 오른쪽 → 화면 우측으로 크게 우회 → 버튼 오른쪽으로 진입
-         */
-        startX = phoneRect.right - gridRect.left + 4;
-        startY = phoneRect.top - gridRect.top + phoneRect.height * 0.46;
-
-        endX = buttonRect.right - gridRect.left + 5;
-        endY = buttonRect.top - gridRect.top + buttonRect.height * 0.52;
-
-        const safeRight = Math.max(
-          startX + 34,
-          Math.min(width - 8, Math.max(startX, endX) + 60)
-        );
-
-        const middleY = endY + Math.max(58, (startY - endY) * 0.44);
-
-        d = [
-          `M ${startX.toFixed(1)} ${startY.toFixed(1)}`,
-          `C ${safeRight.toFixed(1)} ${(startY - 6).toFixed(1)},`,
-          `${safeRight.toFixed(1)} ${(middleY + 60).toFixed(1)},`,
-          `${safeRight.toFixed(1)} ${middleY.toFixed(1)}`,
-          `C ${safeRight.toFixed(1)} ${(endY + 28).toFixed(1)},`,
-          `${(endX + 52).toFixed(1)} ${endY.toFixed(1)},`,
-          `${endX.toFixed(1)} ${endY.toFixed(1)}`
-        ].join(" ");
+      .nav-logo img {
+        height: 48px;
       }
 
-      dynamicArrowBody.setAttribute("d", d);
-      dynamicArrowShadow.setAttribute("d", d);
+      .nav-menu {
+        display: none !important;
+      }
 
-      /*
-       * 화살촉은 끝점 직전의 방향을 기준으로 계산합니다.
-       * 마지막 구간은 버튼 쪽으로 거의 수평 진입하도록 설계되어 있으므로
-       * 버튼 오른쪽을 향해 자연스럽게 붙습니다.
-       */
-      const headLength = mobile ? 15 : 17;
-      const headSpread = mobile ? 11 : 12;
+      .menu-toggle {
+        position: relative;
+        z-index: 1002;
+        flex: 0 0 44px;
+        margin-left: auto;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
 
-      const tailX = endX + headLength;
-      const tailY = endY;
+      .mobile-menu-overlay {
+        display: flex;
+      }
 
-      dynamicArrowHeadA.setAttribute(
-        "d",
-        `M ${tailX.toFixed(1)} ${(tailY - headSpread).toFixed(1)} ` +
-        `Q ${(endX + headLength * 0.45).toFixed(1)} ${(endY - 5).toFixed(1)} ` +
-        `${endX.toFixed(1)} ${endY.toFixed(1)}`
+      .hero-frame {
+        min-height: calc(100dvh - var(--header-height));
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 26px;
+        padding-top: 34px;
+        padding-bottom: 38px;
+      }
+
+      .hero-title {
+        font-size: clamp(44px, 11vw, 62px);
+      }
+
+      .hero-desc {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+
+      .hero-art {
+        align-items: flex-end;
+      }
+
+      .hero-art svg {
+        width: min(92vw, 520px);
+        max-height: 40vh;
+      }
+
+      .service-panel,
+      .final-section {
+        padding-top: 82px;
+        padding-bottom: 78px;
+      }
+
+      .service-grid,
+      .final-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .service-visual {
+        order: 2;
+      }
+
+      .service-copy {
+        order: 1;
+      }
+
+      .service-grid.reverse .service-visual {
+        order: 2;
+      }
+
+      .service-grid.reverse .service-copy {
+        order: 1;
+      }
+
+      .phone-stage {
+        min-height: 500px;
+      }
+
+      .phone-card.a {
+        left: 2%;
+        top: 4%;
+      }
+
+      .phone-card.b {
+        right: 2%;
+        bottom: 4%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      :root {
+        --page-pad: 18px;
+      }
+
+      .nav {
+        padding: 10px 18px;
+      }
+
+      .nav-logo img {
+        height: 44px;
+      }
+
+      .hero-frame {
+        padding-top: 28px;
+        padding-bottom: 30px;
+      }
+
+      .hero-kicker {
+        margin-bottom: 16px;
+        font-size: 11px;
+      }
+
+      .hero-title {
+        font-size: clamp(40px, 11.5vw, 50px);
+      }
+
+      .hero-desc {
+        font-size: 15px;
+      }
+
+      .hero-art svg {
+        width: min(95vw, 460px);
+        max-height: 38vh;
+      }
+
+      .section-title {
+        font-size: clamp(36px, 10vw, 46px);
+      }
+
+      .section-desc {
+        font-size: 15px;
+      }
+
+      .service-panel,
+      .final-section {
+        padding-top: 68px;
+        padding-bottom: 64px;
+      }
+
+      .service-copy h3 {
+        font-size: clamp(34px, 10vw, 44px);
+      }
+
+      .service-copy p {
+        font-size: 15px;
+      }
+
+      .download-button {
+        width: 100%;
+        min-height: 56px;
+        padding: 0 20px;
+      }
+
+      .service-flow {
+        gap: 8px 10px;
+        font-size: 13px;
+      }
+
+      .flow-chip {
+        padding: 9px 13px;
+      }
+
+      .phone-stage {
+        min-height: 430px;
+      }
+
+      .phone-card {
+        width: 138px;
+        min-height: 80px;
+        padding: 12px 12px 10px;
+        border-radius: 18px;
+        font-size: 11px;
+      }
+
+      .phone-card strong {
+        font-size: 12px;
+      }
+
+      .phone-shell {
+        width: min(82vw, 262px);
+        border-radius: 36px;
+      }
+
+      .phone-screen {
+        border-radius: 28px;
+      }
+
+      .site-footer {
+        font-size: 9.5px;
+      }
+
+      .site-side-nav {
+        top: auto;
+        bottom: 12px;
+        min-width: 42px;
+        height: 42px;
+        padding: 0 10px;
+        transform: none;
+        background: rgba(255,255,255,.96);
+      }
+
+      .site-side-nav.prev {
+        left: 12px;
+      }
+
+      .site-side-nav.next {
+        right: 12px;
+      }
+
+      .site-side-nav.prev:hover,
+      .site-side-nav.next:hover {
+        transform: none;
+      }
+
+      .site-side-nav .side-label {
+        display: none;
+      }
+
+      .section-next {
+        bottom: 12px;
+        width: 48px;
+        height: 38px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .nav {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .nav-logo img {
+        height: 40px;
+      }
+
+      .hero-title {
+        font-size: 39px;
+      }
+
+      .phone-card {
+        width: 126px;
+      }
+    }
+
+    /* =========================================================
+       COPY / DRAG PROTECTION
+       ========================================================= */
+    html,
+    body,
+    *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    input,
+    textarea {
+      user-select: text;
+      pointer-events: auto;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .hero-step,
+      .hero-trail,
+      .hero-dot,
+      .search-lens,
+      .search-focus,
+      .pay-card,
+      .pay-check,
+      .invoice-sheet,
+      .invoice-stamp,
+      .section-next {
+        animation: none !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  
+    /* =========================================================
+       SERVICES FULL PAGE + BOTTOM NAV FINAL
+       BRAND ← SERVICES → ALLIANCE
+       ========================================================= */
+    :root {
+      --scene-height: calc(100dvh - var(--header-height));
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    .snap-root {
+      position: fixed;
+      top: var(--header-height);
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: var(--scene-height);
+      padding: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-snap-type: y mandatory;
+      scroll-padding: 0;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      background: #fff;
+    }
+
+    .scene {
+      position: relative;
+      width: 100%;
+      height: var(--scene-height) !important;
+      min-height: var(--scene-height) !important;
+      max-height: var(--scene-height);
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      overflow: hidden;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      scroll-margin: 0 !important;
+    }
+
+    /* 1P */
+    .service-hero {
+      display: flex;
+      align-items: center;
+      min-height: var(--scene-height) !important;
+    }
+
+    .service-hero .hero-frame {
+      height: 100%;
+      min-height: 0;
+      padding-top: 38px;
+      padding-bottom: 56px;
+    }
+
+    .service-hero .hero-art svg {
+      max-height: 66vh;
+    }
+
+    /* 2~4P */
+    .service-panel {
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .service-panel > .container {
+      height: 100%;
+      padding-top: 34px;
+      padding-bottom: 56px;
+      display: flex;
+      align-items: center;
+    }
+
+    .service-grid {
+      width: 100%;
+      height: auto;
+      gap: 50px;
+    }
+
+    .service-visual svg {
+      max-height: 58vh;
+    }
+
+    .service-copy p {
+      margin-top: 18px;
+      font-size: 15px;
+      line-height: 1.72;
+    }
+
+    .service-note {
+      margin-top: 18px;
+    }
+
+    /* 5P + footer */
+    .final-section {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .final-section > .container {
+      flex: 1 1 auto;
+      min-height: 0;
+      height: auto;
+      padding-top: 30px;
+      padding-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .final-grid {
+      width: 100%;
+      gap: 48px;
+    }
+
+    .phone-stage {
+      min-height: min(58vh, 500px);
+    }
+
+    .phone-shell {
+      width: min(72vw, 260px);
+    }
+
+    .phone-card {
+      width: 158px;
+      min-height: 84px;
+    }
+
+    .final-section .site-footer {
+      flex: 0 0 auto;
+      width: 100%;
+      margin: 0;
+      padding: 18px 20px 20px;
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.58);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .final-section .site-footer .footer-links a {
+      color: rgba(255,255,255,.9);
+    }
+
+    /* bottom nav */
+    .section-next,
+    .site-side-nav {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      padding: 0;
+      border: 1px solid rgba(35,139,34,.10);
+      border-radius: 50%;
+      background: rgba(255,255,255,.98);
+      box-shadow:
+        0 8px 24px rgba(0,0,0,.12),
+        inset 0 0 0 1px rgba(255,255,255,.45);
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+
+    .section-next svg,
+    .site-side-nav svg {
+      width: 24px;
+      height: 24px;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .section-next path,
+    .site-side-nav path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 3.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .section-next {
+      position: absolute;
+      z-index: 60;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      animation: serviceBottomArrow 1.5s ease-in-out infinite;
+      filter: none;
+    }
+
+    @keyframes serviceBottomArrow {
+      0%,100% { transform: translate(-50%,0); }
+      50% { transform: translate(-50%,6px); }
+    }
+
+    .service-hero .section-next {
+      color: var(--orange);
+    }
+
+    .site-side-nav {
+      position: fixed;
+      z-index: 910;
+      top: auto;
+      bottom: 18px;
+      transform: none;
+      padding: 0;
+    }
+
+    .site-side-nav.prev {
+      left: 18px;
+    }
+
+    .site-side-nav.next {
+      right: 18px;
+    }
+
+    .site-side-nav.prev:hover,
+    .site-side-nav.next:hover {
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 820px) {
+      .service-hero .hero-frame {
+        height: 100%;
+        min-height: 0;
+        padding-top: 24px;
+        padding-bottom: 48px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0,1fr);
+        gap: 16px;
+      }
+
+      .service-hero .hero-art svg {
+        max-height: 34vh;
+      }
+
+      .service-panel > .container {
+        height: 100%;
+        padding-top: 24px;
+        padding-bottom: 48px;
+      }
+
+      .service-grid,
+      .service-grid.reverse {
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0,1fr);
+        gap: 14px;
+        align-items: stretch;
+      }
+
+      .service-copy,
+      .service-grid.reverse .service-copy {
+        order: 1;
+        align-self: start;
+      }
+
+      .service-visual,
+      .service-grid.reverse .service-visual {
+        order: 2;
+        min-height: 0;
+        align-items: flex-end;
+      }
+
+      .service-visual svg {
+        width: min(96vw, 560px);
+        max-height: 34vh;
+      }
+
+      .service-copy h3 {
+        font-size: clamp(32px, 9.3vw, 42px);
+      }
+
+      .service-copy p {
+        margin-top: 10px;
+        font-size: 13.5px;
+        line-height: 1.55;
+      }
+
+      .service-note {
+        margin-top: 10px;
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+
+      .final-section > .container {
+        padding-top: 20px;
+        padding-bottom: 12px;
+      }
+
+      .final-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0,1fr);
+        gap: 10px;
+        height: 100%;
+      }
+
+      .final-copy h2 {
+        font-size: clamp(32px, 9vw, 42px);
+      }
+
+      .final-copy p {
+        margin-top: 10px;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .service-flow {
+        margin-top: 12px;
+        gap: 6px 8px;
+        font-size: 11.5px;
+      }
+
+      .flow-chip {
+        padding: 7px 10px;
+      }
+
+      .download-button {
+        min-height: 48px;
+        margin-top: 14px;
+        padding: 0 20px;
+        font-size: 14px;
+      }
+
+      .final-visual {
+        min-height: 0;
+        align-items: flex-end;
+      }
+
+      .phone-stage {
+        min-height: 0;
+        height: 34vh;
+      }
+
+      .phone-shell {
+        width: min(62vw, 215px);
+      }
+
+      .phone-card {
+        width: 126px;
+        min-height: 68px;
+        padding: 10px 10px 8px;
+        font-size: 10.5px;
+        border-radius: 17px;
+      }
+
+      .phone-card strong {
+        font-size: 11px;
+      }
+
+      .final-section .site-footer {
+        font-size: 9px;
+      }
+
+      .section-next,
+      .site-side-nav {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+      }
+
+      .section-next {
+        bottom: 12px;
+      }
+
+      .site-side-nav {
+        bottom: 12px;
+      }
+
+      .site-side-nav.prev {
+        left: 12px;
+      }
+
+      .site-side-nav.next {
+        right: 12px;
+      }
+
+      .section-next svg,
+      .site-side-nav svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      .site-side-nav.prev:hover,
+      .site-side-nav.next:hover {
+        transform: none;
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+      .service-hero .hero-frame,
+      .service-panel > .container,
+      .final-section > .container {
+        padding-top: 12px;
+        padding-bottom: 40px;
+      }
+
+      .hero-title {
+        font-size: clamp(30px, 6.3vh, 38px);
+      }
+
+      .hero-desc,
+      .service-copy p,
+      .service-note,
+      .final-copy p {
+        margin-top: 7px;
+        font-size: 12px;
+      }
+
+      .service-copy h3,
+      .final-copy h2 {
+        font-size: clamp(28px, 6.6vh, 36px);
+      }
+
+      .service-visual svg,
+      .service-hero .hero-art svg {
+        max-height: 31vh;
+      }
+
+      .phone-stage {
+        height: 30vh;
+      }
+
+      .phone-card {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .section-next {
+        animation: none !important;
+      }
+    }
+
+
+    /* =========================================================
+       SERVICES MOBILE LAYOUT REFINEMENT
+       PC 유지 / 모바일만 재배치
+       ========================================================= */
+    @media (max-width: 820px) {
+
+      /* 공통: 텍스트 위 / 비주얼 아래 */
+      #serviceDiscovery .service-grid,
+      #servicePayment .service-grid,
+      #serviceInvoice .service-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto minmax(0, 1fr) !important;
+        gap: 10px !important;
+        height: 100%;
+        align-items: stretch !important;
+      }
+
+      #serviceDiscovery .service-copy,
+      #servicePayment .service-copy,
+      #serviceInvoice .service-copy {
+        order: 1 !important;
+        align-self: start;
+        padding-top: 0;
+      }
+
+      #serviceDiscovery .service-visual,
+      #servicePayment .service-visual,
+      #serviceInvoice .service-visual {
+        order: 2 !important;
+        min-height: 0;
+        height: 100%;
+        align-items: center !important;
+        justify-content: center !important;
+        padding-bottom: 24px;
+      }
+
+      /* 2P */
+      #serviceDiscovery .service-copy h3 {
+        font-size: clamp(34px, 9.4vw, 43px);
+        line-height: 1.08;
+      }
+
+      #serviceDiscovery .service-copy p {
+        margin-top: 12px;
+        max-width: 92%;
+        font-size: 13.5px;
+        line-height: 1.58;
+      }
+
+      #serviceDiscovery .service-note {
+        margin-top: 10px;
+        max-width: 86%;
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+
+      #serviceDiscovery .service-visual svg {
+        width: min(82vw, 430px);
+        max-height: 31vh;
+      }
+
+      /* 3P */
+      #servicePayment .service-copy h3 {
+        font-size: clamp(36px, 9.7vw, 44px);
+        line-height: 1.08;
+      }
+
+      #servicePayment .service-copy p {
+        margin-top: 12px;
+        max-width: 90%;
+        font-size: 13.5px;
+        line-height: 1.58;
+      }
+
+      #servicePayment .service-note {
+        margin-top: 10px;
+        max-width: 88%;
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+
+      #servicePayment .service-visual svg {
+        width: min(80vw, 410px);
+        max-height: 29vh;
+      }
+
+      /* 4P */
+      #serviceInvoice .service-copy h3 {
+        font-size: clamp(36px, 9.7vw, 44px);
+        line-height: 1.08;
+      }
+
+      #serviceInvoice .service-copy p {
+        margin-top: 12px;
+        max-width: 92%;
+        font-size: 13px;
+        line-height: 1.58;
+      }
+
+      #serviceInvoice .service-note {
+        margin-top: 10px;
+        max-width: 88%;
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+
+      #serviceInvoice .service-visual svg {
+        width: min(72vw, 360px);
+        max-height: 28vh;
+      }
+
+      /* 5P: 흐름 칩 제거 / CTA와 폰 집중 */
+      #serviceFinal .final-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto minmax(0, 1fr) !important;
+        gap: 8px !important;
+        height: 100%;
+        align-items: stretch !important;
+      }
+
+      #serviceFinal .final-copy {
+        align-self: start;
+        padding-top: 0;
+      }
+
+      #serviceFinal .final-copy h2 {
+        font-size: clamp(36px, 9.7vw, 44px);
+        line-height: 1.06;
+      }
+
+      #serviceFinal .final-copy p {
+        margin-top: 10px;
+        max-width: 92%;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      #serviceFinal .service-flow {
+        display: none !important;
+      }
+
+      #serviceFinal .download-button {
+        width: auto;
+        min-width: 210px;
+        min-height: 50px;
+        margin-top: 14px;
+        padding: 0 22px;
+        font-size: 14px;
+      }
+
+      #serviceFinal .final-visual {
+        min-height: 0;
+        height: 100%;
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      #serviceFinal .phone-stage {
+        width: 100%;
+        min-height: 0;
+        height: 37vh;
+        max-height: 390px;
+      }
+
+      #serviceFinal .phone-ring {
+        inset: 12% 16%;
+      }
+
+      #serviceFinal .phone-shell {
+        width: min(55vw, 218px);
+        border-radius: 30px;
+        padding: 9px;
+      }
+
+      #serviceFinal .phone-screen {
+        border-radius: 23px;
+      }
+
+      #serviceFinal .phone-speaker {
+        top: 13px;
+        width: 62px;
+        height: 7px;
+      }
+
+      #serviceFinal .phone-card {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 520px) {
+
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3 {
+        font-size: clamp(31px, 9vw, 39px);
+      }
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p {
+        font-size: 12.5px;
+        line-height: 1.52;
+      }
+
+      #serviceDiscovery .service-note,
+      #servicePayment .service-note,
+      #serviceInvoice .service-note {
+        font-size: 11.8px;
+      }
+
+      #serviceDiscovery .service-visual svg {
+        width: min(78vw, 360px);
+        max-height: 28vh;
+      }
+
+      #servicePayment .service-visual svg {
+        width: min(74vw, 340px);
+        max-height: 26vh;
+      }
+
+      #serviceInvoice .service-visual svg {
+        width: min(66vw, 300px);
+        max-height: 25vh;
+      }
+
+      #serviceFinal .final-copy h2 {
+        font-size: clamp(31px, 9vw, 39px);
+      }
+
+      #serviceFinal .download-button {
+        min-width: 198px;
+        min-height: 48px;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 34vh;
+      }
+
+      #serviceFinal .phone-shell {
+        width: min(52vw, 198px);
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p {
+        margin-top: 7px;
+      }
+
+      #serviceDiscovery .service-note,
+      #servicePayment .service-note,
+      #serviceInvoice .service-note {
+        margin-top: 6px;
+      }
+
+      #serviceDiscovery .service-visual svg,
+      #servicePayment .service-visual svg,
+      #serviceInvoice .service-visual svg {
+        max-height: 24vh;
+      }
+
+      #serviceFinal .final-copy p {
+        margin-top: 6px;
+      }
+
+      #serviceFinal .download-button {
+        margin-top: 9px;
+        min-height: 44px;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 28vh;
+      }
+    }
+
+    /* =========================================================
+       SERVICES STRUCTURAL FIX
+       container의 display:flex가 grid를 덮는 문제 수정
+       ========================================================= */
+
+    /* PC/모바일 공통: 실제 레이아웃 컨테이너는 반드시 grid */
+    .service-panel > .container.service-grid {
+      display: grid !important;
+    }
+
+    .final-section > .container.final-grid {
+      display: grid !important;
+    }
+
+    @media (max-width: 820px) {
+
+      /* 2~4P: 텍스트는 전체 폭, 비주얼은 완전히 다음 행 */
+      #serviceDiscovery .service-grid,
+      #servicePayment .service-grid,
+      #serviceInvoice .service-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-rows: auto minmax(0, 1fr) !important;
+        width: 100%;
+        height: 100%;
+        gap: 8px !important;
+      }
+
+      #serviceDiscovery .service-copy,
+      #servicePayment .service-copy,
+      #serviceInvoice .service-copy {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        order: 1 !important;
+      }
+
+      #serviceDiscovery .service-visual,
+      #servicePayment .service-visual,
+      #serviceInvoice .service-visual {
+        width: 100%;
+        height: auto !important;
+        min-height: 0;
+        order: 2 !important;
+        align-self: stretch;
+        justify-self: stretch;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 0 18px;
+      }
+
+      /* 이제 전체 폭을 쓰므로 제목이 불필요하게 5~6줄로 깨지지 않음 */
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3 {
+        width: 100%;
+        max-width: 390px;
+      }
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p {
+        max-width: 390px;
+      }
+
+      #serviceDiscovery .service-note,
+      #servicePayment .service-note,
+      #serviceInvoice .service-note {
+        max-width: 360px;
+      }
+
+      /* 비주얼을 장식이 아니라 각 페이지의 두 번째 주인공으로 */
+      #serviceDiscovery .service-visual svg {
+        width: min(78vw, 350px);
+        max-height: 27vh;
+      }
+
+      #servicePayment .service-visual svg {
+        width: min(76vw, 340px);
+        max-height: 26vh;
+      }
+
+      #serviceInvoice .service-visual svg {
+        width: min(66vw, 300px);
+        max-height: 25vh;
+      }
+
+      /* 5P 역시 실제 grid로 강제 */
+      #serviceFinal .final-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-rows: auto minmax(0, 1fr) !important;
+        width: 100%;
+        height: 100%;
+        gap: 6px !important;
+      }
+
+      #serviceFinal .final-copy {
+        width: 100%;
+        min-width: 0;
+        order: 1;
+      }
+
+      #serviceFinal .final-visual {
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+        height: auto !important;
+        order: 2;
+        align-self: stretch;
+        justify-self: stretch;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      #serviceFinal .phone-stage {
+        width: 100%;
+        height: 31vh;
+        max-height: 330px;
+        min-height: 0;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #serviceFinal .phone-shell {
+        width: min(48vw, 190px);
+        margin: 0 auto;
+      }
+
+      #serviceFinal .phone-card {
+        display: none !important;
+      }
+
+      #serviceFinal .service-flow {
+        display: none !important;
+      }
+
+      #serviceFinal .download-button {
+        width: min(100%, 250px);
+      }
+    }
+
+    @media (max-width: 520px) {
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3 {
+        max-width: 350px;
+        font-size: clamp(31px, 8.7vw, 38px);
+      }
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p {
+        max-width: 345px;
+        font-size: 12.5px;
+      }
+
+      #serviceDiscovery .service-visual svg {
+        width: min(74vw, 315px);
+        max-height: 25vh;
+      }
+
+      #servicePayment .service-visual svg {
+        width: min(71vw, 305px);
+        max-height: 24vh;
+      }
+
+      #serviceInvoice .service-visual svg {
+        width: min(61vw, 265px);
+        max-height: 23vh;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 29vh;
+      }
+
+      #serviceFinal .phone-shell {
+        width: min(46vw, 180px);
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+      #serviceDiscovery .service-visual,
+      #servicePayment .service-visual,
+      #serviceInvoice .service-visual {
+        padding-bottom: 8px;
+      }
+
+      #serviceDiscovery .service-visual svg,
+      #servicePayment .service-visual svg,
+      #serviceInvoice .service-visual svg {
+        max-height: 21vh;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 24vh;
+      }
+    }
+
+    /* =========================================================
+       SERVICES DYNAMIC ARROW MASTER FINAL
+       실제 DOM 좌표 기반 자동 연결
+       ========================================================= */
+
+    /* 2~5P 타이포를 About / Alliance 계열로 통일 */
+    #serviceDiscovery .service-copy h3,
+    #servicePayment .service-copy h3,
+    #serviceInvoice .service-copy h3,
+    #serviceFinal .final-copy h2 {
+      font-size: clamp(48px, 5.4vw, 82px) !important;
+      line-height: 1.05 !important;
+      letter-spacing: -0.062em !important;
+    }
+
+    #serviceDiscovery .service-copy p,
+    #servicePayment .service-copy p,
+    #serviceInvoice .service-copy p,
+    #serviceFinal .final-copy p {
+      font-size: clamp(16px, 1.4vw, 20px) !important;
+      line-height: 1.72 !important;
+    }
+
+    #serviceDiscovery .service-note,
+    #servicePayment .service-note,
+    #serviceInvoice .service-note {
+      font-size: 14px !important;
+      line-height: 1.65 !important;
+    }
+
+    /* 다운로드 버튼 */
+    #serviceFinal .download-button {
+      position: relative;
+      z-index: 8;
+      justify-content: center;
+      font-size: 15px !important;
+      font-weight: 900 !important;
+    }
+
+    #serviceFinal .download-button span,
+    #serviceFinal .download-button span:last-child {
+      color: #fff !important;
+      font-size: 15px !important;
+    }
+
+    /* 최종 장면 좌표 기준 */
+    #serviceFinal .final-grid {
+      position: relative !important;
+      overflow: visible !important;
+    }
+
+    #serviceFinal .final-copy,
+    #serviceFinal .final-visual {
+      position: relative;
+      z-index: 3;
+    }
+
+    /* 동적 화살표 SVG */
+    .dynamic-download-arrow {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .dynamic-download-arrow svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .dynamic-arrow-shadow,
+    .dynamic-arrow-body,
+    .dynamic-arrow-head {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+    }
+
+    .dynamic-arrow-shadow {
+      stroke: rgba(228, 87, 87, .18);
+      stroke-width: 11;
+    }
+
+    .dynamic-arrow-body {
+      stroke: #E45757;
+      stroke-width: 6.8;
+    }
+
+    .dynamic-arrow-head {
+      stroke: #E45757;
+      stroke-width: 6.4;
+    }
+
+    .dynamic-download-arrow.is-visible .dynamic-arrow-shadow,
+    .dynamic-download-arrow.is-visible .dynamic-arrow-body {
+      animation: dynamicArrowDraw 1.85s cubic-bezier(.32,.72,.22,1) forwards;
+    }
+
+    .dynamic-download-arrow.is-visible .dynamic-arrow-head:first-of-type {
+      animation: dynamicArrowDraw .30s ease-out 1.55s forwards;
+    }
+
+    .dynamic-download-arrow.is-visible .dynamic-arrow-head:last-of-type {
+      animation: dynamicArrowDraw .30s ease-out 1.65s forwards;
+    }
+
+    @keyframes dynamicArrowDraw {
+      from { stroke-dashoffset: 100; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* 모바일 타이포 = 다른 페이지 규격 */
+    @media (max-width: 820px) {
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3,
+      #serviceFinal .final-copy h2 {
+        font-size: clamp(38px, 10vw, 50px) !important;
+        line-height: 1.06 !important;
+      }
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p,
+      #serviceFinal .final-copy p {
+        font-size: 15px !important;
+        line-height: 1.55 !important;
+      }
+
+      #serviceDiscovery .service-note,
+      #servicePayment .service-note,
+      #serviceInvoice .service-note {
+        font-size: 13px !important;
+        line-height: 1.55 !important;
+      }
+
+      #serviceFinal .service-flow {
+        display: none !important;
+      }
+
+      #serviceFinal .download-button {
+        width: auto !important;
+        min-width: 220px !important;
+        min-height: 52px !important;
+        margin-top: 16px !important;
+        padding: 0 22px !important;
+      }
+
+      /* 폰을 조금 내려 화살표가 우측으로 돌아갈 공간 확보 */
+      #serviceFinal .final-visual {
+        padding-top: 78px !important;
+        align-items: flex-end !important;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 31vh !important;
+        max-height: 330px !important;
+      }
+
+      #serviceFinal .phone-shell {
+        width: min(46vw, 184px) !important;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3,
+      #serviceFinal .final-copy h2 {
+        font-size: clamp(34px, 9.7vw, 43px) !important;
+      }
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p,
+      #serviceFinal .final-copy p {
+        font-size: 14px !important;
+      }
+
+      #serviceDiscovery .service-note,
+      #servicePayment .service-note,
+      #serviceInvoice .service-note {
+        font-size: 13px !important;
+      }
+
+      #serviceFinal .download-button,
+      #serviceFinal .download-button span {
+        font-size: 15px !important;
+      }
+
+      #serviceFinal .final-visual {
+        padding-top: 68px !important;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 29vh !important;
+        max-height: 300px !important;
+      }
+
+      #serviceFinal .phone-shell {
+        width: min(44vw, 172px) !important;
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3,
+      #serviceFinal .final-copy h2 {
+        font-size: clamp(30px, 6.3vh, 38px) !important;
+      }
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p,
+      #serviceFinal .final-copy p {
+        font-size: 13px !important;
+      }
+
+      #serviceFinal .final-visual {
+        padding-top: 46px !important;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 23vh !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dynamic-arrow-shadow,
+      .dynamic-arrow-body,
+      .dynamic-arrow-head {
+        animation: none !important;
+        stroke-dashoffset: 0 !important;
+      }
+    }
+
+    /* =========================================================
+       SERVICES 4P FINAL
+       5P 폐기 / 거래 증빙 페이지에서 종료
+       ========================================================= */
+    #serviceInvoice.service-last {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    #serviceInvoice.service-last > .container {
+      flex: 1 1 auto;
+      min-height: 0;
+      height: auto;
+      padding-top: 28px;
+      padding-bottom: 18px;
+      display: grid !important;
+      align-items: center;
+    }
+
+    #serviceInvoice.service-last .service-grid {
+      align-self: center;
+    }
+
+    #serviceInvoice.service-last .site-footer {
+      flex: 0 0 auto;
+      width: 100%;
+      margin: 0;
+      padding: 18px 20px 20px;
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.58);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    #serviceInvoice.service-last .site-footer .footer-links a {
+      color: rgba(255,255,255,.9);
+    }
+
+    /* 4P는 마지막 장면이므로 중앙 아래 화살표 없음 */
+    #serviceInvoice.service-last .section-next {
+      display: none !important;
+    }
+
+    @media (max-width: 820px) {
+      #serviceInvoice.service-last > .container {
+        padding-top: 18px;
+        padding-bottom: 10px;
+      }
+
+      #serviceInvoice.service-last .service-grid {
+        height: 100%;
+        grid-template-rows: auto minmax(0, 1fr) !important;
+      }
+
+      #serviceInvoice.service-last .service-visual {
+        padding-bottom: 4px !important;
+      }
+
+      #serviceInvoice.service-last .service-visual svg {
+        max-height: 23vh !important;
+      }
+
+      #serviceInvoice.service-last .site-footer {
+        font-size: 9px;
+        padding: 14px 16px 16px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #serviceInvoice.service-last > .container {
+        padding-top: 14px;
+        padding-bottom: 8px;
+      }
+
+      #serviceInvoice.service-last .service-visual svg {
+        max-height: 21vh !important;
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+      #serviceInvoice.service-last > .container {
+        padding-top: 8px;
+        padding-bottom: 6px;
+      }
+
+      #serviceInvoice.service-last .service-note {
+        display: none;
+      }
+
+      #serviceInvoice.service-last .service-visual svg {
+        max-height: 18vh !important;
+      }
+
+      #serviceInvoice.service-last .site-footer {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+</style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="index.html" class="nav-logo" aria-label="모딩 홈으로 이동">
+        <img src="모딩로고.png" alt="Moding Logo">
+      </a>
+
+      <div class="nav-menu">
+        <a href="about.html">About</a>
+        <a href="brand.html">Brand</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="alliance.html">Alliance</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="메뉴 열기"
+        aria-expanded="false"
+        aria-controls="mobileMenuOverlay"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <div
+    class="mobile-menu-overlay"
+    id="mobileMenuOverlay"
+    aria-hidden="true"
+  >
+    <div class="mobile-menu-head">
+      <img src="모딩로고.png" alt="Moding Logo">
+
+      <button
+        class="menu-close"
+        id="menuClose"
+        type="button"
+        aria-label="메뉴 닫기"
+      >×</button>
+    </div>
+
+    <div class="mobile-menu-body">
+      <div class="mobile-menu-title">
+        사장님의 가게에<br>
+        새로운 선택지를.
+      </div>
+
+      <nav class="mobile-menu-links" aria-label="모바일 메뉴">
+        <a href="about.html">About</a>
+        <a href="brand.html">Brand</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="alliance.html">Alliance</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+
+      <div class="mobile-menu-company">
+        주식회사 모딩(Moding Inc.)<br>
+        partner@moding.app
+      </div>
+    </div>
+  </div>
+
+  <!-- 사이트 좌우 이동 -->
+  <a
+    href="brand.html"
+    class="site-side-nav prev"
+    aria-label="이전 사이트 페이지: Brand"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M16 5 L9 12 L16 19"/>
+    </svg>
+  </a>
+
+  <a
+    href="alliance.html"
+    class="site-side-nav next"
+    aria-label="다음 사이트 페이지: Alliance"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8 5 L15 12 L8 19"/>
+    </svg>
+  </a>
+
+  <main class="snap-root" id="snapRoot">
+
+    <!-- HERO -->
+    <section id="serviceHero" class="section scene service-hero">
+      <div class="container hero-frame">
+
+        <div class="hero-copy reveal">
+          <div class="hero-kicker">SERVICES MODING</div>
+
+          <h1 class="hero-title">
+            찾고<br>
+            <em>결제하고</em><br>
+            정리까지
+          </h1>
+
+          <p class="hero-desc">
+            상품 발견부터 카드결제, 거래 증빙까지.<br>
+            식당의 식품 주문을 조금 더 단순하게 이어갑니다.
+          </p>
+        </div>
+
+        <div class="hero-art reveal" aria-hidden="true">
+          <svg viewBox="0 0 640 440">
+
+            <path class="hero-trail"
+              d="M124 220 H284"
+              fill="none" stroke="rgba(255,255,255,.76)"
+              stroke-width="6" stroke-linecap="round"/>
+
+            <path class="hero-trail"
+              d="M356 220 H516"
+              fill="none" stroke="rgba(255,255,255,.76)"
+              stroke-width="6" stroke-linecap="round"/>
+
+            <g class="hero-step">
+              <circle cx="124" cy="220" r="58" fill="none" stroke="#fff" stroke-width="8"/>
+              <path d="M95 221 C116 203 145 204 160 219 C145 235 116 237 95 221 Z"
+                    fill="none" stroke="#FF8C00" stroke-width="5"/>
+              <path d="M95 221 L82 212 L82 229 Z"
+                    fill="none" stroke="#FF8C00" stroke-width="5" stroke-linejoin="round"/>
+            </g>
+
+            <g class="hero-step delay1">
+              <circle cx="320" cy="220" r="58" fill="none" stroke="#fff" stroke-width="8"/>
+              <rect x="280" y="192" width="80" height="56" rx="12"
+                    fill="none" stroke="#FF8C00" stroke-width="5"/>
+              <path d="M292 210 H314" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+              <path d="M292 225 H347" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="342" cy="211" r="5" fill="#fff"/>
+            </g>
+
+            <g class="hero-step delay2">
+              <circle cx="516" cy="220" r="58" fill="none" stroke="#fff" stroke-width="8"/>
+              <path d="M482 185 H538 V257 H482 Z"
+                    fill="none" stroke="#FF8C00" stroke-width="5"/>
+              <path d="M495 202 H525
+                       M495 216 H525
+                       M495 230 H514"
+                    fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+              <path d="M505 240 L513 248 L530 229"
+                    fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+
+            <g class="hero-dot">
+              <circle cx="0" cy="0" r="10" fill="#FF8C00"/>
+            </g>
+
+          </svg>
+        </div>
+
+      </div>
+
+    
+      <button
+        type="button"
+        class="section-next"
+        data-scroll-target="serviceDiscovery"
+        aria-label="다음 서비스 장면으로 이동"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
+        </svg>
+      </button>
+
+    </section>
+
+    <!-- 2P 상품 발견 -->
+    <section id="serviceDiscovery" class="section scene service-panel">
+      <div class="container service-grid">
+
+        <div class="service-copy reveal">
+          <div class="section-kicker">DISCOVERY</div>
+
+          <h3>
+            흔한 상품 말고<br>
+            <em>메뉴에 힘이 되는</em><br>
+            새로운 상품을
+          </h3>
+
+          <p>
+            수산물부터 육가공, 소스·가공식품까지.<br>
+            가게에 필요한 새로운 상품을 더 쉽게 발견하세요.
+          </p>
+
+          <div class="service-note">
+            필요한 상품을 찾는 첫 단계부터 모딩이 함께합니다.
+          </div>
+        </div>
+
+        <div class="service-visual reveal" aria-hidden="true">
+          <svg viewBox="0 0 560 440">
+
+            <g class="search-focus">
+              <path
+                d="M112 182 C149 152 194 153 226 180 C193 209 147 211 112 182 Z"
+                fill="none" stroke="#238B22" stroke-width="7"
+              />
+              <path
+                d="M111 182 L84 164 L86 198 Z"
+                fill="none" stroke="#238B22" stroke-width="7" stroke-linejoin="round"
+              />
+              <circle cx="193" cy="178" r="6" fill="#FF8C00"/>
+            </g>
+
+            <g class="search-focus delay1">
+              <path
+                d="M305 128
+                   C323 106 358 108 371 128
+                   C389 122 405 140 401 158
+                   C414 172 401 196 378 197
+                   C363 214 332 214 318 198
+                   C297 198 288 172 301 160
+                   C295 145 296 135 305 128 Z"
+                fill="none" stroke="#238B22" stroke-width="7" stroke-linejoin="round"
+              />
+              <path
+                d="M318 170 Q348 151 381 170"
+                fill="none" stroke="#FF8C00" stroke-width="6"
+              />
+            </g>
+
+            <g class="search-focus delay2">
+              <path
+                d="M426 214 L508 214 L501 324 Q470 340 438 324 Z"
+                fill="none" stroke="#238B22" stroke-width="7" stroke-linejoin="round"
+              />
+              <path
+                d="M444 238 H492"
+                fill="none" stroke="#FF8C00" stroke-width="7"
+              />
+            </g>
+
+            <g class="search-focus delay3">
+              <path
+                d="M178 328
+                   C189 294 224 284 251 301
+                   C275 317 273 355 245 372
+                   C215 386 180 363 178 328 Z"
+                fill="none" stroke="#238B22" stroke-width="6"
+              />
+              <path
+                d="M190 316 L238 364
+                   M206 299 L248 348"
+                fill="none" stroke="#FF8C00" stroke-width="4"
+              />
+            </g>
+
+            <g class="search-lens">
+              <circle cx="220" cy="222" r="112"
+                      fill="none" stroke="#fff" stroke-width="11"/>
+              <circle cx="220" cy="222" r="112"
+                      fill="none" stroke="#238B22" stroke-width="7"/>
+              <path d="M301 305 L372 376"
+                    fill="none" stroke="#238B22" stroke-width="20" stroke-linecap="round"/>
+              <circle cx="220" cy="222" r="8" fill="#FF8C00"/>
+            </g>
+
+          </svg>
+        </div>
+
+      </div>
+
+    
+      <button
+        type="button"
+        class="section-next"
+        data-scroll-target="servicePayment"
+        aria-label="다음 서비스 장면으로 이동"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
+        </svg>
+      </button>
+
+    </section>
+
+    <!-- 3P 카드결제 -->
+    <section id="servicePayment" class="section scene service-panel alt">
+      <div class="container service-grid reverse">
+
+        <div class="service-visual reveal" aria-hidden="true">
+          <svg viewBox="0 0 560 430">
+
+            <g>
+              <rect x="90" y="130" width="190" height="130" rx="26"
+                    fill="#fff" stroke="#DDE6DD" stroke-width="2"/>
+              <path d="M122 165 H195
+                       M122 193 H228
+                       M122 221 H176"
+                    fill="none" stroke="#238B22" stroke-width="6" stroke-linecap="round"/>
+              <rect x="138" y="238" width="88" height="14" rx="7" fill="#EAF4EA"/>
+            </g>
+
+            <g class="pay-card">
+              <rect x="294" y="156" width="182" height="112" rx="24"
+                    fill="#238B22"/>
+              <circle cx="442" cy="195" r="12" fill="#fff" opacity=".92"/>
+              <circle cx="456" cy="195" r="12" fill="#FF8C00" opacity=".96"/>
+              <path d="M320 212 H450"
+                    fill="none" stroke="rgba(255,255,255,.82)" stroke-width="8" stroke-linecap="round"/>
+              <path d="M320 236 H370"
+                    fill="none" stroke="rgba(255,255,255,.58)" stroke-width="7" stroke-linecap="round"/>
+            </g>
+
+            <g class="pay-check">
+              <circle cx="452" cy="286" r="30" fill="#FF8C00"/>
+              <path d="M438 286 L449 297 L468 277"
+                    fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+
+          </svg>
+        </div>
+
+        <div class="service-copy reveal">
+          <div class="section-kicker">CARD PAYMENT</div>
+
+          <h3>
+            필요한 상품을<br>
+            <em>카드로 결제하세요</em>
+          </h3>
+
+          <p>
+            식당 운영 상황에 맞게 자금 흐름은 조금 더 유연하게.<br>
+            필요한 상품을 카드결제로 이어갈 수 있도록 돕습니다.
+          </p>
+
+          <div class="service-note">
+            결제 단계도 식당 운영 방식에 맞춰 더 간단하게.
+          </div>
+        </div>
+
+      </div>
+
+    
+      <button
+        type="button"
+        class="section-next"
+        data-scroll-target="serviceInvoice"
+        aria-label="다음 서비스 장면으로 이동"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
+        </svg>
+      </button>
+
+    </section>
+
+    <!-- 4P 세금계산서 -->
+    <section id="serviceInvoice" class="section scene service-panel service-last">
+      <div class="container service-grid">
+
+        <div class="service-copy reveal">
+          <div class="section-kicker">TRANSACTION RECORD</div>
+
+          <h3>
+            거래가 끝나면<br>
+            증빙도 <em>깔끔하게</em>
+          </h3>
+
+          <p>
+            상품의 실제 판매주체를 기준으로 거래 증빙이 처리됩니다.<br>
+            입점상품과 MD PICK 상품은 판매주체가 다를 수 있으며,
+            거래 내역에서 확인할 수 있습니다.
+          </p>
+
+          <div class="service-note">
+            판매주체에 맞는 증빙 흐름까지 하나로 연결합니다.
+          </div>
+        </div>
+
+        <div class="service-visual reveal" aria-hidden="true">
+          <svg viewBox="0 0 560 430">
+
+            <g class="invoice-sheet">
+              <rect x="166" y="72" width="230" height="296" rx="24"
+                    fill="#fff" stroke="#DDE6DD" stroke-width="2"/>
+              <path d="M203 126 H324
+                       M203 156 H357
+                       M203 186 H357
+                       M203 216 H302"
+                    fill="none" stroke="#238B22" stroke-width="7" stroke-linecap="round"/>
+
+              <path d="M203 258 H357
+                       M203 286 H357
+                       M203 314 H316"
+                    fill="none" stroke="#E0E8E0" stroke-width="7" stroke-linecap="round"/>
+            </g>
+
+            <g class="invoice-stamp">
+              <circle cx="356" cy="304" r="40" fill="#FF8C00"/>
+              <path d="M336 304 L350 318 L377 291"
+                    fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+
+          </svg>
+        </div>
+
+      </div>
+
+      <footer class="site-footer">
+        <div class="footer-links">
+          <a href="terms.html">이용약관</a>
+          <span class="divider">·</span>
+          <a href="privacy.html">개인정보처리방침</a>
+          <span class="divider">·</span>
+          <a href="location.html">오시는 길</a>
+        </div>
+
+        주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
+        통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
+        대구광역시 달서구 달구벌대로 1870, 7층
+      </footer>
+
+
+    </section>
+
+  </main>
+
+
+  <script>
+    const siteHeader =
+      document.querySelector(".site-header");
+
+    function syncHeaderHeight() {
+      if (!siteHeader) return;
+
+      const headerHeight = Math.ceil(
+        siteHeader.getBoundingClientRect().height
       );
 
-      dynamicArrowHeadB.setAttribute(
-        "d",
-        `M ${tailX.toFixed(1)} ${(tailY + headSpread).toFixed(1)} ` +
-        `Q ${(endX + headLength * 0.45).toFixed(1)} ${(endY + 5).toFixed(1)} ` +
-        `${endX.toFixed(1)} ${endY.toFixed(1)}`
+      const viewportHeight =
+        window.visualViewport?.height || window.innerHeight;
+
+      document.documentElement.style.setProperty(
+        "--header-height",
+        `${headerHeight}px`
+      );
+
+      document.documentElement.style.setProperty(
+        "--scene-height",
+        `${Math.max(320, Math.round(viewportHeight - headerHeight))}px`
       );
     }
 
-    function scheduleDynamicArrowUpdate() {
-      if (dynamicArrowRaf) {
-        cancelAnimationFrame(dynamicArrowRaf);
-      }
+    syncHeaderHeight();
 
-      dynamicArrowRaf = requestAnimationFrame(() => {
-        setDynamicArrowPath();
-        dynamicArrowRaf = null;
+    let resizeSnapTimer = null;
+
+    function resnapCurrentScene() {
+      if (!snapRoot) return;
+
+      window.clearTimeout(resizeSnapTimer);
+      resizeSnapTimer = window.setTimeout(() => {
+        const sceneHeight = snapRoot.clientHeight;
+        if (!sceneHeight) return;
+
+        const index = Math.round(snapRoot.scrollTop / sceneHeight);
+        const safeIndex = Math.max(0, Math.min(index, 3));
+
+        snapRoot.scrollTo({
+          top: safeIndex * sceneHeight,
+          behavior: "auto"
+        });
+      }, 80);
+    }
+
+    if ("ResizeObserver" in window && siteHeader) {
+      const headerResizeObserver =
+        new ResizeObserver(() => {
+          syncHeaderHeight();
+          resnapCurrentScene();
+        });
+
+      headerResizeObserver.observe(siteHeader);
+    }
+
+    window.addEventListener("resize", () => {
+      syncHeaderHeight();
+      resnapCurrentScene();
+    });
+
+    window.addEventListener("orientationchange", () => {
+      syncHeaderHeight();
+      resnapCurrentScene();
+    });
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", () => {
+        syncHeaderHeight();
+        resnapCurrentScene();
       });
     }
 
-    /*
-     * 레이아웃이 확정된 뒤 좌표 계산.
-     * 폰 이미지가 늦게 로드돼도 다시 계산합니다.
-     */
-    scheduleDynamicArrowUpdate();
+    const menuToggle =
+      document.getElementById("menuToggle");
 
-    window.addEventListener("load", scheduleDynamicArrowUpdate);
-    window.addEventListener("resize", scheduleDynamicArrowUpdate);
-    window.addEventListener("orientationchange", scheduleDynamicArrowUpdate);
+    const menuClose =
+      document.getElementById("menuClose");
 
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener(
-        "resize",
-        scheduleDynamicArrowUpdate
-      );
+    const mobileMenuOverlay =
+      document.getElementById("mobileMenuOverlay");
+
+    const snapRoot = document.getElementById("snapRoot");
+
+    function openMobileMenu() {
+      mobileMenuOverlay.classList.add("is-open");
+      mobileMenuOverlay.setAttribute("aria-hidden", "false");
+      menuToggle.setAttribute("aria-expanded", "true");
+      if (snapRoot) snapRoot.style.overflowY = "hidden";
     }
 
-    if ("ResizeObserver" in window && finalGrid) {
-      const dynamicArrowResizeObserver =
-        new ResizeObserver(scheduleDynamicArrowUpdate);
+    function closeMobileMenu() {
+      mobileMenuOverlay.classList.remove("is-open");
+      mobileMenuOverlay.setAttribute("aria-hidden", "true");
+      menuToggle.setAttribute("aria-expanded", "false");
+      if (snapRoot) snapRoot.style.overflowY = "auto";
+    }
 
-      dynamicArrowResizeObserver.observe(finalGrid);
+    menuToggle.addEventListener("click", openMobileMenu);
+    menuClose.addEventListener("click", closeMobileMenu);
 
-      if (finalPhone) {
-        dynamicArrowResizeObserver.observe(finalPhone);
+    document
+      .querySelectorAll(".mobile-menu-links a")
+      .forEach((link) => {
+        link.addEventListener("click", closeMobileMenu);
+      });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMobileMenu();
+      }
+    });
+
+    /* =========================================================
+       SECTION NEXT
+       ========================================================= */
+    /* =========================================================
+       EXACT FULL PAGE SCROLL
+       스크롤 컨테이너 내부의 정확한 장면 시작점으로 이동
+       ========================================================= */
+    function scrollToServiceScene(targetId) {
+      if (!snapRoot) return;
+
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      const prefersReducedMotion =
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      snapRoot.scrollTo({
+        top: target.offsetTop,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
+      });
+    }
+
+    document
+      .querySelectorAll(".section-next[data-scroll-target]")
+      .forEach((button) => {
+        button.addEventListener("click", () => {
+          scrollToServiceScene(button.dataset.scrollTarget);
+        });
+      });
+
+    let snapSettleTimer = null;
+
+    snapRoot.addEventListener(
+      "scroll",
+      () => {
+        window.clearTimeout(snapSettleTimer);
+
+        snapSettleTimer = window.setTimeout(() => {
+          const sceneHeight = snapRoot.clientHeight;
+          if (!sceneHeight) return;
+
+          const nearestIndex =
+            Math.round(snapRoot.scrollTop / sceneHeight);
+
+          const safeIndex =
+            Math.max(0, Math.min(nearestIndex, 3));
+
+          const exactTop = safeIndex * sceneHeight;
+
+          if (Math.abs(snapRoot.scrollTop - exactTop) > 1) {
+            snapRoot.scrollTo({
+              top: exactTop,
+              behavior: "auto"
+            });
+          }
+        }, 140);
+      },
+      { passive: true }
+    );
+
+    /* =========================================================
+       HORIZONTAL SITE SWIPE
+       BRAND ← SERVICES → ALLIANCE
+       ========================================================= */
+    const mainContent =
+      document.querySelector("main");
+
+    let pageSwipeStartX = null;
+    let pageSwipeStartY = null;
+
+    mainContent.addEventListener(
+      "touchstart",
+      (event) => {
+        if (event.touches.length !== 1) return;
+
+        const x = event.touches[0].clientX;
+        const y = event.touches[0].clientY;
+
+        /* 브라우저 edge swipe와 충돌 방지 */
+        if (x < 45 || x > window.innerWidth - 45) {
+          pageSwipeStartX = null;
+          pageSwipeStartY = null;
+          return;
+        }
+
+        pageSwipeStartX = x;
+        pageSwipeStartY = y;
+      },
+      { passive: true }
+    );
+
+    mainContent.addEventListener(
+      "touchend",
+      (event) => {
+        if (
+          pageSwipeStartX === null ||
+          pageSwipeStartY === null ||
+          !event.changedTouches.length
+        ) {
+          return;
+        }
+
+        const endX = event.changedTouches[0].clientX;
+        const endY = event.changedTouches[0].clientY;
+
+        const dx = endX - pageSwipeStartX;
+        const dy = endY - pageSwipeStartY;
+
+        pageSwipeStartX = null;
+        pageSwipeStartY = null;
+
+        if (
+          Math.abs(dx) < 90 ||
+          Math.abs(dx) < Math.abs(dy) * 1.35
+        ) {
+          return;
+        }
+
+        if (dx > 0) {
+          window.location.href = "brand.html";
+        } else {
+          window.location.href = "alliance.html";
+        }
+      },
+      { passive: true }
+    );
+
+    const revealItems =
+      document.querySelectorAll(".reveal");
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.14
+        }
+      );
+
+    revealItems.forEach((item) => {
+      revealObserver.observe(item);
+    });
+
+    function openModingStore(event) {
+      if (event) event.preventDefault();
+
+      const userAgent =
+        navigator.userAgent || navigator.vendor || window.opera;
+
+      const isAndroid =
+        /android/i.test(userAgent);
+
+      const isIOS =
+        /iPad|iPhone|iPod/.test(userAgent) ||
+        (navigator.platform === "MacIntel" &&
+          navigator.maxTouchPoints > 1);
+
+      if (isAndroid) {
+        window.location.href =
+          "https://play.google.com/store/apps/details?id=com.moding.application";
+        return;
       }
 
-      if (finalDownloadButton) {
-        dynamicArrowResizeObserver.observe(finalDownloadButton);
+      if (isIOS) {
+        window.location.href =
+          "https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982";
+        return;
       }
+
+      window.location.href = "/download.html";
     }
 
-    const appMainImage =
-      document.querySelector("#serviceFinal .phone-screen img");
+    document.addEventListener(
+      "contextmenu",
+      function (e) {
+        if (!e.target.closest("input, textarea, a")) {
+          e.preventDefault();
+        }
+      }
+    );
 
-    if (appMainImage && !appMainImage.complete) {
-      appMainImage.addEventListener(
-        "load",
-        scheduleDynamicArrowUpdate,
-        { once: true }
-      );
-    }
+    document.addEventListener(
+      "dragstart",
+      function (e) {
+        if (!e.target.closest("input, textarea")) {
+          e.preventDefault();
+        }
+      }
+    );
 
+    document.addEventListener(
+      "keydown",
+      function (e) {
+        const key = e.key.toLowerCase();
+
+        if (
+          (e.ctrlKey || e.metaKey) &&
+          !e.target.closest("input, textarea")
+        ) {
+          if (
+            ["c", "x", "v", "s", "u", "p", "a"].includes(key)
+          ) {
+            e.preventDefault();
+          }
+        }
+      }
+    );
+
+    document.addEventListener(
+      "copy",
+      function (e) {
+        if (!e.target.closest("input, textarea")) {
+          e.preventDefault();
+        }
+      }
+    );
 </script>
 </body>
 </html>
