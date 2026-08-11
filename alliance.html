@@ -424,74 +424,159 @@
       88% { transform: scale(1); }
     }
 
-    /* 2P CATEGORIES */
+    /* =========================================================
+       2P CATEGORIES
+       손그림 아이콘 + 하단 이름표
+       ========================================================= */
     .category-stage {
       width: 100%;
       max-width: 980px;
-      margin: 32px auto 0;
+      margin: 28px auto 0;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px 24px;
     }
 
-    .category-chip {
-      min-height: 116px;
-      padding: 18px 14px;
-      border-radius: 24px;
-      border: 1px solid var(--line);
-      background: #fff;
+    .category-card {
+      min-height: 178px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 10px;
+      justify-content: flex-end;
       text-align: center;
-      color: var(--green);
-      font-size: 16px;
-      font-weight: 900;
-      box-shadow: 0 10px 28px rgba(20,50,20,.05);
       transform-box: fill-box;
       transform-origin: center;
-      animation: categoryFloat 4.4s ease-in-out infinite;
+      animation: categorySketchFloat 4.8s ease-in-out infinite;
     }
 
-    .category-chip:nth-child(2n) {
+    .category-card:nth-child(2) { animation-delay: .25s; }
+    .category-card:nth-child(3) { animation-delay: .5s; }
+    .category-card:nth-child(4) { animation-delay: .15s; }
+    .category-card:nth-child(5) { animation-delay: .4s; }
+    .category-card:nth-child(6) { animation-delay: .65s; }
+
+    @keyframes categorySketchFloat {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(.4deg); }
+    }
+
+    .sketch-icon {
+      position: relative;
+      width: 142px;
+      height: 108px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+    }
+
+    .category-card:nth-child(even) .sketch-icon {
       color: var(--orange);
-      animation-delay: .25s;
     }
 
-    .category-chip:nth-child(3n) {
-      animation-delay: .5s;
+    .sketch-icon::before {
+      content: "";
+      position: absolute;
+      inset: 10px 8px 6px;
+      border: 2px solid currentColor;
+      border-radius: 48% 52% 46% 54% / 53% 47% 55% 45%;
+      opacity: .10;
+      transform: rotate(-2deg);
     }
 
-    @keyframes categoryFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+    .sketch-icon svg {
+      position: relative;
+      z-index: 1;
+      width: 116px;
+      height: 88px;
+      overflow: visible;
+      transform: rotate(-1.2deg);
     }
 
-    .category-icon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
+    .category-card:nth-child(2n) .sketch-icon svg {
+      transform: rotate(1.3deg);
     }
 
-    .category-icon svg {
-      width: 42px;
-      height: 42px;
+    .category-card:nth-child(3n) .sketch-icon svg {
+      transform: rotate(-2deg);
+    }
+
+    .sketch-line {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .sketch-line.thin {
+      stroke-width: 2.5;
+      opacity: .52;
+    }
+
+    .sketch-accent {
+      fill: none;
+      stroke: var(--orange);
+      stroke-width: 3.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .category-card:nth-child(even) .sketch-accent {
+      stroke: var(--green);
+    }
+
+    .category-tag {
+      position: relative;
+      min-width: 126px;
+      margin-top: 4px;
+      padding: 9px 17px 10px;
+      border: 1px solid rgba(35,139,34,.14);
+      border-radius: 12px 15px 11px 14px;
+      background: #fff;
+      box-shadow: 0 7px 18px rgba(20,50,20,.07);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      transform: rotate(-.5deg);
+    }
+
+    .category-card:nth-child(even) .category-tag {
+      transform: rotate(.6deg);
+    }
+
+    .category-tag::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -6px;
+      width: 34px;
+      height: 10px;
+      border-radius: 3px;
+      background: rgba(255,140,0,.20);
+      transform: translateX(-50%) rotate(-2deg);
+    }
+
+    .category-card:nth-child(even) .category-tag::before {
+      background: rgba(35,139,34,.15);
+      transform: translateX(-50%) rotate(2deg);
     }
 
     .category-note {
       max-width: 760px;
       margin: 18px auto 0;
-      padding: 13px 16px;
-      border-radius: 18px;
-      background: rgba(35,139,34,.055);
-      border: 1px solid rgba(35,139,34,.14);
+      padding: 12px 16px;
+      border-radius: 16px;
+      background: rgba(35,139,34,.05);
+      border: 1px solid rgba(35,139,34,.12);
       color: var(--sub);
       text-align: center;
-      font-size: 12.5px;
-      line-height: 1.65;
+      font-size: 12px;
+      line-height: 1.6;
       font-weight: 650;
     }
 
@@ -1005,31 +1090,35 @@
       }
 
       .category-stage {
-        margin-top: 20px;
+        margin-top: 16px;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
+        gap: 10px 12px;
       }
 
-      .category-chip {
-        min-height: 86px;
-        padding: 12px 10px;
-        border-radius: 18px;
-        font-size: 13px;
+      .category-card {
+        min-height: 122px;
       }
 
-      .category-icon {
-        width: 30px;
-        height: 30px;
+      .sketch-icon {
+        width: 112px;
+        height: 76px;
       }
 
-      .category-icon svg {
-        width: 30px;
-        height: 30px;
+      .sketch-icon svg {
+        width: 92px;
+        height: 68px;
+      }
+
+      .category-tag {
+        min-width: 108px;
+        padding: 8px 12px 9px;
+        font-size: 12px;
       }
 
       .category-note {
         margin-top: 10px;
-        font-size: 11.5px;
+        padding: 10px 12px;
+        font-size: 10.8px;
       }
 
       .partner-flow {
@@ -1173,12 +1262,26 @@
       }
 
       .category-stage {
-        gap: 8px;
+        gap: 8px 10px;
       }
 
-      .category-chip {
-        min-height: 78px;
-        font-size: 12px;
+      .category-card {
+        min-height: 112px;
+      }
+
+      .sketch-icon {
+        width: 102px;
+        height: 68px;
+      }
+
+      .sketch-icon svg {
+        width: 84px;
+        height: 62px;
+      }
+
+      .category-tag {
+        min-width: 100px;
+        font-size: 11.5px;
       }
 
       .partner-flow-item {
@@ -1224,8 +1327,24 @@
         font-size: 13px;
       }
 
-      .category-chip {
-        min-height: 68px;
+      .category-card {
+        min-height: 92px;
+      }
+
+      .sketch-icon {
+        width: 88px;
+        height: 54px;
+      }
+
+      .sketch-icon svg {
+        width: 74px;
+        height: 52px;
+      }
+
+      .category-tag {
+        padding-top: 7px;
+        padding-bottom: 8px;
+        font-size: 10.8px;
       }
 
       .partner-flow-item {
@@ -1269,7 +1388,7 @@
       .manufacturer-box,
       .moding-hub,
       .store-cluster,
-      .category-chip,
+      .category-card,
       .partner-flow-dot,
       .truck-mini,
       .scene-next {
@@ -1502,106 +1621,147 @@
           <div class="kicker">PRODUCT CATEGORY</div>
 
           <h2 class="scene-title">
-            외식업에 필요한 상품이라면<br>
-            <em>모딩과 함께할 수 있습니다</em>
+            모딩은 이런 상품을<br>
+            <em>기다리고 있습니다</em>
           </h2>
 
-          <div class="category-stage">
+          <div class="category-stage" aria-label="모딩 주요 입점 상품군">
 
-            <div class="category-chip">
-              <div class="category-icon">
-                <svg viewBox="0 0 42 42">
-                  <path d="M7 22 C14 14 25 14 32 21 C25 29 14 29 7 22 Z"
-                        fill="none" stroke="currentColor" stroke-width="3"/>
-                  <path d="M7 22 L2 18 L3 26 Z"
-                        fill="none" stroke="currentColor" stroke-width="3"/>
+            <!-- 수산물 -->
+            <div class="category-card">
+              <div class="sketch-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 90">
+                  <path class="sketch-line"
+                    d="M18 47
+                       C31 29 59 27 82 41
+                       C92 47 95 52 95 52
+                       C86 61 69 67 50 65
+                       C35 64 26 58 18 47 Z"/>
+                  <path class="sketch-line"
+                    d="M18 47 L6 36 L8 57 Z"/>
+                  <path class="sketch-line thin"
+                    d="M45 36 C56 42 63 50 67 59"/>
+                  <circle cx="79" cy="45" r="3.6" fill="currentColor"/>
+                  <path class="sketch-accent"
+                    d="M25 69 C42 73 62 73 80 68"/>
                 </svg>
               </div>
-              수산물
+              <div class="category-tag">수산물</div>
             </div>
 
-            <div class="category-chip">
-              <div class="category-icon">
-                <svg viewBox="0 0 42 42">
-                  <path d="M8 17 C14 8 28 9 32 17 C38 22 34 33 24 34 C14 35 6 27 8 17 Z"
-                        fill="none" stroke="currentColor" stroke-width="3"/>
+            <!-- 축산·육가공 -->
+            <div class="category-card">
+              <div class="sketch-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 90">
+                  <path class="sketch-line"
+                    d="M23 56
+                       C15 43 24 29 40 25
+                       C55 17 75 21 85 33
+                       C101 38 101 55 90 64
+                       C79 74 60 72 51 66
+                       C39 72 28 67 23 56 Z"/>
+                  <path class="sketch-line thin"
+                    d="M41 35 C48 42 55 45 66 46
+                       M40 56 C50 51 65 52 77 59"/>
+                  <path class="sketch-accent"
+                    d="M27 25 L35 18 M91 30 L99 24"/>
                 </svg>
               </div>
-              육가공
+              <div class="category-tag">축산·육가공</div>
             </div>
 
-            <div class="category-chip">
-              <div class="category-icon">
-                <svg viewBox="0 0 42 42">
-                  <path d="M11 7 H31 L29 35 H13 Z"
-                        fill="none" stroke="currentColor" stroke-width="3"/>
-                  <path d="M15 15 H27"
-                        stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <!-- 소스·베이스 -->
+            <div class="category-card">
+              <div class="sketch-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 90">
+                  <path class="sketch-line"
+                    d="M38 14 H80
+                       L84 27
+                       L80 74
+                       Q59 82 38 74
+                       L34 27 Z"/>
+                  <path class="sketch-line thin"
+                    d="M38 27 Q59 33 82 27
+                       M42 46 Q59 40 76 46"/>
+                  <path class="sketch-accent"
+                    d="M48 58 Q60 51 71 58"/>
                 </svg>
               </div>
-              소스·양념
+              <div class="category-tag">소스·베이스</div>
             </div>
 
-            <div class="category-chip">
-              <div class="category-icon">
-                <svg viewBox="0 0 42 42">
-                  <rect x="8" y="10" width="26" height="22" rx="5"
-                        fill="none" stroke="currentColor" stroke-width="3"/>
-                  <path d="M13 17 H29 M13 24 H25"
-                        stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <!-- 냉동·반조리 -->
+            <div class="category-card">
+              <div class="sketch-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 90">
+                  <path class="sketch-line"
+                    d="M20 57 Q57 72 96 57
+                       L91 71 Q58 82 26 69 Z"/>
+                  <path class="sketch-line"
+                    d="M31 52 Q45 38 57 51
+                       Q69 37 84 51"/>
+                  <path class="sketch-accent"
+                    d="M87 19 V38
+                       M78 24 L96 34
+                       M78 34 L96 24"/>
+                  <path class="sketch-line thin"
+                    d="M43 25 C46 21 48 17 47 13
+                       M59 27 C62 23 63 19 62 15"/>
                 </svg>
               </div>
-              가공식품
+              <div class="category-tag">냉동·반조리</div>
             </div>
 
-            <div class="category-chip">
-              <div class="category-icon">
-                <svg viewBox="0 0 42 42">
-                  <path d="M7 24 Q21 8 35 24 Q21 35 7 24 Z"
-                        fill="none" stroke="currentColor" stroke-width="3"/>
+            <!-- 농산·김치 -->
+            <div class="category-card">
+              <div class="sketch-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 90">
+                  <path class="sketch-line"
+                    d="M60 72
+                       C42 67 32 51 37 36
+                       C40 25 49 21 59 27
+                       C68 17 80 21 83 34
+                       C88 50 78 66 60 72 Z"/>
+                  <path class="sketch-line thin"
+                    d="M60 29 V68
+                       M59 44 C50 42 45 37 42 32
+                       M61 49 C70 45 76 39 80 34"/>
+                  <path class="sketch-accent"
+                    d="M29 66 C36 61 43 61 50 66"/>
                 </svg>
               </div>
-              안주류
+              <div class="category-tag">농산·김치</div>
             </div>
 
-            <div class="category-chip">
-              <div class="category-icon">
-                <svg viewBox="0 0 42 42">
-                  <path d="M12 8 H30 V28 Q21 35 12 28 Z"
-                        fill="none" stroke="currentColor" stroke-width="3"/>
-                  <path d="M30 14 H35 V23 H30"
-                        fill="none" stroke="currentColor" stroke-width="3"/>
+            <!-- 범용 식품 -->
+            <div class="category-card">
+              <div class="sketch-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 90">
+                  <path class="sketch-line"
+                    d="M31 23 H56
+                       V33 H61
+                       V75 H26
+                       V33 H31 Z"/>
+                  <path class="sketch-line thin"
+                    d="M35 46 H51
+                       M35 57 H51"/>
+                  <path class="sketch-line"
+                    d="M72 28
+                       Q88 23 96 35
+                       L91 72
+                       H72
+                       L68 36 Z"/>
+                  <path class="sketch-accent"
+                    d="M76 40 Q84 45 91 40"/>
                 </svg>
               </div>
-              카페·디저트
-            </div>
-
-            <div class="category-chip">
-              <div class="category-icon">
-                <svg viewBox="0 0 42 42">
-                  <path d="M15 6 H27 V12 H29 V35 H13 V12 H15 Z"
-                        fill="none" stroke="currentColor" stroke-width="3"/>
-                </svg>
-              </div>
-              주류
-            </div>
-
-            <div class="category-chip">
-              <div class="category-icon">
-                <svg viewBox="0 0 42 42">
-                  <circle cx="21" cy="21" r="14"
-                          fill="none" stroke="currentColor" stroke-width="3"/>
-                  <path d="M7 21 H35 M21 7 Q28 21 21 35 M21 7 Q14 21 21 35"
-                        fill="none" stroke="currentColor" stroke-width="2.5"/>
-                </svg>
-              </div>
-              수입식품
+              <div class="category-tag">범용 식품</div>
             </div>
 
           </div>
 
           <div class="category-note">
-            주류·수입식품 등 별도 인허가 확인이 필요한 상품은 관련 서류 확인 후 입점이 진행됩니다.
+            입점 검토는 상품 특성, 유통 조건, 보관 방식 등을 확인한 후 진행됩니다.
           </div>
 
         </div>
