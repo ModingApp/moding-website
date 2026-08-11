@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
   <meta property="og:title" content="Services | 찾고, 결제하고, 정리까지">
-  <meta property="og:description" content="상품 발견부터 카드결제, 세금계산서까지. 식당의 식품 주문을 조금 더 단순하게.">
+  <meta property="og:description" content="상품 발견부터 카드결제, 거래 증빙까지. 식당의 식품 주문을 조금 더 단순하게.">
   <meta property="og:url" content="https://moding.app/services.html">
   <meta property="og:image" content="https://moding.app/og-image.png">
   <meta property="og:image:width" content="500">
@@ -1939,6 +1939,390 @@
         height: 28vh;
       }
     }
+
+    /* =========================================================
+       SERVICES STRUCTURAL FIX
+       container의 display:flex가 grid를 덮는 문제 수정
+       ========================================================= */
+
+    /* PC/모바일 공통: 실제 레이아웃 컨테이너는 반드시 grid */
+    .service-panel > .container.service-grid {
+      display: grid !important;
+    }
+
+    .final-section > .container.final-grid {
+      display: grid !important;
+    }
+
+    @media (max-width: 820px) {
+
+      /* 2~4P: 텍스트는 전체 폭, 비주얼은 완전히 다음 행 */
+      #serviceDiscovery .service-grid,
+      #servicePayment .service-grid,
+      #serviceInvoice .service-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-rows: auto minmax(0, 1fr) !important;
+        width: 100%;
+        height: 100%;
+        gap: 8px !important;
+      }
+
+      #serviceDiscovery .service-copy,
+      #servicePayment .service-copy,
+      #serviceInvoice .service-copy {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        order: 1 !important;
+      }
+
+      #serviceDiscovery .service-visual,
+      #servicePayment .service-visual,
+      #serviceInvoice .service-visual {
+        width: 100%;
+        height: auto !important;
+        min-height: 0;
+        order: 2 !important;
+        align-self: stretch;
+        justify-self: stretch;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 0 18px;
+      }
+
+      /* 이제 전체 폭을 쓰므로 제목이 불필요하게 5~6줄로 깨지지 않음 */
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3 {
+        width: 100%;
+        max-width: 390px;
+      }
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p {
+        max-width: 390px;
+      }
+
+      #serviceDiscovery .service-note,
+      #servicePayment .service-note,
+      #serviceInvoice .service-note {
+        max-width: 360px;
+      }
+
+      /* 비주얼을 장식이 아니라 각 페이지의 두 번째 주인공으로 */
+      #serviceDiscovery .service-visual svg {
+        width: min(78vw, 350px);
+        max-height: 27vh;
+      }
+
+      #servicePayment .service-visual svg {
+        width: min(76vw, 340px);
+        max-height: 26vh;
+      }
+
+      #serviceInvoice .service-visual svg {
+        width: min(66vw, 300px);
+        max-height: 25vh;
+      }
+
+      /* 5P 역시 실제 grid로 강제 */
+      #serviceFinal .final-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-rows: auto minmax(0, 1fr) !important;
+        width: 100%;
+        height: 100%;
+        gap: 6px !important;
+      }
+
+      #serviceFinal .final-copy {
+        width: 100%;
+        min-width: 0;
+        order: 1;
+      }
+
+      #serviceFinal .final-visual {
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+        height: auto !important;
+        order: 2;
+        align-self: stretch;
+        justify-self: stretch;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      #serviceFinal .phone-stage {
+        width: 100%;
+        height: 31vh;
+        max-height: 330px;
+        min-height: 0;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #serviceFinal .phone-shell {
+        width: min(48vw, 190px);
+        margin: 0 auto;
+      }
+
+      #serviceFinal .phone-card {
+        display: none !important;
+      }
+
+      #serviceFinal .service-flow {
+        display: none !important;
+      }
+
+      #serviceFinal .download-button {
+        width: min(100%, 250px);
+      }
+    }
+
+    @media (max-width: 520px) {
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3 {
+        max-width: 350px;
+        font-size: clamp(31px, 8.7vw, 38px);
+      }
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p {
+        max-width: 345px;
+        font-size: 12.5px;
+      }
+
+      #serviceDiscovery .service-visual svg {
+        width: min(74vw, 315px);
+        max-height: 25vh;
+      }
+
+      #servicePayment .service-visual svg {
+        width: min(71vw, 305px);
+        max-height: 24vh;
+      }
+
+      #serviceInvoice .service-visual svg {
+        width: min(61vw, 265px);
+        max-height: 23vh;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 29vh;
+      }
+
+      #serviceFinal .phone-shell {
+        width: min(46vw, 180px);
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+      #serviceDiscovery .service-visual,
+      #servicePayment .service-visual,
+      #serviceInvoice .service-visual {
+        padding-bottom: 8px;
+      }
+
+      #serviceDiscovery .service-visual svg,
+      #servicePayment .service-visual svg,
+      #serviceInvoice .service-visual svg {
+        max-height: 21vh;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 24vh;
+      }
+    }
+
+    /* =========================================================
+       5P DRAWING ARROW
+       기존 Services CSS는 건드리지 않고 이 블록만 추가
+       ========================================================= */
+    .cta-drawn-arrow {
+      width: 148px;
+      min-width: 118px;
+      align-self: center;
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .cta-drawn-arrow-svg {
+      display: block;
+      width: 142px;
+      height: auto;
+      overflow: visible;
+    }
+
+    .cta-drawn-arrow-shadow,
+    .cta-drawn-arrow-main,
+    .cta-drawn-arrow-head {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+    }
+
+    .cta-drawn-arrow-shadow {
+      stroke: rgba(228, 87, 87, .22);
+      stroke-width: 12;
+    }
+
+    .cta-drawn-arrow-main {
+      stroke: #E45757;
+      stroke-width: 7.5;
+    }
+
+    .cta-drawn-arrow-head {
+      stroke: #E45757;
+      stroke-width: 7;
+    }
+
+    .cta-drawn-arrow.is-visible .cta-drawn-arrow-shadow {
+      animation: ctaArrowDraw 1.35s ease-out .08s forwards;
+    }
+
+    .cta-drawn-arrow.is-visible .cta-drawn-arrow-main {
+      animation: ctaArrowDraw 1.35s ease-out 0s forwards;
+    }
+
+    .cta-drawn-arrow.is-visible .cta-head-a {
+      animation: ctaArrowDraw .32s ease-out 1.14s forwards;
+    }
+
+    .cta-drawn-arrow.is-visible .cta-head-b {
+      animation: ctaArrowDraw .32s ease-out 1.22s forwards;
+    }
+
+    @keyframes ctaArrowDraw {
+      from { stroke-dashoffset: 100; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* PC: 텍스트 → 화살표 → 폰 */
+    #serviceFinal .final-grid {
+      grid-template-columns: minmax(0, .92fr) auto minmax(0, 1fr) !important;
+      column-gap: 20px !important;
+    }
+
+    #serviceFinal .final-copy {
+      grid-column: 1;
+    }
+
+    #serviceFinal .cta-drawn-arrow {
+      grid-column: 2;
+    }
+
+    #serviceFinal .final-visual {
+      grid-column: 3;
+    }
+
+    /* MOBILE: 텍스트/다운로드 → 세로형 화살표 → 폰 */
+    @media (max-width: 820px) {
+      #serviceFinal .final-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-rows: auto 82px minmax(0, 1fr) !important;
+        row-gap: 0 !important;
+      }
+
+      #serviceFinal .final-copy {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      #serviceFinal .cta-drawn-arrow {
+        grid-column: 1;
+        grid-row: 2;
+        width: 100%;
+        min-width: 0;
+        height: 82px;
+        justify-content: center;
+        align-self: center;
+        justify-self: stretch;
+        overflow: visible;
+      }
+
+      #serviceFinal .cta-drawn-arrow-svg {
+        width: 112px;
+        transform: rotate(86deg);
+        transform-origin: center;
+      }
+
+      #serviceFinal .final-visual {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 28vh;
+        max-height: 300px;
+      }
+
+      #serviceFinal .phone-shell {
+        width: min(46vw, 184px);
+      }
+    }
+
+    @media (max-width: 520px) {
+      #serviceFinal .final-grid {
+        grid-template-rows: auto 74px minmax(0, 1fr) !important;
+      }
+
+      #serviceFinal .cta-drawn-arrow {
+        height: 74px;
+      }
+
+      #serviceFinal .cta-drawn-arrow-svg {
+        width: 102px;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 27vh;
+      }
+
+      #serviceFinal .phone-shell {
+        width: min(44vw, 172px);
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+      #serviceFinal .final-grid {
+        grid-template-rows: auto 58px minmax(0, 1fr) !important;
+      }
+
+      #serviceFinal .cta-drawn-arrow {
+        height: 58px;
+      }
+
+      #serviceFinal .cta-drawn-arrow-svg {
+        width: 84px;
+      }
+
+      #serviceFinal .phone-stage {
+        height: 21vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta-drawn-arrow-shadow,
+      .cta-drawn-arrow-main,
+      .cta-drawn-arrow-head {
+        animation: none !important;
+        stroke-dashoffset: 0 !important;
+      }
+    }
+
 </style>
 </head>
 
@@ -2047,7 +2431,7 @@
           </h1>
 
           <p class="hero-desc">
-            상품 발견부터 카드결제, 세금계산서까지.<br>
+            상품 발견부터 카드결제, 거래 증빙까지.<br>
             식당의 식품 주문을 조금 더 단순하게 이어갑니다.
           </p>
         </div>
@@ -2303,7 +2687,7 @@
       <div class="container service-grid">
 
         <div class="service-copy reveal">
-          <div class="section-kicker">TAX INVOICE</div>
+          <div class="section-kicker">TRANSACTION RECORD</div>
 
           <h3>
             거래가 끝나면<br>
@@ -2311,13 +2695,13 @@
           </h3>
 
           <p>
-            구매한 상품에 대해 식품제조사 명의의 세금계산서가
-            자동으로 발행되는 구조를 지향합니다.<br>
-            거래 이후의 정리도 더 분명하고 간단하게 이어집니다.
+            상품의 실제 판매주체를 기준으로 거래 증빙이 처리됩니다.<br>
+            입점상품과 MD PICK 상품은 판매주체가 다를 수 있으며,
+            거래 내역에서 확인할 수 있습니다.
           </p>
 
           <div class="service-note">
-            주문 이후의 증빙까지 하나의 흐름으로 연결합니다.
+            판매주체에 맞는 증빙 흐름까지 하나로 연결합니다.
           </div>
         </div>
 
@@ -2388,7 +2772,7 @@
             <span class="flow-arrow">→</span>
             <span class="flow-chip">카드결제</span>
             <span class="flow-arrow">→</span>
-            <span class="flow-chip">세금계산서</span>
+            <span class="flow-chip">거래 증빙</span>
           </div>
 
           <a
@@ -2400,6 +2784,37 @@
             <span>모딩 앱 다운로드</span>
             <span>↘</span>
           </a>
+        </div>
+
+        <div class="cta-drawn-arrow reveal" aria-hidden="true">
+          <svg class="cta-drawn-arrow-svg" viewBox="0 0 260 130">
+            <path
+              class="cta-drawn-arrow-shadow"
+              pathLength="100"
+              d="M16 70
+                 C42 28 78 26 104 65
+                 C130 104 164 106 188 66
+                 C207 35 227 39 244 62"
+            />
+            <path
+              class="cta-drawn-arrow-main"
+              pathLength="100"
+              d="M16 70
+                 C42 28 78 26 104 65
+                 C130 104 164 106 188 66
+                 C207 35 227 39 244 62"
+            />
+            <path
+              class="cta-drawn-arrow-head cta-head-a"
+              pathLength="100"
+              d="M229 48 C238 54 245 61 251 69"
+            />
+            <path
+              class="cta-drawn-arrow-head cta-head-b"
+              pathLength="100"
+              d="M229 77 C238 72 245 68 252 62"
+            />
+          </svg>
         </div>
 
         <div class="final-visual reveal">
@@ -2502,7 +2917,10 @@
 
     if ("ResizeObserver" in window && siteHeader) {
       const headerResizeObserver =
-        new ResizeObserver(syncHeaderHeight);
+        new ResizeObserver(() => {
+          syncHeaderHeight();
+          resnapCurrentScene();
+        });
 
       headerResizeObserver.observe(siteHeader);
     }
