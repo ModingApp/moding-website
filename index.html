@@ -478,83 +478,157 @@
     .hero-download {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 999px;
       text-decoration: none;
-      color: #fff;
+      color: var(--moding-green);
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(0,0,0,.12);
       font-size: 16px;
-      font-weight: 850;
+      font-weight: 900;
       letter-spacing: -0.025em;
       transition:
-        opacity .2s ease,
+        box-shadow .2s ease,
         transform .2s ease;
     }
 
     .hero-download:hover {
-      opacity: .88;
-      transform: translateY(-2px);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 34px rgba(0,0,0,.16);
+    }
+
+    .scene-intro.is-active .hero-variant.is-selected .hero-download {
+      animation: ctaPop .68s .28s cubic-bezier(.22,1.35,.36,1) both;
     }
 
     .download-arrow-mark {
       color: var(--moding-orange);
-      font-size: 17px;
+      font-size: 19px;
       line-height: 1;
+      font-weight: 950;
+    }
+
+    @keyframes ctaPop {
+      0%   { opacity: 0; transform: translateY(8px) scale(.92); }
+      68%  { opacity: 1; transform: translateY(-1px) scale(1.045); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     /* =========================================================
        06. ILLUSTRATION MOTION
        ========================================================= */
-    .float-a {
-      transform-origin: center;
-      animation: floatA 4.6s ease-in-out infinite;
-    }
-
-    .float-b {
-      transform-origin: center;
-      animation: floatB 4.1s .25s ease-in-out infinite;
-    }
-
-    .float-c {
-      transform-origin: center;
-      animation: floatC 4.4s .5s ease-in-out infinite;
-    }
-
-    @keyframes floatA {
-      0%,100% { transform: translateY(0) rotate(0); }
-      50% { transform: translateY(-7px) rotate(2deg); }
-    }
-
-    @keyframes floatB {
-      0%,100% { transform: translate(0,0) rotate(-1deg); }
-      50% { transform: translate(8px,-5px) rotate(2deg); }
-    }
-
-    @keyframes floatC {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
+    .float-a,
+    .float-b,
+    .float-c,
+    .search-item,
+    .search-lens,
+    .connect-store,
     .delivery-truck,
     .delivery-box {
       transform-box: fill-box;
       transform-origin: center;
+      will-change: transform;
     }
 
-    .delivery-truck {
-      animation: truckMove 4.2s ease-in-out infinite;
+    /* 1P: 기존 그림은 그대로, 움직임만 조금 더 명확하게 */
+    .float-a {
+      animation: floatA 3.8s ease-in-out infinite;
     }
 
-    .delivery-box {
-      animation: boxMove 4s .15s ease-in-out infinite;
+    .float-b {
+      animation: floatB 3.5s .18s ease-in-out infinite;
     }
 
-    @keyframes truckMove {
-      0%,100% { transform: translateX(-3px); }
-      50% { transform: translateX(8px); }
+    .float-c {
+      animation: floatC 3.9s .35s ease-in-out infinite;
     }
 
-    @keyframes boxMove {
+    @keyframes floatA {
       0%,100% { transform: translateY(0) rotate(-1deg); }
-      50% { transform: translateY(-3px) rotate(1deg); }
+      45% { transform: translateY(-10px) rotate(3deg); }
+      70% { transform: translateY(-4px) rotate(-2deg); }
+    }
+
+    @keyframes floatB {
+      0%,100% { transform: translate(0,0) rotate(-1deg); }
+      45% { transform: translate(11px,-7px) rotate(3deg); }
+      72% { transform: translate(-3px,-2px) rotate(-2deg); }
+    }
+
+    @keyframes floatC {
+      0%,100% { transform: translateY(0) rotate(0); }
+      45% { transform: translateY(-8px) rotate(1.5deg); }
+      72% { transform: translateY(-2px) rotate(-1deg); }
+    }
+
+    /* 2P: 돋보기 순회 + 비추는 상품 확대 */
+    .search-item {
+      transition:
+        transform .48s cubic-bezier(.22,1.35,.36,1),
+        filter .48s ease,
+        opacity .28s ease;
+    }
+
+    .search-item.is-focus {
+      transform: translateY(-4px) scale(1.13);
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,.10));
+    }
+
+    .search-item .focus-accent {
+      transition: stroke-width .3s ease, opacity .3s ease, r .3s ease;
+    }
+
+    .search-item.is-focus .focus-accent {
+      opacity: 1;
+    }
+
+    .search-lens {
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,.08));
+    }
+
+    /* 3P: 상품 도착 순간 가게가 가볍게 반응 */
+    .scene.is-active .connect-store {
+      animation: storeArrival 4.2s ease-in-out infinite;
+    }
+
+    @keyframes storeArrival {
+      0%, 76%, 100% { transform: scale(1); }
+      86% { transform: scale(1.045); }
+      92% { transform: scale(.992); }
+    }
+
+    /* 4P: 트럭이 박스 옆에서 상차한 뒤 현재 자리로 이동 */
+    .delivery-truck,
+    .delivery-box {
+      animation: none;
+    }
+
+    .scene.is-active .delivery-truck {
+      animation: truckLoadAndGo 4.8s cubic-bezier(.22,.78,.28,1) both;
+    }
+
+    .scene.is-active .delivery-box {
+      animation: boxLoadCue 4.8s ease-in-out both;
+    }
+
+    @keyframes truckLoadAndGo {
+      0%   { transform: translateX(-122px) translateY(1px); }
+      18%  { transform: translateX(-122px) translateY(-1px); }
+      27%  { transform: translateX(-119px) translateY(1px); }
+      34%  { transform: translateX(-122px) translateY(0); }
+      68%  { transform: translateX(0) translateY(-2px); }
+      76%  { transform: translateX(4px) translateY(0); }
+      84%  { transform: translateX(0) translateY(-1px); }
+      100% { transform: translateX(0) translateY(0); }
+    }
+
+    @keyframes boxLoadCue {
+      0%, 18%, 38%, 100% { transform: translateY(0) rotate(0); }
+      24% { transform: translateY(-8px) rotate(-2deg) scale(1.025); }
+      31% { transform: translateY(1px) rotate(1deg) scale(.99); }
     }
 
     /* =========================================================
@@ -621,62 +695,36 @@
     }
 
     .phone-screen {
+      position: relative;
       width: 100%;
       height: 100%;
       border-radius: 33px;
       overflow: hidden;
       background: #F7FAF7;
-      padding: 48px 16px 18px;
       color: #183219;
     }
 
-    .phone-logo {
-      font-size: 20px;
-      font-weight: 950;
+    .phone-screen-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
       color: var(--moding-green);
+      background: #F7FAF7;
+      font-size: 22px;
+      font-weight: 950;
       letter-spacing: -0.04em;
     }
 
-    .phone-line {
-      height: 13px;
-      margin-top: 14px;
-      border-radius: 999px;
-      background: #E9EFE9;
-    }
-
-    .phone-line.short { width: 64%; }
-    .phone-line.mid { width: 82%; }
-
-    .phone-card {
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 16px;
+    .phone-app-screen {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
       background: #fff;
-      box-shadow: 0 7px 20px rgba(20,70,24,.07);
-    }
-
-    .phone-card::before {
-      content: "";
-      display: block;
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(35,139,34,.20),
-          rgba(255,140,0,.20)
-        );
-    }
-
-    .phone-card::after {
-      content: "";
-      display: block;
-      width: 70%;
-      height: 9px;
-      margin-top: 10px;
-      border-radius: 999px;
-      background: #E7EEE7;
     }
 
     .final-copy {
@@ -715,15 +763,35 @@
       margin-top: 28px;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      justify-content: center;
+      gap: 11px;
+      min-height: 56px;
+      padding: 0 23px;
+      border-radius: 999px;
       text-decoration: none;
-      color: #fff;
+      color: var(--moding-green);
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(0,0,0,.14);
       font-size: 17px;
-      font-weight: 900;
+      font-weight: 950;
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .final-download:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 38px rgba(0,0,0,.18);
+    }
+
+    .scene-final.is-active .final-download {
+      animation: ctaPop .68s .36s cubic-bezier(.22,1.35,.36,1) both;
     }
 
     .final-download span {
       color: var(--moding-orange);
+      font-size: 19px;
+      font-weight: 950;
     }
 
     .site-footer {
@@ -942,6 +1010,8 @@
       }
 
       .hero-download {
+        min-height: 48px;
+        padding: 0 18px;
         font-size: 16px;
       }
 
@@ -984,7 +1054,9 @@
       }
 
       .final-download {
+        min-height: 50px;
         margin-top: 18px;
+        padding: 0 19px;
         font-size: 15px;
       }
 
@@ -1702,90 +1774,101 @@
           <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
 
             <!-- 생선 -->
-            <path
-              d="M123 224 C164 191 220 194 251 220 C220 247 164 250 123 224 Z"
-              fill="none"
-              stroke="#fff"
-              stroke-width="7"
-            />
-            <path
-              d="M123 224 L89 200 L93 239 Z"
-              fill="none"
-              stroke="#fff"
-              stroke-width="7"
-              stroke-linejoin="round"
-            />
-            <circle cx="219" cy="219" r="5" fill="#FF8C00"/>
+            <g id="searchFish" class="search-item">
+              <path
+                d="M123 224 C164 191 220 194 251 220 C220 247 164 250 123 224 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+              />
+              <path
+                d="M123 224 L89 200 L93 239 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <circle class="focus-accent" cx="219" cy="219" r="5" fill="#FF8C00"/>
+            </g>
 
             <!-- 육가공 -->
-            <path
-              d="M301 164
-                 C319 143 353 145 365 164
-                 C383 159 396 175 393 191
-                 C407 205 395 230 373 231
-                 C359 248 329 248 316 231
-                 C295 231 287 207 300 192
-                 C293 179 294 170 301 164 Z"
-              fill="none"
-              stroke="#fff"
-              stroke-width="7"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M315 203 Q344 184 376 203"
-              class="svg-line"
-              stroke="#FF8C00"
-              stroke-width="6"
-            />
+            <g id="searchMeat" class="search-item">
+              <path
+                d="M301 164
+                   C319 143 353 145 365 164
+                   C383 159 396 175 393 191
+                   C407 205 395 230 373 231
+                   C359 248 329 248 316 231
+                   C295 231 287 207 300 192
+                   C293 179 294 170 301 164 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M315 203 Q344 184 376 203"
+                class="svg-line focus-accent"
+                stroke="#FF8C00"
+                stroke-width="6"
+              />
+            </g>
 
             <!-- 소스 -->
-            <path
-              d="M480 220 L570 220 L561 344 Q527 362 493 344 Z"
-              fill="none"
-              stroke="#fff"
-              stroke-width="7"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M498 247 H553"
-              class="svg-line"
-              stroke="#FF8C00"
-              stroke-width="7"
-            />
+            <g id="searchSauce" class="search-item">
+              <path
+                d="M480 220 L570 220 L561 344 Q527 362 493 344 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M498 247 H553"
+                class="svg-line focus-accent"
+                stroke="#FF8C00"
+                stroke-width="7"
+              />
+            </g>
 
             <!-- 조개 -->
-            <path
-              d="M166 351
-                 C177 318 214 307 242 324
-                 C266 340 264 378 236 395
-                 C205 408 168 385 166 351 Z"
-              fill="none"
-              stroke="#fff"
-              stroke-width="6"
-            />
-            <path
-              d="M179 339 L229 389
-                 M197 321 L242 373"
-              class="svg-line"
-              stroke="#FF8C00"
-              stroke-width="4"
-            />
+            <g id="searchShell" class="search-item">
+              <path
+                d="M166 351
+                   C177 318 214 307 242 324
+                   C266 340 264 378 236 395
+                   C205 408 168 385 166 351 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="6"
+              />
+              <path
+                d="M179 339 L229 389
+                   M197 321 L242 373"
+                class="svg-line focus-accent"
+                stroke="#FF8C00"
+                stroke-width="4"
+              />
+            </g>
 
-            <!-- 돋보기 -->
-            <circle
-              cx="360"
-              cy="292"
-              r="144"
-              fill="none"
-              stroke="#fff"
-              stroke-width="10"
-            />
-            <path
-              d="M463 397 L562 496"
-              class="svg-line"
-              stroke="#fff"
-              stroke-width="19"
-            />
+            <!-- 움직이는 돋보기: 중심좌표 기준으로 JS 이동 -->
+            <g id="searchLens" class="search-lens" transform="translate(175 224)">
+              <circle
+                cx="0"
+                cy="0"
+                r="126"
+                fill="none"
+                stroke="#fff"
+                stroke-width="10"
+              />
+              <path
+                d="M90 92 L165 167"
+                class="svg-line"
+                stroke="#fff"
+                stroke-width="19"
+              />
+              <circle cx="0" cy="0" r="7" fill="#FF8C00"/>
+            </g>
 
           </svg>
         </div>
@@ -1867,27 +1950,29 @@
 
             <!-- 가게 -->
             <g transform="translate(494 202)">
-              <path
-                d="M12 98 H154 V194 H12 Z"
-                fill="none"
-                stroke="#fff"
-                stroke-width="7"
-              />
-              <path
-                d="M2 98 L25 49 H141 L164 98"
-                fill="none"
-                stroke="#fff"
-                stroke-width="7"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M20 72 H147"
-                class="svg-line"
-                stroke="#FF8C00"
-                stroke-width="14"
-                stroke-dasharray="19 15"
-              />
-              <rect x="73" y="135" width="34" height="59" rx="5" fill="#FF8C00"/>
+              <g class="connect-store">
+                <path
+                  d="M12 98 H154 V194 H12 Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="7"
+                />
+                <path
+                  d="M2 98 L25 49 H141 L164 98"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="7"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M20 72 H147"
+                  class="svg-line"
+                  stroke="#FF8C00"
+                  stroke-width="14"
+                  stroke-dasharray="19 15"
+                />
+                <rect x="73" y="135" width="34" height="59" rx="5" fill="#FF8C00"/>
+              </g>
             </g>
 
             <!-- 연결 -->
@@ -2093,12 +2178,14 @@
         <div class="final-phone-wrap" aria-hidden="true">
           <div class="phone">
             <div class="phone-screen">
-              <div class="phone-logo">MODING</div>
-              <div class="phone-line mid"></div>
-              <div class="phone-line short"></div>
-              <div class="phone-card"></div>
-              <div class="phone-card"></div>
-              <div class="phone-card"></div>
+              <div class="phone-screen-fallback">MODING</div>
+              <img
+                class="phone-app-screen"
+                src="모딩앱메인.jpeg"
+                alt="모딩 앱 메인 화면"
+                loading="eager"
+                decoding="async"
+              >
             </div>
           </div>
         </div>
@@ -2319,6 +2406,138 @@
     }
 
     /* =========================================================
+       2P SEARCH MOTION
+       - 돋보기가 네 상품을 순회
+       - 비추는 상품만 확대
+       ========================================================= */
+    const searchLens = document.getElementById("searchLens");
+
+    const searchTargets = [
+      { id: "searchFish",  x: 175, y: 224 },
+      { id: "searchMeat",  x: 347, y: 194 },
+      { id: "searchSauce", x: 526, y: 282 },
+      { id: "searchShell", x: 206, y: 352 }
+    ];
+
+    let searchMotionTimer = null;
+    let searchMotionFrame = null;
+    let searchMotionIndex = 0;
+    let searchLensX = searchTargets[0].x;
+    let searchLensY = searchTargets[0].y;
+
+    function clearSearchFocus() {
+      searchTargets.forEach((item) => {
+        const node = document.getElementById(item.id);
+        if (node) node.classList.remove("is-focus");
+      });
+    }
+
+    function focusSearchItem(index) {
+      clearSearchFocus();
+      const node = document.getElementById(searchTargets[index].id);
+      if (node) node.classList.add("is-focus");
+    }
+
+    function setSearchLensPosition(x, y) {
+      if (!searchLens) return;
+      searchLens.setAttribute(
+        "transform",
+        `translate(${x.toFixed(2)} ${y.toFixed(2)})`
+      );
+    }
+
+    function easeSearch(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function moveSearchLensTo(index, immediate = false) {
+      if (!searchLens) return;
+
+      const target = searchTargets[index];
+
+      if (searchMotionFrame) {
+        cancelAnimationFrame(searchMotionFrame);
+        searchMotionFrame = null;
+      }
+
+      if (immediate) {
+        searchLensX = target.x;
+        searchLensY = target.y;
+        setSearchLensPosition(searchLensX, searchLensY);
+        focusSearchItem(index);
+        return;
+      }
+
+      clearSearchFocus();
+
+      const startX = searchLensX;
+      const startY = searchLensY;
+      const controlLift = index % 2 === 0 ? -28 : 24;
+      const duration = 820;
+      const startTime = performance.now();
+
+      function frame(now) {
+        const raw = Math.min(1, (now - startTime) / duration);
+        const t = easeSearch(raw);
+
+        /* 직선보다 살짝 휘는 이동 */
+        const curve = Math.sin(Math.PI * raw) * controlLift;
+        searchLensX = startX + (target.x - startX) * t;
+        searchLensY = startY + (target.y - startY) * t + curve;
+        setSearchLensPosition(searchLensX, searchLensY);
+
+        if (raw < 1) {
+          searchMotionFrame = requestAnimationFrame(frame);
+        } else {
+          searchLensX = target.x;
+          searchLensY = target.y;
+          setSearchLensPosition(searchLensX, searchLensY);
+          focusSearchItem(index);
+          searchMotionFrame = null;
+        }
+      }
+
+      searchMotionFrame = requestAnimationFrame(frame);
+    }
+
+    function stopSearchMotion() {
+      if (searchMotionTimer) {
+        clearTimeout(searchMotionTimer);
+        searchMotionTimer = null;
+      }
+      if (searchMotionFrame) {
+        cancelAnimationFrame(searchMotionFrame);
+        searchMotionFrame = null;
+      }
+      clearSearchFocus();
+    }
+
+    function runSearchMotion() {
+      if (!searchLens) return;
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        moveSearchLensTo(0, true);
+        return;
+      }
+
+      stopSearchMotion();
+      searchMotionIndex = 0;
+      moveSearchLensTo(searchMotionIndex, true);
+
+      function next() {
+        searchMotionTimer = setTimeout(() => {
+          searchMotionIndex =
+            (searchMotionIndex + 1) % searchTargets.length;
+
+          moveSearchLensTo(searchMotionIndex);
+          next();
+        }, 1750);
+      }
+
+      next();
+    }
+
+    /* =========================================================
        SCENE / INDICATOR
        ========================================================= */
     const snapRoot =
@@ -2336,13 +2555,28 @@
         )
       );
 
+    let activeSceneId = "page1";
+
     function setActiveScene(scene) {
+      const sceneChanged =
+        Boolean(scene && scene.id !== activeSceneId);
+
       scenes.forEach((item) => {
         item.classList.toggle(
           "is-active",
           item === scene
         );
       });
+
+      if (sceneChanged) {
+        activeSceneId = scene.id;
+
+        if (scene.id === "page2") {
+          runSearchMotion();
+        } else {
+          stopSearchMotion();
+        }
+      }
 
       indicatorButtons.forEach((button) => {
         const isActive =
