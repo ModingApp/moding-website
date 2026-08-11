@@ -378,7 +378,8 @@
     .mix-bowl,
     .pack-item,
     .moding-node,
-    .store-scene {
+    .store-scene,
+    .lift-box {
       transform-box: fill-box;
       transform-origin: center;
     }
@@ -388,7 +389,7 @@
     }
 
     .worker-b {
-      animation: workerBreath 4.6s .3s ease-in-out infinite;
+      animation: workerBreath 4.8s .25s ease-in-out infinite;
     }
 
     @keyframes workerBreath {
@@ -398,13 +399,13 @@
 
     .mix-arm {
       transform-box: fill-box;
-      transform-origin: 151px 226px;
+      transform-origin: 177px 218px;
       animation: mixAction 2.4s ease-in-out infinite;
     }
 
     @keyframes mixAction {
-      0%,100% { transform: rotate(-5deg); }
-      50% { transform: rotate(8deg); }
+      0%,100% { transform: rotate(-6deg); }
+      50% { transform: rotate(9deg); }
     }
 
     .mix-bowl {
@@ -417,7 +418,7 @@
     }
 
     .pack-item {
-      animation: packPop 3.6s .25s ease-in-out infinite;
+      animation: packPop 3.6s .2s ease-in-out infinite;
     }
 
     @keyframes packPop {
@@ -425,16 +426,26 @@
       50% { transform: translateY(-5px) rotate(1deg); }
     }
 
-    .lift-box {
+    .lift-arm {
       transform-box: fill-box;
-      transform-origin: center;
+      transform-origin: 444px 224px;
+      animation: liftArmMove 3.8s ease-in-out infinite;
+    }
+
+    @keyframes liftArmMove {
+      0%,18%,100% { transform: rotate(0deg); }
+      42%,62% { transform: rotate(-8deg); }
+      82% { transform: rotate(-1deg); }
+    }
+
+    .lift-box {
       animation: boxLift 3.8s ease-in-out infinite;
     }
 
     @keyframes boxLift {
       0%,18%,100% { transform: translateY(8px); }
       42%,62% { transform: translateY(-18px); }
-      82% { transform: translateY(6px); }
+      82% { transform: translateY(5px); }
     }
 
     .moding-node {
@@ -1096,6 +1107,7 @@
       .mix-arm,
       .mix-bowl,
       .pack-item,
+      .lift-arm,
       .lift-box,
       .moding-node,
       .store-scene,
@@ -1202,106 +1214,119 @@
         </div>
 
         <div class="hero-art reveal" aria-hidden="true">
-          <svg viewBox="0 0 760 560">
+          <svg viewBox="0 0 860 560">
 
-            <!-- 제조 작업대 -->
+            <!-- 작업대 -->
             <g class="factory-table">
-              <path d="M78 332 H300"
+              <path d="M82 334 H334"
                     fill="none"
                     stroke="#fff"
                     stroke-width="7"
                     stroke-linecap="round"/>
-              <path d="M102 332 V424 M276 332 V424"
+              <path d="M106 334 V424 M310 334 V424"
                     fill="none"
-                    stroke="rgba(255,255,255,.72)"
+                    stroke="rgba(255,255,255,.70)"
                     stroke-width="7"
                     stroke-linecap="round"/>
             </g>
 
             <!-- 사람 A : 제조/가공 -->
             <g class="worker worker-a">
-              <!-- 머리/위생모 -->
-              <circle cx="150" cy="172" r="28"
-                      fill="none" stroke="#fff" stroke-width="7"/>
-              <path d="M124 164 Q150 138 178 164"
+              <circle cx="150" cy="165" r="23"
+                      fill="#238B22" stroke="#fff" stroke-width="7"/>
+              <path d="M126 158 Q150 136 174 158"
                     fill="none" stroke="#FF8C00" stroke-width="8" stroke-linecap="round"/>
-
-              <!-- 몸 -->
-              <path d="M150 202 V294"
-                    fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
-              <path d="M150 226 L112 262"
+              <rect x="120" y="191" width="60" height="94" rx="28"
+                    fill="none" stroke="#fff" stroke-width="8"/>
+              <path d="M122 224 L90 244"
                     fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
 
-              <!-- 오른팔 + 조리도구 -->
               <g class="mix-arm">
-                <path d="M151 226 L201 258"
+                <path d="M178 220 L212 236"
                       fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-                <path d="M201 258 L232 286"
+                <path d="M212 236 L242 278"
                       fill="none" stroke="#FF8C00" stroke-width="6" stroke-linecap="round"/>
               </g>
 
-              <!-- 다리 -->
-              <path d="M150 294 L126 332 M150 294 L177 332"
+              <path d="M138 284 L123 332 M162 284 L178 332"
                     fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
             </g>
 
-            <!-- 냄비/가공용기 -->
+            <!-- 가공 용기 -->
             <g class="mix-bowl">
-              <path d="M196 290 H266"
+              <path d="M205 286 H279"
                     fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
-              <path d="M204 290 Q210 324 232 326 Q254 324 260 290"
+              <path d="M214 286 Q220 324 242 326 Q264 324 270 286"
                     fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
-              <path d="M214 280 Q232 267 250 280"
+              <path d="M221 276 Q242 262 262 276"
                     fill="none" stroke="#FF8C00" stroke-width="5" stroke-linecap="round"/>
             </g>
 
-            <!-- 완성된 식품 포장 -->
+            <!-- 완성 상품 -->
             <g class="pack-item">
-              <rect x="307" y="248" width="92" height="68" rx="12"
+              <rect x="314" y="248" width="102" height="74" rx="14"
                     fill="none" stroke="#fff" stroke-width="7"/>
-              <path d="M322 265 H384"
+              <path d="M331 267 H399"
                     fill="none" stroke="#FF8C00" stroke-width="6" stroke-linecap="round"/>
-              <path d="M334 291 C348 279 369 280 381 291 C369 303 348 304 334 291 Z"
+              <path d="M343 294 C360 281 382 282 395 294 C381 307 360 308 343 294 Z"
                     fill="none" stroke="#fff" stroke-width="4"/>
             </g>
 
-            <!-- 사람 B : 박스 이동 -->
+            <!-- 사람 B : 포장/출고 -->
             <g class="worker worker-b">
-              <circle cx="360" cy="151" r="25"
-                      fill="none" stroke="#fff" stroke-width="7"/>
-              <path d="M337 144 Q360 121 384 144"
-                    fill="none" stroke="#FF8C00" stroke-width="7" stroke-linecap="round"/>
-              <path d="M360 178 V270"
-                    fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
-              <path d="M360 204 L326 233 M360 204 L397 232"
-                    fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-              <path d="M360 270 L338 325 M360 270 L386 325"
+              <circle cx="452" cy="160" r="23"
+                      fill="#238B22" stroke="#fff" stroke-width="7"/>
+              <path d="M428 153 Q452 131 476 153"
+                    fill="none" stroke="#FF8C00" stroke-width="8" stroke-linecap="round"/>
+              <rect x="420" y="187" width="64" height="98" rx="30"
+                    fill="none" stroke="#fff" stroke-width="8"/>
+              <path d="M434 285 L419 332 M470 285 L487 332"
                     fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
 
-              <g class="lift-box">
-                <path d="M305 230 L349 211 L393 230 L349 250 Z"
-                      fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
-                <path d="M305 230 V276 L349 297 V250"
-                      fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
-                <path d="M393 230 V276 L349 297"
-                      fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
-                <path d="M349 211 V250"
-                      fill="none" stroke="#FF8C00" stroke-width="5" stroke-linecap="round"/>
+              <path d="M420 224 L392 244"
+                    fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+
+              <g class="lift-arm">
+                <path d="M484 224 L520 240"
+                      fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+                <path d="M520 240 L546 254"
+                      fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
               </g>
             </g>
 
-            <!-- MODING 연결점 -->
+            <!-- 박스 : 사람과 분리 -->
+            <g class="lift-box">
+              <path d="M534 250 L578 232 L622 250 L578 270 Z"
+                    fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+              <path d="M534 250 V296 L578 316 V270"
+                    fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+              <path d="M622 250 V296 L578 316"
+                    fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+              <path d="M578 232 V270"
+                    fill="none" stroke="#FF8C00" stroke-width="5" stroke-linecap="round"/>
+            </g>
+
+            <!-- MODING 플랫폼 배지 -->
             <g class="moding-node">
-              <circle cx="492" cy="268" r="54"
-                      fill="none" stroke="#fff" stroke-width="8"/>
-              <circle cx="492" cy="268" r="14" fill="#FF8C00"/>
-              <path d="M470 268 H514 M492 246 V290"
-                    fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+              <rect x="640" y="232" width="132" height="74" rx="37"
+                    fill="#fff" stroke="#fff" stroke-width="4"/>
+              <text x="706" y="263"
+                    text-anchor="middle"
+                    fill="#238B22"
+                    font-size="24"
+                    font-weight="900"
+                    letter-spacing=".02em">MODING</text>
+              <text x="706" y="286"
+                    text-anchor="middle"
+                    fill="#FF8C00"
+                    font-size="12.5"
+                    font-weight="900"
+                    letter-spacing=".18em">CONNECT</text>
             </g>
 
             <!-- 연결 경로 -->
             <path id="aboutFlowPath"
-                  d="M405 270 C438 238 462 238 492 268 C528 305 560 306 598 268"
+                  d="M622 270 C648 268 662 268 682 269 C706 270 720 270 740 268"
                   fill="none"
                   stroke="rgba(255,255,255,.68)"
                   stroke-width="5"
@@ -1320,44 +1345,48 @@
 
             <!-- 가게 -->
             <g class="store-scene">
-              <path d="M602 255 H706 V344 H602 Z"
+              <path d="M720 332 H818 V434 H720 Z"
                     fill="none" stroke="#fff" stroke-width="7"/>
-              <path d="M593 255 L611 217 H697 L715 255"
+              <path d="M710 332 L728 292 H810 L828 332"
                     fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
-              <path d="M607 236 H701"
+              <path d="M726 312 H812"
                     fill="none" stroke="#FF8C00" stroke-width="12"
                     stroke-dasharray="15 12"/>
-              <rect x="641" y="299" width="27" height="45" rx="4" fill="#FF8C00"/>
-
-              <!-- 사장님 실루엣 -->
-              <circle cx="684" cy="294" r="12"
+              <rect x="756" y="384" width="30" height="50" rx="4" fill="#FF8C00"/>
+              <circle cx="796" cy="378" r="12"
                       fill="none" stroke="#fff" stroke-width="5"/>
-              <path d="M684 307 V332"
+              <path d="M796 390 V418"
                     fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
             </g>
 
-            <!-- 하단 캡션 라인 -->
-            <path d="M85 448 H696"
+            <!-- 보조 연결 -->
+            <path d="M585 316 C615 325 632 318 653 304"
+                  fill="none" stroke="rgba(255,255,255,.38)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M772 306 C778 316 786 322 796 327"
+                  fill="none" stroke="rgba(255,255,255,.38)" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- 하단 캡션 -->
+            <path d="M84 462 H815"
                   fill="none"
                   stroke="rgba(255,255,255,.18)"
                   stroke-width="2"/>
 
-            <text x="124" y="485"
+            <text x="126" y="498"
                   fill="rgba(255,255,255,.72)"
                   font-size="17"
                   font-weight="800">제조 · 가공</text>
 
-            <text x="325" y="485"
+            <text x="420" y="498"
                   fill="rgba(255,255,255,.72)"
                   font-size="17"
                   font-weight="800">포장 · 출고</text>
 
-            <text x="473" y="485"
+            <text x="684" y="498"
                   fill="#FF8C00"
                   font-size="17"
                   font-weight="900">MODING</text>
 
-            <text x="626" y="485"
+            <text x="771" y="498"
                   fill="rgba(255,255,255,.72)"
                   font-size="17"
                   font-weight="800">외식업</text>
