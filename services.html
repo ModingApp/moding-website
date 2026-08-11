@@ -2141,12 +2141,53 @@
     }
 
     /* =========================================================
-       FINAL 5P : PHONE → DOWNLOAD ARROW
-       PC와 모바일을 완전히 별도 경로로 구현
+       SERVICES DYNAMIC ARROW MASTER FINAL
+       실제 DOM 좌표 기반 자동 연결
        ========================================================= */
 
-    #serviceFinal .final-grid {
+    /* 2~5P 타이포를 About / Alliance 계열로 통일 */
+    #serviceDiscovery .service-copy h3,
+    #servicePayment .service-copy h3,
+    #serviceInvoice .service-copy h3,
+    #serviceFinal .final-copy h2 {
+      font-size: clamp(48px, 5.4vw, 82px) !important;
+      line-height: 1.05 !important;
+      letter-spacing: -0.062em !important;
+    }
+
+    #serviceDiscovery .service-copy p,
+    #servicePayment .service-copy p,
+    #serviceInvoice .service-copy p,
+    #serviceFinal .final-copy p {
+      font-size: clamp(16px, 1.4vw, 20px) !important;
+      line-height: 1.72 !important;
+    }
+
+    #serviceDiscovery .service-note,
+    #servicePayment .service-note,
+    #serviceInvoice .service-note {
+      font-size: 14px !important;
+      line-height: 1.65 !important;
+    }
+
+    /* 다운로드 버튼 */
+    #serviceFinal .download-button {
       position: relative;
+      z-index: 8;
+      justify-content: center;
+      font-size: 15px !important;
+      font-weight: 900 !important;
+    }
+
+    #serviceFinal .download-button span,
+    #serviceFinal .download-button span:last-child {
+      color: #fff !important;
+      font-size: 15px !important;
+    }
+
+    /* 최종 장면 좌표 기준 */
+    #serviceFinal .final-grid {
+      position: relative !important;
       overflow: visible !important;
     }
 
@@ -2156,35 +2197,25 @@
       z-index: 3;
     }
 
-    #serviceFinal .download-button {
-      position: relative;
-      z-index: 6;
-      justify-content: center;
-    }
-
-    /* 예전 span:last-child 주황 화살표 스타일 무력화 */
-    #serviceFinal .download-button span:last-child {
-      color: inherit !important;
-      font-size: inherit !important;
-    }
-
-    .phone-to-download-arrow {
+    /* 동적 화살표 SVG */
+    .dynamic-download-arrow {
       position: absolute;
       inset: 0;
-      z-index: 4;
+      z-index: 5;
       pointer-events: none;
       overflow: visible;
     }
 
-    .phone-to-download-arrow svg {
+    .dynamic-download-arrow svg {
+      display: block;
       width: 100%;
       height: 100%;
       overflow: visible;
     }
 
-    .route-shadow,
-    .route-main,
-    .route-head {
+    .dynamic-arrow-shadow,
+    .dynamic-arrow-body,
+    .dynamic-arrow-head {
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -2193,148 +2224,162 @@
       stroke-dashoffset: 100;
     }
 
-    .route-shadow {
-      stroke: rgba(228, 87, 87, .20);
-      stroke-width: 11.5;
+    .dynamic-arrow-shadow {
+      stroke: rgba(228, 87, 87, .18);
+      stroke-width: 11;
     }
 
-    .route-main {
+    .dynamic-arrow-body {
       stroke: #E45757;
-      stroke-width: 7;
+      stroke-width: 6.8;
     }
 
-    .route-head {
+    .dynamic-arrow-head {
       stroke: #E45757;
-      stroke-width: 6.6;
+      stroke-width: 6.4;
     }
 
-    .phone-to-download-arrow.is-visible .route-shadow,
-    .phone-to-download-arrow.is-visible .route-main {
-      animation: phoneToDownloadDraw 1.8s cubic-bezier(.32,.72,.22,1) forwards;
+    .dynamic-download-arrow.is-visible .dynamic-arrow-shadow,
+    .dynamic-download-arrow.is-visible .dynamic-arrow-body {
+      animation: dynamicArrowDraw 1.85s cubic-bezier(.32,.72,.22,1) forwards;
     }
 
-    .phone-to-download-arrow.is-visible .pc-route-head-a,
-    .phone-to-download-arrow.is-visible .mobile-route-head-a {
-      animation: phoneToDownloadDraw .30s ease-out 1.52s forwards;
+    .dynamic-download-arrow.is-visible .dynamic-arrow-head:first-of-type {
+      animation: dynamicArrowDraw .30s ease-out 1.55s forwards;
     }
 
-    .phone-to-download-arrow.is-visible .pc-route-head-b,
-    .phone-to-download-arrow.is-visible .mobile-route-head-b {
-      animation: phoneToDownloadDraw .30s ease-out 1.62s forwards;
+    .dynamic-download-arrow.is-visible .dynamic-arrow-head:last-of-type {
+      animation: dynamicArrowDraw .30s ease-out 1.65s forwards;
     }
 
-    @keyframes phoneToDownloadDraw {
+    @keyframes dynamicArrowDraw {
       from { stroke-dashoffset: 100; }
       to { stroke-dashoffset: 0; }
     }
 
-    /* PC: 폰에서 왼쪽 아래 버튼으로 길게 연결 */
-    .phone-to-download-arrow-pc {
-      display: block;
-    }
-
-    .phone-to-download-arrow-mobile {
-      display: none;
-    }
-
-    /* 모바일: 폰 우측으로 빠져 위로 우회한 뒤 버튼을 가리킴 */
+    /* 모바일 타이포 = 다른 페이지 규격 */
     @media (max-width: 820px) {
-      .phone-to-download-arrow-pc {
-        display: none;
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3,
+      #serviceFinal .final-copy h2 {
+        font-size: clamp(38px, 10vw, 50px) !important;
+        line-height: 1.06 !important;
       }
 
-      .phone-to-download-arrow-mobile {
-        display: block;
-        inset: 0 -8px 0 0;
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p,
+      #serviceFinal .final-copy p {
+        font-size: 15px !important;
+        line-height: 1.55 !important;
       }
 
-      #serviceFinal .final-copy,
-      #serviceFinal .final-visual {
-        z-index: 3;
+      #serviceDiscovery .service-note,
+      #servicePayment .service-note,
+      #serviceInvoice .service-note {
+        font-size: 13px !important;
+        line-height: 1.55 !important;
+      }
+
+      #serviceFinal .service-flow {
+        display: none !important;
       }
 
       #serviceFinal .download-button {
-        z-index: 6;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .phone-to-download-arrow-mobile {
-        inset: 0 -5px 0 0;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .route-shadow,
-      .route-main,
-      .route-head {
-        animation: none !important;
-        stroke-dashoffset: 0 !important;
-      }
-    }
-
-    /* =========================================================
-       MOBILE 5P SPACING REFINEMENT
-       버튼 ↔ 휴대폰 사이 여백 확보 / 화살표 노출 강화
-       ========================================================= */
-    @media (max-width: 820px) {
-      #serviceFinal .final-grid {
-        grid-template-rows: auto minmax(0, 1fr) !important;
-        row-gap: 0 !important;
+        width: auto !important;
+        min-width: 220px !important;
+        min-height: 52px !important;
+        margin-top: 16px !important;
+        padding: 0 22px !important;
       }
 
-      /* 폰을 아래로 내려 화살표가 지나갈 공간 확보 */
+      /* 폰을 조금 내려 화살표가 우측으로 돌아갈 공간 확보 */
       #serviceFinal .final-visual {
-        padding-top: 54px;
+        padding-top: 78px !important;
         align-items: flex-end !important;
       }
 
       #serviceFinal .phone-stage {
-        height: 30vh;
-        max-height: 320px;
-        margin-top: 0;
+        height: 31vh !important;
+        max-height: 330px !important;
       }
 
       #serviceFinal .phone-shell {
-        width: min(46vw, 184px);
-      }
-
-      /* 우회 화살표가 버튼과 폰 사이 공간을 충분히 사용 */
-      .phone-to-download-arrow-mobile {
-        inset: 0 -10px 0 0;
-      }
-
-      .phone-to-download-arrow-mobile svg {
-        overflow: visible;
+        width: min(46vw, 184px) !important;
       }
     }
 
     @media (max-width: 520px) {
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3,
+      #serviceFinal .final-copy h2 {
+        font-size: clamp(34px, 9.7vw, 43px) !important;
+      }
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p,
+      #serviceFinal .final-copy p {
+        font-size: 14px !important;
+      }
+
+      #serviceDiscovery .service-note,
+      #servicePayment .service-note,
+      #serviceInvoice .service-note {
+        font-size: 13px !important;
+      }
+
+      #serviceFinal .download-button,
+      #serviceFinal .download-button span {
+        font-size: 15px !important;
+      }
+
       #serviceFinal .final-visual {
-        padding-top: 48px;
+        padding-top: 68px !important;
       }
 
       #serviceFinal .phone-stage {
-        height: 29vh;
-        max-height: 300px;
+        height: 29vh !important;
+        max-height: 300px !important;
       }
 
       #serviceFinal .phone-shell {
-        width: min(44vw, 172px);
-      }
-
-      .phone-to-download-arrow-mobile {
-        inset: 0 -7px 0 0;
+        width: min(44vw, 172px) !important;
       }
     }
 
     @media (max-height: 700px) and (max-width: 820px) {
+      #serviceDiscovery .service-copy h3,
+      #servicePayment .service-copy h3,
+      #serviceInvoice .service-copy h3,
+      #serviceFinal .final-copy h2 {
+        font-size: clamp(30px, 6.3vh, 38px) !important;
+      }
+
+      #serviceDiscovery .service-copy p,
+      #servicePayment .service-copy p,
+      #serviceInvoice .service-copy p,
+      #serviceFinal .final-copy p {
+        font-size: 13px !important;
+      }
+
       #serviceFinal .final-visual {
-        padding-top: 34px;
+        padding-top: 46px !important;
       }
 
       #serviceFinal .phone-stage {
-        height: 23vh;
+        height: 23vh !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dynamic-arrow-shadow,
+      .dynamic-arrow-body,
+      .dynamic-arrow-head {
+        animation: none !important;
+        stroke-dashoffset: 0 !important;
       }
     }
 </style>
@@ -2799,70 +2844,28 @@
           </a>
         </div>
 
-        <!-- PC 전용: 휴대폰 → 앱 다운로드 버튼 -->
-        <div class="phone-to-download-arrow phone-to-download-arrow-pc reveal" aria-hidden="true">
-          <svg viewBox="0 0 1000 520" preserveAspectRatio="none">
+        <!-- 실제 DOM 좌표를 읽어 자동 연결되는 화살표 -->
+        <div class="dynamic-download-arrow reveal" id="dynamicDownloadArrow" aria-hidden="true">
+          <svg id="dynamicDownloadArrowSvg">
             <path
-              class="route-shadow pc-route"
+              id="dynamicArrowShadow"
+              class="dynamic-arrow-shadow"
               pathLength="100"
-              d="M770 315
-                 C705 332 650 330 600 308
-                 C540 282 480 286 434 325
-                 C390 362 360 400 314 415"
             />
             <path
-              class="route-main pc-route"
+              id="dynamicArrowBody"
+              class="dynamic-arrow-body"
               pathLength="100"
-              d="M770 315
-                 C705 332 650 330 600 308
-                 C540 282 480 286 434 325
-                 C390 362 360 400 314 415"
-            />
-
-            <path
-              class="route-head pc-route pc-route-head-a"
-              pathLength="100"
-              d="M333 397 C325 404 318 411 309 421"
             />
             <path
-              class="route-head pc-route pc-route-head-b"
+              id="dynamicArrowHeadA"
+              class="dynamic-arrow-head"
               pathLength="100"
-              d="M342 425 C330 422 319 420 307 421"
-            />
-          </svg>
-        </div>
-
-        <!-- 모바일 전용: 휴대폰 우측 → 우회 → 앱 다운로드 버튼 -->
-        <div class="phone-to-download-arrow phone-to-download-arrow-mobile reveal" aria-hidden="true">
-          <svg viewBox="0 0 390 620" preserveAspectRatio="none">
-            <path
-              class="route-shadow mobile-route"
-              pathLength="100"
-              d="M238 505
-                 C330 488 360 432 352 360
-                 C346 300 322 264 320 218
-                 C317 166 337 126 313 102
-                 C289 78 253 84 220 100"
             />
             <path
-              class="route-main mobile-route"
+              id="dynamicArrowHeadB"
+              class="dynamic-arrow-head"
               pathLength="100"
-              d="M238 505
-                 C330 488 360 432 352 360
-                 C346 300 322 264 320 218
-                 C317 166 337 126 313 102
-                 C289 78 253 84 220 100"
-            />
-
-            <path
-              class="route-head mobile-route mobile-route-head-a"
-              pathLength="100"
-              d="M240 82 C232 90 225 97 215 106"
-            />
-            <path
-              class="route-head mobile-route mobile-route-head-b"
-              pathLength="100"
-              d="M246 113 C235 108 225 105 214 106"
             />
           </svg>
         </div>
@@ -3251,6 +3254,199 @@
         }
       }
     );
-  </script>
+  
+
+    /* =========================================================
+       DYNAMIC DOWNLOAD ARROW
+       하드코딩 좌표 없이 실제 버튼/휴대폰 좌표를 자동 계산
+       ========================================================= */
+    const dynamicArrowWrap = document.getElementById("dynamicDownloadArrow");
+    const dynamicArrowSvg = document.getElementById("dynamicDownloadArrowSvg");
+    const dynamicArrowShadow = document.getElementById("dynamicArrowShadow");
+    const dynamicArrowBody = document.getElementById("dynamicArrowBody");
+    const dynamicArrowHeadA = document.getElementById("dynamicArrowHeadA");
+    const dynamicArrowHeadB = document.getElementById("dynamicArrowHeadB");
+    const finalGrid = document.querySelector("#serviceFinal .final-grid");
+    const finalPhone = document.querySelector("#serviceFinal .phone-shell");
+    const finalDownloadButton = document.querySelector("#serviceFinal .download-button");
+
+    let dynamicArrowRaf = null;
+
+    function setDynamicArrowPath() {
+      if (
+        !dynamicArrowWrap ||
+        !dynamicArrowSvg ||
+        !dynamicArrowBody ||
+        !dynamicArrowShadow ||
+        !dynamicArrowHeadA ||
+        !dynamicArrowHeadB ||
+        !finalGrid ||
+        !finalPhone ||
+        !finalDownloadButton
+      ) {
+        return;
+      }
+
+      const gridRect = finalGrid.getBoundingClientRect();
+      const phoneRect = finalPhone.getBoundingClientRect();
+      const buttonRect = finalDownloadButton.getBoundingClientRect();
+
+      const width = Math.max(1, Math.round(gridRect.width));
+      const height = Math.max(1, Math.round(gridRect.height));
+
+      dynamicArrowSvg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      dynamicArrowSvg.setAttribute("preserveAspectRatio", "none");
+
+      const mobile = window.matchMedia("(max-width: 820px)").matches;
+
+      let startX;
+      let startY;
+      let endX;
+      let endY;
+      let d;
+
+      if (!mobile) {
+        /*
+         * PC:
+         * 휴대폰 왼쪽 하단 → 부드럽게 왼쪽으로 우회 → 다운로드 버튼 오른쪽
+         */
+        startX = phoneRect.left - gridRect.left - 10;
+        startY = phoneRect.top - gridRect.top + phoneRect.height * 0.66;
+
+        endX = buttonRect.right - gridRect.left + 8;
+        endY = buttonRect.top - gridRect.top + buttonRect.height * 0.52;
+
+        const distance = Math.max(120, startX - endX);
+        const c1x = startX - distance * 0.22;
+        const c1y = startY + 18;
+
+        const c2x = endX + distance * 0.58;
+        const c2y = endY + 54;
+
+        const midX = endX + distance * 0.42;
+        const midY = endY + 40;
+
+        d = [
+          `M ${startX.toFixed(1)} ${startY.toFixed(1)}`,
+          `C ${c1x.toFixed(1)} ${c1y.toFixed(1)},`,
+          `${(startX - distance * 0.40).toFixed(1)} ${(startY + 42).toFixed(1)},`,
+          `${midX.toFixed(1)} ${midY.toFixed(1)}`,
+          `C ${(endX + distance * 0.27).toFixed(1)} ${(endY + 32).toFixed(1)},`,
+          `${(endX + distance * 0.12).toFixed(1)} ${(endY + 8).toFixed(1)},`,
+          `${endX.toFixed(1)} ${endY.toFixed(1)}`
+        ].join(" ");
+      } else {
+        /*
+         * 모바일:
+         * 휴대폰 오른쪽 → 화면 우측으로 크게 우회 → 버튼 오른쪽으로 진입
+         */
+        startX = phoneRect.right - gridRect.left + 4;
+        startY = phoneRect.top - gridRect.top + phoneRect.height * 0.46;
+
+        endX = buttonRect.right - gridRect.left + 5;
+        endY = buttonRect.top - gridRect.top + buttonRect.height * 0.52;
+
+        const safeRight = Math.max(
+          startX + 34,
+          Math.min(width - 8, Math.max(startX, endX) + 60)
+        );
+
+        const middleY = endY + Math.max(58, (startY - endY) * 0.44);
+
+        d = [
+          `M ${startX.toFixed(1)} ${startY.toFixed(1)}`,
+          `C ${safeRight.toFixed(1)} ${(startY - 6).toFixed(1)},`,
+          `${safeRight.toFixed(1)} ${(middleY + 60).toFixed(1)},`,
+          `${safeRight.toFixed(1)} ${middleY.toFixed(1)}`,
+          `C ${safeRight.toFixed(1)} ${(endY + 28).toFixed(1)},`,
+          `${(endX + 52).toFixed(1)} ${endY.toFixed(1)},`,
+          `${endX.toFixed(1)} ${endY.toFixed(1)}`
+        ].join(" ");
+      }
+
+      dynamicArrowBody.setAttribute("d", d);
+      dynamicArrowShadow.setAttribute("d", d);
+
+      /*
+       * 화살촉은 끝점 직전의 방향을 기준으로 계산합니다.
+       * 마지막 구간은 버튼 쪽으로 거의 수평 진입하도록 설계되어 있으므로
+       * 버튼 오른쪽을 향해 자연스럽게 붙습니다.
+       */
+      const headLength = mobile ? 15 : 17;
+      const headSpread = mobile ? 11 : 12;
+
+      const tailX = endX + headLength;
+      const tailY = endY;
+
+      dynamicArrowHeadA.setAttribute(
+        "d",
+        `M ${tailX.toFixed(1)} ${(tailY - headSpread).toFixed(1)} ` +
+        `Q ${(endX + headLength * 0.45).toFixed(1)} ${(endY - 5).toFixed(1)} ` +
+        `${endX.toFixed(1)} ${endY.toFixed(1)}`
+      );
+
+      dynamicArrowHeadB.setAttribute(
+        "d",
+        `M ${tailX.toFixed(1)} ${(tailY + headSpread).toFixed(1)} ` +
+        `Q ${(endX + headLength * 0.45).toFixed(1)} ${(endY + 5).toFixed(1)} ` +
+        `${endX.toFixed(1)} ${endY.toFixed(1)}`
+      );
+    }
+
+    function scheduleDynamicArrowUpdate() {
+      if (dynamicArrowRaf) {
+        cancelAnimationFrame(dynamicArrowRaf);
+      }
+
+      dynamicArrowRaf = requestAnimationFrame(() => {
+        setDynamicArrowPath();
+        dynamicArrowRaf = null;
+      });
+    }
+
+    /*
+     * 레이아웃이 확정된 뒤 좌표 계산.
+     * 폰 이미지가 늦게 로드돼도 다시 계산합니다.
+     */
+    scheduleDynamicArrowUpdate();
+
+    window.addEventListener("load", scheduleDynamicArrowUpdate);
+    window.addEventListener("resize", scheduleDynamicArrowUpdate);
+    window.addEventListener("orientationchange", scheduleDynamicArrowUpdate);
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener(
+        "resize",
+        scheduleDynamicArrowUpdate
+      );
+    }
+
+    if ("ResizeObserver" in window && finalGrid) {
+      const dynamicArrowResizeObserver =
+        new ResizeObserver(scheduleDynamicArrowUpdate);
+
+      dynamicArrowResizeObserver.observe(finalGrid);
+
+      if (finalPhone) {
+        dynamicArrowResizeObserver.observe(finalPhone);
+      }
+
+      if (finalDownloadButton) {
+        dynamicArrowResizeObserver.observe(finalDownloadButton);
+      }
+    }
+
+    const appMainImage =
+      document.querySelector("#serviceFinal .phone-screen img");
+
+    if (appMainImage && !appMainImage.complete) {
+      appMainImage.addEventListener(
+        "load",
+        scheduleDynamicArrowUpdate,
+        { once: true }
+      );
+    }
+
+</script>
 </body>
 </html>
