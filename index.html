@@ -878,7 +878,7 @@
     .page-indicator {
       position: fixed;
       z-index: 900;
-      right: 24px;
+      right: 82px;
       top: 50%;
       transform: translateY(-50%);
 
@@ -886,6 +886,52 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
+    }
+
+    /* =========================================================
+       09-A. SITE SIDE NAV
+       INDEX → ABOUT
+       ========================================================= */
+    .site-side-nav {
+      position: fixed;
+      z-index: 910;
+      right: 14px;
+      top: 50%;
+      min-width: 48px;
+      height: 46px;
+      padding: 0 14px;
+      border: 1px solid rgba(35,139,34,.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 8px 28px rgba(20,50,20,.08);
+      color: var(--moding-green);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      transform: translateY(-50%);
+      backdrop-filter: blur(7px);
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        color .2s ease;
+    }
+
+    .site-side-nav:hover {
+      color: var(--moding-orange);
+      transform: translate(3px, -50%);
+      box-shadow: 0 12px 34px rgba(20,50,20,.12);
+    }
+
+    .site-side-nav .side-arrow {
+      color: var(--moding-orange);
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 950;
     }
 
     .page-indicator button {
@@ -1016,6 +1062,25 @@
       }
 
       .page-indicator {
+        display: none;
+      }
+
+      .site-side-nav {
+        top: auto;
+        right: 12px;
+        bottom: 12px;
+        min-width: 42px;
+        height: 42px;
+        padding: 0 10px;
+        transform: none;
+        background: rgba(255,255,255,.96);
+      }
+
+      .site-side-nav:hover {
+        transform: none;
+      }
+
+      .site-side-nav .side-label {
         display: none;
       }
 
@@ -1310,6 +1375,19 @@
       </div>
     </div>
   </div>
+
+  <!-- =======================================================
+       SITE SIDE NAV
+       INDEX → ABOUT
+       ======================================================= -->
+  <a
+    href="about.html"
+    class="site-side-nav"
+    aria-label="다음 페이지: About"
+  >
+    <span class="side-label">ABOUT</span>
+    <span class="side-arrow" aria-hidden="true">›</span>
+  </a>
 
   <!-- =======================================================
        FULL PAGE SCROLL
@@ -2976,6 +3054,71 @@
       () => {
         touchStartY = null;
         touchRefreshReady = false;
+      },
+      { passive: true }
+    );
+
+    /* =========================================================
+       HORIZONTAL SITE SWIPE
+       INDEX → ABOUT
+       화면 안쪽에서 왼쪽으로 확실하게 밀 때만 이동
+       ========================================================= */
+    let pageSwipeStartX = null;
+    let pageSwipeStartY = null;
+
+    snapRoot.addEventListener(
+      "touchstart",
+      (event) => {
+        if (event.touches.length !== 1) return;
+
+        const x = event.touches[0].clientX;
+        const y = event.touches[0].clientY;
+
+        /* 브라우저 edge swipe와 충돌 방지 */
+        if (x < 45 || x > window.innerWidth - 45) {
+          pageSwipeStartX = null;
+          pageSwipeStartY = null;
+          return;
+        }
+
+        pageSwipeStartX = x;
+        pageSwipeStartY = y;
+      },
+      { passive: true }
+    );
+
+    snapRoot.addEventListener(
+      "touchend",
+      (event) => {
+        if (
+          pageSwipeStartX === null ||
+          pageSwipeStartY === null ||
+          !event.changedTouches.length
+        ) {
+          return;
+        }
+
+        const endX = event.changedTouches[0].clientX;
+        const endY = event.changedTouches[0].clientY;
+
+        const dx = endX - pageSwipeStartX;
+        const dy = endY - pageSwipeStartY;
+
+        pageSwipeStartX = null;
+        pageSwipeStartY = null;
+
+        /* 세로 스크롤 오인 방지 */
+        if (
+          Math.abs(dx) < 90 ||
+          Math.abs(dx) < Math.abs(dy) * 1.35
+        ) {
+          return;
+        }
+
+        /* 왼쪽으로 밀기 = 다음 사이트 페이지 ABOUT */
+        if (dx < 0) {
+          window.location.href = "about.html";
+        }
       },
       { passive: true }
     );
