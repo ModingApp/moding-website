@@ -2141,30 +2141,29 @@
     }
 
     /* =========================================================
-       5P DRAWING ARROW
-       기존 Services CSS는 건드리지 않고 이 블록만 추가
+       FINAL CTA DRAWING ARROWS
+       PC / MOBILE 별도 경로
        ========================================================= */
-    .cta-drawn-arrow {
-      width: 148px;
-      min-width: 118px;
-      align-self: center;
-      justify-self: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    #serviceFinal .final-grid {
+      position: relative;
+    }
+
+    .download-arrow {
+      position: absolute;
+      z-index: 5;
       pointer-events: none;
     }
 
-    .cta-drawn-arrow-svg {
+    .download-arrow svg {
       display: block;
-      width: 142px;
+      width: 100%;
       height: auto;
       overflow: visible;
     }
 
-    .cta-drawn-arrow-shadow,
-    .cta-drawn-arrow-main,
-    .cta-drawn-arrow-head {
+    .arrow-shadow,
+    .arrow-main,
+    .arrow-head {
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -2173,156 +2172,91 @@
       stroke-dashoffset: 100;
     }
 
-    .cta-drawn-arrow-shadow {
-      stroke: rgba(228, 87, 87, .22);
+    .arrow-shadow {
+      stroke: rgba(228,87,87,.18);
       stroke-width: 12;
     }
 
-    .cta-drawn-arrow-main {
+    .arrow-main {
       stroke: #E45757;
-      stroke-width: 7.5;
+      stroke-width: 7.2;
     }
 
-    .cta-drawn-arrow-head {
+    .arrow-head {
       stroke: #E45757;
-      stroke-width: 7;
+      stroke-width: 6.8;
     }
 
-    .cta-drawn-arrow.is-visible .cta-drawn-arrow-shadow {
-      animation: ctaArrowDraw 1.35s ease-out .08s forwards;
+    .download-arrow.is-visible .arrow-shadow,
+    .download-arrow.is-visible .arrow-main {
+      animation: serviceArrowDraw 1.55s ease-out forwards;
     }
 
-    .cta-drawn-arrow.is-visible .cta-drawn-arrow-main {
-      animation: ctaArrowDraw 1.35s ease-out 0s forwards;
+    .download-arrow.is-visible .pc-head-a,
+    .download-arrow.is-visible .mobile-head-a {
+      animation: serviceArrowDraw .28s ease-out 1.30s forwards;
     }
 
-    .cta-drawn-arrow.is-visible .cta-head-a {
-      animation: ctaArrowDraw .32s ease-out 1.14s forwards;
+    .download-arrow.is-visible .pc-head-b,
+    .download-arrow.is-visible .mobile-head-b {
+      animation: serviceArrowDraw .28s ease-out 1.38s forwards;
     }
 
-    .cta-drawn-arrow.is-visible .cta-head-b {
-      animation: ctaArrowDraw .32s ease-out 1.22s forwards;
-    }
-
-    @keyframes ctaArrowDraw {
+    @keyframes serviceArrowDraw {
       from { stroke-dashoffset: 100; }
       to { stroke-dashoffset: 0; }
     }
 
-    /* PC: 텍스트 → 화살표 → 폰 */
-    #serviceFinal .final-grid {
-      grid-template-columns: minmax(0, .92fr) auto minmax(0, 1fr) !important;
-      column-gap: 20px !important;
+    /* PC */
+    .download-arrow-pc {
+      display: block;
+      left: 39%;
+      top: 58%;
+      width: clamp(165px, 15vw, 230px);
+      transform: translateY(-50%);
     }
 
-    #serviceFinal .final-copy {
-      grid-column: 1;
+    .download-arrow-mobile {
+      display: none;
     }
 
-    #serviceFinal .cta-drawn-arrow {
-      grid-column: 2;
-    }
-
-    #serviceFinal .final-visual {
-      grid-column: 3;
-    }
-
-    /* MOBILE: 텍스트/다운로드 → 세로형 화살표 → 폰 */
+    /* 모바일 */
     @media (max-width: 820px) {
-      #serviceFinal .final-grid {
-        display: grid !important;
-        grid-template-columns: minmax(0, 1fr) !important;
-        grid-template-rows: auto 82px minmax(0, 1fr) !important;
-        row-gap: 0 !important;
+      .download-arrow-pc {
+        display: none;
       }
 
-      #serviceFinal .final-copy {
-        grid-column: 1;
-        grid-row: 1;
-      }
-
-      #serviceFinal .cta-drawn-arrow {
-        grid-column: 1;
-        grid-row: 2;
-        width: 100%;
-        min-width: 0;
-        height: 82px;
-        justify-content: center;
-        align-self: center;
-        justify-self: stretch;
-        overflow: visible;
-      }
-
-      #serviceFinal .cta-drawn-arrow-svg {
-        width: 112px;
-        transform: rotate(86deg);
-        transform-origin: center;
-      }
-
-      #serviceFinal .final-visual {
-        grid-column: 1;
-        grid-row: 3;
-      }
-
-      #serviceFinal .phone-stage {
-        height: 28vh;
-        max-height: 300px;
-      }
-
-      #serviceFinal .phone-shell {
-        width: min(46vw, 184px);
+      .download-arrow-mobile {
+        display: block;
+        right: 2%;
+        top: 41%;
+        width: 132px;
       }
     }
 
     @media (max-width: 520px) {
-      #serviceFinal .final-grid {
-        grid-template-rows: auto 74px minmax(0, 1fr) !important;
-      }
-
-      #serviceFinal .cta-drawn-arrow {
-        height: 74px;
-      }
-
-      #serviceFinal .cta-drawn-arrow-svg {
-        width: 102px;
-      }
-
-      #serviceFinal .phone-stage {
-        height: 27vh;
-      }
-
-      #serviceFinal .phone-shell {
-        width: min(44vw, 172px);
+      .download-arrow-mobile {
+        right: 0;
+        top: 40%;
+        width: 118px;
       }
     }
 
     @media (max-height: 700px) and (max-width: 820px) {
-      #serviceFinal .final-grid {
-        grid-template-rows: auto 58px minmax(0, 1fr) !important;
-      }
-
-      #serviceFinal .cta-drawn-arrow {
-        height: 58px;
-      }
-
-      #serviceFinal .cta-drawn-arrow-svg {
-        width: 84px;
-      }
-
-      #serviceFinal .phone-stage {
-        height: 21vh;
+      .download-arrow-mobile {
+        top: 38%;
+        width: 102px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .cta-drawn-arrow-shadow,
-      .cta-drawn-arrow-main,
-      .cta-drawn-arrow-head {
+      .arrow-shadow,
+      .arrow-main,
+      .arrow-head {
         animation: none !important;
         stroke-dashoffset: 0 !important;
       }
     }
-
 </style>
 </head>
 
@@ -2782,37 +2716,71 @@
             aria-label="모딩 앱 다운로드"
           >
             <span>모딩 앱 다운로드</span>
-            <span>↘</span>
           </a>
         </div>
 
-        <div class="cta-drawn-arrow reveal" aria-hidden="true">
-          <svg class="cta-drawn-arrow-svg" viewBox="0 0 260 130">
+        <!-- PC 전용: 다운로드 버튼 → 휴대폰 -->
+        <div class="download-arrow download-arrow-pc reveal" aria-hidden="true">
+          <svg viewBox="0 0 300 120">
             <path
-              class="cta-drawn-arrow-shadow"
+              class="arrow-shadow pc-arrow-line"
               pathLength="100"
-              d="M16 70
-                 C42 28 78 26 104 65
-                 C130 104 164 106 188 66
-                 C207 35 227 39 244 62"
+              d="M12 70
+                 C58 63 96 66 132 72
+                 C170 79 206 74 238 59
+                 C254 52 270 49 288 52"
             />
             <path
-              class="cta-drawn-arrow-main"
+              class="arrow-main pc-arrow-line"
               pathLength="100"
-              d="M16 70
-                 C42 28 78 26 104 65
-                 C130 104 164 106 188 66
-                 C207 35 227 39 244 62"
+              d="M12 70
+                 C58 63 96 66 132 72
+                 C170 79 206 74 238 59
+                 C254 52 270 49 288 52"
             />
             <path
-              class="cta-drawn-arrow-head cta-head-a"
+              class="arrow-head pc-arrow-head pc-head-a"
               pathLength="100"
-              d="M229 48 C238 54 245 61 251 69"
+              d="M270 39 C279 43 287 49 294 56"
             />
             <path
-              class="cta-drawn-arrow-head cta-head-b"
+              class="arrow-head pc-arrow-head pc-head-b"
               pathLength="100"
-              d="M229 77 C238 72 245 68 252 62"
+              d="M270 66 C279 62 287 58 295 52"
+            />
+          </svg>
+        </div>
+
+        <!-- 모바일 전용: 버튼 우측으로 우회 → 휴대폰 -->
+        <div class="download-arrow download-arrow-mobile reveal" aria-hidden="true">
+          <svg viewBox="0 0 190 250">
+            <path
+              class="arrow-shadow mobile-arrow-line"
+              pathLength="100"
+              d="M18 24
+                 C88 18 146 31 157 73
+                 C165 103 150 126 124 136
+                 C95 147 78 166 87 190
+                 C94 210 113 220 132 223"
+            />
+            <path
+              class="arrow-main mobile-arrow-line"
+              pathLength="100"
+              d="M18 24
+                 C88 18 146 31 157 73
+                 C165 103 150 126 124 136
+                 C95 147 78 166 87 190
+                 C94 210 113 220 132 223"
+            />
+            <path
+              class="arrow-head mobile-arrow-head mobile-head-a"
+              pathLength="100"
+              d="M119 207 C126 214 132 221 137 231"
+            />
+            <path
+              class="arrow-head mobile-arrow-head mobile-head-b"
+              pathLength="100"
+              d="M148 216 C141 219 136 223 132 229"
             />
           </svg>
         </div>
