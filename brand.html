@@ -1197,7 +1197,511 @@
         transition: none !important;
       }
     }
-  </style>
+  
+    /* =========================================================
+       BRAND FULL PAGE + BOTTOM NAV FINAL
+       ========================================================= */
+    :root {
+      --scene-height: calc(100dvh - var(--header-height));
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    .snap-root {
+      position: fixed;
+      top: var(--header-height);
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: var(--scene-height);
+      padding: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      background: #fff;
+    }
+
+    .scene {
+      position: relative;
+      width: 100%;
+      height: var(--scene-height) !important;
+      min-height: var(--scene-height) !important;
+      max-height: var(--scene-height);
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      overflow: hidden;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .brand-hero {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-hero .hero-frame {
+      height: 100%;
+      padding-top: 38px;
+      padding-bottom: 56px;
+    }
+
+    .brand-hero .hero-art svg {
+      max-height: 66vh;
+    }
+
+    .name-section > .container {
+      height: 100%;
+      padding-top: 28px;
+      padding-bottom: 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .name-head {
+      margin-bottom: 18px;
+    }
+
+    .name-head .section-desc {
+      margin-top: 10px;
+    }
+
+    .name-block {
+      min-height: 0;
+      height: min(46vh, 390px);
+      padding: 20px 38px 18px 0;
+    }
+
+    .name-block + .name-block {
+      padding-left: 38px;
+    }
+
+    .name-block > div:first-child {
+      min-height: 164px;
+    }
+
+    .name-big {
+      min-height: 110px;
+      margin: 18px 0 12px;
+      font-size: clamp(46px, 5.7vw, 82px);
+    }
+
+    .name-copy h3 {
+      margin-bottom: 8px;
+      font-size: clamp(23px, 2.5vw, 34px);
+    }
+
+    .name-copy p {
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-section .logo-frame {
+      height: 100%;
+      padding-top: 32px;
+      padding-bottom: 56px;
+    }
+
+    .logo-visual {
+      min-height: 0;
+      height: min(62vh, 510px);
+    }
+
+    .logo-system {
+      width: min(100%, 480px);
+    }
+
+    .logo-note {
+      margin-top: 20px;
+      padding-top: 17px;
+    }
+
+    .color-section > .container {
+      height: 100%;
+      padding-top: 28px;
+      padding-bottom: 58px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .color-head {
+      margin-bottom: 20px;
+    }
+
+    .color-head .section-desc {
+      margin-top: 10px;
+    }
+
+    .color-stack {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .color-band {
+      min-height: min(39vh, 318px);
+      padding: 24px 22px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      gap: 14px;
+    }
+
+    .color-name {
+      font-size: clamp(26px, 3vw, 42px);
+    }
+
+    .color-meta {
+      text-align: left;
+      font-size: 12.5px;
+    }
+
+    .end-section {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+
+    .end-inner {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 24px 18px;
+    }
+
+    .end-section .site-footer {
+      flex: 0 0 auto;
+      width: 100%;
+      margin: 0;
+      padding: 18px 20px 20px;
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.58);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .end-section .site-footer .footer-links a {
+      color: rgba(255,255,255,.9);
+    }
+
+    .section-next,
+    .site-side-nav {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      padding: 0;
+      border: 1px solid rgba(35,139,34,.10);
+      border-radius: 50%;
+      background: rgba(255,255,255,.98);
+      box-shadow:
+        0 8px 24px rgba(0,0,0,.12),
+        inset 0 0 0 1px rgba(255,255,255,.45);
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+
+    .section-next svg,
+    .site-side-nav svg {
+      width: 24px;
+      height: 24px;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .section-next path,
+    .site-side-nav path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 3.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .section-next {
+      position: absolute;
+      z-index: 60;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      animation: brandBottomArrow 1.5s ease-in-out infinite;
+      filter: none;
+    }
+
+    @keyframes brandBottomArrow {
+      0%,100% { transform: translate(-50%,0); }
+      50% { transform: translate(-50%,6px); }
+    }
+
+    .brand-hero .section-next,
+    .end-section .section-next {
+      color: var(--orange);
+    }
+
+    .site-side-nav {
+      position: fixed;
+      z-index: 910;
+      top: auto;
+      bottom: 18px;
+      transform: none;
+      padding: 0;
+    }
+
+    .site-side-nav.prev {
+      left: 18px;
+    }
+
+    .site-side-nav.next {
+      right: 18px;
+    }
+
+    .site-side-nav.prev:hover,
+    .site-side-nav.next:hover {
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 820px) {
+      .brand-hero .hero-frame {
+        height: 100%;
+        min-height: 0;
+        padding-top: 24px;
+        padding-bottom: 48px;
+      }
+
+      .brand-hero .hero-art svg {
+        max-height: 34vh;
+      }
+
+      .name-section > .container {
+        padding-top: 20px;
+        padding-bottom: 48px;
+      }
+
+      .name-head {
+        margin-bottom: 12px;
+      }
+
+      .name-head .section-desc {
+        display: none;
+      }
+
+      .name-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .name-block {
+        height: auto;
+        min-height: 0;
+        padding: 15px 12px 13px 0;
+      }
+
+      .name-block + .name-block {
+        padding-left: 12px;
+      }
+
+      .name-block > div:first-child {
+        min-height: 112px;
+      }
+
+      .name-number {
+        font-size: 10px;
+      }
+
+      .name-big {
+        min-height: 70px;
+        margin: 9px 0 7px;
+        font-size: clamp(31px, 9vw, 45px);
+      }
+
+      .name-copy h3 {
+        margin-bottom: 5px;
+        font-size: clamp(18px, 4.7vw, 24px);
+      }
+
+      .name-copy p {
+        font-size: 11px;
+        line-height: 1.48;
+      }
+
+      .logo-section .logo-frame {
+        height: 100%;
+        padding-top: 22px;
+        padding-bottom: 48px;
+        gap: 12px;
+      }
+
+      .logo-visual {
+        min-height: 0;
+        height: min(38vh, 325px);
+      }
+
+      .logo-copy .section-desc {
+        margin-top: 10px;
+      }
+
+      .logo-note {
+        margin-top: 10px;
+        padding-top: 10px;
+        font-size: 11.5px;
+        line-height: 1.5;
+      }
+
+      .color-section > .container {
+        padding-top: 20px;
+        padding-bottom: 48px;
+      }
+
+      .color-head {
+        margin-bottom: 12px;
+      }
+
+      .color-head .section-desc {
+        display: none;
+      }
+
+      .color-stack {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .color-band {
+        min-height: 0;
+        height: 19vh;
+        max-height: 128px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+
+      .color-name {
+        font-size: clamp(21px, 6vw, 30px);
+      }
+
+      .color-meta {
+        text-align: right;
+        font-size: 10px;
+      }
+
+      .end-inner {
+        padding: 22px 20px 12px;
+      }
+
+      .end-title {
+        font-size: clamp(36px, 10vw, 50px);
+      }
+
+      .end-section .site-footer {
+        font-size: 9px;
+      }
+
+      .section-next,
+      .site-side-nav {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+      }
+
+      .section-next {
+        bottom: 12px;
+      }
+
+      .site-side-nav {
+        bottom: 12px;
+      }
+
+      .site-side-nav.prev {
+        left: 12px;
+      }
+
+      .site-side-nav.next {
+        right: 12px;
+      }
+
+      .section-next svg,
+      .site-side-nav svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      .site-side-nav.prev:hover,
+      .site-side-nav.next:hover {
+        transform: none;
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+      .brand-hero .hero-frame,
+      .name-section > .container,
+      .logo-section .logo-frame,
+      .color-section > .container {
+        padding-top: 12px;
+        padding-bottom: 40px;
+      }
+
+      .name-head {
+        margin-bottom: 7px;
+      }
+
+      .name-block > div:first-child {
+        min-height: 90px;
+      }
+
+      .name-big {
+        min-height: 56px;
+        font-size: clamp(28px, 7vh, 38px);
+      }
+
+      .name-copy p,
+      .logo-note {
+        display: none;
+      }
+
+      .logo-visual {
+        height: min(34vh, 265px);
+      }
+
+      .color-band {
+        height: 17vh;
+        max-height: 102px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .section-next {
+        animation: none !important;
+      }
+    }
+
+</style>
 </head>
 
 <body>
@@ -1271,25 +1775,27 @@
   <a
     href="about.html"
     class="site-side-nav prev"
-    aria-label="이전 페이지: About"
+    aria-label="이전 사이트 페이지: About"
   >
-    <span class="side-arrow" aria-hidden="true">‹</span>
-    <span class="side-label">ABOUT</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M16 5 L9 12 L16 19"/>
+    </svg>
   </a>
 
   <a
     href="services.html"
     class="site-side-nav next"
-    aria-label="다음 페이지: Services"
+    aria-label="다음 사이트 페이지: Services"
   >
-    <span class="side-label">SERVICES</span>
-    <span class="side-arrow" aria-hidden="true">›</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8 5 L15 12 L8 19"/>
+    </svg>
   </a>
 
-  <main>
+  <main class="snap-root" id="snapRoot">
 
     <!-- HERO -->
-    <section id="brandHero" class="section brand-hero">
+    <section id="brandHero" class="section scene brand-hero">
       <div class="container hero-frame">
 
         <div class="hero-copy reveal">
@@ -1356,17 +1862,17 @@
         type="button"
         class="section-next"
         data-scroll-target="brandName"
-        aria-label="다음 브랜드 섹션으로 이동"
+        aria-label="다음 브랜드 장면으로 이동"
       >
-        <svg viewBox="0 0 54 42" aria-hidden="true">
-          <path d="M12 15 L27 29 L42 15"/>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
 
     </section>
 
     <!-- BRAND NAME -->
-    <section id="brandName" class="section name-section">
+    <section id="brandName" class="section scene name-section">
       <div class="container">
 
         <div class="name-head reveal">
@@ -1410,7 +1916,7 @@
 
           <article class="name-block reveal">
             <div>
-              <div class="name-number">02 · 모두의 연결</div>
+              <div class="name-number">02 · MODOO</div>
 
               <div class="name-big">
                 모두
@@ -1437,17 +1943,17 @@
         type="button"
         class="section-next"
         data-scroll-target="brandLogo"
-        aria-label="다음 브랜드 섹션으로 이동"
+        aria-label="다음 브랜드 장면으로 이동"
       >
-        <svg viewBox="0 0 54 42" aria-hidden="true">
-          <path d="M12 15 L27 29 L42 15"/>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
 
     </section>
 
     <!-- LOGO IDENTITY -->
-    <section id="brandLogo" class="section logo-section">
+    <section id="brandLogo" class="section scene logo-section">
       <div class="container logo-frame">
 
         <div class="logo-visual reveal" aria-hidden="true">
@@ -1495,17 +2001,17 @@
         type="button"
         class="section-next"
         data-scroll-target="brandColor"
-        aria-label="다음 브랜드 섹션으로 이동"
+        aria-label="다음 브랜드 장면으로 이동"
       >
-        <svg viewBox="0 0 54 42" aria-hidden="true">
-          <path d="M12 15 L27 29 L42 15"/>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
 
     </section>
 
     <!-- COLOR -->
-    <section id="brandColor" class="section color-section">
+    <section id="brandColor" class="section scene color-section">
       <div class="container">
 
         <div class="color-head reveal">
@@ -1557,17 +2063,17 @@
         type="button"
         class="section-next"
         data-scroll-target="brandEnd"
-        aria-label="다음 브랜드 섹션으로 이동"
+        aria-label="다음 브랜드 장면으로 이동"
       >
-        <svg viewBox="0 0 54 42" aria-hidden="true">
-          <path d="M12 15 L27 29 L42 15"/>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
 
     </section>
 
     <!-- END -->
-    <section id="brandEnd" class="section end-section">
+    <section id="brandEnd" class="section scene end-section">
       <div class="container end-inner reveal">
         <div class="end-kicker">MODING</div>
 
@@ -1578,10 +2084,7 @@
 
         <div class="end-mark" aria-hidden="true"></div>
       </div>
-    </section>
-
-  </main>
-
+    
   <footer class="site-footer">
     <div class="footer-links">
       <a href="terms.html">이용약관</a>
@@ -1595,6 +2098,10 @@
     통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
     대구광역시 달서구 달구벌대로 1870, 7층
   </footer>
+  </section>
+
+  </main>
+
 
   <script>
     const siteHeader = document.querySelector(".site-header");
@@ -1606,9 +2113,17 @@
         siteHeader.getBoundingClientRect().height
       );
 
+      const viewportHeight =
+        window.visualViewport?.height || window.innerHeight;
+
       document.documentElement.style.setProperty(
         "--header-height",
         `${headerHeight}px`
+      );
+
+      document.documentElement.style.setProperty(
+        "--scene-height",
+        `${Math.max(320, Math.round(viewportHeight - headerHeight))}px`
       );
     }
 
@@ -1622,6 +2137,11 @@
     }
 
     window.addEventListener("resize", syncHeaderHeight);
+    window.addEventListener("orientationchange", syncHeaderHeight);
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", syncHeaderHeight);
+    }
 
     const menuToggle =
       document.getElementById("menuToggle");
@@ -1636,14 +2156,14 @@
       mobileMenuOverlay.classList.add("is-open");
       mobileMenuOverlay.setAttribute("aria-hidden", "false");
       menuToggle.setAttribute("aria-expanded", "true");
-      document.body.style.overflow = "hidden";
+      if (snapRoot) snapRoot.style.overflowY = "hidden";
     }
 
     function closeMobileMenu() {
       mobileMenuOverlay.classList.remove("is-open");
       mobileMenuOverlay.setAttribute("aria-hidden", "true");
       menuToggle.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
+      if (snapRoot) snapRoot.style.overflowY = "auto";
     }
 
     menuToggle.addEventListener("click", openMobileMenu);
@@ -1667,6 +2187,7 @@
        브라우저 edge swipe와 세로 스크롤 충돌 방지
        ========================================================= */
     const mainContent = document.querySelector("main");
+    const snapRoot = document.getElementById("snapRoot");
 
     let pageSwipeStartX = null;
     let pageSwipeStartY = null;
