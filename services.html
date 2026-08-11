@@ -752,6 +752,119 @@
     }
 
     /* =========================================================
+       SECTION NEXT ARROW
+       ========================================================= */
+    .section-next {
+      position: absolute;
+      z-index: 40;
+      left: 50%;
+      bottom: 24px;
+      width: 54px;
+      height: 42px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      cursor: pointer;
+      transform: translateX(-50%);
+      animation: serviceArrowAlive 1.45s ease-in-out infinite;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,.10));
+    }
+
+    .service-hero .section-next {
+      color: #fff;
+    }
+
+    .section-next svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .section-next path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 4.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    @keyframes serviceArrowAlive {
+      0%,100% { transform: translate(-50%,0); }
+      50% { transform: translate(-50%,9px); }
+    }
+
+    #serviceHero,
+    #serviceDiscovery,
+    #servicePayment,
+    #serviceInvoice,
+    #serviceFinal {
+      scroll-margin-top: calc(var(--header-height) + 1px);
+    }
+
+    /* =========================================================
+       SITE SIDE NAV
+       BRAND ← SERVICES → ALLIANCE
+       ========================================================= */
+    .site-side-nav {
+      position: fixed;
+      z-index: 910;
+      top: 50%;
+      min-width: 48px;
+      height: 46px;
+      padding: 0 14px;
+      border: 1px solid rgba(35,139,34,.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 8px 28px rgba(20,50,20,.08);
+      color: var(--green);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      transform: translateY(-50%);
+      backdrop-filter: blur(7px);
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        color .2s ease;
+    }
+
+    .site-side-nav:hover {
+      color: var(--orange);
+      box-shadow: 0 12px 34px rgba(20,50,20,.12);
+    }
+
+    .site-side-nav.prev {
+      left: 14px;
+    }
+
+    .site-side-nav.next {
+      right: 14px;
+    }
+
+    .site-side-nav.prev:hover {
+      transform: translate(-3px, -50%);
+    }
+
+    .site-side-nav.next:hover {
+      transform: translate(3px, -50%);
+    }
+
+    .site-side-nav .side-arrow {
+      color: var(--orange);
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    /* =========================================================
        FOOTER
        ========================================================= */
     .site-footer {
@@ -1010,6 +1123,39 @@
       .site-footer {
         font-size: 9.5px;
       }
+
+      .site-side-nav {
+        top: auto;
+        bottom: 12px;
+        min-width: 42px;
+        height: 42px;
+        padding: 0 10px;
+        transform: none;
+        background: rgba(255,255,255,.96);
+      }
+
+      .site-side-nav.prev {
+        left: 12px;
+      }
+
+      .site-side-nav.next {
+        right: 12px;
+      }
+
+      .site-side-nav.prev:hover,
+      .site-side-nav.next:hover {
+        transform: none;
+      }
+
+      .site-side-nav .side-label {
+        display: none;
+      }
+
+      .section-next {
+        bottom: 12px;
+        width: 48px;
+        height: 38px;
+      }
     }
 
     @media (max-width: 380px) {
@@ -1060,7 +1206,8 @@
       .pay-card,
       .pay-check,
       .invoice-sheet,
-      .invoice-stamp {
+      .invoice-stamp,
+      .section-next {
         animation: none !important;
       }
 
@@ -1141,10 +1288,29 @@
     </div>
   </div>
 
+  <!-- 사이트 좌우 이동 -->
+  <a
+    href="brand.html"
+    class="site-side-nav prev"
+    aria-label="이전 페이지: Brand"
+  >
+    <span class="side-arrow" aria-hidden="true">‹</span>
+    <span class="side-label">BRAND</span>
+  </a>
+
+  <a
+    href="alliance.html"
+    class="site-side-nav next"
+    aria-label="다음 페이지: Alliance"
+  >
+    <span class="side-label">ALLIANCE</span>
+    <span class="side-arrow" aria-hidden="true">›</span>
+  </a>
+
   <main>
 
     <!-- HERO -->
-    <section class="section service-hero">
+    <section id="serviceHero" class="section service-hero">
       <div class="container hero-frame">
 
         <div class="hero-copy reveal">
@@ -1212,10 +1378,22 @@
         </div>
 
       </div>
+
+      <button
+        type="button"
+        class="section-next"
+        data-scroll-target="serviceDiscovery"
+        aria-label="다음 서비스 섹션으로 이동"
+      >
+        <svg viewBox="0 0 54 42" aria-hidden="true">
+          <path d="M12 15 L27 29 L42 15"/>
+        </svg>
+      </button>
+
     </section>
 
     <!-- 2P 상품 발견 -->
-    <section class="section service-panel">
+    <section id="serviceDiscovery" class="section service-panel">
       <div class="container service-grid">
 
         <div class="service-copy reveal">
@@ -1309,10 +1487,22 @@
         </div>
 
       </div>
+
+      <button
+        type="button"
+        class="section-next"
+        data-scroll-target="servicePayment"
+        aria-label="다음 서비스 섹션으로 이동"
+      >
+        <svg viewBox="0 0 54 42" aria-hidden="true">
+          <path d="M12 15 L27 29 L42 15"/>
+        </svg>
+      </button>
+
     </section>
 
     <!-- 3P 카드결제 -->
-    <section class="section service-panel alt">
+    <section id="servicePayment" class="section service-panel alt">
       <div class="container service-grid reverse">
 
         <div class="service-visual reveal" aria-hidden="true">
@@ -1367,10 +1557,22 @@
         </div>
 
       </div>
+
+      <button
+        type="button"
+        class="section-next"
+        data-scroll-target="serviceInvoice"
+        aria-label="다음 서비스 섹션으로 이동"
+      >
+        <svg viewBox="0 0 54 42" aria-hidden="true">
+          <path d="M12 15 L27 29 L42 15"/>
+        </svg>
+      </button>
+
     </section>
 
     <!-- 4P 세금계산서 -->
-    <section class="section service-panel">
+    <section id="serviceInvoice" class="section service-panel">
       <div class="container service-grid">
 
         <div class="service-copy reveal">
@@ -1420,10 +1622,22 @@
         </div>
 
       </div>
+
+      <button
+        type="button"
+        class="section-next"
+        data-scroll-target="serviceFinal"
+        aria-label="다음 서비스 섹션으로 이동"
+      >
+        <svg viewBox="0 0 54 42" aria-hidden="true">
+          <path d="M12 15 L27 29 L42 15"/>
+        </svg>
+      </button>
+
     </section>
 
     <!-- 5P FINAL CTA -->
-    <section class="section final-section">
+    <section id="serviceFinal" class="section final-section">
       <div class="container final-grid">
 
         <div class="final-copy reveal">
@@ -1450,7 +1664,7 @@
           </div>
 
           <a
-            href="#"
+            href="/download.html"
             class="download-button"
             onclick="openModingStore(event)"
             aria-label="모딩 앱 다운로드"
@@ -1576,6 +1790,98 @@
       }
     });
 
+    /* =========================================================
+       SECTION NEXT
+       ========================================================= */
+    document
+      .querySelectorAll(".section-next[data-scroll-target]")
+      .forEach((button) => {
+        button.addEventListener("click", () => {
+          const target =
+            document.getElementById(
+              button.dataset.scrollTarget
+            );
+
+          if (!target) return;
+
+          target.scrollIntoView({
+            behavior: window.matchMedia(
+              "(prefers-reduced-motion: reduce)"
+            ).matches
+              ? "auto"
+              : "smooth",
+            block: "start"
+          });
+        });
+      });
+
+    /* =========================================================
+       HORIZONTAL SITE SWIPE
+       BRAND ← SERVICES → ALLIANCE
+       ========================================================= */
+    const mainContent =
+      document.querySelector("main");
+
+    let pageSwipeStartX = null;
+    let pageSwipeStartY = null;
+
+    mainContent.addEventListener(
+      "touchstart",
+      (event) => {
+        if (event.touches.length !== 1) return;
+
+        const x = event.touches[0].clientX;
+        const y = event.touches[0].clientY;
+
+        /* 브라우저 edge swipe와 충돌 방지 */
+        if (x < 45 || x > window.innerWidth - 45) {
+          pageSwipeStartX = null;
+          pageSwipeStartY = null;
+          return;
+        }
+
+        pageSwipeStartX = x;
+        pageSwipeStartY = y;
+      },
+      { passive: true }
+    );
+
+    mainContent.addEventListener(
+      "touchend",
+      (event) => {
+        if (
+          pageSwipeStartX === null ||
+          pageSwipeStartY === null ||
+          !event.changedTouches.length
+        ) {
+          return;
+        }
+
+        const endX = event.changedTouches[0].clientX;
+        const endY = event.changedTouches[0].clientY;
+
+        const dx = endX - pageSwipeStartX;
+        const dy = endY - pageSwipeStartY;
+
+        pageSwipeStartX = null;
+        pageSwipeStartY = null;
+
+        if (
+          Math.abs(dx) < 90 ||
+          Math.abs(dx) < Math.abs(dy) * 1.35
+        ) {
+          return;
+        }
+
+        if (dx > 0) {
+          window.location.href = "brand.html";
+        } else {
+          window.location.href = "alliance.html";
+        }
+      },
+      { passive: true }
+    );
+
     const revealItems =
       document.querySelectorAll(".reveal");
 
@@ -1620,11 +1926,11 @@
 
       if (isIOS) {
         window.location.href =
-          "https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9/id6772018982";
+          "https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982";
         return;
       }
 
-      window.location.href = "download.html";
+      window.location.href = "/download.html";
     }
 
     document.addEventListener(
