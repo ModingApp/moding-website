@@ -1,60 +1,65 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <!-- =========================================================
+       🔒 LOCK 01. 기본 메타 / OG
+       ========================================================= -->
   <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <title>모딩(Moding) | 외식업 식품 주문의 새로운 방법</title>
-
+  <title>모딩(Moding) | 사장님의 가게에 새로운 선택지를</title>
   <meta
     name="description"
-    content="모딩(Moding)은 외식업 사장님이 필요한 식품을 발견하고 주문하고 관리할 수 있도록 돕는 B2B 식품 거래 서비스입니다."
+    content="모딩(Moding)은 외식업 사장님이 새로운 식품을 발견하고 식품제조사와 연결될 수 있도록 돕는 B2B 식품 거래 앱입니다."
   >
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
-  <meta property="og:title" content="모딩(Moding) | 오늘부터 모딩하세요 :)">
-  <meta property="og:description" content="외식업 식품 주문의 새로운 방법.">
+  <meta property="og:title" content="모딩(Moding) | 사장님의 가게에 새로운 선택지를">
+  <meta property="og:description" content="전국의 좋은 식품을 모딩 앱에서 발견하세요.">
   <meta property="og:url" content="https://moding.app/">
   <meta property="og:image" content="https://moding.app/og-image.png">
+  <meta property="og:image:width" content="500">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:type" content="image/png">
 
   <style>
+    /* =========================================================
+       🔒 LOCK 02. 브랜드 / 공통 규격
+       ========================================================= */
     :root {
-      --green: #238B22;
-      --green-dark: #1C6F1C;
-      --orange: #FF8C00;
-      --white: #FFFFFF;
-      --black: #050505;
-      --ink: #173119;
-      --sub: #687269;
-      --line: #E2E8E2;
-      --soft: #F6F7F3;
-      --cream: #F7F0E6;
+      --moding-green: #238B22;
+      --moding-green-dark: #1C6F1C;
+      --moding-orange: #FF8C00;
+      --moding-orange-dark: #E67800;
 
       --page-max: 1180px;
       --page-pad: 24px;
       --header-height: 84px;
-      --scene-height: calc(100dvh - var(--header-height));
+
+      --white: #FFFFFF;
+      --black: #050505;
     }
 
+    /* =========================================================
+       01. RESET
+       ========================================================= */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html {
       width: 100%;
       height: 100%;
-      background: #fff;
       -webkit-text-size-adjust: 100%;
+      background: #fff;
     }
 
     body {
+      width: 100%;
+      height: 100%;
       overflow: hidden;
       font-family:
         -apple-system,
@@ -62,26 +67,28 @@
         "Noto Sans KR",
         "Apple SD Gothic Neo",
         sans-serif;
-      color: var(--ink);
+      background: #fff;
+      color: #fff;
       word-break: keep-all;
     }
 
     a {
       color: inherit;
+    }
+
+    button,
+    a {
       -webkit-tap-highlight-color: transparent;
     }
 
     button {
       font: inherit;
-      -webkit-tap-highlight-color: transparent;
     }
 
     img {
       display: block;
       max-width: 100%;
       height: auto;
-      -webkit-user-drag: none;
-      user-drag: none;
     }
 
     em {
@@ -89,7 +96,9 @@
     }
 
     /* =========================================================
-       HEADER
+       02. HEADER
+       - PC: 기존 공통규격
+       - Mobile: 세로형 로고 + 햄버거
        ========================================================= */
     .site-header {
       position: fixed;
@@ -97,7 +106,7 @@
       z-index: 1000;
       width: 100%;
       background: #fff;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid #E1E4E2;
     }
 
     .nav {
@@ -109,6 +118,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 28px;
+      overflow: visible;
     }
 
     .nav-logo {
@@ -118,6 +128,7 @@
       text-decoration: none;
     }
 
+    /* 🔒 세로형 원본 로고 비율 유지 */
     .nav-logo img {
       width: auto;
       height: 52px;
@@ -131,18 +142,18 @@
       justify-content: flex-end;
       gap: 22px;
       font-size: 15px;
-      font-weight: 800;
+      font-weight: 700;
     }
 
     .nav-menu a {
-      color: var(--green);
       text-decoration: none;
+      color: var(--moding-green);
       white-space: nowrap;
       transition: color .2s ease;
     }
 
     .nav-menu a:hover {
-      color: var(--orange);
+      color: var(--moding-orange);
     }
 
     .menu-toggle {
@@ -152,7 +163,7 @@
       padding: 0;
       border: 0;
       background: transparent;
-      color: var(--green);
+      color: var(--moding-green);
       cursor: pointer;
     }
 
@@ -166,7 +177,7 @@
     }
 
     /* =========================================================
-       MOBILE MENU
+       03. MOBILE MENU OVERLAY
        ========================================================= */
     .mobile-menu-overlay {
       position: fixed;
@@ -213,10 +224,10 @@
 
     .mobile-menu-body {
       flex: 1;
-      min-height: 0;
       padding: 44px 28px 34px;
       display: flex;
       flex-direction: column;
+      min-height: 0;
     }
 
     .mobile-menu-title {
@@ -235,16 +246,16 @@
 
     .mobile-menu-links a {
       width: fit-content;
-      color: #fff;
       text-decoration: none;
+      color: #fff;
       font-size: 25px;
-      font-weight: 850;
       line-height: 1.15;
+      font-weight: 850;
       letter-spacing: -0.035em;
     }
 
     .mobile-menu-links a:hover {
-      color: var(--orange);
+      color: var(--moding-orange);
     }
 
     .mobile-menu-company {
@@ -256,7 +267,7 @@
     }
 
     /* =========================================================
-       SNAP ROOT
+       04. FULL PAGE SNAP
        ========================================================= */
     .snap-root {
       position: fixed;
@@ -264,289 +275,368 @@
       right: 0;
       bottom: 0;
       left: 0;
-      height: var(--scene-height);
+
+      height: calc(100vh - var(--header-height));
+      height: calc(100dvh - var(--header-height));
+
       overflow-y: auto;
       overflow-x: hidden;
+
       scroll-snap-type: y mandatory;
-      scroll-padding: 0;
-      scroll-behavior: smooth;
+      overscroll-behavior-y: contain;
       -webkit-overflow-scrolling: touch;
-      overscroll-behavior-y: none;
-      background: #fff;
+      scroll-behavior: smooth;
+      background: var(--moding-green);
     }
 
     .scene {
       position: relative;
       width: 100%;
-      height: var(--scene-height);
-      min-height: var(--scene-height);
+      height: 100%;
+      min-height: 100%;
       overflow: hidden;
+      isolation: isolate;
+
+      background: var(--moding-green);
+      color: #fff;
+
       scroll-snap-align: start;
       scroll-snap-stop: always;
-      scroll-margin: 0 !important;
     }
 
     .scene-frame {
-      position: relative;
-      z-index: 2;
       width: 100%;
       max-width: var(--page-max);
       height: 100%;
       margin: 0 auto;
-      padding: 36px var(--page-pad) 58px;
+      padding: 36px var(--page-pad) 52px;
+
       display: grid;
-      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+      grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
       align-items: center;
-      gap: 52px;
+      gap: 36px;
     }
 
     .scene-copy {
       position: relative;
-      z-index: 4;
+      z-index: 5;
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity .7s cubic-bezier(.22,1,.36,1),
+        transform .7s cubic-bezier(.22,1,.36,1);
     }
 
-    .kicker {
-      margin-bottom: 18px;
-      color: var(--orange);
-      font-size: 12px;
+    .scene.is-active .scene-copy {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scene-copy h1,
+    .scene-copy h2 {
+      font-size: clamp(50px, 4.5vw, 78px);
+      line-height: 1.08;
+      letter-spacing: -0.06em;
       font-weight: 950;
-      letter-spacing: .18em;
+      color: #fff;
     }
 
-    .scene-title {
-      font-size: clamp(48px, 5.4vw, 82px);
-      line-height: 1.05;
-      letter-spacing: -0.062em;
-      font-weight: 950;
+    .scene-copy h1 em,
+    .scene-copy h2 em {
+      color: var(--moding-orange);
     }
 
-    .scene-title em {
-      color: var(--orange);
-    }
-
-    .scene-desc {
-      margin-top: 22px;
-      max-width: 600px;
-      color: var(--sub);
-      font-size: clamp(16px, 1.4vw, 20px);
-      line-height: 1.72;
-      font-weight: 650;
+    .scene-copy p {
+      margin-top: 26px;
+      font-size: clamp(18px, 1.55vw, 22px);
+      line-height: 1.65;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      color: rgba(255,255,255,.84);
     }
 
     .scene-art {
+      position: relative;
+      z-index: 2;
       min-width: 0;
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity .8s .08s ease,
+        transform .8s .08s cubic-bezier(.22,1,.36,1);
+
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
+    .scene.is-active .scene-art {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .scene-art svg {
-      width: min(100%, 650px);
+      width: min(100%, 620px);
       height: auto;
+      max-height: 72vh;
       overflow: visible;
     }
 
+    .svg-line {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
     /* =========================================================
-       1P REAL PHOTO
+       05. HERO RANDOM 3종
        ========================================================= */
-    .scene-hero {
-      background:
-        url("index-hero-pc.jpg")
-        center center / cover no-repeat;
+    .scene-intro .scene-frame {
+      display: block;
     }
 
-    .scene-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background:
-        linear-gradient(
-          90deg,
-          rgba(255,251,245,.96) 0%,
-          rgba(255,251,245,.90) 28%,
-          rgba(255,251,245,.45) 49%,
-          rgba(255,251,245,.06) 68%,
-          rgba(255,251,245,0) 100%
-        );
+    .hero-variant {
+      display: none;
+      width: 100%;
+      height: 100%;
+      grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+      align-items: center;
+      gap: 36px;
     }
 
-    .hero-frame {
-      grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
+    .hero-variant.is-selected {
+      display: grid;
     }
 
     .hero-copy {
-      align-self: center;
-      max-width: 620px;
+      position: relative;
+      z-index: 5;
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity .7s cubic-bezier(.22,1,.36,1),
+        transform .7s cubic-bezier(.22,1,.36,1);
+    }
+
+    .scene.is-active .hero-copy {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .hero-copy h1 {
-      color: var(--green-dark);
-      font-size: clamp(56px, 5.8vw, 88px);
-      line-height: 1.03;
-      letter-spacing: -0.068em;
+      font-size: clamp(50px, 4.5vw, 78px);
+      line-height: 1.08;
+      letter-spacing: -0.06em;
       font-weight: 950;
+      color: #fff;
     }
 
     .hero-copy h1 em {
-      color: var(--orange);
+      color: var(--moding-orange);
     }
 
     .hero-copy p {
-      margin-top: 22px;
-      color: #5B665D;
-      font-size: clamp(17px, 1.45vw, 21px);
+      margin-top: 26px;
+      font-size: clamp(18px, 1.55vw, 22px);
       line-height: 1.65;
-      font-weight: 750;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      color: rgba(255,255,255,.84);
+    }
+
+    .hero-art {
+      position: relative;
+      min-width: 0;
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity .8s .08s ease,
+        transform .8s .08s cubic-bezier(.22,1,.36,1);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scene.is-active .hero-art {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-art svg {
+      width: min(100%, 620px);
+      height: auto;
+      max-height: 72vh;
+      overflow: visible;
+    }
+
+    .hero-download-area {
+      margin-top: 30px;
     }
 
     .hero-download {
-      min-height: 58px;
-      margin-top: 26px;
-      padding: 0 24px;
-      border-radius: 999px;
-      background: var(--green);
-      color: #fff;
-      text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      font-size: 15px;
-      font-weight: 950;
-      box-shadow: 0 14px 34px rgba(35,139,34,.18);
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--moding-green);
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(0,0,0,.12);
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -0.025em;
       transition:
-        transform .18s ease,
-        background .18s ease;
+        box-shadow .2s ease,
+        transform .2s ease;
     }
 
     .hero-download:hover {
-      background: var(--green-dark);
-      transform: translateY(-2px);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 34px rgba(0,0,0,.16);
     }
 
-    .hero-download .mark {
-      color: var(--orange);
-      font-size: 18px;
+    .scene-intro.is-active .hero-variant.is-selected .hero-download {
+      animation: ctaPop .68s .28s cubic-bezier(.22,1.35,.36,1) both;
+    }
+
+    .download-arrow-mark {
+      color: var(--moding-orange);
+      font-size: 19px;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    @keyframes ctaPop {
+      0%   { opacity: 0; transform: translateY(8px) scale(.92); }
+      68%  { opacity: 1; transform: translateY(-1px) scale(1.045); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     /* =========================================================
-       2P DISCOVERY
+       06. ILLUSTRATION MOTION
        ========================================================= */
-    .scene-discovery {
-      background: #fff;
-    }
-
-    .discovery-item,
-    .discovery-lens {
+    .float-a,
+    .float-b,
+    .float-c,
+    .search-item,
+    .search-lens,
+    .connect-store,
+    .delivery-truck,
+    .delivery-box {
       transform-box: fill-box;
       transform-origin: center;
+      will-change: transform;
     }
 
-    .discovery-item {
-      transition: transform .28s ease;
+    /* 1P: 기존 그림은 그대로, 움직임만 조금 더 명확하게 */
+    .float-a {
+      animation: floatA 3.8s ease-in-out infinite;
     }
 
-    .discovery-item.is-focus {
-      transform: scale(1.10);
+    .float-b {
+      animation: floatB 3.5s .18s ease-in-out infinite;
     }
 
-    .discovery-lens {
+    .float-c {
+      animation: floatC 3.9s .35s ease-in-out infinite;
+    }
+
+    @keyframes floatA {
+      0%,100% { transform: translateY(0) rotate(-1deg); }
+      45% { transform: translateY(-10px) rotate(3deg); }
+      70% { transform: translateY(-4px) rotate(-2deg); }
+    }
+
+    @keyframes floatB {
+      0%,100% { transform: translate(0,0) rotate(-1deg); }
+      45% { transform: translate(11px,-7px) rotate(3deg); }
+      72% { transform: translate(-3px,-2px) rotate(-2deg); }
+    }
+
+    @keyframes floatC {
+      0%,100% { transform: translateY(0) rotate(0); }
+      45% { transform: translateY(-8px) rotate(1.5deg); }
+      72% { transform: translateY(-2px) rotate(-1deg); }
+    }
+
+    /* 2P: 돋보기 순회 + 비추는 상품 확대 */
+    .search-item {
       transition:
-        transform .72s cubic-bezier(.22,1,.36,1);
+        transform .48s cubic-bezier(.22,1.35,.36,1),
+        filter .48s ease,
+        opacity .28s ease;
+    }
+
+    .search-item.is-focus {
+      transform: translateY(-4px) scale(1.13);
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,.10));
+    }
+
+    .search-item .focus-accent {
+      transition: stroke-width .3s ease, opacity .3s ease, r .3s ease;
+    }
+
+    .search-item.is-focus .focus-accent {
+      opacity: 1;
+    }
+
+    .search-lens {
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,.08));
+    }
+
+    /* 3P: 상품 도착 순간 가게가 가볍게 반응 */
+    .scene.is-active .connect-store {
+      animation: storeArrival 4.2s ease-in-out infinite;
+    }
+
+    @keyframes storeArrival {
+      0%, 76%, 100% { transform: scale(1); }
+      86% { transform: scale(1.045); }
+      92% { transform: scale(.992); }
+    }
+
+    /* 4P: 트럭이 박스 옆에서 상차한 뒤 현재 자리로 이동 */
+    .delivery-truck,
+    .delivery-box {
+      animation: none;
+    }
+
+    .scene.is-active .delivery-truck {
+      animation: truckLoadAndGo 4.8s cubic-bezier(.22,.78,.28,1) both;
+    }
+
+    .scene.is-active .delivery-box {
+      animation: boxLoadCue 4.8s ease-in-out both;
+    }
+
+    @keyframes truckLoadAndGo {
+      0%   { transform: translateX(-122px) translateY(1px); }
+      18%  { transform: translateX(-122px) translateY(-1px); }
+      27%  { transform: translateX(-119px) translateY(1px); }
+      34%  { transform: translateX(-122px) translateY(0); }
+      68%  { transform: translateX(0) translateY(-2px); }
+      76%  { transform: translateX(4px) translateY(0); }
+      84%  { transform: translateX(0) translateY(-1px); }
+      100% { transform: translateX(0) translateY(0); }
+    }
+
+    @keyframes boxLoadCue {
+      0%, 18%, 38%, 100% { transform: translateY(0) rotate(0); }
+      24% { transform: translateY(-8px) rotate(-2deg) scale(1.025); }
+      31% { transform: translateY(1px) rotate(1deg) scale(.99); }
     }
 
     /* =========================================================
-       3P ORDER
-       ========================================================= */
-    .scene-order {
-      background: var(--soft);
-    }
-
-    .order-node {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: orderFloat 4.6s ease-in-out infinite;
-    }
-
-    .order-node.n2 {
-      animation-delay: .35s;
-    }
-
-    .order-node.n3 {
-      animation-delay: .7s;
-    }
-
-    .order-route {
-      stroke-dasharray: 10 12;
-      animation: routeMove 3.6s linear infinite;
-    }
-
-    @keyframes orderFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    @keyframes routeMove {
-      to { stroke-dashoffset: -44; }
-    }
-
-    /* =========================================================
-       4P CONNECT
-       ========================================================= */
-    .scene-connect {
-      background: var(--green);
-      color: #fff;
-    }
-
-    .scene-connect .kicker {
-      color: rgba(255,255,255,.72);
-    }
-
-    .scene-connect .scene-title {
-      color: #fff;
-    }
-
-    .scene-connect .scene-desc {
-      color: rgba(255,255,255,.80);
-    }
-
-    .connect-box,
-    .connect-hub,
-    .connect-store {
-      transform-box: fill-box;
-      transform-origin: center;
-    }
-
-    .connect-box {
-      animation: connectFloat 4.6s ease-in-out infinite;
-    }
-
-    .connect-hub {
-      animation: connectPulse 3.2s ease-in-out infinite;
-    }
-
-    .connect-store {
-      animation: connectFloat 4.6s ease-in-out infinite .5s;
-    }
-
-    @keyframes connectFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    @keyframes connectPulse {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.035); }
-    }
-
-    /* =========================================================
-       5P WHITE APP CTA
+       07. 5P / FINAL
        ========================================================= */
     .scene-final {
       display: flex;
       flex-direction: column;
-      background: #fff;
     }
 
     .final-main {
@@ -555,118 +645,165 @@
       width: 100%;
       max-width: var(--page-max);
       margin: 0 auto;
-      padding: 28px var(--page-pad) 16px;
+      padding: 28px var(--page-pad) 20px;
+
       display: grid;
-      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+      grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
       align-items: center;
-      gap: 52px;
-    }
-
-    .final-copy h2 {
-      font-size: clamp(48px, 5.4vw, 82px);
-      line-height: 1.05;
-      letter-spacing: -0.062em;
-      font-weight: 950;
-    }
-
-    .final-copy h2 em {
-      color: var(--orange);
-    }
-
-    .final-copy p {
-      margin-top: 22px;
-      max-width: 560px;
-      color: var(--sub);
-      font-size: clamp(16px, 1.4vw, 20px);
-      line-height: 1.7;
-      font-weight: 650;
-    }
-
-    .final-download {
-      min-height: 60px;
-      margin-top: 28px;
-      padding: 0 28px;
-      border-radius: 999px;
-      background: var(--green);
-      color: #fff;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 950;
-      box-shadow: 0 16px 40px rgba(35,139,34,.20);
-      transition:
-        transform .18s ease,
-        background .18s ease;
-    }
-
-    .final-download:hover {
-      background: var(--green-dark);
-      transform: translateY(-2px);
+      gap: 72px;
     }
 
     .final-phone-wrap {
-      min-width: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+
+      opacity: 0;
+      transform: translateY(24px) rotate(-2deg);
+      transition:
+        opacity .8s .08s ease,
+        transform .8s .08s cubic-bezier(.22,1,.36,1);
+    }
+
+    .scene-final.is-active .final-phone-wrap {
+      opacity: 1;
+      transform: translateY(0) rotate(-2deg);
     }
 
     .phone {
       position: relative;
-      width: min(52vw, 270px);
+      width: clamp(250px, 21vw, 325px);
       aspect-ratio: .54;
-      padding: 10px;
-      border-radius: 42px;
-      background: #111;
-      box-shadow:
-        0 28px 70px rgba(20,30,20,.18),
-        inset 0 0 0 1px rgba(255,255,255,.08);
-      transform: rotate(-2deg);
+      padding: 12px;
+      border: 3px solid rgba(255,255,255,.9);
+      border-radius: 44px;
+      background: #173819;
+      box-shadow: 0 28px 80px rgba(0,0,0,.22);
     }
 
     .phone::before {
       content: "";
       position: absolute;
-      z-index: 5;
-      top: 16px;
+      top: 9px;
       left: 50%;
-      width: 78px;
-      height: 9px;
-      border-radius: 999px;
-      background: #222;
+      width: 34%;
+      height: 18px;
       transform: translateX(-50%);
+      border-radius: 999px;
+      background: #0D2610;
+      z-index: 2;
     }
 
     .phone-screen {
+      position: relative;
       width: 100%;
       height: 100%;
-      overflow: hidden;
       border-radius: 33px;
-      background: #F6FAF6;
+      overflow: hidden;
+      background: #F7FAF7;
+      color: #183219;
     }
 
-    .phone-screen img {
+    .phone-screen-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--moding-green);
+      background: #F7FAF7;
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+    }
+
+    .phone-app-screen {
+      position: relative;
+      z-index: 1;
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: top center;
+      background: #fff;
     }
 
-    /* =========================================================
-       FOOTER
-       ========================================================= */
+    .final-copy {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity .75s .18s ease,
+        transform .75s .18s cubic-bezier(.22,1,.36,1);
+    }
+
+    .scene-final.is-active .final-copy {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .final-copy h2 {
+      font-size: clamp(48px, 4.5vw, 76px);
+      line-height: 1.08;
+      letter-spacing: -0.06em;
+      font-weight: 950;
+    }
+
+    .final-copy h2 em {
+      color: var(--moding-orange);
+    }
+
+    .final-copy p {
+      margin-top: 24px;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(18px, 1.45vw, 21px);
+      font-weight: 700;
+      line-height: 1.65;
+    }
+
+    .final-download {
+      margin-top: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      min-height: 56px;
+      padding: 0 23px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--moding-green);
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(0,0,0,.14);
+      font-size: 17px;
+      font-weight: 950;
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .final-download:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 38px rgba(0,0,0,.18);
+    }
+
+    .scene-final.is-active .final-download {
+      animation: ctaPop .68s .36s cubic-bezier(.22,1.35,.36,1) both;
+    }
+
+    .final-download span {
+      color: var(--moding-orange);
+      font-size: 19px;
+      font-weight: 950;
+    }
+
     .site-footer {
       flex: 0 0 auto;
       width: 100%;
-      padding: 18px 20px 20px;
+      padding: 17px 20px 18px;
       background: var(--black);
-      border-top: 1px solid rgba(255,255,255,.08);
+      border-top: 1px solid rgba(255,255,255,.10);
       text-align: center;
-      color: rgba(255,255,255,.58);
-      font-size: 11px;
+      font-size: 11.5px;
       line-height: 1.6;
+      color: rgba(255,255,255,.58);
     }
 
     .footer-links {
@@ -674,44 +811,55 @@
     }
 
     .footer-links a {
-      color: rgba(255,255,255,.90);
       text-decoration: none;
+      color: rgba(255,255,255,.88);
       font-weight: 800;
     }
 
     .footer-links a:hover {
-      color: var(--orange);
+      color: var(--moding-orange);
     }
 
-    .divider {
+    .footer-links .divider {
       margin: 0 6px;
       color: rgba(255,255,255,.28);
     }
 
     /* =========================================================
-       BOTTOM NAV
-       INDEX → ABOUT
+       08. BOTTOM NAVIGATION
+       INDEX: 중앙 = 다음 장면 / 우측 = ABOUT
+       흰색 원 + 주황색 SVG 화살표
        ========================================================= */
     .scene-next,
     .site-side-nav {
       width: 48px;
       height: 48px;
-      min-width: 48px;
       padding: 0;
-      border: 1px solid rgba(35,139,34,.10);
+      border: 1px solid rgba(255,255,255,.58);
       border-radius: 50%;
       background: rgba(255,255,255,.98);
       box-shadow:
         0 8px 24px rgba(0,0,0,.12),
         inset 0 0 0 1px rgba(255,255,255,.45);
-      color: var(--orange);
+      color: var(--moding-orange);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      text-decoration: none;
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
       -webkit-backdrop-filter: blur(6px);
       backdrop-filter: blur(6px);
+    }
+
+    .scene-next:hover,
+    .site-side-nav:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.16),
+        inset 0 0 0 1px rgba(255,255,255,.55);
     }
 
     .scene-next svg,
@@ -732,30 +880,46 @@
       vector-effect: non-scaling-stroke;
     }
 
+    /* 현재 INDEX 장면의 다음 화면 */
     .scene-next {
       position: absolute;
-      z-index: 60;
+      z-index: 40;
       left: 50%;
       bottom: 18px;
       transform: translateX(-50%);
-      animation: downAlive 1.5s ease-in-out infinite;
+      animation: nextArrowAlive 1.5s ease-in-out infinite;
     }
 
-    @keyframes downAlive {
+    .scene-next:hover {
+      transform: translate(-50%, -3px);
+    }
+
+    @keyframes nextArrowAlive {
       0%,100% { transform: translate(-50%,0); }
       50% { transform: translate(-50%,6px); }
     }
 
+    /* 다음 사이트 페이지 ABOUT */
     .site-side-nav {
       position: fixed;
       z-index: 910;
       right: 18px;
       bottom: 18px;
+      color: var(--moding-orange);
+      text-decoration: none;
     }
 
     /* =========================================================
-       MOBILE
+       10. RESPONSIVE · Tablet / Mobile
+       - 모바일은 PC를 접는 방식이 아니라 전용 Grid
        ========================================================= */
+    @media (max-width: 1024px) {
+      .scene-frame,
+      .final-main {
+        max-width: 960px;
+      }
+    }
+
     @media (max-width: 820px) {
       .nav {
         padding: 12px 20px;
@@ -770,11 +934,15 @@
       }
 
       .menu-toggle {
+        position: relative;
+        z-index: 1002;
+        flex: 0 0 44px;
+        margin-left: auto;
+
         display: flex !important;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-left: auto;
       }
 
       .mobile-menu-overlay {
@@ -782,139 +950,78 @@
       }
 
       .scene-frame {
-        padding: 22px 20px 48px;
+        padding: 26px 20px 48px;
+        display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: auto minmax(0,1fr);
-        gap: 14px;
+        grid-template-rows: auto minmax(0, 1fr);
         align-items: stretch;
+        gap: 14px;
       }
 
-      .scene-copy {
+      .scene-intro .scene-frame {
+        display: block;
+        padding: 0 20px;
+      }
+
+      .hero-variant,
+      .hero-variant.is-selected {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 1fr);
+        align-items: stretch;
+        gap: 14px;
+      }
+
+      .scene-copy,
+      .hero-copy {
         align-self: start;
+        padding-top: 8px;
       }
 
-      .scene-title {
-        font-size: clamp(38px, 10vw, 50px);
+      .scene-copy h1,
+      .scene-copy h2,
+      .hero-copy h1 {
+        font-size: clamp(40px, 10.8vw, 54px);
+        line-height: 1.07;
       }
 
-      .scene-desc {
-        margin-top: 14px;
-        font-size: 15px;
+      .scene-copy p,
+      .hero-copy p {
+        margin-top: 16px;
+        font-size: 17px;
         line-height: 1.55;
       }
 
-      .scene-art {
+      .scene-art,
+      .hero-art {
         min-height: 0;
-        align-items: center;
+        align-self: end;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
       }
 
-      .scene-art svg {
-        width: min(94vw, 520px);
-        max-height: 35vh;
+      .scene-art svg,
+      .hero-art svg {
+        width: min(92vw, 540px);
+        height: 100%;
+        max-height: 42vh;
+        object-fit: contain;
       }
 
-      /* 1P */
-      .scene-hero {
-        background:
-          url("index-hero-mobile.jpg")
-          center center / cover no-repeat;
-      }
-
-      .scene-hero::before {
-        background:
-          linear-gradient(
-            180deg,
-            rgba(255,250,242,.97) 0%,
-            rgba(255,250,242,.94) 31%,
-            rgba(255,250,242,.72) 48%,
-            rgba(255,250,242,.18) 66%,
-            rgba(255,250,242,0) 100%
-          );
-      }
-
-      .hero-frame {
-        display: block;
-        padding-top: 26px;
-      }
-
-      .hero-copy {
-        max-width: 420px;
-      }
-
-      .hero-copy h1 {
-        font-size: clamp(40px, 11vw, 52px);
-        line-height: 1.04;
-      }
-
-      .hero-copy p {
-        margin-top: 14px;
-        font-size: 15px;
+      .hero-download-area {
+        margin-top: 20px;
       }
 
       .hero-download {
-        min-height: 52px;
-        margin-top: 18px;
-        padding: 0 20px;
-        font-size: 14px;
-      }
-
-      /* 5P */
-      .final-main {
-        padding: 20px 20px 10px;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto minmax(0,1fr);
-        gap: 10px;
-        align-items: stretch;
-      }
-
-      .final-copy h2 {
-        font-size: clamp(38px, 10vw, 50px);
-      }
-
-      .final-copy p {
-        margin-top: 12px;
-        font-size: 14px;
-        line-height: 1.55;
-      }
-
-      .final-download {
-        min-height: 52px;
-        margin-top: 16px;
-        padding: 0 22px;
-        font-size: 14px;
-      }
-
-      .final-phone-wrap {
-        min-height: 0;
-        align-items: flex-end;
-      }
-
-      .phone {
-        width: min(43vw, 184px);
-        border-radius: 31px;
-        padding: 7px;
-      }
-
-      .phone::before {
-        top: 11px;
-        width: 54px;
-        height: 6px;
-      }
-
-      .phone-screen {
-        border-radius: 24px;
-      }
-
-      .site-footer {
-        font-size: 9px;
-        padding: 14px 16px 16px;
+        min-height: 48px;
+        padding: 0 18px;
+        font-size: 16px;
       }
 
       .scene-next,
       .site-side-nav {
         width: 42px;
         height: 42px;
-        min-width: 42px;
       }
 
       .scene-next {
@@ -931,13 +1038,59 @@
         width: 21px;
         height: 21px;
       }
+
+      .site-side-nav:hover {
+        transform: none;
+      }
+
+      /* 5P 모바일 전용 */
+      .final-main {
+        padding: 18px 20px 10px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 10px;
+      }
+
+      .final-copy {
+        order: 1;
+        align-self: start;
+      }
+
+      .final-phone-wrap {
+        order: 2;
+        min-height: 0;
+        align-self: center;
+      }
+
+      .phone {
+        width: min(44vw, 210px);
+        aspect-ratio: .54;
+      }
+
+      .final-copy h2 {
+        font-size: clamp(34px, 9vw, 46px);
+      }
+
+      .final-copy p {
+        margin-top: 14px;
+        font-size: 15px;
+      }
+
+      .final-download {
+        min-height: 50px;
+        margin-top: 18px;
+        padding: 0 19px;
+        font-size: 15px;
+      }
+
+      .site-footer {
+        font-size: 9.5px;
+        line-height: 1.5;
+      }
     }
 
     @media (max-width: 520px) {
-      :root {
-        --page-pad: 18px;
-      }
-
       .nav {
         padding: 10px 18px;
       }
@@ -947,91 +1100,130 @@
       }
 
       .scene-frame {
-        padding: 18px 18px 44px;
+        padding: 24px 18px 46px;
       }
 
-      .scene-title {
-        font-size: clamp(34px, 9.7vw, 43px);
+      .scene-intro .scene-frame {
+        padding: 0 18px;
       }
 
-      .scene-desc {
-        font-size: 14px;
-      }
-
+      .scene-copy h1,
+      .scene-copy h2,
       .hero-copy h1 {
-        font-size: clamp(38px, 10.5vw, 46px);
+        font-size: clamp(39px, 11.2vw, 48px);
+      }
+
+      .scene-copy p,
+      .hero-copy p {
+        font-size: 16px;
+      }
+
+      .scene-art svg,
+      .hero-art svg {
+        width: min(94vw, 500px);
+        max-height: 39vh;
       }
 
       .final-main {
         padding: 16px 18px 8px;
       }
 
+      .phone {
+        width: min(46vw, 190px);
+      }
+
       .final-copy h2 {
-        font-size: clamp(34px, 9.7vw, 43px);
+        font-size: clamp(31px, 9vw, 40px);
+      }
+
+      .final-copy p {
+        font-size: 13.5px;
+      }
+
+      .site-footer {
+        font-size: 8.8px;
+        line-height: 1.48;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .nav {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .nav-logo img {
+        height: 40px;
+      }
+
+      .scene-frame {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .scene-intro .scene-frame {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .scene-copy h1,
+      .scene-copy h2,
+      .hero-copy h1 {
+        font-size: 37px;
+      }
+
+      .scene-copy p,
+      .hero-copy p {
+        font-size: 15px;
       }
 
       .phone {
-        width: min(41vw, 170px);
+        width: min(48vw, 178px);
       }
     }
 
     @media (max-height: 700px) and (max-width: 820px) {
       .scene-frame {
-        padding-top: 10px;
+        padding-top: 16px;
         padding-bottom: 38px;
       }
 
-      .scene-title,
-      .final-copy h2 {
-        font-size: clamp(30px, 6.3vh, 38px);
-      }
-
-      .scene-desc,
-      .final-copy p {
-        margin-top: 7px;
-        font-size: 13px;
-      }
-
-      .scene-art svg {
-        max-height: 28vh;
-      }
-
+      .scene-copy h1,
+      .scene-copy h2,
       .hero-copy h1 {
-        font-size: clamp(30px, 6.5vh, 39px);
+        font-size: clamp(32px, 7.2vh, 42px);
       }
 
+      .scene-copy p,
       .hero-copy p {
-        margin-top: 8px;
-        font-size: 13px;
-      }
-
-      .hero-download {
-        min-height: 44px;
         margin-top: 10px;
+        font-size: 14px;
       }
 
-      .phone {
-        width: min(34vw, 150px);
+      .hero-download-area {
+        margin-top: 12px;
+      }
+
+      .scene-art svg,
+      .hero-art svg {
+        max-height: 35vh;
       }
     }
 
     /* =========================================================
-       SAFE VISIBILITY / COPY PROTECTION
+       11. COPY / DRAG PROTECTION
        ========================================================= */
-    .scene-copy,
-    .scene-art,
-    .hero-copy,
-    .final-copy,
-    .final-phone-wrap {
-      opacity: 1;
-      transform: none;
-    }
-
     html,
     body,
     *:not(input):not(textarea) {
       -webkit-user-select: none;
       user-select: none;
+    }
+
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
     }
 
     input,
@@ -1040,68 +1232,162 @@
       pointer-events: auto;
     }
 
+    /* =========================================================
+       12. REDUCED MOTION
+       ========================================================= */
     @media (prefers-reduced-motion: reduce) {
-      .scene-next,
-      .order-node,
-      .order-route,
-      .connect-box,
-      .connect-hub,
-      .connect-store {
-        animation: none !important;
-      }
-
       .snap-root {
         scroll-behavior: auto;
       }
+
+      .scene-copy,
+      .hero-copy,
+      .scene-art,
+      .hero-art,
+      .final-phone-wrap,
+      .final-copy {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+
+      .scene *,
+      .scene *::before,
+      .scene *::after {
+        animation: none !important;
+      }
     }
   
+    @media (prefers-reduced-motion: reduce) {
+      .scene-next {
+        animation: none !important;
+      }
+    }
+
+
     /* =========================================================
-       MODING APP CTA
-       심플한 2단 앱 카드형 버튼
+       INDEX HERO4 STABLE FINAL
+       1P + 5P만 새 구성
+       2~4P 기존 SVG/모션 유지
        ========================================================= */
+
+    .snap-root {
+      background: #fff !important;
+      overscroll-behavior-y: none;
+      scroll-padding: 0;
+    }
+
+    .scene {
+      scroll-margin: 0 !important;
+    }
+
+    /* 1P 실사 */
+    .scene-intro {
+      --hero-pc: url("index-hero-pc.jpg");
+      --hero-mobile: url("index-hero-mobile.jpg");
+      background: #F5EEE4 !important;
+      color: var(--ink);
+    }
+
+    .scene-intro::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image: var(--hero-pc);
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    .scene-intro::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(255,251,245,.94) 0%,
+          rgba(255,251,245,.87) 28%,
+          rgba(255,251,245,.45) 48%,
+          rgba(255,251,245,.08) 66%,
+          rgba(255,251,245,0) 100%
+        );
+      pointer-events: none;
+    }
+
+    .scene-intro .scene-frame {
+      display: block;
+      max-width: var(--page-max);
+      padding-top: 36px;
+      padding-bottom: 52px;
+    }
+
+    .hero-variant,
+    .hero-variant.is-selected {
+      width: 100%;
+      height: 100%;
+      grid-template-columns: none;
+    }
+
+    .hero-variant.is-selected {
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-copy {
+      width: min(550px, 48vw);
+      color: var(--ink);
+    }
+
+    .hero-kicker {
+      margin-bottom: 17px;
+      color: var(--moding-orange);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: .17em;
+    }
+
+    .hero-copy h1 {
+      color: var(--moding-green-dark) !important;
+      font-size: clamp(50px, 4.8vw, 80px);
+      line-height: 1.06;
+    }
+
+    .hero-copy h1 em {
+      color: var(--moding-orange);
+    }
+
+    .hero-copy p {
+      max-width: 520px;
+      margin-top: 22px;
+      color: #5F695F !important;
+      font-size: clamp(16px, 1.35vw, 20px);
+      line-height: 1.62;
+    }
+
+    .hero-download-area {
+      margin-top: 24px;
+    }
+
+    /* 앱 CTA */
     .app-cta {
-      position: relative;
       min-width: 198px;
-      min-height: 66px;
-      padding: 11px 22px 10px;
-      border-radius: 20px;
+      min-height: 64px;
+      padding: 10px 22px 9px;
+      border-radius: 19px;
       text-decoration: none;
       display: inline-flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
       gap: 2px;
-      overflow: hidden;
       transition:
         transform .18s ease,
         box-shadow .18s ease,
-        background .18s ease,
-        border-color .18s ease;
-    }
-
-    .app-cta::after {
-      content: "";
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--orange);
-      opacity: 0;
-      transform: translateY(-50%) scale(.3);
-      transition:
-        opacity .18s ease,
-        transform .18s ease;
-    }
-
-    .app-cta:hover {
-      transform: translateY(-2px);
-    }
-
-    .app-cta:hover::after {
-      opacity: 1;
-      transform: translateY(-50%) scale(1);
+        background .18s ease;
     }
 
     .app-cta-main {
@@ -1118,26 +1404,55 @@
       letter-spacing: .025em;
     }
 
-    /* 1P: 실사 위 흰 카드 */
     .app-cta-hero {
-      margin-top: 26px;
-      background: rgba(255,255,255,.96);
-      border: 1px solid rgba(35,139,34,.12);
-      color: var(--green);
-      box-shadow: 0 12px 30px rgba(30,60,30,.12);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(35,139,34,.16);
+      color: var(--moding-green);
+      box-shadow: 0 10px 26px rgba(20,45,20,.10);
+      -webkit-backdrop-filter: blur(7px);
+      backdrop-filter: blur(7px);
     }
 
     .app-cta-hero .app-cta-sub {
-      color: #8B948C;
+      color: #8A938B;
     }
 
-    /* 5P: 백색 화면에서 가벼운 녹색 카드 */
+    .app-cta:hover {
+      transform: translateY(-2px);
+    }
+
+    /* 5P 백색 엔딩 */
+    .scene-final {
+      background: #fff !important;
+      color: var(--ink);
+    }
+
+    .scene-final .final-main {
+      grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
+      gap: 64px;
+    }
+
+    .final-kicker {
+      margin-bottom: 17px;
+      color: var(--moding-orange);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .17em;
+    }
+
+    .scene-final .final-copy h2 {
+      color: var(--moding-green-dark);
+    }
+
+    .scene-final .final-copy p {
+      color: var(--moding-sub);
+      font-size: clamp(16px, 1.35vw, 20px);
+    }
+
     .app-cta-final {
-      margin-top: 28px;
-      background: var(--green);
-      border: 1px solid var(--green);
+      margin-top: 26px;
+      background: var(--moding-green);
+      border: 1px solid var(--moding-green);
       color: #fff;
       box-shadow: 0 14px 34px rgba(35,139,34,.18);
     }
@@ -1146,20 +1461,78 @@
       color: rgba(255,255,255,.68);
     }
 
+    .scene-final .phone {
+      width: clamp(250px, 21vw, 325px);
+      border-color: rgba(23,56,25,.14);
+      background: #111;
+      transform: none;
+    }
+
+    .scene-final .final-phone-wrap {
+      transform: translateY(24px);
+    }
+
+    .scene-final.is-active .final-phone-wrap {
+      transform: translateY(0);
+    }
+
     @media (max-width: 820px) {
-      .app-cta {
-        min-width: 188px;
-        min-height: 62px;
-        padding: 10px 19px 9px;
-        border-radius: 18px;
+      .scene-intro::before {
+        background-image: var(--hero-mobile);
+        background-position: center center;
       }
 
-      .app-cta-hero {
-        margin-top: 18px;
+      .scene-intro::after {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(255,250,243,.97) 0%,
+            rgba(255,250,243,.94) 30%,
+            rgba(255,250,243,.76) 46%,
+            rgba(255,250,243,.20) 65%,
+            rgba(255,250,243,0) 100%
+          );
       }
 
-      .app-cta-final {
+      .scene-intro .scene-frame {
+        padding: 22px 20px 48px;
+      }
+
+      .hero-variant.is-selected {
+        align-items: flex-start;
+      }
+
+      .hero-copy {
+        width: min(100%, 430px);
+        padding-top: 4px;
+      }
+
+      .hero-kicker {
+        margin-bottom: 13px;
+        font-size: 10px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(38px, 10.5vw, 46px);
+        line-height: 1.05;
+      }
+
+      .hero-copy p {
+        max-width: 360px;
+        margin-top: 13px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .hero-download-area {
         margin-top: 16px;
+      }
+
+      .app-cta {
+        min-width: 184px;
+        min-height: 58px;
+        padding: 9px 18px 8px;
+        border-radius: 17px;
       }
 
       .app-cta-main {
@@ -1167,26 +1540,106 @@
       }
 
       .app-cta-sub {
-        font-size: 9.5px;
+        font-size: 9px;
+      }
+
+      /* 5P 기존 안정 모바일 구조 */
+      .scene-final .final-main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 10px;
+        padding: 20px 20px 10px;
+        align-items: stretch;
+      }
+
+      .scene-final .final-copy {
+        align-self: start;
+      }
+
+      .scene-final .final-copy h2 {
+        font-size: clamp(34px, 9.7vw, 43px);
+      }
+
+      .scene-final .final-copy p {
+        margin-top: 12px;
+        font-size: 14px;
+        line-height: 1.52;
+      }
+
+      .final-kicker {
+        margin-bottom: 11px;
+        font-size: 10px;
+      }
+
+      .app-cta-final {
+        margin-top: 15px;
+      }
+
+      .scene-final .final-phone-wrap {
+        min-height: 0;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .scene-final .phone {
+        width: min(44vw, 210px);
+        padding: 8px;
+        border-radius: 34px;
+      }
+
+      .scene-final .phone::before {
+        top: 7px;
+        height: 12px;
+      }
+
+      .scene-final .phone-screen {
+        border-radius: 26px;
+      }
+
+      .scene-final .site-footer {
+        padding: 14px 16px 16px;
+        font-size: 9px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .scene-intro .scene-frame {
+        padding: 18px 18px 44px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(36px, 10vw, 44px);
+      }
+
+      .scene-final .final-main {
+        padding: 16px 18px 8px;
+      }
+
+      .scene-final .phone {
+        width: min(43vw, 198px);
       }
     }
 
     @media (max-height: 700px) and (max-width: 820px) {
+      .hero-copy h1 {
+        font-size: clamp(30px, 6.5vh, 38px);
+      }
+
+      .hero-copy p {
+        margin-top: 7px;
+        font-size: 12px;
+      }
+
+      .hero-download-area {
+        margin-top: 9px;
+      }
+
       .app-cta {
-        min-height: 54px;
-        padding-top: 8px;
-        padding-bottom: 7px;
+        min-height: 50px;
       }
 
-      .app-cta-hero {
-        margin-top: 10px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .app-cta,
-      .app-cta::after {
-        transition: none;
+      .scene-final .phone {
+        width: min(34vw, 160px);
       }
     }
 </style>
@@ -1194,8 +1647,12 @@
 
 <body>
 
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
   <header class="site-header">
     <nav class="nav" aria-label="주요 메뉴">
+
       <a href="index.html" class="nav-logo" aria-label="모딩 홈으로 이동">
         <img src="모딩로고.png" alt="Moding Logo">
       </a>
@@ -1220,9 +1677,13 @@
         <span></span>
         <span></span>
       </button>
+
     </nav>
   </header>
 
+  <!-- =======================================================
+       MOBILE MENU
+       ======================================================= -->
   <div
     class="mobile-menu-overlay"
     id="mobileMenuOverlay"
@@ -1230,7 +1691,6 @@
   >
     <div class="mobile-menu-head">
       <img src="모딩로고.png" alt="Moding Logo">
-
       <button
         class="menu-close"
         id="menuClose"
@@ -1260,7 +1720,10 @@
     </div>
   </div>
 
-  <!-- INDEX → ABOUT -->
+  <!-- =======================================================
+       BOTTOM SITE NAV
+       INDEX → ABOUT
+       ======================================================= -->
   <a
     href="about.html"
     class="site-side-nav"
@@ -1271,46 +1734,141 @@
     </svg>
   </a>
 
+  <!-- =======================================================
+       FULL PAGE SCROLL
+       ======================================================= -->
   <main class="snap-root" id="snapRoot">
 
-    <!-- 1P REAL PHOTO -->
+    <!-- =====================================================
+         1P · RANDOM REAL HERO 4종
+         ===================================================== -->
     <section
       id="page1"
-      class="scene scene-hero"
+      class="scene scene-intro is-active"
       data-page="1"
-      aria-label="모딩 메인"
+      aria-label="모딩 소개"
     >
-      <div class="scene-frame hero-frame">
-        <div class="hero-copy">
-          <div class="kicker">HELLO, MODING</div>
+      <div class="scene-frame">
 
-          <h1>
-            사장님,<br>
-            오늘부터<br>
-            <em>모딩하세요 :)</em>
-          </h1>
+        <div
+          class="hero-variant is-selected"
+          data-hero="0"
+          data-pc="index-hero-pc.jpg"
+          data-mobile="index-hero-mobile.jpg"
+        >
+          <div class="hero-copy">
+            <div class="hero-kicker">HELLO MODING</div>
+            <h1>
+              사장님의 가게에<br>
+              <em>새로운 선택지를</em>
+            </h1>
+            <p>외식업 식품 주문의 새로운 방법</p>
 
-          <p>
-            외식업 식품 주문의 새로운 방법
-          </p>
-
-          <a
-            class="app-cta app-cta-hero"
-            href="/download.html"
-            onclick="return openModingStore(event);"
-            aria-label="모딩 앱 받기"
-          >
-            <span class="app-cta-main">모딩 앱 받기</span>
-            <span class="app-cta-sub">iOS · Android</span>
-          </a>
+            <div class="hero-download-area">
+              <a
+                class="app-cta app-cta-hero"
+                href="/download.html"
+                onclick="return openModingStore(event);"
+                aria-label="모딩 앱 받기"
+              >
+                <span class="app-cta-main">모딩 앱 받기</span>
+                <span class="app-cta-sub">iOS · Android</span>
+              </a>
+            </div>
+          </div>
         </div>
+
+        <div
+          class="hero-variant"
+          data-hero="1"
+          data-pc="index-hero-pc-2.png"
+          data-mobile="index-hero-mobile-2.png"
+        >
+          <div class="hero-copy">
+            <div class="hero-kicker">FOR JAPANESE MENU</div>
+            <h1>
+              일식 재료<br>
+              <em>찾고 계세요?</em>
+            </h1>
+            <p>단새우부터 우니까지 필요한 일식 재료를 찾아보세요</p>
+
+            <div class="hero-download-area">
+              <a
+                class="app-cta app-cta-hero"
+                href="/download.html"
+                onclick="return openModingStore(event);"
+                aria-label="모딩 앱 받기"
+              >
+                <span class="app-cta-main">모딩 앱 받기</span>
+                <span class="app-cta-sub">iOS · Android</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="hero-variant"
+          data-hero="2"
+          data-pc="index-hero-pc-3.png"
+          data-mobile="index-hero-mobile-3.png"
+        >
+          <div class="hero-copy">
+            <div class="hero-kicker">FOR SNACK BAR</div>
+            <h1>
+              분식집 운영에 필요한<br>
+              <em>재료 찾고 계세요?</em>
+            </h1>
+            <p>떡볶이부터 튀김 어묵까지 필요한 식품을 찾아보세요</p>
+
+            <div class="hero-download-area">
+              <a
+                class="app-cta app-cta-hero"
+                href="/download.html"
+                onclick="return openModingStore(event);"
+                aria-label="모딩 앱 받기"
+              >
+                <span class="app-cta-main">모딩 앱 받기</span>
+                <span class="app-cta-sub">iOS · Android</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="hero-variant"
+          data-hero="3"
+          data-pc="index-hero-pc-4.png"
+          data-mobile="index-hero-mobile-4.png"
+        >
+          <div class="hero-copy">
+            <div class="hero-kicker">FOR DELIVERY KITCHEN</div>
+            <h1>
+              배달전문점을<br>
+              <em>운영 중이세요?</em>
+            </h1>
+            <p>튀김부터 포장까지 운영에 필요한 식품을 찾아보세요</p>
+
+            <div class="hero-download-area">
+              <a
+                class="app-cta app-cta-hero"
+                href="/download.html"
+                onclick="return openModingStore(event);"
+                aria-label="모딩 앱 받기"
+              >
+                <span class="app-cta-main">모딩 앱 받기</span>
+                <span class="app-cta-sub">iOS · Android</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <button
         type="button"
         class="scene-next"
         data-next="page2"
-        aria-label="다음 장면"
+        aria-label="다음 페이지로 이동"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 8 L12 15 L19 8"/>
@@ -1318,123 +1876,141 @@
       </button>
     </section>
 
-    <!-- 2P DISCOVERY -->
+    
+
+    <!-- =====================================================
+         2P · DISCOVER
+         ===================================================== -->
     <section
       id="page2"
-      class="scene scene-discovery"
+      class="scene"
       data-page="2"
-      aria-label="상품 발견"
+      aria-label="새로운 상품을 찾을 때"
     >
       <div class="scene-frame">
-        <div class="scene-copy">
-          <div class="kicker">DISCOVERY</div>
 
-          <h2 class="scene-title">
-            우리 가게에 맞는<br>
-            <em>새로운 상품을.</em>
+        <div class="scene-copy">
+          <h2>
+            새로운 상품을<br>
+            <em>찾고 싶을 때.</em>
           </h2>
 
-          <p class="scene-desc">
-            수산·축산·소스·반조리까지,<br>
-            필요한 상품을 가볍게 찾아보세요.
+          <p>
+            수산물부터 육가공, 소스·가공식품까지<br>
+            가게에 필요한 새로운 선택지를 만나보세요.
           </p>
         </div>
 
         <div class="scene-art" aria-hidden="true">
-          <svg viewBox="0 0 660 500">
-            <g id="discoverFish" class="discovery-item">
-              <path
-                d="M95 188 C130 159 178 161 205 185 C177 210 130 213 95 188 Z"
-                fill="none" stroke="#238B22" stroke-width="7"
-              />
-              <path
-                d="M95 188 L69 169 L72 202 Z"
-                fill="none" stroke="#238B22" stroke-width="7"
-                stroke-linejoin="round"
-              />
-              <circle cx="177" cy="183" r="5" fill="#FF8C00"/>
-            </g>
+          <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-            <g id="discoverMeat" class="discovery-item">
+            <!-- 생선 -->
+            <g id="searchFish" class="search-item">
               <path
-                d="M296 112
-                   C315 90 351 93 364 114
-                   C383 107 401 126 396 145
-                   C411 159 397 184 375 184
-                   C360 201 329 202 314 186
-                   C292 187 282 161 296 147
-                   C290 134 290 122 296 112 Z"
-                fill="none" stroke="#238B22" stroke-width="7"
-              />
-              <path
-                d="M313 157 Q344 139 377 158"
-                fill="none" stroke="#FF8C00" stroke-width="6"
-              />
-            </g>
-
-            <g id="discoverSauce" class="discovery-item">
-              <path
-                d="M446 195 H527
-                   L522 306
-                   Q486 322 452 306 Z"
-                fill="none" stroke="#238B22" stroke-width="7"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M460 220 H514"
-                fill="none" stroke="#FF8C00" stroke-width="7"
-              />
-            </g>
-
-            <g id="discoverFrozen" class="discovery-item">
-              <path
-                d="M174 329 Q214 350 258 329
-                   L253 355 Q216 374 180 352 Z"
-                fill="none" stroke="#238B22" stroke-width="6"
-              />
-              <path
-                d="M191 322 Q206 303 220 319
-                   Q235 301 250 320"
-                fill="none" stroke="#238B22" stroke-width="6"
-              />
-              <path
-                d="M265 288 V314
-                   M253 295 L277 308
-                   M253 308 L277 295"
-                fill="none" stroke="#FF8C00" stroke-width="4"
-                stroke-linecap="round"
-              />
-            </g>
-
-            <g
-              id="discoverLens"
-              class="discovery-lens"
-              transform="translate(95 188)"
-            >
-              <circle
-                cx="0" cy="0" r="84"
-                fill="rgba(255,255,255,.45)"
-                stroke="#238B22"
+                d="M123 224 C164 191 220 194 251 220 C220 247 164 250 123 224 Z"
+                fill="none"
+                stroke="#fff"
                 stroke-width="7"
               />
               <path
-                d="M62 62 L120 120"
+                d="M123 224 L89 200 L93 239 Z"
                 fill="none"
-                stroke="#238B22"
-                stroke-width="17"
-                stroke-linecap="round"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
               />
-              <circle cx="0" cy="0" r="6" fill="#FF8C00"/>
+              <circle class="focus-accent" cx="219" cy="219" r="5" fill="#FF8C00"/>
             </g>
+
+            <!-- 육가공 -->
+            <g id="searchMeat" class="search-item">
+              <path
+                d="M301 164
+                   C319 143 353 145 365 164
+                   C383 159 396 175 393 191
+                   C407 205 395 230 373 231
+                   C359 248 329 248 316 231
+                   C295 231 287 207 300 192
+                   C293 179 294 170 301 164 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M315 203 Q344 184 376 203"
+                class="svg-line focus-accent"
+                stroke="#FF8C00"
+                stroke-width="6"
+              />
+            </g>
+
+            <!-- 소스 -->
+            <g id="searchSauce" class="search-item">
+              <path
+                d="M480 220 L570 220 L561 344 Q527 362 493 344 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M498 247 H553"
+                class="svg-line focus-accent"
+                stroke="#FF8C00"
+                stroke-width="7"
+              />
+            </g>
+
+            <!-- 조개 -->
+            <g id="searchShell" class="search-item">
+              <path
+                d="M166 351
+                   C177 318 214 307 242 324
+                   C266 340 264 378 236 395
+                   C205 408 168 385 166 351 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="6"
+              />
+              <path
+                d="M179 339 L229 389
+                   M197 321 L242 373"
+                class="svg-line focus-accent"
+                stroke="#FF8C00"
+                stroke-width="4"
+              />
+            </g>
+
+            <!-- 움직이는 돋보기: 중심좌표 기준으로 JS 이동 -->
+            <g id="searchLens" class="search-lens" transform="translate(175 224)">
+              <circle
+                cx="0"
+                cy="0"
+                r="126"
+                fill="none"
+                stroke="#fff"
+                stroke-width="10"
+              />
+              <path
+                d="M90 92 L165 167"
+                class="svg-line"
+                stroke="#fff"
+                stroke-width="19"
+              />
+              <circle cx="0" cy="0" r="7" fill="#FF8C00"/>
+            </g>
+
           </svg>
         </div>
+
       </div>
 
       <button
         type="button"
         class="scene-next"
         data-next="page3"
-        aria-label="다음 장면"
+        aria-label="다음 페이지로 이동"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 8 L12 15 L19 8"/>
@@ -1442,111 +2018,135 @@
       </button>
     </section>
 
-    <!-- 3P ORDER -->
+    <!-- =====================================================
+         3P · CONNECT
+         ===================================================== -->
     <section
       id="page3"
-      class="scene scene-order"
+      class="scene"
       data-page="3"
-      aria-label="간단한 주문"
+      aria-label="식품제조사와 외식업 사장님 연결"
     >
       <div class="scene-frame">
-        <div class="scene-copy">
-          <div class="kicker">ORDER FLOW</div>
 
-          <h2 class="scene-title">
-            찾았다면,<br>
-            주문은 <em>더 간단하게.</em>
+        <div class="scene-copy">
+          <h2>
+            좋은 식품은<br>
+            <em>좋은 가게</em>를 만나야 하니까.
           </h2>
 
-          <p class="scene-desc">
-            상품을 고르고, 결제하고, 확인하는 흐름을<br>
-            한곳에서 자연스럽게 이어갑니다.
+          <p>
+            모딩은 식품제조사와<br>
+            외식업 사장님을 연결합니다.
           </p>
         </div>
 
         <div class="scene-art" aria-hidden="true">
-          <svg viewBox="0 0 660 500">
-            <path
-              class="order-route"
-              d="M145 250 H515"
-              fill="none"
-              stroke="#C9D9C9"
-              stroke-width="6"
-              stroke-linecap="round"
-            />
+          <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-            <g class="order-node n1">
-              <circle
-                cx="145" cy="250" r="73"
-                fill="#fff"
-                stroke="#238B22"
-                stroke-width="6"
-              />
+            <!-- 공급자 -->
+            <g transform="translate(86 216)">
               <path
-                d="M110 235 L145 220 L180 235 L145 252 Z"
-                fill="none" stroke="#238B22" stroke-width="5"
-              />
-              <path
-                d="M110 235 V274 L145 290 V252
-                   M180 235 V274 L145 290"
-                fill="none" stroke="#238B22" stroke-width="5"
-              />
-            </g>
-
-            <g class="order-node n2">
-              <circle
-                cx="330" cy="250" r="73"
-                fill="#fff"
-                stroke="#FF8C00"
-                stroke-width="6"
-              />
-              <rect
-                x="283" y="218"
-                width="94" height="64"
-                rx="13"
-                fill="#238B22"
-              />
-              <circle cx="353" cy="237" r="8" fill="#fff"/>
-              <circle cx="365" cy="237" r="8" fill="#FF8C00"/>
-              <path
-                d="M299 254 H360
-                   M299 269 H327"
-                fill="none"
-                stroke="rgba(255,255,255,.82)"
-                stroke-width="6"
-                stroke-linecap="round"
-              />
-            </g>
-
-            <g class="order-node n3">
-              <circle
-                cx="515" cy="250" r="73"
-                fill="#fff"
-                stroke="#238B22"
-                stroke-width="6"
-              />
-              <circle cx="515" cy="250" r="36" fill="#FF8C00"/>
-              <path
-                d="M496 250 L509 263 L536 235"
+                d="M0 45 L86 8 L172 45 L86 85 Z"
                 fill="none"
                 stroke="#fff"
-                stroke-width="8"
-                stroke-linecap="round"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M0 45 V132 L86 171 V85"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M172 45 V132 L86 171"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M47 105 C63 92 87 94 100 105 C87 116 63 118 47 105 Z"
+                fill="none"
+                stroke="#FF8C00"
+                stroke-width="4"
+              />
+              <path
+                d="M47 105 L35 96 L37 112 Z"
+                fill="none"
+                stroke="#FF8C00"
+                stroke-width="4"
                 stroke-linejoin="round"
               />
             </g>
 
-            <circle cx="232" cy="250" r="8" fill="#FF8C00"/>
-            <circle cx="418" cy="250" r="8" fill="#FF8C00"/>
+            <!-- 가게 -->
+            <g transform="translate(494 202)">
+              <g class="connect-store">
+                <path
+                  d="M12 98 H154 V194 H12 Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="7"
+                />
+                <path
+                  d="M2 98 L25 49 H141 L164 98"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="7"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M20 72 H147"
+                  class="svg-line"
+                  stroke="#FF8C00"
+                  stroke-width="14"
+                  stroke-dasharray="19 15"
+                />
+                <rect x="73" y="135" width="34" height="59" rx="5" fill="#FF8C00"/>
+              </g>
+            </g>
+
+            <!-- 연결 -->
+            <path
+              id="connectRoute"
+              d="M268 322 C349 250 431 250 494 322"
+              class="svg-line"
+              stroke="rgba(255,255,255,.82)"
+              stroke-width="5"
+              stroke-dasharray="11 15"
+            />
+
+            <g>
+              <rect x="-17" y="-15" width="34" height="30" rx="6" fill="#FF8C00"/>
+              <path
+                d="M-12 -6 H12 M0 -15 V15"
+                class="svg-line"
+                stroke="#fff"
+                stroke-width="3"
+              />
+              <animateMotion
+                dur="4.2s"
+                repeatCount="indefinite"
+                rotate="auto"
+              >
+                <mpath href="#connectRoute" xlink:href="#connectRoute"/>
+              </animateMotion>
+            </g>
+
           </svg>
         </div>
+
       </div>
 
       <button
         type="button"
         class="scene-next"
         data-next="page4"
-        aria-label="다음 장면"
+        aria-label="다음 페이지로 이동"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 8 L12 15 L19 8"/>
@@ -1554,120 +2154,132 @@
       </button>
     </section>
 
-    <!-- 4P CONNECT -->
+    <!-- =====================================================
+         4P · DELIVERY
+         ===================================================== -->
     <section
       id="page4"
-      class="scene scene-connect"
+      class="scene"
       data-page="4"
-      aria-label="좋은 상품과 좋은 가게 연결"
+      aria-label="택배와 직배송"
     >
       <div class="scene-frame">
-        <div class="scene-copy">
-          <div class="kicker">CONNECT</div>
 
-          <h2 class="scene-title">
-            좋은 상품이<br>
-            필요한 가게를<br>
-            <em>만날 수 있도록.</em>
+        <div class="scene-copy">
+          <h2>
+            택배도.<br>
+            <em>직배송도.</em>
           </h2>
 
-          <p class="scene-desc">
-            모딩은 식품제조사와 외식업 사장님 사이의<br>
-            새로운 연결을 만들어갑니다.
+          <p>
+            상품과 지역에 맞는 배송방식으로<br>
+            주문하세요.
           </p>
         </div>
 
         <div class="scene-art" aria-hidden="true">
-          <svg viewBox="0 0 720 500">
-            <!-- 제조사 -->
-            <g class="connect-box">
-              <path
-                d="M78 274 H231 V374 H78 Z"
-                fill="none" stroke="#fff" stroke-width="7"
-              />
-              <path
-                d="M98 274 V225 L128 247 V217 L164 247 V216 L201 247 V274"
-                fill="none" stroke="#fff" stroke-width="7"
-                stroke-linejoin="round"
-              />
-              <rect x="104" y="310" width="34" height="64" rx="4" fill="#FF8C00"/>
-              <path
-                d="M163 312 H207 M163 335 H207"
-                fill="none" stroke="#fff" stroke-width="5"
-                stroke-linecap="round"
-              />
-            </g>
+          <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-            <!-- 연결 선 -->
-            <path
-              id="indexConnectRoute"
-              d="M240 300 C286 266 326 265 360 285 C402 309 448 309 500 286"
-              fill="none"
-              stroke="rgba(255,255,255,.66)"
-              stroke-width="5"
-              stroke-linecap="round"
-              stroke-dasharray="10 14"
-            />
-
-            <!-- 모딩 허브 -->
-            <g class="connect-hub">
-              <rect
-                x="306" y="222"
-                width="128" height="88"
-                rx="44"
-                fill="#fff"
-              />
-              <image
-                href="모딩로고.png"
-                x="338" y="230"
-                width="64" height="70"
-                preserveAspectRatio="xMidYMid meet"
-              />
-            </g>
-
-            <!-- 이동 박스 -->
-            <g>
-              <rect x="-15" y="-13" width="30" height="26" rx="5" fill="#FF8C00"/>
+            <!-- 택배 박스: 왼쪽 -->
+            <g transform="translate(86 263)">
+              <g class="delivery-box">
               <path
-                d="M-10 -4 H10 M0 -13 V13"
+                d="M0 45 L70 13 L140 45 L70 80 Z"
                 fill="none"
                 stroke="#fff"
-                stroke-width="3"
-                stroke-linecap="round"
+                stroke-width="7"
+                stroke-linejoin="round"
               />
-              <animateMotion dur="4.6s" repeatCount="indefinite" rotate="auto">
-                <mpath href="#indexConnectRoute"/>
-              </animateMotion>
+              <path
+                d="M0 45 V116 L70 151 V80"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M140 45 V116 L70 151"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M70 13 V80"
+                class="svg-line"
+                stroke="#FF8C00"
+                stroke-width="7"
+              />
+              </g>
             </g>
 
-            <!-- 가게 -->
-            <g class="connect-store" transform="translate(510 253)">
+            <!-- 택배 경로 -->
+            <path
+              d="M245 349 C286 315 320 311 356 327"
+              class="svg-line"
+              stroke="rgba(255,255,255,.62)"
+              stroke-width="4"
+              stroke-dasharray="9 13"
+            />
+
+            <!-- 직배송 트럭: 오른쪽 -->
+            <g transform="translate(357 288)">
+              <g class="delivery-truck">
               <path
-                d="M0 55 H118 V151 H0 Z"
-                fill="none" stroke="#fff" stroke-width="7"
+                d="M0 25 H179 V112 H0 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
               />
               <path
-                d="M-10 55 L9 17 H108 L128 55"
-                fill="none" stroke="#fff" stroke-width="7"
+                d="M179 53 H233 L264 83 V112 H179 Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="7"
+                stroke-linejoin="round"
               />
+              <rect x="196" y="66" width="36" height="24" rx="4" fill="#FF8C00"/>
+
+              <!-- 적재칸 식품 -->
               <path
-                d="M9 37 H108"
+                d="M43 67 C63 51 93 53 108 66 C93 81 63 83 43 67 Z"
                 fill="none"
                 stroke="#FF8C00"
-                stroke-width="11"
-                stroke-dasharray="15 12"
+                stroke-width="5"
               />
-              <rect x="46" y="105" width="27" height="46" rx="4" fill="#FF8C00"/>
+              <path
+                d="M43 67 L27 56 L29 75 Z"
+                fill="none"
+                stroke="#FF8C00"
+                stroke-width="5"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M126 53 L154 53 L151 91 Q140 98 129 91 Z"
+                fill="none"
+                stroke="#FF8C00"
+                stroke-width="5"
+                stroke-linejoin="round"
+              />
+
+              <circle cx="58" cy="123" r="19" fill="#fff"/>
+              <circle cx="211" cy="123" r="19" fill="#fff"/>
+              <circle cx="58" cy="123" r="8" fill="#238B22"/>
+              <circle cx="211" cy="123" r="8" fill="#238B22"/>
+              </g>
             </g>
+
           </svg>
         </div>
+
       </div>
 
       <button
         type="button"
         class="scene-next"
         data-next="page5"
-        aria-label="다음 장면"
+        aria-label="다음 페이지로 이동"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 8 L12 15 L19 8"/>
@@ -1675,7 +2287,9 @@
       </button>
     </section>
 
-    <!-- 5P APP CTA -->
+    <!-- =====================================================
+         5P · DOWNLOAD + FOOTER
+         ===================================================== -->
     <section
       id="page5"
       class="scene scene-final"
@@ -1683,18 +2297,19 @@
       aria-label="모딩 앱 다운로드"
     >
       <div class="final-main">
+
         <div class="final-copy">
-          <div class="kicker">GET MODING</div>
+          <div class="final-kicker">GET MODING</div>
 
           <h2>
-            이제,<br>
+            이제<br>
             우리 가게에도<br>
-            <em>모딩을.</em>
+            <em>모딩을</em>
           </h2>
 
           <p>
-            필요한 상품을 찾고, 주문하고, 관리하는<br>
-            새로운 방법을 시작해보세요.
+            필요한 상품을 찾고 주문하고 관리하는<br>
+            새로운 방법을 시작해보세요
           </p>
 
           <a
@@ -1711,7 +2326,9 @@
         <div class="final-phone-wrap" aria-hidden="true">
           <div class="phone">
             <div class="phone-screen">
+              <div class="phone-screen-fallback">MODING</div>
               <img
+                class="phone-app-screen"
                 src="moding-app-main.jpeg"
                 alt="모딩 앱 메인 화면"
                 loading="eager"
@@ -1720,8 +2337,10 @@
             </div>
           </div>
         </div>
+
       </div>
 
+      <!-- 🔒 LOCK 03. 기존 Footer -->
       <footer class="site-footer">
         <div class="footer-links">
           <a href="terms.html">이용약관</a>
@@ -1740,143 +2359,492 @@
   </main>
 
   <script>
+    /* =========================================================
+       HEADER HEIGHT SYNC
+       ========================================================= */
     const siteHeader = document.querySelector(".site-header");
-    const snapRoot = document.getElementById("snapRoot");
-    const scenes = Array.from(document.querySelectorAll(".scene"));
 
-    function syncViewport() {
-      const headerHeight = siteHeader
-        ? Math.ceil(siteHeader.getBoundingClientRect().height)
-        : 84;
+    function syncHeaderHeight() {
+      if (!siteHeader) return;
 
-      const viewportHeight =
-        window.visualViewport?.height || window.innerHeight;
+      const headerHeight = Math.ceil(
+        siteHeader.getBoundingClientRect().height
+      );
 
       document.documentElement.style.setProperty(
         "--header-height",
         `${headerHeight}px`
       );
+    }
 
-      document.documentElement.style.setProperty(
-        "--scene-height",
-        `${Math.max(320, Math.round(viewportHeight - headerHeight))}px`
+    syncHeaderHeight();
+
+    if ("ResizeObserver" in window && siteHeader) {
+      const headerResizeObserver =
+        new ResizeObserver(syncHeaderHeight);
+
+      headerResizeObserver.observe(siteHeader);
+    }
+
+    window.addEventListener("resize", syncHeaderHeight);
+
+    /* =========================================================
+       1P RANDOM HERO
+       ========================================================= */
+    const heroVariants = Array.from(
+      document.querySelectorAll(".hero-variant")
+    );
+
+    function chooseHeroVariant() {
+      if (!heroVariants.length) return;
+
+      const savedHero =
+        sessionStorage.getItem("modingLastHero");
+
+      const lastHero =
+        savedHero === null
+          ? -1
+          : Number(savedHero);
+
+      const candidates = heroVariants
+        .map((_, index) => index)
+        .filter((index) => index !== lastHero);
+
+      const pool = candidates.length
+        ? candidates
+        : heroVariants.map((_, index) => index);
+
+      const selectedIndex =
+        pool[Math.floor(Math.random() * pool.length)];
+
+      heroVariants.forEach((hero, index) => {
+        hero.classList.toggle(
+          "is-selected",
+          index === selectedIndex
+        );
+      });
+
+      const selectedHero = heroVariants[selectedIndex];
+      const introScene = document.querySelector(".scene-intro");
+
+      if (selectedHero && introScene) {
+        introScene.style.setProperty(
+          "--hero-pc",
+          `url("${selectedHero.dataset.pc}")`
+        );
+
+        introScene.style.setProperty(
+          "--hero-mobile",
+          `url("${selectedHero.dataset.mobile}")`
+        );
+      }
+
+      sessionStorage.setItem(
+        "modingLastHero",
+        String(selectedIndex)
       );
     }
 
-    syncViewport();
+    chooseHeroVariant();
 
-    let resizeSnapTimer = null;
+    /* =========================================================
+       MOBILE MENU
+       ========================================================= */
+    const menuToggle =
+      document.getElementById("menuToggle");
 
-    function resnapCurrentScene() {
-      window.clearTimeout(resizeSnapTimer);
+    const menuClose =
+      document.getElementById("menuClose");
 
-      resizeSnapTimer = window.setTimeout(() => {
-        const sceneHeight = snapRoot.clientHeight;
-        if (!sceneHeight) return;
-
-        const currentIndex =
-          Math.round(snapRoot.scrollTop / sceneHeight);
-
-        const safeIndex =
-          Math.max(0, Math.min(currentIndex, scenes.length - 1));
-
-        snapRoot.scrollTo({
-          top: safeIndex * sceneHeight,
-          behavior: "auto"
-        });
-      }, 80);
-    }
-
-    if ("ResizeObserver" in window && siteHeader) {
-      const ro = new ResizeObserver(() => {
-        syncViewport();
-        resnapCurrentScene();
-      });
-
-      ro.observe(siteHeader);
-    }
-
-    window.addEventListener("resize", () => {
-      syncViewport();
-      resnapCurrentScene();
-    });
-
-    window.addEventListener("orientationchange", () => {
-      syncViewport();
-      resnapCurrentScene();
-    });
-
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", () => {
-        syncViewport();
-        resnapCurrentScene();
-      });
-    }
-
-    /* Mobile menu */
-    const menuToggle = document.getElementById("menuToggle");
-    const menuClose = document.getElementById("menuClose");
-    const mobileMenuOverlay = document.getElementById("mobileMenuOverlay");
+    const mobileMenuOverlay =
+      document.getElementById("mobileMenuOverlay");
 
     function openMobileMenu() {
       mobileMenuOverlay.classList.add("is-open");
-      mobileMenuOverlay.setAttribute("aria-hidden", "false");
-      menuToggle.setAttribute("aria-expanded", "true");
+      mobileMenuOverlay.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+      menuToggle.setAttribute(
+        "aria-expanded",
+        "true"
+      );
       snapRoot.style.overflowY = "hidden";
     }
 
     function closeMobileMenu() {
       mobileMenuOverlay.classList.remove("is-open");
-      mobileMenuOverlay.setAttribute("aria-hidden", "true");
-      menuToggle.setAttribute("aria-expanded", "false");
+      mobileMenuOverlay.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+      menuToggle.setAttribute(
+        "aria-expanded",
+        "false"
+      );
       snapRoot.style.overflowY = "auto";
     }
 
-    menuToggle.addEventListener("click", openMobileMenu);
-    menuClose.addEventListener("click", closeMobileMenu);
+    menuToggle.addEventListener(
+      "click",
+      openMobileMenu
+    );
+
+    menuClose.addEventListener(
+      "click",
+      closeMobileMenu
+    );
 
     document
       .querySelectorAll(".mobile-menu-links a")
       .forEach((link) => {
-        link.addEventListener("click", closeMobileMenu);
+        link.addEventListener(
+          "click",
+          closeMobileMenu
+        );
       });
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeMobileMenu();
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") {
+          closeMobileMenu();
+        }
       }
+    );
+
+    /* =========================================================
+       🔒 LOCK 04. 다운로드 자동 분기
+       ========================================================= */
+    function openModingStore(event) {
+      const androidUrl =
+        "https://play.google.com/store/apps/details?id=com.moding.application";
+
+      const iosUrl =
+        "https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982";
+
+      const ua =
+        navigator.userAgent ||
+        navigator.vendor ||
+        window.opera ||
+        "";
+
+      const platform =
+        navigator.platform || "";
+
+      const isAndroid =
+        /android/i.test(ua);
+
+      const isIOS =
+        /iPhone|iPad|iPod/i.test(ua) ||
+        (
+          platform === "MacIntel" &&
+          navigator.maxTouchPoints > 1
+        );
+
+      if (isAndroid) {
+        event.preventDefault();
+        window.location.href = androidUrl;
+        return false;
+      }
+
+      if (isIOS) {
+        event.preventDefault();
+        window.location.href = iosUrl;
+        return false;
+      }
+
+      return true;
+    }
+
+    /* =========================================================
+       2P SEARCH MOTION
+       - 돋보기가 네 상품을 순회
+       - 비추는 상품만 확대
+       ========================================================= */
+    const searchLens = document.getElementById("searchLens");
+
+    const searchTargetIds = [
+      "searchFish",
+      "searchMeat",
+      "searchSauce",
+      "searchShell"
+    ];
+
+    let searchTargets = [];
+    let searchMotionTimer = null;
+    let searchMotionFrame = null;
+    let searchMotionIndex = 0;
+    let searchLensX = 0;
+    let searchLensY = 0;
+
+    function refreshSearchTargets() {
+      searchTargets = searchTargetIds
+        .map((id) => {
+          const node = document.getElementById(id);
+          if (!node) return null;
+
+          const box = node.getBBox();
+
+          return {
+            id,
+            x: box.x + box.width / 2,
+            y: box.y + box.height / 2
+          };
+        })
+        .filter(Boolean);
+
+      if (searchTargets.length && searchLensX === 0 && searchLensY === 0) {
+        searchLensX = searchTargets[0].x;
+        searchLensY = searchTargets[0].y;
+      }
+    }
+
+    refreshSearchTargets();
+
+    function clearSearchFocus() {
+      searchTargets.forEach((item) => {
+        const node = document.getElementById(item.id);
+        if (node) node.classList.remove("is-focus");
+      });
+    }
+
+    function focusSearchItem(index) {
+      clearSearchFocus();
+      const node = document.getElementById(searchTargets[index].id);
+      if (node) node.classList.add("is-focus");
+    }
+
+    function setSearchLensPosition(x, y) {
+      if (!searchLens) return;
+      searchLens.setAttribute(
+        "transform",
+        `translate(${x.toFixed(2)} ${y.toFixed(2)})`
+      );
+    }
+
+    function easeSearch(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function moveSearchLensTo(index, immediate = false) {
+      if (!searchLens) return;
+
+      const target = searchTargets[index];
+
+      if (searchMotionFrame) {
+        cancelAnimationFrame(searchMotionFrame);
+        searchMotionFrame = null;
+      }
+
+      if (immediate) {
+        searchLensX = target.x;
+        searchLensY = target.y;
+        setSearchLensPosition(searchLensX, searchLensY);
+        focusSearchItem(index);
+        return;
+      }
+
+      clearSearchFocus();
+
+      const startX = searchLensX;
+      const startY = searchLensY;
+      const controlLift = index % 2 === 0 ? -28 : 24;
+      const duration = 820;
+      const startTime = performance.now();
+
+      function frame(now) {
+        const raw = Math.min(1, (now - startTime) / duration);
+        const t = easeSearch(raw);
+
+        /* 직선보다 살짝 휘는 이동 */
+        const curve = Math.sin(Math.PI * raw) * controlLift;
+        searchLensX = startX + (target.x - startX) * t;
+        searchLensY = startY + (target.y - startY) * t + curve;
+        setSearchLensPosition(searchLensX, searchLensY);
+
+        if (raw < 1) {
+          searchMotionFrame = requestAnimationFrame(frame);
+        } else {
+          searchLensX = target.x;
+          searchLensY = target.y;
+          setSearchLensPosition(searchLensX, searchLensY);
+          focusSearchItem(index);
+          searchMotionFrame = null;
+        }
+      }
+
+      searchMotionFrame = requestAnimationFrame(frame);
+    }
+
+    function stopSearchMotion() {
+      if (searchMotionTimer) {
+        clearTimeout(searchMotionTimer);
+        searchMotionTimer = null;
+      }
+      if (searchMotionFrame) {
+        cancelAnimationFrame(searchMotionFrame);
+        searchMotionFrame = null;
+      }
+      clearSearchFocus();
+    }
+
+    function runSearchMotion() {
+      refreshSearchTargets();
+
+      if (!searchLens || !searchTargets.length) return;
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        moveSearchLensTo(0, true);
+        return;
+      }
+
+      stopSearchMotion();
+      searchMotionIndex = 0;
+      moveSearchLensTo(searchMotionIndex, true);
+
+      function next() {
+        searchMotionTimer = setTimeout(() => {
+          searchMotionIndex =
+            (searchMotionIndex + 1) % searchTargets.length;
+
+          moveSearchLensTo(searchMotionIndex);
+          next();
+        }, 1750);
+      }
+
+      next();
+    }
+
+    /* =========================================================
+       SCENE / INDICATOR
+       ========================================================= */
+    const snapRoot =
+      document.getElementById("snapRoot");
+
+    const scenes =
+      Array.from(
+        document.querySelectorAll(".scene")
+      );
+
+    const indicatorButtons = [];
+
+    let activeSceneId = "page1";
+
+    function setActiveScene(scene) {
+      const sceneChanged =
+        Boolean(scene && scene.id !== activeSceneId);
+
+      scenes.forEach((item) => {
+        item.classList.toggle(
+          "is-active",
+          item === scene
+        );
+      });
+
+      if (sceneChanged) {
+        activeSceneId = scene.id;
+
+        stopSearchMotion();
+
+        if (scene.id === "page2") {
+          runSearchMotion();
+        }
+      }
+
+      indicatorButtons.forEach((button) => {
+        const isActive =
+          button.dataset.target === scene.id;
+
+        button.classList.toggle(
+          "is-active",
+          isActive
+        );
+
+        button.setAttribute(
+          "aria-current",
+          isActive ? "true" : "false"
+        );
+      });
+    }
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter(
+              (entry) => entry.isIntersecting
+            )
+            .sort(
+              (a, b) =>
+                b.intersectionRatio -
+                a.intersectionRatio
+            );
+
+          if (
+            visible.length > 0 &&
+            visible[0].intersectionRatio >= 0.55
+          ) {
+            setActiveScene(
+              visible[0].target
+            );
+          }
+        },
+        {
+          root: snapRoot,
+          threshold: [
+            0.30,
+            0.55,
+            0.70,
+            0.90
+          ]
+        }
+      );
+
+    scenes.forEach((scene) => {
+      observer.observe(scene);
     });
 
-    /* Exact snap */
-    function scrollToScene(targetId) {
-      const target = document.getElementById(targetId);
-      if (!target) return;
-
-      const reduced =
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    /* =========================================================
+       NEXT SCENE CLICK
+       ========================================================= */
+    function scrollToScene(id) {
+      const target = document.getElementById(id);
+      if (!target || !snapRoot) return;
 
       snapRoot.scrollTo({
         top: target.offsetTop,
-        behavior: reduced ? "auto" : "smooth"
+        behavior: window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches
+          ? "auto"
+          : "smooth"
       });
     }
 
     document
-      .querySelectorAll(".scene-next[data-next]")
+      .querySelectorAll(
+        ".scene-next[data-next]"
+      )
       .forEach((button) => {
-        button.addEventListener("click", () => {
-          scrollToScene(button.dataset.next);
-        });
+        button.addEventListener(
+          "click",
+          () => {
+            scrollToScene(
+              button.dataset.next
+            );
+          }
+        );
       });
 
-    let snapSettleTimer = null;
+    let indexSnapSettleTimer = null;
 
     snapRoot.addEventListener(
       "scroll",
       () => {
-        window.clearTimeout(snapSettleTimer);
+        window.clearTimeout(indexSnapSettleTimer);
 
-        snapSettleTimer = window.setTimeout(() => {
+        indexSnapSettleTimer = window.setTimeout(() => {
           const sceneHeight = snapRoot.clientHeight;
           if (!sceneHeight) return;
 
@@ -1899,44 +2867,101 @@
       { passive: true }
     );
 
-    /* 2P magnifier motion */
-    const discoverLens = document.getElementById("discoverLens");
-    const discoverTargets = [
-      { id: "discoverFish", x: 95, y: 188 },
-      { id: "discoverMeat", x: 340, y: 140 },
-      { id: "discoverSauce", x: 486, y: 250 },
-      { id: "discoverFrozen", x: 220, y: 330 }
-    ];
+    /* =========================================================
+       1P TOP REFRESH
+       - PC: 최상단에서 위로 휠
+       - Mobile: 최상단에서 아래로 당기기
+       ========================================================= */
+    let refreshLock = false;
+    let wheelPull = 0;
 
-    let discoverIndex = 0;
-
-    function moveDiscoverLens() {
-      if (!discoverLens) return;
-
-      const target = discoverTargets[discoverIndex];
-
-      discoverLens.setAttribute(
-        "transform",
-        `translate(${target.x} ${target.y})`
-      );
-
-      discoverTargets.forEach((item, index) => {
-        const el = document.getElementById(item.id);
-        if (el) {
-          el.classList.toggle("is-focus", index === discoverIndex);
-        }
-      });
-
-      discoverIndex =
-        (discoverIndex + 1) % discoverTargets.length;
+    function refreshFromTop() {
+      if (refreshLock) return;
+      refreshLock = true;
+      window.location.reload();
     }
 
-    moveDiscoverLens();
-    window.setInterval(moveDiscoverLens, 1800);
+    snapRoot.addEventListener(
+      "wheel",
+      (event) => {
+        if (snapRoot.scrollTop > 1) {
+          wheelPull = 0;
+          return;
+        }
 
-    /* Mobile horizontal swipe: Index → About */
-    let swipeStartX = null;
-    let swipeStartY = null;
+        if (event.deltaY < 0) {
+          wheelPull += Math.abs(event.deltaY);
+
+          if (wheelPull >= 160) {
+            refreshFromTop();
+          }
+        } else {
+          wheelPull = 0;
+        }
+      },
+      { passive: true }
+    );
+
+    let touchStartY = null;
+    let touchRefreshReady = false;
+
+    snapRoot.addEventListener(
+      "touchstart",
+      (event) => {
+        if (
+          snapRoot.scrollTop <= 1 &&
+          event.touches.length === 1
+        ) {
+          touchStartY =
+            event.touches[0].clientY;
+
+          touchRefreshReady = true;
+        } else {
+          touchStartY = null;
+          touchRefreshReady = false;
+        }
+      },
+      { passive: true }
+    );
+
+    snapRoot.addEventListener(
+      "touchmove",
+      (event) => {
+        if (
+          !touchRefreshReady ||
+          touchStartY === null ||
+          event.touches.length !== 1
+        ) {
+          return;
+        }
+
+        const pullDistance =
+          event.touches[0].clientY -
+          touchStartY;
+
+        if (pullDistance >= 110) {
+          refreshFromTop();
+        }
+      },
+      { passive: true }
+    );
+
+    snapRoot.addEventListener(
+      "touchend",
+      () => {
+        touchStartY = null;
+        touchRefreshReady = false;
+      },
+      { passive: true }
+    );
+
+    /* =========================================================
+       HORIZONTAL SITE SWIPE
+       INDEX → ABOUT
+       화면 안쪽에서 왼쪽으로 확실하게 밀 때만 이동
+       ========================================================= */
+    let pageSwipeStartX = null;
+    let pageSwipeStartY = null;
 
     snapRoot.addEventListener(
       "touchstart",
@@ -1946,14 +2971,15 @@
         const x = event.touches[0].clientX;
         const y = event.touches[0].clientY;
 
+        /* 브라우저 edge swipe와 충돌 방지 */
         if (x < 45 || x > window.innerWidth - 45) {
-          swipeStartX = null;
-          swipeStartY = null;
+          pageSwipeStartX = null;
+          pageSwipeStartY = null;
           return;
         }
 
-        swipeStartX = x;
-        swipeStartY = y;
+        pageSwipeStartX = x;
+        pageSwipeStartY = y;
       },
       { passive: true }
     );
@@ -1962,8 +2988,8 @@
       "touchend",
       (event) => {
         if (
-          swipeStartX === null ||
-          swipeStartY === null ||
+          pageSwipeStartX === null ||
+          pageSwipeStartY === null ||
           !event.changedTouches.length
         ) {
           return;
@@ -1972,12 +2998,13 @@
         const endX = event.changedTouches[0].clientX;
         const endY = event.changedTouches[0].clientY;
 
-        const dx = endX - swipeStartX;
-        const dy = endY - swipeStartY;
+        const dx = endX - pageSwipeStartX;
+        const dy = endY - pageSwipeStartY;
 
-        swipeStartX = null;
-        swipeStartY = null;
+        pageSwipeStartX = null;
+        pageSwipeStartY = null;
 
+        /* 세로 스크롤 오인 방지 */
         if (
           Math.abs(dx) < 90 ||
           Math.abs(dx) < Math.abs(dy) * 1.35
@@ -1985,6 +3012,7 @@
           return;
         }
 
+        /* 왼쪽으로 밀기 = 다음 사이트 페이지 ABOUT */
         if (dx < 0) {
           window.location.href = "about.html";
         }
@@ -1992,52 +3020,76 @@
       { passive: true }
     );
 
-    function openModingStore(event) {
-      if (event) event.preventDefault();
-
-      const ua =
-        navigator.userAgent ||
-        navigator.vendor ||
-        window.opera ||
-        "";
-
-      const isAndroid = /android/i.test(ua);
-
-      const isIOS =
-        /iPad|iPhone|iPod/i.test(ua) ||
-        (
-          navigator.platform === "MacIntel" &&
-          navigator.maxTouchPoints > 1
-        );
-
-      if (isAndroid) {
-        window.location.href =
-          "https://play.google.com/store/apps/details?id=com.moding.application";
-        return false;
+    /* =========================================================
+       🔒 LOCK 05. 복사 / 드래그 방지
+       ========================================================= */
+    document.addEventListener(
+      "contextmenu",
+      function (e) {
+        if (
+          !e.target.closest(
+            "input, textarea, a"
+          )
+        ) {
+          e.preventDefault();
+        }
       }
+    );
 
-      if (isIOS) {
-        window.location.href =
-          "https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982";
-        return false;
+    document.addEventListener(
+      "dragstart",
+      function (e) {
+        if (
+          !e.target.closest(
+            "input, textarea"
+          )
+        ) {
+          e.preventDefault();
+        }
       }
+    );
 
-      window.location.href = "/download.html";
-      return false;
-    }
+    document.addEventListener(
+      "keydown",
+      function (e) {
+        const key =
+          e.key.toLowerCase();
 
-    /* Copy / drag protection */
-    document.addEventListener("contextmenu", (event) => {
-      if (!event.target.closest("input, textarea, a, button")) {
-        event.preventDefault();
+        if (
+          (e.ctrlKey || e.metaKey) &&
+          !e.target.closest(
+            "input, textarea"
+          )
+        ) {
+          if (
+            [
+              "c",
+              "x",
+              "v",
+              "s",
+              "u",
+              "p",
+              "a"
+            ].includes(key)
+          ) {
+            e.preventDefault();
+          }
+        }
       }
-    });
+    );
 
-    document.addEventListener("dragstart", (event) => {
-      if (!event.target.closest("input, textarea")) {
-        event.preventDefault();
+    document.addEventListener(
+      "copy",
+      function (e) {
+        if (
+          !e.target.closest(
+            "input, textarea"
+          )
+        ) {
+          e.preventDefault();
+        }
       }
-    });
+    );
   </script>
 </body>
 </html>
