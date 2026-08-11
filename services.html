@@ -796,13 +796,6 @@
       50% { transform: translate(-50%,9px); }
     }
 
-    #serviceHero,
-    #serviceDiscovery,
-    #servicePayment,
-    #serviceInvoice,
-    #serviceFinal {
-      scroll-margin-top: calc(var(--header-height) + 1px);
-    }
 
     /* =========================================================
        SITE SIDE NAV
@@ -1248,6 +1241,7 @@
       overflow-y: auto;
       overflow-x: hidden;
       scroll-snap-type: y mandatory;
+      scroll-padding: 0;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior-y: contain;
@@ -1265,6 +1259,7 @@
       overflow: hidden;
       scroll-snap-align: start;
       scroll-snap-stop: always;
+      scroll-margin: 0 !important;
     }
 
     /* 1P */
@@ -2208,6 +2203,26 @@
 
     syncHeaderHeight();
 
+    let resizeSnapTimer = null;
+
+    function resnapCurrentScene() {
+      if (!snapRoot) return;
+
+      window.clearTimeout(resizeSnapTimer);
+      resizeSnapTimer = window.setTimeout(() => {
+        const sceneHeight = snapRoot.clientHeight;
+        if (!sceneHeight) return;
+
+        const index = Math.round(snapRoot.scrollTop / sceneHeight);
+        const safeIndex = Math.max(0, Math.min(index, 4));
+
+        snapRoot.scrollTo({
+          top: safeIndex * sceneHeight,
+          behavior: "auto"
+        });
+      }, 80);
+    }
+
     if ("ResizeObserver" in window && siteHeader) {
       const headerResizeObserver =
         new ResizeObserver(syncHeaderHeight);
@@ -2215,11 +2230,21 @@
       headerResizeObserver.observe(siteHeader);
     }
 
-    window.addEventListener("resize", syncHeaderHeight);
-    window.addEventListener("orientationchange", syncHeaderHeight);
+    window.addEventListener("resize", () => {
+      syncHeaderHeight();
+      resnapCurrentScene();
+    });
+
+    window.addEventListener("orientationchange", () => {
+      syncHeaderHeight();
+      resnapCurrentScene();
+    });
 
     if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", syncHeaderHeight);
+      window.visualViewport.addEventListener("resize", () => {
+        syncHeaderHeight();
+        resnapCurrentScene();
+      });
     }
 
     const menuToggle =
@@ -2265,27 +2290,59 @@
     /* =========================================================
        SECTION NEXT
        ========================================================= */
+    /* =========================================================
+       EXACT FULL PAGE SCROLL
+       스크롤 컨테이너 내부의 정확한 장면 시작점으로 이동
+       ========================================================= */
+    function scrollToServiceScene(targetId) {
+      if (!snapRoot) return;
+
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      const prefersReducedMotion =
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      snapRoot.scrollTo({
+        top: target.offsetTop,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
+      });
+    }
+
     document
       .querySelectorAll(".section-next[data-scroll-target]")
       .forEach((button) => {
         button.addEventListener("click", () => {
-          const target =
-            document.getElementById(
-              button.dataset.scrollTarget
-            );
-
-          if (!target) return;
-
-          target.scrollIntoView({
-            behavior: window.matchMedia(
-              "(prefers-reduced-motion: reduce)"
-            ).matches
-              ? "auto"
-              : "smooth",
-            block: "start"
-          });
+          scrollToServiceScene(button.dataset.scrollTarget);
         });
       });
+
+    let snapSettleTimer = null;
+
+    snapRoot.addEventListener(
+      "scroll",
+      () => {
+        window.clearTimeout(snapSettleTimer);
+
+        snapSettleTimer = window.setTimeout(() => {
+          const sceneHeight = snapRoot.clientHeight;
+          if (!sceneHeight) return;
+
+          const nearestIndex =
+            Math.round(snapRoot.scrollTop / sceneHeight);
+
+          const exactTop = nearestIndex * sceneHeight;
+
+          if (Math.abs(snapRoot.scrollTop - exactTop) > 1) {
+            snapRoot.scrollTo({
+              top: exactTop,
+              behavior: "auto"
+            });
+          }
+        }, 140);
+      },
+      { passive: true }
+    );
 
     /* =========================================================
        HORIZONTAL SITE SWIPE
@@ -2353,22 +2410,6 @@
       },
       { passive: true }
     );
-
-    document
-      .querySelectorAll(".section-next[data-scroll-target]")
-      .forEach((button) => {
-        button.addEventListener("click", () => {
-          const target = document.getElementById(button.dataset.scrollTarget);
-          if (!target) return;
-
-          target.scrollIntoView({
-            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-              ? "auto"
-              : "smooth",
-            block: "start"
-          });
-        });
-      });
 
     const revealItems =
       document.querySelectorAll(".reveal");
