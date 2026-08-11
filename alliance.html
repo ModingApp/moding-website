@@ -1403,7 +1403,13 @@
         transition: none !important;
       }
     }
-  </style>
+  
+    /* SVG 안 실제 로고 이미지 */
+    .moding-hub image {
+      pointer-events: none;
+    }
+
+</style>
 </head>
 
 <body>
@@ -1543,18 +1549,23 @@
 
               <!-- MODING 허브 -->
               <g class="moding-hub">
-                <rect x="346" y="208" width="146" height="84" rx="42" fill="#fff"/>
-                <text x="419" y="244"
-                      text-anchor="middle"
-                      fill="#238B22"
-                      font-size="25"
-                      font-weight="900">MODING</text>
-                <text x="419" y="269"
-                      text-anchor="middle"
-                      fill="#FF8C00"
-                      font-size="16"
-                      font-weight="900"
-                      letter-spacing=".16em">CONNECT</text>
+                <rect
+                  x="346"
+                  y="208"
+                  width="146"
+                  height="84"
+                  rx="42"
+                  fill="#fff"
+                />
+
+                <image
+                  href="모딩로고.png"
+                  x="380"
+                  y="216"
+                  width="78"
+                  height="68"
+                  preserveAspectRatio="xMidYMid meet"
+                />
               </g>
 
               <!-- 경로 -->
