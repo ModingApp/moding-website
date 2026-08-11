@@ -389,20 +389,21 @@
     }
 
     /* 1P HERO */
-    .manufacturer-box,
+    .manufacturer-cluster,
     .store-cluster,
     .moding-hub {
       transform-box: fill-box;
       transform-origin: center;
     }
 
-    .manufacturer-box {
-      animation: factoryFloat 4.8s ease-in-out infinite;
+    .manufacturer-cluster {
+      animation: manufacturerClusterReact 4.8s ease-in-out infinite;
     }
 
-    @keyframes factoryFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+    @keyframes manufacturerClusterReact {
+      0%,70%,100% { transform: scale(1); }
+      80% { transform: scale(1.025); }
+      88% { transform: scale(1); }
     }
 
     .moding-hub {
@@ -1385,7 +1386,7 @@
         scroll-behavior: auto;
       }
 
-      .manufacturer-box,
+      .manufacturer-cluster,
       .moding-hub,
       .store-cluster,
       .category-card,
@@ -1524,27 +1525,102 @@
           <div class="scene-visual" aria-hidden="true">
             <svg viewBox="0 0 760 520">
 
-              <!-- 제조사 -->
-              <g class="manufacturer-box">
-                <path d="M70 308 H248 V408 H70 Z"
-                      fill="none" stroke="#fff" stroke-width="7"/>
-                <path d="M92 308 V256 L126 280 V246 L164 280 V244 L205 280 V308"
-                      fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
-                <rect x="96" y="345" width="42" height="63" rx="4" fill="#FF8C00"/>
-                <path d="M168 346 H218 M168 370 H218"
-                      fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-              </g>
+              <!-- 제조사 3곳 -->
+              <g class="manufacturer-cluster">
 
-              <!-- 출고 박스 -->
-              <g class="manufacturer-box" transform="translate(230 182)">
-                <path d="M0 45 L54 22 L108 45 L54 69 Z"
-                      fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
-                <path d="M0 45 V99 L54 124 V69"
-                      fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
-                <path d="M108 45 V99 L54 124"
-                      fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
-                <path d="M54 22 V69"
-                      fill="none" stroke="#FF8C00" stroke-width="5"/>
+                <!-- 큰 제조사 -->
+                <g transform="translate(116 302) scale(.82)">
+                  <path
+                    d="M0 58 H112 V138 H0 Z"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="7"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M14 58 V29
+                       L34 43 V23
+                       L58 43 V21
+                       L84 43 V58"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <rect x="18" y="95" width="27" height="43" rx="4" fill="#FF8C00"/>
+                  <path
+                    d="M62 93 H94
+                       M62 112 H94"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="5"
+                    stroke-linecap="round"
+                  />
+                </g>
+
+                <!-- 작은 제조사 -->
+                <g transform="translate(40 274) scale(.66)">
+                  <path
+                    d="M0 58 H112 V138 H0 Z"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="7"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M14 58 V29
+                       L34 43 V23
+                       L58 43 V21
+                       L84 43 V58"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <rect x="18" y="95" width="27" height="43" rx="4" fill="#FF8C00"/>
+                  <path
+                    d="M62 93 H94
+                       M62 112 H94"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="5"
+                    stroke-linecap="round"
+                  />
+                </g>
+
+                <!-- 작은 제조사 -->
+                <g transform="translate(20 366) scale(.56)">
+                  <path
+                    d="M0 58 H112 V138 H0 Z"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="7"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M14 58 V29
+                       L34 43 V23
+                       L58 43 V21
+                       L84 43 V58"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <rect x="18" y="95" width="27" height="43" rx="4" fill="#FF8C00"/>
+                  <path
+                    d="M62 93 H94
+                       M62 112 H94"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="5"
+                    stroke-linecap="round"
+                  />
+                </g>
+
               </g>
 
               <!-- MODING 허브 -->
@@ -1570,7 +1646,10 @@
 
               <!-- 경로 -->
               <path id="allianceRoute"
-                    d="M300 246 C330 230 346 230 360 242 C395 272 454 274 510 256 C548 244 586 248 620 270"
+                    d="M218 270
+                       C265 244 314 240 360 250
+                       C401 268 451 268 492 250
+                       C540 238 585 246 620 270"
                     fill="none"
                     stroke="rgba(255,255,255,.68)"
                     stroke-width="5"
