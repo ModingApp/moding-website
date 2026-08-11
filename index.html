@@ -2,42 +2,42 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
-  <title>Services | 모딩 서비스</title>
+  <title>모딩(Moding) | 외식업 식품 주문의 새로운 방법</title>
 
   <meta
     name="description"
-    content="모딩(Moding)은 외식업 사장님이 새로운 상품을 발견하고, 카드결제로 주문하고, 세금계산서까지 더 간단하게 이어갈 수 있도록 돕는 B2B 식품 거래 서비스입니다."
+    content="모딩(Moding)은 외식업 사장님이 필요한 식품을 발견하고 주문하고 관리할 수 있도록 돕는 B2B 식품 거래 서비스입니다."
   >
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Moding">
-  <meta property="og:title" content="Services | 찾고, 결제하고, 정리까지">
-  <meta property="og:description" content="상품 발견부터 카드결제, 거래 증빙까지. 식당의 식품 주문을 조금 더 단순하게.">
-  <meta property="og:url" content="https://moding.app/services.html">
+  <meta property="og:title" content="모딩(Moding) | 오늘부터 모딩하세요 :)">
+  <meta property="og:description" content="외식업 식품 주문의 새로운 방법.">
+  <meta property="og:url" content="https://moding.app/">
   <meta property="og:image" content="https://moding.app/og-image.png">
-  <meta property="og:image:width" content="500">
-  <meta property="og:image:height" content="500">
-  <meta property="og:image:type" content="image/png">
 
   <style>
     :root {
       --green: #238B22;
       --green-dark: #1C6F1C;
       --orange: #FF8C00;
-
       --white: #FFFFFF;
       --black: #050505;
       --ink: #173119;
       --sub: #687269;
       --line: #E2E8E2;
-      --soft: #F4F7F4;
-      --mint: #EDF5ED;
+      --soft: #F6F7F3;
+      --cream: #F7F0E6;
 
       --page-max: 1180px;
       --page-pad: 24px;
       --header-height: 84px;
+      --scene-height: calc(100dvh - var(--header-height));
     }
 
     * {
@@ -46,40 +46,34 @@
       box-sizing: border-box;
     }
 
-    html {
+    html,
+    body {
       width: 100%;
-      min-height: 100%;
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
+      height: 100%;
       background: #fff;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
-      width: 100%;
-      min-height: 100vh;
-      overflow-x: hidden;
+      overflow: hidden;
       font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Noto Sans KR",
         "Apple SD Gothic Neo",
         sans-serif;
-      background: #fff;
       color: var(--ink);
       word-break: keep-all;
     }
 
     a {
       color: inherit;
-    }
-
-    button,
-    a {
       -webkit-tap-highlight-color: transparent;
     }
 
     button {
       font: inherit;
+      -webkit-tap-highlight-color: transparent;
     }
 
     img {
@@ -92,13 +86,6 @@
 
     em {
       font-style: normal;
-    }
-
-    .container {
-      width: 100%;
-      max-width: var(--page-max);
-      margin: 0 auto;
-      padding: 0 var(--page-pad);
     }
 
     /* =========================================================
@@ -122,7 +109,6 @@
       align-items: center;
       justify-content: space-between;
       gap: 28px;
-      overflow: visible;
     }
 
     .nav-logo {
@@ -155,8 +141,7 @@
       transition: color .2s ease;
     }
 
-    .nav-menu a:hover,
-    .nav-menu a.active {
+    .nav-menu a:hover {
       color: var(--orange);
     }
 
@@ -258,7 +243,6 @@
       letter-spacing: -0.035em;
     }
 
-    .mobile-menu-links a.active,
     .mobile-menu-links a:hover {
       color: var(--orange);
     }
@@ -272,18 +256,56 @@
     }
 
     /* =========================================================
-       COMMON
+       SNAP ROOT
        ========================================================= */
-    main {
-      padding-top: var(--header-height);
+    .snap-root {
+      position: fixed;
+      top: var(--header-height);
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: var(--scene-height);
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-snap-type: y mandatory;
+      scroll-padding: 0;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: none;
+      background: #fff;
     }
 
-    .section {
+    .scene {
       position: relative;
+      width: 100%;
+      height: var(--scene-height);
+      min-height: var(--scene-height);
       overflow: hidden;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      scroll-margin: 0 !important;
     }
 
-    .section-kicker {
+    .scene-frame {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: var(--page-max);
+      height: 100%;
+      margin: 0 auto;
+      padding: 36px var(--page-pad) 58px;
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+      align-items: center;
+      gap: 52px;
+    }
+
+    .scene-copy {
+      position: relative;
+      z-index: 4;
+    }
+
+    .kicker {
       margin-bottom: 18px;
       color: var(--orange);
       font-size: 12px;
@@ -291,287 +313,259 @@
       letter-spacing: .18em;
     }
 
-    .section-title {
-      font-size: clamp(42px, 5.2vw, 76px);
-      line-height: 1.06;
-      letter-spacing: -0.06em;
+    .scene-title {
+      font-size: clamp(48px, 5.4vw, 82px);
+      line-height: 1.05;
+      letter-spacing: -0.062em;
       font-weight: 950;
     }
 
-    .section-title em {
+    .scene-title em {
       color: var(--orange);
     }
 
-    .section-desc {
+    .scene-desc {
       margin-top: 22px;
-      max-width: 680px;
+      max-width: 600px;
       color: var(--sub);
-      font-size: clamp(16px, 1.35vw, 19px);
-      line-height: 1.75;
-      letter-spacing: -0.025em;
+      font-size: clamp(16px, 1.4vw, 20px);
+      line-height: 1.72;
       font-weight: 650;
     }
 
-    /* =========================================================
-       HERO
-       ========================================================= */
-    .service-hero {
-      min-height: calc(100vh - var(--header-height));
-      min-height: calc(100dvh - var(--header-height));
-      background: var(--green);
-      color: #fff;
+    .scene-art {
+      min-width: 0;
       display: flex;
       align-items: center;
+      justify-content: center;
+    }
+
+    .scene-art svg {
+      width: min(100%, 650px);
+      height: auto;
+      overflow: visible;
+    }
+
+    /* =========================================================
+       1P REAL PHOTO
+       ========================================================= */
+    .scene-hero {
+      background:
+        url("index-hero-pc.jpg")
+        center center / cover no-repeat;
+    }
+
+    .scene-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(255,251,245,.96) 0%,
+          rgba(255,251,245,.90) 28%,
+          rgba(255,251,245,.45) 49%,
+          rgba(255,251,245,.06) 68%,
+          rgba(255,251,245,0) 100%
+        );
     }
 
     .hero-frame {
-      width: 100%;
-      display: grid;
-      grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr);
-      align-items: center;
-      gap: 54px;
-      padding-top: 58px;
-      padding-bottom: 58px;
+      grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
     }
 
-    .hero-kicker {
-      margin-bottom: 22px;
-      color: rgba(255,255,255,.72);
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: .18em;
+    .hero-copy {
+      align-self: center;
+      max-width: 620px;
     }
 
-    .hero-title {
-      font-size: clamp(52px, 5.8vw, 86px);
-      line-height: 1.04;
-      letter-spacing: -0.065em;
+    .hero-copy h1 {
+      color: var(--green-dark);
+      font-size: clamp(56px, 5.8vw, 88px);
+      line-height: 1.03;
+      letter-spacing: -0.068em;
       font-weight: 950;
     }
 
-    .hero-title em {
+    .hero-copy h1 em {
       color: var(--orange);
     }
 
-    .hero-desc {
-      margin-top: 28px;
-      max-width: 590px;
-      color: rgba(255,255,255,.82);
-      font-size: clamp(17px, 1.5vw, 21px);
-      line-height: 1.7;
-      font-weight: 700;
+    .hero-copy p {
+      margin-top: 22px;
+      color: #5B665D;
+      font-size: clamp(17px, 1.45vw, 21px);
+      line-height: 1.65;
+      font-weight: 750;
     }
 
-    .hero-art {
-      display: flex;
+    .hero-download {
+      min-height: 58px;
+      margin-top: 26px;
+      padding: 0 24px;
+      border-radius: 999px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 0;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 950;
+      box-shadow: 0 14px 34px rgba(35,139,34,.18);
+      transition:
+        transform .18s ease,
+        background .18s ease;
     }
 
-    .hero-art svg {
-      width: min(100%, 620px);
-      height: auto;
-      overflow: visible;
+    .hero-download:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
     }
 
-    .hero-step {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: heroStepFloat 4.8s ease-in-out infinite;
-    }
-
-    .hero-step.delay1 { animation-delay: .4s; }
-    .hero-step.delay2 { animation-delay: .8s; }
-
-    @keyframes heroStepFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .hero-trail {
-      stroke-dasharray: 10 12;
-      animation: heroTrailMove 4.8s linear infinite;
-    }
-
-    @keyframes heroTrailMove {
-      to { stroke-dashoffset: -44; }
-    }
-
-    .hero-dot {
-      animation: heroDotMove 6s ease-in-out infinite;
-    }
-
-    @keyframes heroDotMove {
-      0%   { transform: translate(116px, 220px); }
-      30%  { transform: translate(310px, 220px); }
-      65%  { transform: translate(500px, 220px); }
-      100% { transform: translate(116px, 220px); }
+    .hero-download .mark {
+      color: var(--orange);
+      font-size: 18px;
     }
 
     /* =========================================================
-       SERVICE PANELS
+       2P DISCOVERY
        ========================================================= */
-    .service-panel {
-      padding: 122px 0;
+    .scene-discovery {
+      background: #fff;
     }
 
-    .service-panel.alt {
+    .discovery-item,
+    .discovery-lens {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .discovery-item {
+      transition: transform .28s ease;
+    }
+
+    .discovery-item.is-focus {
+      transform: scale(1.10);
+    }
+
+    .discovery-lens {
+      transition:
+        transform .72s cubic-bezier(.22,1,.36,1);
+    }
+
+    /* =========================================================
+       3P ORDER
+       ========================================================= */
+    .scene-order {
       background: var(--soft);
     }
 
-    .service-grid {
-      display: grid;
-      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-      align-items: center;
-      gap: 64px;
-    }
-
-    .service-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 0;
-    }
-
-    .service-visual svg {
-      width: min(100%, 560px);
-      height: auto;
-      overflow: visible;
-    }
-
-    .service-copy {
-      min-width: 0;
-    }
-
-    .service-copy h3 {
-      font-size: clamp(38px, 4.5vw, 68px);
-      line-height: 1.08;
-      letter-spacing: -0.055em;
-      font-weight: 950;
-    }
-
-    .service-copy h3 em {
-      color: var(--orange);
-    }
-
-    .service-copy p {
-      margin-top: 22px;
-      max-width: 560px;
-      color: var(--sub);
-      font-size: 16px;
-      line-height: 1.8;
-      font-weight: 650;
-    }
-
-    .service-note {
-      margin-top: 24px;
-      color: var(--green);
-      font-size: 14px;
-      line-height: 1.75;
-      font-weight: 850;
-    }
-
-    /* 상품 발견 모션 */
-    .search-lens {
-      animation: lensMove 7.8s ease-in-out infinite;
+    .order-node {
       transform-box: fill-box;
       transform-origin: center;
+      animation: orderFloat 4.6s ease-in-out infinite;
     }
 
-    @keyframes lensMove {
-      0%, 10%   { transform: translate(-85px, -34px); }
-      30%, 40%  { transform: translate(40px, -92px); }
-      58%, 68%  { transform: translate(132px, 18px); }
-      86%, 100% { transform: translate(-34px, 108px); }
+    .order-node.n2 {
+      animation-delay: .35s;
     }
 
-    .search-focus {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: focusPulse 7.8s ease-in-out infinite;
+    .order-node.n3 {
+      animation-delay: .7s;
     }
 
-    .search-focus.delay1 { animation-delay: 1.8s; }
-    .search-focus.delay2 { animation-delay: 3.8s; }
-    .search-focus.delay3 { animation-delay: 5.8s; }
-
-    @keyframes focusPulse {
-      0%, 18%, 100% { transform: scale(1); }
-      8%, 12% { transform: scale(1.12); }
+    .order-route {
+      stroke-dasharray: 10 12;
+      animation: routeMove 3.6s linear infinite;
     }
 
-    /* 카드결제 모션 */
-    .pay-card {
-      animation: cardSlide 4.8s ease-in-out infinite;
-      transform-box: fill-box;
-      transform-origin: center;
+    @keyframes orderFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
-    .pay-check {
-      opacity: 0;
-      animation: checkPop 4.8s ease-in-out infinite;
-      transform-box: fill-box;
-      transform-origin: center;
-    }
-
-    @keyframes cardSlide {
-      0%, 15% { transform: translateX(90px); }
-      42%, 60% { transform: translateX(0); }
-      100% { transform: translateX(90px); }
-    }
-
-    @keyframes checkPop {
-      0%, 44% { opacity: 0; transform: scale(.7); }
-      50%, 76% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(.85); }
-    }
-
-    /* 세금계산서 모션 */
-    .invoice-sheet {
-      animation: invoiceRise 4.8s ease-in-out infinite;
-      transform-box: fill-box;
-      transform-origin: center;
-    }
-
-    .invoice-stamp {
-      opacity: 0;
-      animation: stampDrop 4.8s ease-in-out infinite;
-      transform-box: fill-box;
-      transform-origin: center;
-    }
-
-    @keyframes invoiceRise {
-      0%, 18% { transform: translateY(54px); opacity: .2; }
-      38%, 78% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(18px); opacity: .8; }
-    }
-
-    @keyframes stampDrop {
-      0%, 46% { opacity: 0; transform: translateY(-26px) scale(.84); }
-      56%, 84% { opacity: 1; transform: translateY(0) scale(1); }
-      100% { opacity: 0; transform: translateY(-8px) scale(.95); }
+    @keyframes routeMove {
+      to { stroke-dashoffset: -44; }
     }
 
     /* =========================================================
-       FINAL CTA
+       4P CONNECT
        ========================================================= */
-    .final-section {
-      background: #fff;
-      padding: 124px 0 118px;
+    .scene-connect {
+      background: var(--green);
+      color: #fff;
     }
 
-    .final-grid {
+    .scene-connect .kicker {
+      color: rgba(255,255,255,.72);
+    }
+
+    .scene-connect .scene-title {
+      color: #fff;
+    }
+
+    .scene-connect .scene-desc {
+      color: rgba(255,255,255,.80);
+    }
+
+    .connect-box,
+    .connect-hub,
+    .connect-store {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .connect-box {
+      animation: connectFloat 4.6s ease-in-out infinite;
+    }
+
+    .connect-hub {
+      animation: connectPulse 3.2s ease-in-out infinite;
+    }
+
+    .connect-store {
+      animation: connectFloat 4.6s ease-in-out infinite .5s;
+    }
+
+    @keyframes connectFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes connectPulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.035); }
+    }
+
+    /* =========================================================
+       5P WHITE APP CTA
+       ========================================================= */
+    .scene-final {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+
+    .final-main {
+      flex: 1 1 auto;
+      min-height: 0;
+      width: 100%;
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 28px var(--page-pad) 16px;
       display: grid;
-      grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
       align-items: center;
-      gap: 64px;
+      gap: 52px;
     }
 
     .final-copy h2 {
-      font-size: clamp(44px, 5.1vw, 76px);
-      line-height: 1.06;
-      letter-spacing: -0.06em;
+      font-size: clamp(48px, 5.4vw, 82px);
+      line-height: 1.05;
+      letter-spacing: -0.062em;
       font-weight: 950;
     }
 
@@ -581,166 +575,75 @@
 
     .final-copy p {
       margin-top: 22px;
-      max-width: 540px;
+      max-width: 560px;
       color: var(--sub);
-      font-size: 16px;
-      line-height: 1.8;
+      font-size: clamp(16px, 1.4vw, 20px);
+      line-height: 1.7;
       font-weight: 650;
     }
 
-    .service-flow {
+    .final-download {
+      min-height: 60px;
       margin-top: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px 14px;
-      color: var(--green);
-      font-size: 15px;
-      font-weight: 850;
-    }
-
-    .flow-chip {
-      padding: 11px 16px;
+      padding: 0 28px;
       border-radius: 999px;
-      background: var(--mint);
-      border: 1px solid #D6E7D6;
-    }
-
-    .flow-arrow {
-      color: var(--orange);
-      font-size: 18px;
-      font-weight: 950;
-    }
-
-    .download-button {
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      min-height: 60px;
-      margin-top: 34px;
-      padding: 0 28px;
-      border-radius: 999px;
-      border: 0;
-      background: var(--green);
-      color: #fff;
       font-size: 16px;
       font-weight: 950;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-      cursor: pointer;
-      box-shadow: 0 16px 40px rgba(35,139,34,.22);
+      box-shadow: 0 16px 40px rgba(35,139,34,.20);
       transition:
         transform .18s ease,
-        box-shadow .18s ease,
         background .18s ease;
     }
 
-    .download-button:hover {
+    .final-download:hover {
       background: var(--green-dark);
       transform: translateY(-2px);
-      box-shadow: 0 20px 48px rgba(35,139,34,.26);
     }
 
-    .download-button span:last-child {
-      color: var(--orange);
-      font-size: 18px;
-    }
-
-    .final-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .final-phone-wrap {
       min-width: 0;
-    }
-
-    .phone-stage {
-      position: relative;
-      width: min(100%, 600px);
-      min-height: 560px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .phone-ring {
-      position: absolute;
-      inset: 12% 4%;
-      border-radius: 999px;
-      background: radial-gradient(
-        circle at center,
-        rgba(35,139,34,.10) 0%,
-        rgba(35,139,34,.03) 54%,
-        rgba(35,139,34,0) 75%
-      );
-      filter: blur(8px);
-    }
-
-    .phone-card {
-      position: absolute;
-      width: 170px;
-      min-height: 92px;
-      padding: 16px 16px 14px;
-      border-radius: 24px;
-      background: #fff;
-      border: 1px solid var(--line);
-      box-shadow: 0 16px 44px rgba(20,50,20,.08);
-      font-size: 13px;
-      line-height: 1.55;
-      color: var(--sub);
-      font-weight: 700;
-    }
-
-    .phone-card strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--ink);
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    .phone-card.a {
-      left: 0;
-      top: 10%;
-      transform: rotate(-7deg);
-    }
-
-    .phone-card.b {
-      right: 0;
-      bottom: 10%;
-      transform: rotate(6deg);
-    }
-
-    .phone-shell {
+    .phone {
       position: relative;
-      z-index: 2;
-      width: min(78vw, 290px);
+      width: min(52vw, 270px);
       aspect-ratio: .54;
-      padding: 12px;
-      border-radius: 44px;
+      padding: 10px;
+      border-radius: 42px;
       background: #111;
       box-shadow:
-        0 28px 80px rgba(15,20,15,.22),
-        inset 0 0 0 1px rgba(255,255,255,.10);
+        0 28px 70px rgba(20,30,20,.18),
+        inset 0 0 0 1px rgba(255,255,255,.08);
+      transform: rotate(-2deg);
     }
 
-    .phone-speaker {
+    .phone::before {
+      content: "";
       position: absolute;
-      z-index: 3;
-      top: 18px;
+      z-index: 5;
+      top: 16px;
       left: 50%;
-      transform: translateX(-50%);
-      width: 86px;
-      height: 10px;
+      width: 78px;
+      height: 9px;
       border-radius: 999px;
       background: #222;
+      transform: translateX(-50%);
     }
 
     .phone-screen {
       width: 100%;
       height: 100%;
       overflow: hidden;
-      border-radius: 34px;
+      border-radius: 33px;
       background: #F6FAF6;
     }
 
@@ -752,123 +655,18 @@
     }
 
     /* =========================================================
-       SECTION NEXT ARROW
-       ========================================================= */
-    .section-next {
-      position: absolute;
-      z-index: 40;
-      left: 50%;
-      bottom: 24px;
-      width: 54px;
-      height: 42px;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      color: var(--green);
-      cursor: pointer;
-      transform: translateX(-50%);
-      animation: serviceArrowAlive 1.45s ease-in-out infinite;
-      filter: drop-shadow(0 2px 3px rgba(0,0,0,.10));
-    }
-
-    .service-hero .section-next {
-      color: #fff;
-    }
-
-    .section-next svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    .section-next path {
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 4.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      vector-effect: non-scaling-stroke;
-    }
-
-    @keyframes serviceArrowAlive {
-      0%,100% { transform: translate(-50%,0); }
-      50% { transform: translate(-50%,9px); }
-    }
-
-
-    /* =========================================================
-       SITE SIDE NAV
-       BRAND ← SERVICES → ALLIANCE
-       ========================================================= */
-    .site-side-nav {
-      position: fixed;
-      z-index: 910;
-      top: 50%;
-      min-width: 48px;
-      height: 46px;
-      padding: 0 14px;
-      border: 1px solid rgba(35,139,34,.18);
-      border-radius: 999px;
-      background: rgba(255,255,255,.95);
-      box-shadow: 0 8px 28px rgba(20,50,20,.08);
-      color: var(--green);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .04em;
-      transform: translateY(-50%);
-      backdrop-filter: blur(7px);
-      transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        color .2s ease;
-    }
-
-    .site-side-nav:hover {
-      color: var(--orange);
-      box-shadow: 0 12px 34px rgba(20,50,20,.12);
-    }
-
-    .site-side-nav.prev {
-      left: 14px;
-    }
-
-    .site-side-nav.next {
-      right: 14px;
-    }
-
-    .site-side-nav.prev:hover {
-      transform: translate(-3px, -50%);
-    }
-
-    .site-side-nav.next:hover {
-      transform: translate(3px, -50%);
-    }
-
-    .site-side-nav .side-arrow {
-      color: var(--orange);
-      font-size: 22px;
-      line-height: 1;
-      font-weight: 950;
-    }
-
-    /* =========================================================
        FOOTER
        ========================================================= */
     .site-footer {
+      flex: 0 0 auto;
       width: 100%;
-      padding: 22px 20px 24px;
+      padding: 18px 20px 20px;
       background: var(--black);
       border-top: 1px solid rgba(255,255,255,.08);
       text-align: center;
       color: rgba(255,255,255,.58);
-      font-size: 11.5px;
-      line-height: 1.65;
+      font-size: 11px;
+      line-height: 1.6;
     }
 
     .footer-links {
@@ -876,7 +674,7 @@
     }
 
     .footer-links a {
-      color: rgba(255,255,255,.9);
+      color: rgba(255,255,255,.90);
       text-decoration: none;
       font-weight: 800;
     }
@@ -891,483 +689,10 @@
     }
 
     /* =========================================================
-       REVEAL
+       BOTTOM NAV
+       INDEX → ABOUT
        ========================================================= */
-    .reveal {
-      opacity: 0;
-      transform: translateY(26px);
-      transition:
-        opacity .75s ease,
-        transform .75s cubic-bezier(.22,1,.36,1);
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
-    @media (max-width: 1024px) {
-      .hero-frame,
-      .service-grid,
-      .final-grid {
-        gap: 42px;
-      }
-    }
-
-    @media (max-width: 820px) {
-      .nav {
-        padding: 12px 20px;
-      }
-
-      .nav-logo img {
-        height: 48px;
-      }
-
-      .nav-menu {
-        display: none !important;
-      }
-
-      .menu-toggle {
-        position: relative;
-        z-index: 1002;
-        flex: 0 0 44px;
-        margin-left: auto;
-        display: flex !important;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .mobile-menu-overlay {
-        display: flex;
-      }
-
-      .hero-frame {
-        min-height: calc(100dvh - var(--header-height));
-        grid-template-columns: 1fr;
-        grid-template-rows: auto minmax(0, 1fr);
-        gap: 26px;
-        padding-top: 34px;
-        padding-bottom: 38px;
-      }
-
-      .hero-title {
-        font-size: clamp(44px, 11vw, 62px);
-      }
-
-      .hero-desc {
-        margin-top: 20px;
-        font-size: 16px;
-      }
-
-      .hero-art {
-        align-items: flex-end;
-      }
-
-      .hero-art svg {
-        width: min(92vw, 520px);
-        max-height: 40vh;
-      }
-
-      .service-panel,
-      .final-section {
-        padding-top: 82px;
-        padding-bottom: 78px;
-      }
-
-      .service-grid,
-      .final-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .service-visual {
-        order: 2;
-      }
-
-      .service-copy {
-        order: 1;
-      }
-
-      .service-grid.reverse .service-visual {
-        order: 2;
-      }
-
-      .service-grid.reverse .service-copy {
-        order: 1;
-      }
-
-      .phone-stage {
-        min-height: 500px;
-      }
-
-      .phone-card.a {
-        left: 2%;
-        top: 4%;
-      }
-
-      .phone-card.b {
-        right: 2%;
-        bottom: 4%;
-      }
-    }
-
-    @media (max-width: 520px) {
-      :root {
-        --page-pad: 18px;
-      }
-
-      .nav {
-        padding: 10px 18px;
-      }
-
-      .nav-logo img {
-        height: 44px;
-      }
-
-      .hero-frame {
-        padding-top: 28px;
-        padding-bottom: 30px;
-      }
-
-      .hero-kicker {
-        margin-bottom: 16px;
-        font-size: 11px;
-      }
-
-      .hero-title {
-        font-size: clamp(40px, 11.5vw, 50px);
-      }
-
-      .hero-desc {
-        font-size: 15px;
-      }
-
-      .hero-art svg {
-        width: min(95vw, 460px);
-        max-height: 38vh;
-      }
-
-      .section-title {
-        font-size: clamp(36px, 10vw, 46px);
-      }
-
-      .section-desc {
-        font-size: 15px;
-      }
-
-      .service-panel,
-      .final-section {
-        padding-top: 68px;
-        padding-bottom: 64px;
-      }
-
-      .service-copy h3 {
-        font-size: clamp(34px, 10vw, 44px);
-      }
-
-      .service-copy p {
-        font-size: 15px;
-      }
-
-      .download-button {
-        width: 100%;
-        min-height: 56px;
-        padding: 0 20px;
-      }
-
-      .service-flow {
-        gap: 8px 10px;
-        font-size: 13px;
-      }
-
-      .flow-chip {
-        padding: 9px 13px;
-      }
-
-      .phone-stage {
-        min-height: 430px;
-      }
-
-      .phone-card {
-        width: 138px;
-        min-height: 80px;
-        padding: 12px 12px 10px;
-        border-radius: 18px;
-        font-size: 11px;
-      }
-
-      .phone-card strong {
-        font-size: 12px;
-      }
-
-      .phone-shell {
-        width: min(82vw, 262px);
-        border-radius: 36px;
-      }
-
-      .phone-screen {
-        border-radius: 28px;
-      }
-
-      .site-footer {
-        font-size: 9.5px;
-      }
-
-      .site-side-nav {
-        top: auto;
-        bottom: 12px;
-        min-width: 42px;
-        height: 42px;
-        padding: 0 10px;
-        transform: none;
-        background: rgba(255,255,255,.96);
-      }
-
-      .site-side-nav.prev {
-        left: 12px;
-      }
-
-      .site-side-nav.next {
-        right: 12px;
-      }
-
-      .site-side-nav.prev:hover,
-      .site-side-nav.next:hover {
-        transform: none;
-      }
-
-      .site-side-nav .side-label {
-        display: none;
-      }
-
-      .section-next {
-        bottom: 12px;
-        width: 48px;
-        height: 38px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .nav {
-        padding-left: 14px;
-        padding-right: 14px;
-      }
-
-      .nav-logo img {
-        height: 40px;
-      }
-
-      .hero-title {
-        font-size: 39px;
-      }
-
-      .phone-card {
-        width: 126px;
-      }
-    }
-
-    /* =========================================================
-       COPY / DRAG PROTECTION
-       ========================================================= */
-    html,
-    body,
-    *:not(input):not(textarea) {
-      -webkit-user-select: none;
-      user-select: none;
-    }
-
-    input,
-    textarea {
-      user-select: text;
-      pointer-events: auto;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .hero-step,
-      .hero-trail,
-      .hero-dot,
-      .search-lens,
-      .search-focus,
-      .pay-card,
-      .pay-check,
-      .invoice-sheet,
-      .invoice-stamp,
-      .section-next {
-        animation: none !important;
-      }
-
-      .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-    }
-  
-    /* =========================================================
-       SERVICES FULL PAGE + BOTTOM NAV FINAL
-       BRAND ← SERVICES → ALLIANCE
-       ========================================================= */
-    :root {
-      --scene-height: calc(100dvh - var(--header-height));
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      min-height: 100%;
-    }
-
-    body {
-      overflow: hidden;
-    }
-
-    .snap-root {
-      position: fixed;
-      top: var(--header-height);
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: var(--scene-height);
-      padding: 0;
-      overflow-y: auto;
-      overflow-x: hidden;
-      scroll-snap-type: y mandatory;
-      scroll-padding: 0;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-y: contain;
-      background: #fff;
-    }
-
-    .scene {
-      position: relative;
-      width: 100%;
-      height: var(--scene-height) !important;
-      min-height: var(--scene-height) !important;
-      max-height: var(--scene-height);
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-      overflow: hidden;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      scroll-margin: 0 !important;
-    }
-
-    /* 1P */
-    .service-hero {
-      display: flex;
-      align-items: center;
-      min-height: var(--scene-height) !important;
-    }
-
-    .service-hero .hero-frame {
-      height: 100%;
-      min-height: 0;
-      padding-top: 38px;
-      padding-bottom: 56px;
-    }
-
-    .service-hero .hero-art svg {
-      max-height: 66vh;
-    }
-
-    /* 2~4P */
-    .service-panel {
-      padding: 0;
-      display: flex;
-      align-items: center;
-    }
-
-    .service-panel > .container {
-      height: 100%;
-      padding-top: 34px;
-      padding-bottom: 56px;
-      display: flex;
-      align-items: center;
-    }
-
-    .service-grid {
-      width: 100%;
-      height: auto;
-      gap: 50px;
-    }
-
-    .service-visual svg {
-      max-height: 58vh;
-    }
-
-    .service-copy p {
-      margin-top: 18px;
-      font-size: 15px;
-      line-height: 1.72;
-    }
-
-    .service-note {
-      margin-top: 18px;
-    }
-
-    /* 5P + footer */
-    .final-section {
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .final-section > .container {
-      flex: 1 1 auto;
-      min-height: 0;
-      height: auto;
-      padding-top: 30px;
-      padding-bottom: 20px;
-      display: flex;
-      align-items: center;
-    }
-
-    .final-grid {
-      width: 100%;
-      gap: 48px;
-    }
-
-    .phone-stage {
-      min-height: min(58vh, 500px);
-    }
-
-    .phone-shell {
-      width: min(72vw, 260px);
-    }
-
-    .phone-card {
-      width: 158px;
-      min-height: 84px;
-    }
-
-    .final-section .site-footer {
-      flex: 0 0 auto;
-      width: 100%;
-      margin: 0;
-      padding: 18px 20px 20px;
-      background: var(--black);
-      border-top: 1px solid rgba(255,255,255,.08);
-      color: rgba(255,255,255,.58);
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    .final-section .site-footer .footer-links a {
-      color: rgba(255,255,255,.9);
-    }
-
-    /* bottom nav */
-    .section-next,
+    .scene-next,
     .site-side-nav {
       width: 48px;
       height: 48px;
@@ -1389,7 +714,7 @@
       backdrop-filter: blur(6px);
     }
 
-    .section-next svg,
+    .scene-next svg,
     .site-side-nav svg {
       width: 24px;
       height: 24px;
@@ -1397,7 +722,7 @@
       pointer-events: none;
     }
 
-    .section-next path,
+    .scene-next path,
     .site-side-nav path {
       fill: none;
       stroke: currentColor;
@@ -1407,1080 +732,461 @@
       vector-effect: non-scaling-stroke;
     }
 
-    .section-next {
+    .scene-next {
       position: absolute;
       z-index: 60;
       left: 50%;
       bottom: 18px;
       transform: translateX(-50%);
-      animation: serviceBottomArrow 1.5s ease-in-out infinite;
-      filter: none;
+      animation: downAlive 1.5s ease-in-out infinite;
     }
 
-    @keyframes serviceBottomArrow {
+    @keyframes downAlive {
       0%,100% { transform: translate(-50%,0); }
       50% { transform: translate(-50%,6px); }
-    }
-
-    .service-hero .section-next {
-      color: var(--orange);
     }
 
     .site-side-nav {
       position: fixed;
       z-index: 910;
-      top: auto;
-      bottom: 18px;
-      transform: none;
-      padding: 0;
-    }
-
-    .site-side-nav.prev {
-      left: 18px;
-    }
-
-    .site-side-nav.next {
       right: 18px;
+      bottom: 18px;
     }
 
-    .site-side-nav.prev:hover,
-    .site-side-nav.next:hover {
-      transform: translateY(-3px);
-    }
-
+    /* =========================================================
+       MOBILE
+       ========================================================= */
     @media (max-width: 820px) {
-      .service-hero .hero-frame {
-        height: 100%;
-        min-height: 0;
-        padding-top: 24px;
-        padding-bottom: 48px;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto minmax(0,1fr);
-        gap: 16px;
+      .nav {
+        padding: 12px 20px;
       }
 
-      .service-hero .hero-art svg {
-        max-height: 34vh;
+      .nav-logo img {
+        height: 48px;
       }
 
-      .service-panel > .container {
-        height: 100%;
-        padding-top: 24px;
-        padding-bottom: 48px;
+      .nav-menu {
+        display: none !important;
       }
 
-      .service-grid,
-      .service-grid.reverse {
-        width: 100%;
-        height: 100%;
+      .menu-toggle {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+      }
+
+      .mobile-menu-overlay {
+        display: flex;
+      }
+
+      .scene-frame {
+        padding: 22px 20px 48px;
         grid-template-columns: 1fr;
         grid-template-rows: auto minmax(0,1fr);
         gap: 14px;
         align-items: stretch;
       }
 
-      .service-copy,
-      .service-grid.reverse .service-copy {
-        order: 1;
+      .scene-copy {
         align-self: start;
       }
 
-      .service-visual,
-      .service-grid.reverse .service-visual {
-        order: 2;
-        min-height: 0;
-        align-items: flex-end;
+      .scene-title {
+        font-size: clamp(38px, 10vw, 50px);
       }
 
-      .service-visual svg {
-        width: min(96vw, 560px);
-        max-height: 34vh;
-      }
-
-      .service-copy h3 {
-        font-size: clamp(32px, 9.3vw, 42px);
-      }
-
-      .service-copy p {
-        margin-top: 10px;
-        font-size: 13.5px;
-        line-height: 1.55;
-      }
-
-      .service-note {
-        margin-top: 10px;
-        font-size: 12.5px;
-        line-height: 1.5;
-      }
-
-      .final-section > .container {
-        padding-top: 20px;
-        padding-bottom: 12px;
-      }
-
-      .final-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto minmax(0,1fr);
-        gap: 10px;
-        height: 100%;
-      }
-
-      .final-copy h2 {
-        font-size: clamp(32px, 9vw, 42px);
-      }
-
-      .final-copy p {
-        margin-top: 10px;
-        font-size: 13px;
-        line-height: 1.55;
-      }
-
-      .service-flow {
-        margin-top: 12px;
-        gap: 6px 8px;
-        font-size: 11.5px;
-      }
-
-      .flow-chip {
-        padding: 7px 10px;
-      }
-
-      .download-button {
-        min-height: 48px;
+      .scene-desc {
         margin-top: 14px;
+        font-size: 15px;
+        line-height: 1.55;
+      }
+
+      .scene-art {
+        min-height: 0;
+        align-items: center;
+      }
+
+      .scene-art svg {
+        width: min(94vw, 520px);
+        max-height: 35vh;
+      }
+
+      /* 1P */
+      .scene-hero {
+        background:
+          url("index-hero-mobile.jpg")
+          center center / cover no-repeat;
+      }
+
+      .scene-hero::before {
+        background:
+          linear-gradient(
+            180deg,
+            rgba(255,250,242,.97) 0%,
+            rgba(255,250,242,.94) 31%,
+            rgba(255,250,242,.72) 48%,
+            rgba(255,250,242,.18) 66%,
+            rgba(255,250,242,0) 100%
+          );
+      }
+
+      .hero-frame {
+        display: block;
+        padding-top: 26px;
+      }
+
+      .hero-copy {
+        max-width: 420px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(40px, 11vw, 52px);
+        line-height: 1.04;
+      }
+
+      .hero-copy p {
+        margin-top: 14px;
+        font-size: 15px;
+      }
+
+      .hero-download {
+        min-height: 52px;
+        margin-top: 18px;
         padding: 0 20px;
         font-size: 14px;
       }
 
-      .final-visual {
+      /* 5P */
+      .final-main {
+        padding: 20px 20px 10px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0,1fr);
+        gap: 10px;
+        align-items: stretch;
+      }
+
+      .final-copy h2 {
+        font-size: clamp(38px, 10vw, 50px);
+      }
+
+      .final-copy p {
+        margin-top: 12px;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .final-download {
+        min-height: 52px;
+        margin-top: 16px;
+        padding: 0 22px;
+        font-size: 14px;
+      }
+
+      .final-phone-wrap {
         min-height: 0;
         align-items: flex-end;
       }
 
-      .phone-stage {
-        min-height: 0;
-        height: 34vh;
+      .phone {
+        width: min(43vw, 184px);
+        border-radius: 31px;
+        padding: 7px;
       }
 
-      .phone-shell {
-        width: min(62vw, 215px);
+      .phone::before {
+        top: 11px;
+        width: 54px;
+        height: 6px;
       }
 
-      .phone-card {
-        width: 126px;
-        min-height: 68px;
-        padding: 10px 10px 8px;
-        font-size: 10.5px;
-        border-radius: 17px;
+      .phone-screen {
+        border-radius: 24px;
       }
 
-      .phone-card strong {
-        font-size: 11px;
-      }
-
-      .final-section .site-footer {
+      .site-footer {
         font-size: 9px;
+        padding: 14px 16px 16px;
       }
 
-      .section-next,
+      .scene-next,
       .site-side-nav {
         width: 42px;
         height: 42px;
         min-width: 42px;
       }
 
-      .section-next {
+      .scene-next {
         bottom: 12px;
       }
 
       .site-side-nav {
+        right: 12px;
         bottom: 12px;
       }
 
-      .site-side-nav.prev {
-        left: 12px;
-      }
-
-      .site-side-nav.next {
-        right: 12px;
-      }
-
-      .section-next svg,
+      .scene-next svg,
       .site-side-nav svg {
         width: 21px;
         height: 21px;
       }
-
-      .site-side-nav.prev:hover,
-      .site-side-nav.next:hover {
-        transform: none;
-      }
     }
 
-    @media (max-height: 700px) and (max-width: 820px) {
-      .service-hero .hero-frame,
-      .service-panel > .container,
-      .final-section > .container {
-        padding-top: 12px;
-        padding-bottom: 40px;
+    @media (max-width: 520px) {
+      :root {
+        --page-pad: 18px;
       }
 
-      .hero-title {
-        font-size: clamp(30px, 6.3vh, 38px);
+      .nav {
+        padding: 10px 18px;
       }
 
-      .hero-desc,
-      .service-copy p,
-      .service-note,
-      .final-copy p {
-        margin-top: 7px;
-        font-size: 12px;
+      .nav-logo img {
+        height: 44px;
       }
 
-      .service-copy h3,
-      .final-copy h2 {
-        font-size: clamp(28px, 6.6vh, 36px);
+      .scene-frame {
+        padding: 18px 18px 44px;
       }
 
-      .service-visual svg,
-      .service-hero .hero-art svg {
-        max-height: 31vh;
+      .scene-title {
+        font-size: clamp(34px, 9.7vw, 43px);
       }
 
-      .phone-stage {
-        height: 30vh;
-      }
-
-      .phone-card {
-        display: none;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .section-next {
-        animation: none !important;
-      }
-    }
-
-
-    /* =========================================================
-       SERVICES MOBILE LAYOUT REFINEMENT
-       PC 유지 / 모바일만 재배치
-       ========================================================= */
-    @media (max-width: 820px) {
-
-      /* 공통: 텍스트 위 / 비주얼 아래 */
-      #serviceDiscovery .service-grid,
-      #servicePayment .service-grid,
-      #serviceInvoice .service-grid {
-        grid-template-columns: 1fr !important;
-        grid-template-rows: auto minmax(0, 1fr) !important;
-        gap: 10px !important;
-        height: 100%;
-        align-items: stretch !important;
-      }
-
-      #serviceDiscovery .service-copy,
-      #servicePayment .service-copy,
-      #serviceInvoice .service-copy {
-        order: 1 !important;
-        align-self: start;
-        padding-top: 0;
-      }
-
-      #serviceDiscovery .service-visual,
-      #servicePayment .service-visual,
-      #serviceInvoice .service-visual {
-        order: 2 !important;
-        min-height: 0;
-        height: 100%;
-        align-items: center !important;
-        justify-content: center !important;
-        padding-bottom: 24px;
-      }
-
-      /* 2P */
-      #serviceDiscovery .service-copy h3 {
-        font-size: clamp(34px, 9.4vw, 43px);
-        line-height: 1.08;
-      }
-
-      #serviceDiscovery .service-copy p {
-        margin-top: 12px;
-        max-width: 92%;
-        font-size: 13.5px;
-        line-height: 1.58;
-      }
-
-      #serviceDiscovery .service-note {
-        margin-top: 10px;
-        max-width: 86%;
-        font-size: 12.5px;
-        line-height: 1.5;
-      }
-
-      #serviceDiscovery .service-visual svg {
-        width: min(82vw, 430px);
-        max-height: 31vh;
-      }
-
-      /* 3P */
-      #servicePayment .service-copy h3 {
-        font-size: clamp(36px, 9.7vw, 44px);
-        line-height: 1.08;
-      }
-
-      #servicePayment .service-copy p {
-        margin-top: 12px;
-        max-width: 90%;
-        font-size: 13.5px;
-        line-height: 1.58;
-      }
-
-      #servicePayment .service-note {
-        margin-top: 10px;
-        max-width: 88%;
-        font-size: 12.5px;
-        line-height: 1.5;
-      }
-
-      #servicePayment .service-visual svg {
-        width: min(80vw, 410px);
-        max-height: 29vh;
-      }
-
-      /* 4P */
-      #serviceInvoice .service-copy h3 {
-        font-size: clamp(36px, 9.7vw, 44px);
-        line-height: 1.08;
-      }
-
-      #serviceInvoice .service-copy p {
-        margin-top: 12px;
-        max-width: 92%;
-        font-size: 13px;
-        line-height: 1.58;
-      }
-
-      #serviceInvoice .service-note {
-        margin-top: 10px;
-        max-width: 88%;
-        font-size: 12.5px;
-        line-height: 1.5;
-      }
-
-      #serviceInvoice .service-visual svg {
-        width: min(72vw, 360px);
-        max-height: 28vh;
-      }
-
-      /* 5P: 흐름 칩 제거 / CTA와 폰 집중 */
-      #serviceFinal .final-grid {
-        grid-template-columns: 1fr !important;
-        grid-template-rows: auto minmax(0, 1fr) !important;
-        gap: 8px !important;
-        height: 100%;
-        align-items: stretch !important;
-      }
-
-      #serviceFinal .final-copy {
-        align-self: start;
-        padding-top: 0;
-      }
-
-      #serviceFinal .final-copy h2 {
-        font-size: clamp(36px, 9.7vw, 44px);
-        line-height: 1.06;
-      }
-
-      #serviceFinal .final-copy p {
-        margin-top: 10px;
-        max-width: 92%;
-        font-size: 13px;
-        line-height: 1.55;
-      }
-
-      #serviceFinal .service-flow {
-        display: none !important;
-      }
-
-      #serviceFinal .download-button {
-        width: auto;
-        min-width: 210px;
-        min-height: 50px;
-        margin-top: 14px;
-        padding: 0 22px;
+      .scene-desc {
         font-size: 14px;
       }
 
-      #serviceFinal .final-visual {
-        min-height: 0;
-        height: 100%;
-        align-items: flex-end;
-        justify-content: center;
+      .hero-copy h1 {
+        font-size: clamp(38px, 10.5vw, 46px);
       }
 
-      #serviceFinal .phone-stage {
-        width: 100%;
-        min-height: 0;
-        height: 37vh;
-        max-height: 390px;
+      .final-main {
+        padding: 16px 18px 8px;
       }
 
-      #serviceFinal .phone-ring {
-        inset: 12% 16%;
+      .final-copy h2 {
+        font-size: clamp(34px, 9.7vw, 43px);
       }
 
-      #serviceFinal .phone-shell {
-        width: min(55vw, 218px);
-        border-radius: 30px;
-        padding: 9px;
-      }
-
-      #serviceFinal .phone-screen {
-        border-radius: 23px;
-      }
-
-      #serviceFinal .phone-speaker {
-        top: 13px;
-        width: 62px;
-        height: 7px;
-      }
-
-      #serviceFinal .phone-card {
-        display: none !important;
+      .phone {
+        width: min(41vw, 170px);
       }
     }
 
-    @media (max-width: 520px) {
-
-      #serviceDiscovery .service-copy h3,
-      #servicePayment .service-copy h3,
-      #serviceInvoice .service-copy h3 {
-        font-size: clamp(31px, 9vw, 39px);
+    @media (max-height: 700px) and (max-width: 820px) {
+      .scene-frame {
+        padding-top: 10px;
+        padding-bottom: 38px;
       }
 
-      #serviceDiscovery .service-copy p,
-      #servicePayment .service-copy p,
-      #serviceInvoice .service-copy p {
-        font-size: 12.5px;
-        line-height: 1.52;
+      .scene-title,
+      .final-copy h2 {
+        font-size: clamp(30px, 6.3vh, 38px);
       }
 
-      #serviceDiscovery .service-note,
-      #servicePayment .service-note,
-      #serviceInvoice .service-note {
-        font-size: 11.8px;
+      .scene-desc,
+      .final-copy p {
+        margin-top: 7px;
+        font-size: 13px;
       }
 
-      #serviceDiscovery .service-visual svg {
-        width: min(78vw, 360px);
+      .scene-art svg {
         max-height: 28vh;
       }
 
-      #servicePayment .service-visual svg {
-        width: min(74vw, 340px);
-        max-height: 26vh;
+      .hero-copy h1 {
+        font-size: clamp(30px, 6.5vh, 39px);
       }
 
-      #serviceInvoice .service-visual svg {
-        width: min(66vw, 300px);
-        max-height: 25vh;
+      .hero-copy p {
+        margin-top: 8px;
+        font-size: 13px;
       }
 
-      #serviceFinal .final-copy h2 {
-        font-size: clamp(31px, 9vw, 39px);
-      }
-
-      #serviceFinal .download-button {
-        min-width: 198px;
-        min-height: 48px;
-      }
-
-      #serviceFinal .phone-stage {
-        height: 34vh;
-      }
-
-      #serviceFinal .phone-shell {
-        width: min(52vw, 198px);
-      }
-    }
-
-    @media (max-height: 700px) and (max-width: 820px) {
-
-      #serviceDiscovery .service-copy p,
-      #servicePayment .service-copy p,
-      #serviceInvoice .service-copy p {
-        margin-top: 7px;
-      }
-
-      #serviceDiscovery .service-note,
-      #servicePayment .service-note,
-      #serviceInvoice .service-note {
-        margin-top: 6px;
-      }
-
-      #serviceDiscovery .service-visual svg,
-      #servicePayment .service-visual svg,
-      #serviceInvoice .service-visual svg {
-        max-height: 24vh;
-      }
-
-      #serviceFinal .final-copy p {
-        margin-top: 6px;
-      }
-
-      #serviceFinal .download-button {
-        margin-top: 9px;
+      .hero-download {
         min-height: 44px;
+        margin-top: 10px;
       }
 
-      #serviceFinal .phone-stage {
-        height: 28vh;
-      }
-    }
-
-    /* =========================================================
-       SERVICES STRUCTURAL FIX
-       container의 display:flex가 grid를 덮는 문제 수정
-       ========================================================= */
-
-    /* PC/모바일 공통: 실제 레이아웃 컨테이너는 반드시 grid */
-    .service-panel > .container.service-grid {
-      display: grid !important;
-    }
-
-    .final-section > .container.final-grid {
-      display: grid !important;
-    }
-
-    @media (max-width: 820px) {
-
-      /* 2~4P: 텍스트는 전체 폭, 비주얼은 완전히 다음 행 */
-      #serviceDiscovery .service-grid,
-      #servicePayment .service-grid,
-      #serviceInvoice .service-grid {
-        display: grid !important;
-        grid-template-columns: minmax(0, 1fr) !important;
-        grid-template-rows: auto minmax(0, 1fr) !important;
-        width: 100%;
-        height: 100%;
-        gap: 8px !important;
-      }
-
-      #serviceDiscovery .service-copy,
-      #servicePayment .service-copy,
-      #serviceInvoice .service-copy {
-        width: 100%;
-        max-width: none;
-        min-width: 0;
-        order: 1 !important;
-      }
-
-      #serviceDiscovery .service-visual,
-      #servicePayment .service-visual,
-      #serviceInvoice .service-visual {
-        width: 100%;
-        height: auto !important;
-        min-height: 0;
-        order: 2 !important;
-        align-self: stretch;
-        justify-self: stretch;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 0 18px;
-      }
-
-      /* 이제 전체 폭을 쓰므로 제목이 불필요하게 5~6줄로 깨지지 않음 */
-      #serviceDiscovery .service-copy h3,
-      #servicePayment .service-copy h3,
-      #serviceInvoice .service-copy h3 {
-        width: 100%;
-        max-width: 390px;
-      }
-
-      #serviceDiscovery .service-copy p,
-      #servicePayment .service-copy p,
-      #serviceInvoice .service-copy p {
-        max-width: 390px;
-      }
-
-      #serviceDiscovery .service-note,
-      #servicePayment .service-note,
-      #serviceInvoice .service-note {
-        max-width: 360px;
-      }
-
-      /* 비주얼을 장식이 아니라 각 페이지의 두 번째 주인공으로 */
-      #serviceDiscovery .service-visual svg {
-        width: min(78vw, 350px);
-        max-height: 27vh;
-      }
-
-      #servicePayment .service-visual svg {
-        width: min(76vw, 340px);
-        max-height: 26vh;
-      }
-
-      #serviceInvoice .service-visual svg {
-        width: min(66vw, 300px);
-        max-height: 25vh;
-      }
-
-      /* 5P 역시 실제 grid로 강제 */
-      #serviceFinal .final-grid {
-        display: grid !important;
-        grid-template-columns: minmax(0, 1fr) !important;
-        grid-template-rows: auto minmax(0, 1fr) !important;
-        width: 100%;
-        height: 100%;
-        gap: 6px !important;
-      }
-
-      #serviceFinal .final-copy {
-        width: 100%;
-        min-width: 0;
-        order: 1;
-      }
-
-      #serviceFinal .final-visual {
-        width: 100%;
-        min-width: 0;
-        min-height: 0;
-        height: auto !important;
-        order: 2;
-        align-self: stretch;
-        justify-self: stretch;
-        align-items: center !important;
-        justify-content: center !important;
-      }
-
-      #serviceFinal .phone-stage {
-        width: 100%;
-        height: 31vh;
-        max-height: 330px;
-        min-height: 0;
-        margin: 0 auto;
-        align-items: center;
-        justify-content: center;
-      }
-
-      #serviceFinal .phone-shell {
-        width: min(48vw, 190px);
-        margin: 0 auto;
-      }
-
-      #serviceFinal .phone-card {
-        display: none !important;
-      }
-
-      #serviceFinal .service-flow {
-        display: none !important;
-      }
-
-      #serviceFinal .download-button {
-        width: min(100%, 250px);
-      }
-    }
-
-    @media (max-width: 520px) {
-      #serviceDiscovery .service-copy h3,
-      #servicePayment .service-copy h3,
-      #serviceInvoice .service-copy h3 {
-        max-width: 350px;
-        font-size: clamp(31px, 8.7vw, 38px);
-      }
-
-      #serviceDiscovery .service-copy p,
-      #servicePayment .service-copy p,
-      #serviceInvoice .service-copy p {
-        max-width: 345px;
-        font-size: 12.5px;
-      }
-
-      #serviceDiscovery .service-visual svg {
-        width: min(74vw, 315px);
-        max-height: 25vh;
-      }
-
-      #servicePayment .service-visual svg {
-        width: min(71vw, 305px);
-        max-height: 24vh;
-      }
-
-      #serviceInvoice .service-visual svg {
-        width: min(61vw, 265px);
-        max-height: 23vh;
-      }
-
-      #serviceFinal .phone-stage {
-        height: 29vh;
-      }
-
-      #serviceFinal .phone-shell {
-        width: min(46vw, 180px);
-      }
-    }
-
-    @media (max-height: 700px) and (max-width: 820px) {
-      #serviceDiscovery .service-visual,
-      #servicePayment .service-visual,
-      #serviceInvoice .service-visual {
-        padding-bottom: 8px;
-      }
-
-      #serviceDiscovery .service-visual svg,
-      #servicePayment .service-visual svg,
-      #serviceInvoice .service-visual svg {
-        max-height: 21vh;
-      }
-
-      #serviceFinal .phone-stage {
-        height: 24vh;
+      .phone {
+        width: min(34vw, 150px);
       }
     }
 
     /* =========================================================
-       SERVICES DYNAMIC ARROW MASTER FINAL
-       실제 DOM 좌표 기반 자동 연결
+       SAFE VISIBILITY / COPY PROTECTION
        ========================================================= */
-
-    /* 2~5P 타이포를 About / Alliance 계열로 통일 */
-    #serviceDiscovery .service-copy h3,
-    #servicePayment .service-copy h3,
-    #serviceInvoice .service-copy h3,
-    #serviceFinal .final-copy h2 {
-      font-size: clamp(48px, 5.4vw, 82px) !important;
-      line-height: 1.05 !important;
-      letter-spacing: -0.062em !important;
+    .scene-copy,
+    .scene-art,
+    .hero-copy,
+    .final-copy,
+    .final-phone-wrap {
+      opacity: 1;
+      transform: none;
     }
 
-    #serviceDiscovery .service-copy p,
-    #servicePayment .service-copy p,
-    #serviceInvoice .service-copy p,
-    #serviceFinal .final-copy p {
-      font-size: clamp(16px, 1.4vw, 20px) !important;
-      line-height: 1.72 !important;
+    html,
+    body,
+    *:not(input):not(textarea) {
+      -webkit-user-select: none;
+      user-select: none;
     }
 
-    #serviceDiscovery .service-note,
-    #servicePayment .service-note,
-    #serviceInvoice .service-note {
-      font-size: 14px !important;
-      line-height: 1.65 !important;
+    input,
+    textarea {
+      user-select: text;
+      pointer-events: auto;
     }
 
-    /* 다운로드 버튼 */
-    #serviceFinal .download-button {
+    @media (prefers-reduced-motion: reduce) {
+      .scene-next,
+      .order-node,
+      .order-route,
+      .connect-box,
+      .connect-hub,
+      .connect-store {
+        animation: none !important;
+      }
+
+      .snap-root {
+        scroll-behavior: auto;
+      }
+    }
+  
+    /* =========================================================
+       MODING APP CTA
+       심플한 2단 앱 카드형 버튼
+       ========================================================= */
+    .app-cta {
       position: relative;
-      z-index: 8;
+      min-width: 198px;
+      min-height: 66px;
+      padding: 11px 22px 10px;
+      border-radius: 20px;
+      text-decoration: none;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
       justify-content: center;
-      font-size: 15px !important;
-      font-weight: 900 !important;
+      gap: 2px;
+      overflow: hidden;
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease,
+        border-color .18s ease;
     }
 
-    #serviceFinal .download-button span,
-    #serviceFinal .download-button span:last-child {
-      color: #fff !important;
-      font-size: 15px !important;
-    }
-
-    /* 최종 장면 좌표 기준 */
-    #serviceFinal .final-grid {
-      position: relative !important;
-      overflow: visible !important;
-    }
-
-    #serviceFinal .final-copy,
-    #serviceFinal .final-visual {
-      position: relative;
-      z-index: 3;
-    }
-
-    /* 동적 화살표 SVG */
-    .dynamic-download-arrow {
+    .app-cta::after {
+      content: "";
       position: absolute;
-      inset: 0;
-      z-index: 5;
-      pointer-events: none;
-      overflow: visible;
+      right: 16px;
+      top: 50%;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: 0;
+      transform: translateY(-50%) scale(.3);
+      transition:
+        opacity .18s ease,
+        transform .18s ease;
     }
 
-    .dynamic-download-arrow svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-      overflow: visible;
+    .app-cta:hover {
+      transform: translateY(-2px);
     }
 
-    .dynamic-arrow-shadow,
-    .dynamic-arrow-body,
-    .dynamic-arrow-head {
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      vector-effect: non-scaling-stroke;
-      stroke-dasharray: 100;
-      stroke-dashoffset: 100;
+    .app-cta:hover::after {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
     }
 
-    .dynamic-arrow-shadow {
-      stroke: rgba(228, 87, 87, .18);
-      stroke-width: 11;
+    .app-cta-main {
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 950;
+      letter-spacing: -0.025em;
     }
 
-    .dynamic-arrow-body {
-      stroke: #E45757;
-      stroke-width: 6.8;
+    .app-cta-sub {
+      font-size: 10px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: .025em;
     }
 
-    .dynamic-arrow-head {
-      stroke: #E45757;
-      stroke-width: 6.4;
+    /* 1P: 실사 위 흰 카드 */
+    .app-cta-hero {
+      margin-top: 26px;
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(35,139,34,.12);
+      color: var(--green);
+      box-shadow: 0 12px 30px rgba(30,60,30,.12);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
     }
 
-    .dynamic-download-arrow.is-visible .dynamic-arrow-shadow,
-    .dynamic-download-arrow.is-visible .dynamic-arrow-body {
-      animation: dynamicArrowDraw 1.85s cubic-bezier(.32,.72,.22,1) forwards;
+    .app-cta-hero .app-cta-sub {
+      color: #8B948C;
     }
 
-    .dynamic-download-arrow.is-visible .dynamic-arrow-head:first-of-type {
-      animation: dynamicArrowDraw .30s ease-out 1.55s forwards;
+    /* 5P: 백색 화면에서 가벼운 녹색 카드 */
+    .app-cta-final {
+      margin-top: 28px;
+      background: var(--green);
+      border: 1px solid var(--green);
+      color: #fff;
+      box-shadow: 0 14px 34px rgba(35,139,34,.18);
     }
 
-    .dynamic-download-arrow.is-visible .dynamic-arrow-head:last-of-type {
-      animation: dynamicArrowDraw .30s ease-out 1.65s forwards;
+    .app-cta-final .app-cta-sub {
+      color: rgba(255,255,255,.68);
     }
 
-    @keyframes dynamicArrowDraw {
-      from { stroke-dashoffset: 100; }
-      to { stroke-dashoffset: 0; }
-    }
-
-    /* 모바일 타이포 = 다른 페이지 규격 */
     @media (max-width: 820px) {
-      #serviceDiscovery .service-copy h3,
-      #servicePayment .service-copy h3,
-      #serviceInvoice .service-copy h3,
-      #serviceFinal .final-copy h2 {
-        font-size: clamp(38px, 10vw, 50px) !important;
-        line-height: 1.06 !important;
+      .app-cta {
+        min-width: 188px;
+        min-height: 62px;
+        padding: 10px 19px 9px;
+        border-radius: 18px;
       }
 
-      #serviceDiscovery .service-copy p,
-      #servicePayment .service-copy p,
-      #serviceInvoice .service-copy p,
-      #serviceFinal .final-copy p {
-        font-size: 15px !important;
-        line-height: 1.55 !important;
+      .app-cta-hero {
+        margin-top: 18px;
       }
 
-      #serviceDiscovery .service-note,
-      #servicePayment .service-note,
-      #serviceInvoice .service-note {
-        font-size: 13px !important;
-        line-height: 1.55 !important;
+      .app-cta-final {
+        margin-top: 16px;
       }
 
-      #serviceFinal .service-flow {
-        display: none !important;
+      .app-cta-main {
+        font-size: 14px;
       }
 
-      #serviceFinal .download-button {
-        width: auto !important;
-        min-width: 220px !important;
-        min-height: 52px !important;
-        margin-top: 16px !important;
-        padding: 0 22px !important;
-      }
-
-      /* 폰을 조금 내려 화살표가 우측으로 돌아갈 공간 확보 */
-      #serviceFinal .final-visual {
-        padding-top: 78px !important;
-        align-items: flex-end !important;
-      }
-
-      #serviceFinal .phone-stage {
-        height: 31vh !important;
-        max-height: 330px !important;
-      }
-
-      #serviceFinal .phone-shell {
-        width: min(46vw, 184px) !important;
-      }
-    }
-
-    @media (max-width: 520px) {
-      #serviceDiscovery .service-copy h3,
-      #servicePayment .service-copy h3,
-      #serviceInvoice .service-copy h3,
-      #serviceFinal .final-copy h2 {
-        font-size: clamp(34px, 9.7vw, 43px) !important;
-      }
-
-      #serviceDiscovery .service-copy p,
-      #servicePayment .service-copy p,
-      #serviceInvoice .service-copy p,
-      #serviceFinal .final-copy p {
-        font-size: 14px !important;
-      }
-
-      #serviceDiscovery .service-note,
-      #servicePayment .service-note,
-      #serviceInvoice .service-note {
-        font-size: 13px !important;
-      }
-
-      #serviceFinal .download-button,
-      #serviceFinal .download-button span {
-        font-size: 15px !important;
-      }
-
-      #serviceFinal .final-visual {
-        padding-top: 68px !important;
-      }
-
-      #serviceFinal .phone-stage {
-        height: 29vh !important;
-        max-height: 300px !important;
-      }
-
-      #serviceFinal .phone-shell {
-        width: min(44vw, 172px) !important;
+      .app-cta-sub {
+        font-size: 9.5px;
       }
     }
 
     @media (max-height: 700px) and (max-width: 820px) {
-      #serviceDiscovery .service-copy h3,
-      #servicePayment .service-copy h3,
-      #serviceInvoice .service-copy h3,
-      #serviceFinal .final-copy h2 {
-        font-size: clamp(30px, 6.3vh, 38px) !important;
+      .app-cta {
+        min-height: 54px;
+        padding-top: 8px;
+        padding-bottom: 7px;
       }
 
-      #serviceDiscovery .service-copy p,
-      #servicePayment .service-copy p,
-      #serviceInvoice .service-copy p,
-      #serviceFinal .final-copy p {
-        font-size: 13px !important;
-      }
-
-      #serviceFinal .final-visual {
-        padding-top: 46px !important;
-      }
-
-      #serviceFinal .phone-stage {
-        height: 23vh !important;
+      .app-cta-hero {
+        margin-top: 10px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .dynamic-arrow-shadow,
-      .dynamic-arrow-body,
-      .dynamic-arrow-head {
-        animation: none !important;
-        stroke-dashoffset: 0 !important;
-      }
-    }
-
-    /* =========================================================
-       SERVICES 4P FINAL
-       5P 폐기 / 거래 증빙 페이지에서 종료
-       ========================================================= */
-    #serviceInvoice.service-last {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    #serviceInvoice.service-last > .container {
-      flex: 1 1 auto;
-      min-height: 0;
-      height: auto;
-      padding-top: 28px;
-      padding-bottom: 18px;
-      display: grid !important;
-      align-items: center;
-    }
-
-    #serviceInvoice.service-last .service-grid {
-      align-self: center;
-    }
-
-    #serviceInvoice.service-last .site-footer {
-      flex: 0 0 auto;
-      width: 100%;
-      margin: 0;
-      padding: 18px 20px 20px;
-      background: var(--black);
-      border-top: 1px solid rgba(255,255,255,.08);
-      color: rgba(255,255,255,.58);
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    #serviceInvoice.service-last .site-footer .footer-links a {
-      color: rgba(255,255,255,.9);
-    }
-
-    /* 4P는 마지막 장면이므로 중앙 아래 화살표 없음 */
-    #serviceInvoice.service-last .section-next {
-      display: none !important;
-    }
-
-    @media (max-width: 820px) {
-      #serviceInvoice.service-last > .container {
-        padding-top: 18px;
-        padding-bottom: 10px;
-      }
-
-      #serviceInvoice.service-last .service-grid {
-        height: 100%;
-        grid-template-rows: auto minmax(0, 1fr) !important;
-      }
-
-      #serviceInvoice.service-last .service-visual {
-        padding-bottom: 4px !important;
-      }
-
-      #serviceInvoice.service-last .service-visual svg {
-        max-height: 23vh !important;
-      }
-
-      #serviceInvoice.service-last .site-footer {
-        font-size: 9px;
-        padding: 14px 16px 16px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      #serviceInvoice.service-last > .container {
-        padding-top: 14px;
-        padding-bottom: 8px;
-      }
-
-      #serviceInvoice.service-last .service-visual svg {
-        max-height: 21vh !important;
-      }
-    }
-
-    @media (max-height: 700px) and (max-width: 820px) {
-      #serviceInvoice.service-last > .container {
-        padding-top: 8px;
-        padding-bottom: 6px;
-      }
-
-      #serviceInvoice.service-last .service-note {
-        display: none;
-      }
-
-      #serviceInvoice.service-last .service-visual svg {
-        max-height: 18vh !important;
-      }
-
-      #serviceInvoice.service-last .site-footer {
-        padding-top: 10px;
-        padding-bottom: 10px;
+      .app-cta,
+      .app-cta::after {
+        transition: none;
       }
     }
 </style>
@@ -2497,7 +1203,7 @@
       <div class="nav-menu">
         <a href="about.html">About</a>
         <a href="brand.html">Brand</a>
-        <a href="services.html" class="active">Services</a>
+        <a href="services.html">Services</a>
         <a href="alliance.html">Alliance</a>
         <a href="faq.html">FAQ</a>
       </div>
@@ -2542,7 +1248,7 @@
       <nav class="mobile-menu-links" aria-label="모바일 메뉴">
         <a href="about.html">About</a>
         <a href="brand.html">Brand</a>
-        <a href="services.html" class="active">Services</a>
+        <a href="services.html">Services</a>
         <a href="alliance.html">Alliance</a>
         <a href="faq.html">FAQ</a>
       </nav>
@@ -2554,21 +1260,11 @@
     </div>
   </div>
 
-  <!-- 사이트 좌우 이동 -->
+  <!-- INDEX → ABOUT -->
   <a
-    href="brand.html"
-    class="site-side-nav prev"
-    aria-label="이전 사이트 페이지: Brand"
-  >
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M16 5 L9 12 L16 19"/>
-    </svg>
-  </a>
-
-  <a
-    href="alliance.html"
-    class="site-side-nav next"
-    aria-label="다음 사이트 페이지: Alliance"
+    href="about.html"
+    class="site-side-nav"
+    aria-label="다음 사이트 페이지: About"
   >
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M8 5 L15 12 L8 19"/>
@@ -2577,321 +1273,453 @@
 
   <main class="snap-root" id="snapRoot">
 
-    <!-- HERO -->
-    <section id="serviceHero" class="section scene service-hero">
-      <div class="container hero-frame">
+    <!-- 1P REAL PHOTO -->
+    <section
+      id="page1"
+      class="scene scene-hero"
+      data-page="1"
+      aria-label="모딩 메인"
+    >
+      <div class="scene-frame hero-frame">
+        <div class="hero-copy">
+          <div class="kicker">HELLO, MODING</div>
 
-        <div class="hero-copy reveal">
-          <div class="hero-kicker">SERVICES MODING</div>
-
-          <h1 class="hero-title">
-            찾고<br>
-            <em>결제하고</em><br>
-            정리까지
+          <h1>
+            사장님,<br>
+            오늘부터<br>
+            <em>모딩하세요 :)</em>
           </h1>
 
-          <p class="hero-desc">
-            상품 발견부터 카드결제, 거래 증빙까지.<br>
-            식당의 식품 주문을 조금 더 단순하게 이어갑니다.
+          <p>
+            외식업 식품 주문의 새로운 방법
           </p>
+
+          <a
+            class="app-cta app-cta-hero"
+            href="/download.html"
+            onclick="return openModingStore(event);"
+            aria-label="모딩 앱 받기"
+          >
+            <span class="app-cta-main">모딩 앱 받기</span>
+            <span class="app-cta-sub">iOS · Android</span>
+          </a>
         </div>
-
-        <div class="hero-art reveal" aria-hidden="true">
-          <svg viewBox="0 0 640 440">
-
-            <path class="hero-trail"
-              d="M124 220 H284"
-              fill="none" stroke="rgba(255,255,255,.76)"
-              stroke-width="6" stroke-linecap="round"/>
-
-            <path class="hero-trail"
-              d="M356 220 H516"
-              fill="none" stroke="rgba(255,255,255,.76)"
-              stroke-width="6" stroke-linecap="round"/>
-
-            <g class="hero-step">
-              <circle cx="124" cy="220" r="58" fill="none" stroke="#fff" stroke-width="8"/>
-              <path d="M95 221 C116 203 145 204 160 219 C145 235 116 237 95 221 Z"
-                    fill="none" stroke="#FF8C00" stroke-width="5"/>
-              <path d="M95 221 L82 212 L82 229 Z"
-                    fill="none" stroke="#FF8C00" stroke-width="5" stroke-linejoin="round"/>
-            </g>
-
-            <g class="hero-step delay1">
-              <circle cx="320" cy="220" r="58" fill="none" stroke="#fff" stroke-width="8"/>
-              <rect x="280" y="192" width="80" height="56" rx="12"
-                    fill="none" stroke="#FF8C00" stroke-width="5"/>
-              <path d="M292 210 H314" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-              <path d="M292 225 H347" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-              <circle cx="342" cy="211" r="5" fill="#fff"/>
-            </g>
-
-            <g class="hero-step delay2">
-              <circle cx="516" cy="220" r="58" fill="none" stroke="#fff" stroke-width="8"/>
-              <path d="M482 185 H538 V257 H482 Z"
-                    fill="none" stroke="#FF8C00" stroke-width="5"/>
-              <path d="M495 202 H525
-                       M495 216 H525
-                       M495 230 H514"
-                    fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-              <path d="M505 240 L513 248 L530 229"
-                    fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-
-            <g class="hero-dot">
-              <circle cx="0" cy="0" r="10" fill="#FF8C00"/>
-            </g>
-
-          </svg>
-        </div>
-
       </div>
 
-    
       <button
         type="button"
-        class="section-next"
-        data-scroll-target="serviceDiscovery"
-        aria-label="다음 서비스 장면으로 이동"
+        class="scene-next"
+        data-next="page2"
+        aria-label="다음 장면"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
-
     </section>
 
-    <!-- 2P 상품 발견 -->
-    <section id="serviceDiscovery" class="section scene service-panel">
-      <div class="container service-grid">
+    <!-- 2P DISCOVERY -->
+    <section
+      id="page2"
+      class="scene scene-discovery"
+      data-page="2"
+      aria-label="상품 발견"
+    >
+      <div class="scene-frame">
+        <div class="scene-copy">
+          <div class="kicker">DISCOVERY</div>
 
-        <div class="service-copy reveal">
-          <div class="section-kicker">DISCOVERY</div>
+          <h2 class="scene-title">
+            우리 가게에 맞는<br>
+            <em>새로운 상품을.</em>
+          </h2>
 
-          <h3>
-            흔한 상품 말고<br>
-            <em>메뉴에 힘이 되는</em><br>
-            새로운 상품을
-          </h3>
-
-          <p>
-            수산물부터 육가공, 소스·가공식품까지.<br>
-            가게에 필요한 새로운 상품을 더 쉽게 발견하세요.
+          <p class="scene-desc">
+            수산·축산·소스·반조리까지,<br>
+            필요한 상품을 가볍게 찾아보세요.
           </p>
-
-          <div class="service-note">
-            필요한 상품을 찾는 첫 단계부터 모딩이 함께합니다.
-          </div>
         </div>
 
-        <div class="service-visual reveal" aria-hidden="true">
-          <svg viewBox="0 0 560 440">
-
-            <g class="search-focus">
+        <div class="scene-art" aria-hidden="true">
+          <svg viewBox="0 0 660 500">
+            <g id="discoverFish" class="discovery-item">
               <path
-                d="M112 182 C149 152 194 153 226 180 C193 209 147 211 112 182 Z"
+                d="M95 188 C130 159 178 161 205 185 C177 210 130 213 95 188 Z"
                 fill="none" stroke="#238B22" stroke-width="7"
               />
               <path
-                d="M111 182 L84 164 L86 198 Z"
-                fill="none" stroke="#238B22" stroke-width="7" stroke-linejoin="round"
+                d="M95 188 L69 169 L72 202 Z"
+                fill="none" stroke="#238B22" stroke-width="7"
+                stroke-linejoin="round"
               />
-              <circle cx="193" cy="178" r="6" fill="#FF8C00"/>
+              <circle cx="177" cy="183" r="5" fill="#FF8C00"/>
             </g>
 
-            <g class="search-focus delay1">
+            <g id="discoverMeat" class="discovery-item">
               <path
-                d="M305 128
-                   C323 106 358 108 371 128
-                   C389 122 405 140 401 158
-                   C414 172 401 196 378 197
-                   C363 214 332 214 318 198
-                   C297 198 288 172 301 160
-                   C295 145 296 135 305 128 Z"
-                fill="none" stroke="#238B22" stroke-width="7" stroke-linejoin="round"
+                d="M296 112
+                   C315 90 351 93 364 114
+                   C383 107 401 126 396 145
+                   C411 159 397 184 375 184
+                   C360 201 329 202 314 186
+                   C292 187 282 161 296 147
+                   C290 134 290 122 296 112 Z"
+                fill="none" stroke="#238B22" stroke-width="7"
               />
               <path
-                d="M318 170 Q348 151 381 170"
+                d="M313 157 Q344 139 377 158"
                 fill="none" stroke="#FF8C00" stroke-width="6"
               />
             </g>
 
-            <g class="search-focus delay2">
+            <g id="discoverSauce" class="discovery-item">
               <path
-                d="M426 214 L508 214 L501 324 Q470 340 438 324 Z"
-                fill="none" stroke="#238B22" stroke-width="7" stroke-linejoin="round"
+                d="M446 195 H527
+                   L522 306
+                   Q486 322 452 306 Z"
+                fill="none" stroke="#238B22" stroke-width="7"
+                stroke-linejoin="round"
               />
               <path
-                d="M444 238 H492"
+                d="M460 220 H514"
                 fill="none" stroke="#FF8C00" stroke-width="7"
               />
             </g>
 
-            <g class="search-focus delay3">
+            <g id="discoverFrozen" class="discovery-item">
               <path
-                d="M178 328
-                   C189 294 224 284 251 301
-                   C275 317 273 355 245 372
-                   C215 386 180 363 178 328 Z"
+                d="M174 329 Q214 350 258 329
+                   L253 355 Q216 374 180 352 Z"
                 fill="none" stroke="#238B22" stroke-width="6"
               />
               <path
-                d="M190 316 L238 364
-                   M206 299 L248 348"
+                d="M191 322 Q206 303 220 319
+                   Q235 301 250 320"
+                fill="none" stroke="#238B22" stroke-width="6"
+              />
+              <path
+                d="M265 288 V314
+                   M253 295 L277 308
+                   M253 308 L277 295"
                 fill="none" stroke="#FF8C00" stroke-width="4"
+                stroke-linecap="round"
               />
             </g>
 
-            <g class="search-lens">
-              <circle cx="220" cy="222" r="112"
-                      fill="none" stroke="#fff" stroke-width="11"/>
-              <circle cx="220" cy="222" r="112"
-                      fill="none" stroke="#238B22" stroke-width="7"/>
-              <path d="M301 305 L372 376"
-                    fill="none" stroke="#238B22" stroke-width="20" stroke-linecap="round"/>
-              <circle cx="220" cy="222" r="8" fill="#FF8C00"/>
+            <g
+              id="discoverLens"
+              class="discovery-lens"
+              transform="translate(95 188)"
+            >
+              <circle
+                cx="0" cy="0" r="84"
+                fill="rgba(255,255,255,.45)"
+                stroke="#238B22"
+                stroke-width="7"
+              />
+              <path
+                d="M62 62 L120 120"
+                fill="none"
+                stroke="#238B22"
+                stroke-width="17"
+                stroke-linecap="round"
+              />
+              <circle cx="0" cy="0" r="6" fill="#FF8C00"/>
             </g>
-
           </svg>
         </div>
-
       </div>
 
-    
       <button
         type="button"
-        class="section-next"
-        data-scroll-target="servicePayment"
-        aria-label="다음 서비스 장면으로 이동"
+        class="scene-next"
+        data-next="page3"
+        aria-label="다음 장면"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
-
     </section>
 
-    <!-- 3P 카드결제 -->
-    <section id="servicePayment" class="section scene service-panel alt">
-      <div class="container service-grid reverse">
+    <!-- 3P ORDER -->
+    <section
+      id="page3"
+      class="scene scene-order"
+      data-page="3"
+      aria-label="간단한 주문"
+    >
+      <div class="scene-frame">
+        <div class="scene-copy">
+          <div class="kicker">ORDER FLOW</div>
 
-        <div class="service-visual reveal" aria-hidden="true">
-          <svg viewBox="0 0 560 430">
+          <h2 class="scene-title">
+            찾았다면,<br>
+            주문은 <em>더 간단하게.</em>
+          </h2>
 
+          <p class="scene-desc">
+            상품을 고르고, 결제하고, 확인하는 흐름을<br>
+            한곳에서 자연스럽게 이어갑니다.
+          </p>
+        </div>
+
+        <div class="scene-art" aria-hidden="true">
+          <svg viewBox="0 0 660 500">
+            <path
+              class="order-route"
+              d="M145 250 H515"
+              fill="none"
+              stroke="#C9D9C9"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+
+            <g class="order-node n1">
+              <circle
+                cx="145" cy="250" r="73"
+                fill="#fff"
+                stroke="#238B22"
+                stroke-width="6"
+              />
+              <path
+                d="M110 235 L145 220 L180 235 L145 252 Z"
+                fill="none" stroke="#238B22" stroke-width="5"
+              />
+              <path
+                d="M110 235 V274 L145 290 V252
+                   M180 235 V274 L145 290"
+                fill="none" stroke="#238B22" stroke-width="5"
+              />
+            </g>
+
+            <g class="order-node n2">
+              <circle
+                cx="330" cy="250" r="73"
+                fill="#fff"
+                stroke="#FF8C00"
+                stroke-width="6"
+              />
+              <rect
+                x="283" y="218"
+                width="94" height="64"
+                rx="13"
+                fill="#238B22"
+              />
+              <circle cx="353" cy="237" r="8" fill="#fff"/>
+              <circle cx="365" cy="237" r="8" fill="#FF8C00"/>
+              <path
+                d="M299 254 H360
+                   M299 269 H327"
+                fill="none"
+                stroke="rgba(255,255,255,.82)"
+                stroke-width="6"
+                stroke-linecap="round"
+              />
+            </g>
+
+            <g class="order-node n3">
+              <circle
+                cx="515" cy="250" r="73"
+                fill="#fff"
+                stroke="#238B22"
+                stroke-width="6"
+              />
+              <circle cx="515" cy="250" r="36" fill="#FF8C00"/>
+              <path
+                d="M496 250 L509 263 L536 235"
+                fill="none"
+                stroke="#fff"
+                stroke-width="8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+
+            <circle cx="232" cy="250" r="8" fill="#FF8C00"/>
+            <circle cx="418" cy="250" r="8" fill="#FF8C00"/>
+          </svg>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="scene-next"
+        data-next="page4"
+        aria-label="다음 장면"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
+        </svg>
+      </button>
+    </section>
+
+    <!-- 4P CONNECT -->
+    <section
+      id="page4"
+      class="scene scene-connect"
+      data-page="4"
+      aria-label="좋은 상품과 좋은 가게 연결"
+    >
+      <div class="scene-frame">
+        <div class="scene-copy">
+          <div class="kicker">CONNECT</div>
+
+          <h2 class="scene-title">
+            좋은 상품이<br>
+            필요한 가게를<br>
+            <em>만날 수 있도록.</em>
+          </h2>
+
+          <p class="scene-desc">
+            모딩은 식품제조사와 외식업 사장님 사이의<br>
+            새로운 연결을 만들어갑니다.
+          </p>
+        </div>
+
+        <div class="scene-art" aria-hidden="true">
+          <svg viewBox="0 0 720 500">
+            <!-- 제조사 -->
+            <g class="connect-box">
+              <path
+                d="M78 274 H231 V374 H78 Z"
+                fill="none" stroke="#fff" stroke-width="7"
+              />
+              <path
+                d="M98 274 V225 L128 247 V217 L164 247 V216 L201 247 V274"
+                fill="none" stroke="#fff" stroke-width="7"
+                stroke-linejoin="round"
+              />
+              <rect x="104" y="310" width="34" height="64" rx="4" fill="#FF8C00"/>
+              <path
+                d="M163 312 H207 M163 335 H207"
+                fill="none" stroke="#fff" stroke-width="5"
+                stroke-linecap="round"
+              />
+            </g>
+
+            <!-- 연결 선 -->
+            <path
+              id="indexConnectRoute"
+              d="M240 300 C286 266 326 265 360 285 C402 309 448 309 500 286"
+              fill="none"
+              stroke="rgba(255,255,255,.66)"
+              stroke-width="5"
+              stroke-linecap="round"
+              stroke-dasharray="10 14"
+            />
+
+            <!-- 모딩 허브 -->
+            <g class="connect-hub">
+              <rect
+                x="306" y="222"
+                width="128" height="88"
+                rx="44"
+                fill="#fff"
+              />
+              <image
+                href="모딩로고.png"
+                x="338" y="230"
+                width="64" height="70"
+                preserveAspectRatio="xMidYMid meet"
+              />
+            </g>
+
+            <!-- 이동 박스 -->
             <g>
-              <rect x="90" y="130" width="190" height="130" rx="26"
-                    fill="#fff" stroke="#DDE6DD" stroke-width="2"/>
-              <path d="M122 165 H195
-                       M122 193 H228
-                       M122 221 H176"
-                    fill="none" stroke="#238B22" stroke-width="6" stroke-linecap="round"/>
-              <rect x="138" y="238" width="88" height="14" rx="7" fill="#EAF4EA"/>
+              <rect x="-15" y="-13" width="30" height="26" rx="5" fill="#FF8C00"/>
+              <path
+                d="M-10 -4 H10 M0 -13 V13"
+                fill="none"
+                stroke="#fff"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+              <animateMotion dur="4.6s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#indexConnectRoute"/>
+              </animateMotion>
             </g>
 
-            <g class="pay-card">
-              <rect x="294" y="156" width="182" height="112" rx="24"
-                    fill="#238B22"/>
-              <circle cx="442" cy="195" r="12" fill="#fff" opacity=".92"/>
-              <circle cx="456" cy="195" r="12" fill="#FF8C00" opacity=".96"/>
-              <path d="M320 212 H450"
-                    fill="none" stroke="rgba(255,255,255,.82)" stroke-width="8" stroke-linecap="round"/>
-              <path d="M320 236 H370"
-                    fill="none" stroke="rgba(255,255,255,.58)" stroke-width="7" stroke-linecap="round"/>
+            <!-- 가게 -->
+            <g class="connect-store" transform="translate(510 253)">
+              <path
+                d="M0 55 H118 V151 H0 Z"
+                fill="none" stroke="#fff" stroke-width="7"
+              />
+              <path
+                d="M-10 55 L9 17 H108 L128 55"
+                fill="none" stroke="#fff" stroke-width="7"
+              />
+              <path
+                d="M9 37 H108"
+                fill="none"
+                stroke="#FF8C00"
+                stroke-width="11"
+                stroke-dasharray="15 12"
+              />
+              <rect x="46" y="105" width="27" height="46" rx="4" fill="#FF8C00"/>
             </g>
-
-            <g class="pay-check">
-              <circle cx="452" cy="286" r="30" fill="#FF8C00"/>
-              <path d="M438 286 L449 297 L468 277"
-                    fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-
           </svg>
         </div>
-
-        <div class="service-copy reveal">
-          <div class="section-kicker">CARD PAYMENT</div>
-
-          <h3>
-            필요한 상품을<br>
-            <em>카드로 결제하세요</em>
-          </h3>
-
-          <p>
-            식당 운영 상황에 맞게 자금 흐름은 조금 더 유연하게.<br>
-            필요한 상품을 카드결제로 이어갈 수 있도록 돕습니다.
-          </p>
-
-          <div class="service-note">
-            결제 단계도 식당 운영 방식에 맞춰 더 간단하게.
-          </div>
-        </div>
-
       </div>
 
-    
       <button
         type="button"
-        class="section-next"
-        data-scroll-target="serviceInvoice"
-        aria-label="다음 서비스 장면으로 이동"
+        class="scene-next"
+        data-next="page5"
+        aria-label="다음 장면"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 8 L12 15 L19 8"/>
         </svg>
       </button>
-
     </section>
 
-    <!-- 4P 세금계산서 -->
-    <section id="serviceInvoice" class="section scene service-panel service-last">
-      <div class="container service-grid">
+    <!-- 5P APP CTA -->
+    <section
+      id="page5"
+      class="scene scene-final"
+      data-page="5"
+      aria-label="모딩 앱 다운로드"
+    >
+      <div class="final-main">
+        <div class="final-copy">
+          <div class="kicker">GET MODING</div>
 
-        <div class="service-copy reveal">
-          <div class="section-kicker">TRANSACTION RECORD</div>
-
-          <h3>
-            거래가 끝나면<br>
-            증빙도 <em>깔끔하게</em>
-          </h3>
+          <h2>
+            이제,<br>
+            우리 가게에도<br>
+            <em>모딩을.</em>
+          </h2>
 
           <p>
-            상품의 실제 판매주체를 기준으로 거래 증빙이 처리됩니다.<br>
-            입점상품과 MD PICK 상품은 판매주체가 다를 수 있으며,
-            거래 내역에서 확인할 수 있습니다.
+            필요한 상품을 찾고, 주문하고, 관리하는<br>
+            새로운 방법을 시작해보세요.
           </p>
 
-          <div class="service-note">
-            판매주체에 맞는 증빙 흐름까지 하나로 연결합니다.
+          <a
+            class="app-cta app-cta-final"
+            href="/download.html"
+            onclick="return openModingStore(event);"
+            aria-label="모딩 앱 받기"
+          >
+            <span class="app-cta-main">모딩 앱 받기</span>
+            <span class="app-cta-sub">iOS · Android</span>
+          </a>
+        </div>
+
+        <div class="final-phone-wrap" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-screen">
+              <img
+                src="moding-app-main.jpeg"
+                alt="모딩 앱 메인 화면"
+                loading="eager"
+                decoding="async"
+              >
+            </div>
           </div>
         </div>
-
-        <div class="service-visual reveal" aria-hidden="true">
-          <svg viewBox="0 0 560 430">
-
-            <g class="invoice-sheet">
-              <rect x="166" y="72" width="230" height="296" rx="24"
-                    fill="#fff" stroke="#DDE6DD" stroke-width="2"/>
-              <path d="M203 126 H324
-                       M203 156 H357
-                       M203 186 H357
-                       M203 216 H302"
-                    fill="none" stroke="#238B22" stroke-width="7" stroke-linecap="round"/>
-
-              <path d="M203 258 H357
-                       M203 286 H357
-                       M203 314 H316"
-                    fill="none" stroke="#E0E8E0" stroke-width="7" stroke-linecap="round"/>
-            </g>
-
-            <g class="invoice-stamp">
-              <circle cx="356" cy="304" r="40" fill="#FF8C00"/>
-              <path d="M336 304 L350 318 L377 291"
-                    fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-
-          </svg>
-        </div>
-
       </div>
 
       <footer class="site-footer">
@@ -2907,23 +1735,19 @@
         통신판매업신고: 제2025-대구달서-1367호 · partner@moding.app<br>
         대구광역시 달서구 달구벌대로 1870, 7층
       </footer>
-
-
     </section>
 
   </main>
 
-
   <script>
-    const siteHeader =
-      document.querySelector(".site-header");
+    const siteHeader = document.querySelector(".site-header");
+    const snapRoot = document.getElementById("snapRoot");
+    const scenes = Array.from(document.querySelectorAll(".scene"));
 
-    function syncHeaderHeight() {
-      if (!siteHeader) return;
-
-      const headerHeight = Math.ceil(
-        siteHeader.getBoundingClientRect().height
-      );
+    function syncViewport() {
+      const headerHeight = siteHeader
+        ? Math.ceil(siteHeader.getBoundingClientRect().height)
+        : 84;
 
       const viewportHeight =
         window.visualViewport?.height || window.innerHeight;
@@ -2939,20 +1763,22 @@
       );
     }
 
-    syncHeaderHeight();
+    syncViewport();
 
     let resizeSnapTimer = null;
 
     function resnapCurrentScene() {
-      if (!snapRoot) return;
-
       window.clearTimeout(resizeSnapTimer);
+
       resizeSnapTimer = window.setTimeout(() => {
         const sceneHeight = snapRoot.clientHeight;
         if (!sceneHeight) return;
 
-        const index = Math.round(snapRoot.scrollTop / sceneHeight);
-        const safeIndex = Math.max(0, Math.min(index, 3));
+        const currentIndex =
+          Math.round(snapRoot.scrollTop / sceneHeight);
+
+        const safeIndex =
+          Math.max(0, Math.min(currentIndex, scenes.length - 1));
 
         snapRoot.scrollTo({
           top: safeIndex * sceneHeight,
@@ -2962,55 +1788,48 @@
     }
 
     if ("ResizeObserver" in window && siteHeader) {
-      const headerResizeObserver =
-        new ResizeObserver(() => {
-          syncHeaderHeight();
-          resnapCurrentScene();
-        });
+      const ro = new ResizeObserver(() => {
+        syncViewport();
+        resnapCurrentScene();
+      });
 
-      headerResizeObserver.observe(siteHeader);
+      ro.observe(siteHeader);
     }
 
     window.addEventListener("resize", () => {
-      syncHeaderHeight();
+      syncViewport();
       resnapCurrentScene();
     });
 
     window.addEventListener("orientationchange", () => {
-      syncHeaderHeight();
+      syncViewport();
       resnapCurrentScene();
     });
 
     if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", () => {
-        syncHeaderHeight();
+        syncViewport();
         resnapCurrentScene();
       });
     }
 
-    const menuToggle =
-      document.getElementById("menuToggle");
-
-    const menuClose =
-      document.getElementById("menuClose");
-
-    const mobileMenuOverlay =
-      document.getElementById("mobileMenuOverlay");
-
-    const snapRoot = document.getElementById("snapRoot");
+    /* Mobile menu */
+    const menuToggle = document.getElementById("menuToggle");
+    const menuClose = document.getElementById("menuClose");
+    const mobileMenuOverlay = document.getElementById("mobileMenuOverlay");
 
     function openMobileMenu() {
       mobileMenuOverlay.classList.add("is-open");
       mobileMenuOverlay.setAttribute("aria-hidden", "false");
       menuToggle.setAttribute("aria-expanded", "true");
-      if (snapRoot) snapRoot.style.overflowY = "hidden";
+      snapRoot.style.overflowY = "hidden";
     }
 
     function closeMobileMenu() {
       mobileMenuOverlay.classList.remove("is-open");
       mobileMenuOverlay.setAttribute("aria-hidden", "true");
       menuToggle.setAttribute("aria-expanded", "false");
-      if (snapRoot) snapRoot.style.overflowY = "auto";
+      snapRoot.style.overflowY = "auto";
     }
 
     menuToggle.addEventListener("click", openMobileMenu);
@@ -3028,33 +1847,25 @@
       }
     });
 
-    /* =========================================================
-       SECTION NEXT
-       ========================================================= */
-    /* =========================================================
-       EXACT FULL PAGE SCROLL
-       스크롤 컨테이너 내부의 정확한 장면 시작점으로 이동
-       ========================================================= */
-    function scrollToServiceScene(targetId) {
-      if (!snapRoot) return;
-
+    /* Exact snap */
+    function scrollToScene(targetId) {
       const target = document.getElementById(targetId);
       if (!target) return;
 
-      const prefersReducedMotion =
+      const reduced =
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       snapRoot.scrollTo({
         top: target.offsetTop,
-        behavior: prefersReducedMotion ? "auto" : "smooth"
+        behavior: reduced ? "auto" : "smooth"
       });
     }
 
     document
-      .querySelectorAll(".section-next[data-scroll-target]")
+      .querySelectorAll(".scene-next[data-next]")
       .forEach((button) => {
         button.addEventListener("click", () => {
-          scrollToServiceScene(button.dataset.scrollTarget);
+          scrollToScene(button.dataset.next);
         });
       });
 
@@ -3073,7 +1884,7 @@
             Math.round(snapRoot.scrollTop / sceneHeight);
 
           const safeIndex =
-            Math.max(0, Math.min(nearestIndex, 3));
+            Math.max(0, Math.min(nearestIndex, scenes.length - 1));
 
           const exactTop = safeIndex * sceneHeight;
 
@@ -3088,17 +1899,46 @@
       { passive: true }
     );
 
-    /* =========================================================
-       HORIZONTAL SITE SWIPE
-       BRAND ← SERVICES → ALLIANCE
-       ========================================================= */
-    const mainContent =
-      document.querySelector("main");
+    /* 2P magnifier motion */
+    const discoverLens = document.getElementById("discoverLens");
+    const discoverTargets = [
+      { id: "discoverFish", x: 95, y: 188 },
+      { id: "discoverMeat", x: 340, y: 140 },
+      { id: "discoverSauce", x: 486, y: 250 },
+      { id: "discoverFrozen", x: 220, y: 330 }
+    ];
 
-    let pageSwipeStartX = null;
-    let pageSwipeStartY = null;
+    let discoverIndex = 0;
 
-    mainContent.addEventListener(
+    function moveDiscoverLens() {
+      if (!discoverLens) return;
+
+      const target = discoverTargets[discoverIndex];
+
+      discoverLens.setAttribute(
+        "transform",
+        `translate(${target.x} ${target.y})`
+      );
+
+      discoverTargets.forEach((item, index) => {
+        const el = document.getElementById(item.id);
+        if (el) {
+          el.classList.toggle("is-focus", index === discoverIndex);
+        }
+      });
+
+      discoverIndex =
+        (discoverIndex + 1) % discoverTargets.length;
+    }
+
+    moveDiscoverLens();
+    window.setInterval(moveDiscoverLens, 1800);
+
+    /* Mobile horizontal swipe: Index → About */
+    let swipeStartX = null;
+    let swipeStartY = null;
+
+    snapRoot.addEventListener(
       "touchstart",
       (event) => {
         if (event.touches.length !== 1) return;
@@ -3106,25 +1946,24 @@
         const x = event.touches[0].clientX;
         const y = event.touches[0].clientY;
 
-        /* 브라우저 edge swipe와 충돌 방지 */
         if (x < 45 || x > window.innerWidth - 45) {
-          pageSwipeStartX = null;
-          pageSwipeStartY = null;
+          swipeStartX = null;
+          swipeStartY = null;
           return;
         }
 
-        pageSwipeStartX = x;
-        pageSwipeStartY = y;
+        swipeStartX = x;
+        swipeStartY = y;
       },
       { passive: true }
     );
 
-    mainContent.addEventListener(
+    snapRoot.addEventListener(
       "touchend",
       (event) => {
         if (
-          pageSwipeStartX === null ||
-          pageSwipeStartY === null ||
+          swipeStartX === null ||
+          swipeStartY === null ||
           !event.changedTouches.length
         ) {
           return;
@@ -3133,11 +1972,11 @@
         const endX = event.changedTouches[0].clientX;
         const endY = event.changedTouches[0].clientY;
 
-        const dx = endX - pageSwipeStartX;
-        const dy = endY - pageSwipeStartY;
+        const dx = endX - swipeStartX;
+        const dy = endY - swipeStartY;
 
-        pageSwipeStartX = null;
-        pageSwipeStartY = null;
+        swipeStartX = null;
+        swipeStartY = null;
 
         if (
           Math.abs(dx) < 90 ||
@@ -3146,110 +1985,59 @@
           return;
         }
 
-        if (dx > 0) {
-          window.location.href = "brand.html";
-        } else {
-          window.location.href = "alliance.html";
+        if (dx < 0) {
+          window.location.href = "about.html";
         }
       },
       { passive: true }
     );
 
-    const revealItems =
-      document.querySelectorAll(".reveal");
-
-    const revealObserver =
-      new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          threshold: 0.14
-        }
-      );
-
-    revealItems.forEach((item) => {
-      revealObserver.observe(item);
-    });
-
     function openModingStore(event) {
       if (event) event.preventDefault();
 
-      const userAgent =
-        navigator.userAgent || navigator.vendor || window.opera;
+      const ua =
+        navigator.userAgent ||
+        navigator.vendor ||
+        window.opera ||
+        "";
 
-      const isAndroid =
-        /android/i.test(userAgent);
+      const isAndroid = /android/i.test(ua);
 
       const isIOS =
-        /iPad|iPhone|iPod/.test(userAgent) ||
-        (navigator.platform === "MacIntel" &&
-          navigator.maxTouchPoints > 1);
+        /iPad|iPhone|iPod/i.test(ua) ||
+        (
+          navigator.platform === "MacIntel" &&
+          navigator.maxTouchPoints > 1
+        );
 
       if (isAndroid) {
         window.location.href =
           "https://play.google.com/store/apps/details?id=com.moding.application";
-        return;
+        return false;
       }
 
       if (isIOS) {
         window.location.href =
           "https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982";
-        return;
+        return false;
       }
 
       window.location.href = "/download.html";
+      return false;
     }
 
-    document.addEventListener(
-      "contextmenu",
-      function (e) {
-        if (!e.target.closest("input, textarea, a")) {
-          e.preventDefault();
-        }
+    /* Copy / drag protection */
+    document.addEventListener("contextmenu", (event) => {
+      if (!event.target.closest("input, textarea, a, button")) {
+        event.preventDefault();
       }
-    );
+    });
 
-    document.addEventListener(
-      "dragstart",
-      function (e) {
-        if (!e.target.closest("input, textarea")) {
-          e.preventDefault();
-        }
+    document.addEventListener("dragstart", (event) => {
+      if (!event.target.closest("input, textarea")) {
+        event.preventDefault();
       }
-    );
-
-    document.addEventListener(
-      "keydown",
-      function (e) {
-        const key = e.key.toLowerCase();
-
-        if (
-          (e.ctrlKey || e.metaKey) &&
-          !e.target.closest("input, textarea")
-        ) {
-          if (
-            ["c", "x", "v", "s", "u", "p", "a"].includes(key)
-          ) {
-            e.preventDefault();
-          }
-        }
-      }
-    );
-
-    document.addEventListener(
-      "copy",
-      function (e) {
-        if (!e.target.closest("input, textarea")) {
-          e.preventDefault();
-        }
-      }
-    );
-</script>
+    });
+  </script>
 </body>
 </html>
