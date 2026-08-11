@@ -374,27 +374,86 @@
       overflow: visible;
     }
 
-    .hero-orbit {
-      stroke-dasharray: 10 14;
-      animation: orbitMove 5.8s linear infinite;
-    }
-
-    @keyframes orbitMove {
-      to { stroke-dashoffset: -48; }
-    }
-
-    .hero-float {
+    .worker,
+    .mix-bowl,
+    .pack-item,
+    .moding-node,
+    .store-scene {
       transform-box: fill-box;
       transform-origin: center;
-      animation: heroFloat 4.6s ease-in-out infinite;
     }
 
-    .hero-float.delay1 { animation-delay: .45s; }
-    .hero-float.delay2 { animation-delay: .9s; }
+    .worker-a {
+      animation: workerBreath 4.4s ease-in-out infinite;
+    }
 
-    @keyframes heroFloat {
+    .worker-b {
+      animation: workerBreath 4.6s .3s ease-in-out infinite;
+    }
+
+    @keyframes workerBreath {
       0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-7px); }
+      50% { transform: translateY(-3px); }
+    }
+
+    .mix-arm {
+      transform-box: fill-box;
+      transform-origin: 151px 226px;
+      animation: mixAction 2.4s ease-in-out infinite;
+    }
+
+    @keyframes mixAction {
+      0%,100% { transform: rotate(-5deg); }
+      50% { transform: rotate(8deg); }
+    }
+
+    .mix-bowl {
+      animation: bowlReact 2.4s ease-in-out infinite;
+    }
+
+    @keyframes bowlReact {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(2px); }
+    }
+
+    .pack-item {
+      animation: packPop 3.6s .25s ease-in-out infinite;
+    }
+
+    @keyframes packPop {
+      0%,100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-5px) rotate(1deg); }
+    }
+
+    .lift-box {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: boxLift 3.8s ease-in-out infinite;
+    }
+
+    @keyframes boxLift {
+      0%,18%,100% { transform: translateY(8px); }
+      42%,62% { transform: translateY(-18px); }
+      82% { transform: translateY(6px); }
+    }
+
+    .moding-node {
+      animation: modingPulse 3.2s ease-in-out infinite;
+    }
+
+    @keyframes modingPulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.035); }
+    }
+
+    .store-scene {
+      animation: storeReact 4.8s ease-in-out infinite;
+    }
+
+    @keyframes storeReact {
+      0%,70%,100% { transform: scale(1); }
+      78% { transform: scale(1.03); }
+      86% { transform: scale(1); }
     }
 
     /* =========================================================
@@ -1032,8 +1091,14 @@
         scroll-behavior: auto;
       }
 
-      .hero-orbit,
-      .hero-float,
+      .worker-a,
+      .worker-b,
+      .mix-arm,
+      .mix-bowl,
+      .pack-item,
+      .lift-box,
+      .moding-node,
+      .store-scene,
       .flow-dot,
       .who-center-badge::after {
         animation: none !important;
@@ -1131,66 +1196,171 @@
           </h1>
 
           <p class="hero-desc">
-            식품을 찾는 일부터 주문하는 방식까지.<br>
-            외식업 현장에서 반복되는 불편을 조금 더 단순하게 바꾸는 것에서 모딩은 시작했습니다.
+            식품이 만들어지고, 포장되고, 가게에 도착하는 과정까지.<br>
+            현장에서 반복되는 불편을 조금 더 단순하게 바꾸는 것에서 모딩은 시작했습니다.
           </p>
         </div>
 
         <div class="hero-art reveal" aria-hidden="true">
-          <svg viewBox="0 0 700 560">
+          <svg viewBox="0 0 760 560">
 
-            <!-- 연결 궤적 -->
-            <path
-              class="hero-orbit"
-              d="M115 310 C215 155 340 150 350 280 C360 410 485 406 585 260"
-              fill="none"
-              stroke="rgba(255,255,255,.70)"
-              stroke-width="6"
-              stroke-linecap="round"
-            />
-
-            <!-- 식품 -->
-            <g class="hero-float">
-              <circle cx="115" cy="310" r="58" fill="none" stroke="#fff" stroke-width="7"/>
-              <path
-                d="M81 310 C99 294 126 295 140 309 C126 324 99 325 81 310 Z"
-                fill="none"
-                stroke="#FF8C00"
-                stroke-width="5"
-              />
-              <path
-                d="M81 310 L68 301 L69 318 Z"
-                fill="none"
-                stroke="#FF8C00"
-                stroke-width="5"
-                stroke-linejoin="round"
-              />
-            </g>
-
-            <!-- MODING 중심 -->
-            <g class="hero-float delay1">
-              <circle cx="350" cy="280" r="80" fill="none" stroke="#fff" stroke-width="8"/>
-              <circle cx="350" cy="280" r="18" fill="#FF8C00"/>
-              <path d="M319 280 H381 M350 249 V311"
+            <!-- 제조 작업대 -->
+            <g class="factory-table">
+              <path d="M78 332 H300"
                     fill="none"
                     stroke="#fff"
-                    stroke-width="8"
+                    stroke-width="7"
+                    stroke-linecap="round"/>
+              <path d="M102 332 V424 M276 332 V424"
+                    fill="none"
+                    stroke="rgba(255,255,255,.72)"
+                    stroke-width="7"
                     stroke-linecap="round"/>
             </g>
 
-            <!-- 가게 -->
-            <g class="hero-float delay2">
-              <circle cx="585" cy="260" r="58" fill="none" stroke="#fff" stroke-width="7"/>
-              <path d="M558 268 H612 V304 H558 Z"
-                    fill="none"
-                    stroke="#FF8C00"
-                    stroke-width="5"/>
-              <path d="M552 268 L562 245 H608 L618 268"
-                    fill="none"
-                    stroke="#FF8C00"
-                    stroke-width="5"
-                    stroke-linejoin="round"/>
+            <!-- 사람 A : 제조/가공 -->
+            <g class="worker worker-a">
+              <!-- 머리/위생모 -->
+              <circle cx="150" cy="172" r="28"
+                      fill="none" stroke="#fff" stroke-width="7"/>
+              <path d="M124 164 Q150 138 178 164"
+                    fill="none" stroke="#FF8C00" stroke-width="8" stroke-linecap="round"/>
+
+              <!-- 몸 -->
+              <path d="M150 202 V294"
+                    fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+              <path d="M150 226 L112 262"
+                    fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+
+              <!-- 오른팔 + 조리도구 -->
+              <g class="mix-arm">
+                <path d="M151 226 L201 258"
+                      fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+                <path d="M201 258 L232 286"
+                      fill="none" stroke="#FF8C00" stroke-width="6" stroke-linecap="round"/>
+              </g>
+
+              <!-- 다리 -->
+              <path d="M150 294 L126 332 M150 294 L177 332"
+                    fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
             </g>
+
+            <!-- 냄비/가공용기 -->
+            <g class="mix-bowl">
+              <path d="M196 290 H266"
+                    fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+              <path d="M204 290 Q210 324 232 326 Q254 324 260 290"
+                    fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+              <path d="M214 280 Q232 267 250 280"
+                    fill="none" stroke="#FF8C00" stroke-width="5" stroke-linecap="round"/>
+            </g>
+
+            <!-- 완성된 식품 포장 -->
+            <g class="pack-item">
+              <rect x="307" y="248" width="92" height="68" rx="12"
+                    fill="none" stroke="#fff" stroke-width="7"/>
+              <path d="M322 265 H384"
+                    fill="none" stroke="#FF8C00" stroke-width="6" stroke-linecap="round"/>
+              <path d="M334 291 C348 279 369 280 381 291 C369 303 348 304 334 291 Z"
+                    fill="none" stroke="#fff" stroke-width="4"/>
+            </g>
+
+            <!-- 사람 B : 박스 이동 -->
+            <g class="worker worker-b">
+              <circle cx="360" cy="151" r="25"
+                      fill="none" stroke="#fff" stroke-width="7"/>
+              <path d="M337 144 Q360 121 384 144"
+                    fill="none" stroke="#FF8C00" stroke-width="7" stroke-linecap="round"/>
+              <path d="M360 178 V270"
+                    fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+              <path d="M360 204 L326 233 M360 204 L397 232"
+                    fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+              <path d="M360 270 L338 325 M360 270 L386 325"
+                    fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+
+              <g class="lift-box">
+                <path d="M305 230 L349 211 L393 230 L349 250 Z"
+                      fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+                <path d="M305 230 V276 L349 297 V250"
+                      fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+                <path d="M393 230 V276 L349 297"
+                      fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+                <path d="M349 211 V250"
+                      fill="none" stroke="#FF8C00" stroke-width="5" stroke-linecap="round"/>
+              </g>
+            </g>
+
+            <!-- MODING 연결점 -->
+            <g class="moding-node">
+              <circle cx="492" cy="268" r="54"
+                      fill="none" stroke="#fff" stroke-width="8"/>
+              <circle cx="492" cy="268" r="14" fill="#FF8C00"/>
+              <path d="M470 268 H514 M492 246 V290"
+                    fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+            </g>
+
+            <!-- 연결 경로 -->
+            <path id="aboutFlowPath"
+                  d="M405 270 C438 238 462 238 492 268 C528 305 560 306 598 268"
+                  fill="none"
+                  stroke="rgba(255,255,255,.68)"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-dasharray="10 14"/>
+
+            <!-- 이동 상품 -->
+            <g class="flow-package">
+              <rect x="-14" y="-12" width="28" height="24" rx="5" fill="#FF8C00"/>
+              <path d="M-10 -4 H10 M0 -12 V12"
+                    fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+              <animateMotion dur="4.8s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#aboutFlowPath"/>
+              </animateMotion>
+            </g>
+
+            <!-- 가게 -->
+            <g class="store-scene">
+              <path d="M602 255 H706 V344 H602 Z"
+                    fill="none" stroke="#fff" stroke-width="7"/>
+              <path d="M593 255 L611 217 H697 L715 255"
+                    fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+              <path d="M607 236 H701"
+                    fill="none" stroke="#FF8C00" stroke-width="12"
+                    stroke-dasharray="15 12"/>
+              <rect x="641" y="299" width="27" height="45" rx="4" fill="#FF8C00"/>
+
+              <!-- 사장님 실루엣 -->
+              <circle cx="684" cy="294" r="12"
+                      fill="none" stroke="#fff" stroke-width="5"/>
+              <path d="M684 307 V332"
+                    fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+            </g>
+
+            <!-- 하단 캡션 라인 -->
+            <path d="M85 448 H696"
+                  fill="none"
+                  stroke="rgba(255,255,255,.18)"
+                  stroke-width="2"/>
+
+            <text x="124" y="485"
+                  fill="rgba(255,255,255,.72)"
+                  font-size="17"
+                  font-weight="800">제조 · 가공</text>
+
+            <text x="325" y="485"
+                  fill="rgba(255,255,255,.72)"
+                  font-size="17"
+                  font-weight="800">포장 · 출고</text>
+
+            <text x="473" y="485"
+                  fill="#FF8C00"
+                  font-size="17"
+                  font-weight="900">MODING</text>
+
+            <text x="626" y="485"
+                  fill="rgba(255,255,255,.72)"
+                  font-size="17"
+                  font-weight="800">외식업</text>
 
           </svg>
         </div>
@@ -1346,7 +1516,7 @@
 
           <article class="who-side manufacturer reveal">
             <div>
-              <div class="who-label">FOR MANUFACTURER</div>
+              <div class="who-label">FOR FOOD MANUFACTURER</div>
 
               <h3>
                 식품<br>
