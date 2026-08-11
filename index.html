@@ -826,130 +826,87 @@
     }
 
     /* =========================================================
-       08. NEXT ARROW
+       08. BOTTOM NAVIGATION
+       INDEX: 중앙 = 다음 장면 / 우측 = ABOUT
+       흰색 원 + 주황색 SVG 화살표
        ========================================================= */
+    .scene-next,
+    .site-side-nav {
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      border: 1px solid rgba(255,255,255,.58);
+      border-radius: 50%;
+      background: rgba(255,255,255,.98);
+      box-shadow:
+        0 8px 24px rgba(0,0,0,.12),
+        inset 0 0 0 1px rgba(255,255,255,.45);
+      color: var(--moding-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+
+    .scene-next:hover,
+    .site-side-nav:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.16),
+        inset 0 0 0 1px rgba(255,255,255,.55);
+    }
+
+    .scene-next svg,
+    .site-side-nav svg {
+      width: 24px;
+      height: 24px;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .scene-next path,
+    .site-side-nav path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 3.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    /* 현재 INDEX 장면의 다음 화면 */
     .scene-next {
       position: absolute;
-      z-index: 20;
+      z-index: 40;
       left: 50%;
-      bottom: 17px;
-      width: 48px;
-      height: 38px;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      color: rgba(255,255,255,.94);
+      bottom: 18px;
       transform: translateX(-50%);
-      animation: nextArrowAlive 1.45s ease-in-out infinite;
+      animation: nextArrowAlive 1.5s ease-in-out infinite;
     }
 
-    .scene-next::before,
-    .scene-next::after {
-      content: "";
-      position: absolute;
-      top: 13px;
-      width: 20px;
-      height: 4px;
-      border-radius: 999px;
-      background: currentColor;
-    }
-
-    .scene-next::before {
-      right: 22px;
-      transform: rotate(42deg);
-      transform-origin: right center;
-    }
-
-    .scene-next::after {
-      left: 22px;
-      transform: rotate(-42deg);
-      transform-origin: left center;
+    .scene-next:hover {
+      transform: translate(-50%, -3px);
     }
 
     @keyframes nextArrowAlive {
       0%,100% { transform: translate(-50%,0); }
-      50% { transform: translate(-50%,10px); }
+      50% { transform: translate(-50%,6px); }
     }
 
-    /* =========================================================
-       09. PAGE INDICATOR (PC only)
-       ========================================================= */
-    .page-indicator {
-      position: fixed;
-      z-index: 900;
-      right: 82px;
-      top: 50%;
-      transform: translateY(-50%);
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* =========================================================
-       09-A. SITE SIDE NAV
-       INDEX → ABOUT
-       ========================================================= */
+    /* 다음 사이트 페이지 ABOUT */
     .site-side-nav {
       position: fixed;
       z-index: 910;
-      right: 14px;
-      top: 50%;
-      min-width: 48px;
-      height: 46px;
-      padding: 0 14px;
-      border: 1px solid rgba(35,139,34,.18);
-      border-radius: 999px;
-      background: rgba(255,255,255,.95);
-      box-shadow: 0 8px 28px rgba(20,50,20,.08);
-      color: var(--moding-green);
+      right: 18px;
+      bottom: 18px;
+      color: var(--moding-orange);
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .04em;
-      transform: translateY(-50%);
-      backdrop-filter: blur(7px);
-      transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        color .2s ease;
-    }
-
-    .site-side-nav:hover {
-      color: var(--moding-orange);
-      transform: translate(3px, -50%);
-      box-shadow: 0 12px 34px rgba(20,50,20,.12);
-    }
-
-    .site-side-nav .side-arrow {
-      color: var(--moding-orange);
-      font-size: 22px;
-      line-height: 1;
-      font-weight: 950;
-    }
-
-    .page-indicator button {
-      width: 7px;
-      height: 7px;
-      padding: 0;
-      border: 0;
-      border-radius: 999px;
-      background: rgba(255,255,255,.38);
-      cursor: pointer;
-      transition:
-        height .24s ease,
-        background .24s ease;
-    }
-
-    .page-indicator button.is-active {
-      height: 24px;
-      background: var(--moding-orange);
     }
 
     /* =========================================================
@@ -1061,27 +1018,29 @@
         font-size: 16px;
       }
 
-      .page-indicator {
-        display: none;
+      .scene-next,
+      .site-side-nav {
+        width: 42px;
+        height: 42px;
+      }
+
+      .scene-next {
+        bottom: 12px;
       }
 
       .site-side-nav {
-        top: auto;
         right: 12px;
         bottom: 12px;
-        min-width: 42px;
-        height: 42px;
-        padding: 0 10px;
-        transform: none;
-        background: rgba(255,255,255,.96);
+      }
+
+      .scene-next svg,
+      .site-side-nav svg {
+        width: 21px;
+        height: 21px;
       }
 
       .site-side-nav:hover {
         transform: none;
-      }
-
-      .site-side-nav .side-label {
-        display: none;
       }
 
       /* 5P 모바일 전용 */
@@ -1298,7 +1257,14 @@
         animation: none !important;
       }
     }
-  </style>
+  
+    @media (prefers-reduced-motion: reduce) {
+      .scene-next {
+        animation: none !important;
+      }
+    }
+
+</style>
 </head>
 
 <body>
@@ -1377,16 +1343,17 @@
   </div>
 
   <!-- =======================================================
-       SITE SIDE NAV
+       BOTTOM SITE NAV
        INDEX → ABOUT
        ======================================================= -->
   <a
     href="about.html"
     class="site-side-nav"
-    aria-label="다음 페이지: About"
+    aria-label="다음 사이트 페이지: About"
   >
-    <span class="side-label">ABOUT</span>
-    <span class="side-arrow" aria-hidden="true">›</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8 5 L15 12 L8 19"/>
+    </svg>
   </a>
 
   <!-- =======================================================
@@ -1832,7 +1799,11 @@
         class="scene-next"
         data-next="page2"
         aria-label="다음 페이지로 이동"
-      ></button>
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
+        </svg>
+      </button>
     </section>
 
     <!-- =====================================================
@@ -1968,7 +1939,11 @@
         class="scene-next"
         data-next="page3"
         aria-label="다음 페이지로 이동"
-      ></button>
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
+        </svg>
+      </button>
     </section>
 
     <!-- =====================================================
@@ -2100,7 +2075,11 @@
         class="scene-next"
         data-next="page4"
         aria-label="다음 페이지로 이동"
-      ></button>
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
+        </svg>
+      </button>
     </section>
 
     <!-- =====================================================
@@ -2229,7 +2208,11 @@
         class="scene-next"
         data-next="page5"
         aria-label="다음 페이지로 이동"
-      ></button>
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8 L12 15 L19 8"/>
+        </svg>
+      </button>
     </section>
 
     <!-- =====================================================
@@ -2297,17 +2280,6 @@
     </section>
 
   </main>
-
-  <!-- =======================================================
-       PAGE INDICATOR · PC ONLY
-       ======================================================= -->
-  <nav class="page-indicator" id="pageIndicator" aria-label="페이지 이동">
-    <button type="button" class="is-active" data-target="page1" aria-label="1페이지로 이동"></button>
-    <button type="button" data-target="page2" aria-label="2페이지로 이동"></button>
-    <button type="button" data-target="page3" aria-label="3페이지로 이동"></button>
-    <button type="button" data-target="page4" aria-label="4페이지로 이동"></button>
-    <button type="button" data-target="page5" aria-label="5페이지로 이동"></button>
-  </nav>
 
   <script>
     /* =========================================================
@@ -2829,12 +2801,7 @@
         document.querySelectorAll(".scene")
       );
 
-    const indicatorButtons =
-      Array.from(
-        document.querySelectorAll(
-          ".page-indicator button[data-target]"
-        )
-      );
+    const indicatorButtons = [];
 
     let activeSceneId = "page1";
 
@@ -2926,7 +2893,7 @@
     }
 
     /* =========================================================
-       NEXT / INDICATOR CLICK
+       NEXT SCENE CLICK
        ========================================================= */
     function scrollToScene(id) {
       const target =
@@ -2943,17 +2910,6 @@
         block: "start"
       });
     }
-
-    indicatorButtons.forEach((button) => {
-      button.addEventListener(
-        "click",
-        () => {
-          scrollToScene(
-            button.dataset.target
-          );
-        }
-      );
-    });
 
     document
       .querySelectorAll(
