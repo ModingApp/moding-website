@@ -1993,6 +1993,40 @@
         padding-bottom: 10px;
       }
     }
+
+    /* =========================================================
+       SERVICES 2P SEARCH MOTION FINAL FIX
+       기존 CSS 하드코딩 이동 폐기 / JS 실제 중심 좌표 사용
+       ========================================================= */
+    #serviceDiscovery .search-lens {
+      animation: none !important;
+      transform-box: fill-box;
+      transform-origin: center;
+      will-change: transform;
+    }
+
+    #serviceDiscovery .search-focus {
+      animation: none !important;
+      transform-box: fill-box;
+      transform-origin: center;
+      will-change: transform;
+      transition:
+        transform .48s cubic-bezier(.22,1.35,.36,1),
+        filter .48s ease,
+        opacity .28s ease;
+    }
+
+    #serviceDiscovery .search-focus.is-focus {
+      transform: translateY(-4px) scale(1.13);
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,.10));
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #serviceDiscovery .search-focus {
+        transition: none !important;
+      }
+    }
+
 </style>
 </head>
 
@@ -2197,7 +2231,7 @@
         <div class="service-visual reveal" aria-hidden="true">
           <svg viewBox="0 0 560 440">
 
-            <g class="search-focus">
+            <g id="serviceSearchFish" class="search-focus">
               <path
                 d="M112 182 C149 152 194 153 226 180 C193 209 147 211 112 182 Z"
                 fill="none" stroke="#238B22" stroke-width="7"
@@ -2209,7 +2243,7 @@
               <circle cx="193" cy="178" r="6" fill="#FF8C00"/>
             </g>
 
-            <g class="search-focus delay1">
+            <g id="serviceSearchMeat" class="search-focus delay1">
               <path
                 d="M305 128
                    C323 106 358 108 371 128
@@ -2226,7 +2260,7 @@
               />
             </g>
 
-            <g class="search-focus delay2">
+            <g id="serviceSearchSauce" class="search-focus delay2">
               <path
                 d="M426 214 L508 214 L501 324 Q470 340 438 324 Z"
                 fill="none" stroke="#238B22" stroke-width="7" stroke-linejoin="round"
@@ -2237,7 +2271,7 @@
               />
             </g>
 
-            <g class="search-focus delay3">
+            <g id="serviceSearchShell" class="search-focus delay3">
               <path
                 d="M178 328
                    C189 294 224 284 251 301
@@ -2252,7 +2286,7 @@
               />
             </g>
 
-            <g class="search-lens">
+            <g id="serviceSearchLens" class="search-lens">
               <circle cx="220" cy="222" r="112"
                       fill="none" stroke="#fff" stroke-width="11"/>
               <circle cx="220" cy="222" r="112"
@@ -2709,6 +2743,237 @@
         }
       }
     );
+
+    /* =========================================================
+       2P SEARCH MOTION FINAL
+       생선 → 육가공 → 소스 → 조개
+       실제 SVG 중심 좌표를 getBBox()로 계산
+       ========================================================= */
+    const serviceSearchLens =
+      document.getElementById("serviceSearchLens");
+
+    const serviceSearchTargetIds = [
+      "serviceSearchFish",
+      "serviceSearchMeat",
+      "serviceSearchSauce",
+      "serviceSearchShell"
+    ];
+
+    const SERVICE_LENS_BASE_X = 220;
+    const SERVICE_LENS_BASE_Y = 222;
+
+    let serviceSearchTargets = [];
+    let serviceSearchTimer = null;
+    let serviceSearchFrame = null;
+    let serviceSearchIndex = 0;
+    let serviceLensOffsetX = 0;
+    let serviceLensOffsetY = 0;
+
+    function refreshServiceSearchTargets() {
+      serviceSearchTargets = serviceSearchTargetIds
+        .map((id) => {
+          const node = document.getElementById(id);
+          if (!node) return null;
+
+          const box = node.getBBox();
+
+          return {
+            id,
+            x: box.x + box.width / 2,
+            y: box.y + box.height / 2
+          };
+        })
+        .filter(Boolean);
+    }
+
+    function clearServiceSearchFocus() {
+      serviceSearchTargetIds.forEach((id) => {
+        const node = document.getElementById(id);
+        if (node) node.classList.remove("is-focus");
+      });
+    }
+
+    function focusServiceSearchItem(index) {
+      clearServiceSearchFocus();
+
+      const target = serviceSearchTargets[index];
+      if (!target) return;
+
+      const node = document.getElementById(target.id);
+      if (node) node.classList.add("is-focus");
+    }
+
+    function setServiceLensOffset(x, y) {
+      if (!serviceSearchLens) return;
+
+      serviceSearchLens.setAttribute(
+        "transform",
+        `translate(${x.toFixed(2)} ${y.toFixed(2)})`
+      );
+    }
+
+    function serviceSearchEase(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function moveServiceLensTo(index, immediate = false) {
+      if (
+        !serviceSearchLens ||
+        !serviceSearchTargets.length ||
+        !serviceSearchTargets[index]
+      ) {
+        return;
+      }
+
+      const target = serviceSearchTargets[index];
+
+      const targetOffsetX =
+        target.x - SERVICE_LENS_BASE_X;
+
+      const targetOffsetY =
+        target.y - SERVICE_LENS_BASE_Y;
+
+      if (serviceSearchFrame) {
+        cancelAnimationFrame(serviceSearchFrame);
+        serviceSearchFrame = null;
+      }
+
+      if (immediate) {
+        serviceLensOffsetX = targetOffsetX;
+        serviceLensOffsetY = targetOffsetY;
+        setServiceLensOffset(
+          serviceLensOffsetX,
+          serviceLensOffsetY
+        );
+        focusServiceSearchItem(index);
+        return;
+      }
+
+      clearServiceSearchFocus();
+
+      const startX = serviceLensOffsetX;
+      const startY = serviceLensOffsetY;
+      const controlLift = index % 2 === 0 ? -28 : 24;
+      const duration = 820;
+      const startTime = performance.now();
+
+      function frame(now) {
+        const raw =
+          Math.min(1, (now - startTime) / duration);
+
+        const t = serviceSearchEase(raw);
+
+        const curve =
+          Math.sin(Math.PI * raw) * controlLift;
+
+        serviceLensOffsetX =
+          startX + (targetOffsetX - startX) * t;
+
+        serviceLensOffsetY =
+          startY +
+          (targetOffsetY - startY) * t +
+          curve;
+
+        setServiceLensOffset(
+          serviceLensOffsetX,
+          serviceLensOffsetY
+        );
+
+        if (raw < 1) {
+          serviceSearchFrame =
+            requestAnimationFrame(frame);
+        } else {
+          serviceLensOffsetX = targetOffsetX;
+          serviceLensOffsetY = targetOffsetY;
+
+          setServiceLensOffset(
+            serviceLensOffsetX,
+            serviceLensOffsetY
+          );
+
+          focusServiceSearchItem(index);
+          serviceSearchFrame = null;
+        }
+      }
+
+      serviceSearchFrame =
+        requestAnimationFrame(frame);
+    }
+
+    function stopServiceSearchMotion() {
+      if (serviceSearchTimer) {
+        clearTimeout(serviceSearchTimer);
+        serviceSearchTimer = null;
+      }
+
+      if (serviceSearchFrame) {
+        cancelAnimationFrame(serviceSearchFrame);
+        serviceSearchFrame = null;
+      }
+
+      clearServiceSearchFocus();
+    }
+
+    function runServiceSearchMotion() {
+      refreshServiceSearchTargets();
+
+      if (
+        !serviceSearchLens ||
+        !serviceSearchTargets.length
+      ) {
+        return;
+      }
+
+      if (
+        window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches
+      ) {
+        moveServiceLensTo(0, true);
+        return;
+      }
+
+      stopServiceSearchMotion();
+
+      serviceSearchIndex = 0;
+      moveServiceLensTo(serviceSearchIndex, true);
+
+      function nextServiceSearchTarget() {
+        serviceSearchTimer = setTimeout(() => {
+          serviceSearchIndex =
+            (serviceSearchIndex + 1) %
+            serviceSearchTargets.length;
+
+          moveServiceLensTo(serviceSearchIndex);
+          nextServiceSearchTarget();
+        }, 1750);
+      }
+
+      nextServiceSearchTarget();
+    }
+
+    requestAnimationFrame(() => {
+      runServiceSearchMotion();
+    });
+
+    window.addEventListener("resize", () => {
+      window.clearTimeout(
+        window.__serviceSearchResizeTimer
+      );
+
+      window.__serviceSearchResizeTimer =
+        window.setTimeout(() => {
+          refreshServiceSearchTargets();
+
+          if (serviceSearchTargets.length) {
+            moveServiceLensTo(
+              serviceSearchIndex,
+              true
+            );
+          }
+        }, 120);
+    });
+
 </script>
 </body>
 </html>
