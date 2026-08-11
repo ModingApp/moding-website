@@ -673,7 +673,7 @@
     .phone {
       position: relative;
       width: clamp(250px, 21vw, 325px);
-      aspect-ratio: .58;
+      aspect-ratio: .54;
       padding: 12px;
       border: 3px solid rgba(255,255,255,.9);
       border-radius: 44px;
@@ -1041,7 +1041,7 @@
 
       .phone {
         width: min(44vw, 210px);
-        aspect-ratio: .58;
+        aspect-ratio: .54;
       }
 
       .final-copy h2 {
@@ -1525,89 +1525,99 @@
           <div class="hero-art" aria-hidden="true">
             <svg viewBox="0 0 720 520" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-              <!-- 식품 4종 -->
-              <path
-                d="M121 215 C163 181 219 185 251 212 C219 240 163 244 121 215 Z"
-                fill="none"
-                stroke="#fff"
-                stroke-width="7"
-              />
-              <path
-                d="M121 215 L86 191 L90 231 Z"
-                fill="none"
-                stroke="#fff"
-                stroke-width="7"
-                stroke-linejoin="round"
-              />
-              <circle cx="219" cy="210" r="5" fill="#FF8C00"/>
+              <!-- 식품 4종: HERO B도 돋보기가 순회할 수 있도록 그룹화 -->
+              <g id="heroSearchFish" class="search-item">
+                <path
+                  d="M121 215 C163 181 219 185 251 212 C219 240 163 244 121 215 Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="7"
+                />
+                <path
+                  d="M121 215 L86 191 L90 231 Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="7"
+                  stroke-linejoin="round"
+                />
+                <circle class="focus-accent" cx="219" cy="210" r="5" fill="#FF8C00"/>
+              </g>
 
-              <path
-                d="M302 159
-                   C320 138 354 140 365 160
-                   C383 154 397 170 394 187
-                   C408 201 395 225 373 226
-                   C359 243 329 243 315 226
-                   C295 226 287 202 300 188
-                   C293 174 294 165 302 159 Z"
-                fill="none"
-                stroke="#fff"
-                stroke-width="7"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M315 198 Q344 179 376 198"
-                class="svg-line"
-                stroke="#FF8C00"
-                stroke-width="6"
-              />
+              <g id="heroSearchMeat" class="search-item">
+                <path
+                  d="M302 159
+                     C320 138 354 140 365 160
+                     C383 154 397 170 394 187
+                     C408 201 395 225 373 226
+                     C359 243 329 243 315 226
+                     C295 226 287 202 300 188
+                     C293 174 294 165 302 159 Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="7"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M315 198 Q344 179 376 198"
+                  class="svg-line focus-accent"
+                  stroke="#FF8C00"
+                  stroke-width="6"
+                />
+              </g>
 
-              <path
-                d="M478 213 L568 213 L559 337 Q525 355 491 337 Z"
-                fill="none"
-                stroke="#fff"
-                stroke-width="7"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M496 239 H551"
-                class="svg-line"
-                stroke="#FF8C00"
-                stroke-width="7"
-              />
+              <g id="heroSearchSauce" class="search-item">
+                <path
+                  d="M478 213 L568 213 L559 337 Q525 355 491 337 Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="7"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M496 239 H551"
+                  class="svg-line focus-accent"
+                  stroke="#FF8C00"
+                  stroke-width="7"
+                />
+              </g>
 
-              <path
-                d="M166 343
-                   C177 309 214 298 242 315
-                   C266 331 264 369 236 386
-                   C205 399 168 377 166 343 Z"
-                fill="none"
-                stroke="#fff"
-                stroke-width="6"
-              />
-              <path
-                d="M179 331 L229 381
-                   M197 313 L242 365"
-                class="svg-line"
-                stroke="#FF8C00"
-                stroke-width="4"
-              />
+              <g id="heroSearchShell" class="search-item">
+                <path
+                  d="M166 343
+                     C177 309 214 298 242 315
+                     C266 331 264 369 236 386
+                     C205 399 168 377 166 343 Z"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="6"
+                />
+                <path
+                  d="M179 331 L229 381
+                     M197 313 L242 365"
+                  class="svg-line focus-accent"
+                  stroke="#FF8C00"
+                  stroke-width="4"
+                />
+              </g>
 
-              <!-- 돋보기 -->
-              <circle
-                cx="360"
-                cy="287"
-                r="142"
-                fill="none"
-                stroke="#fff"
-                stroke-width="10"
-              />
-              <path
-                d="M462 391 L560 489"
-                class="svg-line"
-                stroke="#fff"
-                stroke-width="19"
-              />
-              <circle cx="360" cy="287" r="9" fill="#FF8C00"/>
+              <!-- 움직이는 돋보기: HERO B -->
+              <g id="heroSearchLens" class="search-lens" transform="translate(175 215)">
+                <circle
+                  cx="0"
+                  cy="0"
+                  r="126"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="10"
+                />
+                <path
+                  d="M90 92 L165 167"
+                  class="svg-line"
+                  stroke="#fff"
+                  stroke-width="19"
+                />
+                <circle cx="0" cy="0" r="7" fill="#FF8C00"/>
+              </g>
 
             </svg>
           </div>
@@ -2538,6 +2548,199 @@
     }
 
     /* =========================================================
+       1P HERO B SEARCH MOTION
+       - 랜덤 Hero B가 선택됐을 때만 실행
+       - 생선 → 육가공 → 소스 → 조개 순회
+       ========================================================= */
+    const heroSearchLens =
+      document.getElementById("heroSearchLens");
+
+    const heroSearchTargets = [
+      { id: "heroSearchFish",  x: 175, y: 215 },
+      { id: "heroSearchMeat",  x: 344, y: 188 },
+      { id: "heroSearchSauce", x: 524, y: 277 },
+      { id: "heroSearchShell", x: 205, y: 350 }
+    ];
+
+    let heroSearchTimer = null;
+    let heroSearchFrame = null;
+    let heroSearchIndex = 0;
+    let heroSearchLensX = heroSearchTargets[0].x;
+    let heroSearchLensY = heroSearchTargets[0].y;
+
+    function isHeroBSelected() {
+      const heroB =
+        document.querySelector('.hero-variant[data-hero="1"]');
+
+      return Boolean(
+        heroB &&
+        heroB.classList.contains("is-selected")
+      );
+    }
+
+    function clearHeroSearchFocus() {
+      heroSearchTargets.forEach((item) => {
+        const node = document.getElementById(item.id);
+        if (node) node.classList.remove("is-focus");
+      });
+    }
+
+    function focusHeroSearchItem(index) {
+      clearHeroSearchFocus();
+      const node =
+        document.getElementById(
+          heroSearchTargets[index].id
+        );
+
+      if (node) node.classList.add("is-focus");
+    }
+
+    function setHeroSearchLensPosition(x, y) {
+      if (!heroSearchLens) return;
+
+      heroSearchLens.setAttribute(
+        "transform",
+        `translate(${x.toFixed(2)} ${y.toFixed(2)})`
+      );
+    }
+
+    function moveHeroSearchLensTo(index, immediate = false) {
+      if (!heroSearchLens) return;
+
+      const target = heroSearchTargets[index];
+
+      if (heroSearchFrame) {
+        cancelAnimationFrame(heroSearchFrame);
+        heroSearchFrame = null;
+      }
+
+      if (immediate) {
+        heroSearchLensX = target.x;
+        heroSearchLensY = target.y;
+
+        setHeroSearchLensPosition(
+          heroSearchLensX,
+          heroSearchLensY
+        );
+
+        focusHeroSearchItem(index);
+        return;
+      }
+
+      clearHeroSearchFocus();
+
+      const startX = heroSearchLensX;
+      const startY = heroSearchLensY;
+      const controlLift = index % 2 === 0 ? -26 : 22;
+      const duration = 820;
+      const startTime = performance.now();
+
+      function frame(now) {
+        const raw =
+          Math.min(1, (now - startTime) / duration);
+
+        const t = easeSearch(raw);
+        const curve =
+          Math.sin(Math.PI * raw) * controlLift;
+
+        heroSearchLensX =
+          startX + (target.x - startX) * t;
+
+        heroSearchLensY =
+          startY +
+          (target.y - startY) * t +
+          curve;
+
+        setHeroSearchLensPosition(
+          heroSearchLensX,
+          heroSearchLensY
+        );
+
+        if (raw < 1) {
+          heroSearchFrame =
+            requestAnimationFrame(frame);
+        } else {
+          heroSearchLensX = target.x;
+          heroSearchLensY = target.y;
+
+          setHeroSearchLensPosition(
+            heroSearchLensX,
+            heroSearchLensY
+          );
+
+          focusHeroSearchItem(index);
+          heroSearchFrame = null;
+        }
+      }
+
+      heroSearchFrame =
+        requestAnimationFrame(frame);
+    }
+
+    function stopHeroSearchMotion() {
+      if (heroSearchTimer) {
+        clearTimeout(heroSearchTimer);
+        heroSearchTimer = null;
+      }
+
+      if (heroSearchFrame) {
+        cancelAnimationFrame(heroSearchFrame);
+        heroSearchFrame = null;
+      }
+
+      clearHeroSearchFocus();
+    }
+
+    function runHeroSearchMotion() {
+      if (
+        !heroSearchLens ||
+        !isHeroBSelected()
+      ) {
+        stopHeroSearchMotion();
+        return;
+      }
+
+      if (
+        window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches
+      ) {
+        moveHeroSearchLensTo(0, true);
+        return;
+      }
+
+      stopHeroSearchMotion();
+      heroSearchIndex = 0;
+
+      moveHeroSearchLensTo(
+        heroSearchIndex,
+        true
+      );
+
+      function next() {
+        heroSearchTimer =
+          setTimeout(() => {
+            if (!isHeroBSelected()) {
+              stopHeroSearchMotion();
+              return;
+            }
+
+            heroSearchIndex =
+              (heroSearchIndex + 1) %
+              heroSearchTargets.length;
+
+            moveHeroSearchLensTo(
+              heroSearchIndex
+            );
+
+            next();
+          }, 1750);
+      }
+
+      next();
+    }
+
+    /* =========================================================
        SCENE / INDICATOR
        ========================================================= */
     const snapRoot =
@@ -2571,10 +2774,18 @@
       if (sceneChanged) {
         activeSceneId = scene.id;
 
+        stopHeroSearchMotion();
+        stopSearchMotion();
+
+        if (
+          scene.id === "page1" &&
+          isHeroBSelected()
+        ) {
+          runHeroSearchMotion();
+        }
+
         if (scene.id === "page2") {
           runSearchMotion();
-        } else {
-          stopSearchMotion();
         }
       }
 
@@ -2630,6 +2841,11 @@
     scenes.forEach((scene) => {
       observer.observe(scene);
     });
+
+    /* 첫 로드가 1P Hero B라면 즉시 돋보기 모션 시작 */
+    if (isHeroBSelected()) {
+      runHeroSearchMotion();
+    }
 
     /* =========================================================
        NEXT / INDICATOR CLICK
