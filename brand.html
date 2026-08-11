@@ -753,12 +753,6 @@
       50% { transform: translate(-50%,9px); }
     }
 
-    .brand-hero,
-    .name-section,
-    .logo-section,
-    .color-section {
-      scroll-margin-top: calc(var(--header-height) + 1px);
-    }
 
     /* =========================================================
        SITE SIDE NAV
@@ -1226,6 +1220,7 @@
       overflow-y: auto;
       overflow-x: hidden;
       scroll-snap-type: y mandatory;
+      scroll-padding: 0;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior-y: contain;
@@ -1243,6 +1238,7 @@
       overflow: hidden;
       scroll-snap-align: start;
       scroll-snap-stop: always;
+      scroll-margin: 0 !important;
     }
 
     .brand-hero {
@@ -2129,18 +2125,55 @@
 
     syncHeaderHeight();
 
+    let resizeSnapTimer = null;
+
+    function resnapCurrentBrandScene() {
+      if (!snapRoot) return;
+
+      window.clearTimeout(resizeSnapTimer);
+
+      resizeSnapTimer = window.setTimeout(() => {
+        const sceneHeight = snapRoot.clientHeight;
+        if (!sceneHeight) return;
+
+        const currentIndex =
+          Math.round(snapRoot.scrollTop / sceneHeight);
+
+        const safeIndex =
+          Math.max(0, Math.min(currentIndex, 4));
+
+        snapRoot.scrollTo({
+          top: safeIndex * sceneHeight,
+          behavior: "auto"
+        });
+      }, 80);
+    }
+
     if ("ResizeObserver" in window && siteHeader) {
       const headerResizeObserver =
-        new ResizeObserver(syncHeaderHeight);
+        new ResizeObserver(() => {
+          syncHeaderHeight();
+          resnapCurrentBrandScene();
+        });
 
       headerResizeObserver.observe(siteHeader);
     }
 
-    window.addEventListener("resize", syncHeaderHeight);
-    window.addEventListener("orientationchange", syncHeaderHeight);
+    window.addEventListener("resize", () => {
+      syncHeaderHeight();
+      resnapCurrentBrandScene();
+    });
+
+    window.addEventListener("orientationchange", () => {
+      syncHeaderHeight();
+      resnapCurrentBrandScene();
+    });
 
     if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", syncHeaderHeight);
+      window.visualViewport.addEventListener("resize", () => {
+        syncHeaderHeight();
+        resnapCurrentBrandScene();
+      });
     }
 
     const menuToggle =
@@ -2249,29 +2282,62 @@
     );
 
     /* =========================================================
-       SECTION NEXT
+       EXACT FULL PAGE SCROLL
+       snapRoot 내부의 정확한 장면 시작점으로 이동
        ========================================================= */
+    function scrollToBrandScene(targetId) {
+      if (!snapRoot) return;
+
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      const prefersReducedMotion =
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      snapRoot.scrollTo({
+        top: target.offsetTop,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
+      });
+    }
+
     document
       .querySelectorAll(".section-next[data-scroll-target]")
       .forEach((button) => {
         button.addEventListener("click", () => {
-          const target =
-            document.getElementById(
-              button.dataset.scrollTarget
-            );
-
-          if (!target) return;
-
-          target.scrollIntoView({
-            behavior: window.matchMedia(
-              "(prefers-reduced-motion: reduce)"
-            ).matches
-              ? "auto"
-              : "smooth",
-            block: "start"
-          });
+          scrollToBrandScene(button.dataset.scrollTarget);
         });
       });
+
+    /* 휠/트랙패드 스크롤 종료 후 가장 가까운 장면에 정확히 정렬 */
+    let snapSettleTimer = null;
+
+    snapRoot.addEventListener(
+      "scroll",
+      () => {
+        window.clearTimeout(snapSettleTimer);
+
+        snapSettleTimer = window.setTimeout(() => {
+          const sceneHeight = snapRoot.clientHeight;
+          if (!sceneHeight) return;
+
+          const nearestIndex =
+            Math.round(snapRoot.scrollTop / sceneHeight);
+
+          const safeIndex =
+            Math.max(0, Math.min(nearestIndex, 4));
+
+          const exactTop = safeIndex * sceneHeight;
+
+          if (Math.abs(snapRoot.scrollTop - exactTop) > 1) {
+            snapRoot.scrollTo({
+              top: exactTop,
+              behavior: "auto"
+            });
+          }
+        }, 140);
+      },
+      { passive: true }
+    );
 
     const revealItems =
       document.querySelectorAll(".reveal");
