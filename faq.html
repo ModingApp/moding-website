@@ -1704,14 +1704,22 @@
     }
 
     /* =========================================================
-       🔒 FAQ · INDEX MASTER COMPATIBILITY LOCK
-       Typography / Footer / Fold
+       🔒 FAQ FINAL MASTER LOCK
+       Index Typography + Footer Safe + Large CTA
        ========================================================= */
 
     html,
     body,
     .snap-root {
       background: #fff;
+    }
+
+    /* Index MASTER typography */
+    .kicker {
+      margin-bottom: var(--kicker-gap);
+      font-size: var(--kicker-size);
+      letter-spacing: .17em;
+      font-weight: 950;
     }
 
     .hero-title,
@@ -1729,13 +1737,7 @@
       font-weight: var(--desc-weight);
     }
 
-    .kicker {
-      margin-bottom: var(--kicker-gap);
-      font-size: var(--kicker-size);
-      letter-spacing: .17em;
-      font-weight: 950;
-    }
-
+    /* Last scene: content + independent footer */
     .scene-final {
       display: flex;
       flex-direction: column;
@@ -1750,6 +1752,7 @@
       flex: 0 0 auto;
     }
 
+    /* Last scene navigation always clears footer */
     body.is-last-scene .site-side-nav {
       bottom: calc(var(--footer-height) + 18px);
     }
@@ -1770,19 +1773,84 @@
         padding: 22px 20px 48px;
       }
 
-      .final-main {
-        padding: 16px 20px 7px;
+      /* 5P: Alliance처럼 큼직한 CTA 유지 */
+      .scene-final .final-main {
+        padding: 16px 20px 8px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 10px;
+        align-items: stretch;
+      }
+
+      .scene-final .scene-content {
+        align-self: start;
+      }
+
+      .scene-final .scene-desc {
+        max-width: 92%;
+      }
+
+      .scene-final .contact-actions {
+        width: 100%;
+        margin-top: 13px;
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 8px;
       }
 
-      body.is-last-scene .site-side-nav {
-        bottom: calc(var(--footer-height) + 12px);
+      .scene-final .contact-btn {
+        width: 100%;
+        min-height: 50px;
+        padding: 0 18px;
+        border-radius: 17px;
+        font-size: 13.5px;
+        font-weight: 950;
+      }
+
+      .scene-final .utility-grid {
+        min-height: 0;
+        align-self: stretch;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-content: center;
+        gap: 8px;
+      }
+
+      .scene-final .utility-card {
+        min-height: 88px;
+        padding: 11px 12px;
+        border-radius: 18px;
+        gap: 10px;
+      }
+
+      .scene-final .utility-icon {
+        flex: 0 0 42px;
+        width: 42px;
+        height: 42px;
+      }
+
+      .scene-final .utility-icon svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .scene-final .utility-card h3 {
+        font-size: 12.5px;
+      }
+
+      .scene-final .utility-card p {
+        margin-top: 3px;
+        font-size: 10.2px;
+        line-height: 1.4;
       }
 
       .site-footer {
         padding: 14px 16px 16px;
         font-size: 9px;
         line-height: 1.5;
+      }
+
+      body.is-last-scene .site-side-nav {
+        bottom: calc(var(--footer-height) + 12px);
       }
     }
 
@@ -1796,68 +1864,86 @@
         padding: 18px 18px 44px;
       }
 
-      .final-main {
+      .scene-final .final-main {
         padding: 13px 18px 6px;
+        gap: 8px;
+      }
+
+      .scene-final .contact-actions {
+        margin-top: 11px;
+        gap: 7px;
+      }
+
+      .scene-final .contact-btn {
+        min-height: 48px;
+        font-size: 13px;
+      }
+
+      .scene-final .utility-card {
+        min-height: 82px;
+        padding: 10px;
       }
     }
 
-    /* Galaxy Fold outer display / narrow phones */
+    /* Galaxy Fold outer display / narrow phones
+       CTA는 작게 쪼개지 않고 1열 전체폭 유지 */
     @media (max-width: 380px) {
-      .final-main {
-        padding: 7px 16px 3px;
-        gap: 5px;
+      .scene-final .final-main {
+        padding: 8px 16px 4px;
+        gap: 6px;
       }
 
       .scene-final .scene-desc {
-        margin-top: 7px;
-        font-size: 12px;
-        line-height: 1.4;
+        margin-top: 8px;
+        font-size: 12.5px;
+        line-height: 1.45;
       }
 
-      .contact-actions {
-        margin-top: 6px;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0,1fr));
-        gap: 5px;
+      .scene-final .contact-actions {
+        margin-top: 8px;
+        grid-template-columns: 1fr;
+        gap: 6px;
       }
 
-      .contact-btn {
-        min-width: 0;
-        min-height: 36px;
-        padding: 0 4px;
-        border-radius: 12px;
-        font-size: 9.8px;
-        text-align: center;
+      .scene-final .contact-btn {
+        width: 100%;
+        min-height: 46px;
+        padding: 0 14px;
+        border-radius: 15px;
+        font-size: 12.5px;
       }
 
-      .utility-grid {
-        gap: 5px;
+      .scene-final .utility-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 6px;
+        align-content: center;
       }
 
-      .utility-card {
-        min-height: 62px;
-        padding: 7px;
-        gap: 7px;
-        border-radius: 13px;
+      .scene-final .utility-card {
+        min-height: 76px;
+        padding: 8px 9px;
+        gap: 8px;
+        border-radius: 15px;
       }
 
-      .utility-icon {
-        flex: 0 0 32px;
-        width: 32px;
-        height: 32px;
+      .scene-final .utility-icon {
+        flex: 0 0 36px;
+        width: 36px;
+        height: 36px;
       }
 
-      .utility-icon svg {
-        width: 19px;
-        height: 19px;
+      .scene-final .utility-icon svg {
+        width: 21px;
+        height: 21px;
       }
 
-      .utility-card h3 {
-        font-size: 10.5px;
+      .scene-final .utility-card h3 {
+        font-size: 11px;
       }
 
-      .utility-card p {
-        display: none;
+      .scene-final .utility-card p {
+        font-size: 9.4px;
+        line-height: 1.35;
       }
 
       .site-footer {
@@ -1874,21 +1960,26 @@
         --copy-gap: 7px;
       }
 
-      .final-main {
+      .scene-final .final-main {
         padding-top: 6px;
         padding-bottom: 3px;
         gap: 4px;
       }
 
-      .contact-actions {
-        margin-top: 4px;
+      .scene-final .contact-actions {
+        margin-top: 6px;
+        gap: 5px;
       }
 
-      .utility-card {
-        min-height: 58px;
+      .scene-final .contact-btn {
+        min-height: 42px;
       }
 
-      .utility-card p {
+      .scene-final .utility-card {
+        min-height: 68px;
+      }
+
+      .scene-final .utility-card p {
         display: none;
       }
 
@@ -2531,6 +2622,8 @@
 
     /* Scene activation */
     function setActiveScene(scene) {
+      if (!scene) return;
+
       scenes.forEach((item) => {
         item.classList.toggle("is-active", item === scene);
       });
