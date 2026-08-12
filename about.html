@@ -1557,6 +1557,324 @@
         filter: none !important;
       }
     }
+
+    /* =========================================================
+       ABOUT EXPERIENCE V4
+       DESKTOP 3 WORLDS + MOBILE 3 ROWS
+       ========================================================= */
+
+    .experience-desktop {
+      display: block;
+    }
+
+    .experience-mobile {
+      display: none;
+    }
+
+    .stage-world {
+      opacity: .13;
+      transition:
+        opacity .42s ease,
+        transform .42s cubic-bezier(.22,1,.36,1);
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .experience-stage.is-stage-active .stage-world {
+      opacity: .27;
+      transform: scale(1.018);
+    }
+
+    .stage-world-mark {
+      opacity: .28;
+      transition: opacity .42s ease;
+    }
+
+    .experience-stage.is-stage-active .stage-world-mark {
+      opacity: .72;
+    }
+
+    /* 모바일 전용 */
+    @media (max-width: 820px) {
+      .experience-desktop {
+        display: none !important;
+      }
+
+      .experience-mobile {
+        position: relative;
+        width: min(100%, 560px);
+        margin: 0 auto;
+        padding: 4px 0 4px 26px;
+        display: grid;
+        grid-template-rows: repeat(3, minmax(82px, auto));
+        gap: 8px;
+      }
+
+      .mobile-journey-track,
+      .mobile-journey-live {
+        position: absolute;
+        left: 10px;
+        top: 42px;
+        bottom: 42px;
+        width: 4px;
+        border-radius: 999px;
+      }
+
+      .mobile-journey-track {
+        background: rgba(255,255,255,.18);
+      }
+
+      .mobile-journey-live {
+        bottom: auto;
+        height: 0;
+        background: var(--orange);
+        will-change: height;
+      }
+
+      .mobile-journey-runner {
+        position: absolute;
+        left: 4px;
+        top: 42px;
+        width: 16px;
+        height: 16px;
+        border: 4px solid #fff;
+        border-radius: 50%;
+        background: var(--orange);
+        transform: translateY(-50%);
+        box-shadow: 0 5px 12px rgba(0,0,0,.14);
+        will-change: top;
+      }
+
+      .experience-mobile-card {
+        position: relative;
+        min-height: 88px;
+        padding: 8px 12px 8px 10px;
+        display: grid;
+        grid-template-columns: 48px 110px minmax(0,1fr);
+        align-items: center;
+        gap: 10px;
+        border-radius: 24px;
+        overflow: hidden;
+        opacity: .62;
+        transition:
+          opacity .35s ease,
+          transform .35s cubic-bezier(.22,1,.36,1),
+          background .35s ease;
+      }
+
+      .experience-mobile-card::after {
+        content: "";
+        position: absolute;
+        right: -28px;
+        top: -28px;
+        width: 94px;
+        height: 94px;
+        border-radius: 50%;
+        opacity: .23;
+        pointer-events: none;
+      }
+
+      .experience-mobile-card.manufacturing {
+        background: rgba(168,230,207,.10);
+      }
+
+      .experience-mobile-card.manufacturing::after {
+        background: #A8E6CF;
+      }
+
+      .experience-mobile-card.restaurant {
+        background: rgba(255,182,72,.10);
+      }
+
+      .experience-mobile-card.restaurant::after {
+        background: #FFD166;
+      }
+
+      .experience-mobile-card.franchise {
+        background: rgba(167,216,255,.10);
+      }
+
+      .experience-mobile-card.franchise::after {
+        background: #A7D8FF;
+      }
+
+      .experience-mobile-card.is-stage-active {
+        opacity: 1;
+        transform: translateX(4px);
+      }
+
+      .experience-mobile-card.manufacturing.is-stage-active {
+        background: rgba(168,230,207,.18);
+      }
+
+      .experience-mobile-card.restaurant.is-stage-active {
+        background: rgba(255,182,72,.18);
+      }
+
+      .experience-mobile-card.franchise.is-stage-active {
+        background: rgba(167,216,255,.18);
+      }
+
+      .mobile-step {
+        width: 46px;
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid rgba(255,255,255,.72);
+        border-radius: 50%;
+        color: var(--orange);
+        background: rgba(255,255,255,.07);
+        font-size: 18px;
+        font-weight: 950;
+        letter-spacing: -.05em;
+      }
+
+      .mobile-scene-svg {
+        width: 110px !important;
+        height: 76px !important;
+        max-height: none !important;
+        overflow: visible;
+      }
+
+      .mobile-experience-copy {
+        position: relative;
+        z-index: 2;
+        min-width: 0;
+      }
+
+      .mobile-experience-copy strong {
+        display: block;
+        color: #fff;
+        font-size: 20px;
+        line-height: 1.1;
+        font-weight: 950;
+        letter-spacing: -.045em;
+      }
+
+      .mobile-experience-copy span {
+        display: block;
+        margin-top: 5px;
+        color: rgba(255,255,255,.76);
+        font-size: 12.5px;
+        line-height: 1.3;
+        font-weight: 800;
+      }
+
+      .scene-visual {
+        align-items: center;
+      }
+
+      .scene-grid {
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .experience-mobile {
+        width: 100%;
+        padding-left: 23px;
+        gap: 6px;
+      }
+
+      .mobile-journey-track,
+      .mobile-journey-live {
+        left: 8px;
+      }
+
+      .mobile-journey-runner {
+        left: 2px;
+      }
+
+      .experience-mobile-card {
+        min-height: 82px;
+        padding: 7px 9px 7px 8px;
+        grid-template-columns: 42px 92px minmax(0,1fr);
+        gap: 8px;
+        border-radius: 20px;
+      }
+
+      .mobile-step {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+
+      .mobile-scene-svg {
+        width: 92px !important;
+        height: 66px !important;
+      }
+
+      .mobile-experience-copy strong {
+        font-size: 18px;
+      }
+
+      .mobile-experience-copy span {
+        margin-top: 3px;
+        font-size: 11.5px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .experience-mobile {
+        gap: 5px;
+      }
+
+      .experience-mobile-card {
+        min-height: 76px;
+        grid-template-columns: 38px 82px minmax(0,1fr);
+        gap: 6px;
+      }
+
+      .mobile-step {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+      }
+
+      .mobile-scene-svg {
+        width: 82px !important;
+        height: 60px !important;
+      }
+
+      .mobile-experience-copy strong {
+        font-size: 17px;
+      }
+
+      .mobile-experience-copy span {
+        font-size: 10.8px;
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+      .experience-mobile {
+        gap: 4px;
+      }
+
+      .experience-mobile-card {
+        min-height: 68px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+
+      .mobile-scene-svg {
+        height: 54px !important;
+      }
+
+      .mobile-experience-copy strong {
+        font-size: 16px;
+      }
+
+      .mobile-experience-copy span {
+        display: none;
+      }
+
+      .mobile-step {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+      }
+    }
 </style>
 </head>
 
@@ -1673,7 +1991,7 @@
 
 
           <div class="scene-visual" aria-hidden="true">
-            <svg class="experience-svg" viewBox="0 0 1000 560">
+            <svg class="experience-svg experience-desktop" viewBox="0 0 1000 560">
 
               <defs>
                 <linearGradient id="steelGrad" x1="0" x2="1">
@@ -1725,6 +2043,27 @@
                    01 · 식품 제조
                    ================================================== -->
               <g class="experience-stage stage-01" data-stage="1">
+
+                <!-- 제조 현장 무대 -->
+                <path class="stage-world"
+                      d="M42 177
+                         Q42 126 96 116
+                         H232
+                         Q292 118 292 181
+                         V360
+                         Q292 413 235 418
+                         H98
+                         Q42 411 42 356 Z"
+                      fill="#A8E6CF"/>
+                <path class="stage-world-mark"
+                      d="M65 395 H270"
+                      fill="none"
+                      stroke="#A8E6CF"
+                      stroke-width="5"
+                      stroke-linecap="round"/>
+                <circle class="stage-world-mark"
+                        cx="73" cy="143" r="7"
+                        fill="#A8E6CF"/>
 
                 <!-- number -->
                 <g>
@@ -1859,6 +2198,29 @@
                    ================================================== -->
               <g class="experience-stage stage-02" data-stage="2">
 
+                <!-- 식당 주방 무대 -->
+                <path class="stage-world"
+                      d="M370 420
+                         V194
+                         Q370 132 426 118
+                         Q500 94 574 118
+                         Q630 132 630 194
+                         V420 Z"
+                      fill="#FFD166"/>
+                <path class="stage-world-mark"
+                      d="M397 396 H608"
+                      fill="none"
+                      stroke="#FFD166"
+                      stroke-width="5"
+                      stroke-linecap="round"/>
+                <path class="stage-world-mark"
+                      d="M600 140
+                         C612 126 620 114 624 99"
+                      fill="none"
+                      stroke="#FF9E45"
+                      stroke-width="5"
+                      stroke-linecap="round"/>
+
                 <!-- number -->
                 <g>
                   <circle class="experience-number-ring"
@@ -1976,6 +2338,24 @@
                    03 · 프랜차이즈 운영
                    ================================================== -->
               <g class="experience-stage stage-03" data-stage="3">
+
+                <!-- 프랜차이즈 교육 무대 -->
+                <rect class="stage-world"
+                      x="682" y="116"
+                      width="306" height="304"
+                      rx="42"
+                      fill="#A7D8FF"/>
+                <path class="stage-world-mark"
+                      d="M714 395 H956"
+                      fill="none"
+                      stroke="#A7D8FF"
+                      stroke-width="5"
+                      stroke-linecap="round"/>
+                <rect class="stage-world-mark"
+                      x="797" y="130"
+                      width="78" height="9"
+                      rx="4.5"
+                      fill="#A7D8FF"/>
 
                 <!-- number -->
                 <g>
@@ -2123,6 +2503,163 @@
               </g>
 
             </svg>
+          </div>
+
+          <div class="experience-mobile" aria-hidden="true">
+            <div class="mobile-journey-track"></div>
+            <div class="mobile-journey-live" id="mobileJourneyLive"></div>
+            <div class="mobile-journey-runner" id="mobileJourneyRunner"></div>
+
+            <!-- 01 제조 -->
+            <div class="experience-mobile-card manufacturing" data-mobile-stage="1">
+              <div class="mobile-step">01</div>
+
+              <svg class="mobile-scene-svg" viewBox="0 0 160 100">
+                <path d="M15 91 H145"
+                      fill="none" stroke="#A8E6CF" stroke-width="4"
+                      stroke-linecap="round"/>
+
+                <path d="M24 24 H49 V66 H24 Z"
+                      fill="none" stroke="#A8E6CF" stroke-width="4"/>
+                <path d="M36 24 V12 M29 39 H45"
+                      fill="none" stroke="#A8E6CF" stroke-width="4"
+                      stroke-linecap="round"/>
+
+                <circle cx="82" cy="25" r="11" fill="#F7F0DF"/>
+                <path d="M70 22 Q82 12 95 22" fill="#F7F0DF"/>
+                <path d="M65 46 Q82 34 100 46 L105 76 H60 Z"
+                      fill="#F7F0DF"/>
+
+                <g class="factory-paddle">
+                  <path d="M98 49 Q111 57 108 68"
+                        fill="none" stroke="#F7F0DF" stroke-width="6"
+                        stroke-linecap="round"/>
+                  <path d="M108 67 L92 89"
+                        fill="none" stroke="#FFD166" stroke-width="6"
+                        stroke-linecap="round"/>
+                </g>
+
+                <ellipse cx="84" cy="75" rx="37" ry="9"
+                         fill="#DCE5E2" stroke="#fff" stroke-width="4"/>
+                <path d="M47 75 L53 91 Q84 99 115 91 L121 75"
+                      fill="#DCE5E2" stroke="#fff" stroke-width="4"/>
+
+                <g class="factory-liquid">
+                  <path d="M56 76 Q84 69 112 76"
+                        fill="none" stroke="#FFD166" stroke-width="5"
+                        stroke-linecap="round"/>
+                </g>
+              </svg>
+
+              <div class="mobile-experience-copy">
+                <strong>식품 제조</strong>
+                <span>직접 만들고</span>
+              </div>
+            </div>
+
+            <!-- 02 식당 -->
+            <div class="experience-mobile-card restaurant" data-mobile-stage="2">
+              <div class="mobile-step">02</div>
+
+              <svg class="mobile-scene-svg" viewBox="0 0 160 100">
+                <path d="M15 91 H145"
+                      fill="none" stroke="#FFD166" stroke-width="4"
+                      stroke-linecap="round"/>
+
+                <circle cx="66" cy="25" r="11" fill="#F7F0DF"/>
+                <path d="M54 22 Q66 12 80 22" fill="#263A36"/>
+                <path d="M48 47 Q66 35 85 47 L92 76 H42 Z"
+                      fill="#263A36"/>
+                <path d="M55 47 L61 75 M77 47 L72 75"
+                      fill="none" stroke="#A8E6CF" stroke-width="4"
+                      stroke-linecap="round"/>
+
+                <g class="wok-unit">
+                  <path d="M67 67
+                           C78 59 103 59 115 67
+                           C104 79 78 79 67 67 Z"
+                        fill="#263A36" stroke="#F7F0DF" stroke-width="4"/>
+                  <path d="M114 67 L143 60"
+                        fill="none" stroke="#F7F0DF" stroke-width="5"
+                        stroke-linecap="round"/>
+                  <circle class="food-toss-a" cx="84" cy="57" r="4" fill="#FFD166"/>
+                  <circle class="food-toss-b" cx="99" cy="54" r="4" fill="#FF8C00"/>
+                  <path class="food-toss-c"
+                        d="M108 58 l7 -5 l3 7 l-7 4 Z"
+                        fill="#A8E6CF"/>
+                </g>
+
+                <g class="wok-fire">
+                  <path d="M71 90
+                           C76 77 82 77 85 88
+                           C90 71 99 70 102 88
+                           C108 75 116 78 118 90 Z"
+                        fill="#FF8C00"/>
+                  <path d="M86 89 C91 81 96 82 99 90"
+                        fill="#FFD166"/>
+                </g>
+              </svg>
+
+              <div class="mobile-experience-copy">
+                <strong>식당 운영</strong>
+                <span>직접 장사하고</span>
+              </div>
+            </div>
+
+            <!-- 03 프랜차이즈 -->
+            <div class="experience-mobile-card franchise" data-mobile-stage="3">
+              <div class="mobile-step">03</div>
+
+              <svg class="mobile-scene-svg" viewBox="0 0 160 100">
+                <path d="M15 91 H145"
+                      fill="none" stroke="#A7D8FF" stroke-width="4"
+                      stroke-linecap="round"/>
+
+                <!-- trainer -->
+                <circle cx="54" cy="27" r="10" fill="#F7F0DF"/>
+                <path d="M43 24 Q54 14 66 24" fill="#263A36"/>
+                <path d="M38 48 Q54 37 71 48 L76 78 H33 Z"
+                      fill="#A7D8FF"/>
+
+                <!-- tablet -->
+                <rect x="20" y="51" width="28" height="36" rx="5"
+                      fill="#263A36" stroke="#F7F0DF" stroke-width="3"/>
+                <rect x="25" y="56" width="18" height="25" rx="3"
+                      fill="#7CC7B7"/>
+                <circle class="tablet-screen-check-1" cx="30" cy="63" r="2.5" fill="#fff"/>
+                <circle class="tablet-screen-check-2" cx="30" cy="70" r="2.5" fill="#fff"/>
+                <circle class="tablet-screen-check-3" cx="30" cy="77" r="2.5" fill="#fff"/>
+
+                <g class="trainer-hand">
+                  <path d="M70 52 Q82 57 89 66"
+                        fill="none" stroke="#F7F0DF" stroke-width="5"
+                        stroke-linecap="round"/>
+                </g>
+
+                <!-- trainee -->
+                <g class="trainee-head">
+                  <circle cx="102" cy="33" r="9" fill="#F7F0DF"/>
+                  <path d="M93 30 Q102 22 112 30" fill="#40534E"/>
+                </g>
+                <path d="M88 54 Q102 45 117 54 L121 80 H84 Z"
+                      fill="#7CC7B7"/>
+
+                <!-- store -->
+                <path d="M122 54 H151 V82 H122 Z"
+                      fill="none" stroke="#A7D8FF" stroke-width="3"/>
+                <path d="M119 54 L124 43 H149 L154 54"
+                      fill="none" stroke="#A7D8FF" stroke-width="3"
+                      stroke-linejoin="round"/>
+                <path d="M125 50 H149"
+                      fill="none" stroke="#FFD166" stroke-width="5"
+                      stroke-dasharray="6 4"/>
+              </svg>
+
+              <div class="mobile-experience-copy">
+                <strong>프랜차이즈 운영</strong>
+                <span>직접 운영했습니다</span>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -2558,6 +3095,15 @@
     const experienceStages =
       Array.from(document.querySelectorAll(".experience-stage"));
 
+    const mobileExperienceStages =
+      Array.from(document.querySelectorAll(".experience-mobile-card"));
+
+    const mobileJourneyLive =
+      document.getElementById("mobileJourneyLive");
+
+    const mobileJourneyRunner =
+      document.getElementById("mobileJourneyRunner");
+
     const reduceMotion =
       window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -2608,6 +3154,39 @@
           i === index
         );
       });
+
+      mobileExperienceStages.forEach((stage, i) => {
+        stage.classList.toggle(
+          "is-stage-active",
+          i === index
+        );
+      });
+    }
+
+    function syncMobileJourney(progress) {
+      if (!mobileJourneyLive || !mobileJourneyRunner) return;
+
+      const track =
+        mobileJourneyLive.parentElement;
+
+      if (!track) return;
+
+      const trackTop = 42;
+      const trackBottom = 42;
+      const usable =
+        Math.max(
+          0,
+          track.clientHeight - trackTop - trackBottom
+        );
+
+      const current =
+        usable * progress;
+
+      mobileJourneyLive.style.height =
+        `${current}px`;
+
+      mobileJourneyRunner.style.top =
+        `${trackTop + current}px`;
     }
 
     function prepareExperiencePath() {
@@ -2658,6 +3237,11 @@
           stage.classList.add("is-stage-active");
         });
 
+        mobileExperienceStages.forEach((stage) => {
+          stage.classList.add("is-stage-active");
+        });
+
+        syncMobileJourney(1);
         return;
       }
 
@@ -2692,6 +3276,8 @@
         "transform",
         `translate(${point.x} ${point.y})`
       );
+
+      syncMobileJourney(progress);
 
       setExperienceStage(
         activeExperienceStage(phase)
