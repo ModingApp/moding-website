@@ -37,6 +37,21 @@
       --page-pad: 24px;
       --header-height: 84px;
       --scene-height: calc(100dvh - var(--header-height));
+      --footer-height: 0px;
+
+      /* INDEX TYPOGRAPHY MASTER */
+      --title-size: clamp(50px, 4.8vw, 80px);
+      --title-line: 1.06;
+      --title-spacing: -0.06em;
+      --title-weight: 950;
+
+      --desc-size: clamp(16px, 1.35vw, 20px);
+      --desc-line: 1.62;
+      --desc-weight: 700;
+
+      --kicker-size: 12px;
+      --kicker-gap: 17px;
+      --copy-gap: 22px;
     }
 
     * {
@@ -276,7 +291,7 @@
       scroll-padding: 0;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
-      overscroll-behavior-y: contain;
+      overscroll-behavior-y: none;
       background: #fff;
     }
 
@@ -1687,6 +1702,201 @@
         min-height: 82px;
       }
     }
+
+    /* =========================================================
+       🔒 FAQ · INDEX MASTER COMPATIBILITY LOCK
+       Typography / Footer / Fold
+       ========================================================= */
+
+    html,
+    body,
+    .snap-root {
+      background: #fff;
+    }
+
+    .hero-title,
+    .scene-title {
+      font-size: var(--title-size);
+      line-height: var(--title-line);
+      letter-spacing: var(--title-spacing);
+      font-weight: var(--title-weight);
+    }
+
+    .scene-desc {
+      margin-top: var(--copy-gap);
+      font-size: var(--desc-size);
+      line-height: var(--desc-line);
+      font-weight: var(--desc-weight);
+    }
+
+    .kicker {
+      margin-bottom: var(--kicker-gap);
+      font-size: var(--kicker-size);
+      letter-spacing: .17em;
+      font-weight: 950;
+    }
+
+    .scene-final {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scene-final .final-main {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .scene-final .site-footer {
+      flex: 0 0 auto;
+    }
+
+    body.is-last-scene .site-side-nav {
+      bottom: calc(var(--footer-height) + 18px);
+    }
+
+    @media (max-width: 820px) {
+      :root {
+        --title-size: clamp(38px, 10.5vw, 46px);
+        --title-line: 1.05;
+        --title-spacing: -0.055em;
+        --desc-size: 14px;
+        --desc-line: 1.5;
+        --kicker-size: 10px;
+        --kicker-gap: 13px;
+        --copy-gap: 13px;
+      }
+
+      .scene-frame {
+        padding: 22px 20px 48px;
+      }
+
+      .final-main {
+        padding: 16px 20px 7px;
+        gap: 8px;
+      }
+
+      body.is-last-scene .site-side-nav {
+        bottom: calc(var(--footer-height) + 12px);
+      }
+
+      .site-footer {
+        padding: 14px 16px 16px;
+        font-size: 9px;
+        line-height: 1.5;
+      }
+    }
+
+    @media (max-width: 520px) {
+      :root {
+        --page-pad: 18px;
+        --title-size: clamp(36px, 10vw, 44px);
+      }
+
+      .scene-frame {
+        padding: 18px 18px 44px;
+      }
+
+      .final-main {
+        padding: 13px 18px 6px;
+      }
+    }
+
+    /* Galaxy Fold outer display / narrow phones */
+    @media (max-width: 380px) {
+      .final-main {
+        padding: 7px 16px 3px;
+        gap: 5px;
+      }
+
+      .scene-final .scene-desc {
+        margin-top: 7px;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .contact-actions {
+        margin-top: 6px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0,1fr));
+        gap: 5px;
+      }
+
+      .contact-btn {
+        min-width: 0;
+        min-height: 36px;
+        padding: 0 4px;
+        border-radius: 12px;
+        font-size: 9.8px;
+        text-align: center;
+      }
+
+      .utility-grid {
+        gap: 5px;
+      }
+
+      .utility-card {
+        min-height: 62px;
+        padding: 7px;
+        gap: 7px;
+        border-radius: 13px;
+      }
+
+      .utility-icon {
+        flex: 0 0 32px;
+        width: 32px;
+        height: 32px;
+      }
+
+      .utility-icon svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .utility-card h3 {
+        font-size: 10.5px;
+      }
+
+      .utility-card p {
+        display: none;
+      }
+
+      .site-footer {
+        padding: 8px 10px 9px;
+        font-size: 8.3px;
+        line-height: 1.42;
+      }
+    }
+
+    @media (max-height: 700px) and (max-width: 820px) {
+      :root {
+        --title-size: clamp(30px, 6.5vh, 38px);
+        --desc-size: 12px;
+        --copy-gap: 7px;
+      }
+
+      .final-main {
+        padding-top: 6px;
+        padding-bottom: 3px;
+        gap: 4px;
+      }
+
+      .contact-actions {
+        margin-top: 4px;
+      }
+
+      .utility-card {
+        min-height: 58px;
+      }
+
+      .utility-card p {
+        display: none;
+      }
+
+      .site-footer {
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+    }
 </style>
 </head>
 
@@ -1736,7 +1946,7 @@
     <div class="mobile-menu-body">
       <div class="mobile-menu-title">
         사장님의 가게에<br>
-        새로운 선택지를.
+        새로운 선택지를
       </div>
 
       <nav class="mobile-menu-links" aria-label="모바일 메뉴">
@@ -2199,6 +2409,16 @@
     const siteHeader = document.querySelector(".site-header");
     const snapRoot = document.getElementById("snapRoot");
     const scenes = Array.from(document.querySelectorAll(".scene"));
+    const siteFooter = document.querySelector(".site-footer");
+
+    function syncFooterHeight() {
+      if (!siteFooter) return;
+
+      document.documentElement.style.setProperty(
+        "--footer-height",
+        `${Math.ceil(siteFooter.getBoundingClientRect().height)}px`
+      );
+    }
 
     function syncViewport() {
       const headerHeight = siteHeader
@@ -2220,6 +2440,14 @@
     }
 
     syncViewport();
+    syncFooterHeight();
+
+    if ("ResizeObserver" in window && siteFooter) {
+      const footerResizeObserver =
+        new ResizeObserver(syncFooterHeight);
+
+      footerResizeObserver.observe(siteFooter);
+    }
 
     let resizeSnapTimer = null;
 
@@ -2306,6 +2534,13 @@
       scenes.forEach((item) => {
         item.classList.toggle("is-active", item === scene);
       });
+
+      document.body.classList.toggle(
+        "is-last-scene",
+        scene === scenes[scenes.length - 1]
+      );
+
+      syncFooterHeight();
     }
 
     const observer = new IntersectionObserver(
@@ -2325,6 +2560,7 @@
     );
 
     scenes.forEach((scene) => observer.observe(scene));
+    setActiveScene(scenes[0]);
 
     /* Exact full page scroll */
     function scrollToFaqScene(targetId) {
