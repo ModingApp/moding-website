@@ -34,20 +34,6 @@
       --header-height: 84px;
       --scene-height: calc(100dvh - var(--header-height));
       --footer-height: 0px;
-
-      /* INDEX TYPOGRAPHY MASTER */
-      --title-size: clamp(50px, 4.8vw, 80px);
-      --title-line: 1.06;
-      --title-spacing: -0.06em;
-      --title-weight: 950;
-
-      --desc-size: clamp(16px, 1.35vw, 20px);
-      --desc-line: 1.62;
-      --desc-weight: 700;
-
-      --kicker-size: 12px;
-      --kicker-gap: 17px;
-      --copy-gap: 22px;
     }
 
     * {
@@ -397,92 +383,250 @@
     }
 
     /* =========================================================
-       ABOUT 1P · REAL KITCHEN WORKSTATION MOTION
-       현장을 아는 사람들이 만들었습니다
+       ABOUT 1P · EXPERIENCE JOURNEY SVG
+       01 식품 제조 → 02 식당 운영 → 03 프랜차이즈 운영
        ========================================================= */
-    .about-kitchen-stage,
-    .kitchen-apron,
-    .kitchen-ladle,
-    .kitchen-note,
-    .kitchen-phone,
-    .kitchen-steam,
-    .kitchen-produce {
+
+    .experience-svg {
+      width: min(100%, 700px) !important;
+      max-height: 72vh !important;
+      overflow: visible;
+    }
+
+    .experience-stage,
+    .experience-label,
+    .experience-node,
+    .experience-person,
+    .experience-prop,
+    .experience-detail {
       transform-box: fill-box;
       transform-origin: center;
       will-change: transform, opacity;
     }
 
-    .kitchen-apron {
-      animation: apronSway 4.8s ease-in-out infinite;
-      transform-origin: 28% 14%;
+    .journey-path-base {
+      fill: none;
+      stroke: rgba(255,255,255,.18);
+      stroke-width: 7;
+      stroke-linecap: round;
     }
 
-    @keyframes apronSway {
-      0%,100% { transform: rotate(-1deg); }
-      50% { transform: rotate(1.5deg); }
+    .journey-path-live {
+      fill: none;
+      stroke: var(--orange);
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-dasharray: 900;
+      stroke-dashoffset: 900;
+      animation: journeyDraw 8.8s cubic-bezier(.65,0,.35,1) infinite;
     }
 
-    .kitchen-ladle {
-      animation: ladleAlive 4.2s ease-in-out infinite;
-      transform-origin: 18% 50%;
+    @keyframes journeyDraw {
+      0%,7%   { stroke-dashoffset: 900; opacity: .2; }
+      28%     { stroke-dashoffset: 620; opacity: 1; }
+      54%     { stroke-dashoffset: 315; opacity: 1; }
+      80%,94% { stroke-dashoffset: 0; opacity: 1; }
+      100%    { stroke-dashoffset: 0; opacity: .25; }
     }
 
-    @keyframes ladleAlive {
-      0%,100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-2px) rotate(1.5deg); }
+    .journey-runner {
+      animation: runnerMove 8.8s cubic-bezier(.65,0,.35,1) infinite;
     }
 
-    .kitchen-note {
-      animation: noteSway 4.4s ease-in-out infinite;
-      transform-origin: 50% 0%;
+    @keyframes runnerMove {
+      0%,7%   { transform: translate(0,0); opacity: 0; }
+      12%     { opacity: 1; }
+      30%     { transform: translate(265px,-11px); }
+      56%     { transform: translate(540px,4px); }
+      82%,94% { transform: translate(785px,-12px); opacity: 1; }
+      100%    { transform: translate(785px,-12px); opacity: 0; }
     }
 
-    @keyframes noteSway {
-      0%,100% { transform: rotate(-1.2deg) translateY(0); }
-      50% { transform: rotate(1.1deg) translateY(-3px); }
+    .stage-01 {
+      animation: stageOne 8.8s ease-in-out infinite;
     }
 
-    .kitchen-phone {
-      animation: phoneNudge 5s ease-in-out infinite;
+    .stage-02 {
+      animation: stageTwo 8.8s ease-in-out infinite;
     }
 
-    @keyframes phoneNudge {
-      0%,72%,100% { transform: translateY(0) rotate(0); }
-      78% { transform: translateY(-3px) rotate(-1deg); }
-      84% { transform: translateY(0) rotate(1deg); }
-      90% { transform: translateY(-2px) rotate(0); }
+    .stage-03 {
+      animation: stageThree 8.8s ease-in-out infinite;
     }
 
-    .phone-alert {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: alertPulse 5s ease-in-out infinite;
+    @keyframes stageOne {
+      0%,7% { opacity:.28; transform:translateY(7px) scale(.97); }
+      12%,31% { opacity:1; transform:translateY(0) scale(1); }
+      42%,100% { opacity:.54; transform:translateY(0) scale(.985); }
     }
 
-    @keyframes alertPulse {
-      0%,70%,100% { transform: scale(.7); opacity: 0; }
-      76%,88% { transform: scale(1); opacity: 1; }
-      93% { transform: scale(1.25); opacity: 0; }
+    @keyframes stageTwo {
+      0%,28% { opacity:.28; transform:translateY(7px) scale(.97); }
+      36%,58% { opacity:1; transform:translateY(0) scale(1); }
+      69%,100% { opacity:.54; transform:translateY(0) scale(.985); }
     }
 
-    .kitchen-steam.s1 { animation: steamRise1 3.1s ease-in-out infinite; }
-    .kitchen-steam.s2 { animation: steamRise2 3.4s .35s ease-in-out infinite; }
-
-    @keyframes steamRise1 {
-      0%,100% { transform: translateY(5px); opacity: .25; }
-      50% { transform: translateY(-9px); opacity: 1; }
+    @keyframes stageThree {
+      0%,56% { opacity:.28; transform:translateY(7px) scale(.97); }
+      64%,92% { opacity:1; transform:translateY(0) scale(1); }
+      100% { opacity:.65; transform:translateY(0) scale(.99); }
     }
 
-    @keyframes steamRise2 {
-      0%,100% { transform: translateY(7px); opacity: .18; }
-      50% { transform: translateY(-11px); opacity: .9; }
+    .stage-01 .experience-person {
+      animation: mixBody 2.4s ease-in-out infinite;
     }
 
-    .kitchen-produce { animation: produceBreathe 4.6s ease-in-out infinite; }
-
-    @keyframes produceBreathe {
+    @keyframes mixBody {
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-2px); }
+    }
+
+    .mix-arm {
+      transform-box: fill-box;
+      transform-origin: 80% 8%;
+      animation: mixArm 1.55s ease-in-out infinite;
+    }
+
+    @keyframes mixArm {
+      0%,100% { transform: rotate(-3deg); }
+      50% { transform: rotate(7deg); }
+    }
+
+    .mix-liquid {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: mixLiquid 1.55s ease-in-out infinite;
+    }
+
+    @keyframes mixLiquid {
+      0%,100% { transform: translateX(-3px) scaleX(.96); }
+      50% { transform: translateX(3px) scaleX(1.04); }
+    }
+
+    .stage-02 .steam-a {
+      animation: steamA 2.6s ease-in-out infinite;
+    }
+
+    .stage-02 .steam-b {
+      animation: steamB 3s .45s ease-in-out infinite;
+    }
+
+    @keyframes steamA {
+      0%,100% { transform:translateY(5px); opacity:.22; }
+      50% { transform:translateY(-10px); opacity:1; }
+    }
+
+    @keyframes steamB {
+      0%,100% { transform:translateY(8px); opacity:.16; }
+      50% { transform:translateY(-13px); opacity:.85; }
+    }
+
+    .pan-hand {
+      transform-box: fill-box;
+      transform-origin: 10% 55%;
+      animation: panCook 2.15s ease-in-out infinite;
+    }
+
+    @keyframes panCook {
+      0%,100% { transform:rotate(-1deg) translateY(0); }
+      50% { transform:rotate(2.2deg) translateY(-2px); }
+    }
+
+    .ticket-1 { animation: ticketPulse 4.8s ease-in-out infinite; }
+    .ticket-2 { animation: ticketPulse 4.8s .45s ease-in-out infinite; }
+
+    @keyframes ticketPulse {
+      0%,65%,100% { opacity:.45; transform:translateY(0); }
+      72%,82% { opacity:1; transform:translateY(-3px); }
+    }
+
+    .store-a { animation: storeReveal 8.8s 5.7s ease-in-out infinite; }
+    .store-b { animation: storeReveal 8.8s 6.05s ease-in-out infinite; }
+    .store-c { animation: storeReveal 8.8s 6.4s ease-in-out infinite; }
+
+    @keyframes storeReveal {
+      0%,63% { opacity:.18; transform:translateY(10px) scale(.92); }
+      69%,92% { opacity:1; transform:translateY(0) scale(1); }
+      100% { opacity:.64; transform:translateY(0) scale(.98); }
+    }
+
+    .shop-light-a { animation: shopLight 8.8s 6.15s ease-in-out infinite; }
+    .shop-light-b { animation: shopLight 8.8s 6.45s ease-in-out infinite; }
+    .shop-light-c { animation: shopLight 8.8s 6.75s ease-in-out infinite; }
+
+    @keyframes shopLight {
+      0%,68% { opacity:.15; }
+      73%,91% { opacity:1; }
+      100% { opacity:.35; }
+    }
+
+    .clip-board {
+      animation: clipboardAlive 3.6s ease-in-out infinite;
+      transform-origin: 50% 90%;
+    }
+
+    @keyframes clipboardAlive {
+      0%,100% { transform:rotate(-1deg); }
+      50% { transform:rotate(1.5deg); }
+    }
+
+    .experience-number {
+      font-size: 42px;
+      font-weight: 950;
+      letter-spacing: -.06em;
+      fill: var(--orange);
+    }
+
+    .experience-number-ring {
+      fill: rgba(255,255,255,.06);
+      stroke: rgba(255,255,255,.88);
+      stroke-width: 3;
+    }
+
+    .experience-caption {
+      fill: #fff;
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing: -.035em;
+    }
+
+    .experience-mini {
+      fill: rgba(255,255,255,.62);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .svg-line {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .svg-line-soft {
+      fill: none;
+      stroke: rgba(255,255,255,.56);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .svg-orange {
+      fill: none;
+      stroke: var(--orange);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .svg-white-fill {
+      fill: #fff;
+    }
+
+    .svg-orange-fill {
+      fill: var(--orange);
     }
 
     /* PAGE 2 */
@@ -1257,77 +1401,113 @@
 
 
     /* =========================================================
-       🔒 ABOUT FINAL · INDEX MASTER COMPATIBILITY LOCK
+       ABOUT FINAL MASTER LOCK
        ========================================================= */
-    html, body, .snap-root { background: #fff; }
-    .snap-root { scroll-padding: 0; }
-    .scene { scroll-margin: 0 !important; }
 
-    .kicker {
-      margin-bottom: var(--kicker-gap);
-      font-size: var(--kicker-size);
-      letter-spacing: .17em;
-      font-weight: 950;
+    html,
+    body,
+    .snap-root {
+      background: #fff;
     }
 
-    .hero-title,
-    .scene-title {
-      font-size: var(--title-size);
-      line-height: var(--title-line);
-      letter-spacing: var(--title-spacing);
-      font-weight: var(--title-weight);
+    .snap-root {
+      scroll-padding: 0;
     }
 
-    .scene-desc {
-      margin-top: var(--copy-gap);
-      font-size: var(--desc-size);
-      line-height: var(--desc-line);
-      font-weight: var(--desc-weight);
+    .scene {
+      scroll-margin: 0 !important;
     }
 
-    .scene-final { display: flex; flex-direction: column; }
-    .scene-final .vision-main { flex: 1 1 auto; min-height: 0; }
-    .scene-final .site-footer { flex: 0 0 auto; }
-    body.is-last-scene .site-side-nav { bottom: calc(var(--footer-height) + 18px); }
+    .scene-final {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scene-final .vision-main {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .scene-final .site-footer {
+      flex: 0 0 auto;
+    }
+
+    body.is-last-scene .site-side-nav {
+      bottom: calc(var(--footer-height) + 18px);
+    }
 
     @media (max-width: 820px) {
-      :root {
-        --title-size: clamp(38px, 10.5vw, 46px);
-        --title-line: 1.05;
-        --title-spacing: -0.055em;
-        --desc-size: 14px;
-        --desc-line: 1.5;
-        --kicker-size: 10px;
-        --kicker-gap: 13px;
-        --copy-gap: 13px;
+      .experience-svg {
+        width: min(96vw, 680px) !important;
+        max-height: 41vh !important;
       }
-      .scene-frame { padding: 22px 20px 48px; }
-      .scene-visual svg { width: min(94vw, 620px); max-height: 39vh; }
-      body.is-last-scene .site-side-nav { bottom: calc(var(--footer-height) + 12px); }
-      .site-footer { padding: 14px 16px 16px; font-size: 9px; line-height: 1.5; }
+
+      body.is-last-scene .site-side-nav {
+        bottom: calc(var(--footer-height) + 12px);
+      }
     }
 
     @media (max-width: 520px) {
-      :root { --page-pad: 18px; --title-size: clamp(36px, 10vw, 44px); }
-      .scene-frame { padding: 18px 18px 44px; }
-      .scene-visual svg { max-height: 35vh; }
+      .experience-svg {
+        width: min(100vw, 650px) !important;
+        max-height: 35vh !important;
+      }
+
+      .experience-caption {
+        font-size: 21px;
+      }
+
+      .experience-mini {
+        font-size: 11px;
+      }
     }
 
     @media (max-height: 700px) and (max-width: 820px) {
-      :root { --title-size: clamp(30px, 6.5vh, 38px); --desc-size: 12px; --copy-gap: 7px; }
-      .scene-frame { padding-top: 12px; padding-bottom: 38px; }
-      .scene-visual svg { max-height: 31vh; }
-      .site-footer { padding-top: 10px; padding-bottom: 10px; }
+      .experience-svg {
+        max-height: 30vh !important;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .kitchen-apron,
-      .kitchen-ladle,
-      .kitchen-note,
-      .kitchen-phone,
-      .phone-alert,
-      .kitchen-steam,
-      .kitchen-produce { animation: none !important; }
+      .journey-path-live,
+      .journey-runner,
+      .stage-01,
+      .stage-02,
+      .stage-03,
+      .mix-arm,
+      .mix-liquid,
+      .steam-a,
+      .steam-b,
+      .pan-hand,
+      .ticket-1,
+      .ticket-2,
+      .store-a,
+      .store-b,
+      .store-c,
+      .shop-light-a,
+      .shop-light-b,
+      .shop-light-c,
+      .clip-board {
+        animation: none !important;
+      }
+
+      .stage-01,
+      .stage-02,
+      .stage-03,
+      .store-a,
+      .store-b,
+      .store-c {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .journey-path-live {
+        stroke-dashoffset: 0 !important;
+      }
+
+      .journey-runner {
+        opacity: 0 !important;
+      }
     }
 </style>
 </head>
@@ -1443,96 +1623,315 @@
             </p>
           </div>
 
+
           <div class="scene-visual" aria-hidden="true">
-            <svg
-              class="about-kitchen-stage"
-              viewBox="0 0 1000 560"
-              role="img"
-              aria-label="식당 현장의 작업대"
-            >
-              <!-- 조리 설비 -->
-              <path d="M792 182 H942 V432 H792" fill="none" stroke="rgba(255,255,255,.34)" stroke-width="5" stroke-linecap="round"/>
-              <rect x="826" y="210" width="112" height="102" rx="8" fill="none" stroke="#fff" stroke-width="7"/>
-              <path d="M826 327 H944 M834 375 H936" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="6" stroke-linecap="round"/>
-              <circle cx="852" cy="358" r="13" fill="none" stroke="#fff" stroke-width="5"/>
-              <circle cx="912" cy="358" r="13" fill="none" stroke="#fff" stroke-width="5"/>
-              <path class="kitchen-steam s1" d="M852 182 C840 168 865 158 850 140" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-              <path class="kitchen-steam s2" d="M888 183 C875 168 901 157 887 136" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+            <svg class="experience-svg" viewBox="0 0 1000 560">
 
-              <!-- 작업대 -->
-              <path d="M84 346 H778" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-              <path d="M112 346 V475 M748 346 V475" fill="none" stroke="rgba(255,255,255,.78)" stroke-width="8" stroke-linecap="round"/>
-              <path d="M116 440 H746" fill="none" stroke="rgba(255,255,255,.58)" stroke-width="5" stroke-linecap="round"/>
+              <!-- 하나의 경험선 -->
+              <path class="journey-path-base"
+                    d="M105 420 C210 392 285 430 375 405
+                       C470 379 560 420 655 399
+                       C755 376 835 410 915 376"/>
 
-              <!-- 하단 바트 -->
-              <g opacity=".78">
-                <rect x="390" y="397" width="150" height="26" rx="7" fill="none" stroke="#fff" stroke-width="5"/>
-                <rect x="398" y="408" width="142" height="26" rx="7" fill="none" stroke="#fff" stroke-width="5"/>
-                <rect x="406" y="419" width="134" height="26" rx="7" fill="none" stroke="#fff" stroke-width="5"/>
-                <rect x="570" y="402" width="148" height="46" rx="11" fill="none" stroke="#fff" stroke-width="6"/>
-                <path d="M584 402 Q587 419 604 419 H688 Q705 419 708 402" fill="none" stroke="#fff" stroke-width="5"/>
+              <path class="journey-path-live"
+                    d="M105 420 C210 392 285 430 375 405
+                       C470 379 560 420 655 399
+                       C755 376 835 410 915 376"/>
+
+              <!-- 시작점 -->
+              <circle cx="105" cy="420" r="10"
+                      fill="#FF8C00"
+                      stroke="#fff"
+                      stroke-width="5"/>
+
+              <!-- 움직이는 경험 포인트 -->
+              <g class="journey-runner" transform="translate(105 420)">
+                <circle r="11" fill="#FF8C00" stroke="#fff" stroke-width="5"/>
+                <circle r="3.5" fill="#fff"/>
               </g>
 
-              <!-- 앞치마 -->
-              <g class="kitchen-apron">
-                <path d="M130 312 C132 279 148 254 175 247 C201 254 218 279 220 312 L236 493 C210 511 144 511 118 493 Z" fill="none" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
-                <path d="M151 250 Q175 230 199 250 M118 320 L86 384 M220 320 L249 378" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
-                <rect x="154" y="401" width="48" height="43" rx="8" fill="none" stroke="#fff" stroke-width="6"/>
-                <rect x="169" y="319" width="39" height="16" rx="5" fill="#FF8C00"/>
-              </g>
+              <!-- ===================================================
+                   01 · 식품 제조
+                   =================================================== -->
+              <g class="experience-stage stage-01">
 
-              <!-- 식재료 바트 -->
-              <g class="kitchen-produce">
-                <path d="M196 246 H390 L382 324 Q294 348 206 324 Z" fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
-                <path d="M206 246 L219 230 H378 L390 246" fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
-                <path d="M232 273 C245 253 263 255 276 273 C286 252 305 252 316 273 C328 252 348 252 360 273" fill="none" stroke="#FF8C00" stroke-width="6" stroke-linecap="round"/>
-                <path d="M252 253 Q260 237 270 230 M304 252 Q312 235 324 226 M342 254 Q352 238 362 232" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-              </g>
-
-              <!-- 국자 -->
-              <g class="kitchen-ladle">
-                <path d="M347 334 L465 286" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-                <circle cx="474" cy="282" r="20" fill="none" stroke="#fff" stroke-width="8"/>
-                <path d="M347 334 L329 340" fill="none" stroke="#FF8C00" stroke-width="9" stroke-linecap="round"/>
-              </g>
-
-              <!-- 작은 소스 바트 -->
-              <rect x="525" y="292" width="92" height="46" rx="12" fill="none" stroke="#fff" stroke-width="6"/>
-              <path d="M536 305 Q571 316 606 305" fill="none" stroke="rgba(255,140,0,.88)" stroke-width="5" stroke-linecap="round"/>
-
-              <!-- 발주 메모 -->
-              <g class="kitchen-note">
-                <rect x="503" y="136" width="120" height="146" rx="7" fill="#fff"/>
-                <rect x="548" y="119" width="28" height="33" rx="3" fill="none" stroke="#FF8C00" stroke-width="7"/>
-                <path d="M527 179 H591 M527 208 H595 M527 237 H585" fill="none" stroke="#238B22" stroke-width="6" stroke-linecap="round"/>
-                <path d="M583 250 L590 257 L603 243" fill="none" stroke="#238B22" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-
-              <!-- 계산기 -->
-              <g transform="translate(635 262) rotate(7 49 45)">
-                <path d="M10 2 H92 L84 90 H0 Z" fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
-                <rect x="20" y="12" width="61" height="18" rx="3" fill="none" stroke="#FF8C00" stroke-width="4"/>
-                <g fill="#fff">
-                  <circle cx="22" cy="48" r="4"/><circle cx="43" cy="48" r="4"/><circle cx="64" cy="48" r="4"/>
-                  <circle cx="22" cy="67" r="4"/><circle cx="43" cy="67" r="4"/><circle cx="64" cy="67" r="4"/>
+                <!-- Number -->
+                <g class="experience-label" transform="translate(74 35)">
+                  <circle class="experience-number-ring" cx="54" cy="54" r="47"/>
+                  <text class="experience-number" x="54" y="69" text-anchor="middle">01</text>
+                  <path d="M92 19 l15 -13 M101 32 l20 -4"
+                        class="svg-orange"/>
                 </g>
+
+                <!-- 같은 사람 01 -->
+                <g class="experience-person" transform="translate(72 130)">
+                  <!-- 머리 -->
+                  <circle cx="104" cy="57" r="28" class="svg-white-fill"/>
+                  <!-- 위생모 -->
+                  <path d="M77 49
+                           C75 29 88 16 104 18
+                           C112 7 136 12 138 30
+                           C148 36 146 53 138 58
+                           C122 48 93 47 77 49 Z"
+                        class="svg-white-fill"/>
+                  <path d="M84 56 Q104 45 132 55"
+                        fill="none" stroke="#238B22" stroke-width="5" stroke-linecap="round"/>
+                  <!-- 몸 -->
+                  <path d="M66 111
+                           Q104 89 143 111
+                           L156 217
+                           H55 Z"
+                        class="svg-white-fill"/>
+                  <!-- 앞섶 -->
+                  <path d="M103 103 V212"
+                        fill="none" stroke="#238B22" stroke-width="5" stroke-linecap="round"/>
+                  <circle cx="92" cy="136" r="3.5" fill="#238B22"/>
+                  <circle cx="92" cy="157" r="3.5" fill="#238B22"/>
+
+                  <!-- 왼팔 -->
+                  <path d="M69 122 Q46 146 50 187"
+                        class="svg-line"/>
+                  <path d="M50 187 Q61 201 78 190"
+                        class="svg-line"/>
+
+                  <!-- 오른팔 + 교반봉 -->
+                  <g class="mix-arm">
+                    <path d="M140 122 Q168 146 157 174"
+                          class="svg-line"/>
+                    <path d="M157 174 L125 235"
+                          class="svg-line"/>
+                    <path d="M128 229 L110 264"
+                          class="svg-orange"/>
+                  </g>
+                </g>
+
+                <!-- 배합통 -->
+                <g class="experience-prop" transform="translate(62 321)">
+                  <ellipse cx="118" cy="0" rx="83" ry="24"
+                           fill="none" stroke="#fff" stroke-width="7"/>
+                  <path d="M35 0 L47 85
+                           Q118 118 189 85
+                           L201 0"
+                        class="svg-line"/>
+                  <g class="mix-liquid">
+                    <path d="M57 7 Q118 -7 178 7"
+                          class="svg-orange"/>
+                    <path d="M70 23 Q118 13 165 23"
+                          fill="none" stroke="rgba(255,140,0,.6)" stroke-width="4" stroke-linecap="round"/>
+                  </g>
+                  <!-- 제품 파우치 -->
+                  <g transform="translate(-26 18)">
+                    <path d="M0 0 H47 L43 70 H4 Z"
+                          fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+                    <rect x="10" y="24" width="27" height="20" rx="4"
+                          fill="#FF8C00"/>
+                  </g>
+                </g>
+
+                <!-- 캡션 -->
+                <text class="experience-caption" x="183" y="505" text-anchor="middle">식품 제조</text>
+                <text class="experience-mini" x="183" y="530" text-anchor="middle">만들어 본 사람</text>
               </g>
 
-              <!-- 휴대폰 -->
-              <g class="kitchen-phone">
-                <rect x="704" y="282" width="65" height="50" rx="8" fill="none" stroke="#fff" stroke-width="6"/>
-                <path d="M717 320 H754" fill="none" stroke="#FF8C00" stroke-width="5" stroke-linecap="round"/>
-                <circle class="phone-alert" cx="764" cy="278" r="7" fill="#FF8C00"/>
+              <!-- ===================================================
+                   02 · 식당 운영
+                   =================================================== -->
+              <g class="experience-stage stage-02">
+
+                <!-- Number -->
+                <g class="experience-label" transform="translate(382 35)">
+                  <circle class="experience-number-ring" cx="54" cy="54" r="47"/>
+                  <text class="experience-number" x="54" y="69" text-anchor="middle">02</text>
+                  <path d="M92 19 l15 -13 M101 32 l20 -4"
+                        class="svg-orange"/>
+                </g>
+
+                <!-- 같은 사람 02 -->
+                <g class="experience-person" transform="translate(370 132)">
+                  <!-- 머리 -->
+                  <circle cx="100" cy="56" r="28" class="svg-white-fill"/>
+                  <!-- 머리/캡 -->
+                  <path d="M74 51
+                           Q74 27 100 25
+                           Q125 27 129 51
+                           Q105 44 74 51 Z"
+                        class="svg-white-fill"/>
+                  <path d="M80 54 Q102 45 127 54"
+                        fill="none" stroke="#238B22" stroke-width="5" stroke-linecap="round"/>
+
+                  <!-- 몸 + 앞치마 -->
+                  <path d="M60 107
+                           Q100 88 141 108
+                           L153 222
+                           H48 Z"
+                        class="svg-white-fill"/>
+                  <path d="M79 116 L90 218
+                           M121 116 L111 218
+                           M79 116 Q100 129 121 116"
+                        fill="none"
+                        stroke="#238B22"
+                        stroke-width="5"
+                        stroke-linecap="round"/>
+
+                  <!-- 왼팔 -->
+                  <path d="M63 126 Q42 148 48 180"
+                        class="svg-line"/>
+
+                  <!-- 오른팔 + 팬 -->
+                  <g class="pan-hand">
+                    <path d="M139 127 Q161 151 154 178"
+                          class="svg-line"/>
+                    <path d="M154 178 L188 210"
+                          class="svg-line"/>
+                    <path d="M190 210 L247 210"
+                          class="svg-line"/>
+                  </g>
+                </g>
+
+                <!-- 화구 / 팬 -->
+                <g class="experience-prop" transform="translate(397 344)">
+                  <rect x="0" y="0" width="185" height="75" rx="9"
+                        fill="none" stroke="#fff" stroke-width="7"/>
+                  <circle cx="48" cy="54" r="8" fill="#fff"/>
+                  <circle cx="92" cy="54" r="8" fill="#fff"/>
+                  <circle cx="136" cy="54" r="8" fill="#fff"/>
+                  <path d="M59 0
+                           C72 -27 113 -31 136 -8
+                           C112 10 76 12 59 0 Z"
+                        fill="none" stroke="#fff" stroke-width="7"/>
+                  <!-- 불 -->
+                  <path d="M78 5 C84 -16 95 -16 99 5
+                           M103 5 C111 -18 121 -17 124 5"
+                        class="svg-orange"/>
+                </g>
+
+                <!-- 김 -->
+                <path class="steam-a svg-line-soft"
+                      d="M492 322 C480 307 504 292 493 275"/>
+                <path class="steam-b svg-line-soft"
+                      d="M527 320 C515 302 540 289 527 267"/>
+
+                <!-- 주문표 -->
+                <g class="ticket-1" transform="translate(570 183)">
+                  <rect x="0" y="0" width="55" height="75" rx="5"
+                        fill="none" stroke="#fff" stroke-width="5"/>
+                  <path d="M11 17 H43 M11 32 H37 M11 47 H45"
+                        class="svg-line-soft"/>
+                </g>
+
+                <g class="ticket-2" transform="translate(630 205)">
+                  <rect x="0" y="0" width="48" height="66" rx="5"
+                        fill="none" stroke="#fff" stroke-width="5"/>
+                  <path d="M10 16 H37 M10 31 H34"
+                        class="svg-line-soft"/>
+                </g>
+
+                <!-- 캡션 -->
+                <text class="experience-caption" x="498" y="505" text-anchor="middle">식당 운영</text>
+                <text class="experience-mini" x="498" y="530" text-anchor="middle">장사해 본 사람</text>
               </g>
 
-              <!-- 열쇠 -->
-              <g transform="translate(744 343) rotate(-8)">
-                <circle cx="0" cy="0" r="12" fill="none" stroke="#fff" stroke-width="6"/>
-                <path d="M11 0 H56 L66 10 L58 18 L49 10" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                <rect x="61" y="8" width="16" height="24" rx="4" fill="#FF8C00"/>
+              <!-- ===================================================
+                   03 · 프랜차이즈 운영
+                   =================================================== -->
+              <g class="experience-stage stage-03">
+
+                <!-- Number -->
+                <g class="experience-label" transform="translate(700 35)">
+                  <circle class="experience-number-ring" cx="54" cy="54" r="47"/>
+                  <text class="experience-number" x="54" y="69" text-anchor="middle">03</text>
+                  <path d="M92 19 l15 -13 M101 32 l20 -4"
+                        class="svg-orange"/>
+                </g>
+
+                <!-- 같은 사람 03 -->
+                <g class="experience-person" transform="translate(733 144)">
+                  <circle cx="92" cy="53" r="27" class="svg-white-fill"/>
+                  <path d="M67 48 Q70 28 91 26 Q112 28 117 48"
+                        class="svg-white-fill"/>
+                  <path d="M61 107
+                           Q92 88 126 108
+                           L138 208
+                           H49 Z"
+                        class="svg-white-fill"/>
+                  <path d="M75 110 L92 131 L108 110"
+                        fill="none" stroke="#238B22" stroke-width="5" stroke-linecap="round"/>
+
+                  <!-- clipboard -->
+                  <g class="clip-board" transform="translate(16 135)">
+                    <rect x="0" y="0" width="58" height="67" rx="5"
+                          fill="none" stroke="#fff" stroke-width="6"/>
+                    <rect x="18" y="-7" width="22" height="14" rx="4"
+                          fill="#FF8C00"/>
+                    <path d="M13 24 H44 M13 39 H40"
+                          class="svg-line-soft"/>
+                  </g>
+
+                  <!-- 열쇠 -->
+                  <g transform="translate(126 120)">
+                    <circle cx="0" cy="0" r="10"
+                            fill="none" stroke="#fff" stroke-width="6"/>
+                    <path d="M9 0 H42 L50 8 L43 15 L36 8"
+                          class="svg-line"/>
+                    <rect x="46" y="5" width="13" height="20" rx="3"
+                          class="svg-orange-fill"/>
+                  </g>
+                </g>
+
+                <!-- 동일 간판 매장 3개 -->
+                <g transform="translate(667 324)">
+                  <g class="store-a">
+                    <path d="M0 38 H82 V96 H0 Z"
+                          fill="none" stroke="#fff" stroke-width="5"/>
+                    <path d="M-5 38 L8 8 H74 L87 38"
+                          class="svg-line"/>
+                    <path class="shop-light-a"
+                          d="M8 24 H74"
+                          fill="none" stroke="#FF8C00" stroke-width="10"
+                          stroke-dasharray="12 9"/>
+                    <rect x="29" y="62" width="22" height="34" rx="3"
+                          fill="none" stroke="#fff" stroke-width="4"/>
+                  </g>
+
+                  <g class="store-b" transform="translate(92 -22)">
+                    <path d="M0 38 H92 V105 H0 Z"
+                          fill="none" stroke="#fff" stroke-width="5"/>
+                    <path d="M-6 38 L10 3 H82 L98 38"
+                          class="svg-line"/>
+                    <path class="shop-light-b"
+                          d="M10 22 H82"
+                          fill="none" stroke="#FF8C00" stroke-width="11"
+                          stroke-dasharray="13 9"/>
+                    <rect x="34" y="64" width="24" height="41" rx="3"
+                          fill="none" stroke="#fff" stroke-width="4"/>
+                    <circle cx="74" cy="66" r="7" class="svg-orange-fill"/>
+                  </g>
+
+                  <g class="store-c" transform="translate(194 0)">
+                    <path d="M0 38 H82 V96 H0 Z"
+                          fill="none" stroke="#fff" stroke-width="5"/>
+                    <path d="M-5 38 L8 8 H74 L87 38"
+                          class="svg-line"/>
+                    <path class="shop-light-c"
+                          d="M8 24 H74"
+                          fill="none" stroke="#FF8C00" stroke-width="10"
+                          stroke-dasharray="12 9"/>
+                    <rect x="29" y="62" width="22" height="34" rx="3"
+                          fill="none" stroke="#fff" stroke-width="4"/>
+                  </g>
+                </g>
+
+                <!-- 성장 화살표 -->
+                <path d="M873 276 C907 253 928 225 942 190"
+                      class="svg-orange"/>
+                <path d="M925 198 L942 190 L947 208"
+                      class="svg-orange"/>
+
+                <!-- 캡션 -->
+                <text class="experience-caption" x="812" y="505" text-anchor="middle">프랜차이즈 운영</text>
+                <text class="experience-mini" x="812" y="530" text-anchor="middle">여러 매장을 운영해 본 사람</text>
               </g>
 
-              <path d="M88 510 H942" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
             </svg>
           </div>
 
@@ -1755,6 +2154,7 @@
 
     function syncFooterHeight() {
       if (!siteFooter) return;
+
       document.documentElement.style.setProperty(
         "--footer-height",
         `${Math.ceil(siteFooter.getBoundingClientRect().height)}px`
@@ -1783,50 +2183,21 @@
     syncViewport();
     syncFooterHeight();
 
-    let resizeSnapTimer = null;
-
-    function resnapCurrentScene() {
-      window.clearTimeout(resizeSnapTimer);
-      resizeSnapTimer = window.setTimeout(() => {
-        const sceneHeight = snapRoot.clientHeight;
-        if (!sceneHeight) return;
-        const currentIndex = Math.round(snapRoot.scrollTop / sceneHeight);
-        const safeIndex = Math.max(0, Math.min(currentIndex, scenes.length - 1));
-        snapRoot.scrollTo({ top: safeIndex * sceneHeight, behavior: "auto" });
-      }, 80);
-    }
-
     if ("ResizeObserver" in window && siteHeader) {
-      const ro = new ResizeObserver(() => {
-        syncViewport();
-        resnapCurrentScene();
-      });
+      const ro = new ResizeObserver(syncViewport);
       ro.observe(siteHeader);
     }
 
     if ("ResizeObserver" in window && siteFooter) {
-      const footerResizeObserver = new ResizeObserver(syncFooterHeight);
-      footerResizeObserver.observe(siteFooter);
+      const footerRO = new ResizeObserver(syncFooterHeight);
+      footerRO.observe(siteFooter);
     }
 
-    window.addEventListener("resize", () => {
-      syncViewport();
-      syncFooterHeight();
-      resnapCurrentScene();
-    });
-
-    window.addEventListener("orientationchange", () => {
-      syncViewport();
-      syncFooterHeight();
-      resnapCurrentScene();
-    });
+    window.addEventListener("resize", syncViewport);
+    window.addEventListener("orientationchange", syncViewport);
 
     if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", () => {
-        syncViewport();
-        syncFooterHeight();
-        resnapCurrentScene();
-      });
+      window.visualViewport.addEventListener("resize", syncViewport);
     }
 
     /* Mobile menu */
@@ -1864,6 +2235,7 @@
     /* Scene activation */
     function setActiveScene(scene) {
       if (!scene) return;
+
       scenes.forEach((item) => {
         item.classList.toggle("is-active", item === scene);
       });
@@ -1872,6 +2244,7 @@
         "is-last-scene",
         scene === scenes[scenes.length - 1]
       );
+
       syncFooterHeight();
 
       indicatorButtons.forEach((button) => {
@@ -1898,16 +2271,17 @@
     );
 
     scenes.forEach((scene) => observer.observe(scene));
+    setActiveScene(scenes[0]);
 
     function scrollToScene(id) {
       const target = document.getElementById(id);
-      if (!target || !snapRoot) return;
+      if (!target) return;
 
-      snapRoot.scrollTo({
-        top: target.offsetTop,
+      target.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
           ? "auto"
-          : "smooth"
+          : "smooth",
+        block: "start"
       });
     }
 
@@ -1918,28 +2292,6 @@
           scrollToScene(button.dataset.next);
         });
       });
-
-    let snapSettleTimer = null;
-
-    snapRoot.addEventListener(
-      "scroll",
-      () => {
-        window.clearTimeout(snapSettleTimer);
-        snapSettleTimer = window.setTimeout(() => {
-          const sceneHeight = snapRoot.clientHeight;
-          if (!sceneHeight) return;
-          const nearestIndex = Math.round(snapRoot.scrollTop / sceneHeight);
-          const safeIndex = Math.max(0, Math.min(nearestIndex, scenes.length - 1));
-          const exactTop = safeIndex * sceneHeight;
-          if (Math.abs(snapRoot.scrollTop - exactTop) > 1) {
-            snapRoot.scrollTo({ top: exactTop, behavior: "auto" });
-          }
-        }, 140);
-      },
-      { passive: true }
-    );
-
-    setActiveScene(scenes[0]);
 
     /* Horizontal site swipe:
        right swipe -> Index / left swipe -> Brand
