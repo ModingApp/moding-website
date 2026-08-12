@@ -430,16 +430,7 @@
     }
 
     .journey-runner {
-      animation: runnerMove 8.8s cubic-bezier(.65,0,.35,1) infinite;
-    }
-
-    @keyframes runnerMove {
-      0%,7%   { transform: translate(0,0); opacity: 0; }
-      12%     { opacity: 1; }
-      30%     { transform: translate(265px,-11px); }
-      56%     { transform: translate(540px,4px); }
-      82%,94% { transform: translate(785px,-12px); opacity: 1; }
-      100%    { transform: translate(785px,-12px); opacity: 0; }
+      opacity: 1;
     }
 
     .stage-01 {
@@ -455,21 +446,21 @@
     }
 
     @keyframes stageOne {
-      0%,7% { opacity:.28; transform:translateY(7px) scale(.97); }
-      12%,31% { opacity:1; transform:translateY(0) scale(1); }
-      42%,100% { opacity:.54; transform:translateY(0) scale(.985); }
+      0%,7%   { opacity:.38; }
+      12%,31% { opacity:1; }
+      42%,100% { opacity:.62; }
     }
 
     @keyframes stageTwo {
-      0%,28% { opacity:.28; transform:translateY(7px) scale(.97); }
-      36%,58% { opacity:1; transform:translateY(0) scale(1); }
-      69%,100% { opacity:.54; transform:translateY(0) scale(.985); }
+      0%,28%  { opacity:.38; }
+      36%,58% { opacity:1; }
+      69%,100% { opacity:.62; }
     }
 
     @keyframes stageThree {
-      0%,56% { opacity:.28; transform:translateY(7px) scale(.97); }
-      64%,92% { opacity:1; transform:translateY(0) scale(1); }
-      100% { opacity:.65; transform:translateY(0) scale(.99); }
+      0%,56%  { opacity:.38; }
+      64%,92% { opacity:1; }
+      100% { opacity:.72; }
     }
 
     .stage-01 .experience-person {
@@ -1509,6 +1500,40 @@
         opacity: 0 !important;
       }
     }
+
+    /* =========================================================
+       EXPERIENCE SVG · ALIGNMENT LOCK
+       세 장면의 중심/바닥/캡션 위치 고정
+       ========================================================= */
+    .experience-stage {
+      transform: none !important;
+      transform-origin: center !important;
+    }
+
+    .experience-stage.stage-01,
+    .experience-stage.stage-02,
+    .experience-stage.stage-03 {
+      transform: none !important;
+    }
+
+    .experience-caption,
+    .experience-mini {
+      dominant-baseline: alphabetic;
+    }
+
+    @media (max-width: 820px) {
+      .experience-svg {
+        width: min(98vw, 720px) !important;
+        max-height: 42vh !important;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .experience-svg {
+        width: min(104vw, 700px) !important;
+        max-height: 36vh !important;
+      }
+    }
 </style>
 </head>
 
@@ -1627,309 +1652,441 @@
           <div class="scene-visual" aria-hidden="true">
             <svg class="experience-svg" viewBox="0 0 1000 560">
 
-              <!-- 하나의 경험선 -->
-              <path class="journey-path-base"
-                    d="M105 420 C210 392 285 430 375 405
-                       C470 379 560 420 655 399
-                       C755 376 835 410 915 376"/>
+              <!-- ==================================================
+                   COMMON GRID
+                   x = 165 / 500 / 835
+                   number y = 67
+                   human center y ≈ 210
+                   field baseline y = 382
+                   journey y ≈ 423
+                   caption y = 485 / 514
+                   ================================================== -->
+
+              <!-- 하나의 경력선 -->
+              <path id="experiencePath"
+                    class="journey-path-base"
+                    d="M165 423
+                       C270 405 390 441 500 423
+                       C610 405 730 441 835 423"/>
 
               <path class="journey-path-live"
-                    d="M105 420 C210 392 285 430 375 405
-                       C470 379 560 420 655 399
-                       C755 376 835 410 915 376"/>
+                    d="M165 423
+                       C270 405 390 441 500 423
+                       C610 405 730 441 835 423"/>
 
-              <!-- 시작점 -->
-              <circle cx="105" cy="420" r="10"
-                      fill="#FF8C00"
-                      stroke="#fff"
-                      stroke-width="5"/>
+              <!-- 세 기준점 -->
+              <circle cx="165" cy="423" r="9"
+                      fill="#238B22" stroke="#fff" stroke-width="4"/>
+              <circle cx="500" cy="423" r="9"
+                      fill="#238B22" stroke="#fff" stroke-width="4"/>
+              <circle cx="835" cy="423" r="9"
+                      fill="#238B22" stroke="#fff" stroke-width="4"/>
 
-              <!-- 움직이는 경험 포인트 -->
-              <g class="journey-runner" transform="translate(105 420)">
+              <!-- 실제 경로를 따라가는 주황 포인트 -->
+              <g class="journey-runner">
                 <circle r="11" fill="#FF8C00" stroke="#fff" stroke-width="5"/>
                 <circle r="3.5" fill="#fff"/>
+                <animateMotion
+                  dur="8.8s"
+                  repeatCount="indefinite"
+                  rotate="auto"
+                  keyTimes="0;0.08;0.34;0.60;0.88;1"
+                  keyPoints="0;0;0.5;0.5;1;1"
+                  calcMode="linear"
+                >
+                  <mpath href="#experiencePath"/>
+                </animateMotion>
               </g>
 
-              <!-- ===================================================
+
+              <!-- ==================================================
                    01 · 식품 제조
-                   =================================================== -->
+                   ================================================== -->
               <g class="experience-stage stage-01">
 
-                <!-- Number -->
-                <g class="experience-label" transform="translate(74 35)">
-                  <circle class="experience-number-ring" cx="54" cy="54" r="47"/>
-                  <text class="experience-number" x="54" y="69" text-anchor="middle">01</text>
-                  <path d="M92 19 l15 -13 M101 32 l20 -4"
+                <!-- 01 -->
+                <g class="experience-label">
+                  <circle class="experience-number-ring"
+                          cx="165" cy="67" r="43"/>
+                  <text class="experience-number"
+                        x="165" y="82"
+                        text-anchor="middle">01</text>
+                  <path d="M197 35 l14 -12 M204 49 l18 -3"
                         class="svg-orange"/>
                 </g>
 
-                <!-- 같은 사람 01 -->
-                <g class="experience-person" transform="translate(72 130)">
-                  <!-- 머리 -->
-                  <circle cx="104" cy="57" r="28" class="svg-white-fill"/>
+                <!-- 제조 작업자 -->
+                <g class="experience-person">
                   <!-- 위생모 -->
-                  <path d="M77 49
-                           C75 29 88 16 104 18
-                           C112 7 136 12 138 30
-                           C148 36 146 53 138 58
-                           C122 48 93 47 77 49 Z"
-                        class="svg-white-fill"/>
-                  <path d="M84 56 Q104 45 132 55"
-                        fill="none" stroke="#238B22" stroke-width="5" stroke-linecap="round"/>
+                  <path d="M130 153
+                           C129 132 143 120 158 122
+                           C165 109 187 113 189 130
+                           C202 136 200 153 191 160
+                           Q163 149 130 153 Z"
+                        fill="#fff"/>
+                  <circle cx="165" cy="166" r="26" fill="#fff"/>
+                  <path d="M139 157 Q165 146 191 157"
+                        fill="none"
+                        stroke="#238B22"
+                        stroke-width="5"
+                        stroke-linecap="round"/>
+
                   <!-- 몸 -->
-                  <path d="M66 111
-                           Q104 89 143 111
-                           L156 217
-                           H55 Z"
-                        class="svg-white-fill"/>
-                  <!-- 앞섶 -->
-                  <path d="M103 103 V212"
-                        fill="none" stroke="#238B22" stroke-width="5" stroke-linecap="round"/>
-                  <circle cx="92" cy="136" r="3.5" fill="#238B22"/>
-                  <circle cx="92" cy="157" r="3.5" fill="#238B22"/>
+                  <path d="M123 218
+                           Q165 192 207 218
+                           L218 319
+                           H112 Z"
+                        fill="#fff"/>
+                  <path d="M165 205 V312"
+                        fill="none"
+                        stroke="#238B22"
+                        stroke-width="5"
+                        stroke-linecap="round"/>
+                  <circle cx="151" cy="238" r="3.5" fill="#238B22"/>
+                  <circle cx="151" cy="260" r="3.5" fill="#238B22"/>
 
                   <!-- 왼팔 -->
-                  <path d="M69 122 Q46 146 50 187"
+                  <path d="M126 231 Q101 250 105 286"
                         class="svg-line"/>
-                  <path d="M50 187 Q61 201 78 190"
+                  <path d="M105 286 Q117 299 132 286"
                         class="svg-line"/>
 
-                  <!-- 오른팔 + 교반봉 -->
+                  <!-- 오른팔/교반 -->
                   <g class="mix-arm">
-                    <path d="M140 122 Q168 146 157 174"
+                    <path d="M204 229 Q230 248 222 276"
                           class="svg-line"/>
-                    <path d="M157 174 L125 235"
+                    <path d="M222 276 L192 332"
                           class="svg-line"/>
-                    <path d="M128 229 L110 264"
+                    <path d="M195 327 L178 355"
                           class="svg-orange"/>
                   </g>
                 </g>
 
                 <!-- 배합통 -->
-                <g class="experience-prop" transform="translate(62 321)">
-                  <ellipse cx="118" cy="0" rx="83" ry="24"
-                           fill="none" stroke="#fff" stroke-width="7"/>
-                  <path d="M35 0 L47 85
-                           Q118 118 189 85
-                           L201 0"
+                <g class="experience-prop">
+                  <ellipse cx="165" cy="340"
+                           rx="82" ry="22"
+                           fill="none"
+                           stroke="#fff"
+                           stroke-width="7"/>
+                  <path d="M83 340
+                           L96 393
+                           Q165 413 234 393
+                           L247 340"
                         class="svg-line"/>
+
                   <g class="mix-liquid">
-                    <path d="M57 7 Q118 -7 178 7"
+                    <path d="M105 343 Q165 330 225 343"
                           class="svg-orange"/>
-                    <path d="M70 23 Q118 13 165 23"
-                          fill="none" stroke="rgba(255,140,0,.6)" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M119 357 Q165 348 211 357"
+                          fill="none"
+                          stroke="rgba(255,140,0,.62)"
+                          stroke-width="4"
+                          stroke-linecap="round"/>
                   </g>
-                  <!-- 제품 파우치 -->
-                  <g transform="translate(-26 18)">
-                    <path d="M0 0 H47 L43 70 H4 Z"
-                          fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
-                    <rect x="10" y="24" width="27" height="20" rx="4"
+
+                  <!-- 완성 파우치 -->
+                  <g transform="translate(61 322)">
+                    <path d="M0 0 H39 L36 60 H3 Z"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-width="5"
+                          stroke-linejoin="round"/>
+                    <rect x="9" y="20"
+                          width="22" height="18"
+                          rx="4"
                           fill="#FF8C00"/>
                   </g>
                 </g>
 
-                <!-- 캡션 -->
-                <text class="experience-caption" x="183" y="505" text-anchor="middle">식품 제조</text>
-                <text class="experience-mini" x="183" y="530" text-anchor="middle">만들어 본 사람</text>
+                <text class="experience-caption"
+                      x="165" y="485"
+                      text-anchor="middle">식품 제조</text>
+                <text class="experience-mini"
+                      x="165" y="514"
+                      text-anchor="middle">만들어 본 사람</text>
               </g>
 
-              <!-- ===================================================
+
+              <!-- ==================================================
                    02 · 식당 운영
-                   =================================================== -->
+                   ================================================== -->
               <g class="experience-stage stage-02">
 
-                <!-- Number -->
-                <g class="experience-label" transform="translate(382 35)">
-                  <circle class="experience-number-ring" cx="54" cy="54" r="47"/>
-                  <text class="experience-number" x="54" y="69" text-anchor="middle">02</text>
-                  <path d="M92 19 l15 -13 M101 32 l20 -4"
+                <!-- 02 -->
+                <g class="experience-label">
+                  <circle class="experience-number-ring"
+                          cx="500" cy="67" r="43"/>
+                  <text class="experience-number"
+                        x="500" y="82"
+                        text-anchor="middle">02</text>
+                  <path d="M532 35 l14 -12 M539 49 l18 -3"
                         class="svg-orange"/>
                 </g>
 
-                <!-- 같은 사람 02 -->
-                <g class="experience-person" transform="translate(370 132)">
-                  <!-- 머리 -->
-                  <circle cx="100" cy="56" r="28" class="svg-white-fill"/>
-                  <!-- 머리/캡 -->
-                  <path d="M74 51
-                           Q74 27 100 25
-                           Q125 27 129 51
-                           Q105 44 74 51 Z"
-                        class="svg-white-fill"/>
-                  <path d="M80 54 Q102 45 127 54"
-                        fill="none" stroke="#238B22" stroke-width="5" stroke-linecap="round"/>
+                <!-- 식당 작업자 -->
+                <g class="experience-person">
+                  <path d="M468 151
+                           Q471 128 499 127
+                           Q527 128 531 151
+                           Q503 143 468 151 Z"
+                        fill="#fff"/>
+                  <circle cx="500" cy="165" r="26" fill="#fff"/>
+                  <path d="M474 156 Q501 146 528 156"
+                        fill="none"
+                        stroke="#238B22"
+                        stroke-width="5"
+                        stroke-linecap="round"/>
 
-                  <!-- 몸 + 앞치마 -->
-                  <path d="M60 107
-                           Q100 88 141 108
-                           L153 222
-                           H48 Z"
-                        class="svg-white-fill"/>
-                  <path d="M79 116 L90 218
-                           M121 116 L111 218
-                           M79 116 Q100 129 121 116"
+                  <path d="M458 217
+                           Q500 192 542 217
+                           L553 318
+                           H447 Z"
+                        fill="#fff"/>
+
+                  <!-- 앞치마 -->
+                  <path d="M477 222 L486 310
+                           M523 222 L514 310
+                           M477 222 Q500 235 523 222"
                         fill="none"
                         stroke="#238B22"
                         stroke-width="5"
                         stroke-linecap="round"/>
 
                   <!-- 왼팔 -->
-                  <path d="M63 126 Q42 148 48 180"
+                  <path d="M461 232 Q438 251 443 283"
                         class="svg-line"/>
 
-                  <!-- 오른팔 + 팬 -->
+                  <!-- 오른팔 -->
                   <g class="pan-hand">
-                    <path d="M139 127 Q161 151 154 178"
+                    <path d="M539 231 Q564 250 558 278"
                           class="svg-line"/>
-                    <path d="M154 178 L188 210"
-                          class="svg-line"/>
-                    <path d="M190 210 L247 210"
+                    <path d="M558 278 L592 309"
                           class="svg-line"/>
                   </g>
                 </g>
 
-                <!-- 화구 / 팬 -->
-                <g class="experience-prop" transform="translate(397 344)">
-                  <rect x="0" y="0" width="185" height="75" rx="9"
-                        fill="none" stroke="#fff" stroke-width="7"/>
-                  <circle cx="48" cy="54" r="8" fill="#fff"/>
-                  <circle cx="92" cy="54" r="8" fill="#fff"/>
-                  <circle cx="136" cy="54" r="8" fill="#fff"/>
-                  <path d="M59 0
-                           C72 -27 113 -31 136 -8
-                           C112 10 76 12 59 0 Z"
-                        fill="none" stroke="#fff" stroke-width="7"/>
+                <!-- 팬 + 화구 -->
+                <g class="experience-prop">
+                  <path d="M457 326
+                           C473 308 521 306 542 324
+                           C521 342 475 344 457 326 Z"
+                        fill="none"
+                        stroke="#fff"
+                        stroke-width="7"/>
+                  <path d="M541 324 L594 324"
+                        class="svg-line"/>
+
+                  <rect x="418" y="352"
+                        width="164" height="52"
+                        rx="8"
+                        fill="none"
+                        stroke="#fff"
+                        stroke-width="7"/>
+
+                  <circle cx="455" cy="382" r="6" fill="#fff"/>
+                  <circle cx="500" cy="382" r="6" fill="#fff"/>
+                  <circle cx="545" cy="382" r="6" fill="#fff"/>
+
                   <!-- 불 -->
-                  <path d="M78 5 C84 -16 95 -16 99 5
-                           M103 5 C111 -18 121 -17 124 5"
+                  <path d="M473 351 C480 332 490 333 494 351
+                           M502 351 C510 328 520 330 524 351"
                         class="svg-orange"/>
                 </g>
 
                 <!-- 김 -->
                 <path class="steam-a svg-line-soft"
-                      d="M492 322 C480 307 504 292 493 275"/>
+                      d="M482 310 C469 294 493 278 481 260"/>
                 <path class="steam-b svg-line-soft"
-                      d="M527 320 C515 302 540 289 527 267"/>
+                      d="M520 309 C507 290 533 277 519 253"/>
 
                 <!-- 주문표 -->
-                <g class="ticket-1" transform="translate(570 183)">
-                  <rect x="0" y="0" width="55" height="75" rx="5"
-                        fill="none" stroke="#fff" stroke-width="5"/>
-                  <path d="M11 17 H43 M11 32 H37 M11 47 H45"
+                <g class="ticket-1">
+                  <rect x="586" y="207"
+                        width="52" height="72"
+                        rx="5"
+                        fill="none"
+                        stroke="#fff"
+                        stroke-width="5"/>
+                  <path d="M598 225 H627
+                           M598 241 H623
+                           M598 257 H629"
                         class="svg-line-soft"/>
                 </g>
 
-                <g class="ticket-2" transform="translate(630 205)">
-                  <rect x="0" y="0" width="48" height="66" rx="5"
-                        fill="none" stroke="#fff" stroke-width="5"/>
-                  <path d="M10 16 H37 M10 31 H34"
+                <g class="ticket-2">
+                  <rect x="646" y="226"
+                        width="43" height="61"
+                        rx="5"
+                        fill="none"
+                        stroke="#fff"
+                        stroke-width="5"/>
+                  <path d="M656 243 H679
+                           M656 258 H676"
                         class="svg-line-soft"/>
                 </g>
 
-                <!-- 캡션 -->
-                <text class="experience-caption" x="498" y="505" text-anchor="middle">식당 운영</text>
-                <text class="experience-mini" x="498" y="530" text-anchor="middle">장사해 본 사람</text>
+                <text class="experience-caption"
+                      x="500" y="485"
+                      text-anchor="middle">식당 운영</text>
+                <text class="experience-mini"
+                      x="500" y="514"
+                      text-anchor="middle">장사해 본 사람</text>
               </g>
 
-              <!-- ===================================================
+
+              <!-- ==================================================
                    03 · 프랜차이즈 운영
-                   =================================================== -->
+                   ================================================== -->
               <g class="experience-stage stage-03">
 
-                <!-- Number -->
-                <g class="experience-label" transform="translate(700 35)">
-                  <circle class="experience-number-ring" cx="54" cy="54" r="47"/>
-                  <text class="experience-number" x="54" y="69" text-anchor="middle">03</text>
-                  <path d="M92 19 l15 -13 M101 32 l20 -4"
+                <!-- 03 -->
+                <g class="experience-label">
+                  <circle class="experience-number-ring"
+                          cx="835" cy="67" r="43"/>
+                  <text class="experience-number"
+                        x="835" y="82"
+                        text-anchor="middle">03</text>
+                  <path d="M867 35 l14 -12 M874 49 l18 -3"
                         class="svg-orange"/>
                 </g>
 
-                <!-- 같은 사람 03 -->
-                <g class="experience-person" transform="translate(733 144)">
-                  <circle cx="92" cy="53" r="27" class="svg-white-fill"/>
-                  <path d="M67 48 Q70 28 91 26 Q112 28 117 48"
-                        class="svg-white-fill"/>
-                  <path d="M61 107
-                           Q92 88 126 108
-                           L138 208
-                           H49 Z"
-                        class="svg-white-fill"/>
-                  <path d="M75 110 L92 131 L108 110"
-                        fill="none" stroke="#238B22" stroke-width="5" stroke-linecap="round"/>
+                <!-- 동일 인물 · 운영자 -->
+                <g class="experience-person">
+                  <circle cx="835" cy="163" r="26" fill="#fff"/>
+                  <path d="M810 151 Q835 132 861 151"
+                        fill="#fff"/>
+                  <path d="M794 216
+                           Q835 193 876 216
+                           L888 320
+                           H782 Z"
+                        fill="#fff"/>
 
-                  <!-- clipboard -->
-                  <g class="clip-board" transform="translate(16 135)">
-                    <rect x="0" y="0" width="58" height="67" rx="5"
-                          fill="none" stroke="#fff" stroke-width="6"/>
-                    <rect x="18" y="-7" width="22" height="14" rx="4"
+                  <!-- 셔츠 V -->
+                  <path d="M813 220 L835 242 L857 220"
+                        fill="none"
+                        stroke="#238B22"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+
+                  <!-- 오른팔 + 열쇠 -->
+                  <path d="M872 230 Q897 244 900 270"
+                        class="svg-line"/>
+                  <g transform="translate(905 271)">
+                    <circle cx="0" cy="0" r="10"
+                            fill="none"
+                            stroke="#fff"
+                            stroke-width="6"/>
+                    <path d="M9 0 H40 L48 8 L41 15 L34 8"
+                          class="svg-line"/>
+                    <rect x="44" y="5"
+                          width="13" height="20"
+                          rx="3"
                           fill="#FF8C00"/>
-                    <path d="M13 24 H44 M13 39 H40"
+                  </g>
+
+                  <!-- 왼팔 + 클립보드 -->
+                  <path d="M798 231 Q777 250 782 280"
+                        class="svg-line"/>
+                  <g class="clip-board">
+                    <rect x="744" y="263"
+                          width="57" height="65"
+                          rx="5"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-width="6"/>
+                    <rect x="762" y="256"
+                          width="21" height="14"
+                          rx="4"
+                          fill="#FF8C00"/>
+                    <path d="M756 286 H790
+                             M756 301 H786"
                           class="svg-line-soft"/>
                   </g>
-
-                  <!-- 열쇠 -->
-                  <g transform="translate(126 120)">
-                    <circle cx="0" cy="0" r="10"
-                            fill="none" stroke="#fff" stroke-width="6"/>
-                    <path d="M9 0 H42 L50 8 L43 15 L36 8"
-                          class="svg-line"/>
-                    <rect x="46" y="5" width="13" height="20" rx="3"
-                          class="svg-orange-fill"/>
-                  </g>
                 </g>
 
-                <!-- 동일 간판 매장 3개 -->
-                <g transform="translate(667 324)">
+                <!-- 3개 매장 · 동일 바닥선 -->
+                <g class="experience-prop">
+                  <!-- left -->
                   <g class="store-a">
-                    <path d="M0 38 H82 V96 H0 Z"
-                          fill="none" stroke="#fff" stroke-width="5"/>
-                    <path d="M-5 38 L8 8 H74 L87 38"
+                    <path d="M687 345 H758 V397 H687 Z"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-width="5"/>
+                    <path d="M682 345 L694 319 H751 L763 345"
                           class="svg-line"/>
                     <path class="shop-light-a"
-                          d="M8 24 H74"
-                          fill="none" stroke="#FF8C00" stroke-width="10"
-                          stroke-dasharray="12 9"/>
-                    <rect x="29" y="62" width="22" height="34" rx="3"
-                          fill="none" stroke="#fff" stroke-width="4"/>
+                          d="M694 333 H751"
+                          fill="none"
+                          stroke="#FF8C00"
+                          stroke-width="9"
+                          stroke-dasharray="11 8"/>
+                    <rect x="711" y="365"
+                          width="20" height="32"
+                          rx="3"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-width="4"/>
                   </g>
 
-                  <g class="store-b" transform="translate(92 -22)">
-                    <path d="M0 38 H92 V105 H0 Z"
-                          fill="none" stroke="#fff" stroke-width="5"/>
-                    <path d="M-6 38 L10 3 H82 L98 38"
+                  <!-- center -->
+                  <g class="store-b">
+                    <path d="M793 332 H877 V397 H793 Z"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-width="5"/>
+                    <path d="M787 332 L801 301 H869 L883 332"
                           class="svg-line"/>
                     <path class="shop-light-b"
-                          d="M10 22 H82"
-                          fill="none" stroke="#FF8C00" stroke-width="11"
-                          stroke-dasharray="13 9"/>
-                    <rect x="34" y="64" width="24" height="41" rx="3"
-                          fill="none" stroke="#fff" stroke-width="4"/>
-                    <circle cx="74" cy="66" r="7" class="svg-orange-fill"/>
+                          d="M801 318 H869"
+                          fill="none"
+                          stroke="#FF8C00"
+                          stroke-width="10"
+                          stroke-dasharray="12 8"/>
+                    <rect x="824" y="358"
+                          width="22" height="39"
+                          rx="3"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-width="4"/>
                   </g>
 
-                  <g class="store-c" transform="translate(194 0)">
-                    <path d="M0 38 H82 V96 H0 Z"
-                          fill="none" stroke="#fff" stroke-width="5"/>
-                    <path d="M-5 38 L8 8 H74 L87 38"
+                  <!-- right -->
+                  <g class="store-c">
+                    <path d="M912 345 H983 V397 H912 Z"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-width="5"/>
+                    <path d="M907 345 L919 319 H976 L988 345"
                           class="svg-line"/>
                     <path class="shop-light-c"
-                          d="M8 24 H74"
-                          fill="none" stroke="#FF8C00" stroke-width="10"
-                          stroke-dasharray="12 9"/>
-                    <rect x="29" y="62" width="22" height="34" rx="3"
-                          fill="none" stroke="#fff" stroke-width="4"/>
+                          d="M919 333 H976"
+                          fill="none"
+                          stroke="#FF8C00"
+                          stroke-width="9"
+                          stroke-dasharray="11 8"/>
+                    <rect x="936" y="365"
+                          width="20" height="32"
+                          rx="3"
+                          fill="none"
+                          stroke="#fff"
+                          stroke-width="4"/>
                   </g>
                 </g>
 
-                <!-- 성장 화살표 -->
-                <path d="M873 276 C907 253 928 225 942 190"
+                <!-- 확장 표시 -->
+                <path d="M904 191 C927 178 946 159 958 138"
                       class="svg-orange"/>
-                <path d="M925 198 L942 190 L947 208"
+                <path d="M943 145 L958 138 L961 155"
                       class="svg-orange"/>
 
-                <!-- 캡션 -->
-                <text class="experience-caption" x="812" y="505" text-anchor="middle">프랜차이즈 운영</text>
-                <text class="experience-mini" x="812" y="530" text-anchor="middle">여러 매장을 운영해 본 사람</text>
+                <text class="experience-caption"
+                      x="835" y="485"
+                      text-anchor="middle">프랜차이즈 운영</text>
+                <text class="experience-mini"
+                      x="835" y="514"
+                      text-anchor="middle">여러 매장을 운영해 본 사람</text>
               </g>
 
             </svg>
