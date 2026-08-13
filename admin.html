@@ -24,7 +24,8 @@
       --soft: #F4F7F4;
       --white: #FFFFFF;
       --danger: #C74848;
-      --page-max: 1120px;
+      --blue: #3D7FF0;
+      --page-max: 1160px;
     }
 
     * {
@@ -260,12 +261,12 @@
     .dashboard {
       width: min(100% - 40px, var(--page-max));
       margin: 0 auto;
-      padding: 42px 0 64px;
+      padding: 38px 0 64px;
     }
 
     .dashboard-head {
       display: flex;
-      align-items: end;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 24px;
     }
@@ -293,10 +294,15 @@
       font-weight: 650;
     }
 
-    .logout-btn {
-      flex: 0 0 auto;
+    .head-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ghost-btn {
       min-height: 42px;
-      padding: 0 16px;
+      padding: 0 15px;
       border: 1px solid var(--line);
       border-radius: 999px;
       background: #fff;
@@ -306,16 +312,63 @@
       cursor: pointer;
     }
 
-    .logout-btn:hover {
+    .ghost-btn:hover {
       color: var(--orange);
       border-color: rgba(255,140,0,.28);
     }
 
+    .ghost-btn:disabled {
+      opacity: .5;
+      cursor: wait;
+    }
+
     /* =========================================================
-       04 STATS
+       04 TABS
+       ========================================================= */
+    .period-tabs {
+      margin-top: 28px;
+      width: fit-content;
+      max-width: 100%;
+      padding: 5px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .period-tab {
+      min-width: 96px;
+      min-height: 44px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 13px;
+      background: transparent;
+      color: var(--sub);
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      transition:
+        background .18s ease,
+        color .18s ease,
+        box-shadow .18s ease;
+    }
+
+    .period-tab.is-active {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(35,139,34,.15);
+    }
+
+    .period-panel {
+      margin-top: 18px;
+    }
+
+    /* =========================================================
+       05 STATS
        ========================================================= */
     .stat-grid {
-      margin-top: 32px;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
@@ -338,8 +391,13 @@
       color: #fff;
     }
 
-    .stat-card.download {
+    .stat-card.orange {
       border-color: rgba(255,140,0,.22);
+    }
+
+    .stat-card.soft-green {
+      background: #F1F8F1;
+      border-color: rgba(35,139,34,.13);
     }
 
     .stat-label {
@@ -355,13 +413,13 @@
 
     .stat-value {
       margin-top: 18px;
-      font-size: clamp(38px, 5vw, 56px);
+      font-size: clamp(36px, 4.7vw, 54px);
       line-height: 1;
       letter-spacing: -.055em;
       font-weight: 950;
     }
 
-    .download .stat-value {
+    .orange .stat-value {
       color: var(--orange);
     }
 
@@ -383,88 +441,206 @@
       color: rgba(255,255,255,.68);
     }
 
+    .change-up {
+      color: var(--green);
+    }
+
+    .change-down {
+      color: var(--danger);
+    }
+
+    .change-flat {
+      color: var(--sub);
+    }
+
     /* =========================================================
-       05 7 DAY TABLE
+       06 SUMMARY STRIP
        ========================================================= */
-    .history-card {
-      margin-top: 18px;
-      padding: 26px;
+    .summary-strip {
+      margin-top: 14px;
+      padding: 15px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
       border: 1px solid var(--line);
-      border-radius: 26px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.72);
+      color: var(--sub);
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 750;
+    }
+
+    .summary-strip strong {
+      color: var(--ink);
+      font-weight: 950;
+    }
+
+    /* =========================================================
+       07 CHART
+       ========================================================= */
+    .chart-card,
+    .table-card {
+      margin-top: 16px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
       background: #fff;
     }
 
-    .history-head {
+    .section-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
     }
 
-    .history-title {
+    .section-title {
       font-size: 20px;
+      line-height: 1.2;
       font-weight: 950;
       letter-spacing: -.04em;
     }
 
-    .refresh-btn {
-      min-height: 38px;
-      padding: 0 14px;
-      border: 0;
-      border-radius: 999px;
-      background: var(--soft);
-      color: var(--green);
-      font-size: 12px;
+    .section-caption {
+      color: var(--sub);
+      font-size: 11.5px;
+      line-height: 1.45;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .bar-chart {
+      margin-top: 22px;
+      min-height: 220px;
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      align-items: end;
+      gap: 10px;
+    }
+
+    .bar-item {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .bar-stack {
+      width: min(100%, 42px);
+      height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+
+    .bar {
+      width: 100%;
+      min-height: 2px;
+      border-radius: 8px 8px 3px 3px;
+      transition: height .35s ease;
+    }
+
+    .bar.visit {
+      background: var(--green);
+    }
+
+    .bar.download {
+      background: var(--orange);
+    }
+
+    .bar-label {
+      margin-top: 9px;
+      color: var(--sub);
+      font-size: 10.5px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .bar-value {
+      margin-bottom: 7px;
+      color: var(--ink);
+      font-size: 10px;
       font-weight: 900;
-      cursor: pointer;
+      white-space: nowrap;
     }
 
-    .refresh-btn:disabled {
-      opacity: .5;
-      cursor: wait;
+    .chart-legend {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      color: var(--sub);
+      font-size: 11px;
+      font-weight: 750;
     }
 
-    .history-table-wrap {
-      margin-top: 18px;
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.visit {
+      background: var(--green);
+    }
+
+    .legend-dot.download {
+      background: var(--orange);
+    }
+
+    /* =========================================================
+       08 TABLE
+       ========================================================= */
+    .table-wrap {
+      margin-top: 17px;
       overflow-x: auto;
       border-top: 1px solid var(--line);
     }
 
-    .history-table {
+    .stats-table {
       width: 100%;
-      min-width: 540px;
+      min-width: 560px;
       border-collapse: collapse;
     }
 
-    .history-table th,
-    .history-table td {
-      padding: 16px 10px;
+    .stats-table th,
+    .stats-table td {
+      padding: 15px 10px;
       border-bottom: 1px solid var(--line);
       text-align: right;
       font-size: 13px;
     }
 
-    .history-table th {
+    .stats-table th {
       color: var(--sub);
       font-size: 11px;
       font-weight: 900;
     }
 
-    .history-table th:first-child,
-    .history-table td:first-child {
+    .stats-table th:first-child,
+    .stats-table td:first-child {
       text-align: left;
     }
 
-    .history-table td {
+    .stats-table td {
       color: var(--ink);
       font-weight: 800;
     }
 
-    .history-table td.download-count {
+    .stats-table td.download {
       color: var(--orange);
     }
 
-    .history-empty {
+    .empty {
       padding: 34px 0 16px;
       color: var(--sub);
       text-align: center;
@@ -473,7 +649,21 @@
     }
 
     /* =========================================================
-       06 STATUS
+       09 MONTH LAYOUT
+       ========================================================= */
+    .month-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 16px;
+    }
+
+    .month-grid .table-card {
+      margin-top: 16px;
+      min-width: 0;
+    }
+
+    /* =========================================================
+       10 STATUS
        ========================================================= */
     .status-line {
       margin-top: 18px;
@@ -489,11 +679,15 @@
     }
 
     /* =========================================================
-       07 RESPONSIVE
+       11 RESPONSIVE
        ========================================================= */
-    @media (max-width: 900px) {
+    @media (max-width: 940px) {
       .stat-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .month-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -543,8 +737,21 @@
         max-width: 260px;
       }
 
+      .head-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .period-tabs {
+        width: 100%;
+      }
+
+      .period-tab {
+        min-width: 0;
+        padding: 0 12px;
+      }
+
       .stat-grid {
-        margin-top: 24px;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
       }
@@ -559,9 +766,32 @@
         font-size: 38px;
       }
 
-      .history-card {
-        padding: 20px 16px;
-        border-radius: 22px;
+      .chart-card,
+      .table-card {
+        padding: 19px 15px;
+        border-radius: 21px;
+      }
+
+      .bar-chart {
+        min-height: 190px;
+        gap: 6px;
+      }
+
+      .bar-stack {
+        height: 132px;
+        width: min(100%, 30px);
+      }
+
+      .bar-value {
+        font-size: 9px;
+      }
+
+      .bar-label {
+        font-size: 9.5px;
+      }
+
+      .section-head {
+        align-items: flex-start;
       }
     }
 
@@ -583,6 +813,12 @@
         font-size: 11px;
       }
 
+      .ghost-btn {
+        min-height: 38px;
+        padding: 0 12px;
+        font-size: 11px;
+      }
+
       .stat-card {
         min-height: 132px;
         padding: 15px;
@@ -598,6 +834,16 @@
 
       .stat-sub {
         font-size: 10.5px;
+      }
+
+      .summary-strip {
+        padding: 13px 14px;
+        gap: 6px 14px;
+        font-size: 11px;
+      }
+
+      .section-title {
+        font-size: 18px;
       }
     }
   </style>
@@ -682,98 +928,337 @@
         </h1>
 
         <p class="dashboard-desc">
-          인덱스 진입과 앱 다운로드 클릭만 간단하게 확인합니다.
+          인덱스 진입과 앱 다운로드 클릭 흐름을 확인합니다.
         </p>
       </div>
 
-      <button
-        id="logoutBtn"
-        class="logout-btn"
-        type="button"
-      >
-        로그아웃
-      </button>
-    </div>
-
-    <section class="stat-grid" aria-label="주요 통계">
-      <article class="stat-card primary">
-        <div>
-          <div class="stat-label">오늘 인덱스 방문</div>
-          <div class="stat-value">
-            <span id="todayVisits">0</span>
-            <span class="stat-unit">회</span>
-          </div>
-        </div>
-        <div class="stat-sub">오늘 홈페이지 첫 진입 기준</div>
-      </article>
-
-      <article class="stat-card download">
-        <div>
-          <div class="stat-label">오늘 다운로드 클릭</div>
-          <div class="stat-value">
-            <span id="todayDownloads">0</span>
-            <span class="stat-unit">회</span>
-          </div>
-        </div>
-        <div class="stat-sub">모딩 앱 다운로드 버튼 클릭</div>
-      </article>
-
-      <article class="stat-card">
-        <div>
-          <div class="stat-label">누적 인덱스 방문</div>
-          <div class="stat-value">
-            <span id="totalVisits">0</span>
-            <span class="stat-unit">회</span>
-          </div>
-        </div>
-        <div class="stat-sub">전체 누적 방문 횟수</div>
-      </article>
-
-      <article class="stat-card download">
-        <div>
-          <div class="stat-label">누적 다운로드 클릭</div>
-          <div class="stat-value">
-            <span id="totalDownloads">0</span>
-            <span class="stat-unit">회</span>
-          </div>
-        </div>
-        <div class="stat-sub">전체 누적 다운로드 클릭</div>
-      </article>
-    </section>
-
-    <section class="history-card">
-      <div class="history-head">
-        <h2 class="history-title">최근 7일</h2>
-
+      <div class="head-actions">
         <button
           id="refreshBtn"
-          class="refresh-btn"
+          class="ghost-btn"
           type="button"
         >
           새로고침
         </button>
+
+        <button
+          id="logoutBtn"
+          class="ghost-btn"
+          type="button"
+        >
+          로그아웃
+        </button>
+      </div>
+    </div>
+
+    <nav class="period-tabs" aria-label="통계 기간">
+      <button
+        class="period-tab is-active"
+        type="button"
+        data-tab="today"
+        aria-selected="true"
+      >오늘</button>
+
+      <button
+        class="period-tab"
+        type="button"
+        data-tab="week"
+        aria-selected="false"
+      >주간</button>
+
+      <button
+        class="period-tab"
+        type="button"
+        data-tab="month"
+        aria-selected="false"
+      >월간</button>
+    </nav>
+
+    <!-- TODAY -->
+    <section id="panelToday" class="period-panel">
+      <div class="stat-grid">
+        <article class="stat-card primary">
+          <div>
+            <div class="stat-label">오늘 인덱스 방문</div>
+            <div class="stat-value">
+              <span id="todayVisits">0</span>
+              <span class="stat-unit">회</span>
+            </div>
+          </div>
+          <div class="stat-sub">오늘 홈페이지 첫 진입 기준</div>
+        </article>
+
+        <article class="stat-card orange">
+          <div>
+            <div class="stat-label">오늘 다운로드 클릭</div>
+            <div class="stat-value">
+              <span id="todayDownloads">0</span>
+              <span class="stat-unit">회</span>
+            </div>
+          </div>
+          <div class="stat-sub">모딩 앱 다운로드 버튼 클릭</div>
+        </article>
+
+        <article class="stat-card soft-green">
+          <div>
+            <div class="stat-label">오늘 클릭률</div>
+            <div class="stat-value">
+              <span id="todayRate">0</span>
+              <span class="stat-unit">%</span>
+            </div>
+          </div>
+          <div class="stat-sub">다운로드 클릭 ÷ 방문</div>
+        </article>
+
+        <article class="stat-card">
+          <div>
+            <div class="stat-label">누적 방문</div>
+            <div class="stat-value">
+              <span id="totalVisits">0</span>
+              <span class="stat-unit">회</span>
+            </div>
+          </div>
+          <div class="stat-sub">
+            누적 다운로드 <strong id="totalDownloads">0회</strong>
+          </div>
+        </article>
       </div>
 
-      <div class="history-table-wrap">
-        <table class="history-table">
-          <thead>
-            <tr>
-              <th scope="col">날짜</th>
-              <th scope="col">인덱스 방문</th>
-              <th scope="col">다운로드 클릭</th>
-            </tr>
-          </thead>
+      <div class="summary-strip">
+        <span>오늘 날짜 <strong id="todayDate">-</strong></span>
+        <span>누적 클릭률 <strong id="totalRate">0%</strong></span>
+      </div>
 
-          <tbody id="historyBody"></tbody>
-        </table>
-
-        <div
-          id="historyEmpty"
-          class="history-empty"
-          hidden
-        >
-          아직 집계된 데이터가 없습니다.
+      <section class="table-card">
+        <div class="section-head">
+          <h2 class="section-title">최근 7일</h2>
+          <div class="section-caption">날짜별 방문과 다운로드</div>
         </div>
+
+        <div class="table-wrap">
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>방문</th>
+                <th>다운로드</th>
+                <th>클릭률</th>
+              </tr>
+            </thead>
+            <tbody id="todayTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- WEEK -->
+    <section id="panelWeek" class="period-panel" hidden>
+      <div class="stat-grid">
+        <article class="stat-card primary">
+          <div>
+            <div class="stat-label">이번 주 방문</div>
+            <div class="stat-value">
+              <span id="weekVisits">0</span>
+              <span class="stat-unit">회</span>
+            </div>
+          </div>
+          <div class="stat-sub">
+            지난주 대비
+            <strong id="weekVisitChange">-</strong>
+          </div>
+        </article>
+
+        <article class="stat-card orange">
+          <div>
+            <div class="stat-label">이번 주 다운로드</div>
+            <div class="stat-value">
+              <span id="weekDownloads">0</span>
+              <span class="stat-unit">회</span>
+            </div>
+          </div>
+          <div class="stat-sub">
+            지난주 대비
+            <strong id="weekDownloadChange">-</strong>
+          </div>
+        </article>
+
+        <article class="stat-card soft-green">
+          <div>
+            <div class="stat-label">이번 주 클릭률</div>
+            <div class="stat-value">
+              <span id="weekRate">0</span>
+              <span class="stat-unit">%</span>
+            </div>
+          </div>
+          <div class="stat-sub">다운로드 클릭 ÷ 방문</div>
+        </article>
+
+        <article class="stat-card">
+          <div>
+            <div class="stat-label">지난주 방문</div>
+            <div class="stat-value">
+              <span id="previousWeekVisits">0</span>
+              <span class="stat-unit">회</span>
+            </div>
+          </div>
+          <div class="stat-sub">
+            지난주 다운로드
+            <strong id="previousWeekDownloads">0회</strong>
+          </div>
+        </article>
+      </div>
+
+      <div class="summary-strip">
+        <span>이번 주 <strong id="weekRange">-</strong></span>
+        <span>지난주 <strong id="previousWeekRange">-</strong></span>
+      </div>
+
+      <section class="chart-card">
+        <div class="section-head">
+          <h2 class="section-title">최근 7일 추이</h2>
+          <div class="section-caption">방문 / 다운로드 클릭</div>
+        </div>
+
+        <div id="weekChart" class="bar-chart"></div>
+
+        <div class="chart-legend">
+          <span class="legend-item">
+            <span class="legend-dot visit"></span>
+            방문
+          </span>
+          <span class="legend-item">
+            <span class="legend-dot download"></span>
+            다운로드
+          </span>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <div class="section-head">
+          <h2 class="section-title">일별 상세</h2>
+          <div class="section-caption">최근 7일</div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>방문</th>
+                <th>다운로드</th>
+                <th>클릭률</th>
+              </tr>
+            </thead>
+            <tbody id="weekTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- MONTH -->
+    <section id="panelMonth" class="period-panel" hidden>
+      <div class="stat-grid">
+        <article class="stat-card primary">
+          <div>
+            <div class="stat-label">이번 달 방문</div>
+            <div class="stat-value">
+              <span id="monthVisits">0</span>
+              <span class="stat-unit">회</span>
+            </div>
+          </div>
+          <div class="stat-sub">
+            지난달 대비
+            <strong id="monthVisitChange">-</strong>
+          </div>
+        </article>
+
+        <article class="stat-card orange">
+          <div>
+            <div class="stat-label">이번 달 다운로드</div>
+            <div class="stat-value">
+              <span id="monthDownloads">0</span>
+              <span class="stat-unit">회</span>
+            </div>
+          </div>
+          <div class="stat-sub">
+            지난달 대비
+            <strong id="monthDownloadChange">-</strong>
+          </div>
+        </article>
+
+        <article class="stat-card soft-green">
+          <div>
+            <div class="stat-label">이번 달 클릭률</div>
+            <div class="stat-value">
+              <span id="monthRate">0</span>
+              <span class="stat-unit">%</span>
+            </div>
+          </div>
+          <div class="stat-sub">다운로드 클릭 ÷ 방문</div>
+        </article>
+
+        <article class="stat-card">
+          <div>
+            <div class="stat-label">지난달 방문</div>
+            <div class="stat-value">
+              <span id="previousMonthVisits">0</span>
+              <span class="stat-unit">회</span>
+            </div>
+          </div>
+          <div class="stat-sub">
+            지난달 다운로드
+            <strong id="previousMonthDownloads">0회</strong>
+          </div>
+        </article>
+      </div>
+
+      <div class="summary-strip">
+        <span>이번 달 <strong id="monthRange">-</strong></span>
+        <span>비교 기준 <strong id="previousMonthLabel">-</strong></span>
+      </div>
+
+      <div class="month-grid">
+        <section class="table-card">
+          <div class="section-head">
+            <h2 class="section-title">이번 달 일별</h2>
+            <div class="section-caption">1일부터 오늘까지</div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>날짜</th>
+                  <th>방문</th>
+                  <th>다운로드</th>
+                  <th>클릭률</th>
+                </tr>
+              </thead>
+              <tbody id="monthDailyBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="table-card">
+          <div class="section-head">
+            <h2 class="section-title">최근 6개월</h2>
+            <div class="section-caption">월별 누적</div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>월</th>
+                  <th>방문</th>
+                  <th>다운로드</th>
+                  <th>클릭률</th>
+                </tr>
+              </thead>
+              <tbody id="monthlyBody"></tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -786,11 +1271,10 @@
 
   <script>
     /* =========================================================
-       01 API CONFIG
-       서버/API를 만든 뒤 이 주소만 바꾸면 됩니다.
-       예: https://counter.moding.app
+       01 API
        ========================================================= */
-    const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
+    const API_BASE =
+      "https://flat-queen-f1fb.moding-inc.workers.dev";
 
     const ENDPOINTS = {
       login: "/admin/login",
@@ -798,63 +1282,120 @@
       logout: "/admin/logout"
     };
 
-    const SESSION_TOKEN_KEY = "moding_admin_token";
+    const SESSION_TOKEN_KEY =
+      "moding_admin_token";
 
     /* =========================================================
        02 DOM
        ========================================================= */
-    const loginView = document.getElementById("loginView");
-    const dashboardView = document.getElementById("dashboardView");
+    const loginView =
+      document.getElementById("loginView");
 
-    const loginForm = document.getElementById("loginForm");
-    const passwordInput = document.getElementById("passwordInput");
-    const passwordToggle = document.getElementById("passwordToggle");
-    const loginSubmit = document.getElementById("loginSubmit");
-    const loginError = document.getElementById("loginError");
+    const dashboardView =
+      document.getElementById("dashboardView");
 
-    const todayVisits = document.getElementById("todayVisits");
-    const todayDownloads = document.getElementById("todayDownloads");
-    const totalVisits = document.getElementById("totalVisits");
-    const totalDownloads = document.getElementById("totalDownloads");
+    const loginForm =
+      document.getElementById("loginForm");
 
-    const historyBody = document.getElementById("historyBody");
-    const historyEmpty = document.getElementById("historyEmpty");
-    const refreshBtn = document.getElementById("refreshBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const dashboardStatus = document.getElementById("dashboardStatus");
+    const passwordInput =
+      document.getElementById("passwordInput");
+
+    const passwordToggle =
+      document.getElementById("passwordToggle");
+
+    const loginSubmit =
+      document.getElementById("loginSubmit");
+
+    const loginError =
+      document.getElementById("loginError");
+
+    const refreshBtn =
+      document.getElementById("refreshBtn");
+
+    const logoutBtn =
+      document.getElementById("logoutBtn");
+
+    const dashboardStatus =
+      document.getElementById("dashboardStatus");
+
+    const periodTabs =
+      Array.from(
+        document.querySelectorAll(".period-tab")
+      );
+
+    const panels = {
+      today:
+        document.getElementById("panelToday"),
+
+      week:
+        document.getElementById("panelWeek"),
+
+      month:
+        document.getElementById("panelMonth")
+    };
+
+    let latestStats = null;
 
     /* =========================================================
        03 HELPERS
        ========================================================= */
     function apiUrl(path) {
-      return `${API_BASE.replace(/\/$/, "")}${path}`;
+      return (
+        API_BASE.replace(/\/$/, "") +
+        path
+      );
     }
 
     function getToken() {
-      return sessionStorage.getItem(SESSION_TOKEN_KEY);
+      return sessionStorage.getItem(
+        SESSION_TOKEN_KEY
+      );
     }
 
     function saveToken(token) {
-      sessionStorage.setItem(SESSION_TOKEN_KEY, token);
+      sessionStorage.setItem(
+        SESSION_TOKEN_KEY,
+        token
+      );
     }
 
     function clearToken() {
-      sessionStorage.removeItem(SESSION_TOKEN_KEY);
+      sessionStorage.removeItem(
+        SESSION_TOKEN_KEY
+      );
     }
 
     function formatNumber(value) {
-      const number = Number(value || 0);
+      const number =
+        Number(value || 0);
+
       return Number.isFinite(number)
         ? number.toLocaleString("ko-KR")
         : "0";
     }
 
+    function formatRate(value) {
+      const number =
+        Number(value || 0);
+
+      return Number.isFinite(number)
+        ? number.toFixed(1)
+        : "0.0";
+    }
+
     function formatDate(dateString) {
       if (!dateString) return "-";
 
-      const date = new Date(`${dateString}T00:00:00`);
+      const date =
+        new Date(
+          `${dateString}T00:00:00`
+        );
 
-      if (Number.isNaN(date.getTime())) {
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
         return dateString;
       }
 
@@ -868,14 +1409,103 @@
       ).format(date);
     }
 
-    function isApiConfigured() {
-      return !API_BASE.includes("YOUR-COUNTER-API");
+    function formatMonth(monthString) {
+      if (!monthString) return "-";
+
+      const [
+        year,
+        month
+      ] =
+        monthString
+          .split("-")
+          .map(Number);
+
+      if (!year || !month) {
+        return monthString;
+      }
+
+      return `${year}년 ${month}월`;
+    }
+
+    function compactDate(dateString) {
+      if (!dateString) return "-";
+
+      const parts =
+        dateString.split("-");
+
+      if (parts.length !== 3) {
+        return dateString;
+      }
+
+      return (
+        `${Number(parts[1])}.` +
+        `${Number(parts[2])}`
+      );
+    }
+
+    function changeText(value) {
+      if (
+        value === null ||
+        value === undefined ||
+        !Number.isFinite(Number(value))
+      ) {
+        return {
+          text: "비교 데이터 없음",
+          className: "change-flat"
+        };
+      }
+
+      const number =
+        Number(value);
+
+      if (number > 0) {
+        return {
+          text: `+${number.toFixed(1)}%`,
+          className: "change-up"
+        };
+      }
+
+      if (number < 0) {
+        return {
+          text: `${number.toFixed(1)}%`,
+          className: "change-down"
+        };
+      }
+
+      return {
+        text: "0.0%",
+        className: "change-flat"
+      };
+    }
+
+    function applyChange(
+      elementId,
+      value
+    ) {
+      const element =
+        document.getElementById(
+          elementId
+        );
+
+      if (!element) return;
+
+      const result =
+        changeText(value);
+
+      element.textContent =
+        result.text;
+
+      element.className =
+        result.className;
     }
 
     function showLogin() {
       dashboardView.hidden = true;
       loginView.hidden = false;
-      passwordInput.focus();
+
+      setTimeout(() => {
+        passwordInput.focus();
+      }, 50);
     }
 
     function showDashboard() {
@@ -883,117 +1513,161 @@
       dashboardView.hidden = false;
     }
 
-    function setDashboardStatus(message, isError = false) {
-      dashboardStatus.textContent = message;
-      dashboardStatus.classList.toggle("error", isError);
+    function setDashboardStatus(
+      message,
+      isError = false
+    ) {
+      dashboardStatus.textContent =
+        message;
+
+      dashboardStatus.classList.toggle(
+        "error",
+        isError
+      );
     }
 
     /* =========================================================
-       04 PASSWORD VISIBILITY
+       04 TABS
        ========================================================= */
-    passwordToggle.addEventListener("click", () => {
-      const isPassword =
-        passwordInput.type === "password";
+    function activateTab(name) {
+      periodTabs.forEach((button) => {
+        const active =
+          button.dataset.tab === name;
 
-      passwordInput.type =
-        isPassword ? "text" : "password";
-
-      passwordToggle.textContent =
-        isPassword ? "숨김" : "보기";
-    });
-
-    /* =========================================================
-       05 LOGIN
-       POST /admin/login
-       request  : { password }
-       response : { token }
-       ========================================================= */
-    loginForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      loginError.textContent = "";
-
-      if (!isApiConfigured()) {
-        loginError.textContent =
-          "카운터 API 주소가 아직 연결되지 않았습니다.";
-        return;
-      }
-
-      const password = passwordInput.value;
-
-      if (!password) return;
-
-      loginSubmit.disabled = true;
-      loginSubmit.textContent = "확인 중";
-
-      try {
-        const response = await fetch(
-          apiUrl(ENDPOINTS.login),
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ password })
-          }
+        button.classList.toggle(
+          "is-active",
+          active
         );
 
-        if (!response.ok) {
-          throw new Error(
-            response.status === 401
-              ? "비밀번호가 올바르지 않습니다."
-              : "관리자 인증에 실패했습니다."
+        button.setAttribute(
+          "aria-selected",
+          active ? "true" : "false"
+        );
+      });
+
+      Object.entries(panels)
+        .forEach(([key, panel]) => {
+          panel.hidden =
+            key !== name;
+        });
+    }
+
+    periodTabs.forEach((button) => {
+      button.addEventListener(
+        "click",
+        () => {
+          activateTab(
+            button.dataset.tab
           );
         }
-
-        const data = await response.json();
-
-        if (!data?.token) {
-          throw new Error("인증 토큰을 받지 못했습니다.");
-        }
-
-        saveToken(data.token);
-        passwordInput.value = "";
-
-        showDashboard();
-        await loadStats();
-
-      } catch (error) {
-        loginError.textContent =
-          error?.message ||
-          "관리자 인증 중 오류가 발생했습니다.";
-      } finally {
-        loginSubmit.disabled = false;
-        loginSubmit.textContent =
-          "관리자 페이지 들어가기";
-      }
+      );
     });
 
     /* =========================================================
-       06 STATS
-       GET /admin/stats?days=7
+       05 PASSWORD
+       ========================================================= */
+    passwordToggle.addEventListener(
+      "click",
+      () => {
+        const isPassword =
+          passwordInput.type ===
+          "password";
 
-       expected response:
-       {
-         "today": {
-           "visits": 37,
-           "downloads": 8
-         },
-         "total": {
-           "visits": 1284,
-           "downloads": 173
-         },
-         "daily": [
-           {
-             "date": "2026-08-13",
-             "visits": 37,
-             "downloads": 8
-           }
-         ]
-       }
+        passwordInput.type =
+          isPassword
+            ? "text"
+            : "password";
+
+        passwordToggle.textContent =
+          isPassword
+            ? "숨김"
+            : "보기";
+      }
+    );
+
+    /* =========================================================
+       06 LOGIN
+       ========================================================= */
+    loginForm.addEventListener(
+      "submit",
+      async (event) => {
+        event.preventDefault();
+
+        loginError.textContent = "";
+
+        const password =
+          passwordInput.value;
+
+        if (!password) return;
+
+        loginSubmit.disabled = true;
+        loginSubmit.textContent =
+          "확인 중";
+
+        try {
+          const response =
+            await fetch(
+              apiUrl(
+                ENDPOINTS.login
+              ),
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+                body:
+                  JSON.stringify({
+                    password
+                  })
+              }
+            );
+
+          if (!response.ok) {
+            throw new Error(
+              response.status === 401
+                ? "비밀번호가 올바르지 않습니다."
+                : "관리자 인증에 실패했습니다."
+            );
+          }
+
+          const data =
+            await response.json();
+
+          if (!data?.token) {
+            throw new Error(
+              "인증 토큰을 받지 못했습니다."
+            );
+          }
+
+          saveToken(
+            data.token
+          );
+
+          passwordInput.value = "";
+
+          showDashboard();
+          await loadStats();
+
+        } catch (error) {
+          loginError.textContent =
+            error?.message ||
+            "관리자 인증 중 오류가 발생했습니다.";
+
+        } finally {
+          loginSubmit.disabled = false;
+          loginSubmit.textContent =
+            "관리자 페이지 들어가기";
+        }
+      }
+    );
+
+    /* =========================================================
+       07 LOAD STATS
        ========================================================= */
     async function loadStats() {
-      const token = getToken();
+      const token =
+        getToken();
 
       if (!token) {
         showLogin();
@@ -1001,42 +1675,64 @@
       }
 
       refreshBtn.disabled = true;
-      setDashboardStatus("통계를 불러오는 중입니다.");
+      setDashboardStatus(
+        "통계를 불러오는 중입니다."
+      );
 
       try {
-        const response = await fetch(
-          `${apiUrl(ENDPOINTS.stats)}?days=7`,
-          {
-            method: "GET",
-            headers: {
-              "Authorization": `Bearer ${token}`,
-              "Accept": "application/json"
-            },
-            cache: "no-store"
-          }
-        );
+        const response =
+          await fetch(
+            `${apiUrl(
+              ENDPOINTS.stats
+            )}?days=7`,
+            {
+              method: "GET",
+              headers: {
+                "Authorization":
+                  `Bearer ${token}`,
 
-        if (response.status === 401) {
+                "Accept":
+                  "application/json"
+              },
+              cache: "no-store"
+            }
+          );
+
+        if (
+          response.status === 401
+        ) {
           clearToken();
           showLogin();
 
           loginError.textContent =
             "관리자 인증이 만료되었습니다. 다시 로그인해주세요.";
+
           return;
         }
 
         if (!response.ok) {
-          throw new Error("통계를 불러오지 못했습니다.");
+          throw new Error(
+            "통계를 불러오지 못했습니다."
+          );
         }
 
-        const data = await response.json();
+        const data =
+          await response.json();
 
+        latestStats = data;
         renderStats(data);
+
         setDashboardStatus(
-          `마지막 확인 ${new Date().toLocaleTimeString("ko-KR", {
-            hour: "2-digit",
-            minute: "2-digit"
-          })}`
+          `마지막 확인 ${
+            new Date()
+              .toLocaleTimeString(
+                "ko-KR",
+                {
+                  hour: "2-digit",
+                  minute: "2-digit"
+                }
+              )
+          }`
         );
 
       } catch (error) {
@@ -1045,112 +1741,605 @@
           "통계 조회 중 오류가 발생했습니다.",
           true
         );
+
       } finally {
         refreshBtn.disabled = false;
       }
     }
 
+    /* =========================================================
+       08 RENDER
+       ========================================================= */
     function renderStats(data) {
-      todayVisits.textContent =
-        formatNumber(data?.today?.visits);
+      renderToday(data);
+      renderWeek(data);
+      renderMonth(data);
+    }
 
-      todayDownloads.textContent =
-        formatNumber(data?.today?.downloads);
+    function renderToday(data) {
+      document.getElementById(
+        "todayVisits"
+      ).textContent =
+        formatNumber(
+          data?.today?.visits
+        );
 
-      totalVisits.textContent =
-        formatNumber(data?.total?.visits);
+      document.getElementById(
+        "todayDownloads"
+      ).textContent =
+        formatNumber(
+          data?.today?.downloads
+        );
 
-      totalDownloads.textContent =
-        formatNumber(data?.total?.downloads);
+      document.getElementById(
+        "todayRate"
+      ).textContent =
+        formatRate(
+          data?.today?.downloadRate
+        );
 
-      renderHistory(
-        Array.isArray(data?.daily)
-          ? data.daily
-          : []
+      document.getElementById(
+        "totalVisits"
+      ).textContent =
+        formatNumber(
+          data?.total?.visits
+        );
+
+      document.getElementById(
+        "totalDownloads"
+      ).textContent =
+        `${formatNumber(
+          data?.total?.downloads
+        )}회`;
+
+      document.getElementById(
+        "totalRate"
+      ).textContent =
+        `${formatRate(
+          data?.total?.downloadRate
+        )}%`;
+
+      document.getElementById(
+        "todayDate"
+      ).textContent =
+        formatDate(
+          data?.today?.date
+        );
+
+      renderDailyTable(
+        "todayTableBody",
+        data?.daily || []
       );
     }
 
-    function renderHistory(rows) {
-      historyBody.innerHTML = "";
+    function renderWeek(data) {
+      const week =
+        data?.week || {};
 
-      if (!rows.length) {
-        historyEmpty.hidden = false;
+      document.getElementById(
+        "weekVisits"
+      ).textContent =
+        formatNumber(
+          week.visits
+        );
+
+      document.getElementById(
+        "weekDownloads"
+      ).textContent =
+        formatNumber(
+          week.downloads
+        );
+
+      document.getElementById(
+        "weekRate"
+      ).textContent =
+        formatRate(
+          week.downloadRate
+        );
+
+      document.getElementById(
+        "previousWeekVisits"
+      ).textContent =
+        formatNumber(
+          week?.previous?.visits
+        );
+
+      document.getElementById(
+        "previousWeekDownloads"
+      ).textContent =
+        `${formatNumber(
+          week?.previous?.downloads
+        )}회`;
+
+      applyChange(
+        "weekVisitChange",
+        week.visitChange
+      );
+
+      applyChange(
+        "weekDownloadChange",
+        week.downloadChange
+      );
+
+      document.getElementById(
+        "weekRange"
+      ).textContent =
+        `${compactDate(
+          week.startDate
+        )} ~ ${compactDate(
+          week.endDate
+        )}`;
+
+      document.getElementById(
+        "previousWeekRange"
+      ).textContent =
+        `${compactDate(
+          week?.previous?.startDate
+        )} ~ ${compactDate(
+          week?.previous?.endDate
+        )}`;
+
+      const rows =
+        Array.isArray(data?.daily)
+          ? [...data.daily].reverse()
+          : [];
+
+      renderBarChart(
+        "weekChart",
+        rows
+      );
+
+      renderDailyTable(
+        "weekTableBody",
+        data?.daily || []
+      );
+    }
+
+    function renderMonth(data) {
+      const month =
+        data?.month || {};
+
+      document.getElementById(
+        "monthVisits"
+      ).textContent =
+        formatNumber(
+          month.visits
+        );
+
+      document.getElementById(
+        "monthDownloads"
+      ).textContent =
+        formatNumber(
+          month.downloads
+        );
+
+      document.getElementById(
+        "monthRate"
+      ).textContent =
+        formatRate(
+          month.downloadRate
+        );
+
+      document.getElementById(
+        "previousMonthVisits"
+      ).textContent =
+        formatNumber(
+          month?.previous?.visits
+        );
+
+      document.getElementById(
+        "previousMonthDownloads"
+      ).textContent =
+        `${formatNumber(
+          month?.previous?.downloads
+        )}회`;
+
+      applyChange(
+        "monthVisitChange",
+        month.visitChange
+      );
+
+      applyChange(
+        "monthDownloadChange",
+        month.downloadChange
+      );
+
+      document.getElementById(
+        "monthRange"
+      ).textContent =
+        formatMonth(
+          month.month
+        );
+
+      document.getElementById(
+        "previousMonthLabel"
+      ).textContent =
+        formatMonth(
+          month?.previous?.month
+        );
+
+      renderDailyTable(
+        "monthDailyBody",
+        Array.isArray(
+          data?.monthDaily
+        )
+          ? [...data.monthDaily]
+              .reverse()
+          : []
+      );
+
+      renderMonthlyTable(
+        "monthlyBody",
+        data?.monthly || []
+      );
+    }
+
+    function renderDailyTable(
+      bodyId,
+      rows
+    ) {
+      const body =
+        document.getElementById(
+          bodyId
+        );
+
+      body.innerHTML = "";
+
+      if (
+        !Array.isArray(rows) ||
+        !rows.length
+      ) {
+        const tr =
+          document.createElement(
+            "tr"
+          );
+
+        const td =
+          document.createElement(
+            "td"
+          );
+
+        td.colSpan = 4;
+        td.className = "empty";
+        td.textContent =
+          "집계된 데이터가 없습니다.";
+
+        tr.appendChild(td);
+        body.appendChild(tr);
         return;
       }
 
-      historyEmpty.hidden = true;
-
       rows.forEach((row) => {
-        const tr = document.createElement("tr");
+        const tr =
+          document.createElement(
+            "tr"
+          );
 
-        const dateTd = document.createElement("td");
-        dateTd.textContent = formatDate(row.date);
+        const date =
+          document.createElement(
+            "td"
+          );
 
-        const visitsTd = document.createElement("td");
-        visitsTd.textContent =
-          `${formatNumber(row.visits)}회`;
+        date.textContent =
+          formatDate(
+            row.date
+          );
 
-        const downloadsTd = document.createElement("td");
-        downloadsTd.className = "download-count";
-        downloadsTd.textContent =
-          `${formatNumber(row.downloads)}회`;
+        const visits =
+          document.createElement(
+            "td"
+          );
+
+        visits.textContent =
+          `${formatNumber(
+            row.visits
+          )}회`;
+
+        const downloads =
+          document.createElement(
+            "td"
+          );
+
+        downloads.className =
+          "download";
+
+        downloads.textContent =
+          `${formatNumber(
+            row.downloads
+          )}회`;
+
+        const rate =
+          document.createElement(
+            "td"
+          );
+
+        rate.textContent =
+          `${formatRate(
+            row.downloadRate
+          )}%`;
 
         tr.append(
-          dateTd,
-          visitsTd,
-          downloadsTd
+          date,
+          visits,
+          downloads,
+          rate
         );
 
-        historyBody.appendChild(tr);
+        body.appendChild(tr);
+      });
+    }
+
+    function renderMonthlyTable(
+      bodyId,
+      rows
+    ) {
+      const body =
+        document.getElementById(
+          bodyId
+        );
+
+      body.innerHTML = "";
+
+      if (
+        !Array.isArray(rows) ||
+        !rows.length
+      ) {
+        const tr =
+          document.createElement(
+            "tr"
+          );
+
+        const td =
+          document.createElement(
+            "td"
+          );
+
+        td.colSpan = 4;
+        td.className = "empty";
+        td.textContent =
+          "집계된 데이터가 없습니다.";
+
+        tr.appendChild(td);
+        body.appendChild(tr);
+        return;
+      }
+
+      rows.forEach((row) => {
+        const tr =
+          document.createElement(
+            "tr"
+          );
+
+        const month =
+          document.createElement(
+            "td"
+          );
+
+        month.textContent =
+          formatMonth(
+            row.month
+          );
+
+        const visits =
+          document.createElement(
+            "td"
+          );
+
+        visits.textContent =
+          `${formatNumber(
+            row.visits
+          )}회`;
+
+        const downloads =
+          document.createElement(
+            "td"
+          );
+
+        downloads.className =
+          "download";
+
+        downloads.textContent =
+          `${formatNumber(
+            row.downloads
+          )}회`;
+
+        const rate =
+          document.createElement(
+            "td"
+          );
+
+        rate.textContent =
+          `${formatRate(
+            row.downloadRate
+          )}%`;
+
+        tr.append(
+          month,
+          visits,
+          downloads,
+          rate
+        );
+
+        body.appendChild(tr);
+      });
+    }
+
+    function renderBarChart(
+      elementId,
+      rows
+    ) {
+      const chart =
+        document.getElementById(
+          elementId
+        );
+
+      chart.innerHTML = "";
+
+      if (
+        !Array.isArray(rows) ||
+        !rows.length
+      ) {
+        return;
+      }
+
+      const max =
+        Math.max(
+          1,
+          ...rows.map(
+            (row) =>
+              Math.max(
+                Number(
+                  row.visits || 0
+                ),
+                Number(
+                  row.downloads || 0
+                )
+              )
+          )
+        );
+
+      rows.forEach((row) => {
+        const item =
+          document.createElement(
+            "div"
+          );
+
+        item.className =
+          "bar-item";
+
+        const value =
+          document.createElement(
+            "div"
+          );
+
+        value.className =
+          "bar-value";
+
+        value.textContent =
+          `${formatNumber(
+            row.visits
+          )} / ${formatNumber(
+            row.downloads
+          )}`;
+
+        const stack =
+          document.createElement(
+            "div"
+          );
+
+        stack.className =
+          "bar-stack";
+
+        const visitBar =
+          document.createElement(
+            "div"
+          );
+
+        visitBar.className =
+          "bar visit";
+
+        visitBar.style.height =
+          `${Math.max(
+            2,
+            (
+              Number(
+                row.visits || 0
+              ) /
+              max
+            ) *
+            100
+          )}%`;
+
+        const downloadBar =
+          document.createElement(
+            "div"
+          );
+
+        downloadBar.className =
+          "bar download";
+
+        downloadBar.style.height =
+          `${Math.max(
+            2,
+            (
+              Number(
+                row.downloads || 0
+              ) /
+              max
+            ) *
+            100
+          )}%`;
+
+        stack.append(
+          visitBar,
+          downloadBar
+        );
+
+        const label =
+          document.createElement(
+            "div"
+          );
+
+        label.className =
+          "bar-label";
+
+        label.textContent =
+          compactDate(
+            row.date
+          );
+
+        item.append(
+          value,
+          stack,
+          label
+        );
+
+        chart.appendChild(item);
       });
     }
 
     /* =========================================================
-       07 REFRESH
+       09 REFRESH / LOGOUT
        ========================================================= */
     refreshBtn.addEventListener(
       "click",
       loadStats
     );
 
-    /* =========================================================
-       08 LOGOUT
-       ========================================================= */
-    logoutBtn.addEventListener("click", async () => {
-      const token = getToken();
+    logoutBtn.addEventListener(
+      "click",
+      async () => {
+        const token =
+          getToken();
 
-      if (token && isApiConfigured()) {
-        try {
-          await fetch(
-            apiUrl(ENDPOINTS.logout),
-            {
-              method: "POST",
-              headers: {
-                "Authorization": `Bearer ${token}`
+        if (token) {
+          try {
+            await fetch(
+              apiUrl(
+                ENDPOINTS.logout
+              ),
+              {
+                method: "POST",
+                headers: {
+                  "Authorization":
+                    `Bearer ${token}`
+                }
               }
-            }
-          );
-        } catch (_) {
-          /* 서버 로그아웃 실패 여부와 관계없이
-             브라우저 세션은 종료 */
+            );
+          } catch (_) {}
         }
-      }
 
-      clearToken();
-      showLogin();
-    });
+        clearToken();
+        latestStats = null;
+        showLogin();
+      }
+    );
 
     /* =========================================================
-       09 INITIALIZE
+       10 INITIALIZE
        ========================================================= */
     async function initialize() {
-      if (!isApiConfigured()) {
-        showLogin();
-
-        loginError.textContent =
-          "현재는 관리자 화면만 완성된 상태입니다. 카운터 API 연결 후 사용할 수 있습니다.";
-        return;
-      }
+      activateTab("today");
 
       if (getToken()) {
         showDashboard();
