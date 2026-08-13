@@ -868,6 +868,19 @@
       color: rgba(255,255,255,.28);
     }
 
+    .admin-link {
+      opacity: .42;
+      font-size: 10px;
+      font-weight: 700 !important;
+      letter-spacing: -.01em;
+      transition: opacity .18s ease, color .18s ease;
+    }
+
+    .admin-link:hover {
+      opacity: 1;
+      color: var(--orange) !important;
+    }
+
     /* =========================================================
        🔒 INDEX MASTER 10 · RESPONSIVE ≤ 820
        ========================================================= */
@@ -1926,6 +1939,8 @@
           <a href="privacy.html">개인정보처리방침</a>
           <span class="divider">·</span>
           <a href="location.html">오시는 길</a>
+          <span class="divider">·</span>
+          <a href="admin.html" class="admin-link" aria-label="모딩 관리자 페이지">관리자</a>
         </div>
 
         주식회사 모딩(Moding Inc.) · 대표 서희진 · 사업자번호 730-87-03564<br>
@@ -1958,6 +1973,53 @@
 
     const mobileMenuOverlay =
       document.getElementById("mobileMenuOverlay");
+
+    /* =========================================================
+       🔒 INDEX COUNTER JS · VISIT / DOWNLOAD
+       ========================================================= */
+    const COUNTER_API_BASE =
+      "https://flat-queen-f1fb.moding-inc.workers.dev";
+
+    const INDEX_VISIT_SESSION_KEY =
+      "moding_index_visit_tracked";
+
+    function postCounter(path) {
+      try {
+        fetch(`${COUNTER_API_BASE}${path}`, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-store",
+          keepalive: true
+        }).catch(() => {});
+      } catch (error) {}
+    }
+
+    function trackIndexVisitOnce() {
+      try {
+        if (
+          sessionStorage.getItem(
+            INDEX_VISIT_SESSION_KEY
+          ) === "1"
+        ) {
+          return;
+        }
+
+        sessionStorage.setItem(
+          INDEX_VISIT_SESSION_KEY,
+          "1"
+        );
+
+        postCounter("/track/visit");
+      } catch (error) {
+        postCounter("/track/visit");
+      }
+    }
+
+    function trackDownloadClick() {
+      postCounter("/track/download");
+    }
+
+    trackIndexVisitOnce();
 
     /* =========================================================
        🔒 INDEX MASTER JS 02 · VIEWPORT / HEADER SYNC
@@ -2144,6 +2206,8 @@
        🔒 INDEX MASTER JS 05 · DOWNLOAD ROUTING
        ========================================================= */
     function openModingStore(event) {
+      trackDownloadClick();
+
       const androidUrl =
         "https://play.google.com/store/apps/details?id=com.moding.application";
 
