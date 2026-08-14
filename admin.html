@@ -2,61 +2,39 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  >
-
-  <meta
-    name="robots"
-    content="noindex,nofollow,noarchive"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="googlebot" content="noindex,nofollow,noarchive">
   <title>Moding Admin</title>
 
   <style>
     :root {
       --green: #238B22;
       --green-dark: #176516;
-      --green-soft: #EFF8EF;
-
+      --green-soft: #EEF8EE;
       --orange: #FF8C00;
-      --orange-soft: #FFF5E8;
-
-      --blue: #3478F6;
-      --blue-soft: #EEF4FF;
-
-      --yellow: #FEE500;
-      --red: #FF0033;
-
-      --black: #101310;
-      --ink: #142016;
-
-      --sub: #69736B;
-      --muted: #9AA29B;
-
-      --line: #E1E7E2;
-      --soft: #F4F7F4;
+      --orange-soft: #FFF4E5;
+      --blue: #3D7FF0;
+      --blue-soft: #EDF4FF;
+      --black: #0C110D;
+      --ink: #142017;
+      --sub: #667169;
+      --muted: #9AA39C;
+      --line: #DFE6E0;
+      --soft: #F3F6F3;
       --white: #FFFFFF;
-
-      --danger: #C74D4D;
-
-      --page-max: 1320px;
-
+      --danger: #C64B4B;
+      --page-max: 1440px;
       --radius-xl: 30px;
       --radius-lg: 24px;
       --radius-md: 18px;
-
-      --shadow:
-        0 18px 55px
-        rgba(20, 45, 23, .055);
+      --shadow: 0 18px 56px rgba(19, 44, 22, .045);
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     html,
@@ -65,14 +43,7 @@
       min-height: 100%;
       background: var(--soft);
       color: var(--ink);
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Noto Sans KR",
-        "Apple SD Gothic Neo",
-        sans-serif;
-
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
       -webkit-text-size-adjust: 100%;
     }
 
@@ -112,45 +83,26 @@
       position: sticky;
       top: 0;
       z-index: 100;
-
-      border-bottom:
-        1px solid
-        rgba(225, 231, 226, .88);
-
-      background:
-        rgba(255,255,255,.92);
-
-      backdrop-filter:
-        blur(18px);
-
-      -webkit-backdrop-filter:
-        blur(18px);
+      border-bottom: 1px solid rgba(223, 230, 224, .9);
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
     .admin-header-inner {
-      width:
-        min(
-          100% - 48px,
-          var(--page-max)
-        );
-
+      width: min(100% - 52px, var(--page-max));
       min-height: 80px;
-
       margin: 0 auto;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       gap: 24px;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-
       gap: 11px;
-
       text-decoration: none;
     }
 
@@ -162,32 +114,23 @@
 
     .brand-badge {
       min-height: 28px;
-
       padding: 0 10px;
-
       display: inline-flex;
       align-items: center;
       justify-content: center;
-
       border-radius: 999px;
-
       background: var(--black);
-
       color: #fff;
-
       font-size: 11px;
       font-weight: 950;
-
       letter-spacing: .08em;
     }
 
     .header-link {
       color: var(--sub);
-
-      text-decoration: none;
-
       font-size: 14px;
       font-weight: 850;
+      text-decoration: none;
     }
 
     .header-link:hover {
@@ -195,70 +138,47 @@
     }
 
     .login-shell {
-      min-height:
-        calc(
-          100dvh - 81px
-        );
-
-      padding: 44px 20px;
-
+      min-height: calc(100dvh - 81px);
+      padding: 46px 20px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .login-card {
-      width:
-        min(
-          100%,
-          460px
-        );
-
-      padding:
-        42px 36px 36px;
-
-      border:
-        1px solid
-        var(--line);
-
-      border-radius:
-        32px;
-
+      width: min(100%, 470px);
+      padding: 44px 38px 38px;
+      border: 1px solid var(--line);
+      border-radius: 32px;
       background: #fff;
-
-      box-shadow:
-        var(--shadow);
+      box-shadow: var(--shadow);
     }
 
-    .kicker {
-      color: var(--orange);
-
+    .kicker,
+    .eyebrow {
+      color: var(--green);
       font-size: 12px;
       font-weight: 950;
-
       letter-spacing: .15em;
+    }
+
+    .login-card .kicker {
+      color: var(--orange);
     }
 
     .login-title {
       margin-top: 12px;
-
-      font-size: 40px;
-
+      font-size: 42px;
       line-height: 1;
-
       letter-spacing: -.06em;
-
       font-weight: 950;
     }
 
     .login-desc {
       margin-top: 16px;
-
       color: var(--sub);
-
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.65;
-
       font-weight: 650;
     }
 
@@ -272,82 +192,53 @@
 
     .password-input {
       width: 100%;
-
-      height: 60px;
-
-      padding:
-        0 58px 0 18px;
-
-      border:
-        1px solid
-        var(--line);
-
-      border-radius: 17px;
-
+      height: 62px;
+      padding: 0 62px 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
       outline: none;
-
       background: #fff;
-
       color: var(--ink);
-
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 800;
     }
 
     .password-input:focus {
-      border-color:
-        rgba(35,139,34,.50);
-
-      box-shadow:
-        0 0 0 4px
-        rgba(35,139,34,.08);
+      border-color: rgba(35, 139, 34, .50);
+      box-shadow: 0 0 0 4px rgba(35, 139, 34, .08);
     }
 
     .password-toggle {
       position: absolute;
-
       top: 50%;
       right: 8px;
-
-      width: 44px;
-      height: 44px;
-
-      transform:
-        translateY(-50%);
-
+      width: 46px;
+      height: 46px;
+      transform: translateY(-50%);
       border: 0;
-
-      border-radius: 12px;
-
+      border-radius: 13px;
       background: transparent;
-
       color: var(--sub);
-
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
-
       cursor: pointer;
     }
 
     .login-submit {
       width: 100%;
-
-      min-height: 58px;
-
-      margin-top: 13px;
-
+      min-height: 60px;
+      margin-top: 14px;
       border: 0;
-
-      border-radius: 17px;
-
+      border-radius: 18px;
       background: var(--green);
-
       color: #fff;
-
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 950;
-
       cursor: pointer;
+    }
+
+    .login-submit:hover {
+      background: var(--green-dark);
     }
 
     .login-submit:disabled {
@@ -357,108 +248,63 @@
 
     .login-error {
       min-height: 22px;
-
       margin-top: 13px;
-
       color: var(--danger);
-
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.5;
-
       font-weight: 800;
     }
 
     .dashboard {
-      width:
-        min(
-          100% - 48px,
-          var(--page-max)
-        );
-
+      width: min(100% - 52px, var(--page-max));
       margin: 0 auto;
-
-      padding:
-        40px 0 90px;
+      padding: 42px 0 100px;
     }
 
     .dashboard-top {
       display: flex;
-
       align-items: flex-end;
       justify-content: space-between;
-
-      gap: 28px;
-    }
-
-    .dashboard-kicker {
-      color: var(--green);
-
-      font-size: 12px;
-      font-weight: 950;
-
-      letter-spacing: .16em;
+      gap: 30px;
     }
 
     .dashboard-title {
-      margin-top: 7px;
-
-      font-size:
-        clamp(
-          48px,
-          5vw,
-          72px
-        );
-
-      line-height: .96;
-
+      margin-top: 8px;
+      font-size: clamp(52px, 5.5vw, 78px);
+      line-height: .94;
       letter-spacing: -.075em;
-
       font-weight: 950;
     }
 
     .dashboard-desc {
       margin-top: 16px;
-
       color: var(--sub);
-
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.6;
-
       font-weight: 650;
     }
 
     .top-actions {
       display: flex;
-
       align-items: center;
       justify-content: flex-end;
-
       gap: 9px;
     }
 
     .ghost-btn {
-      min-height: 44px;
-
-      padding:
-        0 16px;
-
-      border:
-        1px solid
-        var(--line);
-
+      min-height: 46px;
+      padding: 0 17px;
+      border: 1px solid var(--line);
       border-radius: 999px;
-
       background: #fff;
-
       color: var(--sub);
-
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 900;
-
       cursor: pointer;
     }
 
     .ghost-btn:hover {
+      border-color: rgba(35, 139, 34, .25);
       color: var(--green);
     }
 
@@ -469,53 +315,32 @@
 
     .last-check {
       margin-top: 10px;
-
       color: var(--sub);
-
-      font-size: 11px;
-      font-weight: 750;
-
+      font-size: 12px;
+      font-weight: 760;
       text-align: right;
     }
 
     .primary-tabs {
-      margin-top: 34px;
-
+      margin-top: 36px;
       padding: 6px;
-
       display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
+      grid-template-columns: repeat(4, 1fr);
       gap: 5px;
-
-      border:
-        1px solid
-        var(--line);
-
+      border: 1px solid var(--line);
       border-radius: 22px;
-
       background: #fff;
     }
 
     .primary-tab {
-      min-height: 58px;
-
-      padding:
-        0 16px;
-
+      min-height: 60px;
+      padding: 0 16px;
       border: 0;
-
       border-radius: 16px;
-
       background: transparent;
-
       color: var(--sub);
-
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 900;
-
       cursor: pointer;
     }
 
@@ -525,67 +350,45 @@
     }
 
     .filter-row {
-      margin-top: 16px;
-
+      margin-top: 18px;
       display: flex;
-
       align-items: center;
       justify-content: space-between;
-
-      gap: 18px;
+      gap: 20px;
     }
 
     .period-tabs {
-      padding: 4px;
-
+      padding: 5px;
       display: inline-grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
+      grid-template-columns: repeat(4, 1fr);
       gap: 4px;
-
-      border-radius: 16px;
-
-      background: #E8ECE9;
+      border-radius: 17px;
+      background: #E7ECE8;
     }
 
     .period-tab {
-      min-width: 92px;
-      min-height: 42px;
-
-      padding:
-        0 15px;
-
+      min-width: 98px;
+      min-height: 44px;
+      padding: 0 16px;
       border: 0;
-
-      border-radius: 12px;
-
+      border-radius: 13px;
       background: transparent;
-
       color: var(--sub);
-
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 900;
-
       cursor: pointer;
     }
 
     .period-tab.is-active {
       background: #fff;
-
       color: var(--ink);
-
-      box-shadow:
-        0 3px 10px
-        rgba(20,40,23,.05);
+      box-shadow: 0 3px 10px rgba(20, 40, 23, .05);
     }
 
     .launch-mark {
       color: var(--sub);
-
-      font-size: 12px;
-      font-weight: 750;
+      font-size: 13px;
+      font-weight: 760;
     }
 
     .launch-mark strong {
@@ -594,747 +397,579 @@
     }
 
     .content-panel {
-      margin-top: 22px;
+      margin-top: 24px;
     }
 
     .surface {
-      border:
-        1px solid
-        var(--line);
-
-      border-radius:
-        var(--radius-xl);
-
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
       background: #fff;
-
-      box-shadow:
-        0 14px 42px
-        rgba(20,45,23,.025);
+      box-shadow: var(--shadow);
     }
 
-    .metric-grid {
+    .kpi-grid {
       display: grid;
-
-      grid-template-columns:
-        repeat(4, minmax(0,1fr));
-
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .metric-card {
-      min-height: 230px;
-
+    .kpi-card {
+      min-height: 236px;
       padding: 28px;
-
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-
       overflow: hidden;
     }
 
-    .metric-card.green {
+    .kpi-card.primary {
       border-color: var(--green);
-
       background: var(--green);
-
       color: #fff;
     }
 
-    .metric-card.orange {
-      background:
-        linear-gradient(
-          180deg,
-          #fff 0%,
-          #FFF8EF 100%
-        );
-    }
-
-    .metric-card.blue {
-      background:
-        linear-gradient(
-          180deg,
-          #fff 0%,
-          #F4F7FF 100%
-        );
-    }
-
-    .metric-card.softgreen {
-      background:
-        linear-gradient(
-          180deg,
-          #fff 0%,
-          #F5FBF5 100%
-        );
-    }
-
-    .metric-label {
+    .kpi-label {
       color: var(--sub);
-
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 900;
     }
 
-    .green .metric-label {
-      color:
-        rgba(255,255,255,.78);
+    .primary .kpi-label {
+      color: rgba(255, 255, 255, .78);
     }
 
-    .metric-value {
+    .kpi-value {
       margin-top: 16px;
-
-      font-size:
-        clamp(
-          54px,
-          5.6vw,
-          82px
-        );
-
+      font-size: clamp(58px, 5.6vw, 82px);
       line-height: .9;
-
       letter-spacing: -.075em;
-
       font-weight: 950;
     }
 
-    .metric-value.medium {
-      font-size:
-        clamp(
-          44px,
-          4.5vw,
-          66px
-        );
+    .kpi-value.medium {
+      font-size: clamp(50px, 4.7vw, 70px);
     }
 
-    .metric-unit {
+    .kpi-unit {
       margin-left: 4px;
-
       font-size: 16px;
       font-weight: 900;
-
       letter-spacing: -.02em;
     }
 
-    .metric-desc {
+    .kpi-desc {
       margin-top: 12px;
-
       color: var(--sub);
-
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.55;
-
       font-weight: 720;
     }
 
-    .green .metric-desc {
-      color:
-        rgba(255,255,255,.74);
+    .primary .kpi-desc {
+      color: rgba(255, 255, 255, .75);
     }
 
-    .metric-bottom {
-      margin-top: 20px;
-
+    .kpi-footer {
+      min-height: 48px;
+      margin-top: 18px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
       color: var(--sub);
-
-      font-size: 12px;
-      line-height: 1.5;
-
+      font-size: 13px;
       font-weight: 850;
     }
 
-    .green .metric-bottom {
-      color:
-        rgba(255,255,255,.76);
+    .primary .kpi-footer {
+      color: rgba(255, 255, 255, .76);
     }
 
-    .rate-pill {
-      min-height: 30px;
+    .spark {
+      width: 100%;
+      height: 48px;
+    }
 
-      padding:
-        0 10px;
-
-      display: inline-flex;
-      align-items: center;
-
-      border-radius: 999px;
-
-      background:
-        rgba(35,139,34,.09);
-
-      color: var(--green);
-
-      font-size: 12px;
-      font-weight: 950;
+    .spark svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
     }
 
     .section-grid {
       margin-top: 16px;
-
       display: grid;
-
-      grid-template-columns:
-        minmax(0,1.55fr)
-        minmax(320px,.72fr);
-
+      grid-template-columns: minmax(0, 1.55fr) minmax(360px, .78fr);
       gap: 16px;
     }
 
     .section-card {
-      padding: 28px;
+      padding: 30px;
     }
 
     .section-head {
       display: flex;
-
       align-items: flex-end;
       justify-content: space-between;
-
       gap: 20px;
-    }
-
-    .eyebrow {
-      color: var(--green);
-
-      font-size: 11px;
-      font-weight: 950;
-
-      letter-spacing: .15em;
     }
 
     .section-title {
       margin-top: 7px;
-
-      font-size: 25px;
+      font-size: 29px;
       line-height: 1.16;
-
       letter-spacing: -.045em;
-
       font-weight: 950;
     }
 
     .section-caption {
       color: var(--sub);
-
-      font-size: 12px;
-      line-height: 1.55;
-
-      font-weight: 700;
-
-      text-align: right;
-    }
-
-    .channel-section {
-      margin-top: 16px;
-
-      padding: 30px;
-    }
-
-    .channel-grid {
-      margin-top: 22px;
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          3,
-          minmax(0,1fr)
-        );
-
-      gap: 14px;
-    }
-
-    .channel-item {
-      min-height: 174px;
-
-      padding: 20px;
-
-      border:
-        1px solid
-        var(--line);
-
-      border-radius: 22px;
-
-      background: var(--white);
-
-      display: flex;
-      flex-direction: column;
-
-      transition:
-        transform .16s ease,
-        box-shadow .16s ease,
-        border-color .16s ease;
-    }
-
-    .channel-item:hover {
-      transform:
-        translateY(-2px);
-
-      border-color:
-        rgba(35,139,34,.20);
-
-      box-shadow:
-        0 12px 32px
-        rgba(20,45,23,.05);
-    }
-
-    .channel-head {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 14px;
-    }
-
-    .channel-identity {
-      min-width: 0;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 12px;
-    }
-
-    .channel-icon {
-      width: 48px;
-      height: 48px;
-
-      flex:
-        0 0 48px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 15px;
-
-      background: var(--soft);
-
-      color: var(--ink);
-
-      overflow: hidden;
-    }
-
-    .channel-icon svg {
-      width: 26px;
-      height: 26px;
-
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.9;
-
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .channel-icon .fill {
-      fill: currentColor;
-      stroke: none;
-    }
-
-    .channel-icon-letter {
-      font-size: 21px;
-      line-height: 1;
-
-      font-weight: 950;
-    }
-
-    .channel-icon.daangn {
-      background:
-        #FFF1E5;
-
-      color:
-        #FF6F0F;
-    }
-
-    .channel-icon.naver {
-      background:
-        #EAF9EF;
-
-      color:
-        #03C75A;
-    }
-
-    .channel-icon.kakao {
-      background:
-        #FFF9C7;
-
-      color:
-        #201C00;
-    }
-
-    .channel-icon.youtube {
-      background:
-        #FFF0F3;
-
-      color:
-        #FF0033;
-    }
-
-    .channel-icon.instagram {
-      background:
-        #FFF0F5;
-
-      color:
-        #D62976;
-    }
-
-    .channel-icon.google {
-      background:
-        #F1F5FF;
-
-      color:
-        #4285F4;
-    }
-
-    .channel-icon.facebook {
-      background:
-        #EEF4FF;
-
-      color:
-        #1877F2;
-    }
-
-    .channel-icon.x {
-      background:
-        #F0F1F0;
-
-      color:
-        #111;
-    }
-
-    .channel-icon.leaflet,
-    .channel-icon.qr {
-      background:
-        var(--green-soft);
-
-      color:
-        var(--green);
-    }
-
-    .channel-icon.direct {
-      background:
-        #F0F2F0;
-
-      color:
-        #666;
-    }
-
-    .channel-name {
-      min-width: 0;
-
-      font-size: 17px;
-      line-height: 1.1;
-
-      font-weight: 950;
-
-      letter-spacing: -.035em;
-    }
-
-    .channel-name small {
-      display: block;
-
-      margin-top: 5px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-      line-height: 1.2;
-
-      font-weight: 750;
-
-      letter-spacing: 0;
-    }
-
-    .channel-entry {
-      color: var(--green);
-
       font-size: 13px;
-      font-weight: 950;
-
-      white-space: nowrap;
-    }
-
-    .channel-number {
-      margin-top: auto;
-      padding-top: 20px;
-
-      font-size: 36px;
-      line-height: 1;
-
-      letter-spacing: -.06em;
-
-      font-weight: 950;
-    }
-
-    .channel-number span {
-      margin-left: 3px;
-
-      color: var(--sub);
-
-      font-size: 12px;
-      font-weight: 850;
-
-      letter-spacing: 0;
-    }
-
-    .channel-detail {
-      margin-top: 11px;
-
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-
-      gap: 7px;
-    }
-
-    .channel-chip {
-      min-height: 29px;
-
-      padding: 0 9px;
-
-      display: inline-flex;
-      align-items: center;
-
-      border-radius: 999px;
-
-      font-size: 10px;
-      font-weight: 900;
-    }
-
-    .channel-chip.visit {
-      background:
-        #EEF1EE;
-
-      color: var(--sub);
-    }
-
-    .channel-chip.store {
-      background:
-        var(--orange-soft);
-
-      color:
-        #B66300;
-    }
-
-    .channel-chip.ios {
-      background:
-        var(--blue-soft);
-
-      color:
-        var(--blue);
-    }
-
-    .channel-chip.android {
-      background:
-        var(--green-soft);
-
-      color:
-        var(--green-dark);
-    }
-
-    .channel-empty {
-      grid-column:
-        1 / -1;
-
-      min-height: 180px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      color: var(--sub);
-
-      font-size: 14px;
-      line-height: 1.6;
-
-      font-weight: 800;
-
-      text-align: center;
-    }
-
-    .channel-note {
-      margin-top: 18px;
-
-      color: var(--sub);
-
-      font-size: 11px;
-      line-height: 1.65;
-
-      font-weight: 700;
+      line-height: 1.55;
+      font-weight: 720;
+      text-align: right;
     }
 
     .chart-wrap {
       width: 100%;
-
-      min-height: 320px;
-
-      margin-top: 22px;
-
+      min-height: 340px;
+      margin-top: 24px;
       overflow-x: auto;
     }
 
     .chart {
       width: 100%;
-
-      min-width: 650px;
-      height: 320px;
+      min-width: 720px;
+      height: 340px;
     }
 
     .chart svg {
       width: 100%;
       height: 100%;
-
       overflow: visible;
     }
 
     .chart-empty {
-      min-height: 300px;
-
+      min-height: 320px;
       display: flex;
       align-items: center;
       justify-content: center;
-
       color: var(--sub);
-
-      font-size: 14px;
+      font-size: 15px;
+      line-height: 1.6;
       font-weight: 800;
+      text-align: center;
     }
 
     .chart-legend {
       display: flex;
-
       align-items: center;
       justify-content: flex-end;
-
       flex-wrap: wrap;
-
-      gap: 11px;
+      gap: 12px;
     }
 
     .legend-item {
       display: inline-flex;
       align-items: center;
-
       gap: 7px;
-
       color: var(--sub);
-
-      font-size: 12px;
-      font-weight: 850;
-    }
-
-    .legend-dot {
-      width: 9px;
-      height: 9px;
-
-      border-radius: 50%;
-
-      background: var(--green);
-    }
-
-    .legend-dot.orange {
-      background: var(--orange);
-    }
-
-    .legend-dot.blue {
-      background: var(--blue);
-    }
-
-    .legend-dot.black {
-      background: var(--black);
-    }
-
-    .platform-list {
-      margin-top: 20px;
-
-      display: grid;
-
-      gap: 10px;
-    }
-
-    .platform-row {
-      min-height: 58px;
-
-      padding:
-        0 15px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 12px;
-
-      border-radius: 16px;
-
-      background: var(--soft);
-    }
-
-    .platform-name {
-      display: inline-flex;
-      align-items: center;
-
-      gap: 8px;
-
-      color: var(--sub);
-
       font-size: 13px;
       font-weight: 850;
     }
 
-    .platform-value {
-      color: var(--ink);
-
-      font-size: 17px;
-      font-weight: 950;
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
     }
 
-    .summary-box {
-      margin-top: 16px;
+    .legend-dot.orange { background: var(--orange); }
+    .legend-dot.blue { background: var(--blue); }
+    .legend-dot.black { background: var(--black); }
+    .legend-dot.muted { background: #B9C1BA; }
 
-      padding: 17px;
-
-      border-radius: 17px;
-
-      background: var(--soft);
+    .donut-layout {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      align-items: center;
+      gap: 26px;
     }
 
-    .summary-box strong {
-      display: block;
-
-      font-size: 14px;
-      font-weight: 950;
+    .donut {
+      width: 190px;
+      aspect-ratio: 1;
+      padding: 22px;
+      border-radius: 50%;
+      background: #E9EEEA;
+      animation: donutIn .45s ease both;
     }
 
-    .summary-box span {
-      display: block;
+    .donut-hole {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #fff;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px rgba(223, 230, 224, .75);
+    }
 
-      margin-top: 7px;
-
+    .donut-hole small {
       color: var(--sub);
+      font-size: 12px;
+      font-weight: 850;
+    }
 
+    .donut-hole strong {
+      margin-top: 4px;
+      font-size: 36px;
+      line-height: 1;
+      letter-spacing: -.055em;
+      font-weight: 950;
+    }
+
+    @keyframes donutIn {
+      from {
+        transform: scale(.92) rotate(-8deg);
+        opacity: .4;
+      }
+
+      to {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+      }
+    }
+
+    .share-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .share-row {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .share-row:last-child {
+      border-bottom: 0;
+    }
+
+    .share-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--sub);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .share-value {
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 950;
+    }
+
+    .channel-visual {
+      margin-top: 16px;
+      padding: 30px;
+    }
+
+    .channel-visual-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .channel-bars {
+      display: grid;
+      gap: 14px;
+    }
+
+    .channel-bar-row {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .channel-bar-head {
+      display: grid;
+      grid-template-columns: auto minmax(100px, 1fr) auto auto;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .source-icon {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: #EEF1EE;
+      color: var(--ink);
+      font-size: 20px;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .source-icon.daangn {
+      background: #FFF0E5;
+      color: #FF6F0F;
+    }
+
+    .source-icon.naver {
+      background: #EAF9EF;
+      color: #03C75A;
+    }
+
+    .source-icon.kakao {
+      background: #FFF8B8;
+      color: #2C2600;
+    }
+
+    .source-icon.youtube {
+      background: #FFF0F3;
+      color: #FF0033;
+    }
+
+    .source-icon.instagram {
+      background: #FFF0F6;
+      color: #D62976;
+    }
+
+    .source-icon.google {
+      background: #EEF4FF;
+      color: #4285F4;
+    }
+
+    .source-icon.facebook {
+      background: #EEF4FF;
+      color: #1877F2;
+    }
+
+    .source-icon.x {
+      background: #F0F1F0;
+      color: #111;
+    }
+
+    .source-icon.leaflet,
+    .source-icon.qr {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .source-icon.direct {
+      background: #EFF1EF;
+      color: #6B736D;
+    }
+
+    .source-name {
+      min-width: 0;
+      font-size: 18px;
+      font-weight: 950;
+      letter-spacing: -.03em;
+    }
+
+    .source-name small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
       font-size: 11px;
-      line-height: 1.6;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
 
+    .source-share {
+      color: var(--sub);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .source-total {
+      font-size: 18px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .bar-track {
+      height: 11px;
+      margin-top: 13px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #EDF0ED;
+    }
+
+    .bar-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+      transition: width .55s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .channel-bar-detail {
+      margin-top: 11px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      min-height: 30px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .chip.visit {
+      background: #EEF1EE;
+      color: var(--sub);
+    }
+
+    .chip.store {
+      background: var(--orange-soft);
+      color: #B66500;
+    }
+
+    .chip.ios {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .chip.android {
+      background: var(--green-soft);
+      color: var(--green-dark);
+    }
+
+    .chip.unknown {
+      background: #EEF0EE;
+      color: var(--sub);
+    }
+
+    .direct-box {
+      margin-top: 16px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border: 1px dashed #CCD4CD;
+      border-radius: 18px;
+      background: #F9FAF9;
+    }
+
+    .direct-box strong {
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .direct-box span {
+      color: var(--sub);
+      font-size: 13px;
+      font-weight: 760;
+    }
+
+    .direct-value {
+      font-size: 26px !important;
+      color: var(--ink) !important;
+      font-weight: 950 !important;
+      white-space: nowrap;
+    }
+
+    .flow-card {
+      margin-top: 16px;
+      padding: 30px;
+    }
+
+    .flow-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 156px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: var(--flow, 0%);
+      height: 8px;
+      border-radius: 0 999px 999px 0;
+      background: var(--green);
+      transition: width .55s ease;
+    }
+
+    .flow-step.orange::after {
+      background: var(--orange);
+    }
+
+    .flow-step.blue::after {
+      background: var(--blue);
+    }
+
+    .flow-label {
+      color: var(--sub);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .flow-value {
+      margin-top: 14px;
+      font-size: 46px;
+      line-height: 1;
+      letter-spacing: -.06em;
+      font-weight: 950;
+    }
+
+    .flow-note {
+      margin-top: 10px;
+      color: var(--sub);
+      font-size: 13px;
+      line-height: 1.5;
       font-weight: 700;
     }
 
     .details-card {
       margin-top: 16px;
-
-      padding: 26px;
+      padding: 28px 30px;
     }
 
     .details-card summary {
       list-style: none;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       gap: 20px;
-
       cursor: pointer;
     }
 
@@ -1344,63 +979,46 @@
 
     .details-toggle {
       color: var(--sub);
-
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
     }
 
-    details[open]
-    .details-toggle::after {
+    details[open] .details-toggle::after {
       content: "접기";
     }
 
-    details:not([open])
-    .details-toggle::after {
+    details:not([open]) .details-toggle::after {
       content: "상세 보기";
     }
 
     .table-wrap {
-      margin-top: 20px;
-
+      margin-top: 22px;
       overflow-x: auto;
-
-      border-top:
-        1px solid
-        var(--line);
+      border-top: 1px solid var(--line);
     }
 
     .data-table {
       width: 100%;
-
-      min-width: 720px;
-
+      min-width: 760px;
       border-collapse: collapse;
     }
 
     .data-table th,
     .data-table td {
-      padding:
-        16px 11px;
-
-      border-bottom:
-        1px solid
-        var(--line);
-
+      padding: 17px 12px;
+      border-bottom: 1px solid var(--line);
       text-align: right;
-
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .data-table th {
       color: var(--sub);
-
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 900;
     }
 
     .data-table td {
       color: var(--ink);
-
       font-weight: 820;
     }
 
@@ -1409,46 +1027,128 @@
       text-align: left;
     }
 
-    .ios-value {
-      color: var(--blue) !important;
+    .data-table .ios-value {
+      color: var(--blue);
     }
 
-    .android-value {
-      color: var(--green-dark) !important;
+    .data-table .android-value {
+      color: var(--green-dark);
     }
 
-    .orange-value {
-      color: var(--orange) !important;
+    .data-table .orange-value {
+      color: var(--orange);
     }
 
-    .pending-value {
-      color: var(--muted) !important;
+    .data-table .muted-value {
+      color: var(--muted);
     }
 
     .empty {
-      padding:
-        34px 8px !important;
+      padding: 38px 8px !important;
+      color: var(--sub) !important;
+      text-align: center !important;
+      font-weight: 760 !important;
+    }
 
-      color:
-        var(--sub) !important;
+    .platform-bars {
+      margin-top: 24px;
+      display: grid;
+      gap: 16px;
+    }
 
-      text-align:
-        center !important;
+    .platform-bar-row {
+      display: grid;
+      grid-template-columns: 105px minmax(0, 1fr) 84px;
+      align-items: center;
+      gap: 14px;
+    }
 
-      font-weight:
-        760 !important;
+    .platform-bar-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--sub);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .platform-bar-value {
+      text-align: right;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .bar-fill.blue {
+      background: var(--blue);
+    }
+
+    .bar-fill.orange {
+      background: var(--orange);
+    }
+
+    .bar-fill.muted {
+      background: #B9C1BA;
+    }
+
+    .activity-list {
+      margin-top: 18px;
+      display: grid;
+    }
+
+    .activity-row {
+      min-height: 66px;
+      padding: 13px 2px;
+      display: grid;
+      grid-template-columns: 150px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .activity-row:last-child {
+      border-bottom: 0;
+    }
+
+    .activity-date {
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .activity-platforms {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .activity-total {
+      font-size: 16px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .note-box {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 17px;
+      background: var(--soft);
+      color: var(--sub);
+      font-size: 13px;
+      line-height: 1.65;
+      font-weight: 720;
+    }
+
+    .note-box strong {
+      color: var(--ink);
+      font-weight: 950;
     }
 
     .status-line {
       margin-top: 18px;
-
       min-height: 22px;
-
       color: var(--sub);
-
-      font-size: 12px;
+      font-size: 13px;
       line-height: 1.5;
-
       font-weight: 700;
     }
 
@@ -1458,122 +1158,73 @@
 
     .system-popover {
       position: fixed;
-
       top: 92px;
-
-      right:
-        max(
-          24px,
-          calc(
-            (
-              100vw -
-              var(--page-max)
-            ) /
-            2
-          )
-        );
-
+      right: max(26px, calc((100vw - var(--page-max)) / 2));
       z-index: 150;
-
-      width:
-        min(
-          390px,
-          calc(
-            100vw - 30px
-          )
-        );
-
+      width: min(400px, calc(100vw - 32px));
       padding: 20px;
-
-      border:
-        1px solid
-        var(--line);
-
+      border: 1px solid var(--line);
       border-radius: 24px;
-
       background: #fff;
-
       box-shadow: var(--shadow);
     }
 
     .system-head {
       display: flex;
-
       align-items: center;
       justify-content: space-between;
-
       gap: 12px;
     }
 
     .system-title {
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 950;
     }
 
     .system-close {
-      width: 34px;
-      height: 34px;
-
+      width: 36px;
+      height: 36px;
       border: 0;
-
-      border-radius: 10px;
-
+      border-radius: 11px;
       background: var(--soft);
-
       color: var(--sub);
-
       font-weight: 900;
-
       cursor: pointer;
     }
 
     .system-list {
-      margin-top: 15px;
-
+      margin-top: 16px;
       display: grid;
-
       gap: 9px;
     }
 
     .system-item {
-      padding: 14px;
-
-      border:
-        1px solid
-        var(--line);
-
+      padding: 15px;
+      border: 1px solid var(--line);
       border-radius: 16px;
-
       background: var(--soft);
     }
 
     .system-item-top {
       display: flex;
-
       align-items: center;
       justify-content: space-between;
-
       gap: 12px;
     }
 
     .system-name {
       display: inline-flex;
       align-items: center;
-
       gap: 8px;
-
       color: var(--sub);
-
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
     }
 
     .system-dot {
       width: 8px;
       height: 8px;
-
       border-radius: 50%;
-
       background: #B9C1BA;
     }
 
@@ -1582,76 +1233,75 @@
     }
 
     .system-state {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 950;
     }
 
     .system-desc {
       margin-top: 7px;
-
       color: var(--sub);
-
-      font-size: 11px;
+      font-size: 12px;
       line-height: 1.5;
-
       font-weight: 700;
     }
 
-    @media (max-width: 1100px) {
-      .metric-grid {
-        grid-template-columns:
-          1fr 1fr;
-      }
-
-      .channel-grid {
-        grid-template-columns:
-          1fr 1fr;
+    @media (max-width: 1180px) {
+      .kpi-grid {
+        grid-template-columns: 1fr 1fr;
       }
 
       .section-grid {
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
+      }
+
+      .channel-visual-grid {
+        grid-template-columns: 320px minmax(0, 1fr);
       }
     }
 
-    @media (max-width: 720px) {
-      .admin-header-inner,
-      .dashboard {
-        width:
-          min(
-            100% - 28px,
-            var(--page-max)
-          );
+    @media (max-width: 860px) {
+      .channel-visual-grid {
+        grid-template-columns: 1fr;
       }
 
+      .donut-layout {
+        grid-template-columns: 165px 1fr;
+      }
+
+      .donut {
+        width: 165px;
+      }
+
+      .flow-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .admin-header-inner,
       .dashboard {
-        padding-top: 28px;
+        width: min(100% - 28px, var(--page-max));
       }
 
       .dashboard-top {
         align-items: flex-start;
-      }
-
-      .dashboard-title {
-        font-size: 48px;
-      }
-
-      .dashboard-desc {
-        font-size: 14px;
+        flex-direction: column;
       }
 
       .top-actions {
-        flex-direction: column;
-        align-items: stretch;
+        justify-content: flex-start;
       }
 
       .last-check {
         text-align: left;
       }
 
+      .dashboard-title {
+        font-size: 50px;
+      }
+
       .primary-tabs {
-        grid-template-columns:
-          1fr 1fr;
+        grid-template-columns: 1fr 1fr;
       }
 
       .filter-row {
@@ -1667,37 +1317,26 @@
         min-width: 0;
       }
 
-      .metric-grid {
-        grid-template-columns:
-          1fr;
+      .kpi-grid {
+        grid-template-columns: 1fr;
       }
 
-      .metric-card {
-        min-height: 200px;
-        padding: 23px;
+      .kpi-card {
+        min-height: 210px;
+        padding: 24px;
       }
 
-      .metric-value,
-      .metric-value.medium {
-        font-size: 58px;
-      }
-
-      .channel-section {
-        padding: 22px 17px;
-      }
-
-      .channel-grid {
-        grid-template-columns:
-          1fr;
-      }
-
-      .channel-item {
-        min-height: 160px;
+      .kpi-value,
+      .kpi-value.medium {
+        font-size: 60px;
       }
 
       .section-card,
+      .channel-visual,
+      .flow-card,
       .details-card {
-        padding: 21px 17px;
+        padding: 22px 18px;
+        border-radius: 24px;
       }
 
       .section-head {
@@ -1705,109 +1344,106 @@
       }
 
       .section-caption {
-        max-width: 170px;
+        max-width: 180px;
+      }
+
+      .channel-bar-head {
+        grid-template-columns: auto 1fr auto;
+      }
+
+      .source-share {
+        display: none;
+      }
+
+      .activity-row {
+        grid-template-columns: 1fr auto;
+      }
+
+      .activity-platforms {
+        grid-column: 1 / -1;
       }
     }
 
-    @media (max-width: 430px) {
+    @media (max-width: 460px) {
       .admin-header-inner,
       .dashboard {
-        width:
-          min(
-            100% - 22px,
-            var(--page-max)
-          );
+        width: min(100% - 22px, var(--page-max));
       }
 
       .brand img {
         height: 38px;
       }
 
-      .dashboard-title {
-        font-size: 43px;
+      .brand-badge {
+        display: none;
       }
 
-      .primary-tab {
-        min-height: 54px;
+      .dashboard-title {
+        font-size: 44px;
+      }
+
+      .dashboard-desc {
         font-size: 14px;
       }
 
-      .channel-icon {
-        width: 44px;
-        height: 44px;
-        flex-basis: 44px;
+      .top-actions {
+        flex-wrap: wrap;
       }
 
-      .channel-number {
-        font-size: 33px;
+      .primary-tab {
+        min-height: 56px;
+        font-size: 14px;
+      }
+
+      .donut-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .donut {
+        margin: 0 auto;
+      }
+
+      .platform-bar-row {
+        grid-template-columns: 88px 1fr 70px;
       }
     }
   </style>
 </head>
 
 <body>
-
   <header class="admin-header">
     <div class="admin-header-inner">
-
-      <a
-        class="brand"
-        href="index.html"
-        aria-label="모딩 홈"
-      >
-
-        <img
-          src="모딩로고.png"
-          alt="Moding"
-        >
-
-        <span class="brand-badge">
-          ADMIN
-        </span>
-
+      <a class="brand" href="index.html" aria-label="모딩 홈">
+        <img src="모딩로고.png" alt="Moding">
+        <span class="brand-badge">ADMIN</span>
       </a>
 
-      <a
-        class="header-link"
-        href="index.html"
-      >
+      <a class="header-link" href="index.html">
         홈페이지로
       </a>
-
     </div>
   </header>
 
-  <main
-    id="loginView"
-    class="login-shell"
-  >
+  <main id="loginView" class="login-shell">
+    <section class="login-card" aria-labelledby="loginTitle">
+      <div class="kicker">MODING ADMIN</div>
 
-    <section class="login-card">
-
-      <div class="kicker">
-        MODING ADMIN
-      </div>
-
-      <h1 class="login-title">
+      <h1 id="loginTitle" class="login-title">
         관리자 확인
       </h1>
 
       <p class="login-desc">
         관리자 비밀번호를 입력하면<br>
-        채널별 유입부터 실제 앱 설치까지 확인할 수 있습니다.
+        채널 유입부터 실제 앱 설치까지 확인할 수 있습니다.
       </p>
 
-      <form
-        id="loginForm"
-        class="login-form"
-      >
-
+      <form id="loginForm" class="login-form">
         <div class="password-wrap">
-
           <input
             id="passwordInput"
             class="password-input"
             type="password"
+            name="password"
             placeholder="관리자 비밀번호"
             autocomplete="current-password"
             required
@@ -1820,7 +1456,6 @@
           >
             보기
           </button>
-
         </div>
 
         <button
@@ -1834,12 +1469,11 @@
         <div
           id="loginError"
           class="login-error"
+          role="alert"
+          aria-live="polite"
         ></div>
-
       </form>
-
     </section>
-
   </main>
 
   <main
@@ -1847,12 +1481,9 @@
     class="dashboard"
     hidden
   >
-
     <div class="dashboard-top">
-
       <div>
-
-        <div class="dashboard-kicker">
+        <div class="kicker">
           MODING DASHBOARD
         </div>
 
@@ -1861,15 +1492,12 @@
         </h1>
 
         <p class="dashboard-desc">
-          홈페이지 방문부터 당근·네이버·카카오·유튜브 등 채널 유입과 실제 앱 설치까지 확인합니다.
+          홈페이지 방문부터 당근·네이버·카카오·유튜브 등 채널 유입과 실제 앱 설치까지 한눈에 확인합니다.
         </p>
-
       </div>
 
       <div>
-
         <div class="top-actions">
-
           <button
             id="systemBtn"
             class="ghost-btn"
@@ -1893,7 +1521,6 @@
           >
             로그아웃
           </button>
-
         </div>
 
         <div
@@ -1902,16 +1529,13 @@
         >
           마지막 확인 -
         </div>
-
       </div>
-
     </div>
 
     <nav
       class="primary-tabs"
       aria-label="통계 종류"
     >
-
       <button
         class="primary-tab is-active"
         data-view="overview"
@@ -1930,7 +1554,7 @@
 
       <button
         class="primary-tab"
-        data-view="clicks"
+        data-view="downloads"
         type="button"
       >
         다운로드
@@ -1943,16 +1567,13 @@
       >
         실제 설치
       </button>
-
     </nav>
 
     <div class="filter-row">
-
       <nav
         class="period-tabs"
-        aria-label="기간"
+        aria-label="통계 기간"
       >
-
         <button
           class="period-tab is-active"
           data-period="all"
@@ -1984,1216 +1605,24 @@
         >
           월간
         </button>
-
       </nav>
 
       <div class="launch-mark">
         앱 배포일
-        <strong>
-          2026.07.01
-        </strong>
+        <strong>2026.07.01</strong>
       </div>
-
     </div>
 
     <section
-      id="viewOverview"
+      id="content"
       class="content-panel"
-    >
-
-      <div class="metric-grid">
-
-        <article
-          class="surface metric-card green"
-        >
-
-          <div>
-
-            <div
-              id="overviewVisitLabel"
-              class="metric-label"
-            >
-              홈페이지 방문
-            </div>
-
-            <div class="metric-value">
-
-              <span id="overviewVisitValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                회
-              </span>
-
-            </div>
-
-            <div class="metric-desc">
-              모딩 홈페이지 유입
-            </div>
-
-          </div>
-
-          <div
-            id="overviewVisitBottom"
-            class="metric-bottom"
-          >
-            전체 누적
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card orange"
-        >
-
-          <div>
-
-            <div
-              id="overviewDownloadLabel"
-              class="metric-label"
-            >
-              다운로드 클릭
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="overviewDownloadValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                회
-              </span>
-
-            </div>
-
-            <div class="metric-desc">
-              App Store · Google Play 이동
-            </div>
-
-          </div>
-
-          <div class="metric-bottom">
-
-            방문 → 다운로드
-
-            <span
-              id="overviewDownloadRate"
-              class="rate-pill"
-            >
-              0.0%
-            </span>
-
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card blue"
-        >
-
-          <div>
-
-            <div
-              id="overviewChannelLabel"
-              class="metric-label"
-            >
-              확인된 외부채널 유입
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="overviewChannelValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                회
-              </span>
-
-            </div>
-
-            <div class="metric-desc">
-              당근 · 네이버 · 카카오 등
-            </div>
-
-          </div>
-
-          <div
-            id="overviewTopChannel"
-            class="metric-bottom"
-          >
-            상위 채널 -
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card softgreen"
-        >
-
-          <div>
-
-            <div
-              id="overviewInstallLabel"
-              class="metric-label"
-            >
-              실제 신규 설치
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="overviewInstallValue">
-                -
-              </span>
-
-              <span class="metric-unit">
-                건
-              </span>
-
-            </div>
-
-            <div class="metric-desc">
-              Apple · Google 확정 데이터
-            </div>
-
-          </div>
-
-          <div
-            id="overviewInstallBottom"
-            class="metric-bottom"
-          >
-            iOS - · Android -
-          </div>
-
-        </article>
-
-      </div>
-
-      <section
-        class="surface channel-section"
-      >
-
-        <div class="section-head">
-
-          <div>
-
-            <div class="eyebrow">
-              CHANNEL
-            </div>
-
-            <h2 class="section-title">
-              채널별 유입 현황
-            </h2>
-
-          </div>
-
-          <div class="section-caption">
-            실제 데이터가 있는 채널만 자동 표시
-          </div>
-
-        </div>
-
-        <div
-          id="overviewChannelGrid"
-          class="channel-grid"
-        ></div>
-
-        <p class="channel-note">
-          유입 횟수는 현재 채널별 방문 또는 스토어 이동 이벤트를 기준으로 표시합니다.
-          동일 사용자의 완전한 고유 사용자 수 집계는 아닙니다.
-        </p>
-
-      </section>
-
-      <div class="section-grid">
-
-        <section
-          class="surface section-card"
-        >
-
-          <div class="section-head">
-
-            <div>
-
-              <div class="eyebrow">
-                TREND
-              </div>
-
-              <h2
-                id="overviewChartTitle"
-                class="section-title"
-              >
-                방문과 다운로드 추이
-              </h2>
-
-            </div>
-
-            <div class="chart-legend">
-
-              <span class="legend-item">
-                <span class="legend-dot"></span>
-                방문
-              </span>
-
-              <span class="legend-item">
-                <span class="legend-dot orange"></span>
-                다운로드
-              </span>
-
-            </div>
-
-          </div>
-
-          <div class="chart-wrap">
-
-            <div
-              id="overviewChart"
-              class="chart"
-            ></div>
-
-          </div>
-
-        </section>
-
-        <aside
-          class="surface section-card"
-        >
-
-          <div class="eyebrow">
-            PLATFORM
-          </div>
-
-          <h2 class="section-title">
-            다운로드 플랫폼
-          </h2>
-
-          <div class="platform-list">
-
-            <div class="platform-row">
-
-              <span class="platform-name">
-                <span class="legend-dot blue"></span>
-                iOS
-              </span>
-
-              <span
-                id="overviewIosClicks"
-                class="platform-value"
-              >
-                0회
-              </span>
-
-            </div>
-
-            <div class="platform-row">
-
-              <span class="platform-name">
-                <span class="legend-dot"></span>
-                Android
-              </span>
-
-              <span
-                id="overviewAndroidClicks"
-                class="platform-value"
-              >
-                0회
-              </span>
-
-            </div>
-
-            <div class="platform-row">
-
-              <span class="platform-name">
-                <span class="legend-dot black"></span>
-                미분류
-              </span>
-
-              <span
-                id="overviewUnknownClicks"
-                class="platform-value"
-              >
-                0회
-              </span>
-
-            </div>
-
-          </div>
-
-          <div class="summary-box">
-
-            <strong id="overviewClickTotal">
-              전체 다운로드 0회
-            </strong>
-
-            <span>
-              홈페이지와 외부채널의 다운로드 이벤트를 합산합니다.
-            </span>
-
-          </div>
-
-        </aside>
-
-      </div>
-
-    </section>
-
-    <section
-      id="viewChannels"
-      class="content-panel"
-      hidden
-    >
-
-      <div class="metric-grid">
-
-        <article
-          class="surface metric-card blue"
-        >
-
-          <div>
-
-            <div class="metric-label">
-              확인된 채널
-            </div>
-
-            <div class="metric-value">
-
-              <span id="channelCountValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                개
-              </span>
-
-            </div>
-
-            <div class="metric-desc">
-              데이터가 발생한 유입 경로
-            </div>
-
-          </div>
-
-          <div
-            id="channelCountBottom"
-            class="metric-bottom"
-          >
-            전체
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card green"
-        >
-
-          <div>
-
-            <div class="metric-label">
-              채널 유입
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="channelEntryValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                회
-              </span>
-
-            </div>
-
-            <div class="metric-desc">
-              채널별 확인 가능한 유입
-            </div>
-
-          </div>
-
-          <div class="metric-bottom">
-            직접 유입 포함
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card orange"
-        >
-
-          <div>
-
-            <div class="metric-label">
-              외부채널 유입
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="externalEntryValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                회
-              </span>
-
-            </div>
-
-            <div class="metric-desc">
-              direct 제외
-            </div>
-
-          </div>
-
-          <div
-            id="externalTopChannel"
-            class="metric-bottom"
-          >
-            상위 채널 -
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card softgreen"
-        >
-
-          <div>
-
-            <div class="metric-label">
-              채널 다운로드
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="channelDownloadValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                회
-              </span>
-
-            </div>
-
-            <div class="metric-desc">
-              채널별 스토어 이동
-            </div>
-
-          </div>
-
-          <div
-            id="channelDownloadBottom"
-            class="metric-bottom"
-          >
-            iOS 0 · Android 0
-          </div>
-
-        </article>
-
-      </div>
-
-      <section
-        class="surface channel-section"
-      >
-
-        <div class="section-head">
-
-          <div>
-
-            <div class="eyebrow">
-              CHANNEL DETAIL
-            </div>
-
-            <h2 class="section-title">
-              어디서 들어왔는지
-            </h2>
-
-          </div>
-
-          <div class="section-caption">
-            채널이 늘어나면 자동으로 카드 추가
-          </div>
-
-        </div>
-
-        <div
-          id="channelMainGrid"
-          class="channel-grid"
-        ></div>
-
-        <p class="channel-note">
-          예: 당근은 <strong>download.html?src=daangn</strong>,
-          네이버는 <strong>src=naver</strong>,
-          카카오톡은 <strong>src=kakao</strong>처럼 사용하면 이 화면에 자동으로 표시됩니다.
-        </p>
-
-      </section>
-
-      <details
-        class="surface details-card"
-      >
-
-        <summary>
-
-          <div>
-
-            <div class="eyebrow">
-              CHANNEL TABLE
-            </div>
-
-            <h2 class="section-title">
-              채널 상세 수치
-            </h2>
-
-          </div>
-
-          <span class="details-toggle"></span>
-
-        </summary>
-
-        <div class="table-wrap">
-
-          <table class="data-table">
-
-            <thead>
-
-              <tr>
-                <th>채널</th>
-                <th>유입</th>
-                <th>홈페이지 방문</th>
-                <th>스토어 이동</th>
-                <th>iOS</th>
-                <th>Android</th>
-                <th>미분류</th>
-              </tr>
-
-            </thead>
-
-            <tbody id="channelTableBody"></tbody>
-
-          </table>
-
-        </div>
-
-      </details>
-
-    </section>
-
-    <section
-      id="viewClicks"
-      class="content-panel"
-      hidden
-    >
-
-      <div class="metric-grid">
-
-        <article
-          class="surface metric-card orange"
-        >
-
-          <div>
-
-            <div
-              id="clickTotalLabel"
-              class="metric-label"
-            >
-              다운로드 클릭
-            </div>
-
-            <div class="metric-value">
-
-              <span id="clickTotalValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                회
-              </span>
-
-            </div>
-
-            <div class="metric-desc">
-              전체 스토어 이동 이벤트
-            </div>
-
-          </div>
-
-          <div
-            id="clickTotalBottom"
-            class="metric-bottom"
-          >
-            전체
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card blue"
-        >
-
-          <div>
-
-            <div class="metric-label">
-              iOS
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="clickIosValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                회
-              </span>
-
-            </div>
-
-            <div
-              id="clickIosShare"
-              class="metric-desc"
-            >
-              0.0%
-            </div>
-
-          </div>
-
-          <div class="metric-bottom">
-            App Store
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card softgreen"
-        >
-
-          <div>
-
-            <div class="metric-label">
-              Android
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="clickAndroidValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                회
-              </span>
-
-            </div>
-
-            <div
-              id="clickAndroidShare"
-              class="metric-desc"
-            >
-              0.0%
-            </div>
-
-          </div>
-
-          <div class="metric-bottom">
-            Google Play
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card"
-        >
-
-          <div>
-
-            <div class="metric-label">
-              미분류
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="clickUnknownValue">
-                0
-              </span>
-
-              <span class="metric-unit">
-                회
-              </span>
-
-            </div>
-
-            <div
-              id="clickUnknownShare"
-              class="metric-desc"
-            >
-              0.0%
-            </div>
-
-          </div>
-
-          <div class="metric-bottom">
-            PC · 기타
-          </div>
-
-        </article>
-
-      </div>
-
-      <div class="section-grid">
-
-        <section
-          class="surface section-card"
-        >
-
-          <div class="section-head">
-
-            <div>
-
-              <div class="eyebrow">
-                CLICK TREND
-              </div>
-
-              <h2
-                id="clickChartTitle"
-                class="section-title"
-              >
-                다운로드 클릭 추이
-              </h2>
-
-            </div>
-
-            <div class="chart-legend">
-
-              <span class="legend-item">
-                <span class="legend-dot orange"></span>
-                다운로드
-              </span>
-
-            </div>
-
-          </div>
-
-          <div class="chart-wrap">
-
-            <div
-              id="clickChart"
-              class="chart"
-            ></div>
-
-          </div>
-
-        </section>
-
-        <aside
-          class="surface section-card"
-        >
-
-          <div class="eyebrow">
-            REFERENCE
-          </div>
-
-          <h2 class="section-title">
-            같은 기간 비교
-          </h2>
-
-          <div class="platform-list">
-
-            <div class="platform-row">
-
-              <span class="platform-name">
-                홈페이지 방문
-              </span>
-
-              <span
-                id="clickVisitReference"
-                class="platform-value"
-              >
-                0회
-              </span>
-
-            </div>
-
-            <div class="platform-row">
-
-              <span class="platform-name">
-                방문 → 다운로드
-              </span>
-
-              <span
-                id="clickRateReference"
-                class="platform-value"
-              >
-                0.0%
-              </span>
-
-            </div>
-
-            <div class="platform-row">
-
-              <span class="platform-name">
-                실제 설치
-              </span>
-
-              <span
-                id="clickInstallReference"
-                class="platform-value"
-              >
-                -
-              </span>
-
-            </div>
-
-          </div>
-
-        </aside>
-
-      </div>
-
-    </section>
-
-    <section
-      id="viewInstalls"
-      class="content-panel"
-      hidden
-    >
-
-      <div class="metric-grid">
-
-        <article
-          class="surface metric-card softgreen"
-        >
-
-          <div>
-
-            <div
-              id="installTotalLabel"
-              class="metric-label"
-            >
-              실제 신규 설치
-            </div>
-
-            <div class="metric-value">
-
-              <span id="installTotalValue">
-                -
-              </span>
-
-              <span class="metric-unit">
-                건
-              </span>
-
-            </div>
-
-            <div class="metric-desc">
-              Apple + Google 확정 데이터
-            </div>
-
-          </div>
-
-          <div
-            id="installLatest"
-            class="metric-bottom"
-          >
-            최신 확정일 -
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card blue"
-        >
-
-          <div>
-
-            <div class="metric-label">
-              iOS
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="installIosValue">
-                -
-              </span>
-
-              <span class="metric-unit">
-                건
-              </span>
-
-            </div>
-
-            <div
-              id="installIosShare"
-              class="metric-desc"
-            >
-              -
-            </div>
-
-          </div>
-
-          <div class="metric-bottom">
-            Apple Sales Summary
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card softgreen"
-        >
-
-          <div>
-
-            <div class="metric-label">
-              Android
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="installAndroidValue">
-                -
-              </span>
-
-              <span class="metric-unit">
-                건
-              </span>
-
-            </div>
-
-            <div
-              id="installAndroidShare"
-              class="metric-desc"
-            >
-              -
-            </div>
-
-          </div>
-
-          <div class="metric-bottom">
-            Google Play New users
-          </div>
-
-        </article>
-
-        <article
-          class="surface metric-card"
-        >
-
-          <div>
-
-            <div class="metric-label">
-              데이터 상태
-            </div>
-
-            <div class="metric-value medium">
-
-              <span id="installStatusValue">
-                -
-              </span>
-
-            </div>
-
-            <div
-              id="installStatusSub"
-              class="metric-desc"
-            >
-              확인 중
-            </div>
-
-          </div>
-
-          <div class="metric-bottom">
-            최신 날짜는 집계 지연 가능
-          </div>
-
-        </article>
-
-      </div>
-
-      <div class="section-grid">
-
-        <section
-          class="surface section-card"
-        >
-
-          <div class="section-head">
-
-            <div>
-
-              <div class="eyebrow">
-                INSTALL TREND
-              </div>
-
-              <h2
-                id="installChartTitle"
-                class="section-title"
-              >
-                실제 신규 설치 추이
-              </h2>
-
-            </div>
-
-            <div class="chart-legend">
-
-              <span class="legend-item">
-                <span class="legend-dot blue"></span>
-                iOS
-              </span>
-
-              <span class="legend-item">
-                <span class="legend-dot"></span>
-                Android
-              </span>
-
-              <span class="legend-item">
-                <span class="legend-dot black"></span>
-                합계
-              </span>
-
-            </div>
-
-          </div>
-
-          <div class="chart-wrap">
-
-            <div
-              id="installChart"
-              class="chart"
-            ></div>
-
-          </div>
-
-        </section>
-
-        <aside
-          class="surface section-card"
-        >
-
-          <div class="eyebrow">
-            DATA DATE
-          </div>
-
-          <h2 class="section-title">
-            플랫폼 확정일
-          </h2>
-
-          <div class="platform-list">
-
-            <div class="platform-row">
-
-              <span class="platform-name">
-                <span class="legend-dot blue"></span>
-                iOS
-              </span>
-
-              <span
-                id="installIosLatest"
-                class="platform-value"
-              >
-                -
-              </span>
-
-            </div>
-
-            <div class="platform-row">
-
-              <span class="platform-name">
-                <span class="legend-dot"></span>
-                Android
-              </span>
-
-              <span
-                id="installAndroidLatest"
-                class="platform-value"
-              >
-                -
-              </span>
-
-            </div>
-
-          </div>
-
-          <div class="summary-box">
-
-            <strong>
-              집계 대기
-            </strong>
-
-            <span>
-              최신 확정일 이후의 0은 실제 0건으로 단정하지 않습니다.
-            </span>
-
-          </div>
-
-        </aside>
-
-      </div>
-
-      <details
-        class="surface details-card"
-        open
-      >
-
-        <summary>
-
-          <div>
-
-            <div class="eyebrow">
-              INSTALL DETAIL
-            </div>
-
-            <h2 class="section-title">
-              설치 기록
-            </h2>
-
-          </div>
-
-          <span class="details-toggle"></span>
-
-        </summary>
-
-        <div class="table-wrap">
-
-          <table class="data-table">
-
-            <thead>
-
-              <tr>
-                <th id="installTableHead">
-                  날짜
-                </th>
-
-                <th>
-                  iOS
-                </th>
-
-                <th>
-                  Android
-                </th>
-
-                <th>
-                  합계
-                </th>
-              </tr>
-
-            </thead>
-
-            <tbody id="installTableBody"></tbody>
-
-          </table>
-
-        </div>
-
-      </details>
-
-    </section>
+    ></section>
 
     <div
       id="dashboardStatus"
       class="status-line"
+      aria-live="polite"
     ></div>
-
   </main>
 
   <aside
@@ -3201,9 +1630,7 @@
     class="system-popover"
     hidden
   >
-
     <div class="system-head">
-
       <h2 class="system-title">
         시스템 상태
       </h2>
@@ -3215,24 +1642,18 @@
       >
         ×
       </button>
-
     </div>
 
     <div class="system-list">
-
       <div class="system-item">
-
         <div class="system-item-top">
-
           <div class="system-name">
-
             <span
               id="appleSystemDot"
               class="system-dot"
             ></span>
 
             Apple App Store
-
           </div>
 
           <div
@@ -3241,7 +1662,6 @@
           >
             확인 중
           </div>
-
         </div>
 
         <div
@@ -3250,22 +1670,17 @@
         >
           Apple 데이터 상태 확인 중
         </div>
-
       </div>
 
       <div class="system-item">
-
         <div class="system-item-top">
-
           <div class="system-name">
-
             <span
               id="googleSystemDot"
               class="system-dot"
             ></span>
 
             Google Play
-
           </div>
 
           <div
@@ -3274,7 +1689,6 @@
           >
             확인 중
           </div>
-
         </div>
 
         <div
@@ -3283,85 +1697,245 @@
         >
           Google 데이터 상태 확인 중
         </div>
-
       </div>
 
       <div class="system-item">
-
         <div class="system-item-top">
-
           <div class="system-name">
-
             <span class="system-dot ready"></span>
-
             Cloudflare D1
-
           </div>
 
           <div class="system-state">
             정상
           </div>
-
         </div>
 
         <div class="system-desc">
           관리자 통계 API 응답 기준
         </div>
-
       </div>
-
     </div>
-
   </aside>
 
   <script>
     const API_BASE =
       "https://flat-queen-f1fb.moding-inc.workers.dev";
 
-    const TOKEN_KEY =
+    const SESSION_TOKEN_KEY =
       "moding_admin_token";
 
     const APP_LAUNCH_DATE =
       "2026-07-01";
 
     const APP_LAUNCH_MONTH =
-      "2026-07";
+      APP_LAUNCH_DATE.slice(
+        0,
+        7
+      );
 
     const COLORS = {
-      green: "#238B22",
-      orange: "#FF8C00",
-      blue: "#3478F6",
-      black: "#101310",
-      grid: "#E6EBE7",
-      label: "#7B847D"
+      green:
+        "#238B22",
+
+      orange:
+        "#FF8C00",
+
+      blue:
+        "#3D7FF0",
+
+      black:
+        "#0C110D",
+
+      muted:
+        "#B9C1BA",
+
+      grid:
+        "#E7ECE7",
+
+      label:
+        "#7B847D"
+    };
+
+    const CHANNEL_META = {
+      daangn: {
+        label:
+          "당근",
+
+        icon:
+          "🥕",
+
+        className:
+          "daangn",
+
+        color:
+          "#FF6F0F"
+      },
+
+      naver: {
+        label:
+          "네이버",
+
+        icon:
+          "N",
+
+        className:
+          "naver",
+
+        color:
+          "#03C75A"
+      },
+
+      kakao: {
+        label:
+          "카카오톡",
+
+        icon:
+          "K",
+
+        className:
+          "kakao",
+
+        color:
+          "#E7C900"
+      },
+
+      youtube: {
+        label:
+          "유튜브",
+
+        icon:
+          "▶",
+
+        className:
+          "youtube",
+
+        color:
+          "#FF0033"
+      },
+
+      instagram: {
+        label:
+          "인스타그램",
+
+        icon:
+          "◎",
+
+        className:
+          "instagram",
+
+        color:
+          "#D62976"
+      },
+
+      google: {
+        label:
+          "구글",
+
+        icon:
+          "G",
+
+        className:
+          "google",
+
+        color:
+          "#4285F4"
+      },
+
+      facebook: {
+        label:
+          "페이스북",
+
+        icon:
+          "f",
+
+        className:
+          "facebook",
+
+        color:
+          "#1877F2"
+      },
+
+      x: {
+        label:
+          "X",
+
+        icon:
+          "X",
+
+        className:
+          "x",
+
+        color:
+          "#111111"
+      },
+
+      leaflet: {
+        label:
+          "전단",
+
+        icon:
+          "▤",
+
+        className:
+          "leaflet",
+
+        color:
+          "#238B22"
+      },
+
+      qr: {
+        label:
+          "QR",
+
+        icon:
+          "▦",
+
+        className:
+          "qr",
+
+        color:
+          "#238B22"
+      },
+
+      referral: {
+        label:
+          "기타 외부",
+
+        icon:
+          "↗",
+
+        className:
+          "referral",
+
+        color:
+          "#7B847D"
+      },
+
+      direct: {
+        label:
+          "직접 유입",
+
+        icon:
+          "↗",
+
+        className:
+          "direct",
+
+        color:
+          "#8C958E"
+      }
     };
 
     const state = {
-      view: "overview",
-      period: "all",
-      stats: null
-    };
+      view:
+        "overview",
 
-    const views = {
-      overview:
-        document.getElementById(
-          "viewOverview"
-        ),
+      period:
+        "all",
 
-      channels:
-        document.getElementById(
-          "viewChannels"
-        ),
-
-      clicks:
-        document.getElementById(
-          "viewClicks"
-        ),
-
-      installs:
-        document.getElementById(
-          "viewInstalls"
-        )
+      stats:
+        null
     };
 
     const loginView =
@@ -3374,29 +1948,19 @@
         "dashboardView"
       );
 
-    const loginForm =
+    const content =
       document.getElementById(
-        "loginForm"
+        "content"
       );
 
-    const passwordInput =
+    const dashboardStatus =
       document.getElementById(
-        "passwordInput"
+        "dashboardStatus"
       );
 
-    const passwordToggle =
+    const lastCheck =
       document.getElementById(
-        "passwordToggle"
-      );
-
-    const loginSubmit =
-      document.getElementById(
-        "loginSubmit"
-      );
-
-    const loginError =
-      document.getElementById(
-        "loginError"
+        "lastCheck"
       );
 
     const refreshBtn =
@@ -3424,14 +1988,29 @@
         "systemCloseBtn"
       );
 
-    const dashboardStatus =
+    const loginForm =
       document.getElementById(
-        "dashboardStatus"
+        "loginForm"
       );
 
-    const lastCheck =
+    const passwordInput =
       document.getElementById(
-        "lastCheck"
+        "passwordInput"
+      );
+
+    const passwordToggle =
+      document.getElementById(
+        "passwordToggle"
+      );
+
+    const loginSubmit =
+      document.getElementById(
+        "loginSubmit"
+      );
+
+    const loginError =
+      document.getElementById(
+        "loginError"
       );
 
     const primaryTabs =
@@ -3460,33 +2039,33 @@
 
     function getToken() {
       return sessionStorage.getItem(
-        TOKEN_KEY
+        SESSION_TOKEN_KEY
       );
     }
 
     function saveToken(token) {
       sessionStorage.setItem(
-        TOKEN_KEY,
+        SESSION_TOKEN_KEY,
         token
       );
     }
 
     function clearToken() {
       sessionStorage.removeItem(
-        TOKEN_KEY
+        SESSION_TOKEN_KEY
       );
     }
 
-    function n(value) {
-      const result =
+    function number(value) {
+      const parsed =
         Number(
           value || 0
         );
 
       return Number.isFinite(
-        result
+        parsed
       )
-        ? result
+        ? parsed
         : 0;
     }
 
@@ -3522,84 +2101,103 @@
       return null;
     }
 
-    function formatNumber(value) {
-      return n(value)
+    function formatNumber(
+      value
+    ) {
+      return number(
+        value
+      )
         .toLocaleString(
           "ko-KR"
         );
     }
 
-    function rate(
+    function percent(
       top,
       bottom
     ) {
       const base =
-        n(bottom);
+        number(
+          bottom
+        );
 
       return base > 0
-        ? n(top) /
+        ? number(
+            top
+          ) /
           base *
           100
         : 0;
     }
 
-    function formatRate(value) {
+    function formatRate(
+      value
+    ) {
       return (
-        `${n(value).toFixed(1)}%`
+        `${number(value).toFixed(1)}%`
       );
     }
 
-    function setText(
-      id,
+    function clamp(
+      value,
+      min,
+      max
+    ) {
+      return Math.max(
+        min,
+        Math.min(
+          max,
+          value
+        )
+      );
+    }
+
+    function escapeHtml(
       value
     ) {
-      const element =
-        document.getElementById(
-          id
+      return String(
+        value ?? ""
+      )
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+        .replaceAll(
+          "'",
+          "&#039;"
         );
-
-      if (element) {
-        element.textContent =
-          value;
-      }
     }
 
-    function periodName() {
+    function compactDate(
+      value
+    ) {
       if (
-        state.period ===
-        "today"
+        !value
       ) {
-        return "오늘";
-      }
-
-      if (
-        state.period ===
-        "week"
-      ) {
-        return "이번 주";
-      }
-
-      if (
-        state.period ===
-        "month"
-      ) {
-        return "이번 달";
-      }
-
-      return "전체";
-    }
-
-    function compactDate(value) {
-      if (!value) {
         return "-";
       }
 
       const parts =
-        String(value)
+        String(
+          value
+        )
           .split("-");
 
       if (
-        parts.length !== 3
+        parts.length !==
+        3
       ) {
         return value;
       }
@@ -3614,8 +2212,12 @@
       );
     }
 
-    function formatDate(value) {
-      if (!value) {
+    function formatDate(
+      value
+    ) {
+      if (
+        !value
+      ) {
         return "-";
       }
 
@@ -3650,8 +2252,12 @@
         );
     }
 
-    function formatMonth(value) {
-      if (!value) {
+    function formatMonth(
+      value
+    ) {
+      if (
+        !value
+      ) {
         return "-";
       }
 
@@ -3659,13 +2265,20 @@
         year,
         month
       ] =
-        String(value)
+        String(
+          value
+        )
           .split("-")
-          .map(Number);
+          .map(
+            Number
+          );
 
       return (
-        `${year}년 ${month}월`
-      );
+        year &&
+        month
+      )
+        ? `${year}년 ${month}월`
+        : value;
     }
 
     function currentDate() {
@@ -3694,7 +2307,9 @@
           dateString
         )
           .split("-")
-          .map(Number);
+          .map(
+            Number
+          );
 
       const date =
         new Date(
@@ -3705,15 +2320,16 @@
           )
         );
 
-      const weekDay =
+      const weekday =
         date.getUTCDay();
 
       date.setUTCDate(
         date.getUTCDate() +
         (
-          weekDay === 0
+          weekday === 0
             ? -6
-            : 1 - weekDay
+            : 1 -
+              weekday
         )
       );
 
@@ -3725,359 +2341,208 @@
         );
     }
 
-    function sourceLabel(source) {
-      const labels = {
-        daangn: "당근",
-
-        naver: "네이버",
-        naver_blog: "네이버 블로그",
-        naver_cafe: "네이버 카페",
-        naver_place: "네이버 플레이스",
-
-        kakao: "카카오톡",
-
-        google: "구글",
-
-        youtube: "유튜브",
-
-        instagram: "인스타그램",
-
-        facebook: "페이스북",
-
-        x: "X",
-
-        leaflet: "전단",
-
-        qr: "QR",
-
-        referral: "기타 외부",
-
-        direct: "직접 유입",
-
-        google_play: "Google Play",
-
-        app_store: "App Store"
-      };
-
-      return (
-        labels[source] ||
-        source ||
-        "직접 유입"
-      );
-    }
-
-    function sourceClass(source) {
-      if (
-        String(source)
-          .startsWith(
-            "naver"
-          )
-      ) {
-        return "naver";
-      }
-
-      return (
-        source ||
-        "direct"
-      );
-    }
-
-    function channelIcon(source) {
-      const base =
-        String(
-          source || ""
-        );
-
-      if (
-        base === "daangn"
-      ) {
-        return `
-          <span class="channel-icon-letter">
-            🥕
-          </span>
-        `;
-      }
-
-      if (
-        base.startsWith(
-          "naver"
-        )
-      ) {
-        return `
-          <span class="channel-icon-letter">
-            N
-          </span>
-        `;
-      }
-
-      if (
-        base === "kakao"
-      ) {
-        return `
-          <svg viewBox="0 0 24 24">
-            <path
-              class="fill"
-              d="M12 4C6.9 4 3 7.1 3 11c0 2.5 1.6 4.7 4.1 6l-1 3.3 3.8-2.2c.7.1 1.4.2 2.1.2 5.1 0 9-3.1 9-7.3S17.1 4 12 4Z"
-            />
-          </svg>
-        `;
-      }
-
-      if (
-        base === "youtube"
-      ) {
-        return `
-          <svg viewBox="0 0 24 24">
-            <rect
-              x="3"
-              y="6"
-              width="18"
-              height="12"
-              rx="4"
-            />
-            <path
-              class="fill"
-              d="M10 9L16 12L10 15Z"
-            />
-          </svg>
-        `;
-      }
-
-      if (
-        base === "instagram"
-      ) {
-        return `
-          <svg viewBox="0 0 24 24">
-            <rect
-              x="4"
-              y="4"
-              width="16"
-              height="16"
-              rx="5"
-            />
-            <circle
-              cx="12"
-              cy="12"
-              r="4"
-            />
-            <circle
-              class="fill"
-              cx="17"
-              cy="7"
-              r="1"
-            />
-          </svg>
-        `;
-      }
-
-      if (
-        base === "google"
-      ) {
-        return `
-          <span class="channel-icon-letter">
-            G
-          </span>
-        `;
-      }
-
-      if (
-        base === "facebook"
-      ) {
-        return `
-          <span class="channel-icon-letter">
-            f
-          </span>
-        `;
-      }
-
-      if (
-        base === "x"
-      ) {
-        return `
-          <span class="channel-icon-letter">
-            X
-          </span>
-        `;
-      }
-
-      if (
-        base === "leaflet"
-      ) {
-        return `
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M6 3H16L19 6V21H6Z"
-            />
-            <path
-              d="M16 3V7H19"
-            />
-            <path
-              d="M9 11H16M9 15H16"
-            />
-          </svg>
-        `;
-      }
-
-      if (
-        base === "qr"
-      ) {
-        return `
-          <svg viewBox="0 0 24 24">
-            <rect
-              x="4"
-              y="4"
-              width="6"
-              height="6"
-            />
-            <rect
-              x="14"
-              y="4"
-              width="6"
-              height="6"
-            />
-            <rect
-              x="4"
-              y="14"
-              width="6"
-              height="6"
-            />
-            <path
-              d="M14 14H17V17H20V20H16V18H14Z"
-            />
-          </svg>
-        `;
-      }
-
-      if (
-        base === "direct"
-      ) {
-        return `
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M9 15L15 9"
-            />
-            <path
-              d="M7 8L5 10A4 4 0 0 0 11 16L13 14"
-            />
-            <path
-              d="M17 16L19 14A4 4 0 0 0 13 8L11 10"
-            />
-          </svg>
-        `;
-      }
-
-      return `
-        <svg viewBox="0 0 24 24">
-          <circle
-            cx="12"
-            cy="12"
-            r="8"
-          />
-          <path
-            d="M8 12H16M12 8V16"
-          />
-        </svg>
-      `;
-    }
-
-    function getWebsitePeriod() {
-      const stats =
-        state.stats || {};
-
+    function periodName() {
       if (
         state.period ===
         "today"
       ) {
-        return {
-          visits:
-            n(
-              stats.today?.visits
-            ),
-
-          downloads:
-            n(
-              stats.today?.downloads
-            ),
-
-          downloadRate:
-            n(
-              stats.today
-                ?.downloadRate
-            )
-        };
+        return "오늘";
       }
 
       if (
         state.period ===
         "week"
       ) {
-        return {
-          visits:
-            n(
-              stats.week?.visits
-            ),
-
-          downloads:
-            n(
-              stats.week
-                ?.downloads
-            ),
-
-          downloadRate:
-            n(
-              stats.week
-                ?.downloadRate
-            )
-        };
+        return "이번 주";
       }
 
       if (
         state.period ===
         "month"
       ) {
-        return {
-          visits:
-            n(
-              stats.month?.visits
-            ),
-
-          downloads:
-            n(
-              stats.month
-                ?.downloads
-            ),
-
-          downloadRate:
-            n(
-              stats.month
-                ?.downloadRate
-            )
-        };
+        return "이번 달";
       }
+
+      return "전체";
+    }
+
+    function setDashboardStatus(
+      message,
+      isError = false
+    ) {
+      dashboardStatus.textContent =
+        message;
+
+      dashboardStatus
+        .classList
+        .toggle(
+          "error",
+          isError
+        );
+    }
+
+    function showLogin() {
+      dashboardView.hidden =
+        true;
+
+      loginView.hidden =
+        false;
+
+      setTimeout(
+        () =>
+          passwordInput.focus(),
+        50
+      );
+    }
+
+    function showDashboard() {
+      loginView.hidden =
+        true;
+
+      dashboardView.hidden =
+        false;
+    }
+
+    function channelFamily(
+      source
+    ) {
+      const value =
+        String(
+          source ||
+          "direct"
+        )
+          .toLowerCase();
+
+      if (
+        value.startsWith(
+          "naver"
+        )
+      ) {
+        return "naver";
+      }
+
+      if (
+        value ===
+          "kakaotalk" ||
+        value ===
+          "kakao_talk"
+      ) {
+        return "kakao";
+      }
+
+      if (
+        value ===
+        "insta"
+      ) {
+        return "instagram";
+      }
+
+      if (
+        value ===
+        "yt"
+      ) {
+        return "youtube";
+      }
+
+      if (
+        value ===
+        "fb"
+      ) {
+        return "facebook";
+      }
+
+      if (
+        value ===
+        "twitter"
+      ) {
+        return "x";
+      }
+
+      return value;
+    }
+
+    function channelMeta(
+      source
+    ) {
+      const key =
+        channelFamily(
+          source
+        );
+
+      return (
+        CHANNEL_META[
+          key
+        ] ||
+        {
+          label:
+            key ||
+            "기타",
+
+          icon:
+            "•",
+
+          className:
+            "referral",
+
+          color:
+            "#7B847D"
+        }
+      );
+    }
+
+    function channelEntry(
+      row
+    ) {
+      const visits =
+        number(
+          row?.visits
+        );
+
+      const downloads =
+        number(
+          row?.downloads
+        );
+
+      return visits > 0
+        ? visits
+        : downloads;
+    }
+
+    function getWebsitePeriod() {
+      const stats =
+        state.stats ||
+        {};
+
+      const current =
+        state.period ===
+          "all"
+          ? stats.total
+          : stats[
+              state.period
+            ];
 
       return {
         visits:
-          n(
-            stats.total?.visits
+          number(
+            current?.visits
           ),
 
         downloads:
-          n(
-            stats.total
-              ?.downloads
+          number(
+            current?.downloads
           ),
 
         downloadRate:
-          n(
-            stats.total
-              ?.downloadRate
+          number(
+            current?.downloadRate
           )
       };
     }
 
     function getWebsiteRows() {
       const stats =
-        state.stats || {};
+        state.stats ||
+        {};
 
       const today =
         currentDate();
@@ -4123,14 +2588,17 @@
                 )}월`,
 
               visits:
-                n(
+                number(
                   row.visits
                 ),
 
               downloads:
-                n(
+                number(
                   row.downloads
-                )
+                ),
+
+              monthly:
+                true
             })
           );
       }
@@ -4206,6 +2674,10 @@
       }
 
       return rows
+        .filter(
+          row =>
+            row.date
+        )
         .sort(
           (
             a,
@@ -4231,14 +2703,17 @@
               ),
 
             visits:
-              n(
+              number(
                 row.visits
               ),
 
             downloads:
-              n(
+              number(
                 row.downloads
-              )
+              ),
+
+            monthly:
+              false
           })
         );
     }
@@ -4259,27 +2734,27 @@
 
       return {
         visits:
-          n(
+          number(
             current?.visits
           ),
 
         downloads:
-          n(
+          number(
             current?.downloads
           ),
 
         ios:
-          n(
+          number(
             current?.ios
           ),
 
         android:
-          n(
+          number(
             current?.android
           ),
 
         unknown:
-          n(
+          number(
             current?.unknown
           ),
 
@@ -4292,60 +2767,137 @@
       };
     }
 
-    function channelEntryCount(row) {
-      const visits =
-        n(
-          row?.visits
-        );
-
-      const downloads =
-        n(
-          row?.downloads
-        );
-
-      return Math.max(
-        visits,
-        downloads
-      );
-    }
-
-    function getChannelSummary() {
-      const data =
+    function groupChannels() {
+      const raw =
         getChannelPeriod();
 
-      const active =
-        data.sources
-          .filter(
-            row =>
-              channelEntryCount(
-                row
-              ) >
-                0 ||
-              n(
-                row.downloads
-              ) >
-                0
-          );
+      const map =
+        new Map();
 
-      const entries =
-        active.reduce(
-          (
-            sum,
-            row
-          ) =>
-            sum +
-            channelEntryCount(
-              row
-            ),
-          0
+      raw.sources
+        .forEach(
+          row => {
+            const key =
+              channelFamily(
+                row.source
+              );
+
+            const current =
+              map.get(
+                key
+              ) ||
+              {
+                source:
+                  key,
+
+                visits:
+                  0,
+
+                downloads:
+                  0,
+
+                ios:
+                  0,
+
+                android:
+                  0,
+
+                unknown:
+                  0
+              };
+
+            current.visits +=
+              number(
+                row.visits
+              );
+
+            current.downloads +=
+              number(
+                row.downloads
+              );
+
+            current.ios +=
+              number(
+                row.ios
+              );
+
+            current.android +=
+              number(
+                row.android
+              );
+
+            current.unknown +=
+              number(
+                row.unknown
+              );
+
+            map.set(
+              key,
+              current
+            );
+          }
         );
 
+      const rows =
+        Array.from(
+          map.values()
+        )
+          .map(
+            row => ({
+              ...row,
+
+              entry:
+                channelEntry(
+                  row
+                )
+            })
+          );
+
+      const direct =
+        rows.find(
+          row =>
+            row.source ===
+            "direct"
+        ) ||
+        {
+          source:
+            "direct",
+
+          visits:
+            0,
+
+          downloads:
+            0,
+
+          ios:
+            0,
+
+          android:
+            0,
+
+          unknown:
+            0,
+
+          entry:
+            0
+        };
+
       const external =
-        active
+        rows
           .filter(
             row =>
               row.source !==
-              "direct"
+                "direct" &&
+              row.entry >
+                0
+          )
+          .sort(
+            (
+              a,
+              b
+            ) =>
+              b.entry -
+              a.entry
           );
 
       const externalEntries =
@@ -4355,18 +2907,64 @@
             row
           ) =>
             sum +
-            channelEntryCount(
-              row
-            ),
+            row.entry,
+          0
+        );
+
+      const externalDownloads =
+        external.reduce(
+          (
+            sum,
+            row
+          ) =>
+            sum +
+            row.downloads,
+          0
+        );
+
+      const externalIos =
+        external.reduce(
+          (
+            sum,
+            row
+          ) =>
+            sum +
+            row.ios,
+          0
+        );
+
+      const externalAndroid =
+        external.reduce(
+          (
+            sum,
+            row
+          ) =>
+            sum +
+            row.android,
+          0
+        );
+
+      const externalUnknown =
+        external.reduce(
+          (
+            sum,
+            row
+          ) =>
+            sum +
+            row.unknown,
           0
         );
 
       return {
-        ...data,
-        active,
-        entries,
+        raw,
+        rows,
+        direct,
         external,
-        externalEntries
+        externalEntries,
+        externalDownloads,
+        externalIos,
+        externalAndroid,
+        externalUnknown
       };
     }
 
@@ -4385,17 +2983,17 @@
             ];
 
       const ios =
-        n(
+        number(
           current?.ios
         );
 
       const android =
-        n(
+        number(
           current?.android
         );
 
       const unknown =
-        n(
+        number(
           current?.unknown
         );
 
@@ -4416,7 +3014,9 @@
       };
     }
 
-    function getIosValue(value) {
+    function getIosValue(
+      value
+    ) {
       return firstNumber(
         value?.newInstalls,
         value?.new_installs,
@@ -4425,7 +3025,9 @@
       );
     }
 
-    function getAndroidValue(value) {
+    function getAndroidValue(
+      value
+    ) {
       return firstNumber(
         value?.newInstalls,
         value?.new_installs,
@@ -4476,8 +3078,11 @@
           android
         );
 
-      let iosValue = null;
-      let androidValue = null;
+      let iosValue =
+        null;
+
+      let androidValue =
+        null;
 
       if (
         state.period ===
@@ -4492,6 +3097,7 @@
           getAndroidValue(
             android.today
           );
+
       } else if (
         state.period ===
         "week"
@@ -4505,6 +3111,7 @@
           getAndroidValue(
             android.week
           );
+
       } else if (
         state.period ===
         "month"
@@ -4518,6 +3125,7 @@
           getAndroidValue(
             android.month
           );
+
       } else {
         iosValue =
           getIosValue(
@@ -4533,20 +3141,18 @@
       return {
         ios,
         android,
-
         iosReady,
         androidReady,
-
         iosValue,
         androidValue,
 
         total:
           iosReady ||
           androidReady
-            ? n(
+            ? number(
                 iosValue
               ) +
-              n(
+              number(
                 androidValue
               )
             : null,
@@ -4563,13 +3169,11 @@
       };
     }
 
-    function getInstallRows() {
+    function getInstallRows(
+      monthly = false
+    ) {
       const install =
         getInstallPeriod();
-
-      const monthly =
-        state.period ===
-        "all";
 
       const key =
         monthly
@@ -4578,13 +3182,17 @@
 
       const iosRows =
         monthly
-          ? install.ios?.monthly
-          : install.ios?.daily;
+          ? install.ios
+              ?.monthly
+          : install.ios
+              ?.daily;
 
       const androidRows =
         monthly
-          ? install.android?.monthly
-          : install.android?.daily;
+          ? install.android
+              ?.monthly
+          : install.android
+              ?.daily;
 
       const map =
         new Map();
@@ -4598,14 +3206,19 @@
       )
         .forEach(
           row => {
+            const rowKey =
+              row[
+                key
+              ];
+
             if (
-              !row[key]
+              !rowKey
             ) {
               return;
             }
 
             map.set(
-              row[key],
+              rowKey,
               {
                 ios:
                   getIosValue(
@@ -4628,19 +3241,27 @@
       )
         .forEach(
           row => {
+            const rowKey =
+              row[
+                key
+              ];
+
             if (
-              !row[key]
+              !rowKey
             ) {
               return;
             }
 
             const current =
               map.get(
-                row[key]
+                rowKey
               ) ||
               {
-                ios: null,
-                android: null
+                ios:
+                  null,
+
+                android:
+                  null
               };
 
             current.android =
@@ -4649,60 +3270,132 @@
               );
 
             map.set(
-              row[key],
+              rowKey,
               current
             );
           }
         );
 
-      let rows =
-        Array.from(
-          map.entries()
+      return Array.from(
+        map.entries()
+      )
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            String(
+              a[0]
+            )
+              .localeCompare(
+                String(
+                  b[0]
+                )
+              )
         )
-          .map(
-            (
-              [
-                rowKey,
-                value
-              ]
-            ) => ({
+        .map(
+          (
+            [
+              rowKey,
+              value
+            ]
+          ) => {
+            if (
+              monthly
+            ) {
+              const iosValue =
+                number(
+                  value.ios
+                );
+
+              const androidValue =
+                number(
+                  value.android
+                );
+
+              return {
+                key:
+                  rowKey,
+
+                ios:
+                  iosValue,
+
+                android:
+                  androidValue,
+
+                total:
+                  iosValue +
+                  androidValue,
+
+                iosConfirmed:
+                  true,
+
+                androidConfirmed:
+                  true,
+
+                exact:
+                  true
+              };
+            }
+
+            const iosConfirmed =
+              !install.iosLatest ||
+              rowKey <=
+                install.iosLatest;
+
+            const androidConfirmed =
+              !install.androidLatest ||
+              rowKey <=
+                install.androidLatest;
+
+            const iosValue =
+              iosConfirmed
+                ? number(
+                    value.ios
+                  )
+                : null;
+
+            const androidValue =
+              androidConfirmed
+                ? number(
+                    value.android
+                  )
+                : null;
+
+            return {
               key:
                 rowKey,
 
               ios:
-                n(
-                  value.ios
-                ),
+                iosValue,
 
               android:
-                n(
-                  value.android
-                ),
+                androidValue,
+
+              iosConfirmed,
+
+              androidConfirmed,
+
+              exact:
+                iosConfirmed &&
+                androidConfirmed,
 
               total:
-                n(
-                  value.ios
-                ) +
-                n(
-                  value.android
-                )
-            })
-          )
-          .sort(
-            (
-              a,
-              b
-            ) =>
-              String(
-                a.key
-              )
-                .localeCompare(
-                  String(
-                    b.key
-                  )
-                )
-          );
+                iosConfirmed &&
+                androidConfirmed
+                  ? number(
+                      iosValue
+                    ) +
+                    number(
+                      androidValue
+                    )
+                  : null
+            };
+          }
+        );
+    }
 
+    function getInstallRowsForPeriod() {
       const today =
         currentDate();
 
@@ -4710,13 +3403,20 @@
         state.period ===
         "all"
       ) {
-        return rows
+        return getInstallRows(
+          true
+        )
           .filter(
             row =>
               row.key >=
               APP_LAUNCH_MONTH
           );
       }
+
+      let rows =
+        getInstallRows(
+          false
+        );
 
       if (
         state.period ===
@@ -4771,289 +3471,128 @@
       return rows;
     }
 
-    function renderChannelGrid(
-      elementId
+    function sparkline(
+      values,
+      color,
+      invert = false
     ) {
-      const element =
-        document.getElementById(
-          elementId
+      const clean =
+        values.map(
+          number
         );
 
-      const data =
-        getChannelSummary();
-
-      element.innerHTML =
-        "";
-
-      const rows =
-        [
-          ...data.active
-        ]
-          .sort(
-            (
-              a,
-              b
-            ) =>
-              channelEntryCount(
-                b
-              ) -
-              channelEntryCount(
-                a
-              )
-          );
-
       if (
-        !rows.length
+        !clean.length
       ) {
-        element.innerHTML =
-          `
-            <div class="channel-empty">
-              아직 채널별 유입 데이터가 없습니다.<br>
-              당근 링크로 접속하면 이곳에 당근이 자동으로 표시됩니다.
-            </div>
-          `;
-
-        return;
+        return "";
       }
 
-      rows.forEach(
-        row => {
-          const source =
-            row.source ||
-            "direct";
+      const width =
+        340;
 
-          const entry =
-            channelEntryCount(
-              row
-            );
+      const height =
+        48;
 
-          const visits =
-            n(
-              row.visits
-            );
-
-          const downloads =
-            n(
-              row.downloads
-            );
-
-          const item =
-            document.createElement(
-              "article"
-            );
-
-          item.className =
-            "channel-item";
-
-          item.innerHTML =
-            `
-              <div class="channel-head">
-
-                <div class="channel-identity">
-
-                  <div
-                    class="channel-icon ${sourceClass(source)}"
-                  >
-                    ${channelIcon(source)}
-                  </div>
-
-                  <div class="channel-name">
-                    ${row.label || sourceLabel(source)}
-
-                    <small>
-                      ${source}
-                    </small>
-                  </div>
-
-                </div>
-
-                <div class="channel-entry">
-                  유입
-                </div>
-
-              </div>
-
-              <div class="channel-number">
-                ${formatNumber(entry)}
-                <span>
-                  회
-                </span>
-              </div>
-
-              <div class="channel-detail">
-
-                ${
-                  visits > 0
-                    ? `
-                      <span class="channel-chip visit">
-                        방문 ${formatNumber(visits)}
-                      </span>
-                    `
-                    : ""
-                }
-
-                ${
-                  downloads > 0
-                    ? `
-                      <span class="channel-chip store">
-                        스토어 ${formatNumber(downloads)}
-                      </span>
-                    `
-                    : ""
-                }
-
-                ${
-                  n(row.ios) > 0
-                    ? `
-                      <span class="channel-chip ios">
-                        iOS ${formatNumber(row.ios)}
-                      </span>
-                    `
-                    : ""
-                }
-
-                ${
-                  n(row.android) > 0
-                    ? `
-                      <span class="channel-chip android">
-                        Android ${formatNumber(row.android)}
-                      </span>
-                    `
-                    : ""
-                }
-
-              </div>
-            `;
-
-          element.appendChild(
-            item
-          );
-        }
-      );
-    }
-
-    function renderChannelTable() {
-      const body =
-        document.getElementById(
-          "channelTableBody"
+      const max =
+        Math.max(
+          1,
+          ...clean
         );
 
-      const data =
-        getChannelSummary();
-
-      body.innerHTML =
-        "";
-
-      const rows =
-        [
-          ...data.active
-        ]
-          .sort(
+      const step =
+        clean.length > 1
+          ? width /
             (
-              a,
-              b
-            ) =>
-              channelEntryCount(
-                b
-              ) -
-              channelEntryCount(
-                a
-              )
-          );
+              clean.length -
+              1
+            )
+          : 0;
 
-      if (
-        !rows.length
-      ) {
-        body.innerHTML =
-          `
-            <tr>
-              <td
-                colspan="7"
-                class="empty"
-              >
-                채널 데이터가 없습니다.
-              </td>
-            </tr>
-          `;
+      const points =
+        clean
+          .map(
+            (
+              value,
+              index
+            ) => {
+              const x =
+                index *
+                step;
 
-        return;
-      }
+              const y =
+                height -
+                4 -
+                (
+                  value /
+                  max
+                ) *
+                38;
 
-      rows.forEach(
-        row => {
-          const tr =
-            document.createElement(
-              "tr"
-            );
+              return (
+                `${x.toFixed(1)},` +
+                `${y.toFixed(1)}`
+              );
+            }
+          )
+          .join(" ");
 
-          tr.innerHTML =
-            `
-              <td>
-                ${row.label || sourceLabel(row.source)}
-              </td>
+      const stroke =
+        invert
+          ? "rgba(255,255,255,.92)"
+          : color;
 
-              <td>
-                ${formatNumber(channelEntryCount(row))}회
-              </td>
-
-              <td>
-                ${formatNumber(row.visits)}회
-              </td>
-
-              <td class="orange-value">
-                ${formatNumber(row.downloads)}회
-              </td>
-
-              <td class="ios-value">
-                ${formatNumber(row.ios)}회
-              </td>
-
-              <td class="android-value">
-                ${formatNumber(row.android)}회
-              </td>
-
-              <td class="pending-value">
-                ${formatNumber(row.unknown)}회
-              </td>
-            `;
-
-          body.appendChild(
-            tr
-          );
-        }
-      );
+      return `
+        <div class="spark">
+          <svg
+            viewBox="0 0 ${width} ${height}"
+            aria-hidden="true"
+          >
+            <polyline
+              points="${points}"
+              fill="none"
+              stroke="${stroke}"
+              stroke-width="2.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      `;
     }
 
-    function renderLineChart(
-      elementId,
+    function lineChart(
       rows,
-      series
+      series,
+      emptyMessage =
+        "표시할 데이터가 없습니다."
     ) {
-      const element =
-        document.getElementById(
-          elementId
-        );
-
       if (
         !rows.length
       ) {
-        element.innerHTML =
-          `
-            <div class="chart-empty">
-              표시할 데이터가 없습니다.
-            </div>
-          `;
-
-        return;
+        return `
+          <div class="chart-empty">
+            ${emptyMessage}
+          </div>
+        `;
       }
 
-      const width = 920;
-      const height = 320;
+      const width =
+        980;
 
-      const left = 45;
-      const right = 18;
-      const top = 20;
-      const bottom = 44;
+      const height =
+        340;
+
+      const left =
+        48;
+
+      const right =
+        18;
+
+      const top =
+        20;
+
+      const bottom =
+        48;
 
       const plotWidth =
         width -
@@ -5065,26 +3604,32 @@
         top -
         bottom;
 
-      const values = [];
+      const values =
+        [];
 
       rows.forEach(
         row => {
           series.forEach(
             item => {
+              const raw =
+                row[
+                  item.key
+                ];
+
               if (
+                raw !==
+                  null &&
+                raw !==
+                  undefined &&
                 Number.isFinite(
                   Number(
-                    row[
-                      item.key
-                    ]
+                    raw
                   )
                 )
               ) {
                 values.push(
                   Number(
-                    row[
-                      item.key
-                    ]
+                    raw
                   )
                 );
               }
@@ -5092,6 +3637,16 @@
           );
         }
       );
+
+      if (
+        !values.length
+      ) {
+        return `
+          <div class="chart-empty">
+            ${emptyMessage}
+          </div>
+        `;
+      }
 
       const maxValue =
         Math.max(
@@ -5118,22 +3673,22 @@
         value =>
           top +
           plotHeight -
-          (
-            n(value) /
-            maxValue
-          ) *
+          number(
+            value
+          ) /
+          maxValue *
           plotHeight;
 
       let svg =
         `
           <svg
             viewBox="0 0 ${width} ${height}"
-            aria-hidden="true"
           >
         `;
 
       for (
-        let i = 0;
+        let i =
+          0;
         i <= 4;
         i++
       ) {
@@ -5153,28 +3708,27 @@
             )
           );
 
-        svg +=
-          `
-            <line
-              x1="${left}"
-              y1="${y}"
-              x2="${width - right}"
-              y2="${y}"
-              stroke="${COLORS.grid}"
-              stroke-width="1"
-            />
+        svg += `
+          <line
+            x1="${left}"
+            y1="${y}"
+            x2="${width - right}"
+            y2="${y}"
+            stroke="${COLORS.grid}"
+            stroke-width="1"
+          />
 
-            <text
-              x="${left - 11}"
-              y="${y + 4}"
-              text-anchor="end"
-              font-size="10"
-              font-weight="700"
-              fill="${COLORS.label}"
-            >
-              ${label}
-            </text>
-          `;
+          <text
+            x="${left - 11}"
+            y="${y + 4}"
+            text-anchor="end"
+            font-size="11"
+            font-weight="700"
+            fill="${COLORS.label}"
+          >
+            ${label}
+          </text>
+        `;
       }
 
       const labelEvery =
@@ -5202,31 +3756,54 @@
             return;
           }
 
-          svg +=
-            `
-              <text
-                x="${xFor(index)}"
-                y="${height - 13}"
-                text-anchor="middle"
-                font-size="10"
-                font-weight="700"
-                fill="${COLORS.label}"
-              >
-                ${row.label}
-              </text>
-            `;
+          svg += `
+            <text
+              x="${xFor(index)}"
+              y="${height - 14}"
+              text-anchor="middle"
+              font-size="11"
+              font-weight="700"
+              fill="${COLORS.label}"
+            >
+              ${escapeHtml(row.label)}
+            </text>
+          `;
         }
       );
 
       series.forEach(
         item => {
-          const points =
-            rows
-              .map(
-                (
-                  row,
-                  index
-                ) => ({
+          let segment =
+            [];
+
+          const segments =
+            [];
+
+          rows.forEach(
+            (
+              row,
+              index
+            ) => {
+              const raw =
+                row[
+                  item.key
+                ];
+
+              const valid =
+                raw !==
+                  null &&
+                raw !==
+                  undefined &&
+                Number.isFinite(
+                  Number(
+                    raw
+                  )
+                );
+
+              if (
+                valid
+              ) {
+                segment.push({
                   x:
                     xFor(
                       index
@@ -5234,46 +3811,78 @@
 
                   y:
                     yFor(
-                      row[
-                        item.key
-                      ]
+                      raw
+                    ),
+
+                  value:
+                    Number(
+                      raw
+                    ),
+
+                  label:
+                    row.label
+                });
+
+              } else if (
+                segment.length
+              ) {
+                segments.push(
+                  segment
+                );
+
+                segment =
+                  [];
+              }
+            }
+          );
+
+          if (
+            segment.length
+          ) {
+            segments.push(
+              segment
+            );
+          }
+
+          segments.forEach(
+            points => {
+              svg += `
+                <polyline
+                  points="${points
+                    .map(
+                      point =>
+                        `${point.x.toFixed(1)},${point.y.toFixed(1)}`
                     )
-                })
+                    .join(" ")}"
+                  fill="none"
+                  stroke="${item.color}"
+                  stroke-width="${item.width || 3.2}"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              `;
+
+              points.forEach(
+                point => {
+                  svg += `
+                    <circle
+                      cx="${point.x}"
+                      cy="${point.y}"
+                      r="3.6"
+                      fill="#fff"
+                      stroke="${item.color}"
+                      stroke-width="2"
+                    >
+                      <title>
+                        ${escapeHtml(point.label)}
+                        ·
+                        ${escapeHtml(item.name)}
+                        ${formatNumber(point.value)}
+                      </title>
+                    </circle>
+                  `;
+                }
               );
-
-          const polyline =
-            points
-              .map(
-                point =>
-                  `${point.x.toFixed(1)},${point.y.toFixed(1)}`
-              )
-              .join(" ");
-
-          svg +=
-            `
-              <polyline
-                points="${polyline}"
-                fill="none"
-                stroke="${item.color}"
-                stroke-width="${item.width || 3}"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            `;
-
-          points.forEach(
-            point => {
-              svg +=
-                `
-                  <circle
-                    cx="${point.x}"
-                    cy="${point.y}"
-                    r="3.4"
-                    fill="#fff"
-                    stroke="${item.color}"
-                    stroke-width="2"
-                  />
-                `;
             }
           );
         }
@@ -5282,255 +3891,550 @@
       svg +=
         `</svg>`;
 
-      element.innerHTML =
-        svg;
+      return `
+        <div class="chart">
+          ${svg}
+        </div>
+      `;
+    }
+
+    function donutGradient(
+      slices
+    ) {
+      const usable =
+        slices.filter(
+          slice =>
+            number(
+              slice.value
+            ) >
+            0
+        );
+
+      const total =
+        usable.reduce(
+          (
+            sum,
+            slice
+          ) =>
+            sum +
+            number(
+              slice.value
+            ),
+          0
+        );
+
+      if (
+        !total
+      ) {
+        return "#E9EEEA";
+      }
+
+      let cursor =
+        0;
+
+      const stops =
+        usable.map(
+          slice => {
+            const start =
+              cursor;
+
+            const end =
+              cursor +
+              number(
+                slice.value
+              ) /
+              total *
+              100;
+
+            cursor =
+              end;
+
+            return (
+              `${slice.color} ` +
+              `${start.toFixed(2)}% ` +
+              `${end.toFixed(2)}%`
+            );
+          }
+        );
+
+      return (
+        `conic-gradient(${stops.join(",")})`
+      );
+    }
+
+    function donutHtml(
+      slices,
+      centerLabel,
+      centerValue
+    ) {
+      return `
+        <div
+          class="donut"
+          style="background:${donutGradient(slices)}"
+        >
+          <div class="donut-hole">
+            <small>
+              ${escapeHtml(centerLabel)}
+            </small>
+
+            <strong>
+              ${escapeHtml(centerValue)}
+            </strong>
+          </div>
+        </div>
+      `;
+    }
+
+    function channelIconHtml(
+      source
+    ) {
+      const meta =
+        channelMeta(
+          source
+        );
+
+      return `
+        <span
+          class="source-icon ${meta.className}"
+        >
+          ${escapeHtml(meta.icon)}
+        </span>
+      `;
+    }
+
+    function channelBarsHtml(
+      rows,
+      totalEntries,
+      valueKey =
+        "entry"
+    ) {
+      if (
+        !rows.length
+      ) {
+        return `
+          <div class="chart-empty">
+            선택한 기간의 외부채널 데이터가 없습니다.
+          </div>
+        `;
+      }
+
+      const maxValue =
+        Math.max(
+          1,
+          ...rows.map(
+            row =>
+              number(
+                row[
+                  valueKey
+                ]
+              )
+          )
+        );
+
+      return `
+        <div class="channel-bars">
+
+          ${rows.map(
+            row => {
+              const meta =
+                channelMeta(
+                  row.source
+                );
+
+              const value =
+                number(
+                  row[
+                    valueKey
+                  ]
+                );
+
+              const share =
+                percent(
+                  value,
+                  totalEntries
+                );
+
+              const width =
+                clamp(
+                  value /
+                  maxValue *
+                  100,
+                  4,
+                  100
+                );
+
+              return `
+                <div class="channel-bar-row">
+
+                  <div class="channel-bar-head">
+
+                    ${channelIconHtml(row.source)}
+
+                    <div class="source-name">
+                      ${escapeHtml(meta.label)}
+
+                      <small>
+                        ${escapeHtml(row.source)}
+                      </small>
+                    </div>
+
+                    <div class="source-share">
+                      ${formatRate(share)}
+                    </div>
+
+                    <div class="source-total">
+                      ${formatNumber(value)}회
+                    </div>
+
+                  </div>
+
+                  <div class="bar-track">
+                    <div
+                      class="bar-fill"
+                      data-bar-width="${width.toFixed(2)}"
+                    ></div>
+                  </div>
+
+                  <div class="channel-bar-detail">
+
+                    ${
+                      number(
+                        row.visits
+                      ) >
+                      0
+                        ? `
+                          <span class="chip visit">
+                            홈페이지 방문
+                            ${formatNumber(row.visits)}
+                          </span>
+                        `
+                        : ""
+                    }
+
+                    ${
+                      number(
+                        row.downloads
+                      ) >
+                      0
+                        ? `
+                          <span class="chip store">
+                            스토어 이동
+                            ${formatNumber(row.downloads)}
+                          </span>
+                        `
+                        : ""
+                    }
+
+                    ${
+                      number(
+                        row.ios
+                      ) >
+                      0
+                        ? `
+                          <span class="chip ios">
+                            iOS
+                            ${formatNumber(row.ios)}
+                          </span>
+                        `
+                        : ""
+                    }
+
+                    ${
+                      number(
+                        row.android
+                      ) >
+                      0
+                        ? `
+                          <span class="chip android">
+                            Android
+                            ${formatNumber(row.android)}
+                          </span>
+                        `
+                        : ""
+                    }
+
+                    ${
+                      number(
+                        row.unknown
+                      ) >
+                      0
+                        ? `
+                          <span class="chip unknown">
+                            미분류
+                            ${formatNumber(row.unknown)}
+                          </span>
+                        `
+                        : ""
+                    }
+
+                  </div>
+
+                </div>
+              `;
+            }
+          )
+            .join("")}
+
+        </div>
+      `;
+    }
+
+    function platformBarsHtml(
+      rows
+    ) {
+      const total =
+        rows.reduce(
+          (
+            sum,
+            row
+          ) =>
+            sum +
+            number(
+              row.value
+            ),
+          0
+        );
+
+      const maxValue =
+        Math.max(
+          1,
+          ...rows.map(
+            row =>
+              number(
+                row.value
+              )
+          )
+        );
+
+      return `
+        <div class="platform-bars">
+
+          ${rows.map(
+            row => {
+              const share =
+                percent(
+                  row.value,
+                  total
+                );
+
+              const width =
+                clamp(
+                  number(
+                    row.value
+                  ) /
+                  maxValue *
+                  100,
+                  number(
+                    row.value
+                  ) >
+                  0
+                    ? 4
+                    : 0,
+                  100
+                );
+
+              return `
+                <div class="platform-bar-row">
+
+                  <div class="platform-bar-name">
+                    <span
+                      class="legend-dot ${row.dotClass || ""}"
+                    ></span>
+
+                    ${escapeHtml(row.label)}
+                  </div>
+
+                  <div class="bar-track">
+                    <div
+                      class="bar-fill ${row.fillClass || ""}"
+                      data-bar-width="${width.toFixed(2)}"
+                    ></div>
+                  </div>
+
+                  <div class="platform-bar-value">
+                    ${formatRate(share)}
+                  </div>
+
+                </div>
+              `;
+            }
+          )
+            .join("")}
+
+        </div>
+      `;
+    }
+
+    function kpiCard({
+      label,
+      value,
+      unit,
+      desc,
+      footer,
+      className = "",
+      spark = ""
+    }) {
+      const numeric =
+        typeof value ===
+          "number"
+          ? `data-count="${value}"`
+          : "";
+
+      const display =
+        typeof value ===
+          "number"
+          ? formatNumber(
+              value
+            )
+          : value;
+
+      return `
+        <article
+          class="surface kpi-card ${className}"
+        >
+          <div>
+
+            <div class="kpi-label">
+              ${escapeHtml(label)}
+            </div>
+
+            <div
+              class="kpi-value ${
+                className.includes(
+                  "compact"
+                )
+                  ? "medium"
+                  : ""
+              }"
+            >
+
+              <span ${numeric}>
+                ${escapeHtml(display)}
+              </span>
+
+              ${
+                unit
+                  ? `
+                    <span class="kpi-unit">
+                      ${escapeHtml(unit)}
+                    </span>
+                  `
+                  : ""
+              }
+
+            </div>
+
+            <div class="kpi-desc">
+              ${desc}
+            </div>
+
+          </div>
+
+          <div class="kpi-footer">
+            ${spark || footer || ""}
+          </div>
+
+        </article>
+      `;
+    }
+
+    function animateRenderedUi() {
+      requestAnimationFrame(
+        () => {
+          document
+            .querySelectorAll(
+              "[data-bar-width]"
+            )
+            .forEach(
+              element => {
+                element.style.width =
+                  `${element.dataset.barWidth}%`;
+              }
+            );
+        }
+      );
+
+      document
+        .querySelectorAll(
+          "[data-count]"
+        )
+        .forEach(
+          element => {
+            const target =
+              number(
+                element.dataset.count
+              );
+
+            if (
+              target <=
+              0
+            ) {
+              element.textContent =
+                "0";
+
+              return;
+            }
+
+            const duration =
+              420;
+
+            const start =
+              performance.now();
+
+            function tick(
+              now
+            ) {
+              const progress =
+                clamp(
+                  (
+                    now -
+                    start
+                  ) /
+                  duration,
+                  0,
+                  1
+                );
+
+              const eased =
+                1 -
+                Math.pow(
+                  1 -
+                  progress,
+                  3
+                );
+
+              element.textContent =
+                Math.round(
+                  target *
+                  eased
+                )
+                  .toLocaleString(
+                    "ko-KR"
+                  );
+
+              if (
+                progress <
+                1
+              ) {
+                requestAnimationFrame(
+                  tick
+                );
+              }
+            }
+
+            requestAnimationFrame(
+              tick
+            );
+          }
+        );
     }
 
     function renderOverview() {
       const website =
         getWebsitePeriod();
 
-      const channel =
-        getChannelSummary();
-
-      const click =
-        getPlatformClicks();
-
-      const install =
-        getInstallPeriod();
-
-      const rows =
-        getWebsiteRows();
-
-      const label =
-        periodName();
-
-      setText(
-        "overviewVisitLabel",
-        `${label} 홈페이지 방문`
-      );
-
-      setText(
-        "overviewVisitValue",
-        formatNumber(
-          website.visits
-        )
-      );
-
-      setText(
-        "overviewVisitBottom",
-        label
-      );
-
-      setText(
-        "overviewDownloadLabel",
-        `${label} 다운로드 클릭`
-      );
-
-      setText(
-        "overviewDownloadValue",
-        formatNumber(
-          website.downloads
-        )
-      );
-
-      setText(
-        "overviewDownloadRate",
-        formatRate(
-          website.downloadRate
-        )
-      );
-
-      setText(
-        "overviewChannelLabel",
-        `${label} 확인된 외부채널 유입`
-      );
-
-      setText(
-        "overviewChannelValue",
-        formatNumber(
-          channel.externalEntries
-        )
-      );
-
-      const top =
-        [
-          ...channel.external
-        ]
-          .sort(
-            (
-              a,
-              b
-            ) =>
-              channelEntryCount(
-                b
-              ) -
-              channelEntryCount(
-                a
-              )
-          )[0];
-
-      setText(
-        "overviewTopChannel",
-        top
-          ? `상위 ${top.label || sourceLabel(top.source)} ${formatNumber(channelEntryCount(top))}회`
-          : "상위 채널 -"
-      );
-
-      setText(
-        "overviewInstallLabel",
-        `${label} 실제 신규 설치`
-      );
-
-      setText(
-        "overviewInstallValue",
-        install.total ===
-          null
-          ? "-"
-          : formatNumber(
-              install.total
-            )
-      );
-
-      setText(
-        "overviewInstallBottom",
-        `iOS ${
-          install.iosReady
-            ? formatNumber(
-                install.iosValue
-              )
-            : "-"
-        } · Android ${
-          install.androidReady
-            ? formatNumber(
-                install.androidValue
-              )
-            : "-"
-        }`
-      );
-
-      setText(
-        "overviewIosClicks",
-        `${formatNumber(click.ios)}회`
-      );
-
-      setText(
-        "overviewAndroidClicks",
-        `${formatNumber(click.android)}회`
-      );
-
-      setText(
-        "overviewUnknownClicks",
-        `${formatNumber(click.unknown)}회`
-      );
-
-      setText(
-        "overviewClickTotal",
-        `${label} 다운로드 ${formatNumber(click.total)}회`
-      );
-
-      renderChannelGrid(
-        "overviewChannelGrid"
-      );
-
-      renderLineChart(
-        "overviewChart",
-
-        rows,
-
-        [
-          {
-            key: "visits",
-            color: COLORS.green
-          },
-
-          {
-            key: "downloads",
-            color: COLORS.orange
-          }
-        ]
-      );
-    }
-
-    function renderChannels() {
-      const data =
-        getChannelSummary();
-
-      const label =
-        periodName();
-
-      setText(
-        "channelCountValue",
-        formatNumber(
-          data.active.length
-        )
-      );
-
-      setText(
-        "channelCountBottom",
-        label
-      );
-
-      setText(
-        "channelEntryValue",
-        formatNumber(
-          data.entries
-        )
-      );
-
-      setText(
-        "externalEntryValue",
-        formatNumber(
-          data.externalEntries
-        )
-      );
-
-      const top =
-        [
-          ...data.external
-        ]
-          .sort(
-            (
-              a,
-              b
-            ) =>
-              channelEntryCount(
-                b
-              ) -
-              channelEntryCount(
-                a
-              )
-          )[0];
-
-      setText(
-        "externalTopChannel",
-        top
-          ? `${top.label || sourceLabel(top.source)} ${formatNumber(channelEntryCount(top))}회`
-          : "상위 채널 -"
-      );
-
-      setText(
-        "channelDownloadValue",
-        formatNumber(
-          data.downloads
-        )
-      );
-
-      setText(
-        "channelDownloadBottom",
-        `iOS ${formatNumber(data.ios)} · Android ${formatNumber(data.android)}`
-      );
-
-      renderChannelGrid(
-        "channelMainGrid"
-      );
-
-      renderChannelTable();
-    }
-
-    function renderClicks() {
-      const website =
-        getWebsitePeriod();
+      const channels =
+        groupChannels();
 
       const clicks =
         getPlatformClicks();
@@ -5544,111 +4448,1436 @@
       const label =
         periodName();
 
-      setText(
-        "clickTotalLabel",
-        `${label} 다운로드 클릭`
-      );
+      const channelSlices =
+        channels.external.map(
+          row => ({
+            value:
+              row.entry,
 
-      setText(
-        "clickTotalValue",
-        formatNumber(
-          clicks.total
-        )
-      );
+            color:
+              channelMeta(
+                row.source
+              )
+                .color
+          })
+        );
 
-      setText(
-        "clickTotalBottom",
-        label
-      );
-
-      setText(
-        "clickIosValue",
-        formatNumber(
-          clicks.ios
-        )
-      );
-
-      setText(
-        "clickAndroidValue",
-        formatNumber(
-          clicks.android
-        )
-      );
-
-      setText(
-        "clickUnknownValue",
-        formatNumber(
-          clicks.unknown
-        )
-      );
-
-      setText(
-        "clickIosShare",
-        formatRate(
-          rate(
-            clicks.ios,
-            clicks.total
-          )
-        )
-      );
-
-      setText(
-        "clickAndroidShare",
-        formatRate(
-          rate(
-            clicks.android,
-            clicks.total
-          )
-        )
-      );
-
-      setText(
-        "clickUnknownShare",
-        formatRate(
-          rate(
-            clicks.unknown,
-            clicks.total
-          )
-        )
-      );
-
-      setText(
-        "clickVisitReference",
-        `${formatNumber(website.visits)}회`
-      );
-
-      setText(
-        "clickRateReference",
-        formatRate(
-          website.downloadRate
-        )
-      );
-
-      setText(
-        "clickInstallReference",
-        install.total ===
-          null
-          ? "-"
-          : `${formatNumber(install.total)}건`
-      );
-
-      setText(
-        "clickChartTitle",
-        `${label} 다운로드 클릭 추이`
-      );
-
-      renderLineChart(
-        "clickChart",
-
-        rows,
-
+      const platformSlices =
         [
           {
-            key: "downloads",
-            color: COLORS.orange
+            value:
+              clicks.ios,
+
+            color:
+              COLORS.blue
+          },
+
+          {
+            value:
+              clicks.android,
+
+            color:
+              COLORS.green
+          },
+
+          {
+            value:
+              clicks.unknown,
+
+            color:
+              COLORS.muted
           }
-        ]
-      );
+        ];
+
+      content.innerHTML = `
+        <div class="kpi-grid">
+
+          ${kpiCard({
+            label:
+              `${label} 홈페이지 방문`,
+
+            value:
+              website.visits,
+
+            unit:
+              "회",
+
+            desc:
+              "모딩 홈페이지 진입",
+
+            className:
+              "primary",
+
+            spark:
+              sparkline(
+                rows.map(
+                  row =>
+                    row.visits
+                ),
+                COLORS.green,
+                true
+              )
+          })}
+
+          ${kpiCard({
+            label:
+              `${label} 외부채널 확인 유입`,
+
+            value:
+              channels.externalEntries,
+
+            unit:
+              "회",
+
+            desc:
+              "당근·네이버·카카오 등 출처가 확인된 유입",
+
+            className:
+              "compact",
+
+            footer:
+              channels.external[0]
+                ? `상위 채널 ${escapeHtml(
+                    channelMeta(
+                      channels.external[0]
+                        .source
+                    )
+                      .label
+                  )} ${formatNumber(
+                    channels.external[0]
+                      .entry
+                  )}회`
+                : "아직 확인된 외부채널 유입 없음"
+          })}
+
+          ${kpiCard({
+            label:
+              `${label} 스토어 이동`,
+
+            value:
+              clicks.total,
+
+            unit:
+              "회",
+
+            desc:
+              "App Store · Google Play 이동 이벤트",
+
+            className:
+              "compact",
+
+            spark:
+              sparkline(
+                rows.map(
+                  row =>
+                    row.downloads
+                ),
+                COLORS.orange,
+                false
+              )
+          })}
+
+          ${kpiCard({
+            label:
+              `${label} 실제 신규 설치`,
+
+            value:
+              install.total ===
+                null
+                ? "-"
+                : install.total,
+
+            unit:
+              "건",
+
+            desc:
+              "Apple · Google 확정 설치 데이터",
+
+            className:
+              "compact",
+
+            footer:
+              `iOS ${
+                install.iosReady
+                  ? formatNumber(
+                      install.iosValue
+                    )
+                  : "-"
+              } · Android ${
+                install.androidReady
+                  ? formatNumber(
+                      install.androidValue
+                    )
+                  : "-"
+              }`
+          })}
+
+        </div>
+
+        <section class="surface channel-visual">
+
+          <div class="section-head">
+
+            <div>
+              <div class="eyebrow">
+                CHANNEL MIX
+              </div>
+
+              <h2 class="section-title">
+                어디에서 들어왔는지
+              </h2>
+            </div>
+
+            <div class="section-caption">
+              외부채널만 구성비로 비교<br>
+              직접 유입은 아래에 별도 표시
+            </div>
+
+          </div>
+
+          <div class="channel-visual-grid">
+
+            <div>
+
+              ${donutHtml(
+                channelSlices,
+                "외부채널",
+                `${formatNumber(
+                  channels.externalEntries
+                )}회`
+              )}
+
+              <div class="note-box">
+
+                ${
+                  channels.external.length
+                    ? `확인된 외부채널 <strong>${formatNumber(
+                        channels.external.length
+                      )}개</strong>`
+                    : "아직 확인된 외부채널 데이터가 없습니다."
+                }
+
+              </div>
+
+            </div>
+
+            <div>
+              ${channelBarsHtml(
+                channels.external,
+                channels.externalEntries
+              )}
+            </div>
+
+          </div>
+
+          <div class="direct-box">
+
+            <div>
+              <strong>
+                직접 유입 · 출처 미확인
+              </strong>
+
+              <span>
+                src가 없거나 출처를 확인할 수 없는 진입
+              </span>
+            </div>
+
+            <span class="direct-value">
+              ${formatNumber(
+                channels.direct.entry
+              )}회
+            </span>
+
+          </div>
+
+        </section>
+
+        <div class="section-grid">
+
+          <section class="surface section-card">
+
+            <div class="section-head">
+
+              <div>
+                <div class="eyebrow">
+                  WEB ACTIVITY
+                </div>
+
+                <h2 class="section-title">
+                  방문과 스토어 이동 추이
+                </h2>
+              </div>
+
+              <div class="chart-legend">
+
+                <span class="legend-item">
+                  <span class="legend-dot"></span>
+                  방문
+                </span>
+
+                <span class="legend-item">
+                  <span class="legend-dot orange"></span>
+                  스토어 이동
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="chart-wrap">
+
+              ${lineChart(
+                rows.map(
+                  row => ({
+                    label:
+                      row.label,
+
+                    visits:
+                      row.visits,
+
+                    downloads:
+                      row.downloads
+                  })
+                ),
+
+                [
+                  {
+                    key:
+                      "visits",
+
+                    name:
+                      "홈페이지 방문",
+
+                    color:
+                      COLORS.green
+                  },
+
+                  {
+                    key:
+                      "downloads",
+
+                    name:
+                      "스토어 이동",
+
+                    color:
+                      COLORS.orange
+                  }
+                ]
+              )}
+
+            </div>
+
+          </section>
+
+          <aside class="surface section-card">
+
+            <div class="eyebrow">
+              STORE PLATFORM
+            </div>
+
+            <h2 class="section-title">
+              스토어 이동 구성
+            </h2>
+
+            <div class="donut-layout">
+
+              ${donutHtml(
+                platformSlices,
+                label,
+                `${formatNumber(
+                  clicks.total
+                )}회`
+              )}
+
+              <div class="share-list">
+
+                <div class="share-row">
+
+                  <span class="share-name">
+                    <span class="legend-dot blue"></span>
+                    iOS
+                  </span>
+
+                  <span class="share-value">
+                    ${formatNumber(clicks.ios)}
+                    ·
+                    ${formatRate(
+                      percent(
+                        clicks.ios,
+                        clicks.total
+                      )
+                    )}
+                  </span>
+
+                </div>
+
+                <div class="share-row">
+
+                  <span class="share-name">
+                    <span class="legend-dot"></span>
+                    Android
+                  </span>
+
+                  <span class="share-value">
+                    ${formatNumber(clicks.android)}
+                    ·
+                    ${formatRate(
+                      percent(
+                        clicks.android,
+                        clicks.total
+                      )
+                    )}
+                  </span>
+
+                </div>
+
+                <div class="share-row">
+
+                  <span class="share-name">
+                    <span class="legend-dot muted"></span>
+                    미분류
+                  </span>
+
+                  <span class="share-value">
+                    ${formatNumber(clicks.unknown)}
+                    ·
+                    ${formatRate(
+                      percent(
+                        clicks.unknown,
+                        clicks.total
+                      )
+                    )}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            ${platformBarsHtml([
+              {
+                label:
+                  "iOS",
+
+                value:
+                  clicks.ios,
+
+                dotClass:
+                  "blue",
+
+                fillClass:
+                  "blue"
+              },
+
+              {
+                label:
+                  "Android",
+
+                value:
+                  clicks.android,
+
+                dotClass:
+                  "",
+
+                fillClass:
+                  ""
+              },
+
+              {
+                label:
+                  "미분류",
+
+                value:
+                  clicks.unknown,
+
+                dotClass:
+                  "muted",
+
+                fillClass:
+                  "muted"
+              }
+            ])}
+
+          </aside>
+
+        </div>
+      `;
+
+      animateRenderedUi();
+    }
+
+    function renderChannels() {
+      const channels =
+        groupChannels();
+
+      const label =
+        periodName();
+
+      const channelSlices =
+        channels.external.map(
+          row => ({
+            value:
+              row.entry,
+
+            color:
+              channelMeta(
+                row.source
+              )
+                .color
+          })
+        );
+
+      const top =
+        channels.external[0];
+
+      const topShare =
+        top
+          ? percent(
+              top.entry,
+              channels.externalEntries
+            )
+          : 0;
+
+      content.innerHTML = `
+        <div class="kpi-grid">
+
+          ${kpiCard({
+            label:
+              `${label} 확인된 외부채널`,
+
+            value:
+              channels.external.length,
+
+            unit:
+              "개",
+
+            desc:
+              "실제 데이터가 발생한 외부 유입 경로",
+
+            className:
+              "primary",
+
+            footer:
+              top
+                ? `현재 1위 ${escapeHtml(
+                    channelMeta(
+                      top.source
+                    )
+                      .label
+                  )}`
+                : "외부채널 데이터 대기"
+          })}
+
+          ${kpiCard({
+            label:
+              `${label} 외부채널 확인 유입`,
+
+            value:
+              channels.externalEntries,
+
+            unit:
+              "회",
+
+            desc:
+              "채널 링크를 통해 확인된 유입 이벤트",
+
+            className:
+              "compact",
+
+            footer:
+              top
+                ? `1위 비중 ${formatRate(topShare)}`
+                : "-"
+          })}
+
+          ${kpiCard({
+            label:
+              `${label} 외부채널 스토어 이동`,
+
+            value:
+              channels.externalDownloads,
+
+            unit:
+              "회",
+
+            desc:
+              "외부채널에서 App Store · Google Play 이동",
+
+            className:
+              "compact",
+
+            footer:
+              `iOS ${formatNumber(
+                channels.externalIos
+              )} · Android ${formatNumber(
+                channels.externalAndroid
+              )}`
+          })}
+
+          ${kpiCard({
+            label:
+              `${label} 직접 유입`,
+
+            value:
+              channels.direct.entry,
+
+            unit:
+              "회",
+
+            desc:
+              "src가 없거나 출처를 특정하지 못한 진입",
+
+            className:
+              "compact",
+
+            footer:
+              `스토어 이동 ${formatNumber(
+                channels.direct.downloads
+              )}회`
+          })}
+
+        </div>
+
+        <section class="surface channel-visual">
+
+          <div class="section-head">
+
+            <div>
+              <div class="eyebrow">
+                CHANNEL SHARE
+              </div>
+
+              <h2 class="section-title">
+                채널별 유입 구성
+              </h2>
+            </div>
+
+            <div class="section-caption">
+              채널이 늘어나면 자동으로 추가<br>
+              비중은 외부채널끼리 계산
+            </div>
+
+          </div>
+
+          <div class="channel-visual-grid">
+
+            <div>
+
+              ${donutHtml(
+                channelSlices,
+                "외부 유입",
+                `${formatNumber(
+                  channels.externalEntries
+                )}회`
+              )}
+
+              <div class="note-box">
+
+                ${
+                  top
+                    ? `<strong>${escapeHtml(
+                        channelMeta(
+                          top.source
+                        )
+                          .label
+                      )}</strong>이 외부채널 유입의 ${formatRate(
+                        topShare
+                      )}를 차지합니다.`
+                    : "외부채널 유입 데이터가 아직 없습니다."
+                }
+
+              </div>
+
+            </div>
+
+            <div>
+              ${channelBarsHtml(
+                channels.external,
+                channels.externalEntries
+              )}
+            </div>
+
+          </div>
+
+          <div class="direct-box">
+
+            <div>
+              <strong>
+                직접 유입은 채널 순위에서 제외
+              </strong>
+
+              <span>
+                당근·네이버·카카오처럼 출처가 확인된 채널과 분리해서 봅니다.
+              </span>
+            </div>
+
+            <span class="direct-value">
+              ${formatNumber(
+                channels.direct.entry
+              )}회
+            </span>
+
+          </div>
+
+        </section>
+
+        <section class="surface flow-card">
+
+          <div class="section-head">
+
+            <div>
+              <div class="eyebrow">
+                CHANNEL ACTION
+              </div>
+
+              <h2 class="section-title">
+                외부채널에서 어떤 행동이 있었나
+              </h2>
+            </div>
+
+            <div class="section-caption">
+              유입·스토어 이동·플랫폼 반응을 분리해서 표시
+            </div>
+
+          </div>
+
+          <div class="flow-grid">
+
+            <div
+              class="flow-step"
+              style="--flow:${
+                channels.externalEntries >
+                0
+                  ? 100
+                  : 0
+              }%"
+            >
+
+              <div class="flow-label">
+                확인 유입
+              </div>
+
+              <div class="flow-value">
+                ${formatNumber(
+                  channels.externalEntries
+                )}
+              </div>
+
+              <div class="flow-note">
+                외부채널 출처가 확인된 진입
+              </div>
+
+            </div>
+
+            <div
+              class="flow-step orange"
+              style="--flow:${clamp(
+                percent(
+                  channels.externalDownloads,
+                  Math.max(
+                    channels.externalEntries,
+                    channels.externalDownloads
+                  )
+                ),
+                0,
+                100
+              )}%"
+            >
+
+              <div class="flow-label">
+                스토어 이동
+              </div>
+
+              <div class="flow-value">
+                ${formatNumber(
+                  channels.externalDownloads
+                )}
+              </div>
+
+              <div class="flow-note">
+                외부채널에서 앱스토어로 이동
+              </div>
+
+            </div>
+
+            <div
+              class="flow-step blue"
+              style="--flow:${
+                channels.externalDownloads >
+                0
+                  ? 100
+                  : 0
+              }%"
+            >
+
+              <div class="flow-label">
+                플랫폼 확인
+              </div>
+
+              <div class="flow-value">
+                ${formatNumber(
+                  channels.externalIos +
+                  channels.externalAndroid
+                )}
+              </div>
+
+              <div class="flow-note">
+                iOS
+                ${formatNumber(
+                  channels.externalIos
+                )}
+                · Android
+                ${formatNumber(
+                  channels.externalAndroid
+                )}
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <details class="surface details-card">
+
+          <summary>
+
+            <div>
+              <div class="eyebrow">
+                CHANNEL DETAIL
+              </div>
+
+              <h2 class="section-title">
+                채널 상세 수치
+              </h2>
+            </div>
+
+            <span class="details-toggle"></span>
+
+          </summary>
+
+          <div class="table-wrap">
+
+            <table class="data-table">
+
+              <thead>
+                <tr>
+                  <th>채널</th>
+                  <th>확인 유입</th>
+                  <th>홈페이지 방문</th>
+                  <th>스토어 이동</th>
+                  <th>iOS</th>
+                  <th>Android</th>
+                  <th>미분류</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                ${
+                  channels.external.length
+                    ? channels.external
+                        .map(
+                          row => `
+                            <tr>
+
+                              <td>
+                                ${escapeHtml(
+                                  channelMeta(
+                                    row.source
+                                  )
+                                    .label
+                                )}
+                              </td>
+
+                              <td>
+                                ${formatNumber(
+                                  row.entry
+                                )}회
+                              </td>
+
+                              <td>
+                                ${formatNumber(
+                                  row.visits
+                                )}회
+                              </td>
+
+                              <td class="orange-value">
+                                ${formatNumber(
+                                  row.downloads
+                                )}회
+                              </td>
+
+                              <td class="ios-value">
+                                ${formatNumber(
+                                  row.ios
+                                )}회
+                              </td>
+
+                              <td class="android-value">
+                                ${formatNumber(
+                                  row.android
+                                )}회
+                              </td>
+
+                              <td class="muted-value">
+                                ${formatNumber(
+                                  row.unknown
+                                )}회
+                              </td>
+
+                            </tr>
+                          `
+                        )
+                        .join("")
+                    : `
+                      <tr>
+                        <td
+                          colspan="7"
+                          class="empty"
+                        >
+                          선택한 기간의 외부채널 데이터가 없습니다.
+                        </td>
+                      </tr>
+                    `
+                }
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+          <div class="note-box">
+            <strong>
+              확인 유입 기준
+            </strong><br>
+            홈페이지 방문이 있는 채널은 방문 횟수를 사용하고 당근처럼 download.html로 바로 보내는 채널은 스토어 이동 횟수를 사용합니다. 현재 값은 완전한 순 사용자 수가 아니라 채널 유입 이벤트 기준입니다.
+          </div>
+
+        </details>
+      `;
+
+      animateRenderedUi();
+    }
+
+    function renderDownloads() {
+      const website =
+        getWebsitePeriod();
+
+      const rows =
+        getWebsiteRows();
+
+      const clicks =
+        getPlatformClicks();
+
+      const channels =
+        groupChannels();
+
+      const label =
+        periodName();
+
+      const sourceRows =
+        channels.rows
+          .filter(
+            row =>
+              number(
+                row.downloads
+              ) >
+              0
+          )
+          .sort(
+            (
+              a,
+              b
+            ) =>
+              b.downloads -
+              a.downloads
+          );
+
+      const sourceTotal =
+        sourceRows.reduce(
+          (
+            sum,
+            row
+          ) =>
+            sum +
+            row.downloads,
+          0
+        );
+
+      const platformSlices =
+        [
+          {
+            value:
+              clicks.ios,
+
+            color:
+              COLORS.blue
+          },
+
+          {
+            value:
+              clicks.android,
+
+            color:
+              COLORS.green
+          },
+
+          {
+            value:
+              clicks.unknown,
+
+            color:
+              COLORS.muted
+          }
+        ];
+
+      content.innerHTML = `
+        <div class="kpi-grid">
+
+          ${kpiCard({
+            label:
+              `${label} 스토어 이동`,
+
+            value:
+              clicks.total,
+
+            unit:
+              "회",
+
+            desc:
+              "모딩에서 App Store · Google Play로 이동한 전체 이벤트",
+
+            className:
+              "primary",
+
+            spark:
+              sparkline(
+                rows.map(
+                  row =>
+                    row.downloads
+                ),
+                COLORS.green,
+                true
+              )
+          })}
+
+          ${kpiCard({
+            label:
+              "iOS",
+
+            value:
+              clicks.ios,
+
+            unit:
+              "회",
+
+            desc:
+              `전체 스토어 이동의 ${formatRate(
+                percent(
+                  clicks.ios,
+                  clicks.total
+                )
+              )}`,
+
+            className:
+              "compact",
+
+            footer:
+              "App Store"
+          })}
+
+          ${kpiCard({
+            label:
+              "Android",
+
+            value:
+              clicks.android,
+
+            unit:
+              "회",
+
+            desc:
+              `전체 스토어 이동의 ${formatRate(
+                percent(
+                  clicks.android,
+                  clicks.total
+                )
+              )}`,
+
+            className:
+              "compact",
+
+            footer:
+              "Google Play"
+          })}
+
+          ${kpiCard({
+            label:
+              "미분류",
+
+            value:
+              clicks.unknown,
+
+            unit:
+              "회",
+
+            desc:
+              `전체 스토어 이동의 ${formatRate(
+                percent(
+                  clicks.unknown,
+                  clicks.total
+                )
+              )}`,
+
+            className:
+              "compact",
+
+            footer:
+              "PC · 기타 환경"
+          })}
+
+        </div>
+
+        <div class="section-grid">
+
+          <section class="surface section-card">
+
+            <div class="section-head">
+
+              <div>
+                <div class="eyebrow">
+                  DOWNLOAD TREND
+                </div>
+
+                <h2 class="section-title">
+                  스토어 이동 추이
+                </h2>
+              </div>
+
+              <div class="chart-legend">
+                <span class="legend-item">
+                  <span class="legend-dot orange"></span>
+                  스토어 이동
+                </span>
+              </div>
+
+            </div>
+
+            <div class="chart-wrap">
+
+              ${lineChart(
+                rows.map(
+                  row => ({
+                    label:
+                      row.label,
+
+                    downloads:
+                      row.downloads
+                  })
+                ),
+
+                [
+                  {
+                    key:
+                      "downloads",
+
+                    name:
+                      "스토어 이동",
+
+                    color:
+                      COLORS.orange
+                  }
+                ]
+              )}
+
+            </div>
+
+          </section>
+
+          <aside class="surface section-card">
+
+            <div class="eyebrow">
+              PLATFORM MIX
+            </div>
+
+            <h2 class="section-title">
+              iOS · Android 비중
+            </h2>
+
+            <div class="donut-layout">
+
+              ${donutHtml(
+                platformSlices,
+                label,
+                `${formatNumber(
+                  clicks.total
+                )}회`
+              )}
+
+              <div class="share-list">
+
+                <div class="share-row">
+                  <span class="share-name">
+                    <span class="legend-dot blue"></span>
+                    iOS
+                  </span>
+
+                  <span class="share-value">
+                    ${formatRate(
+                      percent(
+                        clicks.ios,
+                        clicks.total
+                      )
+                    )}
+                  </span>
+                </div>
+
+                <div class="share-row">
+                  <span class="share-name">
+                    <span class="legend-dot"></span>
+                    Android
+                  </span>
+
+                  <span class="share-value">
+                    ${formatRate(
+                      percent(
+                        clicks.android,
+                        clicks.total
+                      )
+                    )}
+                  </span>
+                </div>
+
+                <div class="share-row">
+                  <span class="share-name">
+                    <span class="legend-dot muted"></span>
+                    미분류
+                  </span>
+
+                  <span class="share-value">
+                    ${formatRate(
+                      percent(
+                        clicks.unknown,
+                        clicks.total
+                      )
+                    )}
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+            ${platformBarsHtml([
+              {
+                label:
+                  "iOS",
+
+                value:
+                  clicks.ios,
+
+                dotClass:
+                  "blue",
+
+                fillClass:
+                  "blue"
+              },
+
+              {
+                label:
+                  "Android",
+
+                value:
+                  clicks.android,
+
+                dotClass:
+                  "",
+
+                fillClass:
+                  ""
+              },
+
+              {
+                label:
+                  "미분류",
+
+                value:
+                  clicks.unknown,
+
+                dotClass:
+                  "muted",
+
+                fillClass:
+                  "muted"
+              }
+            ])}
+
+          </aside>
+
+        </div>
+
+        <section class="surface channel-visual">
+
+          <div class="section-head">
+
+            <div>
+              <div class="eyebrow">
+                DOWNLOAD SOURCE
+              </div>
+
+              <h2 class="section-title">
+                어느 채널에서 스토어로 갔나
+              </h2>
+            </div>
+
+            <div class="section-caption">
+              직접 유입도 포함한 스토어 이동 출처
+            </div>
+
+          </div>
+
+          <div style="margin-top:24px">
+            ${channelBarsHtml(
+              sourceRows,
+              sourceTotal,
+              "downloads"
+            )}
+          </div>
+
+        </section>
+
+        <details class="surface details-card">
+
+          <summary>
+
+            <div>
+              <div class="eyebrow">
+                WEB DETAIL
+              </div>
+
+              <h2 class="section-title">
+                기간별 방문 · 스토어 이동 기록
+              </h2>
+            </div>
+
+            <span class="details-toggle"></span>
+
+          </summary>
+
+          <div class="table-wrap">
+
+            <table class="data-table">
+
+              <thead>
+                <tr>
+                  <th>
+                    ${
+                      state.period ===
+                        "all"
+                        ? "월"
+                        : "날짜"
+                    }
+                  </th>
+
+                  <th>
+                    홈페이지 방문
+                  </th>
+
+                  <th>
+                    스토어 이동
+                  </th>
+
+                  <th>
+                    이동 / 방문 비율
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                ${
+                  rows.length
+                    ? [
+                        ...rows
+                      ]
+                        .reverse()
+                        .map(
+                          row => `
+                            <tr>
+
+                              <td>
+                                ${
+                                  row.monthly
+                                    ? formatMonth(
+                                        row.key
+                                      )
+                                    : formatDate(
+                                        row.key
+                                      )
+                                }
+                              </td>
+
+                              <td>
+                                ${formatNumber(
+                                  row.visits
+                                )}회
+                              </td>
+
+                              <td class="orange-value">
+                                ${formatNumber(
+                                  row.downloads
+                                )}회
+                              </td>
+
+                              <td>
+                                ${
+                                  row.visits >
+                                  0
+                                    ? formatRate(
+                                        percent(
+                                          row.downloads,
+                                          row.visits
+                                        )
+                                      )
+                                    : "-"
+                                }
+                              </td>
+
+                            </tr>
+                          `
+                        )
+                        .join("")
+                    : `
+                      <tr>
+                        <td
+                          colspan="4"
+                          class="empty"
+                        >
+                          선택한 기간의 데이터가 없습니다.
+                        </td>
+                      </tr>
+                    `
+                }
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+          <div class="note-box">
+            <strong>
+              이동 / 방문 비율
+            </strong>은 순 사용자 전환율이 아닙니다. 외부에서 download.html로 바로 들어오는 경우 스토어 이동은 잡히지만 홈페이지 방문은 잡히지 않을 수 있습니다.
+          </div>
+
+        </details>
+      `;
+
+      animateRenderedUi();
     }
 
     function renderInstalls() {
@@ -5656,7 +5885,7 @@
         getInstallPeriod();
 
       const rows =
-        getInstallRows();
+        getInstallRowsForPeriod();
 
       const label =
         periodName();
@@ -5665,131 +5894,34 @@
         install.total;
 
       const ios =
-        n(
+        number(
           install.iosValue
         );
 
       const android =
-        n(
+        number(
           install.androidValue
         );
 
-      setText(
-        "installTotalLabel",
-        `${label} 실제 신규 설치`
-      );
-
-      setText(
-        "installTotalValue",
-        total ===
-          null
-          ? "-"
-          : formatNumber(
+      const iosShare =
+        total >
+        0
+          ? percent(
+              ios,
               total
             )
-      );
+          : 0;
 
-      setText(
-        "installIosValue",
-        install.iosReady
-          ? formatNumber(
-              ios
+      const androidShare =
+        total >
+        0
+          ? percent(
+              android,
+              total
             )
-          : "-"
-      );
+          : 0;
 
-      setText(
-        "installAndroidValue",
-        install.androidReady
-          ? formatNumber(
-              android
-            )
-          : "-"
-      );
-
-      setText(
-        "installIosShare",
-        total > 0
-          ? `전체의 ${formatRate(rate(ios,total))}`
-          : "-"
-      );
-
-      setText(
-        "installAndroidShare",
-        total > 0
-          ? `전체의 ${formatRate(rate(android,total))}`
-          : "-"
-      );
-
-      setText(
-        "installLatest",
-        `iOS ${
-          install.iosLatest
-            ? compactDate(
-                install.iosLatest
-              )
-            : "-"
-        } · Android ${
-          install.androidLatest
-            ? compactDate(
-                install.androidLatest
-              )
-            : "-"
-        }`
-      );
-
-      setText(
-        "installIosLatest",
-        install.iosLatest
-          ? compactDate(
-              install.iosLatest
-            )
-          : "-"
-      );
-
-      setText(
-        "installAndroidLatest",
-        install.androidLatest
-          ? compactDate(
-              install.androidLatest
-            )
-          : "-"
-      );
-
-      const ready =
-        Number(
-          install.iosReady
-        ) +
-        Number(
-          install.androidReady
-        );
-
-      setText(
-        "installStatusValue",
-        ready === 2
-          ? "정상"
-          : ready === 1
-            ? "부분"
-            : "대기"
-      );
-
-      setText(
-        "installStatusSub",
-        ready === 2
-          ? "iOS · Android 확인됨"
-          : ready === 1
-            ? "한 플랫폼만 확인됨"
-            : "스토어 데이터 준비 중"
-      );
-
-      setText(
-        "installChartTitle",
-        `${label} 실제 신규 설치 추이`
-      );
-
-      renderLineChart(
-        "installChart",
-
+      const chartRows =
         rows.map(
           row => ({
             label:
@@ -5814,40 +5946,77 @@
             total:
               row.total
           })
-        ),
-
-        [
-          {
-            key: "ios",
-            color: COLORS.blue
-          },
-
-          {
-            key: "android",
-            color: COLORS.green
-          },
-
-          {
-            key: "total",
-            color: COLORS.black,
-            width: 3.6
-          }
-        ]
-      );
-
-      renderInstallTable();
-    }
-
-    function renderInstallTable() {
-      const body =
-        document.getElementById(
-          "installTableBody"
         );
 
-      const rows =
+      let cumulative =
+        0;
+
+      const cumulativeRows =
+        chartRows.map(
+          row => {
+            if (
+              row.total !==
+                null &&
+              row.total !==
+                undefined
+            ) {
+              cumulative +=
+                number(
+                  row.total
+                );
+            }
+
+            return {
+              label:
+                row.label,
+
+              cumulative
+            };
+          }
+        );
+
+      const platformSlices =
         [
-          ...getInstallRows()
+          {
+            value:
+              ios,
+
+            color:
+              COLORS.blue
+          },
+
+          {
+            value:
+              android,
+
+            color:
+              COLORS.green
+          }
+        ];
+
+      const activityRows =
+        [
+          ...getInstallRows(
+            false
+          )
         ]
+          .filter(
+            row =>
+              (
+                row.iosConfirmed &&
+                number(
+                  row.ios
+                ) >
+                0
+              ) ||
+              (
+                row.androidConfirmed &&
+                number(
+                  row.android
+                ) >
+                0
+              )
+          )
           .sort(
             (
               a,
@@ -5861,82 +6030,668 @@
                     a.key
                   )
                 )
+          )
+          .slice(
+            0,
+            8
           );
 
-      const monthly =
-        state.period ===
-        "all";
+      content.innerHTML = `
+        <div class="kpi-grid">
 
-      setText(
-        "installTableHead",
-        monthly
-          ? "월"
-          : "날짜"
-      );
+          ${kpiCard({
+            label:
+              `${label} 실제 신규 설치`,
 
-      body.innerHTML =
-        "";
+            value:
+              total ===
+                null
+                ? "-"
+                : total,
 
+            unit:
+              "건",
+
+            desc:
+              "Apple + Google 확정 설치 데이터",
+
+            className:
+              "primary",
+
+            footer:
+              `최신 확정 iOS ${
+                install.iosLatest
+                  ? compactDate(
+                      install.iosLatest
+                    )
+                  : "-"
+              } · Android ${
+                install.androidLatest
+                  ? compactDate(
+                      install.androidLatest
+                    )
+                  : "-"
+              }`
+          })}
+
+          ${kpiCard({
+            label:
+              "iOS",
+
+            value:
+              install.iosReady
+                ? ios
+                : "-",
+
+            unit:
+              "건",
+
+            desc:
+              total >
+              0
+                ? `전체 실제 설치의 ${formatRate(
+                    iosShare
+                  )}`
+                : "Apple 확정 데이터",
+
+            className:
+              "compact",
+
+            footer:
+              install.iosLatest
+                ? `${compactDate(
+                    install.iosLatest
+                  )}까지 확정`
+                : "데이터 대기"
+          })}
+
+          ${kpiCard({
+            label:
+              "Android",
+
+            value:
+              install.androidReady
+                ? android
+                : "-",
+
+            unit:
+              "건",
+
+            desc:
+              total >
+              0
+                ? `전체 실제 설치의 ${formatRate(
+                    androidShare
+                  )}`
+                : "Google 확정 데이터",
+
+            className:
+              "compact",
+
+            footer:
+              install.androidLatest
+                ? `${compactDate(
+                    install.androidLatest
+                  )}까지 확정`
+                : "데이터 대기"
+          })}
+
+          ${kpiCard({
+            label:
+              "플랫폼 구성",
+
+            value:
+              total ===
+                null
+                ? "-"
+                : total,
+
+            unit:
+              "건",
+
+            desc:
+              `iOS ${formatRate(
+                iosShare
+              )} · Android ${formatRate(
+                androidShare
+              )}`,
+
+            className:
+              "compact",
+
+            footer:
+              "최신 확정 데이터 기준"
+          })}
+
+        </div>
+
+        <div class="section-grid">
+
+          <section class="surface section-card">
+
+            <div class="section-head">
+
+              <div>
+                <div class="eyebrow">
+                  INSTALL TREND
+                </div>
+
+                <h2 class="section-title">
+                  실제 신규 설치 추이
+                </h2>
+              </div>
+
+              <div class="chart-legend">
+
+                <span class="legend-item">
+                  <span class="legend-dot blue"></span>
+                  iOS
+                </span>
+
+                <span class="legend-item">
+                  <span class="legend-dot"></span>
+                  Android
+                </span>
+
+                <span class="legend-item">
+                  <span class="legend-dot black"></span>
+                  합계
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="chart-wrap">
+
+              ${lineChart(
+                chartRows,
+
+                [
+                  {
+                    key:
+                      "ios",
+
+                    name:
+                      "iOS",
+
+                    color:
+                      COLORS.blue
+                  },
+
+                  {
+                    key:
+                      "android",
+
+                    name:
+                      "Android",
+
+                    color:
+                      COLORS.green
+                  },
+
+                  {
+                    key:
+                      "total",
+
+                    name:
+                      "합계",
+
+                    color:
+                      COLORS.black,
+
+                    width:
+                      3.8
+                  }
+                ],
+
+                "선택한 기간의 확정 설치 데이터가 아직 없습니다."
+              )}
+
+            </div>
+
+          </section>
+
+          <aside class="surface section-card">
+
+            <div class="eyebrow">
+              PLATFORM MIX
+            </div>
+
+            <h2 class="section-title">
+              설치 플랫폼 구성
+            </h2>
+
+            <div class="donut-layout">
+
+              ${donutHtml(
+                platformSlices,
+                label,
+                total ===
+                  null
+                  ? "-"
+                  : `${formatNumber(
+                      total
+                    )}건`
+              )}
+
+              <div class="share-list">
+
+                <div class="share-row">
+
+                  <span class="share-name">
+                    <span class="legend-dot blue"></span>
+                    iOS
+                  </span>
+
+                  <span class="share-value">
+                    ${
+                      install.iosReady
+                        ? `${formatNumber(
+                            ios
+                          )} · ${formatRate(
+                            iosShare
+                          )}`
+                        : "-"
+                    }
+                  </span>
+
+                </div>
+
+                <div class="share-row">
+
+                  <span class="share-name">
+                    <span class="legend-dot"></span>
+                    Android
+                  </span>
+
+                  <span class="share-value">
+                    ${
+                      install.androidReady
+                        ? `${formatNumber(
+                            android
+                          )} · ${formatRate(
+                            androidShare
+                          )}`
+                        : "-"
+                    }
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            ${platformBarsHtml([
+              {
+                label:
+                  "iOS",
+
+                value:
+                  ios,
+
+                dotClass:
+                  "blue",
+
+                fillClass:
+                  "blue"
+              },
+
+              {
+                label:
+                  "Android",
+
+                value:
+                  android,
+
+                dotClass:
+                  "",
+
+                fillClass:
+                  ""
+              }
+            ])}
+
+          </aside>
+
+        </div>
+
+        <section class="surface flow-card">
+
+          <div class="section-head">
+
+            <div>
+              <div class="eyebrow">
+                CUMULATIVE
+              </div>
+
+              <h2 class="section-title">
+                선택 기간 누적 설치 흐름
+              </h2>
+            </div>
+
+            <div class="section-caption">
+              현재 불러온 확정 데이터 범위에서 누적
+            </div>
+
+          </div>
+
+          <div class="chart-wrap">
+
+            ${lineChart(
+              cumulativeRows,
+
+              [
+                {
+                  key:
+                    "cumulative",
+
+                  name:
+                    "누적 설치",
+
+                  color:
+                    COLORS.black,
+
+                  width:
+                    4
+                }
+              ],
+
+              "누적 설치를 표시할 확정 데이터가 없습니다."
+            )}
+
+          </div>
+
+        </section>
+
+        <section
+          class="surface section-card"
+          style="margin-top:16px"
+        >
+
+          <div class="section-head">
+
+            <div>
+              <div class="eyebrow">
+                RECENT ACTIVITY
+              </div>
+
+              <h2 class="section-title">
+                최근 설치 활동
+              </h2>
+            </div>
+
+            <div class="section-caption">
+              설치가 있었던 날짜 중심
+            </div>
+
+          </div>
+
+          <div class="activity-list">
+
+            ${
+              activityRows.length
+                ? activityRows
+                    .map(
+                      row => `
+                        <div class="activity-row">
+
+                          <div class="activity-date">
+                            ${formatDate(
+                              row.key
+                            )}
+                          </div>
+
+                          <div class="activity-platforms">
+
+                            ${
+                              row.iosConfirmed
+                                ? `
+                                  <span class="chip ios">
+                                    iOS
+                                    ${formatNumber(
+                                      row.ios
+                                    )}건
+                                  </span>
+                                `
+                                : `
+                                  <span class="chip unknown">
+                                    iOS 집계대기
+                                  </span>
+                                `
+                            }
+
+                            ${
+                              row.androidConfirmed
+                                ? `
+                                  <span class="chip android">
+                                    Android
+                                    ${formatNumber(
+                                      row.android
+                                    )}건
+                                  </span>
+                                `
+                                : `
+                                  <span class="chip unknown">
+                                    Android 집계대기
+                                  </span>
+                                `
+                            }
+
+                          </div>
+
+                          <div class="activity-total">
+                            ${
+                              row.exact
+                                ? `${formatNumber(
+                                    row.total
+                                  )}건`
+                                : "부분 집계"
+                            }
+                          </div>
+
+                        </div>
+                      `
+                    )
+                    .join("")
+                : `
+                  <div
+                    class="chart-empty"
+                    style="min-height:150px"
+                  >
+                    확정 설치 활동이 없습니다.
+                  </div>
+                `
+            }
+
+          </div>
+
+          <div class="note-box">
+            최신 확정일 이후의 0은 실제 0건으로 단정하지 않습니다. 스토어 집계가 늦게 반영될 수 있습니다.
+          </div>
+
+        </section>
+
+        <details class="surface details-card">
+
+          <summary>
+
+            <div>
+              <div class="eyebrow">
+                INSTALL DETAIL
+              </div>
+
+              <h2 class="section-title">
+                설치 상세 기록
+              </h2>
+            </div>
+
+            <span class="details-toggle"></span>
+
+          </summary>
+
+          <div class="table-wrap">
+
+            <table class="data-table">
+
+              <thead>
+                <tr>
+
+                  <th>
+                    ${
+                      state.period ===
+                        "all"
+                        ? "월"
+                        : "날짜"
+                    }
+                  </th>
+
+                  <th>
+                    iOS
+                  </th>
+
+                  <th>
+                    Android
+                  </th>
+
+                  <th>
+                    합계
+                  </th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+
+                ${
+                  rows.length
+                    ? [
+                        ...rows
+                      ]
+                        .reverse()
+                        .map(
+                          row => `
+                            <tr>
+
+                              <td>
+                                ${
+                                  state.period ===
+                                    "all"
+                                    ? formatMonth(
+                                        row.key
+                                      )
+                                    : formatDate(
+                                        row.key
+                                      )
+                                }
+                              </td>
+
+                              <td
+                                class="${
+                                  row.iosConfirmed
+                                    ? "ios-value"
+                                    : "muted-value"
+                                }"
+                              >
+                                ${
+                                  row.iosConfirmed
+                                    ? `${formatNumber(
+                                        row.ios
+                                      )}건`
+                                    : "집계 대기"
+                                }
+                              </td>
+
+                              <td
+                                class="${
+                                  row.androidConfirmed
+                                    ? "android-value"
+                                    : "muted-value"
+                                }"
+                              >
+                                ${
+                                  row.androidConfirmed
+                                    ? `${formatNumber(
+                                        row.android
+                                      )}건`
+                                    : "집계 대기"
+                                }
+                              </td>
+
+                              <td>
+                                ${
+                                  row.exact
+                                    ? `${formatNumber(
+                                        row.total
+                                      )}건`
+                                    : "-"
+                                }
+                              </td>
+
+                            </tr>
+                          `
+                        )
+                        .join("")
+                    : `
+                      <tr>
+                        <td
+                          colspan="4"
+                          class="empty"
+                        >
+                          선택한 기간의 실제 설치 데이터가 없습니다.
+                        </td>
+                      </tr>
+                    `
+                }
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </details>
+      `;
+
+      animateRenderedUi();
+    }
+
+    function renderCurrentView() {
       if (
-        !rows.length
+        !state.stats
       ) {
-        body.innerHTML =
-          `
-            <tr>
-              <td
-                colspan="4"
-                class="empty"
-              >
-                설치 데이터가 없습니다.
-              </td>
-            </tr>
-          `;
-
         return;
       }
 
-      rows.forEach(
-        row => {
-          const tr =
-            document.createElement(
-              "tr"
-            );
+      if (
+        state.view ===
+        "channels"
+      ) {
+        renderChannels();
+        return;
+      }
 
-          tr.innerHTML =
-            `
-              <td>
-                ${
-                  monthly
-                    ? formatMonth(
-                        row.key
-                      )
-                    : formatDate(
-                        row.key
-                      )
-                }
-              </td>
+      if (
+        state.view ===
+        "downloads"
+      ) {
+        renderDownloads();
+        return;
+      }
 
-              <td class="ios-value">
-                ${formatNumber(row.ios)}건
-              </td>
+      if (
+        state.view ===
+        "installs"
+      ) {
+        renderInstalls();
+        return;
+      }
 
-              <td class="android-value">
-                ${formatNumber(row.android)}건
-              </td>
-
-              <td>
-                ${formatNumber(row.total)}건
-              </td>
-            `;
-
-          body.appendChild(
-            tr
-          );
-        }
-      );
+      renderOverview();
     }
 
-    function renderSystem() {
+    function renderSystemStatus() {
       const install =
         getInstallPeriod();
 
@@ -5960,70 +6715,58 @@
           install.androidReady
         );
 
-      setText(
-        "appleSystemState",
+      document
+        .getElementById(
+          "appleSystemState"
+        )
+        .textContent =
         install.iosReady
           ? "연결됨"
-          : "준비 중"
-      );
+          : "준비 중";
 
-      setText(
-        "googleSystemState",
+      document
+        .getElementById(
+          "googleSystemState"
+        )
+        .textContent =
         install.androidReady
           ? "연결됨"
-          : "준비 중"
-      );
+          : "준비 중";
 
-      setText(
-        "appleSystemDesc",
+      document
+        .getElementById(
+          "appleSystemDesc"
+        )
+        .textContent =
         install.iosReady
-          ? `최신 확정 ${compactDate(install.iosLatest)}`
-          : "Apple 데이터 대기"
-      );
+          ? `최신 확정 ${
+              install.iosLatest
+                ? compactDate(
+                    install.iosLatest
+                  )
+                : "-"
+            }`
+          : "Apple 설치 데이터 대기";
 
-      setText(
-        "googleSystemDesc",
+      document
+        .getElementById(
+          "googleSystemDesc"
+        )
+        .textContent =
         install.androidReady
-          ? `최신 확정 ${compactDate(install.androidLatest)}`
-          : "Google 데이터 대기"
-      );
+          ? `최신 확정 ${
+              install.androidLatest
+                ? compactDate(
+                    install.androidLatest
+                  )
+                : "-"
+            }`
+          : "Google Play 설치 데이터 대기";
     }
 
-    function renderCurrentView() {
-      if (
-        !state.stats
-      ) {
-        return;
-      }
-
-      if (
-        state.view ===
-        "channels"
-      ) {
-        renderChannels();
-        return;
-      }
-
-      if (
-        state.view ===
-        "clicks"
-      ) {
-        renderClicks();
-        return;
-      }
-
-      if (
-        state.view ===
-        "installs"
-      ) {
-        renderInstalls();
-        return;
-      }
-
-      renderOverview();
-    }
-
-    function setView(view) {
+    function setView(
+      view
+    ) {
       state.view =
         view;
 
@@ -6037,26 +6780,12 @@
         }
       );
 
-      Object.entries(
-        views
-      )
-        .forEach(
-          (
-            [
-              key,
-              panel
-            ]
-          ) => {
-            panel.hidden =
-              key !==
-              view;
-          }
-        );
-
       renderCurrentView();
     }
 
-    function setPeriod(period) {
+    function setPeriod(
+      period
+    ) {
       state.period =
         period;
 
@@ -6077,11 +6806,10 @@
       button => {
         button.addEventListener(
           "click",
-          () => {
+          () =>
             setView(
               button.dataset.view
-            );
-          }
+            )
         );
       }
     );
@@ -6090,11 +6818,10 @@
       button => {
         button.addEventListener(
           "click",
-          () => {
+          () =>
             setPeriod(
               button.dataset.period
-            );
-          }
+            )
         );
       }
     );
@@ -6129,7 +6856,9 @@
         const password =
           passwordInput.value;
 
-        if (!password) {
+        if (
+          !password
+        ) {
           return;
         }
 
@@ -6146,7 +6875,8 @@
                 "/admin/login"
               ),
               {
-                method: "POST",
+                method:
+                  "POST",
 
                 headers: {
                   "Content-Type":
@@ -6189,11 +6919,7 @@
           passwordInput.value =
             "";
 
-          loginView.hidden =
-            true;
-
-          dashboardView.hidden =
-            false;
+          showDashboard();
 
           await loadStats();
 
@@ -6218,21 +6944,19 @@
       const token =
         getToken();
 
-      if (!token) {
-        dashboardView.hidden =
-          true;
-
-        loginView.hidden =
-          false;
-
+      if (
+        !token
+      ) {
+        showLogin();
         return;
       }
 
       refreshBtn.disabled =
         true;
 
-      dashboardStatus.textContent =
-        "통계를 불러오는 중입니다.";
+      setDashboardStatus(
+        "통계를 불러오는 중입니다."
+      );
 
       try {
         const response =
@@ -6241,7 +6965,8 @@
               "/admin/stats"
             )}?days=31`,
             {
-              method: "GET",
+              method:
+                "GET",
 
               headers: {
                 Authorization:
@@ -6251,7 +6976,8 @@
                   "application/json"
               },
 
-              cache: "no-store"
+              cache:
+                "no-store"
             }
           );
 
@@ -6261,14 +6987,10 @@
         ) {
           clearToken();
 
-          dashboardView.hidden =
-            true;
-
-          loginView.hidden =
-            false;
+          showLogin();
 
           loginError.textContent =
-            "관리자 인증이 만료되었습니다.";
+            "관리자 인증이 만료되었습니다. 다시 로그인해주세요.";
 
           return;
         }
@@ -6286,7 +7008,7 @@
 
         renderCurrentView();
 
-        renderSystem();
+        renderSystemStatus();
 
         lastCheck.textContent =
           `마지막 확인 ${
@@ -6303,22 +7025,17 @@
               )
           }`;
 
-        dashboardStatus.textContent =
-          "";
-
-        dashboardStatus.classList.remove(
-          "error"
+        setDashboardStatus(
+          ""
         );
 
       } catch (
         error
       ) {
-        dashboardStatus.textContent =
+        setDashboardStatus(
           error?.message ||
-          "통계 조회 중 오류가 발생했습니다.";
-
-        dashboardStatus.classList.add(
-          "error"
+          "통계 조회 중 오류가 발생했습니다.",
+          true
         );
 
       } finally {
@@ -6354,14 +7071,17 @@
         const token =
           getToken();
 
-        if (token) {
+        if (
+          token
+        ) {
           try {
             await fetch(
               apiUrl(
                 "/admin/logout"
               ),
               {
-                method: "POST",
+                method:
+                  "POST",
 
                 headers: {
                   Authorization:
@@ -6369,6 +7089,7 @@
                 }
               }
             );
+
           } catch (_) {}
         }
 
@@ -6380,45 +7101,24 @@
         systemPopover.hidden =
           true;
 
-        dashboardView.hidden =
-          true;
-
-        loginView.hidden =
-          false;
+        showLogin();
       }
     );
 
     async function initialize() {
-      setView(
-        "overview"
-      );
-
-      setPeriod(
-        "all"
-      );
-
       if (
         getToken()
       ) {
-        loginView.hidden =
-          true;
-
-        dashboardView.hidden =
-          false;
+        showDashboard();
 
         await loadStats();
 
       } else {
-        dashboardView.hidden =
-          true;
-
-        loginView.hidden =
-          false;
+        showLogin();
       }
     }
 
     initialize();
   </script>
-
 </body>
 </html>
