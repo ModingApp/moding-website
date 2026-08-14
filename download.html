@@ -3,7 +3,26 @@
 <html lang="ko">
 <head>
   <!-- =========================================================
-       01. 기본 메타
+       01. 모바일 화면 깜빡임 완전 차단
+
+       HTML 렌더링 시작 전부터 숨김
+       PC / Mac / 검색로봇만 JS에서 다시 표시
+
+       정상 모바일:
+       download.html 화면 노출 없음
+       → 카운팅
+       → App Store / Google Play
+       ========================================================= -->
+  <style>
+    html {
+      visibility: hidden;
+      background: #ffffff;
+    }
+  </style>
+
+
+  <!-- =========================================================
+       02. 기본 메타 정보
        ========================================================= -->
   <meta charset="utf-8">
 
@@ -31,7 +50,7 @@
 
 
   <!-- =========================================================
-       02. SNS / 카카오톡 미리보기
+       03. SNS / 카카오톡 미리보기
        ========================================================= -->
   <meta
     property="og:type"
@@ -90,25 +109,11 @@
 
 
   <!-- =========================================================
-       03. 화면 깜빡임 방지
+       04. JavaScript 비활성 환경
 
-       HTML이 그려지기 전부터 숨겨둡니다.
-
-       PC / Mac / 검색로봇만
-       JS에서 다시 visible 처리합니다.
-
-       따라서 정상적인 모바일 접속에서는
-       다운로드 선택 카드가 보이지 않습니다.
+       JavaScript가 꺼져 있으면
+       수동 다운로드 페이지 표시
        ========================================================= -->
-  <style>
-    html {
-      visibility: hidden;
-      background: #ffffff;
-    }
-  </style>
-
-
-  <!-- JavaScript가 꺼진 환경은 페이지 표시 -->
   <noscript>
     <style>
       html {
@@ -119,15 +124,15 @@
 
 
   <!-- =========================================================
-       04. 자동분기 + 채널 추적
+       05. 모바일 자동분기 + 외부채널 추적
        ========================================================= -->
   <script>
     /* =========================================================
-       API / STORE URL
+       Worker / Store 주소
        ========================================================= */
 
     const TRACK_API =
-      "https://flat-queen-f1fb.moding-inc.workers.dev/track/download";
+      "https://flat-queen-f1fb.moding-inc.workers.dev/track/redirect";
 
 
     const ANDROID_URL =
@@ -139,7 +144,7 @@
 
 
     /* =========================================================
-       USER AGENT
+       User Agent
        ========================================================= */
 
     const USER_AGENT =
@@ -150,35 +155,39 @@
 
 
     /* =========================================================
-       검색로봇 판별
+       검색로봇
 
        검색로봇은 스토어로 보내지 않고
-       download.html 내용을 수집하도록 합니다.
+       다운로드 페이지 내용을 읽도록 유지
        ========================================================= */
 
     const IS_BOT =
       /bot|crawl|crawler|spider|slurp|yeti|googlebot|bingbot|daumoa|ads-naver|blueno/i
-        .test(USER_AGENT);
+        .test(
+          USER_AGENT
+        );
 
 
     /* =========================================================
-       Android 판별
+       Android
        ========================================================= */
 
     const IS_ANDROID =
-      /android/i.test(USER_AGENT);
+      /android/i.test(
+        USER_AGENT
+      );
 
 
     /* =========================================================
-       iPhone / iPad 판별
+       iPhone / iPad
 
-       최신 iPadOS는 User Agent를
-       Mac처럼 표현할 수 있으므로
-       터치 포인트까지 함께 확인합니다.
+       iPadOS가 MacIntel로 표시되는 경우 포함
        ========================================================= */
 
     const IS_IOS =
-      /iPhone|iPad|iPod/i.test(USER_AGENT) ||
+      /iPhone|iPad|iPod/i.test(
+        USER_AGENT
+      ) ||
       (
         navigator.platform === "MacIntel" &&
         navigator.maxTouchPoints > 1
@@ -198,21 +207,37 @@
 
 
     /* =========================================================
-       SOURCE 정리
+       Source 정리
 
-       예:
+       사용 예:
 
+       당근
        ?src=daangn
+
+       네이버 카페
        ?src=naver_cafe
+
+       네이버 블로그
        ?src=naver_blog
+
+       카카오
        ?src=kakao
+
+       유튜브
        ?src=youtube
+
+       전단
        ?src=leaflet
        ========================================================= */
 
-    function normalizeSource(value) {
-      const source =
-        String(value || "")
+    function normalizeSource(
+      value
+    ) {
+      let source =
+        String(
+          value ||
+          ""
+        )
           .trim()
           .toLowerCase()
           .replace(
@@ -225,6 +250,24 @@
           );
 
 
+      if (
+        !source
+      ) {
+        return "";
+      }
+
+
+      /*
+       * 당근 별칭 통일
+       */
+      if (
+        source === "karrot" ||
+        source === "danggeun"
+      ) {
+        return "daangn";
+      }
+
+
       return source;
     }
 
@@ -232,74 +275,98 @@
     /* =========================================================
        Referrer 기반 보조 판별
 
-       src 파라미터가 있는 경우에는
-       src가 항상 우선합니다.
+       src 파라미터가 없을 때만 사용
        ========================================================= */
 
     function detectReferrerSource() {
       const referrer =
-        document.referrer || "";
+        document.referrer ||
+        "";
 
 
-      if (!referrer) {
+      if (
+        !referrer
+      ) {
         return "";
       }
 
 
       try {
         const hostname =
-          new URL(referrer)
+          new URL(
+            referrer
+          )
             .hostname
             .toLowerCase();
 
 
         if (
-          hostname.includes("daangn") ||
-          hostname.includes("karrot")
+          hostname.includes(
+            "daangn"
+          ) ||
+          hostname.includes(
+            "karrot"
+          )
         ) {
           return "daangn";
         }
 
 
         if (
-          hostname.includes("naver")
+          hostname.includes(
+            "naver"
+          )
         ) {
           return "naver";
         }
 
 
         if (
-          hostname.includes("kakao") ||
-          hostname.includes("daum")
+          hostname.includes(
+            "kakao"
+          ) ||
+          hostname.includes(
+            "daum"
+          )
         ) {
           return "kakao";
         }
 
 
         if (
-          hostname.includes("youtube") ||
-          hostname.includes("youtu.be")
+          hostname.includes(
+            "youtube"
+          ) ||
+          hostname.includes(
+            "youtu.be"
+          )
         ) {
           return "youtube";
         }
 
 
         if (
-          hostname.includes("instagram")
+          hostname.includes(
+            "instagram"
+          )
         ) {
           return "instagram";
         }
 
 
         if (
-          hostname.includes("facebook")
+          hostname.includes(
+            "facebook"
+          )
         ) {
           return "facebook";
         }
 
 
         if (
-          hostname.includes("google")
+          hostname.includes(
+            "google"
+          )
         ) {
           return "google";
         }
@@ -314,15 +381,20 @@
 
 
     /* =========================================================
-       최종 유입 Source
+       최종 Source
 
-       우선순위
+       우선순위:
 
-       1. src
-       2. utm_source
-       3. 현재 세션에 저장된 source
-       4. document.referrer
-       5. direct
+       1. ?src=
+       2. ?utm_source=
+       3. referrer
+       4. direct
+
+       중요:
+       sessionStorage를 사용하지 않습니다.
+
+       과거 당근 접속값이 이후 직접접속까지
+       당근으로 남는 오염을 방지합니다.
        ========================================================= */
 
     function getTrafficSource() {
@@ -334,53 +406,29 @@
 
       const explicitSource =
         normalizeSource(
-          params.get("src") ||
-          params.get("utm_source")
+          params.get(
+            "src"
+          ) ||
+          params.get(
+            "utm_source"
+          )
         );
 
 
-      if (explicitSource) {
-        try {
-          sessionStorage.setItem(
-            "moding_source",
-            explicitSource
-          );
-        } catch (_) {}
-
-
+      if (
+        explicitSource
+      ) {
         return explicitSource;
       }
-
-
-      try {
-        const savedSource =
-          normalizeSource(
-            sessionStorage.getItem(
-              "moding_source"
-            )
-          );
-
-
-        if (savedSource) {
-          return savedSource;
-        }
-
-      } catch (_) {}
 
 
       const referrerSource =
         detectReferrerSource();
 
 
-      if (referrerSource) {
-        try {
-          sessionStorage.setItem(
-            "moding_source",
-            referrerSource
-          );
-        } catch (_) {}
-
-
+      if (
+        referrerSource
+      ) {
         return referrerSource;
       }
 
@@ -394,47 +442,37 @@
 
 
     /* =========================================================
-       같은 페이지에서 중복 카운팅 방지
+       Store Redirect 카운팅
+
+       /track/download 아님
+
+       /track/redirect 사용
+
+       즉:
+       이 이벤트는 홈페이지 다운로드 클릭에
+       더 이상 포함되지 않습니다.
        ========================================================= */
 
-    let downloadTracked =
-      false;
-
-
-    /* =========================================================
-       카운팅
-
-       1순위:
-       navigator.sendBeacon
-
-       - 전송 완료를 기다릴 필요 없음
-       - 즉시 외부 스토어 이동 가능
-       - 페이지 이동 중 분석 이벤트 전송에 적합
-
-       2순위:
-       fetch + keepalive
-       ========================================================= */
-
-    function trackDownload(platform) {
-      if (downloadTracked) {
-        return;
-      }
-
-
-      downloadTracked =
-        true;
-
-
+    function trackStoreRedirect(
+      platform
+    ) {
       const trackingUrl =
         TRACK_API +
         "?platform=" +
-        encodeURIComponent(platform) +
+        encodeURIComponent(
+          platform
+        ) +
         "&src=" +
-        encodeURIComponent(TRAFFIC_SOURCE);
+        encodeURIComponent(
+          TRAFFIC_SOURCE
+        );
 
 
       /* ---------------------------------------------------------
-         sendBeacon
+         1순위: sendBeacon
+
+         페이지가 즉시 외부 스토어로 이동하는 상황의
+         이벤트 전송에 적합
          --------------------------------------------------------- */
 
       try {
@@ -449,7 +487,9 @@
             );
 
 
-          if (sent) {
+          if (
+            sent
+          ) {
             return;
           }
         }
@@ -458,7 +498,7 @@
 
 
       /* ---------------------------------------------------------
-         Fallback
+         2순위: fetch + keepalive
          --------------------------------------------------------- */
 
       try {
@@ -484,26 +524,20 @@
 
 
     /* =========================================================
-       모바일 즉시 스토어 이동
+       Store 즉시 이동
+
+       카운팅 완료를 기다리지 않음
        ========================================================= */
 
     function redirectToStore(
       platform,
       storeUrl
     ) {
-      /*
-       * 카운팅 요청만 발생시킵니다.
-       * 완료를 기다리지 않습니다.
-       */
-      trackDownload(
+      trackStoreRedirect(
         platform
       );
 
 
-      /*
-       * 다운로드 HTML 화면을 표시하지 않고
-       * 즉시 스토어로 교체합니다.
-       */
       window.location.replace(
         storeUrl
       );
@@ -511,7 +545,7 @@
 
 
     /* =========================================================
-       실제 자동분기
+       모바일 자동분기
 
        Android
        → Google Play
@@ -519,11 +553,8 @@
        iPhone / iPad
        → App Store
 
-       PC / 일반 Mac
-       → download.html 표시
-
-       검색로봇
-       → download.html 표시
+       정상 모바일에서는
+       download.html 화면을 한 번도 표시하지 않음
        ========================================================= */
 
     if (
@@ -548,28 +579,38 @@
 
     } else {
       /*
-       * PC / Mac / 검색로봇
+       * Windows PC
+       * 일반 Mac
+       * 검색로봇
+       *
+       * 이 경우만 download.html 표시
        */
-      document.documentElement.style.visibility =
+      document.documentElement
+        .style
+        .visibility =
         "visible";
     }
 
 
     /* =========================================================
-       모바일 자동분기 실패 대비
+       모바일 Store 호출 실패 대비
 
-       정상적인 경우 이미 App Store / Google Play로
-       이동했기 때문에 이 코드는 실행될 화면이 없습니다.
+       정상적으로 스토어가 열리면
+       이미 페이지를 떠났으므로 실행되지 않습니다.
 
-       특수 인앱브라우저 등에서 외부 이동이 실패해서
-       download.html에 계속 남아 있을 때만
-       2.5초 뒤 수동 선택 화면을 보여줍니다.
+       일부 특수 인앱브라우저에서
+       App Store / Play Store 호출이 막힌 경우에만
+       2.5초 뒤 수동 선택 화면 표시
        ========================================================= */
 
-    if (IS_MOBILE_STORE_TARGET) {
+    if (
+      IS_MOBILE_STORE_TARGET
+    ) {
       window.setTimeout(
         () => {
-          document.documentElement.style.visibility =
+          document.documentElement
+            .style
+            .visibility =
             "visible";
         },
         2500
@@ -580,7 +621,7 @@
 
   <style>
     /* =========================================================
-       05. 브랜드 변수
+       06. 브랜드 컬러
        ========================================================= */
 
     :root {
@@ -588,7 +629,7 @@
         #238B22;
 
       --moding-green-dark:
-        #1C6F1C;
+        #1c6f1c;
 
       --moding-orange:
         #FF8C00;
@@ -620,7 +661,7 @@
 
 
     /* =========================================================
-       06. RESET
+       07. Reset
        ========================================================= */
 
     * {
@@ -723,12 +764,12 @@
 
 
     /* =========================================================
-       07. 다운로드 카드
+       08. Download Card
 
-       기본적으로 PC용입니다.
+       정상 모바일에서는 표시되지 않음
 
-       모바일에서는 정상적으로 스토어가 열리면
-       이 화면을 볼 일이 없습니다.
+       PC / Mac 또는
+       모바일 자동분기 실패 시에만 표시
        ========================================================= */
 
     .download-wrap {
@@ -828,9 +869,6 @@
       margin-bottom:
         12px;
 
-      color:
-        var(--moding-green);
-
       font-size:
         30px;
 
@@ -842,6 +880,9 @@
 
       letter-spacing:
         -0.045em;
+
+      color:
+        var(--moding-green);
     }
 
 
@@ -855,19 +896,19 @@
       margin-bottom:
         26px;
 
-      color:
-        var(--text-sub);
-
       font-size:
         15px;
 
       line-height:
         1.75;
+
+      color:
+        var(--text-sub);
     }
 
 
     /* =========================================================
-       08. STORE BUTTON
+       09. Store Buttons
        ========================================================= */
 
     .store-buttons {
@@ -883,15 +924,6 @@
       min-height:
         58px;
 
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
       border-radius:
         18px;
 
@@ -903,6 +935,15 @@
 
       font-weight:
         900;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
 
       transition:
         transform 0.2s ease,
@@ -919,11 +960,11 @@
 
 
     .store-btn.ios {
-      color:
-        #FFFFFF;
-
       background:
         #111111;
+
+      color:
+        #FFFFFF;
 
       border:
         2px solid
@@ -932,11 +973,11 @@
 
 
     .store-btn.android {
-      color:
-        #FFFFFF;
-
       background:
         var(--moding-green);
+
+      color:
+        #FFFFFF;
 
       border:
         2px solid
@@ -954,28 +995,25 @@
 
 
     /* =========================================================
-       09. 안내
+       10. 안내 문구
        ========================================================= */
 
     .note {
       margin-top:
         18px;
 
-      color:
-        #888888;
-
       font-size:
         12px;
 
       line-height:
         1.65;
+
+      color:
+        #888888;
     }
 
 
     .home-link {
-      margin-top:
-        14px;
-
       display:
         inline-flex;
 
@@ -984,6 +1022,9 @@
 
       justify-content:
         center;
+
+      margin-top:
+        14px;
 
       color:
         var(--moding-green);
@@ -1030,19 +1071,19 @@
       margin-top:
         18px;
 
-      color:
-        #999999;
-
       font-size:
         12px;
 
       line-height:
         1.7;
+
+      color:
+        #999999;
     }
 
 
     /* =========================================================
-       10. RESPONSIVE
+       11. Responsive
        ========================================================= */
 
     @media (
@@ -1181,8 +1222,12 @@
 
 
   <!-- =========================================================
-       11. PC / 자동분기 실패 시 수동 버튼 추적
+       12. PC / 자동분기 실패 시 수동 Store 버튼
+
+       이것도 홈페이지 다운로드 클릭이 아니라
+       실제 Store 분기로 기록합니다.
        ========================================================= -->
+
   <script>
     const iosDownloadButton =
       document.getElementById(
@@ -1196,28 +1241,35 @@
       );
 
 
-    if (iosDownloadButton) {
-      iosDownloadButton.addEventListener(
-        "click",
-        () => {
-          trackDownload(
-            "ios"
-          );
-        }
-      );
+    if (
+      iosDownloadButton
+    ) {
+      iosDownloadButton
+        .addEventListener(
+          "click",
+          () => {
+            trackStoreRedirect(
+              "ios"
+            );
+          }
+        );
     }
 
 
-    if (androidDownloadButton) {
-      androidDownloadButton.addEventListener(
-        "click",
-        () => {
-          trackDownload(
-            "android"
-          );
-        }
-      );
+    if (
+      androidDownloadButton
+    ) {
+      androidDownloadButton
+        .addEventListener(
+          "click",
+          () => {
+            trackStoreRedirect(
+              "android"
+            );
+          }
+        );
     }
   </script>
+
 </body>
 </html>
