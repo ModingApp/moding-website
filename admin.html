@@ -17,14 +17,14 @@
       --green: #238B22;
       --green-dark: #1C6F1C;
       --orange: #FF8C00;
+      --blue: #3D7FF0;
       --black: #090B09;
       --ink: #173119;
       --sub: #687269;
       --line: #E3E9E3;
       --soft: #F4F7F4;
-      --white: #FFFFFF;
       --danger: #C74848;
-      --blue: #3D7FF0;
+      --white: #FFFFFF;
       --page-max: 1160px;
     }
 
@@ -78,7 +78,7 @@
        ========================================================= */
     .admin-header {
       width: 100%;
-      background: #fff;
+      background: var(--white);
       border-bottom: 1px solid var(--line);
     }
 
@@ -114,7 +114,7 @@
       justify-content: center;
       border-radius: 999px;
       background: var(--black);
-      color: #fff;
+      color: var(--white);
       font-size: 11px;
       font-weight: 900;
       letter-spacing: .08em;
@@ -147,11 +147,12 @@
       padding: 38px 34px 32px;
       border: 1px solid var(--line);
       border-radius: 28px;
-      background: #fff;
+      background: var(--white);
       box-shadow: 0 22px 60px rgba(23,49,25,.08);
     }
 
-    .login-kicker {
+    .login-kicker,
+    .dashboard-kicker {
       color: var(--orange);
       font-size: 11px;
       font-weight: 950;
@@ -166,7 +167,8 @@
       font-weight: 950;
     }
 
-    .login-desc {
+    .login-desc,
+    .dashboard-desc {
       margin-top: 13px;
       color: var(--sub);
       font-size: 14px;
@@ -189,7 +191,7 @@
       border: 1px solid var(--line);
       border-radius: 16px;
       outline: none;
-      background: #fff;
+      background: var(--white);
       color: var(--ink);
       font-size: 16px;
       font-weight: 800;
@@ -226,7 +228,7 @@
       border: 0;
       border-radius: 16px;
       background: var(--green);
-      color: #fff;
+      color: var(--white);
       font-size: 15px;
       font-weight: 950;
       cursor: pointer;
@@ -271,27 +273,12 @@
       gap: 24px;
     }
 
-    .dashboard-kicker {
-      color: var(--orange);
-      font-size: 11px;
-      font-weight: 950;
-      letter-spacing: .16em;
-    }
-
     .dashboard-title {
       margin-top: 9px;
       font-size: clamp(34px, 5vw, 58px);
       line-height: 1.04;
       letter-spacing: -.06em;
       font-weight: 950;
-    }
-
-    .dashboard-desc {
-      margin-top: 12px;
-      color: var(--sub);
-      font-size: 14px;
-      line-height: 1.6;
-      font-weight: 650;
     }
 
     .head-actions {
@@ -305,7 +292,7 @@
       padding: 0 15px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: #fff;
+      background: var(--white);
       color: var(--sub);
       font-size: 12px;
       font-weight: 900;
@@ -323,7 +310,7 @@
     }
 
     /* =========================================================
-       04 TABS
+       04 PERIOD TABS
        ========================================================= */
     .period-tabs {
       margin-top: 28px;
@@ -335,7 +322,7 @@
       gap: 4px;
       border: 1px solid var(--line);
       border-radius: 18px;
-      background: #fff;
+      background: var(--white);
     }
 
     .period-tab {
@@ -349,15 +336,11 @@
       font-size: 13px;
       font-weight: 900;
       cursor: pointer;
-      transition:
-        background .18s ease,
-        color .18s ease,
-        box-shadow .18s ease;
     }
 
     .period-tab.is-active {
       background: var(--green);
-      color: #fff;
+      color: var(--white);
       box-shadow: 0 8px 18px rgba(35,139,34,.15);
     }
 
@@ -366,7 +349,7 @@
     }
 
     /* =========================================================
-       05 STATS
+       05 WEBSITE STATS
        ========================================================= */
     .stat-grid {
       display: grid;
@@ -382,13 +365,13 @@
       justify-content: space-between;
       border: 1px solid var(--line);
       border-radius: 24px;
-      background: #fff;
+      background: var(--white);
     }
 
     .stat-card.primary {
       background: var(--green);
       border-color: var(--green);
-      color: #fff;
+      color: var(--white);
     }
 
     .stat-card.orange {
@@ -404,7 +387,6 @@
       color: var(--sub);
       font-size: 12px;
       font-weight: 900;
-      letter-spacing: -.015em;
     }
 
     .primary .stat-label {
@@ -453,139 +435,6 @@
       color: var(--sub);
     }
 
-    /* =========================================================
-       IOS APP STORE
-       ========================================================= */
-    .ios-block {
-      margin-top: 16px;
-      padding: 24px;
-      border: 1px solid rgba(61,127,240,.18);
-      border-radius: 24px;
-      background: #F7FAFF;
-    }
-
-    .ios-head {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .ios-kicker {
-      color: var(--blue);
-      font-size: 10.5px;
-      font-weight: 950;
-      letter-spacing: .14em;
-    }
-
-    .ios-title {
-      margin-top: 6px;
-      font-size: 20px;
-      line-height: 1.2;
-      font-weight: 950;
-      letter-spacing: -.04em;
-    }
-
-    .ios-desc {
-      color: var(--sub);
-      font-size: 11.5px;
-      line-height: 1.45;
-      font-weight: 700;
-      text-align: right;
-    }
-
-    .stat-card.ios-primary {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
-    }
-
-    .ios-primary .stat-label {
-      color: rgba(255,255,255,.75);
-    }
-
-    .ios-primary .stat-sub {
-      color: rgba(255,255,255,.70);
-    }
-
-    .stat-card.ios-accent {
-      border-color: rgba(61,127,240,.24);
-    }
-
-    .ios-accent .stat-value {
-      color: var(--blue);
-    }
-
-    .stat-card.ios-soft {
-      background: #EEF5FF;
-      border-color: rgba(61,127,240,.14);
-    }
-
-    .ios-summary {
-      margin-top: 14px;
-      padding: 13px 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px 22px;
-      border: 1px solid rgba(61,127,240,.14);
-      border-radius: 16px;
-      background: rgba(255,255,255,.78);
-      color: var(--sub);
-      font-size: 11.5px;
-      line-height: 1.5;
-      font-weight: 750;
-    }
-
-    .ios-summary strong {
-      color: var(--ink);
-      font-weight: 950;
-    }
-
-    .ios-table-wrap {
-      margin-top: 16px;
-      overflow-x: auto;
-      border-top: 1px solid rgba(61,127,240,.14);
-    }
-
-    .ios-table {
-      width: 100%;
-      min-width: 460px;
-      border-collapse: collapse;
-    }
-
-    .ios-table th,
-    .ios-table td {
-      padding: 14px 10px;
-      border-bottom: 1px solid rgba(61,127,240,.12);
-      text-align: right;
-      font-size: 13px;
-    }
-
-    .ios-table th {
-      color: var(--sub);
-      font-size: 11px;
-      font-weight: 900;
-    }
-
-    .ios-table th:first-child,
-    .ios-table td:first-child {
-      text-align: left;
-    }
-
-    .ios-table td {
-      color: var(--ink);
-      font-weight: 800;
-    }
-
-    .ios-table td.ios-new {
-      color: var(--blue);
-      font-weight: 950;
-    }
-
-    /* =========================================================
-       06 SUMMARY STRIP
-       ========================================================= */
     .summary-strip {
       margin-top: 14px;
       padding: 15px 18px;
@@ -607,7 +456,191 @@
     }
 
     /* =========================================================
-       07 CHART
+       06 ACTUAL APP INSTALLS
+       ========================================================= */
+    .app-install-block {
+      margin-top: 16px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--white);
+    }
+
+    .app-install-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .app-install-kicker {
+      color: var(--green);
+      font-size: 10.5px;
+      font-weight: 950;
+      letter-spacing: .14em;
+    }
+
+    .app-install-title {
+      margin-top: 6px;
+      font-size: 20px;
+      line-height: 1.2;
+      font-weight: 950;
+      letter-spacing: -.04em;
+    }
+
+    .platform-statuses {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 7px;
+    }
+
+    .platform-status {
+      min-height: 28px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--sub);
+      font-size: 10.5px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .platform-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #BCC5BD;
+    }
+
+    .platform-status.ios.is-ready .platform-dot {
+      background: var(--blue);
+    }
+
+    .platform-status.android.is-ready .platform-dot {
+      background: var(--green);
+    }
+
+    .app-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .app-stat-card {
+      min-height: 136px;
+      padding: 19px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--white);
+    }
+
+    .app-stat-card.total {
+      background: #F1F8F1;
+      border-color: rgba(35,139,34,.15);
+    }
+
+    .app-stat-card.ios {
+      border-color: rgba(61,127,240,.20);
+    }
+
+    .app-stat-card.android {
+      border-color: rgba(35,139,34,.20);
+    }
+
+    .app-stat-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--sub);
+      font-size: 11.5px;
+      font-weight: 900;
+    }
+
+    .platform-badge {
+      min-height: 22px;
+      padding: 0 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-size: 9.5px;
+      font-weight: 950;
+    }
+
+    .platform-badge.ios {
+      background: rgba(61,127,240,.10);
+      color: var(--blue);
+    }
+
+    .platform-badge.android {
+      background: rgba(35,139,34,.10);
+      color: var(--green);
+    }
+
+    .app-stat-value {
+      margin-top: 14px;
+      color: var(--ink);
+      font-size: clamp(32px, 4vw, 46px);
+      line-height: 1;
+      letter-spacing: -.055em;
+      font-weight: 950;
+    }
+
+    .app-stat-card.total .app-stat-value {
+      color: var(--green-dark);
+    }
+
+    .app-stat-card.ios .app-stat-value {
+      color: var(--blue);
+    }
+
+    .app-stat-card.android .app-stat-value {
+      color: var(--green);
+    }
+
+    .app-stat-unit {
+      margin-left: 3px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .app-stat-sub {
+      margin-top: 8px;
+      color: var(--sub);
+      font-size: 10.8px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .app-sync-strip {
+      margin-top: 12px;
+      padding: 11px 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      border-radius: 14px;
+      background: var(--soft);
+      color: var(--sub);
+      font-size: 10.8px;
+      line-height: 1.45;
+      font-weight: 750;
+    }
+
+    .app-sync-strip strong {
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    /* =========================================================
+       07 TABLES / CHART
        ========================================================= */
     .chart-card,
     .table-card {
@@ -615,7 +648,7 @@
       padding: 24px;
       border: 1px solid var(--line);
       border-radius: 24px;
-      background: #fff;
+      background: var(--white);
     }
 
     .section-head {
@@ -638,6 +671,81 @@
       line-height: 1.45;
       font-weight: 700;
       text-align: right;
+    }
+
+    .table-wrap,
+    .platform-table-wrap {
+      margin-top: 17px;
+      overflow-x: auto;
+      border-top: 1px solid var(--line);
+    }
+
+    .stats-table,
+    .platform-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .stats-table {
+      min-width: 560px;
+    }
+
+    .platform-table {
+      min-width: 480px;
+    }
+
+    .stats-table th,
+    .stats-table td,
+    .platform-table th,
+    .platform-table td {
+      padding: 15px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      font-size: 13px;
+    }
+
+    .stats-table th,
+    .platform-table th {
+      color: var(--sub);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .stats-table th:first-child,
+    .stats-table td:first-child,
+    .platform-table th:first-child,
+    .platform-table td:first-child {
+      text-align: left;
+    }
+
+    .stats-table td,
+    .platform-table td {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .stats-table td.download {
+      color: var(--orange);
+    }
+
+    .platform-table td.ios-value {
+      color: var(--blue);
+    }
+
+    .platform-table td.android-value {
+      color: var(--green);
+    }
+
+    .platform-table td.total-value {
+      font-weight: 950;
+    }
+
+    .empty {
+      padding: 34px 0 16px !important;
+      color: var(--sub) !important;
+      text-align: center !important;
+      font-size: 13px !important;
+      font-weight: 750 !important;
     }
 
     .bar-chart {
@@ -681,19 +789,19 @@
       background: var(--orange);
     }
 
-    .bar-label {
-      margin-top: 9px;
-      color: var(--sub);
-      font-size: 10.5px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
     .bar-value {
       margin-bottom: 7px;
       color: var(--ink);
       font-size: 10px;
       font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .bar-label {
+      margin-top: 9px;
+      color: var(--sub);
+      font-size: 10.5px;
+      font-weight: 800;
       white-space: nowrap;
     }
 
@@ -727,60 +835,6 @@
       background: var(--orange);
     }
 
-    /* =========================================================
-       08 TABLE
-       ========================================================= */
-    .table-wrap {
-      margin-top: 17px;
-      overflow-x: auto;
-      border-top: 1px solid var(--line);
-    }
-
-    .stats-table {
-      width: 100%;
-      min-width: 560px;
-      border-collapse: collapse;
-    }
-
-    .stats-table th,
-    .stats-table td {
-      padding: 15px 10px;
-      border-bottom: 1px solid var(--line);
-      text-align: right;
-      font-size: 13px;
-    }
-
-    .stats-table th {
-      color: var(--sub);
-      font-size: 11px;
-      font-weight: 900;
-    }
-
-    .stats-table th:first-child,
-    .stats-table td:first-child {
-      text-align: left;
-    }
-
-    .stats-table td {
-      color: var(--ink);
-      font-weight: 800;
-    }
-
-    .stats-table td.download {
-      color: var(--orange);
-    }
-
-    .empty {
-      padding: 34px 0 16px;
-      color: var(--sub);
-      text-align: center;
-      font-size: 13px;
-      font-weight: 750;
-    }
-
-    /* =========================================================
-       09 MONTH LAYOUT
-       ========================================================= */
     .month-grid {
       display: grid;
       grid-template-columns: 1.15fr .85fr;
@@ -788,13 +842,9 @@
     }
 
     .month-grid .table-card {
-      margin-top: 16px;
       min-width: 0;
     }
 
-    /* =========================================================
-       10 STATUS
-       ========================================================= */
     .status-line {
       margin-top: 18px;
       min-height: 20px;
@@ -809,10 +859,11 @@
     }
 
     /* =========================================================
-       11 RESPONSIVE
+       08 RESPONSIVE
        ========================================================= */
     @media (max-width: 940px) {
-      .stat-grid {
+      .stat-grid,
+      .app-stat-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -864,7 +915,7 @@
       }
 
       .dashboard-desc {
-        max-width: 260px;
+        max-width: 280px;
       }
 
       .head-actions {
@@ -881,7 +932,8 @@
         padding: 0 12px;
       }
 
-      .stat-grid {
+      .stat-grid,
+      .app-stat-grid {
         grid-template-columns: 1fr 1fr;
         gap: 10px;
       }
@@ -896,10 +948,28 @@
         font-size: 38px;
       }
 
+      .app-install-block,
       .chart-card,
       .table-card {
         padding: 19px 15px;
         border-radius: 21px;
+      }
+
+      .app-install-head {
+        align-items: flex-start;
+      }
+
+      .platform-statuses {
+        max-width: 190px;
+      }
+
+      .app-stat-card {
+        min-height: 124px;
+        padding: 15px;
+      }
+
+      .app-stat-value {
+        font-size: 34px;
       }
 
       .bar-chart {
@@ -922,19 +992,6 @@
 
       .section-head {
         align-items: flex-start;
-      }
-
-      .ios-block {
-        padding: 19px 15px;
-        border-radius: 21px;
-      }
-
-      .ios-head {
-        align-items: flex-start;
-      }
-
-      .ios-desc {
-        max-width: 145px;
       }
     }
 
@@ -988,6 +1045,29 @@
       .section-title {
         font-size: 18px;
       }
+
+      .app-install-head {
+        display: block;
+      }
+
+      .platform-statuses {
+        max-width: none;
+        margin-top: 12px;
+        justify-content: flex-start;
+      }
+
+      .app-stat-card {
+        min-height: 116px;
+        padding: 14px;
+      }
+
+      .app-stat-label {
+        font-size: 10.5px;
+      }
+
+      .app-stat-value {
+        font-size: 31px;
+      }
     }
   </style>
 </head>
@@ -1017,7 +1097,7 @@
 
       <p class="login-desc">
         관리자 비밀번호를 입력하면<br>
-        홈페이지 방문 및 다운로드 현황을 확인할 수 있습니다.
+        홈페이지 유입 및 실제 앱 설치 현황을 확인할 수 있습니다.
       </p>
 
       <form id="loginForm" class="login-form">
@@ -1067,11 +1147,11 @@
         <div class="dashboard-kicker">MODING WEBSITE</div>
 
         <h1 class="dashboard-title">
-          방문 현황
+          운영 현황
         </h1>
 
         <p class="dashboard-desc">
-          홈페이지 방문·다운로드 클릭과 App Store 실제 다운로드를 확인합니다.
+          홈페이지 유입과 App Store·Google Play 실제 신규 설치를 확인합니다.
         </p>
       </div>
 
@@ -1100,21 +1180,27 @@
         type="button"
         data-tab="today"
         aria-selected="true"
-      >오늘</button>
+      >
+        오늘
+      </button>
 
       <button
         class="period-tab"
         type="button"
         data-tab="week"
         aria-selected="false"
-      >주간</button>
+      >
+        주간
+      </button>
 
       <button
         class="period-tab"
         type="button"
         data-tab="month"
         aria-selected="false"
-      >월간</button>
+      >
+        월간
+      </button>
     </nav>
 
     <!-- TODAY -->
@@ -1123,141 +1209,229 @@
         <article class="stat-card primary">
           <div>
             <div class="stat-label">오늘 인덱스 방문</div>
+
             <div class="stat-value">
               <span id="todayVisits">0</span>
               <span class="stat-unit">회</span>
             </div>
           </div>
-          <div class="stat-sub">오늘 홈페이지 첫 진입 기준</div>
+
+          <div class="stat-sub">
+            오늘 홈페이지 첫 진입 기준
+          </div>
         </article>
 
         <article class="stat-card orange">
           <div>
             <div class="stat-label">오늘 다운로드 클릭</div>
+
             <div class="stat-value">
               <span id="todayDownloads">0</span>
               <span class="stat-unit">회</span>
             </div>
           </div>
-          <div class="stat-sub">모딩 앱 다운로드 버튼 클릭</div>
+
+          <div class="stat-sub">
+            모딩 앱 다운로드 버튼 클릭
+          </div>
         </article>
 
         <article class="stat-card soft-green">
           <div>
             <div class="stat-label">오늘 클릭률</div>
+
             <div class="stat-value">
               <span id="todayRate">0</span>
               <span class="stat-unit">%</span>
             </div>
           </div>
-          <div class="stat-sub">다운로드 클릭 ÷ 방문</div>
+
+          <div class="stat-sub">
+            다운로드 클릭 ÷ 방문
+          </div>
         </article>
 
         <article class="stat-card">
           <div>
             <div class="stat-label">누적 방문</div>
+
             <div class="stat-value">
               <span id="totalVisits">0</span>
               <span class="stat-unit">회</span>
             </div>
           </div>
+
           <div class="stat-sub">
-            누적 다운로드 <strong id="totalDownloads">0회</strong>
+            누적 다운로드 클릭
+            <strong id="totalDownloads">0회</strong>
           </div>
         </article>
       </div>
 
       <div class="summary-strip">
-        <span>오늘 날짜 <strong id="todayDate">-</strong></span>
-        <span>누적 클릭률 <strong id="totalRate">0%</strong></span>
+        <span>
+          오늘 날짜
+          <strong id="todayDate">-</strong>
+        </span>
+
+        <span>
+          누적 클릭률
+          <strong id="totalRate">0%</strong>
+        </span>
       </div>
 
-      <section class="ios-block">
-        <div class="ios-head">
+      <section class="app-install-block">
+        <div class="app-install-head">
           <div>
-            <div class="ios-kicker">APP STORE</div>
-            <h2 class="ios-title">iOS 실제 다운로드</h2>
+            <div class="app-install-kicker">
+              ACTUAL INSTALLS
+            </div>
+
+            <h2 class="app-install-title">
+              실제 앱 신규 설치
+            </h2>
           </div>
 
-          <div class="ios-desc">
-            App Store Connect 집계 기준
+          <div class="platform-statuses">
+            <span
+              class="platform-status ios"
+              data-platform-status="ios"
+            >
+              <span class="platform-dot"></span>
+              <span data-platform-status-text>
+                iOS 데이터 대기
+              </span>
+            </span>
+
+            <span
+              class="platform-status android"
+              data-platform-status="android"
+            >
+              <span class="platform-dot"></span>
+              <span data-platform-status-text>
+                Android 연결 대기
+              </span>
+            </span>
           </div>
         </div>
 
-        <div class="stat-grid">
-          <article class="stat-card ios-primary">
+        <div class="app-stat-grid">
+          <article class="app-stat-card total">
             <div>
-              <div class="stat-label">오늘 신규 다운로드</div>
-              <div class="stat-value">
-                <span id="iosTodayFirstDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                오늘 신규 설치 합계
+              </div>
+
+              <div class="app-stat-value">
+                <span id="appTodayTotal">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
-            <div class="stat-sub">First-Time Download</div>
+
+            <div class="app-stat-sub">
+              iOS + Android 신규 설치
+            </div>
           </article>
 
-          <article class="stat-card ios-accent">
+          <article class="app-stat-card ios">
             <div>
-              <div class="stat-label">오늘 전체 다운로드</div>
-              <div class="stat-value">
-                <span id="iosTodayTotalDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                <span class="platform-badge ios">
+                  iOS
+                </span>
+                신규 설치
+              </div>
+
+              <div class="app-stat-value">
+                <span id="iosTodayInstall">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
-            <div class="stat-sub">신규 + 재다운로드</div>
+
+            <div class="app-stat-sub">
+              App Store First-Time Download
+            </div>
           </article>
 
-          <article class="stat-card ios-soft">
+          <article class="app-stat-card android">
             <div>
-              <div class="stat-label">누적 신규 다운로드</div>
-              <div class="stat-value">
-                <span id="iosCumulativeFirstDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                <span class="platform-badge android">
+                  Android
+                </span>
+                신규 설치
+              </div>
+
+              <div class="app-stat-value">
+                <span id="androidTodayInstall">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
-            <div class="stat-sub">D1 저장 데이터 누적</div>
+
+            <div class="app-stat-sub">
+              Google Play 신규 사용자 설치
+            </div>
           </article>
 
-          <article class="stat-card">
+          <article class="app-stat-card">
             <div>
-              <div class="stat-label">누적 전체 다운로드</div>
-              <div class="stat-value">
-                <span id="iosCumulativeTotalDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                누적 신규 설치 합계
+              </div>
+
+              <div class="app-stat-value">
+                <span id="appCumulativeTotal">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
-            <div class="stat-sub">신규 + 재다운로드 누적</div>
+
+            <div class="app-stat-sub">
+              확인 가능한 전체 기간 기준
+            </div>
           </article>
         </div>
 
-        <div class="ios-summary">
+        <div class="app-sync-strip">
           <span>
-            마지막 Apple 동기화
-            <strong id="iosTodaySync">아직 없음</strong>
+            iOS 동기화
+            <strong id="appTodayIosSync">
+              데이터 대기
+            </strong>
           </span>
+
           <span>
-            Apple 일별 데이터는 최근 날짜가 이후 보정될 수 있습니다
+            Android 동기화
+            <strong id="appTodayAndroidSync">
+              연결 대기
+            </strong>
           </span>
         </div>
 
-        <div class="ios-table-wrap">
-          <table class="ios-table">
+        <div class="platform-table-wrap">
+          <table class="platform-table">
             <thead>
               <tr>
                 <th>날짜</th>
-                <th>신규 다운로드</th>
-                <th>전체 다운로드</th>
+                <th>iOS</th>
+                <th>Android</th>
+                <th>합계</th>
               </tr>
             </thead>
-            <tbody id="iosTodayTableBody"></tbody>
+
+            <tbody id="appTodayTableBody"></tbody>
           </table>
         </div>
       </section>
 
       <section class="table-card">
         <div class="section-head">
-          <h2 class="section-title">최근 7일</h2>
-          <div class="section-caption">날짜별 방문과 다운로드</div>
+          <h2 class="section-title">
+            최근 7일 홈페이지
+          </h2>
+
+          <div class="section-caption">
+            날짜별 방문과 다운로드 클릭
+          </div>
         </div>
 
         <div class="table-wrap">
@@ -1270,6 +1444,7 @@
                 <th>클릭률</th>
               </tr>
             </thead>
+
             <tbody id="todayTableBody"></tbody>
           </table>
         </div>
@@ -1277,16 +1452,24 @@
     </section>
 
     <!-- WEEK -->
-    <section id="panelWeek" class="period-panel" hidden>
+    <section
+      id="panelWeek"
+      class="period-panel"
+      hidden
+    >
       <div class="stat-grid">
         <article class="stat-card primary">
           <div>
-            <div class="stat-label">이번 주 방문</div>
+            <div class="stat-label">
+              이번 주 방문
+            </div>
+
             <div class="stat-value">
               <span id="weekVisits">0</span>
               <span class="stat-unit">회</span>
             </div>
           </div>
+
           <div class="stat-sub">
             지난주 대비
             <strong id="weekVisitChange">-</strong>
@@ -1295,12 +1478,16 @@
 
         <article class="stat-card orange">
           <div>
-            <div class="stat-label">이번 주 다운로드</div>
+            <div class="stat-label">
+              이번 주 다운로드
+            </div>
+
             <div class="stat-value">
               <span id="weekDownloads">0</span>
               <span class="stat-unit">회</span>
             </div>
           </div>
+
           <div class="stat-sub">
             지난주 대비
             <strong id="weekDownloadChange">-</strong>
@@ -1309,121 +1496,209 @@
 
         <article class="stat-card soft-green">
           <div>
-            <div class="stat-label">이번 주 클릭률</div>
+            <div class="stat-label">
+              이번 주 클릭률
+            </div>
+
             <div class="stat-value">
               <span id="weekRate">0</span>
               <span class="stat-unit">%</span>
             </div>
           </div>
-          <div class="stat-sub">다운로드 클릭 ÷ 방문</div>
+
+          <div class="stat-sub">
+            다운로드 클릭 ÷ 방문
+          </div>
         </article>
 
         <article class="stat-card">
           <div>
-            <div class="stat-label">지난주 방문</div>
+            <div class="stat-label">
+              지난주 방문
+            </div>
+
             <div class="stat-value">
               <span id="previousWeekVisits">0</span>
               <span class="stat-unit">회</span>
             </div>
           </div>
+
           <div class="stat-sub">
             지난주 다운로드
-            <strong id="previousWeekDownloads">0회</strong>
+            <strong id="previousWeekDownloads">
+              0회
+            </strong>
           </div>
         </article>
       </div>
 
       <div class="summary-strip">
-        <span>이번 주 <strong id="weekRange">-</strong></span>
-        <span>지난주 <strong id="previousWeekRange">-</strong></span>
+        <span>
+          이번 주
+          <strong id="weekRange">-</strong>
+        </span>
+
+        <span>
+          지난주
+          <strong id="previousWeekRange">-</strong>
+        </span>
       </div>
 
-      <section class="ios-block">
-        <div class="ios-head">
+      <section class="app-install-block">
+        <div class="app-install-head">
           <div>
-            <div class="ios-kicker">APP STORE</div>
-            <h2 class="ios-title">iOS 주간 실제 다운로드</h2>
+            <div class="app-install-kicker">
+              ACTUAL INSTALLS
+            </div>
+
+            <h2 class="app-install-title">
+              이번 주 실제 앱 신규 설치
+            </h2>
           </div>
 
-          <div class="ios-desc">
-            신규 다운로드 중심 비교
+          <div class="platform-statuses">
+            <span
+              class="platform-status ios"
+              data-platform-status="ios"
+            >
+              <span class="platform-dot"></span>
+              <span data-platform-status-text>
+                iOS 데이터 대기
+              </span>
+            </span>
+
+            <span
+              class="platform-status android"
+              data-platform-status="android"
+            >
+              <span class="platform-dot"></span>
+              <span data-platform-status-text>
+                Android 연결 대기
+              </span>
+            </span>
           </div>
         </div>
 
-        <div class="stat-grid">
-          <article class="stat-card ios-primary">
+        <div class="app-stat-grid">
+          <article class="app-stat-card total">
             <div>
-              <div class="stat-label">이번 주 신규 다운로드</div>
-              <div class="stat-value">
-                <span id="iosWeekFirstDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                이번 주 신규 설치 합계
+              </div>
+
+              <div class="app-stat-value">
+                <span id="appWeekTotal">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
-            <div class="stat-sub">
+
+            <div class="app-stat-sub">
               지난주 대비
-              <strong id="iosWeekFirstChange">-</strong>
+              <strong id="appWeekChange">-</strong>
             </div>
           </article>
 
-          <article class="stat-card ios-accent">
+          <article class="app-stat-card ios">
             <div>
-              <div class="stat-label">이번 주 전체 다운로드</div>
-              <div class="stat-value">
-                <span id="iosWeekTotalDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                <span class="platform-badge ios">
+                  iOS
+                </span>
+                이번 주
+              </div>
+
+              <div class="app-stat-value">
+                <span id="iosWeekInstall">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
-            <div class="stat-sub">신규 + 재다운로드</div>
+
+            <div class="app-stat-sub">
+              지난주
+              <strong id="iosPreviousWeekInstall">-</strong>
+            </div>
           </article>
 
-          <article class="stat-card ios-soft">
+          <article class="app-stat-card android">
             <div>
-              <div class="stat-label">지난주 신규 다운로드</div>
-              <div class="stat-value">
-                <span id="iosPreviousWeekFirstDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                <span class="platform-badge android">
+                  Android
+                </span>
+                이번 주
+              </div>
+
+              <div class="app-stat-value">
+                <span id="androidWeekInstall">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
-            <div class="stat-sub">비교 기준</div>
+
+            <div class="app-stat-sub">
+              지난주
+              <strong id="androidPreviousWeekInstall">-</strong>
+            </div>
           </article>
 
-          <article class="stat-card">
+          <article class="app-stat-card">
             <div>
-              <div class="stat-label">지난주 전체 다운로드</div>
-              <div class="stat-value">
-                <span id="iosPreviousWeekTotalDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                지난주 신규 설치 합계
+              </div>
+
+              <div class="app-stat-value">
+                <span id="appPreviousWeekTotal">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
-            <div class="stat-sub">신규 + 재다운로드</div>
+
+            <div class="app-stat-sub">
+              iOS + Android 비교 기준
+            </div>
           </article>
         </div>
 
-        <div class="ios-summary">
+        <div class="app-sync-strip">
           <span>
-            마지막 Apple 동기화
-            <strong id="iosWeekSync">아직 없음</strong>
+            iOS 동기화
+            <strong id="appWeekIosSync">
+              데이터 대기
+            </strong>
+          </span>
+
+          <span>
+            Android 동기화
+            <strong id="appWeekAndroidSync">
+              연결 대기
+            </strong>
           </span>
         </div>
 
-        <div class="ios-table-wrap">
-          <table class="ios-table">
+        <div class="platform-table-wrap">
+          <table class="platform-table">
             <thead>
               <tr>
                 <th>날짜</th>
-                <th>신규 다운로드</th>
-                <th>전체 다운로드</th>
+                <th>iOS</th>
+                <th>Android</th>
+                <th>합계</th>
               </tr>
             </thead>
-            <tbody id="iosWeekTableBody"></tbody>
+
+            <tbody id="appWeekTableBody"></tbody>
           </table>
         </div>
       </section>
 
       <section class="chart-card">
         <div class="section-head">
-          <h2 class="section-title">최근 7일 추이</h2>
-          <div class="section-caption">방문 / 다운로드 클릭</div>
+          <h2 class="section-title">
+            최근 7일 홈페이지 추이
+          </h2>
+
+          <div class="section-caption">
+            방문 / 다운로드 클릭
+          </div>
         </div>
 
         <div id="weekChart" class="bar-chart"></div>
@@ -1443,8 +1718,13 @@
 
       <section class="table-card">
         <div class="section-head">
-          <h2 class="section-title">일별 상세</h2>
-          <div class="section-caption">최근 7일</div>
+          <h2 class="section-title">
+            홈페이지 일별 상세
+          </h2>
+
+          <div class="section-caption">
+            최근 7일
+          </div>
         </div>
 
         <div class="table-wrap">
@@ -1457,6 +1737,7 @@
                 <th>클릭률</th>
               </tr>
             </thead>
+
             <tbody id="weekTableBody"></tbody>
           </table>
         </div>
@@ -1464,11 +1745,18 @@
     </section>
 
     <!-- MONTH -->
-    <section id="panelMonth" class="period-panel" hidden>
+    <section
+      id="panelMonth"
+      class="period-panel"
+      hidden
+    >
       <div class="stat-grid">
         <article class="stat-card primary">
           <div>
-            <div class="stat-label">이번 달 방문</div>
+            <div class="stat-label">
+              이번 달 방문
+            </div>
+
             <div class="stat-value">
               <span id="monthVisits">0</span>
               <span class="stat-unit">회</span>
@@ -1483,7 +1771,10 @@
 
         <article class="stat-card orange">
           <div>
-            <div class="stat-label">이번 달 다운로드</div>
+            <div class="stat-label">
+              이번 달 다운로드
+            </div>
+
             <div class="stat-value">
               <span id="monthDownloads">0</span>
               <span class="stat-unit">회</span>
@@ -1498,19 +1789,27 @@
 
         <article class="stat-card soft-green">
           <div>
-            <div class="stat-label">이번 달 클릭률</div>
+            <div class="stat-label">
+              이번 달 클릭률
+            </div>
+
             <div class="stat-value">
               <span id="monthRate">0</span>
               <span class="stat-unit">%</span>
             </div>
           </div>
 
-          <div class="stat-sub">다운로드 클릭 ÷ 방문</div>
+          <div class="stat-sub">
+            다운로드 클릭 ÷ 방문
+          </div>
         </article>
 
         <article class="stat-card">
           <div>
-            <div class="stat-label">지난달 방문</div>
+            <div class="stat-label">
+              지난달 방문
+            </div>
+
             <div class="stat-value">
               <span id="previousMonthVisits">0</span>
               <span class="stat-unit">회</span>
@@ -1519,99 +1818,167 @@
 
           <div class="stat-sub">
             지난달 다운로드
-            <strong id="previousMonthDownloads">0회</strong>
+            <strong id="previousMonthDownloads">
+              0회
+            </strong>
           </div>
         </article>
       </div>
 
       <div class="summary-strip">
-        <span>이번 달 <strong id="monthRange">-</strong></span>
-        <span>비교 기준 <strong id="previousMonthLabel">-</strong></span>
+        <span>
+          이번 달
+          <strong id="monthRange">-</strong>
+        </span>
+
+        <span>
+          비교 기준
+          <strong id="previousMonthLabel">-</strong>
+        </span>
       </div>
 
-      <section class="ios-block">
-        <div class="ios-head">
+      <section class="app-install-block">
+        <div class="app-install-head">
           <div>
-            <div class="ios-kicker">APP STORE</div>
-            <h2 class="ios-title">iOS 월간 실제 다운로드</h2>
+            <div class="app-install-kicker">
+              ACTUAL INSTALLS
+            </div>
+
+            <h2 class="app-install-title">
+              이번 달 실제 앱 신규 설치
+            </h2>
           </div>
 
-          <div class="ios-desc">
-            App Store Connect 월별 집계
+          <div class="platform-statuses">
+            <span
+              class="platform-status ios"
+              data-platform-status="ios"
+            >
+              <span class="platform-dot"></span>
+              <span data-platform-status-text>
+                iOS 데이터 대기
+              </span>
+            </span>
+
+            <span
+              class="platform-status android"
+              data-platform-status="android"
+            >
+              <span class="platform-dot"></span>
+              <span data-platform-status-text>
+                Android 연결 대기
+              </span>
+            </span>
           </div>
         </div>
 
-        <div class="stat-grid">
-          <article class="stat-card ios-primary">
+        <div class="app-stat-grid">
+          <article class="app-stat-card total">
             <div>
-              <div class="stat-label">이번 달 신규 다운로드</div>
-              <div class="stat-value">
-                <span id="iosMonthFirstDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                이번 달 신규 설치 합계
+              </div>
+
+              <div class="app-stat-value">
+                <span id="appMonthTotal">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
 
-            <div class="stat-sub">
+            <div class="app-stat-sub">
               지난달 대비
-              <strong id="iosMonthFirstChange">-</strong>
+              <strong id="appMonthChange">-</strong>
             </div>
           </article>
 
-          <article class="stat-card ios-accent">
+          <article class="app-stat-card ios">
             <div>
-              <div class="stat-label">이번 달 전체 다운로드</div>
-              <div class="stat-value">
-                <span id="iosMonthTotalDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                <span class="platform-badge ios">
+                  iOS
+                </span>
+                이번 달
+              </div>
+
+              <div class="app-stat-value">
+                <span id="iosMonthInstall">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
 
-            <div class="stat-sub">신규 + 재다운로드</div>
+            <div class="app-stat-sub">
+              지난달
+              <strong id="iosPreviousMonthInstall">-</strong>
+            </div>
           </article>
 
-          <article class="stat-card ios-soft">
+          <article class="app-stat-card android">
             <div>
-              <div class="stat-label">지난달 신규 다운로드</div>
-              <div class="stat-value">
-                <span id="iosPreviousMonthFirstDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                <span class="platform-badge android">
+                  Android
+                </span>
+                이번 달
+              </div>
+
+              <div class="app-stat-value">
+                <span id="androidMonthInstall">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
 
-            <div class="stat-sub">비교 기준</div>
+            <div class="app-stat-sub">
+              지난달
+              <strong id="androidPreviousMonthInstall">-</strong>
+            </div>
           </article>
 
-          <article class="stat-card">
+          <article class="app-stat-card">
             <div>
-              <div class="stat-label">지난달 전체 다운로드</div>
-              <div class="stat-value">
-                <span id="iosPreviousMonthTotalDownloads">0</span>
-                <span class="stat-unit">건</span>
+              <div class="app-stat-label">
+                지난달 신규 설치 합계
+              </div>
+
+              <div class="app-stat-value">
+                <span id="appPreviousMonthTotal">-</span>
+                <span class="app-stat-unit">건</span>
               </div>
             </div>
 
-            <div class="stat-sub">신규 + 재다운로드</div>
+            <div class="app-stat-sub">
+              iOS + Android 비교 기준
+            </div>
           </article>
         </div>
 
-        <div class="ios-summary">
+        <div class="app-sync-strip">
           <span>
-            마지막 Apple 동기화
-            <strong id="iosMonthSync">아직 없음</strong>
+            iOS 동기화
+            <strong id="appMonthIosSync">
+              데이터 대기
+            </strong>
+          </span>
+
+          <span>
+            Android 동기화
+            <strong id="appMonthAndroidSync">
+              연결 대기
+            </strong>
           </span>
         </div>
 
-        <div class="ios-table-wrap">
-          <table class="ios-table">
+        <div class="platform-table-wrap">
+          <table class="platform-table">
             <thead>
               <tr>
                 <th>월</th>
-                <th>신규 다운로드</th>
-                <th>전체 다운로드</th>
+                <th>iOS</th>
+                <th>Android</th>
+                <th>합계</th>
               </tr>
             </thead>
 
-            <tbody id="iosMonthlyBody"></tbody>
+            <tbody id="appMonthlyBody"></tbody>
           </table>
         </div>
       </section>
@@ -1619,8 +1986,13 @@
       <div class="month-grid">
         <section class="table-card">
           <div class="section-head">
-            <h2 class="section-title">이번 달 일별</h2>
-            <div class="section-caption">1일부터 오늘까지</div>
+            <h2 class="section-title">
+              이번 달 홈페이지 일별
+            </h2>
+
+            <div class="section-caption">
+              1일부터 오늘까지
+            </div>
           </div>
 
           <div class="table-wrap">
@@ -1641,8 +2013,13 @@
 
         <section class="table-card">
           <div class="section-head">
-            <h2 class="section-title">최근 6개월</h2>
-            <div class="section-caption">월별 누적</div>
+            <h2 class="section-title">
+              홈페이지 최근 6개월
+            </h2>
+
+            <div class="section-caption">
+              월별 누적
+            </div>
           </div>
 
           <div class="table-wrap">
@@ -1672,7 +2049,7 @@
 
   <script>
     /* =========================================================
-       01 API
+       01 API / STATE
        ========================================================= */
     const API_BASE =
       "https://flat-queen-f1fb.moding-inc.workers.dev";
@@ -1686,63 +2063,91 @@
     const SESSION_TOKEN_KEY =
       "moding_admin_token";
 
-    /* =========================================================
-       02 DOM
-       ========================================================= */
     const loginView =
-      document.getElementById("loginView");
+      document.getElementById(
+        "loginView"
+      );
 
     const dashboardView =
-      document.getElementById("dashboardView");
+      document.getElementById(
+        "dashboardView"
+      );
 
     const loginForm =
-      document.getElementById("loginForm");
+      document.getElementById(
+        "loginForm"
+      );
 
     const passwordInput =
-      document.getElementById("passwordInput");
+      document.getElementById(
+        "passwordInput"
+      );
 
     const passwordToggle =
-      document.getElementById("passwordToggle");
+      document.getElementById(
+        "passwordToggle"
+      );
 
     const loginSubmit =
-      document.getElementById("loginSubmit");
+      document.getElementById(
+        "loginSubmit"
+      );
 
     const loginError =
-      document.getElementById("loginError");
+      document.getElementById(
+        "loginError"
+      );
 
     const refreshBtn =
-      document.getElementById("refreshBtn");
+      document.getElementById(
+        "refreshBtn"
+      );
 
     const logoutBtn =
-      document.getElementById("logoutBtn");
+      document.getElementById(
+        "logoutBtn"
+      );
 
     const dashboardStatus =
-      document.getElementById("dashboardStatus");
+      document.getElementById(
+        "dashboardStatus"
+      );
 
     const periodTabs =
       Array.from(
-        document.querySelectorAll(".period-tab")
+        document.querySelectorAll(
+          ".period-tab"
+        )
       );
 
     const panels = {
       today:
-        document.getElementById("panelToday"),
+        document.getElementById(
+          "panelToday"
+        ),
 
       week:
-        document.getElementById("panelWeek"),
+        document.getElementById(
+          "panelWeek"
+        ),
 
       month:
-        document.getElementById("panelMonth")
+        document.getElementById(
+          "panelMonth"
+        )
     };
 
     let latestStats = null;
 
     /* =========================================================
-       03 HELPERS
+       02 COMMON HELPERS
        ========================================================= */
     function apiUrl(path) {
       return (
-        API_BASE.replace(/\/$/, "") +
+        API_BASE.replace(
+          /\/$/,
+          ""
+        ) +
         path
       );
     }
@@ -1768,24 +2173,38 @@
 
     function formatNumber(value) {
       const number =
-        Number(value || 0);
+        Number(
+          value || 0
+        );
 
-      return Number.isFinite(number)
-        ? number.toLocaleString("ko-KR")
+      return Number.isFinite(
+        number
+      )
+        ? number.toLocaleString(
+            "ko-KR"
+          )
         : "0";
     }
 
     function formatRate(value) {
       const number =
-        Number(value || 0);
+        Number(
+          value || 0
+        );
 
-      return Number.isFinite(number)
+      return Number.isFinite(
+        number
+      )
         ? number.toFixed(1)
         : "0.0";
     }
 
-    function formatDate(dateString) {
-      if (!dateString) return "-";
+    function formatDate(
+      dateString
+    ) {
+      if (!dateString) {
+        return "-";
+      }
 
       const date =
         new Date(
@@ -1807,11 +2226,17 @@
           day: "numeric",
           weekday: "short"
         }
-      ).format(date);
+      ).format(
+        date
+      );
     }
 
-    function formatMonth(monthString) {
-      if (!monthString) return "-";
+    function formatMonth(
+      monthString
+    ) {
+      if (!monthString) {
+        return "-";
+      }
 
       const [
         year,
@@ -1821,26 +2246,45 @@
           .split("-")
           .map(Number);
 
-      if (!year || !month) {
+      if (
+        !year ||
+        !month
+      ) {
         return monthString;
       }
 
-      return `${year}년 ${month}월`;
+      return (
+        `${year}년 ` +
+        `${month}월`
+      );
     }
 
-    function compactDate(dateString) {
-      if (!dateString) return "-";
+    function compactDate(
+      dateString
+    ) {
+      if (!dateString) {
+        return "-";
+      }
 
       const parts =
-        dateString.split("-");
+        dateString.split(
+          "-"
+        );
 
-      if (parts.length !== 3) {
+      if (
+        parts.length !==
+        3
+      ) {
         return dateString;
       }
 
       return (
-        `${Number(parts[1])}.` +
-        `${Number(parts[2])}`
+        `${Number(
+          parts[1]
+        )}.` +
+        `${Number(
+          parts[2]
+        )}`
       );
     }
 
@@ -1848,34 +2292,52 @@
       if (
         value === null ||
         value === undefined ||
-        !Number.isFinite(Number(value))
+        !Number.isFinite(
+          Number(value)
+        )
       ) {
         return {
-          text: "비교 데이터 없음",
-          className: "change-flat"
+          text:
+            "비교 데이터 없음",
+
+          className:
+            "change-flat"
         };
       }
 
       const number =
         Number(value);
 
-      if (number > 0) {
+      if (
+        number > 0
+      ) {
         return {
-          text: `+${number.toFixed(1)}%`,
-          className: "change-up"
+          text:
+            `+${number.toFixed(1)}%`,
+
+          className:
+            "change-up"
         };
       }
 
-      if (number < 0) {
+      if (
+        number < 0
+      ) {
         return {
-          text: `${number.toFixed(1)}%`,
-          className: "change-down"
+          text:
+            `${number.toFixed(1)}%`,
+
+          className:
+            "change-down"
         };
       }
 
       return {
-        text: "0.0%",
-        className: "change-flat"
+        text:
+          "0.0%",
+
+        className:
+          "change-flat"
       };
     }
 
@@ -1888,10 +2350,14 @@
           elementId
         );
 
-      if (!element) return;
+      if (!element) {
+        return;
+      }
 
       const result =
-        changeText(value);
+        changeText(
+          value
+        );
 
       element.textContent =
         result.text;
@@ -1900,18 +2366,41 @@
         result.className;
     }
 
-    function showLogin() {
-      dashboardView.hidden = true;
-      loginView.hidden = false;
+    function setText(
+      elementId,
+      value
+    ) {
+      const element =
+        document.getElementById(
+          elementId
+        );
 
-      setTimeout(() => {
-        passwordInput.focus();
-      }, 50);
+      if (element) {
+        element.textContent =
+          value;
+      }
+    }
+
+    function showLogin() {
+      dashboardView.hidden =
+        true;
+
+      loginView.hidden =
+        false;
+
+      setTimeout(
+        () =>
+          passwordInput.focus(),
+        50
+      );
     }
 
     function showDashboard() {
-      loginView.hidden = true;
-      dashboardView.hidden = false;
+      loginView.hidden =
+        true;
+
+      dashboardView.hidden =
+        false;
     }
 
     function setDashboardStatus(
@@ -1928,45 +2417,388 @@
     }
 
     /* =========================================================
-       04 TABS
+       03 STORE / INSTALL HELPERS
        ========================================================= */
-    function activateTab(name) {
-      periodTabs.forEach((button) => {
-        const active =
-          button.dataset.tab === name;
+    function firstFiniteNumber(
+      ...values
+    ) {
+      for (
+        const value of values
+      ) {
+        if (
+          value === null ||
+          value === undefined ||
+          value === ""
+        ) {
+          continue;
+        }
 
-        button.classList.toggle(
-          "is-active",
-          active
-        );
+        const number =
+          Number(value);
 
-        button.setAttribute(
-          "aria-selected",
-          active ? "true" : "false"
-        );
-      });
+        if (
+          Number.isFinite(
+            number
+          )
+        ) {
+          return number;
+        }
+      }
 
-      Object.entries(panels)
-        .forEach(([key, panel]) => {
-          panel.hidden =
-            key !== name;
-        });
+      return null;
     }
 
-    periodTabs.forEach((button) => {
-      button.addEventListener(
-        "click",
-        () => {
-          activateTab(
-            button.dataset.tab
+    function getStoreSyncTime(
+      store
+    ) {
+      return (
+        store?.lastSyncedAt ||
+        store?.last_synced_at ||
+        store?.syncedAt ||
+        store?.updatedAt ||
+        null
+      );
+    }
+
+    function isStoreReady(
+      store
+    ) {
+      return Boolean(
+        getStoreSyncTime(
+          store
+        )
+      );
+    }
+
+    function hasStorePayload(
+      store
+    ) {
+      return Boolean(
+        store &&
+        typeof store ===
+          "object" &&
+        Object.keys(
+          store
+        ).length
+      );
+    }
+
+    function getIosInstallCount(
+      source
+    ) {
+      return firstFiniteNumber(
+        source?.firstDownloads,
+        source?.first_downloads
+      );
+    }
+
+    function getAndroidInstallCount(
+      source
+    ) {
+      return firstFiniteNumber(
+        source?.firstInstalls,
+        source?.first_installs,
+        source?.newInstalls,
+        source?.new_installs,
+        source?.userInstalls,
+        source?.user_installs,
+        source?.dailyUserInstalls,
+        source?.daily_user_installs,
+        source?.installs,
+        source?.firstDownloads,
+        source?.first_downloads
+      );
+    }
+
+    function setInstallCount(
+      elementId,
+      value,
+      ready
+    ) {
+      setText(
+        elementId,
+        ready
+          ? formatNumber(
+              value ?? 0
+            )
+          : "-"
+      );
+    }
+
+    function combinedInstallCount(
+      iosValue,
+      androidValue,
+      iosReady,
+      androidReady
+    ) {
+      if (
+        !iosReady ||
+        !androidReady
+      ) {
+        return null;
+      }
+
+      return (
+        Number(
+          iosValue || 0
+        ) +
+        Number(
+          androidValue || 0
+        )
+      );
+    }
+
+    function setCombinedInstallCount(
+      elementId,
+      iosValue,
+      androidValue,
+      iosReady,
+      androidReady
+    ) {
+      const combined =
+        combinedInstallCount(
+          iosValue,
+          androidValue,
+          iosReady,
+          androidReady
+        );
+
+      setText(
+        elementId,
+        combined === null
+          ? "-"
+          : formatNumber(
+              combined
+            )
+      );
+
+      return combined;
+    }
+
+    function calculateChange(
+      current,
+      previous
+    ) {
+      const currentValue =
+        Number(
+          current || 0
+        );
+
+      const previousValue =
+        Number(
+          previous || 0
+        );
+
+      if (
+        previousValue === 0
+      ) {
+        return null;
+      }
+
+      return Number(
+        (
+          (
+            (
+              currentValue -
+              previousValue
+            ) /
+            previousValue
+          ) *
+          100
+        ).toFixed(1)
+      );
+    }
+
+    function renderCombinedChange(
+      elementId,
+      current,
+      previous
+    ) {
+      if (
+        current === null ||
+        previous === null
+      ) {
+        const element =
+          document.getElementById(
+            elementId
+          );
+
+        if (element) {
+          element.textContent =
+            "-";
+
+          element.className =
+            "change-flat";
+        }
+
+        return;
+      }
+
+      applyChange(
+        elementId,
+        calculateChange(
+          current,
+          previous
+        )
+      );
+    }
+
+    function formatSyncTime(value) {
+      if (!value) {
+        return "아직 없음";
+      }
+
+      const normalized =
+        /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
+          .test(value)
+          ? value.replace(
+              " ",
+              "T"
+            ) + "Z"
+          : value;
+
+      const date =
+        new Date(
+          normalized
+        );
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+        return value;
+      }
+
+      return new Intl.DateTimeFormat(
+        "ko-KR",
+        {
+          timeZone:
+            "Asia/Seoul",
+
+          month:
+            "numeric",
+
+          day:
+            "numeric",
+
+          hour:
+            "2-digit",
+
+          minute:
+            "2-digit",
+
+          hour12:
+            false
+        }
+      ).format(
+        date
+      );
+    }
+
+    function updatePlatformStatus(
+      platform,
+      store
+    ) {
+      const ready =
+        isStoreReady(
+          store
+        );
+
+      const hasPayload =
+        hasStorePayload(
+          store
+        );
+
+      const platformName =
+        platform ===
+          "ios"
+          ? "iOS"
+          : "Android";
+
+      const text =
+        ready
+          ? `${platformName} 동기화됨`
+          : hasPayload
+            ? `${platformName} 데이터 대기`
+            : `${platformName} 연결 대기`;
+
+      document
+        .querySelectorAll(
+          `[data-platform-status="${platform}"]`
+        )
+        .forEach(
+          (element) => {
+            element.classList.toggle(
+              "is-ready",
+              ready
+            );
+
+            const textElement =
+              element.querySelector(
+                "[data-platform-status-text]"
+              );
+
+            if (
+              textElement
+            ) {
+              textElement.textContent =
+                text;
+            }
+          }
+        );
+    }
+
+    /* =========================================================
+       04 TABS / PASSWORD
+       ========================================================= */
+    function activateTab(name) {
+      periodTabs.forEach(
+        (button) => {
+          const active =
+            button.dataset.tab ===
+            name;
+
+          button.classList.toggle(
+            "is-active",
+            active
+          );
+
+          button.setAttribute(
+            "aria-selected",
+            active
+              ? "true"
+              : "false"
           );
         }
       );
-    });
 
-    /* =========================================================
-       05 PASSWORD
-       ========================================================= */
+      Object.entries(
+        panels
+      ).forEach(
+        ([
+          key,
+          panel
+        ]) => {
+          panel.hidden =
+            key !==
+            name;
+        }
+      );
+    }
+
+    periodTabs.forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () =>
+            activateTab(
+              button.dataset.tab
+            )
+        );
+      }
+    );
+
     passwordToggle.addEventListener(
       "click",
       () => {
@@ -1987,21 +2819,26 @@
     );
 
     /* =========================================================
-       06 LOGIN
+       05 LOGIN / LOAD
        ========================================================= */
     loginForm.addEventListener(
       "submit",
       async (event) => {
         event.preventDefault();
 
-        loginError.textContent = "";
+        loginError.textContent =
+          "";
 
         const password =
           passwordInput.value;
 
-        if (!password) return;
+        if (!password) {
+          return;
+        }
 
-        loginSubmit.disabled = true;
+        loginSubmit.disabled =
+          true;
+
         loginSubmit.textContent =
           "확인 중";
 
@@ -2012,11 +2849,14 @@
                 ENDPOINTS.login
               ),
               {
-                method: "POST",
+                method:
+                  "POST",
+
                 headers: {
                   "Content-Type":
                     "application/json"
                 },
+
                 body:
                   JSON.stringify({
                     password
@@ -2024,9 +2864,12 @@
               }
             );
 
-          if (!response.ok) {
+          if (
+            !response.ok
+          ) {
             throw new Error(
-              response.status === 401
+              response.status ===
+                401
                 ? "비밀번호가 올바르지 않습니다."
                 : "관리자 인증에 실패했습니다."
             );
@@ -2035,7 +2878,9 @@
           const data =
             await response.json();
 
-          if (!data?.token) {
+          if (
+            !data?.token
+          ) {
             throw new Error(
               "인증 토큰을 받지 못했습니다."
             );
@@ -2045,9 +2890,11 @@
             data.token
           );
 
-          passwordInput.value = "";
+          passwordInput.value =
+            "";
 
           showDashboard();
+
           await loadStats();
 
         } catch (error) {
@@ -2056,16 +2903,15 @@
             "관리자 인증 중 오류가 발생했습니다.";
 
         } finally {
-          loginSubmit.disabled = false;
+          loginSubmit.disabled =
+            false;
+
           loginSubmit.textContent =
             "관리자 페이지 들어가기";
         }
       }
     );
 
-    /* =========================================================
-       07 LOAD STATS
-       ========================================================= */
     async function loadStats() {
       const token =
         getToken();
@@ -2075,7 +2921,9 @@
         return;
       }
 
-      refreshBtn.disabled = true;
+      refreshBtn.disabled =
+        true;
+
       setDashboardStatus(
         "통계를 불러오는 중입니다."
       );
@@ -2087,7 +2935,9 @@
               ENDPOINTS.stats
             )}?days=7`,
             {
-              method: "GET",
+              method:
+                "GET",
+
               headers: {
                 "Authorization":
                   `Bearer ${token}`,
@@ -2095,14 +2945,18 @@
                 "Accept":
                   "application/json"
               },
-              cache: "no-store"
+
+              cache:
+                "no-store"
             }
           );
 
         if (
-          response.status === 401
+          response.status ===
+          401
         ) {
           clearToken();
+
           showLogin();
 
           loginError.textContent =
@@ -2111,7 +2965,9 @@
           return;
         }
 
-        if (!response.ok) {
+        if (
+          !response.ok
+        ) {
           throw new Error(
             "통계를 불러오지 못했습니다."
           );
@@ -2120,8 +2976,12 @@
         const data =
           await response.json();
 
-        latestStats = data;
-        renderStats(data);
+        latestStats =
+          data;
+
+        renderStats(
+          data
+        );
 
         setDashboardStatus(
           `마지막 확인 ${
@@ -2129,8 +2989,11 @@
               .toLocaleTimeString(
                 "ko-KR",
                 {
-                  hour: "2-digit",
-                  minute: "2-digit"
+                  hour:
+                    "2-digit",
+
+                  minute:
+                    "2-digit"
                 }
               )
           }`
@@ -2144,69 +3007,82 @@
         );
 
       } finally {
-        refreshBtn.disabled = false;
+        refreshBtn.disabled =
+          false;
       }
     }
 
     /* =========================================================
-       08 RENDER
+       06 WEBSITE RENDER
        ========================================================= */
     function renderStats(data) {
-      renderToday(data);
-      renderWeek(data);
-      renderMonth(data);
-      renderIos(data?.ios || {});
+      renderToday(
+        data
+      );
+
+      renderWeek(
+        data
+      );
+
+      renderMonth(
+        data
+      );
+
+      renderAppInstalls(
+        data?.ios || {},
+        data?.android || {}
+      );
     }
 
     function renderToday(data) {
-      document.getElementById(
-        "todayVisits"
-      ).textContent =
+      setText(
+        "todayVisits",
         formatNumber(
           data?.today?.visits
-        );
+        )
+      );
 
-      document.getElementById(
-        "todayDownloads"
-      ).textContent =
+      setText(
+        "todayDownloads",
         formatNumber(
           data?.today?.downloads
-        );
+        )
+      );
 
-      document.getElementById(
-        "todayRate"
-      ).textContent =
+      setText(
+        "todayRate",
         formatRate(
           data?.today?.downloadRate
-        );
+        )
+      );
 
-      document.getElementById(
-        "totalVisits"
-      ).textContent =
+      setText(
+        "totalVisits",
         formatNumber(
           data?.total?.visits
-        );
+        )
+      );
 
-      document.getElementById(
-        "totalDownloads"
-      ).textContent =
+      setText(
+        "totalDownloads",
         `${formatNumber(
           data?.total?.downloads
-        )}회`;
+        )}회`
+      );
 
-      document.getElementById(
-        "totalRate"
-      ).textContent =
+      setText(
+        "totalRate",
         `${formatRate(
           data?.total?.downloadRate
-        )}%`;
+        )}%`
+      );
 
-      document.getElementById(
-        "todayDate"
-      ).textContent =
+      setText(
+        "todayDate",
         formatDate(
           data?.today?.date
-        );
+        )
+      );
 
       renderDailyTable(
         "todayTableBody",
@@ -2218,40 +3094,40 @@
       const week =
         data?.week || {};
 
-      document.getElementById(
-        "weekVisits"
-      ).textContent =
+      setText(
+        "weekVisits",
         formatNumber(
           week.visits
-        );
+        )
+      );
 
-      document.getElementById(
-        "weekDownloads"
-      ).textContent =
+      setText(
+        "weekDownloads",
         formatNumber(
           week.downloads
-        );
+        )
+      );
 
-      document.getElementById(
-        "weekRate"
-      ).textContent =
+      setText(
+        "weekRate",
         formatRate(
           week.downloadRate
-        );
+        )
+      );
 
-      document.getElementById(
-        "previousWeekVisits"
-      ).textContent =
+      setText(
+        "previousWeekVisits",
         formatNumber(
           week?.previous?.visits
-        );
+        )
+      );
 
-      document.getElementById(
-        "previousWeekDownloads"
-      ).textContent =
+      setText(
+        "previousWeekDownloads",
         `${formatNumber(
           week?.previous?.downloads
-        )}회`;
+        )}회`
+      );
 
       applyChange(
         "weekVisitChange",
@@ -2263,32 +3139,36 @@
         week.downloadChange
       );
 
-      document.getElementById(
-        "weekRange"
-      ).textContent =
+      setText(
+        "weekRange",
         `${compactDate(
           week.startDate
         )} ~ ${compactDate(
           week.endDate
-        )}`;
+        )}`
+      );
 
-      document.getElementById(
-        "previousWeekRange"
-      ).textContent =
+      setText(
+        "previousWeekRange",
         `${compactDate(
           week?.previous?.startDate
         )} ~ ${compactDate(
           week?.previous?.endDate
-        )}`;
+        )}`
+      );
 
-      const rows =
-        Array.isArray(data?.daily)
-          ? [...data.daily].reverse()
+      const chartRows =
+        Array.isArray(
+          data?.daily
+        )
+          ? [
+              ...data.daily
+            ].reverse()
           : [];
 
       renderBarChart(
         "weekChart",
-        rows
+        chartRows
       );
 
       renderDailyTable(
@@ -2301,40 +3181,40 @@
       const month =
         data?.month || {};
 
-      document.getElementById(
-        "monthVisits"
-      ).textContent =
+      setText(
+        "monthVisits",
         formatNumber(
           month.visits
-        );
+        )
+      );
 
-      document.getElementById(
-        "monthDownloads"
-      ).textContent =
+      setText(
+        "monthDownloads",
         formatNumber(
           month.downloads
-        );
+        )
+      );
 
-      document.getElementById(
-        "monthRate"
-      ).textContent =
+      setText(
+        "monthRate",
         formatRate(
           month.downloadRate
-        );
+        )
+      );
 
-      document.getElementById(
-        "previousMonthVisits"
-      ).textContent =
+      setText(
+        "previousMonthVisits",
         formatNumber(
           month?.previous?.visits
-        );
+        )
+      );
 
-      document.getElementById(
-        "previousMonthDownloads"
-      ).textContent =
+      setText(
+        "previousMonthDownloads",
         `${formatNumber(
           month?.previous?.downloads
-        )}회`;
+        )}회`
+      );
 
       applyChange(
         "monthVisitChange",
@@ -2346,27 +3226,28 @@
         month.downloadChange
       );
 
-      document.getElementById(
-        "monthRange"
-      ).textContent =
+      setText(
+        "monthRange",
         formatMonth(
           month.month
-        );
+        )
+      );
 
-      document.getElementById(
-        "previousMonthLabel"
-      ).textContent =
+      setText(
+        "previousMonthLabel",
         formatMonth(
           month?.previous?.month
-        );
+        )
+      );
 
       renderDailyTable(
         "monthDailyBody",
         Array.isArray(
           data?.monthDaily
         )
-          ? [...data.monthDaily]
-              .reverse()
+          ? [
+              ...data.monthDaily
+            ].reverse()
           : []
       );
 
@@ -2376,355 +3257,662 @@
       );
     }
 
-    function renderIos(ios) {
-      renderIosToday(ios);
-      renderIosWeek(ios);
-      renderIosMonth(ios);
-    }
-
-    function renderIosToday(ios) {
-      document.getElementById(
-        "iosTodayFirstDownloads"
-      ).textContent =
-        formatNumber(
-          ios?.today?.firstDownloads
+    /* =========================================================
+       07 APP INSTALL RENDER
+       ========================================================= */
+    function renderAppInstalls(
+      ios,
+      android
+    ) {
+      const iosReady =
+        isStoreReady(
+          ios
         );
 
-      document.getElementById(
-        "iosTodayTotalDownloads"
-      ).textContent =
-        formatNumber(
-          ios?.today?.totalDownloads
+      const androidReady =
+        isStoreReady(
+          android
         );
 
-      document.getElementById(
-        "iosCumulativeFirstDownloads"
-      ).textContent =
-        formatNumber(
-          ios?.total?.firstDownloads
-        );
+      updatePlatformStatus(
+        "ios",
+        ios
+      );
 
-      document.getElementById(
-        "iosCumulativeTotalDownloads"
-      ).textContent =
-        formatNumber(
-          ios?.total?.totalDownloads
-        );
+      updatePlatformStatus(
+        "android",
+        android
+      );
 
-      document.getElementById(
-        "iosTodaySync"
-      ).textContent =
-        formatSyncTime(
-          ios?.lastSyncedAt
-        );
+      renderAppToday(
+        ios,
+        android,
+        iosReady,
+        androidReady
+      );
 
-      renderIosDailyTable(
-        "iosTodayTableBody",
-        ios?.daily || []
+      renderAppWeek(
+        ios,
+        android,
+        iosReady,
+        androidReady
+      );
+
+      renderAppMonth(
+        ios,
+        android,
+        iosReady,
+        androidReady
       );
     }
 
-    function renderIosWeek(ios) {
-      const week =
-        ios?.week || {};
-
-      document.getElementById(
-        "iosWeekFirstDownloads"
-      ).textContent =
-        formatNumber(
-          week.firstDownloads
+    function renderAppToday(
+      ios,
+      android,
+      iosReady,
+      androidReady
+    ) {
+      const iosToday =
+        getIosInstallCount(
+          ios?.today
         );
 
-      document.getElementById(
-        "iosWeekTotalDownloads"
-      ).textContent =
-        formatNumber(
-          week.totalDownloads
+      const androidToday =
+        getAndroidInstallCount(
+          android?.today
         );
 
-      document.getElementById(
-        "iosPreviousWeekFirstDownloads"
-      ).textContent =
-        formatNumber(
-          week?.previous?.firstDownloads
+      const iosTotal =
+        getIosInstallCount(
+          ios?.total
         );
 
-      document.getElementById(
-        "iosPreviousWeekTotalDownloads"
-      ).textContent =
-        formatNumber(
-          week?.previous?.totalDownloads
+      const androidTotal =
+        getAndroidInstallCount(
+          android?.total
         );
 
-      applyChange(
-        "iosWeekFirstChange",
-        week.firstDownloadChange
+      setInstallCount(
+        "iosTodayInstall",
+        iosToday,
+        iosReady
       );
 
-      document.getElementById(
-        "iosWeekSync"
-      ).textContent =
-        formatSyncTime(
-          ios?.lastSyncedAt
-        );
-
-      renderIosDailyTable(
-        "iosWeekTableBody",
-        ios?.daily || []
-      );
-    }
-
-    function renderIosMonth(ios) {
-      const month =
-        ios?.month || {};
-
-      document.getElementById(
-        "iosMonthFirstDownloads"
-      ).textContent =
-        formatNumber(
-          month.firstDownloads
-        );
-
-      document.getElementById(
-        "iosMonthTotalDownloads"
-      ).textContent =
-        formatNumber(
-          month.totalDownloads
-        );
-
-      document.getElementById(
-        "iosPreviousMonthFirstDownloads"
-      ).textContent =
-        formatNumber(
-          month?.previous?.firstDownloads
-        );
-
-      document.getElementById(
-        "iosPreviousMonthTotalDownloads"
-      ).textContent =
-        formatNumber(
-          month?.previous?.totalDownloads
-        );
-
-      applyChange(
-        "iosMonthFirstChange",
-        month.firstDownloadChange
+      setInstallCount(
+        "androidTodayInstall",
+        androidToday,
+        androidReady
       );
 
-      document.getElementById(
-        "iosMonthSync"
-      ).textContent =
-        formatSyncTime(
-          ios?.lastSyncedAt
-        );
+      setCombinedInstallCount(
+        "appTodayTotal",
+        iosToday,
+        androidToday,
+        iosReady,
+        androidReady
+      );
 
-      renderIosMonthlyTable(
-        "iosMonthlyBody",
-        ios?.monthly || []
+      setCombinedInstallCount(
+        "appCumulativeTotal",
+        iosTotal,
+        androidTotal,
+        iosReady,
+        androidReady
+      );
+
+      setText(
+        "appTodayIosSync",
+        iosReady
+          ? formatSyncTime(
+              getStoreSyncTime(
+                ios
+              )
+            )
+          : "데이터 대기"
+      );
+
+      setText(
+        "appTodayAndroidSync",
+        androidReady
+          ? formatSyncTime(
+              getStoreSyncTime(
+                android
+              )
+            )
+          : hasStorePayload(
+              android
+            )
+            ? "데이터 대기"
+            : "연결 대기"
+      );
+
+      renderPlatformDailyTable(
+        "appTodayTableBody",
+        ios?.daily || [],
+        android?.daily || [],
+        iosReady,
+        androidReady
       );
     }
 
-    function formatSyncTime(value) {
-      if (!value) {
-        return "아직 없음";
-      }
+    function renderAppWeek(
+      ios,
+      android,
+      iosReady,
+      androidReady
+    ) {
+      const iosCurrent =
+        getIosInstallCount(
+          ios?.week
+        );
 
-      const normalized =
-        /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
-          .test(value)
-          ? value.replace(" ", "T") + "Z"
-          : value;
+      const androidCurrent =
+        getAndroidInstallCount(
+          android?.week
+        );
 
-      const date =
-        new Date(normalized);
+      const iosPrevious =
+        getIosInstallCount(
+          ios?.week?.previous
+        );
 
-      if (
-        Number.isNaN(
-          date.getTime()
+      const androidPrevious =
+        getAndroidInstallCount(
+          android?.week?.previous
+        );
+
+      const currentTotal =
+        setCombinedInstallCount(
+          "appWeekTotal",
+          iosCurrent,
+          androidCurrent,
+          iosReady,
+          androidReady
+        );
+
+      const previousTotal =
+        setCombinedInstallCount(
+          "appPreviousWeekTotal",
+          iosPrevious,
+          androidPrevious,
+          iosReady,
+          androidReady
+        );
+
+      setInstallCount(
+        "iosWeekInstall",
+        iosCurrent,
+        iosReady
+      );
+
+      setInstallCount(
+        "androidWeekInstall",
+        androidCurrent,
+        androidReady
+      );
+
+      setText(
+        "iosPreviousWeekInstall",
+        iosReady
+          ? `${formatNumber(
+              iosPrevious ?? 0
+            )}건`
+          : "-"
+      );
+
+      setText(
+        "androidPreviousWeekInstall",
+        androidReady
+          ? `${formatNumber(
+              androidPrevious ?? 0
+            )}건`
+          : "-"
+      );
+
+      renderCombinedChange(
+        "appWeekChange",
+        currentTotal,
+        previousTotal
+      );
+
+      setText(
+        "appWeekIosSync",
+        iosReady
+          ? formatSyncTime(
+              getStoreSyncTime(
+                ios
+              )
+            )
+          : "데이터 대기"
+      );
+
+      setText(
+        "appWeekAndroidSync",
+        androidReady
+          ? formatSyncTime(
+              getStoreSyncTime(
+                android
+              )
+            )
+          : hasStorePayload(
+              android
+            )
+            ? "데이터 대기"
+            : "연결 대기"
+      );
+
+      renderPlatformDailyTable(
+        "appWeekTableBody",
+        ios?.daily || [],
+        android?.daily || [],
+        iosReady,
+        androidReady
+      );
+    }
+
+    function renderAppMonth(
+      ios,
+      android,
+      iosReady,
+      androidReady
+    ) {
+      const iosCurrent =
+        getIosInstallCount(
+          ios?.month
+        );
+
+      const androidCurrent =
+        getAndroidInstallCount(
+          android?.month
+        );
+
+      const iosPrevious =
+        getIosInstallCount(
+          ios?.month?.previous
+        );
+
+      const androidPrevious =
+        getAndroidInstallCount(
+          android?.month?.previous
+        );
+
+      const currentTotal =
+        setCombinedInstallCount(
+          "appMonthTotal",
+          iosCurrent,
+          androidCurrent,
+          iosReady,
+          androidReady
+        );
+
+      const previousTotal =
+        setCombinedInstallCount(
+          "appPreviousMonthTotal",
+          iosPrevious,
+          androidPrevious,
+          iosReady,
+          androidReady
+        );
+
+      setInstallCount(
+        "iosMonthInstall",
+        iosCurrent,
+        iosReady
+      );
+
+      setInstallCount(
+        "androidMonthInstall",
+        androidCurrent,
+        androidReady
+      );
+
+      setText(
+        "iosPreviousMonthInstall",
+        iosReady
+          ? `${formatNumber(
+              iosPrevious ?? 0
+            )}건`
+          : "-"
+      );
+
+      setText(
+        "androidPreviousMonthInstall",
+        androidReady
+          ? `${formatNumber(
+              androidPrevious ?? 0
+            )}건`
+          : "-"
+      );
+
+      renderCombinedChange(
+        "appMonthChange",
+        currentTotal,
+        previousTotal
+      );
+
+      setText(
+        "appMonthIosSync",
+        iosReady
+          ? formatSyncTime(
+              getStoreSyncTime(
+                ios
+              )
+            )
+          : "데이터 대기"
+      );
+
+      setText(
+        "appMonthAndroidSync",
+        androidReady
+          ? formatSyncTime(
+              getStoreSyncTime(
+                android
+              )
+            )
+          : hasStorePayload(
+              android
+            )
+            ? "데이터 대기"
+            : "연결 대기"
+      );
+
+      renderPlatformMonthlyTable(
+        "appMonthlyBody",
+        ios?.monthly || [],
+        android?.monthly || [],
+        iosReady,
+        androidReady
+      );
+    }
+
+    /* =========================================================
+       08 PLATFORM TABLES
+       ========================================================= */
+    function mergePlatformRows(
+      iosRows,
+      androidRows,
+      key
+    ) {
+      const map =
+        new Map();
+
+      (
+        Array.isArray(
+          iosRows
         )
-      ) {
-        return value;
-      }
+          ? iosRows
+          : []
+      ).forEach(
+        (row) => {
+          const rowKey =
+            row?.[key];
 
-      return new Intl.DateTimeFormat(
-        "ko-KR",
-        {
-          timeZone: "Asia/Seoul",
-          month: "numeric",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false
+          if (!rowKey) {
+            return;
+          }
+
+          const current =
+            map.get(
+              rowKey
+            ) || {
+              key:
+                rowKey,
+
+              ios:
+                null,
+
+              android:
+                null
+            };
+
+          current.ios =
+            getIosInstallCount(
+              row
+            );
+
+          map.set(
+            rowKey,
+            current
+          );
         }
-      ).format(date);
+      );
+
+      (
+        Array.isArray(
+          androidRows
+        )
+          ? androidRows
+          : []
+      ).forEach(
+        (row) => {
+          const rowKey =
+            row?.[key];
+
+          if (!rowKey) {
+            return;
+          }
+
+          const current =
+            map.get(
+              rowKey
+            ) || {
+              key:
+                rowKey,
+
+              ios:
+                null,
+
+              android:
+                null
+            };
+
+          current.android =
+            getAndroidInstallCount(
+              row
+            );
+
+          map.set(
+            rowKey,
+            current
+          );
+        }
+      );
+
+      return Array.from(
+        map.values()
+      ).sort(
+        (a, b) =>
+          String(
+            b.key
+          ).localeCompare(
+            String(
+              a.key
+            )
+          )
+      );
     }
 
-    function renderIosDailyTable(
+    function renderPlatformDailyTable(
       bodyId,
-      rows
+      iosRows,
+      androidRows,
+      iosReady,
+      androidReady
+    ) {
+      renderPlatformTable(
+        bodyId,
+        mergePlatformRows(
+          iosRows,
+          androidRows,
+          "date"
+        ),
+        iosReady,
+        androidReady,
+        formatDate
+      );
+    }
+
+    function renderPlatformMonthlyTable(
+      bodyId,
+      iosRows,
+      androidRows,
+      iosReady,
+      androidReady
+    ) {
+      renderPlatformTable(
+        bodyId,
+        mergePlatformRows(
+          iosRows,
+          androidRows,
+          "month"
+        ),
+        iosReady,
+        androidReady,
+        formatMonth
+      );
+    }
+
+    function renderPlatformTable(
+      bodyId,
+      rows,
+      iosReady,
+      androidReady,
+      labelFormatter
     ) {
       const body =
         document.getElementById(
           bodyId
         );
 
-      body.innerHTML = "";
+      body.innerHTML =
+        "";
 
       if (
-        !Array.isArray(rows) ||
         !rows.length
       ) {
-        const tr =
-          document.createElement(
-            "tr"
-          );
+        body.appendChild(
+          emptyRow(
+            4,
+            "실제 앱 설치 데이터가 아직 없습니다."
+          )
+        );
 
-        const td =
-          document.createElement(
-            "td"
-          );
-
-        td.colSpan = 3;
-        td.className = "empty";
-        td.textContent =
-          "아직 iOS 집계 데이터가 없습니다.";
-
-        tr.appendChild(td);
-        body.appendChild(tr);
         return;
       }
 
-      rows.forEach((row) => {
-        const tr =
-          document.createElement(
-            "tr"
+      rows.forEach(
+        (row) => {
+          const tr =
+            document.createElement(
+              "tr"
+            );
+
+          const label =
+            document.createElement(
+              "td"
+            );
+
+          const iosCell =
+            document.createElement(
+              "td"
+            );
+
+          const androidCell =
+            document.createElement(
+              "td"
+            );
+
+          const totalCell =
+            document.createElement(
+              "td"
+            );
+
+          label.textContent =
+            labelFormatter(
+              row.key
+            );
+
+          iosCell.className =
+            "ios-value";
+
+          iosCell.textContent =
+            iosReady
+              ? `${formatNumber(
+                  row.ios ?? 0
+                )}건`
+              : "-";
+
+          androidCell.className =
+            "android-value";
+
+          androidCell.textContent =
+            androidReady
+              ? `${formatNumber(
+                  row.android ?? 0
+                )}건`
+              : "-";
+
+          totalCell.className =
+            "total-value";
+
+          totalCell.textContent =
+            iosReady &&
+            androidReady
+              ? `${formatNumber(
+                  Number(
+                    row.ios || 0
+                  ) +
+                  Number(
+                    row.android || 0
+                  )
+                )}건`
+              : "-";
+
+          tr.append(
+            label,
+            iosCell,
+            androidCell,
+            totalCell
           );
 
-        const date =
-          document.createElement(
-            "td"
+          body.appendChild(
+            tr
           );
-
-        date.textContent =
-          formatDate(
-            row.date
-          );
-
-        const first =
-          document.createElement(
-            "td"
-          );
-
-        first.className =
-          "ios-new";
-
-        first.textContent =
-          `${formatNumber(
-            row.firstDownloads
-          )}건`;
-
-        const total =
-          document.createElement(
-            "td"
-          );
-
-        total.textContent =
-          `${formatNumber(
-            row.totalDownloads
-          )}건`;
-
-        tr.append(
-          date,
-          first,
-          total
-        );
-
-        body.appendChild(tr);
-      });
+        }
+      );
     }
 
-    function renderIosMonthlyTable(
-      bodyId,
-      rows
+    /* =========================================================
+       09 WEBSITE TABLE / CHART
+       ========================================================= */
+    function emptyRow(
+      colSpan,
+      message
     ) {
-      const body =
-        document.getElementById(
-          bodyId
+      const tr =
+        document.createElement(
+          "tr"
         );
 
-      body.innerHTML = "";
-
-      if (
-        !Array.isArray(rows) ||
-        !rows.length
-      ) {
-        const tr =
-          document.createElement(
-            "tr"
-          );
-
-        const td =
-          document.createElement(
-            "td"
-          );
-
-        td.colSpan = 3;
-        td.className = "empty";
-        td.textContent =
-          "아직 iOS 집계 데이터가 없습니다.";
-
-        tr.appendChild(td);
-        body.appendChild(tr);
-        return;
-      }
-
-      rows.forEach((row) => {
-        const tr =
-          document.createElement(
-            "tr"
-          );
-
-        const month =
-          document.createElement(
-            "td"
-          );
-
-        month.textContent =
-          formatMonth(
-            row.month
-          );
-
-        const first =
-          document.createElement(
-            "td"
-          );
-
-        first.className =
-          "ios-new";
-
-        first.textContent =
-          `${formatNumber(
-            row.firstDownloads
-          )}건`;
-
-        const total =
-          document.createElement(
-            "td"
-          );
-
-        total.textContent =
-          `${formatNumber(
-            row.totalDownloads
-          )}건`;
-
-        tr.append(
-          month,
-          first,
-          total
+      const td =
+        document.createElement(
+          "td"
         );
 
-        body.appendChild(tr);
-      });
+      td.colSpan =
+        colSpan;
+
+      td.className =
+        "empty";
+
+      td.textContent =
+        message;
+
+      tr.appendChild(
+        td
+      );
+
+      return tr;
     }
 
     function renderDailyTable(
@@ -2736,90 +3924,87 @@
           bodyId
         );
 
-      body.innerHTML = "";
+      body.innerHTML =
+        "";
 
       if (
-        !Array.isArray(rows) ||
+        !Array.isArray(
+          rows
+        ) ||
         !rows.length
       ) {
-        const tr =
-          document.createElement(
-            "tr"
-          );
+        body.appendChild(
+          emptyRow(
+            4,
+            "집계된 데이터가 없습니다."
+          )
+        );
 
-        const td =
-          document.createElement(
-            "td"
-          );
-
-        td.colSpan = 4;
-        td.className = "empty";
-        td.textContent =
-          "집계된 데이터가 없습니다.";
-
-        tr.appendChild(td);
-        body.appendChild(tr);
         return;
       }
 
-      rows.forEach((row) => {
-        const tr =
-          document.createElement(
-            "tr"
+      rows.forEach(
+        (row) => {
+          const tr =
+            document.createElement(
+              "tr"
+            );
+
+          const date =
+            document.createElement(
+              "td"
+            );
+
+          const visits =
+            document.createElement(
+              "td"
+            );
+
+          const downloads =
+            document.createElement(
+              "td"
+            );
+
+          const rate =
+            document.createElement(
+              "td"
+            );
+
+          date.textContent =
+            formatDate(
+              row.date
+            );
+
+          visits.textContent =
+            `${formatNumber(
+              row.visits
+            )}회`;
+
+          downloads.className =
+            "download";
+
+          downloads.textContent =
+            `${formatNumber(
+              row.downloads
+            )}회`;
+
+          rate.textContent =
+            `${formatRate(
+              row.downloadRate
+            )}%`;
+
+          tr.append(
+            date,
+            visits,
+            downloads,
+            rate
           );
 
-        const date =
-          document.createElement(
-            "td"
+          body.appendChild(
+            tr
           );
-
-        date.textContent =
-          formatDate(
-            row.date
-          );
-
-        const visits =
-          document.createElement(
-            "td"
-          );
-
-        visits.textContent =
-          `${formatNumber(
-            row.visits
-          )}회`;
-
-        const downloads =
-          document.createElement(
-            "td"
-          );
-
-        downloads.className =
-          "download";
-
-        downloads.textContent =
-          `${formatNumber(
-            row.downloads
-          )}회`;
-
-        const rate =
-          document.createElement(
-            "td"
-          );
-
-        rate.textContent =
-          `${formatRate(
-            row.downloadRate
-          )}%`;
-
-        tr.append(
-          date,
-          visits,
-          downloads,
-          rate
-        );
-
-        body.appendChild(tr);
-      });
+        }
+      );
     }
 
     function renderMonthlyTable(
@@ -2831,90 +4016,87 @@
           bodyId
         );
 
-      body.innerHTML = "";
+      body.innerHTML =
+        "";
 
       if (
-        !Array.isArray(rows) ||
+        !Array.isArray(
+          rows
+        ) ||
         !rows.length
       ) {
-        const tr =
-          document.createElement(
-            "tr"
-          );
+        body.appendChild(
+          emptyRow(
+            4,
+            "집계된 데이터가 없습니다."
+          )
+        );
 
-        const td =
-          document.createElement(
-            "td"
-          );
-
-        td.colSpan = 4;
-        td.className = "empty";
-        td.textContent =
-          "집계된 데이터가 없습니다.";
-
-        tr.appendChild(td);
-        body.appendChild(tr);
         return;
       }
 
-      rows.forEach((row) => {
-        const tr =
-          document.createElement(
-            "tr"
+      rows.forEach(
+        (row) => {
+          const tr =
+            document.createElement(
+              "tr"
+            );
+
+          const month =
+            document.createElement(
+              "td"
+            );
+
+          const visits =
+            document.createElement(
+              "td"
+            );
+
+          const downloads =
+            document.createElement(
+              "td"
+            );
+
+          const rate =
+            document.createElement(
+              "td"
+            );
+
+          month.textContent =
+            formatMonth(
+              row.month
+            );
+
+          visits.textContent =
+            `${formatNumber(
+              row.visits
+            )}회`;
+
+          downloads.className =
+            "download";
+
+          downloads.textContent =
+            `${formatNumber(
+              row.downloads
+            )}회`;
+
+          rate.textContent =
+            `${formatRate(
+              row.downloadRate
+            )}%`;
+
+          tr.append(
+            month,
+            visits,
+            downloads,
+            rate
           );
 
-        const month =
-          document.createElement(
-            "td"
+          body.appendChild(
+            tr
           );
-
-        month.textContent =
-          formatMonth(
-            row.month
-          );
-
-        const visits =
-          document.createElement(
-            "td"
-          );
-
-        visits.textContent =
-          `${formatNumber(
-            row.visits
-          )}회`;
-
-        const downloads =
-          document.createElement(
-            "td"
-          );
-
-        downloads.className =
-          "download";
-
-        downloads.textContent =
-          `${formatNumber(
-            row.downloads
-          )}회`;
-
-        const rate =
-          document.createElement(
-            "td"
-          );
-
-        rate.textContent =
-          `${formatRate(
-            row.downloadRate
-          )}%`;
-
-        tr.append(
-          month,
-          visits,
-          downloads,
-          rate
-        );
-
-        body.appendChild(tr);
-      });
+        }
+      );
     }
 
     function renderBarChart(
@@ -2926,10 +4108,13 @@
           elementId
         );
 
-      chart.innerHTML = "";
+      chart.innerHTML =
+        "";
 
       if (
-        !Array.isArray(rows) ||
+        !Array.isArray(
+          rows
+        ) ||
         !rows.length
       ) {
         return;
@@ -2951,108 +4136,112 @@
           )
         );
 
-      rows.forEach((row) => {
-        const item =
-          document.createElement(
-            "div"
+      rows.forEach(
+        (row) => {
+          const item =
+            document.createElement(
+              "div"
+            );
+
+          const value =
+            document.createElement(
+              "div"
+            );
+
+          const stack =
+            document.createElement(
+              "div"
+            );
+
+          const visitBar =
+            document.createElement(
+              "div"
+            );
+
+          const downloadBar =
+            document.createElement(
+              "div"
+            );
+
+          const label =
+            document.createElement(
+              "div"
+            );
+
+          item.className =
+            "bar-item";
+
+          value.className =
+            "bar-value";
+
+          stack.className =
+            "bar-stack";
+
+          visitBar.className =
+            "bar visit";
+
+          downloadBar.className =
+            "bar download";
+
+          label.className =
+            "bar-label";
+
+          value.textContent =
+            `${formatNumber(
+              row.visits
+            )} / ${formatNumber(
+              row.downloads
+            )}`;
+
+          visitBar.style.height =
+            `${Math.max(
+              2,
+              (
+                Number(
+                  row.visits || 0
+                ) /
+                max
+              ) *
+              100
+            )}%`;
+
+          downloadBar.style.height =
+            `${Math.max(
+              2,
+              (
+                Number(
+                  row.downloads || 0
+                ) /
+                max
+              ) *
+              100
+            )}%`;
+
+          label.textContent =
+            compactDate(
+              row.date
+            );
+
+          stack.append(
+            visitBar,
+            downloadBar
           );
 
-        item.className =
-          "bar-item";
-
-        const value =
-          document.createElement(
-            "div"
+          item.append(
+            value,
+            stack,
+            label
           );
 
-        value.className =
-          "bar-value";
-
-        value.textContent =
-          `${formatNumber(
-            row.visits
-          )} / ${formatNumber(
-            row.downloads
-          )}`;
-
-        const stack =
-          document.createElement(
-            "div"
+          chart.appendChild(
+            item
           );
-
-        stack.className =
-          "bar-stack";
-
-        const visitBar =
-          document.createElement(
-            "div"
-          );
-
-        visitBar.className =
-          "bar visit";
-
-        visitBar.style.height =
-          `${Math.max(
-            2,
-            (
-              Number(
-                row.visits || 0
-              ) /
-              max
-            ) *
-            100
-          )}%`;
-
-        const downloadBar =
-          document.createElement(
-            "div"
-          );
-
-        downloadBar.className =
-          "bar download";
-
-        downloadBar.style.height =
-          `${Math.max(
-            2,
-            (
-              Number(
-                row.downloads || 0
-              ) /
-              max
-            ) *
-            100
-          )}%`;
-
-        stack.append(
-          visitBar,
-          downloadBar
-        );
-
-        const label =
-          document.createElement(
-            "div"
-          );
-
-        label.className =
-          "bar-label";
-
-        label.textContent =
-          compactDate(
-            row.date
-          );
-
-        item.append(
-          value,
-          stack,
-          label
-        );
-
-        chart.appendChild(item);
-      });
+        }
+      );
     }
 
     /* =========================================================
-       09 REFRESH / LOGOUT
+       10 REFRESH / LOGOUT / INIT
        ========================================================= */
     refreshBtn.addEventListener(
       "click",
@@ -3072,31 +4261,40 @@
                 ENDPOINTS.logout
               ),
               {
-                method: "POST",
+                method:
+                  "POST",
+
                 headers: {
                   "Authorization":
                     `Bearer ${token}`
                 }
               }
             );
+
           } catch (_) {}
         }
 
         clearToken();
-        latestStats = null;
+
+        latestStats =
+          null;
+
         showLogin();
       }
     );
 
-    /* =========================================================
-       10 INITIALIZE
-       ========================================================= */
     async function initialize() {
-      activateTab("today");
+      activateTab(
+        "today"
+      );
 
-      if (getToken()) {
+      if (
+        getToken()
+      ) {
         showDashboard();
+
         await loadStats();
+
       } else {
         showLogin();
       }
