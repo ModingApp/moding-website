@@ -454,6 +454,136 @@
     }
 
     /* =========================================================
+       IOS APP STORE
+       ========================================================= */
+    .ios-block {
+      margin-top: 16px;
+      padding: 24px;
+      border: 1px solid rgba(61,127,240,.18);
+      border-radius: 24px;
+      background: #F7FAFF;
+    }
+
+    .ios-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .ios-kicker {
+      color: var(--blue);
+      font-size: 10.5px;
+      font-weight: 950;
+      letter-spacing: .14em;
+    }
+
+    .ios-title {
+      margin-top: 6px;
+      font-size: 20px;
+      line-height: 1.2;
+      font-weight: 950;
+      letter-spacing: -.04em;
+    }
+
+    .ios-desc {
+      color: var(--sub);
+      font-size: 11.5px;
+      line-height: 1.45;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .stat-card.ios-primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    .ios-primary .stat-label {
+      color: rgba(255,255,255,.75);
+    }
+
+    .ios-primary .stat-sub {
+      color: rgba(255,255,255,.70);
+    }
+
+    .stat-card.ios-accent {
+      border-color: rgba(61,127,240,.24);
+    }
+
+    .ios-accent .stat-value {
+      color: var(--blue);
+    }
+
+    .stat-card.ios-soft {
+      background: #EEF5FF;
+      border-color: rgba(61,127,240,.14);
+    }
+
+    .ios-summary {
+      margin-top: 14px;
+      padding: 13px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px 22px;
+      border: 1px solid rgba(61,127,240,.14);
+      border-radius: 16px;
+      background: rgba(255,255,255,.78);
+      color: var(--sub);
+      font-size: 11.5px;
+      line-height: 1.5;
+      font-weight: 750;
+    }
+
+    .ios-summary strong {
+      color: var(--ink);
+      font-weight: 950;
+    }
+
+    .ios-table-wrap {
+      margin-top: 16px;
+      overflow-x: auto;
+      border-top: 1px solid rgba(61,127,240,.14);
+    }
+
+    .ios-table {
+      width: 100%;
+      min-width: 460px;
+      border-collapse: collapse;
+    }
+
+    .ios-table th,
+    .ios-table td {
+      padding: 14px 10px;
+      border-bottom: 1px solid rgba(61,127,240,.12);
+      text-align: right;
+      font-size: 13px;
+    }
+
+    .ios-table th {
+      color: var(--sub);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .ios-table th:first-child,
+    .ios-table td:first-child {
+      text-align: left;
+    }
+
+    .ios-table td {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .ios-table td.ios-new {
+      color: var(--blue);
+      font-weight: 950;
+    }
+
+    /* =========================================================
        06 SUMMARY STRIP
        ========================================================= */
     .summary-strip {
@@ -793,6 +923,19 @@
       .section-head {
         align-items: flex-start;
       }
+
+      .ios-block {
+        padding: 19px 15px;
+        border-radius: 21px;
+      }
+
+      .ios-head {
+        align-items: flex-start;
+      }
+
+      .ios-desc {
+        max-width: 145px;
+      }
     }
 
     @media (max-width: 390px) {
@@ -928,7 +1071,7 @@
         </h1>
 
         <p class="dashboard-desc">
-          인덱스 진입과 앱 다운로드 클릭 흐름을 확인합니다.
+          홈페이지 방문·다운로드 클릭과 App Store 실제 다운로드를 확인합니다.
         </p>
       </div>
 
@@ -1029,6 +1172,88 @@
         <span>누적 클릭률 <strong id="totalRate">0%</strong></span>
       </div>
 
+      <section class="ios-block">
+        <div class="ios-head">
+          <div>
+            <div class="ios-kicker">APP STORE</div>
+            <h2 class="ios-title">iOS 실제 다운로드</h2>
+          </div>
+
+          <div class="ios-desc">
+            App Store Connect 집계 기준
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat-card ios-primary">
+            <div>
+              <div class="stat-label">오늘 신규 다운로드</div>
+              <div class="stat-value">
+                <span id="iosTodayFirstDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+            <div class="stat-sub">First-Time Download</div>
+          </article>
+
+          <article class="stat-card ios-accent">
+            <div>
+              <div class="stat-label">오늘 전체 다운로드</div>
+              <div class="stat-value">
+                <span id="iosTodayTotalDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+            <div class="stat-sub">신규 + 재다운로드</div>
+          </article>
+
+          <article class="stat-card ios-soft">
+            <div>
+              <div class="stat-label">누적 신규 다운로드</div>
+              <div class="stat-value">
+                <span id="iosCumulativeFirstDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+            <div class="stat-sub">D1 저장 데이터 누적</div>
+          </article>
+
+          <article class="stat-card">
+            <div>
+              <div class="stat-label">누적 전체 다운로드</div>
+              <div class="stat-value">
+                <span id="iosCumulativeTotalDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+            <div class="stat-sub">신규 + 재다운로드 누적</div>
+          </article>
+        </div>
+
+        <div class="ios-summary">
+          <span>
+            마지막 Apple 동기화
+            <strong id="iosTodaySync">아직 없음</strong>
+          </span>
+          <span>
+            Apple 일별 데이터는 최근 날짜가 이후 보정될 수 있습니다
+          </span>
+        </div>
+
+        <div class="ios-table-wrap">
+          <table class="ios-table">
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>신규 다운로드</th>
+                <th>전체 다운로드</th>
+              </tr>
+            </thead>
+            <tbody id="iosTodayTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
       <section class="table-card">
         <div class="section-head">
           <h2 class="section-title">최근 7일</h2>
@@ -1113,6 +1338,88 @@
         <span>지난주 <strong id="previousWeekRange">-</strong></span>
       </div>
 
+      <section class="ios-block">
+        <div class="ios-head">
+          <div>
+            <div class="ios-kicker">APP STORE</div>
+            <h2 class="ios-title">iOS 주간 실제 다운로드</h2>
+          </div>
+
+          <div class="ios-desc">
+            신규 다운로드 중심 비교
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat-card ios-primary">
+            <div>
+              <div class="stat-label">이번 주 신규 다운로드</div>
+              <div class="stat-value">
+                <span id="iosWeekFirstDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+            <div class="stat-sub">
+              지난주 대비
+              <strong id="iosWeekFirstChange">-</strong>
+            </div>
+          </article>
+
+          <article class="stat-card ios-accent">
+            <div>
+              <div class="stat-label">이번 주 전체 다운로드</div>
+              <div class="stat-value">
+                <span id="iosWeekTotalDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+            <div class="stat-sub">신규 + 재다운로드</div>
+          </article>
+
+          <article class="stat-card ios-soft">
+            <div>
+              <div class="stat-label">지난주 신규 다운로드</div>
+              <div class="stat-value">
+                <span id="iosPreviousWeekFirstDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+            <div class="stat-sub">비교 기준</div>
+          </article>
+
+          <article class="stat-card">
+            <div>
+              <div class="stat-label">지난주 전체 다운로드</div>
+              <div class="stat-value">
+                <span id="iosPreviousWeekTotalDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+            <div class="stat-sub">신규 + 재다운로드</div>
+          </article>
+        </div>
+
+        <div class="ios-summary">
+          <span>
+            마지막 Apple 동기화
+            <strong id="iosWeekSync">아직 없음</strong>
+          </span>
+        </div>
+
+        <div class="ios-table-wrap">
+          <table class="ios-table">
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>신규 다운로드</th>
+                <th>전체 다운로드</th>
+              </tr>
+            </thead>
+            <tbody id="iosWeekTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
       <section class="chart-card">
         <div class="section-head">
           <h2 class="section-title">최근 7일 추이</h2>
@@ -1126,6 +1433,7 @@
             <span class="legend-dot visit"></span>
             방문
           </span>
+
           <span class="legend-item">
             <span class="legend-dot download"></span>
             다운로드
@@ -1166,6 +1474,7 @@
               <span class="stat-unit">회</span>
             </div>
           </div>
+
           <div class="stat-sub">
             지난달 대비
             <strong id="monthVisitChange">-</strong>
@@ -1180,6 +1489,7 @@
               <span class="stat-unit">회</span>
             </div>
           </div>
+
           <div class="stat-sub">
             지난달 대비
             <strong id="monthDownloadChange">-</strong>
@@ -1194,6 +1504,7 @@
               <span class="stat-unit">%</span>
             </div>
           </div>
+
           <div class="stat-sub">다운로드 클릭 ÷ 방문</div>
         </article>
 
@@ -1205,6 +1516,7 @@
               <span class="stat-unit">회</span>
             </div>
           </div>
+
           <div class="stat-sub">
             지난달 다운로드
             <strong id="previousMonthDownloads">0회</strong>
@@ -1216,6 +1528,93 @@
         <span>이번 달 <strong id="monthRange">-</strong></span>
         <span>비교 기준 <strong id="previousMonthLabel">-</strong></span>
       </div>
+
+      <section class="ios-block">
+        <div class="ios-head">
+          <div>
+            <div class="ios-kicker">APP STORE</div>
+            <h2 class="ios-title">iOS 월간 실제 다운로드</h2>
+          </div>
+
+          <div class="ios-desc">
+            App Store Connect 월별 집계
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat-card ios-primary">
+            <div>
+              <div class="stat-label">이번 달 신규 다운로드</div>
+              <div class="stat-value">
+                <span id="iosMonthFirstDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+
+            <div class="stat-sub">
+              지난달 대비
+              <strong id="iosMonthFirstChange">-</strong>
+            </div>
+          </article>
+
+          <article class="stat-card ios-accent">
+            <div>
+              <div class="stat-label">이번 달 전체 다운로드</div>
+              <div class="stat-value">
+                <span id="iosMonthTotalDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+
+            <div class="stat-sub">신규 + 재다운로드</div>
+          </article>
+
+          <article class="stat-card ios-soft">
+            <div>
+              <div class="stat-label">지난달 신규 다운로드</div>
+              <div class="stat-value">
+                <span id="iosPreviousMonthFirstDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+
+            <div class="stat-sub">비교 기준</div>
+          </article>
+
+          <article class="stat-card">
+            <div>
+              <div class="stat-label">지난달 전체 다운로드</div>
+              <div class="stat-value">
+                <span id="iosPreviousMonthTotalDownloads">0</span>
+                <span class="stat-unit">건</span>
+              </div>
+            </div>
+
+            <div class="stat-sub">신규 + 재다운로드</div>
+          </article>
+        </div>
+
+        <div class="ios-summary">
+          <span>
+            마지막 Apple 동기화
+            <strong id="iosMonthSync">아직 없음</strong>
+          </span>
+        </div>
+
+        <div class="ios-table-wrap">
+          <table class="ios-table">
+            <thead>
+              <tr>
+                <th>월</th>
+                <th>신규 다운로드</th>
+                <th>전체 다운로드</th>
+              </tr>
+            </thead>
+
+            <tbody id="iosMonthlyBody"></tbody>
+          </table>
+        </div>
+      </section>
 
       <div class="month-grid">
         <section class="table-card">
@@ -1234,6 +1633,7 @@
                   <th>클릭률</th>
                 </tr>
               </thead>
+
               <tbody id="monthDailyBody"></tbody>
             </table>
           </div>
@@ -1255,6 +1655,7 @@
                   <th>클릭률</th>
                 </tr>
               </thead>
+
               <tbody id="monthlyBody"></tbody>
             </table>
           </div>
@@ -1754,6 +2155,7 @@
       renderToday(data);
       renderWeek(data);
       renderMonth(data);
+      renderIos(data?.ios || {});
     }
 
     function renderToday(data) {
@@ -1972,6 +2374,357 @@
         "monthlyBody",
         data?.monthly || []
       );
+    }
+
+    function renderIos(ios) {
+      renderIosToday(ios);
+      renderIosWeek(ios);
+      renderIosMonth(ios);
+    }
+
+    function renderIosToday(ios) {
+      document.getElementById(
+        "iosTodayFirstDownloads"
+      ).textContent =
+        formatNumber(
+          ios?.today?.firstDownloads
+        );
+
+      document.getElementById(
+        "iosTodayTotalDownloads"
+      ).textContent =
+        formatNumber(
+          ios?.today?.totalDownloads
+        );
+
+      document.getElementById(
+        "iosCumulativeFirstDownloads"
+      ).textContent =
+        formatNumber(
+          ios?.total?.firstDownloads
+        );
+
+      document.getElementById(
+        "iosCumulativeTotalDownloads"
+      ).textContent =
+        formatNumber(
+          ios?.total?.totalDownloads
+        );
+
+      document.getElementById(
+        "iosTodaySync"
+      ).textContent =
+        formatSyncTime(
+          ios?.lastSyncedAt
+        );
+
+      renderIosDailyTable(
+        "iosTodayTableBody",
+        ios?.daily || []
+      );
+    }
+
+    function renderIosWeek(ios) {
+      const week =
+        ios?.week || {};
+
+      document.getElementById(
+        "iosWeekFirstDownloads"
+      ).textContent =
+        formatNumber(
+          week.firstDownloads
+        );
+
+      document.getElementById(
+        "iosWeekTotalDownloads"
+      ).textContent =
+        formatNumber(
+          week.totalDownloads
+        );
+
+      document.getElementById(
+        "iosPreviousWeekFirstDownloads"
+      ).textContent =
+        formatNumber(
+          week?.previous?.firstDownloads
+        );
+
+      document.getElementById(
+        "iosPreviousWeekTotalDownloads"
+      ).textContent =
+        formatNumber(
+          week?.previous?.totalDownloads
+        );
+
+      applyChange(
+        "iosWeekFirstChange",
+        week.firstDownloadChange
+      );
+
+      document.getElementById(
+        "iosWeekSync"
+      ).textContent =
+        formatSyncTime(
+          ios?.lastSyncedAt
+        );
+
+      renderIosDailyTable(
+        "iosWeekTableBody",
+        ios?.daily || []
+      );
+    }
+
+    function renderIosMonth(ios) {
+      const month =
+        ios?.month || {};
+
+      document.getElementById(
+        "iosMonthFirstDownloads"
+      ).textContent =
+        formatNumber(
+          month.firstDownloads
+        );
+
+      document.getElementById(
+        "iosMonthTotalDownloads"
+      ).textContent =
+        formatNumber(
+          month.totalDownloads
+        );
+
+      document.getElementById(
+        "iosPreviousMonthFirstDownloads"
+      ).textContent =
+        formatNumber(
+          month?.previous?.firstDownloads
+        );
+
+      document.getElementById(
+        "iosPreviousMonthTotalDownloads"
+      ).textContent =
+        formatNumber(
+          month?.previous?.totalDownloads
+        );
+
+      applyChange(
+        "iosMonthFirstChange",
+        month.firstDownloadChange
+      );
+
+      document.getElementById(
+        "iosMonthSync"
+      ).textContent =
+        formatSyncTime(
+          ios?.lastSyncedAt
+        );
+
+      renderIosMonthlyTable(
+        "iosMonthlyBody",
+        ios?.monthly || []
+      );
+    }
+
+    function formatSyncTime(value) {
+      if (!value) {
+        return "아직 없음";
+      }
+
+      const normalized =
+        /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
+          .test(value)
+          ? value.replace(" ", "T") + "Z"
+          : value;
+
+      const date =
+        new Date(normalized);
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+        return value;
+      }
+
+      return new Intl.DateTimeFormat(
+        "ko-KR",
+        {
+          timeZone: "Asia/Seoul",
+          month: "numeric",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false
+        }
+      ).format(date);
+    }
+
+    function renderIosDailyTable(
+      bodyId,
+      rows
+    ) {
+      const body =
+        document.getElementById(
+          bodyId
+        );
+
+      body.innerHTML = "";
+
+      if (
+        !Array.isArray(rows) ||
+        !rows.length
+      ) {
+        const tr =
+          document.createElement(
+            "tr"
+          );
+
+        const td =
+          document.createElement(
+            "td"
+          );
+
+        td.colSpan = 3;
+        td.className = "empty";
+        td.textContent =
+          "아직 iOS 집계 데이터가 없습니다.";
+
+        tr.appendChild(td);
+        body.appendChild(tr);
+        return;
+      }
+
+      rows.forEach((row) => {
+        const tr =
+          document.createElement(
+            "tr"
+          );
+
+        const date =
+          document.createElement(
+            "td"
+          );
+
+        date.textContent =
+          formatDate(
+            row.date
+          );
+
+        const first =
+          document.createElement(
+            "td"
+          );
+
+        first.className =
+          "ios-new";
+
+        first.textContent =
+          `${formatNumber(
+            row.firstDownloads
+          )}건`;
+
+        const total =
+          document.createElement(
+            "td"
+          );
+
+        total.textContent =
+          `${formatNumber(
+            row.totalDownloads
+          )}건`;
+
+        tr.append(
+          date,
+          first,
+          total
+        );
+
+        body.appendChild(tr);
+      });
+    }
+
+    function renderIosMonthlyTable(
+      bodyId,
+      rows
+    ) {
+      const body =
+        document.getElementById(
+          bodyId
+        );
+
+      body.innerHTML = "";
+
+      if (
+        !Array.isArray(rows) ||
+        !rows.length
+      ) {
+        const tr =
+          document.createElement(
+            "tr"
+          );
+
+        const td =
+          document.createElement(
+            "td"
+          );
+
+        td.colSpan = 3;
+        td.className = "empty";
+        td.textContent =
+          "아직 iOS 집계 데이터가 없습니다.";
+
+        tr.appendChild(td);
+        body.appendChild(tr);
+        return;
+      }
+
+      rows.forEach((row) => {
+        const tr =
+          document.createElement(
+            "tr"
+          );
+
+        const month =
+          document.createElement(
+            "td"
+          );
+
+        month.textContent =
+          formatMonth(
+            row.month
+          );
+
+        const first =
+          document.createElement(
+            "td"
+          );
+
+        first.className =
+          "ios-new";
+
+        first.textContent =
+          `${formatNumber(
+            row.firstDownloads
+          )}건`;
+
+        const total =
+          document.createElement(
+            "td"
+          );
+
+        total.textContent =
+          `${formatNumber(
+            row.totalDownloads
+          )}건`;
+
+        tr.append(
+          month,
+          first,
+          total
+        );
+
+        body.appendChild(tr);
+      });
     }
 
     function renderDailyTable(
