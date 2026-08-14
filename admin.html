@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Moding Admin</title>
-
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="googlebot" content="noindex,nofollow,noarchive">
 
@@ -12,18 +11,18 @@
     :root {
       --green: #238B22;
       --green-dark: #176516;
-      --green-soft: #EFF8EF;
+      --green-soft: #F0F8F0;
       --orange: #FF8C00;
       --blue: #3D7FF0;
       --ink: #152717;
-      --sub: #6B756D;
-      --line: #E4E9E4;
+      --sub: #6D776F;
+      --line: #E3E9E3;
       --soft: #F6F8F6;
       --white: #FFFFFF;
-      --danger: #C74848;
       --black: #090B09;
+      --danger: #C74848;
       --page-max: 1180px;
-      --shadow: 0 18px 50px rgba(24, 48, 28, .06);
+      --shadow: 0 18px 50px rgba(20, 45, 24, .055);
     }
 
     * {
@@ -57,8 +56,7 @@
     }
 
     button,
-    a,
-    summary {
+    a {
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -78,17 +76,16 @@
     .admin-header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      width: 100%;
+      z-index: 30;
       border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
+      background: rgba(255, 255, 255, .92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
 
     .admin-header-inner {
       width: min(100% - 40px, var(--page-max));
-      min-height: 72px;
+      min-height: 70px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -99,19 +96,18 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      color: var(--green);
+      gap: 11px;
       text-decoration: none;
     }
 
     .brand img {
       width: auto;
-      height: 40px;
+      height: 39px;
       object-fit: contain;
     }
 
     .brand-badge {
-      min-height: 25px;
+      min-height: 24px;
       padding: 0 9px;
       display: inline-flex;
       align-items: center;
@@ -124,22 +120,22 @@
       letter-spacing: .08em;
     }
 
-    .admin-home {
+    .header-link {
       color: var(--sub);
       font-size: 12px;
       font-weight: 850;
       text-decoration: none;
     }
 
-    .admin-home:hover {
-      color: var(--orange);
+    .header-link:hover {
+      color: var(--green);
     }
 
     /* =========================================================
        02 LOGIN
        ========================================================= */
     .login-shell {
-      min-height: calc(100dvh - 73px);
+      min-height: calc(100dvh - 71px);
       padding: 44px 20px;
       display: flex;
       align-items: center;
@@ -155,11 +151,16 @@
       box-shadow: var(--shadow);
     }
 
-    .login-kicker {
-      color: var(--orange);
-      font-size: 11px;
+    .login-kicker,
+    .dashboard-kicker {
+      color: var(--green);
+      font-size: 10.5px;
       font-weight: 950;
       letter-spacing: .16em;
+    }
+
+    .login-kicker {
+      color: var(--orange);
     }
 
     .login-title {
@@ -197,14 +198,11 @@
       color: var(--ink);
       font-size: 16px;
       font-weight: 800;
-      transition:
-        border-color .18s ease,
-        box-shadow .18s ease;
     }
 
     .password-input:focus {
-      border-color: rgba(35,139,34,.55);
-      box-shadow: 0 0 0 4px rgba(35,139,34,.08);
+      border-color: rgba(35, 139, 34, .55);
+      box-shadow: 0 0 0 4px rgba(35, 139, 34, .08);
     }
 
     .password-toggle {
@@ -234,20 +232,15 @@
       font-size: 15px;
       font-weight: 950;
       cursor: pointer;
-      transition:
-        transform .18s ease,
-        background .18s ease;
     }
 
     .login-submit:hover {
       background: var(--green-dark);
-      transform: translateY(-1px);
     }
 
     .login-submit:disabled {
       opacity: .55;
       cursor: wait;
-      transform: none;
     }
 
     .login-error {
@@ -260,7 +253,7 @@
     }
 
     /* =========================================================
-       03 DASHBOARD
+       03 DASHBOARD HEADER / TABS
        ========================================================= */
     .dashboard {
       width: min(100% - 40px, var(--page-max));
@@ -268,37 +261,30 @@
       padding: 34px 0 72px;
     }
 
-    .dashboard-head {
+    .dashboard-top {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 24px;
     }
 
-    .dashboard-kicker {
-      color: var(--green);
-      font-size: 10.5px;
-      font-weight: 950;
-      letter-spacing: .16em;
-    }
-
     .dashboard-title {
       margin-top: 8px;
-      font-size: clamp(38px, 5.3vw, 64px);
+      font-size: clamp(38px, 5vw, 62px);
       line-height: 1;
       letter-spacing: -.07em;
       font-weight: 950;
     }
 
     .dashboard-desc {
-      margin-top: 12px;
+      margin-top: 11px;
       color: var(--sub);
-      font-size: 13.5px;
-      line-height: 1.6;
+      font-size: 13px;
+      line-height: 1.55;
       font-weight: 650;
     }
 
-    .head-actions {
+    .top-actions {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -317,7 +303,7 @@
     }
 
     .ghost-btn:hover {
-      border-color: rgba(35,139,34,.25);
+      border-color: rgba(35, 139, 34, .24);
       color: var(--green);
     }
 
@@ -327,35 +313,29 @@
     }
 
     .last-check {
-      margin-top: 10px;
+      margin-top: 9px;
       color: var(--sub);
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       text-align: right;
     }
 
-    /* =========================================================
-       04 PERIOD TABS
-       ========================================================= */
-    .period-tabs {
-      margin-top: 26px;
-      width: fit-content;
-      max-width: 100%;
+    .primary-tabs {
+      margin-top: 28px;
       padding: 5px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 4px;
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 20px;
       background: #fff;
     }
 
-    .period-tab {
-      min-width: 104px;
-      min-height: 44px;
-      padding: 0 22px;
+    .primary-tab {
+      min-height: 50px;
+      padding: 0 14px;
       border: 0;
-      border-radius: 13px;
+      border-radius: 14px;
       background: transparent;
       color: var(--sub);
       font-size: 13px;
@@ -363,24 +343,73 @@
       cursor: pointer;
     }
 
-    .period-tab.is-active {
-      background: var(--green);
+    .primary-tab.is-active {
+      background: var(--black);
       color: #fff;
-      box-shadow: 0 8px 18px rgba(35,139,34,.13);
+    }
+
+    .period-row {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .period-tabs {
+      padding: 4px;
+      display: inline-grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      border-radius: 15px;
+      background: #EDEFED;
+    }
+
+    .period-tab {
+      min-width: 82px;
+      min-height: 38px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 11px;
+      background: transparent;
+      color: var(--sub);
+      font-size: 11.5px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .period-tab.is-active {
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 3px 10px rgba(23, 49, 25, .06);
+    }
+
+    .launch-mark {
+      color: var(--sub);
+      font-size: 10.5px;
+      font-weight: 750;
+    }
+
+    .launch-mark strong {
+      color: var(--ink);
+      font-weight: 950;
+    }
+
+    .content-panel {
+      margin-top: 18px;
     }
 
     /* =========================================================
-       05 HERO KPI
+       04 KPI / COMMON
        ========================================================= */
-    .hero-kpi-grid {
-      margin-top: 18px;
+    .kpi-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
 
-    .hero-kpi {
-      min-height: 250px;
+    .kpi-card {
+      min-height: 230px;
       padding: 26px;
       display: flex;
       flex-direction: column;
@@ -388,447 +417,488 @@
       border: 1px solid var(--line);
       border-radius: 30px;
       background: #fff;
-      box-shadow: 0 14px 40px rgba(23,49,25,.035);
-      cursor: pointer;
-      transition:
-        transform .18s ease,
-        box-shadow .18s ease;
+      box-shadow: 0 14px 38px rgba(23, 49, 25, .03);
     }
 
-    .hero-kpi:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-kpi.visit {
+    .kpi-card.primary {
       background: var(--green);
       border-color: var(--green);
       color: #fff;
     }
 
-    .hero-kpi.download {
-      border-color: rgba(255,140,0,.22);
+    .kpi-card.orange {
+      border-color: rgba(255, 140, 0, .22);
     }
 
-    .hero-kpi.install {
-      border-color: rgba(35,139,34,.18);
+    .kpi-card.install {
       background:
         linear-gradient(
           180deg,
           #FFFFFF 0%,
-          #F7FBF7 100%
+          #F6FBF6 100%
         );
+      border-color: rgba(35, 139, 34, .17);
     }
 
-    .hero-label {
+    .kpi-label {
       color: var(--sub);
       font-size: 12px;
       font-weight: 900;
     }
 
-    .visit .hero-label {
-      color: rgba(255,255,255,.76);
+    .primary .kpi-label {
+      color: rgba(255, 255, 255, .76);
     }
 
-    .hero-value {
-      margin-top: 22px;
-      font-size: clamp(60px, 7vw, 92px);
+    .kpi-value {
+      margin-top: 18px;
+      font-size: clamp(58px, 6.5vw, 88px);
       line-height: .92;
       letter-spacing: -.07em;
       font-weight: 950;
     }
 
-    .download .hero-value {
+    .orange .kpi-value {
       color: var(--orange);
     }
 
-    .install .hero-value {
+    .install .kpi-value {
       color: var(--green-dark);
     }
 
-    .hero-unit {
-      margin-left: 5px;
-      font-size: 16px;
+    .kpi-unit {
+      margin-left: 4px;
+      font-size: 15px;
       font-weight: 900;
     }
 
-    .hero-sub {
+    .kpi-sub {
       margin-top: 12px;
       color: var(--sub);
       font-size: 11.5px;
-      line-height: 1.55;
+      line-height: 1.5;
       font-weight: 700;
     }
 
-    .visit .hero-sub {
-      color: rgba(255,255,255,.70);
+    .primary .kpi-sub {
+      color: rgba(255, 255, 255, .70);
     }
 
-    .platform-mini-row {
-      margin-top: 16px;
+    .mini-platforms {
+      margin-top: 14px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
     }
 
-    .platform-mini {
+    .mini-platform {
       min-height: 58px;
       padding: 10px 12px;
       border: 1px solid var(--line);
       border-radius: 16px;
-      background: rgba(255,255,255,.86);
+      background: rgba(255, 255, 255, .90);
     }
 
-    .platform-mini-label {
+    .mini-platform small {
+      display: block;
       color: var(--sub);
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 850;
     }
 
-    .platform-mini-value {
+    .mini-platform strong {
+      display: block;
       margin-top: 4px;
       font-size: 20px;
       line-height: 1;
       font-weight: 950;
     }
 
-    .platform-mini.ios .platform-mini-value {
+    .mini-platform.ios strong {
       color: var(--blue);
     }
 
-    .platform-mini.android .platform-mini-value {
+    .mini-platform.android strong {
       color: var(--green);
     }
 
-    .summary-line {
+    .info-strip {
       margin-top: 12px;
-      padding: 0 4px;
+      padding: 13px 16px;
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      gap: 8px 18px;
+      gap: 7px 22px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .76);
       color: var(--sub);
-      font-size: 11.5px;
-      line-height: 1.5;
+      font-size: 11px;
+      line-height: 1.45;
       font-weight: 750;
     }
 
-    .summary-line strong {
+    .info-strip strong {
       color: var(--ink);
       font-weight: 950;
     }
 
-    /* =========================================================
-       06 TREND
-       ========================================================= */
-    .trend-card {
-      margin-top: 18px;
+    .funnel-card,
+    .chart-card,
+    .table-card,
+    .feature-card {
+      margin-top: 16px;
       padding: 24px;
       border: 1px solid var(--line);
-      border-radius: 28px;
+      border-radius: 26px;
       background: #fff;
-      box-shadow: 0 14px 40px rgba(23,49,25,.025);
     }
 
-    .trend-head {
+    .section-head {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 18px;
     }
 
-    .trend-title {
-      font-size: 21px;
+    .section-kicker {
+      color: var(--green);
+      font-size: 9.5px;
+      font-weight: 950;
+      letter-spacing: .13em;
+    }
+
+    .section-title {
+      margin-top: 5px;
+      font-size: 20px;
       line-height: 1.2;
       font-weight: 950;
       letter-spacing: -.04em;
     }
 
-    .trend-caption {
-      margin-top: 5px;
+    .section-caption {
       color: var(--sub);
-      font-size: 11px;
+      font-size: 10.5px;
       line-height: 1.45;
       font-weight: 700;
+      text-align: right;
     }
 
-    .metric-tabs {
+    /* =========================================================
+       05 FUNNEL / CHART
+       ========================================================= */
+    .funnel-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .funnel-step {
+      min-height: 150px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--soft);
+    }
+
+    .funnel-step-label {
+      color: var(--sub);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .funnel-step-value {
+      margin-top: 13px;
+      font-size: 38px;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -.05em;
+    }
+
+    .funnel-arrow {
+      color: #A7B0A8;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .funnel-rate {
+      margin-top: 8px;
+      color: var(--sub);
+      font-size: 10.5px;
+      font-weight: 800;
+    }
+
+    .chart-tools {
       padding: 4px;
       display: inline-grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 3px;
-      border-radius: 14px;
+      border-radius: 13px;
       background: var(--soft);
     }
 
-    .metric-tab {
-      min-height: 36px;
-      padding: 0 13px;
+    .chart-tool {
+      min-height: 34px;
+      padding: 0 11px;
       border: 0;
-      border-radius: 11px;
+      border-radius: 10px;
       background: transparent;
       color: var(--sub);
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 900;
       cursor: pointer;
     }
 
-    .metric-tab.is-active {
+    .chart-tool.is-active {
       background: #fff;
       color: var(--ink);
-      box-shadow: 0 3px 10px rgba(23,49,25,.06);
+      box-shadow: 0 3px 8px rgba(23, 49, 25, .05);
     }
 
-    .trend-chart {
-      margin-top: 26px;
-      height: 270px;
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      align-items: end;
-      gap: 12px;
+    .chart-scroll {
+      margin-top: 24px;
+      overflow-x: auto;
+      padding-bottom: 2px;
     }
 
-    .trend-item {
-      min-width: 0;
-      height: 100%;
+    .bar-chart {
+      min-width: 100%;
+      min-height: 250px;
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .bar-item {
+      flex: 1 0 44px;
+      min-width: 44px;
+      height: 230px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
       align-items: center;
+      justify-content: flex-end;
     }
 
-    .trend-number {
-      margin-bottom: 8px;
+    .bar-number {
+      margin-bottom: 7px;
       color: var(--ink);
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 900;
       white-space: nowrap;
     }
 
-    .trend-bar-wrap {
-      width: min(100%, 44px);
-      height: 190px;
+    .bar-wrap {
+      width: min(100%, 36px);
+      height: 180px;
       display: flex;
       align-items: flex-end;
     }
 
-    .trend-bar {
+    .bar {
       width: 100%;
       min-height: 3px;
-      border-radius: 10px 10px 4px 4px;
+      border-radius: 9px 9px 3px 3px;
       background: var(--green);
-      transition: height .32s ease;
     }
 
-    .trend-bar.download {
+    .bar.orange {
       background: var(--orange);
     }
 
-    .trend-bar.install {
+    .bar.black {
       background: var(--black);
     }
 
-    .trend-label {
-      margin-top: 9px;
+    .bar-label {
+      margin-top: 8px;
       color: var(--sub);
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
       white-space: nowrap;
     }
 
-    .trend-empty {
-      grid-column: 1 / -1;
+    .chart-empty {
+      width: 100%;
       min-height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--sub);
       font-size: 12px;
+      line-height: 1.6;
       font-weight: 800;
       text-align: center;
     }
 
     /* =========================================================
-       07 DETAIL DRAWERS
+       06 TABLE / PLATFORM SPLIT
        ========================================================= */
-    .details-stack {
-      margin-top: 18px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .detail-box {
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: #fff;
-    }
-
-    .detail-box summary {
-      min-height: 66px;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      cursor: pointer;
-      list-style: none;
-      user-select: none;
-    }
-
-    .detail-box summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .detail-summary-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .detail-index {
-      width: 30px;
-      height: 30px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      background: var(--soft);
-      color: var(--sub);
-      font-size: 10px;
-      font-weight: 950;
-    }
-
-    .detail-title {
-      font-size: 14px;
-      font-weight: 950;
-    }
-
-    .detail-caption {
-      margin-top: 3px;
-      color: var(--sub);
-      font-size: 10.5px;
-      font-weight: 700;
-    }
-
-    .detail-arrow {
-      color: var(--sub);
-      font-size: 16px;
-      font-weight: 900;
-      transition: transform .18s ease;
-    }
-
-    .detail-box[open] .detail-arrow {
-      transform: rotate(180deg);
-    }
-
-    .detail-content {
-      padding: 0 20px 20px;
+    .table-wrap {
+      margin-top: 17px;
+      overflow-x: auto;
       border-top: 1px solid var(--line);
     }
 
-    .detail-toolbar {
-      padding: 14px 0 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
+    .data-table {
+      width: 100%;
+      min-width: 620px;
+      border-collapse: collapse;
     }
 
-    .detail-note {
+    .data-table th,
+    .data-table td {
+      padding: 14px 9px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      font-size: 12px;
+    }
+
+    .data-table th {
+      color: var(--sub);
+      font-size: 10.5px;
+      font-weight: 900;
+    }
+
+    .data-table th:first-child,
+    .data-table td:first-child {
+      text-align: left;
+    }
+
+    .data-table td {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .data-table td.orange-value {
+      color: var(--orange);
+    }
+
+    .data-table td.ios-value {
+      color: var(--blue);
+    }
+
+    .data-table td.android-value {
+      color: var(--green);
+    }
+
+    .empty {
+      padding: 30px 8px !important;
+      color: var(--sub) !important;
+      text-align: center !important;
+      font-weight: 750 !important;
+    }
+
+    .split-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .split-card {
+      min-height: 160px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--soft);
+    }
+
+    .split-label {
+      color: var(--sub);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .split-value {
+      margin-top: 16px;
+      font-size: 40px;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -.05em;
+    }
+
+    .split-card.ios .split-value {
+      color: var(--blue);
+    }
+
+    .split-card.android .split-value {
+      color: var(--green);
+    }
+
+    .split-sub {
+      margin-top: 10px;
       color: var(--sub);
       font-size: 10.5px;
       line-height: 1.5;
       font-weight: 700;
     }
 
-    .mini-btn {
-      min-height: 34px;
-      padding: 0 12px;
+    /* =========================================================
+       07 SYSTEM POPOVER
+       ========================================================= */
+    .system-popover {
+      position: fixed;
+      top: 82px;
+      right: max(20px, calc((100vw - var(--page-max)) / 2));
+      z-index: 50;
+      width: min(360px, calc(100vw - 28px));
+      padding: 18px;
       border: 1px solid var(--line);
-      border-radius: 999px;
+      border-radius: 22px;
       background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .system-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .system-title {
+      font-size: 16px;
+      font-weight: 950;
+      letter-spacing: -.03em;
+    }
+
+    .system-close {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--soft);
       color: var(--sub);
-      font-size: 10.5px;
       font-weight: 900;
       cursor: pointer;
     }
 
-    .mini-btn:hover {
-      color: var(--green);
-      border-color: rgba(35,139,34,.24);
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    .detail-table {
-      width: 100%;
-      min-width: 620px;
-      border-collapse: collapse;
-    }
-
-    .detail-table th,
-    .detail-table td {
-      padding: 13px 8px;
-      border-bottom: 1px solid var(--line);
-      text-align: right;
-      font-size: 12px;
-    }
-
-    .detail-table th {
-      color: var(--sub);
-      font-size: 10.5px;
-      font-weight: 900;
-    }
-
-    .detail-table th:first-child,
-    .detail-table td:first-child {
-      text-align: left;
-    }
-
-    .detail-table td {
-      color: var(--ink);
-      font-weight: 800;
-    }
-
-    .detail-table td.ios-value {
-      color: var(--blue);
-    }
-
-    .detail-table td.android-value {
-      color: var(--green);
-    }
-
-    .detail-table td.download-value {
-      color: var(--orange);
-    }
-
-    .empty {
-      padding: 28px 8px !important;
-      color: var(--sub) !important;
-      text-align: center !important;
-      font-weight: 750 !important;
-    }
-
-    .system-grid {
-      padding-top: 14px;
+    .system-list {
+      margin-top: 14px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .system-card {
-      min-height: 112px;
-      padding: 16px;
+    .system-item {
+      padding: 13px;
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 15px;
       background: var(--soft);
     }
 
-    .system-label {
+    .system-item-top {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .system-name {
+      display: inline-flex;
       align-items: center;
       gap: 7px;
       color: var(--sub);
@@ -840,24 +910,23 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #B9C2BA;
+      background: #B9C1BA;
     }
 
-    .system-card.ready .system-dot {
+    .system-dot.ready {
       background: var(--green);
     }
 
-    .system-value {
-      margin-top: 12px;
-      font-size: 18px;
-      line-height: 1.2;
+    .system-state {
+      color: var(--ink);
+      font-size: 11px;
       font-weight: 950;
     }
 
-    .system-sub {
-      margin-top: 5px;
+    .system-desc {
+      margin-top: 7px;
       color: var(--sub);
-      font-size: 10.5px;
+      font-size: 10px;
       line-height: 1.45;
       font-weight: 700;
     }
@@ -879,12 +948,17 @@
        08 RESPONSIVE
        ========================================================= */
     @media (max-width: 900px) {
-      .hero-kpi-grid {
+      .kpi-grid {
         grid-template-columns: 1fr;
       }
 
-      .hero-kpi {
-        min-height: 210px;
+      .funnel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .funnel-arrow {
+        transform: rotate(90deg);
+        text-align: center;
       }
     }
 
@@ -899,7 +973,7 @@
       }
 
       .brand img {
-        height: 36px;
+        height: 35px;
       }
 
       .login-shell {
@@ -916,11 +990,11 @@
         padding-top: 26px;
       }
 
-      .dashboard-head {
+      .dashboard-top {
         align-items: flex-start;
       }
 
-      .head-actions {
+      .top-actions {
         flex-direction: column;
         align-items: stretch;
       }
@@ -929,59 +1003,51 @@
         text-align: left;
       }
 
+      .primary-tabs {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .period-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
       .period-tabs {
         width: 100%;
       }
 
       .period-tab {
         min-width: 0;
-        padding: 0 12px;
       }
 
-      .hero-kpi {
-        min-height: 190px;
+      .kpi-card {
+        min-height: 200px;
         padding: 22px;
         border-radius: 26px;
       }
 
-      .hero-value {
+      .kpi-value {
         font-size: 62px;
       }
 
-      .trend-card {
-        padding: 20px 16px;
-        border-radius: 24px;
+      .funnel-card,
+      .chart-card,
+      .table-card,
+      .feature-card {
+        padding: 19px 15px;
+        border-radius: 22px;
       }
 
-      .trend-head {
+      .section-head.with-tools {
         display: block;
       }
 
-      .metric-tabs {
-        margin-top: 14px;
+      .chart-tools {
         width: 100%;
+        margin-top: 12px;
       }
 
-      .trend-chart {
-        height: 220px;
-        gap: 6px;
-      }
-
-      .trend-bar-wrap {
-        width: min(100%, 30px);
-        height: 150px;
-      }
-
-      .detail-box summary {
-        min-height: 62px;
-        padding: 0 15px;
-      }
-
-      .detail-content {
-        padding: 0 15px 15px;
-      }
-
-      .system-grid {
+      .split-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -996,12 +1062,16 @@
         font-size: 42px;
       }
 
-      .hero-kpi {
-        min-height: 178px;
+      .primary-tab {
+        font-size: 12px;
+      }
+
+      .kpi-card {
+        min-height: 185px;
         padding: 19px;
       }
 
-      .hero-value {
+      .kpi-value {
         font-size: 56px;
       }
     }
@@ -1016,7 +1086,7 @@
         <span class="brand-badge">ADMIN</span>
       </a>
 
-      <a class="admin-home" href="index.html">
+      <a class="header-link" href="index.html">
         홈페이지로
       </a>
     </div>
@@ -1033,7 +1103,7 @@
 
       <p class="login-desc">
         관리자 비밀번호를 입력하면<br>
-        홈페이지 유입과 실제 앱 설치 현황을 확인할 수 있습니다.
+        유입부터 실제 앱 설치까지 확인할 수 있습니다.
       </p>
 
       <form id="loginForm" class="login-form">
@@ -1052,7 +1122,6 @@
             id="passwordToggle"
             class="password-toggle"
             type="button"
-            aria-label="비밀번호 표시 전환"
           >
             보기
           </button>
@@ -1078,7 +1147,7 @@
 
   <!-- DASHBOARD -->
   <main id="dashboardView" class="dashboard" hidden>
-    <div class="dashboard-head">
+    <div class="dashboard-top">
       <div>
         <div class="dashboard-kicker">
           MODING DASHBOARD
@@ -1089,18 +1158,18 @@
         </h1>
 
         <p class="dashboard-desc">
-          유입부터 실제 앱 설치까지 핵심 숫자만 먼저 확인합니다.
+          홈페이지 유입과 다운로드 클릭 그리고 실제 신규 설치를 분리해서 봅니다.
         </p>
       </div>
 
       <div>
-        <div class="head-actions">
+        <div class="top-actions">
           <button
-            id="csvBtn"
+            id="systemBtn"
             class="ghost-btn"
             type="button"
           >
-            CSV
+            시스템
           </button>
 
           <button
@@ -1126,388 +1195,844 @@
       </div>
     </div>
 
-    <nav class="period-tabs" aria-label="통계 기간">
+    <nav class="primary-tabs" aria-label="통계 종류">
       <button
-        class="period-tab is-active"
+        class="primary-tab is-active"
         type="button"
-        data-period="today"
-        aria-selected="true"
+        data-view="overview"
       >
-        오늘
+        개요
       </button>
 
       <button
-        class="period-tab"
+        class="primary-tab"
         type="button"
-        data-period="week"
-        aria-selected="false"
+        data-view="traffic"
       >
-        주간
+        유입
       </button>
 
       <button
-        class="period-tab"
+        class="primary-tab"
         type="button"
-        data-period="month"
-        aria-selected="false"
+        data-view="clicks"
       >
-        월간
+        다운로드 클릭
+      </button>
+
+      <button
+        class="primary-tab"
+        type="button"
+        data-view="installs"
+      >
+        실제 설치
       </button>
     </nav>
 
-    <!-- MAIN KPI -->
-    <section class="hero-kpi-grid">
-      <article
-        class="hero-kpi visit"
-        data-open-detail="websiteDetail"
-      >
-        <div>
-          <div id="visitLabel" class="hero-label">
-            오늘 방문
-          </div>
+    <div class="period-row">
+      <nav class="period-tabs" aria-label="통계 기간">
+        <button
+          class="period-tab is-active"
+          type="button"
+          data-period="today"
+        >
+          오늘
+        </button>
 
-          <div class="hero-value">
-            <span id="visitValue">0</span>
-            <span class="hero-unit">회</span>
-          </div>
-        </div>
+        <button
+          class="period-tab"
+          type="button"
+          data-period="week"
+        >
+          주간
+        </button>
 
-        <div id="visitSub" class="hero-sub">
-          홈페이지 인덱스 진입
-        </div>
-      </article>
+        <button
+          class="period-tab"
+          type="button"
+          data-period="month"
+        >
+          월간
+        </button>
+      </nav>
 
-      <article
-        class="hero-kpi download"
-        data-open-detail="websiteDetail"
-      >
-        <div>
-          <div id="downloadLabel" class="hero-label">
-            오늘 다운로드 클릭
-          </div>
-
-          <div class="hero-value">
-            <span id="downloadValue">0</span>
-            <span class="hero-unit">회</span>
-          </div>
-        </div>
-
-        <div id="downloadSub" class="hero-sub">
-          실제 설치가 아닌 다운로드 버튼 클릭
-        </div>
-      </article>
-
-      <article
-        class="hero-kpi install"
-        data-open-detail="installDetail"
-      >
-        <div>
-          <div id="installLabel" class="hero-label">
-            오늘 실제 신규 설치
-          </div>
-
-          <div class="hero-value">
-            <span id="installValue">-</span>
-            <span class="hero-unit">건</span>
-          </div>
-
-          <div class="platform-mini-row">
-            <div class="platform-mini ios">
-              <div class="platform-mini-label">
-                iOS
-              </div>
-
-              <div
-                id="iosMiniValue"
-                class="platform-mini-value"
-              >
-                -
-              </div>
-            </div>
-
-            <div class="platform-mini android">
-              <div class="platform-mini-label">
-                Android
-              </div>
-
-              <div
-                id="androidMiniValue"
-                class="platform-mini-value"
-              >
-                -
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="installSub" class="hero-sub">
-          App Store + Google Play 신규 설치
-        </div>
-      </article>
-    </section>
-
-    <div class="summary-line">
-      <span>
-        클릭률
-        <strong id="summaryRate">0.0%</strong>
-      </span>
-
-      <span>
-        누적 방문
-        <strong id="summaryVisits">0회</strong>
-      </span>
-
-      <span>
-        누적 다운로드 클릭
-        <strong id="summaryDownloads">0회</strong>
-      </span>
-
-      <span>
-        누적 실제 신규 설치
-        <strong id="summaryInstalls">-</strong>
-      </span>
+      <div class="launch-mark">
+        앱 배포일 <strong>2026.07.01</strong>
+      </div>
     </div>
 
-    <!-- TREND -->
-    <section class="trend-card">
-      <div class="trend-head">
-        <div>
-          <h2 id="trendTitle" class="trend-title">
-            최근 7일 추이
-          </h2>
+    <!-- OVERVIEW -->
+    <section
+      id="viewOverview"
+      class="content-panel"
+    >
+      <div class="kpi-grid">
+        <article class="kpi-card primary">
+          <div>
+            <div
+              id="overviewVisitLabel"
+              class="kpi-label"
+            >
+              오늘 방문
+            </div>
 
-          <p id="trendCaption" class="trend-caption">
-            핵심 흐름을 하나의 그래프로 확인합니다.
-          </p>
-        </div>
+            <div class="kpi-value">
+              <span id="overviewVisitValue">0</span>
+              <span class="kpi-unit">회</span>
+            </div>
+          </div>
 
-        <div class="metric-tabs" aria-label="그래프 지표">
-          <button
-            class="metric-tab is-active"
-            type="button"
-            data-metric="visits"
+          <div
+            id="overviewVisitSub"
+            class="kpi-sub"
           >
-            방문
-          </button>
+            홈페이지 인덱스 진입
+          </div>
+        </article>
 
-          <button
-            class="metric-tab"
-            type="button"
-            data-metric="downloads"
-          >
-            다운로드
-          </button>
+        <article class="kpi-card orange">
+          <div>
+            <div
+              id="overviewClickLabel"
+              class="kpi-label"
+            >
+              오늘 다운로드 클릭
+            </div>
 
-          <button
-            class="metric-tab"
-            type="button"
-            data-metric="installs"
+            <div class="kpi-value">
+              <span id="overviewClickValue">0</span>
+              <span class="kpi-unit">회</span>
+            </div>
+          </div>
+
+          <div
+            id="overviewClickSub"
+            class="kpi-sub"
           >
-            설치
-          </button>
-        </div>
+            실제 설치가 아닌 스토어 이동 클릭
+          </div>
+        </article>
+
+        <article class="kpi-card install">
+          <div>
+            <div
+              id="overviewInstallLabel"
+              class="kpi-label"
+            >
+              오늘 실제 신규 설치
+            </div>
+
+            <div class="kpi-value">
+              <span id="overviewInstallValue">-</span>
+              <span class="kpi-unit">건</span>
+            </div>
+
+            <div class="mini-platforms">
+              <div class="mini-platform ios">
+                <small>iOS</small>
+                <strong id="overviewIosValue">대기</strong>
+              </div>
+
+              <div class="mini-platform android">
+                <small>Android</small>
+                <strong id="overviewAndroidValue">대기</strong>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="overviewInstallSub"
+            class="kpi-sub"
+          >
+            Apple·Google 데이터 준비 후 합계 표시
+          </div>
+        </article>
       </div>
 
-      <div id="trendChart" class="trend-chart"></div>
+      <div class="info-strip">
+        <span>
+          방문 → 클릭률
+          <strong id="overviewClickRate">0.0%</strong>
+        </span>
+
+        <span>
+          클릭 → 설치 참고율
+          <strong id="overviewInstallRate">-</strong>
+        </span>
+
+        <span>
+          출시 후 누적 설치
+          <strong id="overviewLaunchTotal">
+            집계 준비 중
+          </strong>
+        </span>
+      </div>
+
+      <section class="funnel-card">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">
+              FUNNEL
+            </div>
+
+            <h2 class="section-title">
+              유입 흐름
+            </h2>
+          </div>
+
+          <div class="section-caption">
+            동일 기간 집계 기준 참고 흐름<br>
+            사용자 단위 추적은 아닙니다
+          </div>
+        </div>
+
+        <div class="funnel-grid">
+          <div class="funnel-step">
+            <div>
+              <div class="funnel-step-label">
+                홈페이지 방문
+              </div>
+
+              <div
+                id="funnelVisits"
+                class="funnel-step-value"
+              >
+                0
+              </div>
+            </div>
+
+            <div class="funnel-rate">
+              인덱스 진입 횟수
+            </div>
+          </div>
+
+          <div class="funnel-arrow">
+            →
+          </div>
+
+          <div class="funnel-step">
+            <div>
+              <div class="funnel-step-label">
+                다운로드 클릭
+              </div>
+
+              <div
+                id="funnelClicks"
+                class="funnel-step-value"
+              >
+                0
+              </div>
+            </div>
+
+            <div class="funnel-rate">
+              방문 대비
+              <strong id="funnelClickRate">
+                0.0%
+              </strong>
+            </div>
+          </div>
+
+          <div class="funnel-arrow">
+            →
+          </div>
+
+          <div class="funnel-step">
+            <div>
+              <div class="funnel-step-label">
+                실제 신규 설치
+              </div>
+
+              <div
+                id="funnelInstalls"
+                class="funnel-step-value"
+              >
+                -
+              </div>
+            </div>
+
+            <div class="funnel-rate">
+              클릭 대비
+              <strong id="funnelInstallRate">
+                -
+              </strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chart-card">
+        <div class="section-head with-tools">
+          <div>
+            <div class="section-kicker">
+              TREND
+            </div>
+
+            <h2
+              id="overviewChartTitle"
+              class="section-title"
+            >
+              방문 추이
+            </h2>
+          </div>
+
+          <div class="chart-tools">
+            <button
+              class="chart-tool is-active"
+              type="button"
+              data-overview-metric="visits"
+            >
+              방문
+            </button>
+
+            <button
+              class="chart-tool"
+              type="button"
+              data-overview-metric="clicks"
+            >
+              클릭
+            </button>
+
+            <button
+              class="chart-tool"
+              type="button"
+              data-overview-metric="installs"
+            >
+              설치
+            </button>
+          </div>
+        </div>
+
+        <div class="chart-scroll">
+          <div
+            id="overviewChart"
+            class="bar-chart"
+          ></div>
+        </div>
+      </section>
     </section>
 
-    <!-- DETAIL -->
-    <section class="details-stack">
-      <details id="websiteDetail" class="detail-box">
-        <summary>
-          <div class="detail-summary-left">
-            <span class="detail-index">
-              01
-            </span>
-
-            <div>
-              <div class="detail-title">
-                홈페이지 유입 상세
-              </div>
-
-              <div class="detail-caption">
-                일별·월별 방문과 다운로드 클릭
-              </div>
-            </div>
-          </div>
-
-          <span class="detail-arrow">
-            ⌄
-          </span>
-        </summary>
-
-        <div class="detail-content">
-          <div class="detail-toolbar">
+    <!-- TRAFFIC -->
+    <section
+      id="viewTraffic"
+      class="content-panel"
+      hidden
+    >
+      <div class="kpi-grid">
+        <article class="kpi-card primary">
+          <div>
             <div
-              id="websiteDetailNote"
-              class="detail-note"
+              id="trafficMainLabel"
+              class="kpi-label"
             >
-              현재 선택 기간 기준
+              오늘 방문
             </div>
 
-            <button
-              class="mini-btn"
-              type="button"
-              data-export="website"
-            >
-              CSV 내보내기
-            </button>
+            <div class="kpi-value">
+              <span id="trafficMainValue">0</span>
+              <span class="kpi-unit">회</span>
+            </div>
           </div>
 
-          <div class="table-wrap">
-            <table class="detail-table">
-              <thead>
-                <tr>
-                  <th id="websiteFirstHeader">
-                    날짜
-                  </th>
-                  <th>방문</th>
-                  <th>다운로드</th>
-                  <th>클릭률</th>
-                </tr>
-              </thead>
+          <div
+            id="trafficMainSub"
+            class="kpi-sub"
+          >
+            홈페이지 인덱스 진입
+          </div>
+        </article>
 
-              <tbody id="websiteDetailBody"></tbody>
-            </table>
+        <article class="kpi-card">
+          <div>
+            <div class="kpi-label">
+              누적 방문
+            </div>
+
+            <div class="kpi-value">
+              <span id="trafficTotalValue">0</span>
+              <span class="kpi-unit">회</span>
+            </div>
+          </div>
+
+          <div class="kpi-sub">
+            수집 시작 이후 누적
+          </div>
+        </article>
+
+        <article class="kpi-card">
+          <div>
+            <div class="kpi-label">
+              다운로드 클릭률
+            </div>
+
+            <div class="kpi-value">
+              <span id="trafficClickRateValue">0.0</span>
+              <span class="kpi-unit">%</span>
+            </div>
+          </div>
+
+          <div class="kpi-sub">
+            동일 기간 방문 대비 클릭
+          </div>
+        </article>
+      </div>
+
+      <section class="chart-card">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">
+              TRAFFIC
+            </div>
+
+            <h2
+              id="trafficChartTitle"
+              class="section-title"
+            >
+              방문 추이
+            </h2>
+          </div>
+
+          <div
+            id="trafficCompareText"
+            class="section-caption"
+          >
+            당일 집계
           </div>
         </div>
-      </details>
 
-      <details id="installDetail" class="detail-box">
-        <summary>
-          <div class="detail-summary-left">
-            <span class="detail-index">
-              02
-            </span>
+        <div class="chart-scroll">
+          <div
+            id="trafficChart"
+            class="bar-chart"
+          ></div>
+        </div>
+      </section>
 
-            <div>
-              <div class="detail-title">
-                앱 설치 상세
-              </div>
-
-              <div class="detail-caption">
-                iOS·Android 신규 설치 비교
-              </div>
+      <section class="table-card">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">
+              DETAIL
             </div>
+
+            <h2 class="section-title">
+              유입 상세
+            </h2>
           </div>
 
-          <span class="detail-arrow">
-            ⌄
-          </span>
-        </summary>
+          <div class="section-caption">
+            방문 횟수 기준
+          </div>
+        </div>
 
-        <div class="detail-content">
-          <div class="detail-toolbar">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>방문</th>
+                <th>다운로드 클릭</th>
+                <th>클릭률</th>
+              </tr>
+            </thead>
+
+            <tbody id="trafficTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- CLICKS -->
+    <section
+      id="viewClicks"
+      class="content-panel"
+      hidden
+    >
+      <div class="kpi-grid">
+        <article class="kpi-card orange">
+          <div>
             <div
-              id="installDetailNote"
-              class="detail-note"
+              id="clickMainLabel"
+              class="kpi-label"
             >
-              플랫폼 연결 상태에 따라 값이 표시됩니다.
+              오늘 다운로드 클릭
             </div>
 
-            <button
-              class="mini-btn"
-              type="button"
-              data-export="installs"
-            >
-              CSV 내보내기
-            </button>
+            <div class="kpi-value">
+              <span id="clickMainValue">0</span>
+              <span class="kpi-unit">회</span>
+            </div>
           </div>
 
-          <div class="table-wrap">
-            <table class="detail-table">
-              <thead>
-                <tr>
-                  <th id="installFirstHeader">
-                    날짜
-                  </th>
-                  <th>iOS</th>
-                  <th>Android</th>
-                  <th>합계</th>
-                </tr>
-              </thead>
+          <div
+            id="clickMainSub"
+            class="kpi-sub"
+          >
+            스토어 이동 버튼 클릭
+          </div>
+        </article>
 
-              <tbody id="installDetailBody"></tbody>
-            </table>
+        <article class="kpi-card">
+          <div>
+            <div class="kpi-label">
+              방문 → 클릭률
+            </div>
+
+            <div class="kpi-value">
+              <span id="clickRateValue">0.0</span>
+              <span class="kpi-unit">%</span>
+            </div>
+          </div>
+
+          <div class="kpi-sub">
+            동일 기간 기준
+          </div>
+        </article>
+
+        <article class="kpi-card">
+          <div>
+            <div class="kpi-label">
+              누적 다운로드 클릭
+            </div>
+
+            <div class="kpi-value">
+              <span id="clickTotalValue">0</span>
+              <span class="kpi-unit">회</span>
+            </div>
+          </div>
+
+          <div class="kpi-sub">
+            실제 설치 수와는 별도 지표
+          </div>
+        </article>
+      </div>
+
+      <section class="feature-card">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">
+              PLATFORM CLICK
+            </div>
+
+            <h2 class="section-title">
+              스토어별 클릭
+            </h2>
+          </div>
+
+          <div
+            id="clickPlatformStatus"
+            class="section-caption"
+          >
+            플랫폼 구분 집계 준비 중
           </div>
         </div>
-      </details>
 
-      <details id="systemDetail" class="detail-box">
-        <summary>
-          <div class="detail-summary-left">
-            <span class="detail-index">
-              03
-            </span>
+        <div class="split-grid">
+          <div class="split-card ios">
+            <div class="split-label">
+              iOS 스토어 이동 클릭
+            </div>
 
-            <div>
-              <div class="detail-title">
-                시스템 상태
-              </div>
+            <div
+              id="clickIosValue"
+              class="split-value"
+            >
+              -
+            </div>
 
-              <div class="detail-caption">
-                Apple·Google 데이터 연결 및 동기화
-              </div>
+            <div class="split-sub">
+              플랫폼 구분 수집 연결 후 표시
             </div>
           </div>
 
-          <span class="detail-arrow">
-            ⌄
+          <div class="split-card android">
+            <div class="split-label">
+              Android 스토어 이동 클릭
+            </div>
+
+            <div
+              id="clickAndroidValue"
+              class="split-value"
+            >
+              -
+            </div>
+
+            <div class="split-sub">
+              플랫폼 구분 수집 연결 후 표시
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="chart-card">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">
+              CLICK TREND
+            </div>
+
+            <h2
+              id="clickChartTitle"
+              class="section-title"
+            >
+              다운로드 클릭 추이
+            </h2>
+          </div>
+
+          <div
+            id="clickCompareText"
+            class="section-caption"
+          >
+            당일 집계
+          </div>
+        </div>
+
+        <div class="chart-scroll">
+          <div
+            id="clickChart"
+            class="bar-chart"
+          ></div>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">
+              DETAIL
+            </div>
+
+            <h2 class="section-title">
+              클릭 상세
+            </h2>
+          </div>
+
+          <div class="section-caption">
+            홈페이지 버튼 클릭 기준
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>방문</th>
+                <th>다운로드 클릭</th>
+                <th>클릭률</th>
+              </tr>
+            </thead>
+
+            <tbody id="clickTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- INSTALLS -->
+    <section
+      id="viewInstalls"
+      class="content-panel"
+      hidden
+    >
+      <div class="kpi-grid">
+        <article class="kpi-card install">
+          <div>
+            <div
+              id="installMainLabel"
+              class="kpi-label"
+            >
+              오늘 실제 신규 설치
+            </div>
+
+            <div class="kpi-value">
+              <span id="installMainValue">-</span>
+              <span class="kpi-unit">건</span>
+            </div>
+          </div>
+
+          <div
+            id="installMainSub"
+            class="kpi-sub"
+          >
+            Apple·Google 데이터 준비 중
+          </div>
+        </article>
+
+        <article class="kpi-card">
+          <div>
+            <div class="kpi-label">
+              출시 후 누적 신규 설치
+            </div>
+
+            <div class="kpi-value">
+              <span id="installLaunchTotal">-</span>
+              <span class="kpi-unit">건</span>
+            </div>
+          </div>
+
+          <div class="kpi-sub">
+            2026.07.01 ~ 현재
+          </div>
+        </article>
+
+        <article class="kpi-card">
+          <div>
+            <div class="kpi-label">
+              클릭 → 설치 참고율
+            </div>
+
+            <div class="kpi-value">
+              <span id="installReferenceRate">-</span>
+              <span class="kpi-unit">%</span>
+            </div>
+          </div>
+
+          <div class="kpi-sub">
+            동일 기간 집계값 비교이며 사용자 단위 전환율은 아닙니다
+          </div>
+        </article>
+      </div>
+
+      <section class="feature-card">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">
+              PLATFORM
+            </div>
+
+            <h2 class="section-title">
+              플랫폼별 신규 설치
+            </h2>
+          </div>
+
+          <div
+            id="installPlatformStatus"
+            class="section-caption"
+          >
+            Apple 데이터 준비 중 · Google 권한 연결 대기
+          </div>
+        </div>
+
+        <div class="split-grid">
+          <div class="split-card ios">
+            <div class="split-label">
+              iOS
+            </div>
+
+            <div
+              id="installIosValue"
+              class="split-value"
+            >
+              -
+            </div>
+
+            <div
+              id="installIosSub"
+              class="split-sub"
+            >
+              Apple 데이터 준비 중
+            </div>
+          </div>
+
+          <div class="split-card android">
+            <div class="split-label">
+              Android
+            </div>
+
+            <div
+              id="installAndroidValue"
+              class="split-value"
+            >
+              -
+            </div>
+
+            <div
+              id="installAndroidSub"
+              class="split-sub"
+            >
+              Google 권한 연결 대기
+            </div>
+          </div>
+        </div>
+
+        <div class="info-strip">
+          <span>
+            iOS 비중
+            <strong id="installIosShare">-</strong>
           </span>
-        </summary>
 
-        <div class="detail-content">
-          <div class="system-grid">
-            <article
-              id="iosSystemCard"
-              class="system-card"
+          <span>
+            Android 비중
+            <strong id="installAndroidShare">-</strong>
+          </span>
+
+          <span>
+            이전 기간 대비
+            <strong id="installChange">-</strong>
+          </span>
+        </div>
+      </section>
+
+      <section class="chart-card">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">
+              INSTALL TREND
+            </div>
+
+            <h2
+              id="installChartTitle"
+              class="section-title"
             >
-              <div class="system-label">
-                <span class="system-dot"></span>
-                Apple App Store
-              </div>
+              실제 신규 설치 추이
+            </h2>
+          </div>
 
-              <div
-                id="iosSystemValue"
-                class="system-value"
-              >
-                데이터 대기
-              </div>
-
-              <div
-                id="iosSystemSub"
-                class="system-sub"
-              >
-                ONE_TIME_SNAPSHOT 및 일별 보고서 상태
-              </div>
-            </article>
-
-            <article
-              id="androidSystemCard"
-              class="system-card"
-            >
-              <div class="system-label">
-                <span class="system-dot"></span>
-                Google Play
-              </div>
-
-              <div
-                id="androidSystemValue"
-                class="system-value"
-              >
-                연결 대기
-              </div>
-
-              <div
-                id="androidSystemSub"
-                class="system-sub"
-              >
-                설치 보고서 권한 및 동기화 상태
-              </div>
-            </article>
+          <div class="section-caption">
+            iOS + Android
           </div>
         </div>
-      </details>
+
+        <div class="chart-scroll">
+          <div
+            id="installChart"
+            class="bar-chart"
+          ></div>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">
+              DETAIL
+            </div>
+
+            <h2 class="section-title">
+              설치 상세
+            </h2>
+          </div>
+
+          <div class="section-caption">
+            신규 설치 기준
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th id="installTableFirstHead">날짜</th>
+                <th>iOS</th>
+                <th>Android</th>
+                <th>합계</th>
+              </tr>
+            </thead>
+
+            <tbody id="installTableBody"></tbody>
+          </table>
+        </div>
+      </section>
     </section>
 
     <div
@@ -1516,6 +2041,98 @@
       aria-live="polite"
     ></div>
   </main>
+
+  <!-- SYSTEM -->
+  <aside
+    id="systemPopover"
+    class="system-popover"
+    hidden
+  >
+    <div class="system-head">
+      <h2 class="system-title">
+        시스템 상태
+      </h2>
+
+      <button
+        id="systemCloseBtn"
+        class="system-close"
+        type="button"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="system-list">
+      <div class="system-item">
+        <div class="system-item-top">
+          <div class="system-name">
+            <span
+              id="appleSystemDot"
+              class="system-dot"
+            ></span>
+            Apple App Store
+          </div>
+
+          <div
+            id="appleSystemState"
+            class="system-state"
+          >
+            데이터 준비 중
+          </div>
+        </div>
+
+        <div
+          id="appleSystemDesc"
+          class="system-desc"
+        >
+          Snapshot 요청 및 App Downloads 보고서 생성 후 DAILY instance 대기
+        </div>
+      </div>
+
+      <div class="system-item">
+        <div class="system-item-top">
+          <div class="system-name">
+            <span
+              id="googleSystemDot"
+              class="system-dot"
+            ></span>
+            Google Play
+          </div>
+
+          <div
+            id="googleSystemState"
+            class="system-state"
+          >
+            권한 연결 대기
+          </div>
+        </div>
+
+        <div
+          id="googleSystemDesc"
+          class="system-desc"
+        >
+          Google Play 설치 보고서 버킷 권한 반영 대기
+        </div>
+      </div>
+
+      <div class="system-item">
+        <div class="system-item-top">
+          <div class="system-name">
+            <span class="system-dot ready"></span>
+            Cloudflare D1
+          </div>
+
+          <div class="system-state">
+            정상
+          </div>
+        </div>
+
+        <div class="system-desc">
+          관리자 통계 API 응답 기준
+        </div>
+      </div>
+    </div>
+  </aside>
 
   <script>
     /* =========================================================
@@ -1534,14 +2151,34 @@
       "moding_admin_token";
 
     const state = {
+      view: "overview",
       period: "today",
-      metric: "visits",
+      overviewMetric: "visits",
       stats: null
     };
 
-    /* =========================================================
-       02 DOM
-       ========================================================= */
+    const views = {
+      overview:
+        document.getElementById(
+          "viewOverview"
+        ),
+
+      traffic:
+        document.getElementById(
+          "viewTraffic"
+        ),
+
+      clicks:
+        document.getElementById(
+          "viewClicks"
+        ),
+
+      installs:
+        document.getElementById(
+          "viewInstalls"
+        )
+    };
+
     const loginView =
       document.getElementById(
         "loginView"
@@ -1587,9 +2224,19 @@
         "logoutBtn"
       );
 
-    const csvBtn =
+    const systemBtn =
       document.getElementById(
-        "csvBtn"
+        "systemBtn"
+      );
+
+    const systemPopover =
+      document.getElementById(
+        "systemPopover"
+      );
+
+    const systemCloseBtn =
+      document.getElementById(
+        "systemCloseBtn"
       );
 
     const lastCheck =
@@ -1602,6 +2249,13 @@
         "dashboardStatus"
       );
 
+    const primaryTabs =
+      Array.from(
+        document.querySelectorAll(
+          ".primary-tab"
+        )
+      );
+
     const periodTabs =
       Array.from(
         document.querySelectorAll(
@@ -1609,15 +2263,15 @@
         )
       );
 
-    const metricTabs =
+    const overviewMetricTabs =
       Array.from(
         document.querySelectorAll(
-          ".metric-tab"
+          "[data-overview-metric]"
         )
       );
 
     /* =========================================================
-       03 COMMON HELPERS
+       02 HELPERS
        ========================================================= */
     function apiUrl(path) {
       return (
@@ -1696,120 +2350,15 @@
     }
 
     function formatDate(
-      dateString
-    ) {
-      if (!dateString) {
-        return "-";
-      }
-
-      const date =
-        new Date(
-          `${dateString}T00:00:00`
-        );
-
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
-        return dateString;
-      }
-
-      return new Intl.DateTimeFormat(
-        "ko-KR",
-        {
-          month:
-            "numeric",
-
-          day:
-            "numeric",
-
-          weekday:
-            "short"
-        }
-      ).format(
-        date
-      );
-    }
-
-    function formatMonth(
-      monthString
-    ) {
-      if (!monthString) {
-        return "-";
-      }
-
-      const [
-        year,
-        month
-      ] =
-        monthString
-          .split("-")
-          .map(Number);
-
-      if (
-        !year ||
-        !month
-      ) {
-        return monthString;
-      }
-
-      return (
-        `${year}년 ` +
-        `${month}월`
-      );
-    }
-
-    function compactDate(
-      dateString
-    ) {
-      if (!dateString) {
-        return "-";
-      }
-
-      const parts =
-        dateString.split(
-          "-"
-        );
-
-      if (
-        parts.length !==
-        3
-      ) {
-        return dateString;
-      }
-
-      return (
-        `${Number(
-          parts[1]
-        )}.` +
-        `${Number(
-          parts[2]
-        )}`
-      );
-    }
-
-    function formatSyncTime(
       value
     ) {
       if (!value) {
-        return null;
+        return "-";
       }
-
-      const normalized =
-        /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
-          .test(
-            value
-          )
-          ? value.replace(
-              " ",
-              "T"
-            ) + "Z"
-          : value;
 
       const date =
         new Date(
-          normalized
+          `${value}T00:00:00`
         );
 
       if (
@@ -1823,27 +2372,53 @@
       return new Intl.DateTimeFormat(
         "ko-KR",
         {
-          timeZone:
-            "Asia/Seoul",
-
-          month:
-            "numeric",
-
-          day:
-            "numeric",
-
-          hour:
-            "2-digit",
-
-          minute:
-            "2-digit",
-
-          hour12:
-            false
+          month: "numeric",
+          day: "numeric",
+          weekday: "short"
         }
       ).format(
         date
       );
+    }
+
+    function formatMonth(
+      value
+    ) {
+      if (!value) {
+        return "-";
+      }
+
+      const [
+        year,
+        month
+      ] =
+        value
+          .split("-")
+          .map(Number);
+
+      return (
+        year &&
+        month
+      )
+        ? `${year}년 ${month}월`
+        : value;
+    }
+
+    function compactDate(
+      value
+    ) {
+      if (!value) {
+        return "-";
+      }
+
+      const parts =
+        value.split("-");
+
+      return (
+        parts.length === 3
+      )
+        ? `${Number(parts[1])}.${Number(parts[2])}`
+        : value;
     }
 
     function firstFiniteNumber(
@@ -1875,6 +2450,63 @@
       }
 
       return null;
+    }
+
+    function percentChange(
+      current,
+      previous
+    ) {
+      const currentValue =
+        Number(
+          current || 0
+        );
+
+      const previousValue =
+        Number(
+          previous || 0
+        );
+
+      if (!previousValue) {
+        return null;
+      }
+
+      return Number(
+        (
+          (
+            (
+              currentValue -
+              previousValue
+            ) /
+            previousValue
+          ) *
+          100
+        ).toFixed(1)
+      );
+    }
+
+    function changeLabel(
+      value
+    ) {
+      if (
+        value === null ||
+        value === undefined ||
+        !Number.isFinite(
+          Number(value)
+        )
+      ) {
+        return "비교 데이터 없음";
+      }
+
+      const number =
+        Number(
+          value
+        );
+
+      return (
+        number > 0
+      )
+        ? `+${number.toFixed(1)}%`
+        : `${number.toFixed(1)}%`;
     }
 
     function emptyRow(
@@ -1937,16 +2569,14 @@
       dashboardStatus.textContent =
         message;
 
-      dashboardStatus
-        .classList
-        .toggle(
-          "error",
-          isError
-        );
+      dashboardStatus.classList.toggle(
+        "error",
+        isError
+      );
     }
 
     /* =========================================================
-       04 STORE NORMALIZATION
+       03 STORE / PERIOD NORMALIZATION
        ========================================================= */
     function getIosValue(
       source
@@ -1963,20 +2593,13 @@
       return firstFiniteNumber(
         source?.firstInstalls,
         source?.first_installs,
-
         source?.newInstalls,
         source?.new_installs,
-
         source?.userInstalls,
         source?.user_installs,
-
         source?.dailyUserInstalls,
         source?.daily_user_installs,
-
-        source?.installs,
-
-        source?.firstDownloads,
-        source?.first_downloads
+        source?.installs
       );
     }
 
@@ -2015,9 +2638,9 @@
       );
     }
 
-    function combinedValue(
-      iosValue,
-      androidValue,
+    function combinedInstallValue(
+      ios,
+      android,
       iosReady,
       androidReady
     ) {
@@ -2030,17 +2653,324 @@
 
       return (
         Number(
-          iosValue || 0
+          ios || 0
         ) +
         Number(
-          androidValue || 0
+          android || 0
         )
       );
     }
 
+    function getWebsitePeriodData() {
+      const data =
+        state.stats ||
+        {};
+
+      if (
+        state.period ===
+        "week"
+      ) {
+        return {
+          visitLabel:
+            "이번 주 방문",
+
+          clickLabel:
+            "이번 주 다운로드 클릭",
+
+          visits:
+            Number(
+              data?.week
+                ?.visits ||
+              0
+            ),
+
+          clicks:
+            Number(
+              data?.week
+                ?.downloads ||
+              0
+            ),
+
+          clickRate:
+            Number(
+              data?.week
+                ?.downloadRate ||
+              0
+            ),
+
+          visitChange:
+            data?.week
+              ?.visitChange,
+
+          clickChange:
+            data?.week
+              ?.downloadChange,
+
+          compareLabel:
+            "지난주"
+        };
+      }
+
+      if (
+        state.period ===
+        "month"
+      ) {
+        return {
+          visitLabel:
+            "이번 달 방문",
+
+          clickLabel:
+            "이번 달 다운로드 클릭",
+
+          visits:
+            Number(
+              data?.month
+                ?.visits ||
+              0
+            ),
+
+          clicks:
+            Number(
+              data?.month
+                ?.downloads ||
+              0
+            ),
+
+          clickRate:
+            Number(
+              data?.month
+                ?.downloadRate ||
+              0
+            ),
+
+          visitChange:
+            data?.month
+              ?.visitChange,
+
+          clickChange:
+            data?.month
+              ?.downloadChange,
+
+          compareLabel:
+            "지난달"
+        };
+      }
+
+      return {
+        visitLabel:
+          "오늘 방문",
+
+        clickLabel:
+          "오늘 다운로드 클릭",
+
+        visits:
+          Number(
+            data?.today
+              ?.visits ||
+            0
+          ),
+
+        clicks:
+          Number(
+            data?.today
+              ?.downloads ||
+            0
+          ),
+
+        clickRate:
+          Number(
+            data?.today
+              ?.downloadRate ||
+            0
+          ),
+
+        visitChange:
+          null,
+
+        clickChange:
+          null,
+
+        compareLabel:
+          "당일"
+      };
+    }
+
+    function getPeriodInstallData() {
+      const ios =
+        state.stats?.ios ||
+        {};
+
+      const android =
+        state.stats?.android ||
+        {};
+
+      const iosReady =
+        storeReady(
+          ios
+        );
+
+      const androidReady =
+        storeReady(
+          android
+        );
+
+      let iosCurrent =
+        null;
+
+      let androidCurrent =
+        null;
+
+      let iosPrevious =
+        null;
+
+      let androidPrevious =
+        null;
+
+      if (
+        state.period ===
+        "week"
+      ) {
+        iosCurrent =
+          getIosValue(
+            ios?.week
+          );
+
+        androidCurrent =
+          getAndroidValue(
+            android?.week
+          );
+
+        iosPrevious =
+          getIosValue(
+            ios?.week
+              ?.previous
+          );
+
+        androidPrevious =
+          getAndroidValue(
+            android?.week
+              ?.previous
+          );
+
+      } else if (
+        state.period ===
+        "month"
+      ) {
+        iosCurrent =
+          getIosValue(
+            ios?.month
+          );
+
+        androidCurrent =
+          getAndroidValue(
+            android?.month
+          );
+
+        iosPrevious =
+          getIosValue(
+            ios?.month
+              ?.previous
+          );
+
+        androidPrevious =
+          getAndroidValue(
+            android?.month
+              ?.previous
+          );
+
+      } else {
+        iosCurrent =
+          getIosValue(
+            ios?.today
+          );
+
+        androidCurrent =
+          getAndroidValue(
+            android?.today
+          );
+      }
+
+      const currentTotal =
+        combinedInstallValue(
+          iosCurrent,
+          androidCurrent,
+          iosReady,
+          androidReady
+        );
+
+      const previousTotal =
+        state.period ===
+          "today"
+          ? null
+          : combinedInstallValue(
+              iosPrevious,
+              androidPrevious,
+              iosReady,
+              androidReady
+            );
+
+      const launchTotal =
+        combinedInstallValue(
+          getIosValue(
+            ios?.total
+          ),
+          getAndroidValue(
+            android?.total
+          ),
+          iosReady,
+          androidReady
+        );
+
+      return {
+        ios,
+        android,
+        iosReady,
+        androidReady,
+        iosCurrent,
+        androidCurrent,
+        iosPrevious,
+        androidPrevious,
+        currentTotal,
+        previousTotal,
+        launchTotal
+      };
+    }
+
     /* =========================================================
-       05 PERIOD / METRIC
+       04 TAB / LOGIN EVENTS
        ========================================================= */
+    function setView(
+      view
+    ) {
+      state.view =
+        view;
+
+      primaryTabs.forEach(
+        (button) => {
+          button.classList.toggle(
+            "is-active",
+            button.dataset.view ===
+              view
+          );
+        }
+      );
+
+      Object.entries(
+        views
+      ).forEach(
+        ([
+          key,
+          panel
+        ]) => {
+          panel.hidden =
+            key !==
+            view;
+        }
+      );
+
+      renderCurrentView();
+    }
+
     function setPeriod(
       period
     ) {
@@ -2049,45 +2979,29 @@
 
       periodTabs.forEach(
         (button) => {
-          const active =
+          button.classList.toggle(
+            "is-active",
             button.dataset.period ===
-            period;
-
-          button.classList.toggle(
-            "is-active",
-            active
-          );
-
-          button.setAttribute(
-            "aria-selected",
-            active
-              ? "true"
-              : "false"
+              period
           );
         }
       );
 
-      renderDashboard();
+      renderCurrentView();
     }
 
-    function setMetric(
-      metric
-    ) {
-      state.metric =
-        metric;
-
-      metricTabs.forEach(
-        (button) => {
-          button.classList.toggle(
-            "is-active",
-            button.dataset.metric ===
-              metric
-          );
-        }
-      );
-
-      renderTrend();
-    }
+    primaryTabs.forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            setView(
+              button.dataset.view
+            );
+          }
+        );
+      }
+    );
 
     periodTabs.forEach(
       (button) => {
@@ -2102,56 +3016,31 @@
       }
     );
 
-    metricTabs.forEach(
+    overviewMetricTabs.forEach(
       (button) => {
         button.addEventListener(
           "click",
           () => {
-            setMetric(
-              button.dataset.metric
+            state.overviewMetric =
+              button.dataset
+                .overviewMetric;
+
+            overviewMetricTabs.forEach(
+              (item) => {
+                item.classList.toggle(
+                  "is-active",
+                  item ===
+                    button
+                );
+              }
             );
+
+            renderOverviewChart();
           }
         );
       }
     );
 
-    document
-      .querySelectorAll(
-        "[data-open-detail]"
-      )
-      .forEach(
-        (element) => {
-          element.addEventListener(
-            "click",
-            () => {
-              const detail =
-                document.getElementById(
-                  element.dataset
-                    .openDetail
-                );
-
-              if (!detail) {
-                return;
-              }
-
-              detail.open =
-                true;
-
-              detail.scrollIntoView({
-                behavior:
-                  "smooth",
-
-                block:
-                  "nearest"
-              });
-            }
-          );
-        }
-      );
-
-    /* =========================================================
-       06 PASSWORD / LOGIN
-       ========================================================= */
     passwordToggle.addEventListener(
       "click",
       () => {
@@ -2267,7 +3156,7 @@
     );
 
     /* =========================================================
-       07 LOAD STATS
+       05 LOAD / ROUTER
        ========================================================= */
     async function loadStats() {
       const token =
@@ -2279,9 +3168,6 @@
       }
 
       refreshBtn.disabled =
-        true;
-
-      csvBtn.disabled =
         true;
 
       setDashboardStatus(
@@ -2336,23 +3222,23 @@
         state.stats =
           await response.json();
 
-        renderDashboard();
-
-        const checkedAt =
-          new Date()
-            .toLocaleTimeString(
-              "ko-KR",
-              {
-                hour:
-                  "2-digit",
-
-                minute:
-                  "2-digit"
-              }
-            );
+        renderCurrentView();
+        renderSystemStatus();
 
         lastCheck.textContent =
-          `마지막 확인 ${checkedAt}`;
+          `마지막 확인 ${
+            new Date()
+              .toLocaleTimeString(
+                "ko-KR",
+                {
+                  hour:
+                    "2-digit",
+
+                  minute:
+                    "2-digit"
+                }
+              )
+          }`;
 
         setDashboardStatus(
           ""
@@ -2370,397 +3256,132 @@
       } finally {
         refreshBtn.disabled =
           false;
-
-        csvBtn.disabled =
-          false;
       }
     }
 
-    /* =========================================================
-       08 PERIOD DATA
-       ========================================================= */
-    function changeDescription(
-      value,
-      baseLabel
-    ) {
-      if (
-        value === null ||
-        value === undefined ||
-        !Number.isFinite(
-          Number(
-            value
-          )
-        )
-      ) {
-        return (
-          `${baseLabel} ` +
-          `비교 데이터 없음`
-        );
-      }
-
-      const number =
-        Number(
-          value
-        );
-
-      if (
-        number > 0
-      ) {
-        return (
-          `${baseLabel} 대비 +` +
-          `${number.toFixed(1)}%`
-        );
-      }
-
-      if (
-        number < 0
-      ) {
-        return (
-          `${baseLabel} 대비 ` +
-          `${number.toFixed(1)}%`
-        );
-      }
-
-      return (
-        `${baseLabel} 대비 ` +
-        `0.0%`
-      );
-    }
-
-    function getPeriodWebsiteData() {
-      const data =
-        state.stats || {};
-
-      if (
-        state.period ===
-        "week"
-      ) {
-        return {
-          labelVisit:
-            "이번 주 방문",
-
-          labelDownload:
-            "이번 주 다운로드 클릭",
-
-          visits:
-            Number(
-              data?.week
-                ?.visits ||
-              0
-            ),
-
-          downloads:
-            Number(
-              data?.week
-                ?.downloads ||
-              0
-            ),
-
-          rate:
-            Number(
-              data?.week
-                ?.downloadRate ||
-              0
-            ),
-
-          visitSub:
-            changeDescription(
-              data?.week
-                ?.visitChange,
-
-              "지난주"
-            ),
-
-          downloadSub:
-            changeDescription(
-              data?.week
-                ?.downloadChange,
-
-              "지난주"
-            )
-        };
-      }
-
-      if (
-        state.period ===
-        "month"
-      ) {
-        return {
-          labelVisit:
-            "이번 달 방문",
-
-          labelDownload:
-            "이번 달 다운로드 클릭",
-
-          visits:
-            Number(
-              data?.month
-                ?.visits ||
-              0
-            ),
-
-          downloads:
-            Number(
-              data?.month
-                ?.downloads ||
-              0
-            ),
-
-          rate:
-            Number(
-              data?.month
-                ?.downloadRate ||
-              0
-            ),
-
-          visitSub:
-            changeDescription(
-              data?.month
-                ?.visitChange,
-
-              "지난달"
-            ),
-
-          downloadSub:
-            changeDescription(
-              data?.month
-                ?.downloadChange,
-
-              "지난달"
-            )
-        };
-      }
-
-      return {
-        labelVisit:
-          "오늘 방문",
-
-        labelDownload:
-          "오늘 다운로드 클릭",
-
-        visits:
-          Number(
-            data?.today
-              ?.visits ||
-            0
-          ),
-
-        downloads:
-          Number(
-            data?.today
-              ?.downloads ||
-            0
-          ),
-
-        rate:
-          Number(
-            data?.today
-              ?.downloadRate ||
-            0
-          ),
-
-        visitSub:
-          "홈페이지 인덱스 진입",
-
-        downloadSub:
-          "실제 설치가 아닌 다운로드 버튼 클릭"
-      };
-    }
-
-    function getPeriodInstallData() {
-      const ios =
-        state.stats?.ios ||
-        {};
-
-      const android =
-        state.stats?.android ||
-        {};
-
-      const iosReady =
-        storeReady(
-          ios
-        );
-
-      const androidReady =
-        storeReady(
-          android
-        );
-
-      let iosCurrent =
-        null;
-
-      let androidCurrent =
-        null;
-
-      let label =
-        "오늘 실제 신규 설치";
-
-      let sub =
-        "App Store + Google Play 신규 설치";
-
-      if (
-        state.period ===
-        "week"
-      ) {
-        iosCurrent =
-          getIosValue(
-            ios?.week
-          );
-
-        androidCurrent =
-          getAndroidValue(
-            android?.week
-          );
-
-        label =
-          "이번 주 실제 신규 설치";
-
-        sub =
-          "현재 주간 누적 기준";
-
-      } else if (
-        state.period ===
-        "month"
-      ) {
-        iosCurrent =
-          getIosValue(
-            ios?.month
-          );
-
-        androidCurrent =
-          getAndroidValue(
-            android?.month
-          );
-
-        label =
-          "이번 달 실제 신규 설치";
-
-        sub =
-          "현재 월 누적 기준";
-
-      } else {
-        iosCurrent =
-          getIosValue(
-            ios?.today
-          );
-
-        androidCurrent =
-          getAndroidValue(
-            android?.today
-          );
-      }
-
-      return {
-        ios,
-        android,
-        iosReady,
-        androidReady,
-
-        iosCurrent,
-        androidCurrent,
-
-        total:
-          combinedValue(
-            iosCurrent,
-            androidCurrent,
-            iosReady,
-            androidReady
-          ),
-
-        cumulative:
-          combinedValue(
-            getIosValue(
-              ios?.total
-            ),
-
-            getAndroidValue(
-              android?.total
-            ),
-
-            iosReady,
-            androidReady
-          ),
-
-        label,
-        sub
-      };
-    }
-
-    /* =========================================================
-       09 MAIN RENDER
-       ========================================================= */
-    function renderDashboard() {
+    function renderCurrentView() {
       if (
         !state.stats
       ) {
         return;
       }
 
-      renderHero();
-      renderTrend();
-      renderWebsiteDetail();
-      renderInstallDetail();
-      renderSystemStatus();
+      if (
+        state.view ===
+        "traffic"
+      ) {
+        renderTraffic();
+        return;
+      }
+
+      if (
+        state.view ===
+        "clicks"
+      ) {
+        renderClicks();
+        return;
+      }
+
+      if (
+        state.view ===
+        "installs"
+      ) {
+        renderInstalls();
+        return;
+      }
+
+      renderOverview();
     }
 
-    function renderHero() {
+    /* =========================================================
+       06 OVERVIEW
+       ========================================================= */
+    function renderOverview() {
       const website =
-        getPeriodWebsiteData();
+        getWebsitePeriodData();
 
       const installs =
         getPeriodInstallData();
 
+      const installRate =
+        installs.currentTotal !==
+          null &&
+        website.clicks >
+          0
+          ? (
+              installs.currentTotal /
+              website.clicks
+            ) *
+            100
+          : null;
+
       setText(
-        "visitLabel",
-        website.labelVisit
+        "overviewVisitLabel",
+        website.visitLabel
       );
 
       setText(
-        "downloadLabel",
-        website.labelDownload
+        "overviewClickLabel",
+        website.clickLabel
       );
 
       setText(
-        "visitValue",
+        "overviewVisitValue",
         formatNumber(
           website.visits
         )
       );
 
       setText(
-        "downloadValue",
+        "overviewClickValue",
         formatNumber(
-          website.downloads
+          website.clicks
         )
       );
 
       setText(
-        "visitSub",
-        website.visitSub
+        "overviewVisitSub",
+        state.period ===
+          "today"
+          ? "홈페이지 인덱스 진입"
+          : `${website.compareLabel} 대비 ${changeLabel(
+              website.visitChange
+            )}`
       );
 
       setText(
-        "downloadSub",
-        website.downloadSub
+        "overviewClickSub",
+        state.period ===
+          "today"
+          ? "실제 설치가 아닌 스토어 이동 클릭"
+          : `${website.compareLabel} 대비 ${changeLabel(
+              website.clickChange
+            )}`
       );
 
       setText(
-        "installLabel",
-        installs.label
+        "overviewInstallLabel",
+        state.period ===
+          "today"
+          ? "오늘 실제 신규 설치"
+          : state.period ===
+              "week"
+            ? "이번 주 실제 신규 설치"
+            : "이번 달 실제 신규 설치"
       );
 
       setText(
-        "installValue",
-        installs.total ===
+        "overviewInstallValue",
+        installs.currentTotal ===
           null
           ? "-"
           : formatNumber(
-              installs.total
+              installs.currentTotal
             )
       );
 
       setText(
-        "iosMiniValue",
+        "overviewIosValue",
         installs.iosReady
           ? `${formatNumber(
               installs.iosCurrent ??
@@ -2770,7 +3391,7 @@
       );
 
       setText(
-        "androidMiniValue",
+        "overviewAndroidValue",
         installs.androidReady
           ? `${formatNumber(
               installs.androidCurrent ??
@@ -2780,173 +3401,674 @@
       );
 
       setText(
-        "installSub",
-        installs.total ===
+        "overviewInstallSub",
+        installs.currentTotal ===
           null
-          ? "플랫폼 데이터 연결이 완료되면 합계가 표시됩니다."
-          : installs.sub
+          ? "플랫폼 데이터 연결이 완료되면 합계가 표시됩니다"
+          : "App Store + Google Play 신규 설치"
       );
 
       setText(
-        "summaryRate",
+        "overviewClickRate",
         formatRate(
-          website.rate
+          website.clickRate
         )
       );
 
       setText(
-        "summaryVisits",
-        `${formatNumber(
-          state.stats
-            ?.total
-            ?.visits
-        )}회`
-      );
-
-      setText(
-        "summaryDownloads",
-        `${formatNumber(
-          state.stats
-            ?.total
-            ?.downloads
-        )}회`
-      );
-
-      setText(
-        "summaryInstalls",
-        installs.cumulative ===
+        "overviewInstallRate",
+        installRate ===
           null
-          ? "연결 대기"
+          ? "-"
+          : formatRate(
+              installRate
+            )
+      );
+
+      setText(
+        "overviewLaunchTotal",
+        installs.launchTotal ===
+          null
+          ? "집계 준비 중"
           : `${formatNumber(
-              installs.cumulative
+              installs.launchTotal
             )}건`
+      );
+
+      setText(
+        "funnelVisits",
+        formatNumber(
+          website.visits
+        )
+      );
+
+      setText(
+        "funnelClicks",
+        formatNumber(
+          website.clicks
+        )
+      );
+
+      setText(
+        "funnelClickRate",
+        formatRate(
+          website.clickRate
+        )
+      );
+
+      setText(
+        "funnelInstalls",
+        installs.currentTotal ===
+          null
+          ? "-"
+          : formatNumber(
+              installs.currentTotal
+            )
+      );
+
+      setText(
+        "funnelInstallRate",
+        installRate ===
+          null
+          ? "-"
+          : formatRate(
+              installRate
+            )
+      );
+
+      renderOverviewChart();
+    }
+
+    function renderOverviewChart() {
+      if (
+        state.overviewMetric ===
+        "installs"
+      ) {
+        renderBarChart(
+          "overviewChart",
+          getInstallChartRows(),
+          "black",
+          "iOS와 Android 데이터가 모두 준비되면 설치 추이가 표시됩니다."
+        );
+
+        setText(
+          "overviewChartTitle",
+          state.period ===
+            "month"
+            ? "최근 6개월 실제 설치"
+            : "최근 7일 실제 설치"
+        );
+
+        return;
+      }
+
+      const metric =
+        state.overviewMetric ===
+          "visits"
+          ? "visits"
+          : "downloads";
+
+      renderBarChart(
+        "overviewChart",
+        getWebsiteChartRows(
+          metric
+        ),
+        metric ===
+          "visits"
+          ? ""
+          : "orange",
+        "표시할 데이터가 없습니다."
+      );
+
+      setText(
+        "overviewChartTitle",
+        metric ===
+          "visits"
+          ? "방문 추이"
+          : "다운로드 클릭 추이"
       );
     }
 
     /* =========================================================
-       10 TREND
+       07 TRAFFIC / CLICKS
        ========================================================= */
-    function getWebsiteTrendRows() {
+    function renderTraffic() {
+      const website =
+        getWebsitePeriodData();
+
+      setText(
+        "trafficMainLabel",
+        website.visitLabel
+      );
+
+      setText(
+        "trafficMainValue",
+        formatNumber(
+          website.visits
+        )
+      );
+
+      setText(
+        "trafficMainSub",
+        state.period ===
+          "today"
+          ? "홈페이지 인덱스 진입"
+          : `${website.compareLabel} 대비 ${changeLabel(
+              website.visitChange
+            )}`
+      );
+
+      setText(
+        "trafficTotalValue",
+        formatNumber(
+          state.stats
+            ?.total
+            ?.visits
+        )
+      );
+
+      setText(
+        "trafficClickRateValue",
+        Number(
+          website.clickRate ||
+          0
+        ).toFixed(1)
+      );
+
+      setText(
+        "trafficCompareText",
+        state.period ===
+          "today"
+          ? "당일 집계"
+          : `${website.compareLabel} 대비 ${changeLabel(
+              website.visitChange
+            )}`
+      );
+
+      setText(
+        "trafficChartTitle",
+        state.period ===
+          "month"
+          ? "이번 달 일별 방문"
+          : "최근 7일 방문"
+      );
+
+      renderBarChart(
+        "trafficChart",
+        getWebsiteChartRows(
+          "visits"
+        ),
+        "",
+        "표시할 방문 데이터가 없습니다."
+      );
+
+      renderWebsiteTable(
+        "trafficTableBody"
+      );
+    }
+
+    function renderClicks() {
+      const website =
+        getWebsitePeriodData();
+
+      const platform =
+        getPlatformClickData();
+
+      setText(
+        "clickMainLabel",
+        website.clickLabel
+      );
+
+      setText(
+        "clickMainValue",
+        formatNumber(
+          website.clicks
+        )
+      );
+
+      setText(
+        "clickMainSub",
+        state.period ===
+          "today"
+          ? "스토어 이동 버튼 클릭"
+          : `${website.compareLabel} 대비 ${changeLabel(
+              website.clickChange
+            )}`
+      );
+
+      setText(
+        "clickRateValue",
+        Number(
+          website.clickRate ||
+          0
+        ).toFixed(1)
+      );
+
+      setText(
+        "clickTotalValue",
+        formatNumber(
+          state.stats
+            ?.total
+            ?.downloads
+        )
+      );
+
+      setText(
+        "clickPlatformStatus",
+        platform.ready
+          ? "플랫폼별 클릭 집계 중"
+          : "플랫폼 구분 집계 준비 중"
+      );
+
+      setText(
+        "clickIosValue",
+        platform.ready
+          ? `${formatNumber(
+              platform.ios
+            )}회`
+          : "-"
+      );
+
+      setText(
+        "clickAndroidValue",
+        platform.ready
+          ? `${formatNumber(
+              platform.android
+            )}회`
+          : "-"
+      );
+
+      setText(
+        "clickCompareText",
+        state.period ===
+          "today"
+          ? "당일 집계"
+          : `${website.compareLabel} 대비 ${changeLabel(
+              website.clickChange
+            )}`
+      );
+
+      setText(
+        "clickChartTitle",
+        state.period ===
+          "month"
+          ? "이번 달 일별 클릭"
+          : "최근 7일 다운로드 클릭"
+      );
+
+      renderBarChart(
+        "clickChart",
+        getWebsiteChartRows(
+          "downloads"
+        ),
+        "orange",
+        "표시할 클릭 데이터가 없습니다."
+      );
+
+      renderWebsiteTable(
+        "clickTableBody"
+      );
+    }
+
+    function getPlatformClickData() {
+      const source =
+        state.stats
+          ?.clickPlatforms ||
+        state.stats
+          ?.downloadPlatforms ||
+        null;
+
+      if (!source) {
+        return {
+          ready:
+            false,
+
+          ios:
+            null,
+
+          android:
+            null
+        };
+      }
+
+      const current =
+        source?.[
+          state.period
+        ] ||
+        null;
+
+      const ios =
+        firstFiniteNumber(
+          current?.ios,
+          current?.apple
+        );
+
+      const android =
+        firstFiniteNumber(
+          current?.android,
+          current?.google
+        );
+
+      return {
+        ready:
+          ios !==
+            null ||
+          android !==
+            null,
+
+        ios:
+          ios ??
+          0,
+
+        android:
+          android ??
+          0
+      };
+    }
+
+    /* =========================================================
+       08 INSTALLS
+       ========================================================= */
+    function renderInstalls() {
+      const website =
+        getWebsitePeriodData();
+
+      const installs =
+        getPeriodInstallData();
+
+      const referenceRate =
+        installs.currentTotal !==
+          null &&
+        website.clicks >
+          0
+          ? (
+              installs.currentTotal /
+              website.clicks
+            ) *
+            100
+          : null;
+
+      const change =
+        installs.currentTotal !==
+          null &&
+        installs.previousTotal !==
+          null
+          ? percentChange(
+              installs.currentTotal,
+              installs.previousTotal
+            )
+          : null;
+
+      setText(
+        "installMainLabel",
+        state.period ===
+          "today"
+          ? "오늘 실제 신규 설치"
+          : state.period ===
+              "week"
+            ? "이번 주 실제 신규 설치"
+            : "이번 달 실제 신규 설치"
+      );
+
+      setText(
+        "installMainValue",
+        installs.currentTotal ===
+          null
+          ? "-"
+          : formatNumber(
+              installs.currentTotal
+            )
+      );
+
+      setText(
+        "installMainSub",
+        installs.currentTotal ===
+          null
+          ? "Apple·Google 데이터 준비 중"
+          : "App Store + Google Play 신규 설치"
+      );
+
+      setText(
+        "installLaunchTotal",
+        installs.launchTotal ===
+          null
+          ? "-"
+          : formatNumber(
+              installs.launchTotal
+            )
+      );
+
+      setText(
+        "installReferenceRate",
+        referenceRate ===
+          null
+          ? "-"
+          : Number(
+              referenceRate
+            ).toFixed(1)
+      );
+
+      setText(
+        "installIosValue",
+        installs.iosReady
+          ? `${formatNumber(
+              installs.iosCurrent ??
+              0
+            )}건`
+          : "-"
+      );
+
+      setText(
+        "installAndroidValue",
+        installs.androidReady
+          ? `${formatNumber(
+              installs.androidCurrent ??
+              0
+            )}건`
+          : "-"
+      );
+
+      setText(
+        "installIosSub",
+        installs.iosReady
+          ? "App Store 신규 다운로드"
+          : "Apple 데이터 준비 중"
+      );
+
+      setText(
+        "installAndroidSub",
+        installs.androidReady
+          ? "Google Play 신규 사용자 설치"
+          : "Google 권한 연결 대기"
+      );
+
+      setText(
+        "installPlatformStatus",
+        getInstallStatusText(
+          installs
+        )
+      );
+
+      setText(
+        "installChange",
+        state.period ===
+          "today"
+          ? "당일 집계"
+          : changeLabel(
+              change
+            )
+      );
+
+      if (
+        installs.currentTotal !==
+          null &&
+        installs.currentTotal >
+          0
+      ) {
+        setText(
+          "installIosShare",
+          formatRate(
+            (
+              Number(
+                installs.iosCurrent ||
+                0
+              ) /
+              installs.currentTotal
+            ) *
+            100
+          )
+        );
+
+        setText(
+          "installAndroidShare",
+          formatRate(
+            (
+              Number(
+                installs.androidCurrent ||
+                0
+              ) /
+              installs.currentTotal
+            ) *
+            100
+          )
+        );
+
+      } else {
+        setText(
+          "installIosShare",
+          "-"
+        );
+
+        setText(
+          "installAndroidShare",
+          "-"
+        );
+      }
+
+      setText(
+        "installChartTitle",
+        state.period ===
+          "month"
+          ? "최근 6개월 실제 신규 설치"
+          : "최근 7일 실제 신규 설치"
+      );
+
+      renderBarChart(
+        "installChart",
+        getInstallChartRows(),
+        "black",
+        "iOS와 Android 데이터가 모두 준비되면 설치 추이가 표시됩니다."
+      );
+
+      renderInstallTable();
+    }
+
+    function getInstallStatusText(
+      installs
+    ) {
+      const apple =
+        installs.iosReady
+          ? "Apple 동기화 완료"
+          : "Apple 데이터 준비 중";
+
+      const google =
+        installs.androidReady
+          ? "Google 동기화 완료"
+          : storeHasPayload(
+              installs.android
+            )
+            ? "Google 데이터 준비 중"
+            : "Google 권한 연결 대기";
+
+      return (
+        `${apple} · ` +
+        `${google}`
+      );
+    }
+
+    /* =========================================================
+       09 CHART DATA / TABLES
+       ========================================================= */
+    function getWebsiteChartRows(
+      metric
+    ) {
       const data =
         state.stats ||
         {};
 
-      if (
+      const rows =
         state.period ===
-        "month"
-      ) {
-        return (
-          Array.isArray(
-            data?.monthly
-          )
-            ? [
-                ...data.monthly
-              ].reverse()
-            : []
-        ).map(
-          (row) => ({
-            key:
-              row.month,
-
-            shortLabel:
-              row.month
-                ? `${Number(
-                    row.month
-                      .split("-")[1]
-                  )}월`
-                : "-",
-
-            visits:
-              Number(
-                row.visits ||
-                0
-              ),
-
-            downloads:
-              Number(
-                row.downloads ||
-                0
+          "month"
+          ? (
+              Array.isArray(
+                data?.monthDaily
               )
-          })
-        );
-      }
+                ? [
+                    ...data.monthDaily
+                  ]
+                : []
+            )
+          : (
+              Array.isArray(
+                data?.daily
+              )
+                ? [
+                    ...data.daily
+                  ].reverse()
+                : []
+            );
 
-      return (
-        Array.isArray(
-          data?.daily
-        )
-          ? [
-              ...data.daily
-            ].reverse()
-          : []
-      ).map(
+      return rows.map(
         (row) => ({
-          key:
-            row.date,
-
-          shortLabel:
+          label:
             compactDate(
               row.date
             ),
 
-          visits:
+          value:
             Number(
-              row.visits ||
-              0
-            ),
-
-          downloads:
-            Number(
-              row.downloads ||
+              row?.[
+                metric
+              ] ||
               0
             )
         })
       );
     }
 
-    function mergeInstallTrendRows() {
-      const ios =
-        state.stats?.ios ||
-        {};
-
-      const android =
-        state.stats?.android ||
-        {};
-
-      const iosReady =
-        storeReady(
-          ios
-        );
-
-      const androidReady =
-        storeReady(
-          android
-        );
+    function getInstallChartRows() {
+      const installs =
+        getPeriodInstallData();
 
       if (
-        !iosReady ||
-        !androidReady
+        !installs.iosReady ||
+        !installs.androidReady
       ) {
         return [];
       }
 
-      const key =
+      const monthly =
         state.period ===
-          "month"
+        "month";
+
+      const key =
+        monthly
           ? "month"
           : "date";
 
       const iosRows =
-        state.period ===
-          "month"
-          ? ios?.monthly
-          : ios?.daily;
+        monthly
+          ? installs.ios
+              ?.monthly
+          : installs.ios
+              ?.daily;
 
       const androidRows =
-        state.period ===
-          "month"
-          ? android?.monthly
-          : android?.daily;
+        monthly
+          ? installs.android
+              ?.monthly
+          : installs.android
+              ?.daily;
 
       const map =
         new Map();
@@ -2960,28 +4082,27 @@
       ).forEach(
         (row) => {
           const rowKey =
-            row?.[key];
+            row?.[
+              key
+            ];
 
-          if (!rowKey) {
-            return;
+          if (
+            rowKey
+          ) {
+            map.set(
+              rowKey,
+              {
+                ios:
+                  getIosValue(
+                    row
+                  ) ??
+                  0,
+
+                android:
+                  0
+              }
+            );
           }
-
-          map.set(
-            rowKey,
-            {
-              key:
-                rowKey,
-
-              ios:
-                getIosValue(
-                  row
-                ) ??
-                0,
-
-              android:
-                0
-            }
-          );
         }
       );
 
@@ -2994,9 +4115,13 @@
       ).forEach(
         (row) => {
           const rowKey =
-            row?.[key];
+            row?.[
+              key
+            ];
 
-          if (!rowKey) {
+          if (
+            !rowKey
+          ) {
             return;
           }
 
@@ -3004,9 +4129,6 @@
             map.get(
               rowKey
             ) || {
-              key:
-                rowKey,
-
               ios:
                 0,
 
@@ -3028,97 +4150,62 @@
       );
 
       return Array.from(
-        map.values()
+        map.entries()
       )
         .sort(
-          (a, b) =>
+          (
+            a,
+            b
+          ) =>
             String(
-              a.key
+              a[0]
             ).localeCompare(
               String(
-                b.key
+                b[0]
               )
             )
         )
         .map(
-          (row) => ({
-            ...row,
-
-            value:
-              Number(
-                row.ios ||
-                0
-              ) +
-              Number(
-                row.android ||
-                0
-              ),
-
-            shortLabel:
-              state.period ===
-                "month"
+          ([
+            rowKey,
+            value
+          ]) => ({
+            label:
+              monthly
                 ? `${Number(
-                    row.key
+                    rowKey
                       .split("-")[1]
                   )}월`
                 : compactDate(
-                    row.key
-                  )
+                    rowKey
+                  ),
+
+            value:
+              Number(
+                value.ios ||
+                0
+              ) +
+              Number(
+                value.android ||
+                0
+              )
           })
         );
     }
 
-    function renderTrend() {
+    function renderBarChart(
+      elementId,
+      rows,
+      colorClass,
+      emptyMessage
+    ) {
       const chart =
         document.getElementById(
-          "trendChart"
+          elementId
         );
 
       chart.innerHTML =
         "";
-
-      let rows =
-        [];
-
-      let title =
-        state.period ===
-          "month"
-          ? "최근 6개월 추이"
-          : "최근 7일 추이";
-
-      let caption =
-        "홈페이지 방문 흐름";
-
-      if (
-        state.metric ===
-        "installs"
-      ) {
-        rows =
-          mergeInstallTrendRows();
-
-        caption =
-          "iOS + Android 신규 설치";
-
-      } else {
-        rows =
-          getWebsiteTrendRows();
-
-        caption =
-          state.metric ===
-            "downloads"
-            ? "다운로드 버튼 클릭 흐름"
-            : "홈페이지 방문 흐름";
-      }
-
-      setText(
-        "trendTitle",
-        title
-      );
-
-      setText(
-        "trendCaption",
-        caption
-      );
 
       if (
         !rows.length
@@ -3129,13 +4216,10 @@
           );
 
         empty.className =
-          "trend-empty";
+          "chart-empty";
 
         empty.textContent =
-          state.metric ===
-            "installs"
-            ? "iOS와 Android 데이터가 모두 연결되면 설치 추이가 표시됩니다."
-            : "표시할 데이터가 없습니다.";
+          emptyMessage;
 
         chart.appendChild(
           empty
@@ -3144,52 +4228,20 @@
         return;
       }
 
-      const values =
-        rows.map(
-          (row) => {
-            if (
-              state.metric ===
-              "visits"
-            ) {
-              return Number(
-                row.visits ||
-                0
-              );
-            }
-
-            if (
-              state.metric ===
-              "downloads"
-            ) {
-              return Number(
-                row.downloads ||
-                0
-              );
-            }
-
-            return Number(
-              row.value ||
-              0
-            );
-          }
-        );
-
       const max =
         Math.max(
           1,
-          ...values
+          ...rows.map(
+            (row) =>
+              Number(
+                row.value ||
+                0
+              )
+          )
         );
 
       rows.forEach(
-        (
-          row,
-          index
-        ) => {
-          const value =
-            values[
-              index
-            ];
-
+        (row) => {
           const item =
             document.createElement(
               "div"
@@ -3200,7 +4252,7 @@
               "div"
             );
 
-          const barWrap =
+          const wrap =
             document.createElement(
               "div"
             );
@@ -3216,54 +4268,52 @@
             );
 
           item.className =
-            "trend-item";
+            "bar-item";
 
           number.className =
-            "trend-number";
+            "bar-number";
 
-          barWrap.className =
-            "trend-bar-wrap";
+          wrap.className =
+            "bar-wrap";
 
           bar.className =
-            `trend-bar ${
-              state.metric ===
-                "downloads"
-                ? "download"
-                : state.metric ===
-                    "installs"
-                  ? "install"
-                  : ""
+            `bar ${
+              colorClass ||
+              ""
             }`;
 
           label.className =
-            "trend-label";
+            "bar-label";
 
           number.textContent =
             formatNumber(
-              value
+              row.value
             );
 
           bar.style.height =
             `${Math.max(
               2,
               (
-                value /
+                Number(
+                  row.value ||
+                  0
+                ) /
                 max
               ) *
               100
             )}%`;
 
           label.textContent =
-            row.shortLabel ||
+            row.label ||
             "-";
 
-          barWrap.appendChild(
+          wrap.appendChild(
             bar
           );
 
           item.append(
             number,
-            barWrap,
+            wrap,
             label
           );
 
@@ -3274,92 +4324,62 @@
       );
     }
 
-    /* =========================================================
-       11 WEBSITE DETAIL
-       ========================================================= */
-    function getWebsiteDetailRows() {
-      const data =
-        state.stats ||
-        {};
-
-      if (
-        state.period ===
-        "month"
-      ) {
-        return {
-          monthly:
-            true,
-
-          rows:
-            Array.isArray(
-              data?.monthly
-            )
-              ? data.monthly
-              : []
-        };
-      }
-
-      return {
-        monthly:
-          false,
-
-        rows:
-          Array.isArray(
-            data?.daily
-          )
-            ? data.daily
-            : []
-      };
-    }
-
-    function renderWebsiteDetail() {
+    function renderWebsiteTable(
+      bodyId
+    ) {
       const body =
         document.getElementById(
-          "websiteDetailBody"
+          bodyId
         );
 
-      const result =
-        getWebsiteDetailRows();
+      const rows =
+        state.period ===
+          "month"
+          ? (
+              Array.isArray(
+                state.stats
+                  ?.monthDaily
+              )
+                ? [
+                    ...state.stats
+                      .monthDaily
+                  ].reverse()
+                : []
+            )
+          : (
+              Array.isArray(
+                state.stats
+                  ?.daily
+              )
+                ? state.stats
+                    .daily
+                : []
+            );
 
       body.innerHTML =
         "";
 
-      setText(
-        "websiteFirstHeader",
-        result.monthly
-          ? "월"
-          : "날짜"
-      );
-
-      setText(
-        "websiteDetailNote",
-        state.period ===
-          "month"
-          ? "최근 6개월 기준"
-          : "최근 7일 기준"
-      );
-
       if (
-        !result.rows.length
+        !rows.length
       ) {
         body.appendChild(
           emptyRow(
             4,
-            "집계된 홈페이지 데이터가 없습니다."
+            "집계된 데이터가 없습니다."
           )
         );
 
         return;
       }
 
-      result.rows.forEach(
+      rows.forEach(
         (row) => {
           const tr =
             document.createElement(
               "tr"
             );
 
-          const label =
+          const date =
             document.createElement(
               "td"
             );
@@ -3379,14 +4399,10 @@
               "td"
             );
 
-          label.textContent =
-            result.monthly
-              ? formatMonth(
-                  row.month
-                )
-              : formatDate(
-                  row.date
-                );
+          date.textContent =
+            formatDate(
+              row.date
+            );
 
           visits.textContent =
             `${formatNumber(
@@ -3394,7 +4410,7 @@
             )}회`;
 
           downloads.className =
-            "download-value";
+            "orange-value";
 
           downloads.textContent =
             `${formatNumber(
@@ -3407,7 +4423,7 @@
             );
 
           tr.append(
-            label,
+            date,
             visits,
             downloads,
             rate
@@ -3420,38 +4436,50 @@
       );
     }
 
-    /* =========================================================
-       12 INSTALL DETAIL
-       ========================================================= */
-    function getInstallDetailRows() {
-      const ios =
-        state.stats?.ios ||
-        {};
+    function renderInstallTable() {
+      const body =
+        document.getElementById(
+          "installTableBody"
+        );
 
-      const android =
-        state.stats?.android ||
-        {};
+      const installs =
+        getPeriodInstallData();
+
+      const monthly =
+        state.period ===
+        "month";
 
       const key =
-        state.period ===
-          "month"
+        monthly
           ? "month"
           : "date";
 
       const iosRows =
-        state.period ===
-          "month"
-          ? ios?.monthly
-          : ios?.daily;
+        monthly
+          ? installs.ios
+              ?.monthly
+          : installs.ios
+              ?.daily;
 
       const androidRows =
-        state.period ===
-          "month"
-          ? android?.monthly
-          : android?.daily;
+        monthly
+          ? installs.android
+              ?.monthly
+          : installs.android
+              ?.daily;
 
       const map =
         new Map();
+
+      setText(
+        "installTableFirstHead",
+        monthly
+          ? "월"
+          : "날짜"
+      );
+
+      body.innerHTML =
+        "";
 
       (
         Array.isArray(
@@ -3462,27 +4490,26 @@
       ).forEach(
         (row) => {
           const rowKey =
-            row?.[key];
+            row?.[
+              key
+            ];
 
-          if (!rowKey) {
-            return;
+          if (
+            rowKey
+          ) {
+            map.set(
+              rowKey,
+              {
+                ios:
+                  getIosValue(
+                    row
+                  ),
+
+                android:
+                  null
+              }
+            );
           }
-
-          map.set(
-            rowKey,
-            {
-              key:
-                rowKey,
-
-              ios:
-                getIosValue(
-                  row
-                ),
-
-              android:
-                null
-            }
-          );
         }
       );
 
@@ -3495,9 +4522,13 @@
       ).forEach(
         (row) => {
           const rowKey =
-            row?.[key];
+            row?.[
+              key
+            ];
 
-          if (!rowKey) {
+          if (
+            !rowKey
+          ) {
             return;
           }
 
@@ -3505,9 +4536,6 @@
             map.get(
               rowKey
             ) || {
-              key:
-                rowKey,
-
               ios:
                 null,
 
@@ -3527,60 +4555,26 @@
         }
       );
 
-      return {
-        monthly:
-          state.period ===
-          "month",
-
-        rows:
-          Array.from(
-            map.values()
-          )
-            .sort(
-              (a, b) =>
+      const rows =
+        Array.from(
+          map.entries()
+        )
+          .sort(
+            (
+              a,
+              b
+            ) =>
+              String(
+                b[0]
+              ).localeCompare(
                 String(
-                  b.key
-                ).localeCompare(
-                  String(
-                    a.key
-                  )
+                  a[0]
                 )
-            )
-      };
-    }
-
-    function renderInstallDetail() {
-      const body =
-        document.getElementById(
-          "installDetailBody"
-        );
-
-      const result =
-        getInstallDetailRows();
-
-      const installs =
-        getPeriodInstallData();
-
-      body.innerHTML =
-        "";
-
-      setText(
-        "installFirstHeader",
-        result.monthly
-          ? "월"
-          : "날짜"
-      );
-
-      setText(
-        "installDetailNote",
-        installs.iosReady &&
-        installs.androidReady
-          ? "두 플랫폼 모두 연결됨"
-          : "연결된 플랫폼만 실제 값이 표시됩니다."
-      );
+              )
+          );
 
       if (
-        !result.rows.length
+        !rows.length
       ) {
         body.appendChild(
           emptyRow(
@@ -3592,8 +4586,11 @@
         return;
       }
 
-      result.rows.forEach(
-        (row) => {
+      rows.forEach(
+        ([
+          rowKey,
+          value
+        ]) => {
           const tr =
             document.createElement(
               "tr"
@@ -3620,12 +4617,12 @@
             );
 
           label.textContent =
-            result.monthly
+            monthly
               ? formatMonth(
-                  row.key
+                  rowKey
                 )
               : formatDate(
-                  row.key
+                  rowKey
                 );
 
           iosCell.className =
@@ -3634,7 +4631,7 @@
           iosCell.textContent =
             installs.iosReady
               ? `${formatNumber(
-                  row.ios ??
+                  value.ios ??
                   0
                 )}건`
               : "-";
@@ -3645,7 +4642,7 @@
           androidCell.textContent =
             installs.androidReady
               ? `${formatNumber(
-                  row.android ??
+                  value.android ??
                   0
                 )}건`
               : "-";
@@ -3655,11 +4652,11 @@
             installs.androidReady
               ? `${formatNumber(
                   Number(
-                    row.ios ||
+                    value.ios ||
                     0
                   ) +
                   Number(
-                    row.android ||
+                    value.android ||
                     0
                   )
                 )}건`
@@ -3680,7 +4677,7 @@
     }
 
     /* =========================================================
-       13 SYSTEM STATUS
+       10 SYSTEM / LOGOUT / INIT
        ========================================================= */
     function renderSystemStatus() {
       const ios =
@@ -3691,29 +4688,19 @@
         state.stats?.android ||
         {};
 
-      const iosSync =
-        getStoreSync(
+      const iosReady =
+        storeReady(
           ios
         );
 
-      const androidSync =
-        getStoreSync(
-          android
-        );
-
-      const iosReady =
-        Boolean(
-          iosSync
-        );
-
       const androidReady =
-        Boolean(
-          androidSync
+        storeReady(
+          android
         );
 
       document
         .getElementById(
-          "iosSystemCard"
+          "appleSystemDot"
         )
         .classList
         .toggle(
@@ -3723,7 +4710,7 @@
 
       document
         .getElementById(
-          "androidSystemCard"
+          "googleSystemDot"
         )
         .classList
         .toggle(
@@ -3732,274 +4719,66 @@
         );
 
       setText(
-        "iosSystemValue",
+        "appleSystemState",
         iosReady
-          ? "동기화됨"
-          : storeHasPayload(
-              ios
-            )
-            ? "데이터 대기"
-            : "연결 대기"
+          ? "동기화 완료"
+          : "데이터 준비 중"
       );
 
       setText(
-        "iosSystemSub",
+        "appleSystemDesc",
         iosReady
-          ? `마지막 동기화 ${
-              formatSyncTime(
-                iosSync
+          ? `D1 마지막 저장 ${
+              getStoreSync(
+                ios
               )
             }`
-          : "Apple 보고서 생성 및 D1 저장 대기"
+          : "Snapshot 요청 및 App Downloads 보고서 생성 후 DAILY instance 대기"
       );
 
       setText(
-        "androidSystemValue",
+        "googleSystemState",
         androidReady
-          ? "동기화됨"
+          ? "동기화 완료"
           : storeHasPayload(
               android
             )
-            ? "데이터 대기"
-            : "연결 대기"
+            ? "데이터 준비 중"
+            : "권한 연결 대기"
       );
 
       setText(
-        "androidSystemSub",
+        "googleSystemDesc",
         androidReady
-          ? `마지막 동기화 ${
-              formatSyncTime(
-                androidSync
+          ? `D1 마지막 저장 ${
+              getStoreSync(
+                android
               )
             }`
-          : "Google Play 설치 보고서 연결 대기"
+          : storeHasPayload(
+              android
+            )
+            ? "Google Play 설치 보고서 데이터 저장 대기"
+            : "Google Play 설치 보고서 버킷 권한 반영 대기"
       );
     }
 
-    /* =========================================================
-       14 CSV EXPORT
-       ========================================================= */
-    function csvEscape(
-      value
-    ) {
-      const text =
-        String(
-          value ??
-          ""
-        );
-
-      if (
-        /[",\n]/
-          .test(
-            text
-          )
-      ) {
-        return (
-          `"${text.replace(
-            /"/g,
-            '""'
-          )}"`
-        );
-      }
-
-      return text;
-    }
-
-    function downloadCsv(
-      filename,
-      rows
-    ) {
-      const csv =
-        "\uFEFF" +
-        rows
-          .map(
-            (row) =>
-              row
-                .map(
-                  csvEscape
-                )
-                .join(",")
-          )
-          .join("\n");
-
-      const blob =
-        new Blob(
-          [
-            csv
-          ],
-          {
-            type:
-              "text/csv;charset=utf-8;"
-          }
-        );
-
-      const url =
-        URL.createObjectURL(
-          blob
-        );
-
-      const anchor =
-        document.createElement(
-          "a"
-        );
-
-      anchor.href =
-        url;
-
-      anchor.download =
-        filename;
-
-      document.body.appendChild(
-        anchor
-      );
-
-      anchor.click();
-
-      anchor.remove();
-
-      URL.revokeObjectURL(
-        url
-      );
-    }
-
-    function exportWebsiteCsv() {
-      const result =
-        getWebsiteDetailRows();
-
-      const rows = [
-        [
-          result.monthly
-            ? "월"
-            : "날짜",
-
-          "방문",
-
-          "다운로드 클릭",
-
-          "클릭률"
-        ],
-
-        ...result.rows.map(
-          (row) => [
-            result.monthly
-              ? row.month
-              : row.date,
-
-            row.visits ||
-            0,
-
-            row.downloads ||
-            0,
-
-            row.downloadRate ||
-            0
-          ]
-        )
-      ];
-
-      downloadCsv(
-        `moding-website-${state.period}.csv`,
-        rows
-      );
-    }
-
-    function exportInstallCsv() {
-      const result =
-        getInstallDetailRows();
-
-      const installs =
-        getPeriodInstallData();
-
-      const rows = [
-        [
-          result.monthly
-            ? "월"
-            : "날짜",
-
-          "iOS 신규 설치",
-
-          "Android 신규 설치",
-
-          "합계"
-        ],
-
-        ...result.rows.map(
-          (row) => {
-            const iosValue =
-              installs.iosReady
-                ? Number(
-                    row.ios ||
-                    0
-                  )
-                : "";
-
-            const androidValue =
-              installs.androidReady
-                ? Number(
-                    row.android ||
-                    0
-                  )
-                : "";
-
-            const total =
-              installs.iosReady &&
-              installs.androidReady
-                ? Number(
-                    row.ios ||
-                    0
-                  ) +
-                  Number(
-                    row.android ||
-                    0
-                  )
-                : "";
-
-            return [
-              row.key,
-              iosValue,
-              androidValue,
-              total
-            ];
-          }
-        )
-      ];
-
-      downloadCsv(
-        `moding-installs-${state.period}.csv`,
-        rows
-      );
-    }
-
-    csvBtn.addEventListener(
+    systemBtn.addEventListener(
       "click",
-      exportWebsiteCsv
+      () => {
+        systemPopover.hidden =
+          !systemPopover.hidden;
+      }
     );
 
-    document
-      .querySelectorAll(
-        "[data-export]"
-      )
-      .forEach(
-        (button) => {
-          button.addEventListener(
-            "click",
-            () => {
-              if (
-                button.dataset.export ===
-                "installs"
-              ) {
-                exportInstallCsv();
-              } else {
-                exportWebsiteCsv();
-              }
-            }
-          );
-        }
-      );
+    systemCloseBtn.addEventListener(
+      "click",
+      () => {
+        systemPopover.hidden =
+          true;
+      }
+    );
 
-    /* =========================================================
-       15 REFRESH / LOGOUT / INIT
-       ========================================================= */
     refreshBtn.addEventListener(
       "click",
       loadStats
@@ -4011,7 +4790,9 @@
         const token =
           getToken();
 
-        if (token) {
+        if (
+          token
+        ) {
           try {
             await fetch(
               apiUrl(
@@ -4036,11 +4817,22 @@
         state.stats =
           null;
 
+        systemPopover.hidden =
+          true;
+
         showLogin();
       }
     );
 
     async function initialize() {
+      setView(
+        "overview"
+      );
+
+      setPeriod(
+        "today"
+      );
+
       if (
         getToken()
       ) {
