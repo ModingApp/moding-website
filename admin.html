@@ -371,7 +371,7 @@
     .period-tabs {
       padding: 4px;
       display: inline-grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 3px;
       border-radius: 15px;
       background: #E9EDEA;
@@ -1416,7 +1416,8 @@
 
     <div class="filter-row">
       <nav class="period-tabs" aria-label="통계 기간">
-        <button class="period-tab is-active" type="button" data-period="today">오늘</button>
+        <button class="period-tab is-active" type="button" data-period="all">전체</button>
+        <button class="period-tab" type="button" data-period="today">오늘</button>
         <button class="period-tab" type="button" data-period="week">주간</button>
         <button class="period-tab" type="button" data-period="month">월간</button>
       </nav>
@@ -1522,12 +1523,12 @@
 
         <aside class="surface side-card">
           <div class="eyebrow">INSTALL SNAPSHOT</div>
-          <h2 class="section-title">출시 후 실제 설치</h2>
+          <h2 id="overviewInstallSnapshotTitle" class="section-title">전체 실제 설치</h2>
 
           <div class="donut-layout">
             <div id="overviewInstallDonut" class="donut">
               <div class="donut-hole">
-                <small>누적</small>
+                <small id="overviewDonutLabel">전체</small>
                 <strong id="overviewLaunchTotal">-</strong>
               </div>
             </div>
@@ -1566,15 +1567,15 @@
           <div id="trafficSpark" class="mini-spark"></div>
         </article>
 
-        <article class="surface hero-card">
+        <article class="surface hero-card orange">
           <div>
-            <div class="hero-label">누적 방문</div>
+            <div id="trafficSecondaryLabel" class="hero-label">전체 다운로드 클릭</div>
             <div class="hero-value medium">
               <span id="trafficTotalValue">0</span><span class="hero-unit">회</span>
             </div>
-            <div class="hero-sub">수집 시작 이후 누적</div>
+            <div id="trafficSecondarySub" class="hero-sub">같은 기간 스토어 이동 클릭</div>
           </div>
-          <div class="hero-trend">현재까지 홈페이지 진입량</div>
+          <div class="hero-trend">유입 이후 행동량</div>
         </article>
 
         <article class="surface hero-card orange">
@@ -1660,15 +1661,15 @@
           <div class="hero-trend">스토어 이동 관심도</div>
         </article>
 
-        <article class="surface hero-card">
+        <article class="surface hero-card install">
           <div>
-            <div class="hero-label">누적 다운로드 클릭</div>
+            <div id="clickSecondaryLabel" class="hero-label">전체 실제 신규 설치</div>
             <div class="hero-value medium">
-              <span id="clickTotalValue">0</span><span class="hero-unit">회</span>
+              <span id="clickTotalValue">-</span><span class="hero-unit">건</span>
             </div>
-            <div class="hero-sub">실제 설치와는 별도 지표</div>
+            <div class="hero-sub">스토어 확정 데이터 참고</div>
           </div>
-          <div id="clickCompareText" class="hero-trend">당일 집계</div>
+          <div id="clickCompareText" class="hero-trend">선택 기간 설치</div>
         </article>
       </div>
 
@@ -1747,7 +1748,7 @@
       <div class="hero-grid">
         <article class="surface hero-card install">
           <div>
-            <div class="hero-label">출시 후 실제 신규 설치</div>
+            <div id="installMainLabel" class="hero-label">전체 실제 신규 설치</div>
             <div class="hero-value">
               <span id="installLaunchTotal">-</span><span class="hero-unit">건</span>
             </div>
@@ -1804,7 +1805,7 @@
           <div class="donut-layout">
             <div id="installDonut" class="donut">
               <div class="donut-hole">
-                <small>누적</small>
+                <small id="installDonutLabel">전체</small>
                 <strong id="installDonutTotal">-</strong>
               </div>
             </div>
@@ -1832,7 +1833,7 @@
         <div class="section-head">
           <div>
             <div class="eyebrow">RECENT ACTIVITY</div>
-            <h2 class="section-title">최근 설치 활동</h2>
+            <h2 id="installActivityTitle" class="section-title">최근 설치 활동</h2>
           </div>
           <div class="section-caption">설치가 있었던 날 중심<br>0건 반복은 기본 화면에서 숨깁니다</div>
         </div>
@@ -1924,9 +1925,12 @@
       label: "#7B847D"
     };
 
+    const APP_LAUNCH_DATE = "2026-07-01";
+    const APP_LAUNCH_MONTH = APP_LAUNCH_DATE.slice(0, 7);
+
     const state = {
       view: "overview",
-      period: "today",
+      period: "all",
       stats: null
     };
 
@@ -2099,8 +2103,40 @@
       return Boolean(getStoreSync(store) || getLatestDataDate(store));
     }
 
+    function periodName(period = state.period) {
+      if (period === "all") return "전체";
+      if (period === "today") return "오늘";
+      if (period === "week") return "이번 주";
+      return "이번 달";
+    }
+
+    function currentDate() {
+      return state.stats?.today?.date || new Date().toISOString().slice(0, 10);
+    }
+
+    function mondayOfWeek(dateString) {
+      const [year, month, day] = String(dateString).split("-").map(Number);
+      const date = new Date(Date.UTC(year, month - 1, day));
+      const weekDay = date.getUTCDay();
+      date.setUTCDate(date.getUTCDate() + (weekDay === 0 ? -6 : 1 - weekDay));
+      return date.toISOString().slice(0, 10);
+    }
+
     function getWebsitePeriodData() {
       const data = state.stats || {};
+
+      if (state.period === "all") {
+        return {
+          visitLabel: "전체 홈페이지 방문",
+          clickLabel: "전체 다운로드 클릭",
+          visits: Number(data?.total?.visits || 0),
+          clicks: Number(data?.total?.downloads || 0),
+          clickRate: Number(data?.total?.downloadRate || 0),
+          visitChange: null,
+          clickChange: null,
+          compareLabel: "수집 시작 이후"
+        };
+      }
 
       if (state.period === "week") {
         return {
@@ -2151,7 +2187,10 @@
       let iosPrevious = null;
       let androidPrevious = null;
 
-      if (state.period === "week") {
+      if (state.period === "all") {
+        iosCurrent = getIosValue(ios?.total);
+        androidCurrent = getAndroidValue(android?.total);
+      } else if (state.period === "week") {
         iosCurrent = getIosValue(ios?.week);
         androidCurrent = getAndroidValue(android?.week);
         iosPrevious = getIosValue(ios?.week?.previous);
@@ -2172,9 +2211,9 @@
           : null;
 
       const previousTotal =
-        state.period === "today"
-          ? null
-          : Number(iosPrevious || 0) + Number(androidPrevious || 0);
+        state.period === "week" || state.period === "month"
+          ? Number(iosPrevious || 0) + Number(androidPrevious || 0)
+          : null;
 
       const iosTotal = getIosValue(ios?.total);
       const androidTotal = getAndroidValue(android?.total);
@@ -2184,44 +2223,68 @@
           : null;
 
       return {
-        ios,
-        android,
-        iosReady,
-        androidReady,
-        iosCurrent,
-        androidCurrent,
-        iosPrevious,
-        androidPrevious,
-        currentTotal,
-        previousTotal,
-        iosTotal,
-        androidTotal,
-        launchTotal,
+        ios, android, iosReady, androidReady,
+        iosCurrent, androidCurrent, iosPrevious, androidPrevious,
+        currentTotal, previousTotal, iosTotal, androidTotal, launchTotal,
         iosLatest: getLatestDataDate(ios),
         androidLatest: getLatestDataDate(android)
       };
     }
 
     function getWebsiteDailyRows() {
-      const data = state.stats || {};
-      let rows;
-
-      if (state.period === "month" && Array.isArray(data?.monthDaily)) {
-        rows = [...data.monthDaily];
-      } else if (Array.isArray(data?.daily)) {
-        rows = [...data.daily];
-      } else {
-        rows = [];
-      }
-
+      const rows = Array.isArray(state.stats?.daily) ? [...state.stats.daily] : [];
       return rows
         .filter(row => row?.date)
         .sort((a, b) => String(a.date).localeCompare(String(b.date)));
     }
 
+    function getWebsiteRowsForPeriod() {
+      const data = state.stats || {};
+      const today = currentDate();
+
+      if (state.period === "all") {
+        return (Array.isArray(data?.monthly) ? [...data.monthly] : [])
+          .filter(row => row?.month && row.month >= APP_LAUNCH_MONTH)
+          .sort((a, b) => String(a.month).localeCompare(String(b.month)))
+          .map(row => ({
+            key: row.month,
+            label: `${Number(String(row.month).split("-")[1])}월`,
+            visits: Number(row.visits || 0),
+            downloads: Number(row.downloads || 0),
+            downloadRate: Number(row.downloadRate || 0),
+            monthly: true
+          }));
+      }
+
+      let rows = state.period === "month" && Array.isArray(data?.monthDaily)
+        ? [...data.monthDaily]
+        : getWebsiteDailyRows();
+
+      if (state.period === "today") {
+        rows = rows.filter(row => row.date === today);
+      } else if (state.period === "week") {
+        const start = mondayOfWeek(today);
+        rows = rows.filter(row => row.date >= start && row.date <= today);
+      } else if (state.period === "month") {
+        const month = today.slice(0, 7);
+        rows = rows.filter(row => String(row.date).startsWith(month));
+      }
+
+      return rows
+        .filter(row => row?.date)
+        .sort((a, b) => String(a.date).localeCompare(String(b.date)))
+        .map(row => ({
+          key: row.date,
+          label: row.label,
+          visits: Number(row.visits || 0),
+          downloads: Number(row.downloads || 0),
+          downloadRate: Number(row.downloadRate || 0),
+          monthly: false
+        }));
+    }
+
     function getRecentWebsiteRows(limit = 14) {
-      const rows = getWebsiteDailyRows();
-      return rows.slice(-limit);
+      return getWebsiteRowsForPeriod().slice(-limit);
     }
 
     function getPlatformClickData() {
@@ -2230,7 +2293,7 @@
         return { ready: false, ios: 0, android: 0, unknown: 0, total: 0 };
       }
 
-      const current = source?.[state.period] || null;
+      const current = state.period === "all" ? source?.total : source?.[state.period] || null;
       const ios = firstFiniteNumber(current?.ios, current?.apple) ?? 0;
       const android = firstFiniteNumber(current?.android, current?.google) ?? 0;
       const unknown = firstFiniteNumber(current?.unknown, current?.other) ?? 0;
@@ -2289,6 +2352,28 @@
             androidConfirmed
           };
         });
+    }
+
+    function getInstallRowsForPeriod() {
+      const today = currentDate();
+
+      if (state.period === "all") {
+        return getInstallRows(true).filter(row => row.key >= APP_LAUNCH_MONTH);
+      }
+
+      let rows = getInstallRows(false);
+
+      if (state.period === "today") {
+        rows = rows.filter(row => row.key === today);
+      } else if (state.period === "week") {
+        const start = mondayOfWeek(today);
+        rows = rows.filter(row => row.key >= start && row.key <= today);
+      } else if (state.period === "month") {
+        const month = today.slice(0, 7);
+        rows = rows.filter(row => String(row.key).startsWith(month));
+      }
+
+      return rows;
     }
 
     /* =========================================================
@@ -2497,7 +2582,7 @@
       setDashboardStatus("통계를 불러오는 중입니다.");
 
       try {
-        const response = await fetch(`${apiUrl(ENDPOINTS.stats)}?days=30`, {
+        const response = await fetch(`${apiUrl(ENDPOINTS.stats)}?days=31`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${token}`,
@@ -2545,7 +2630,7 @@
     function renderOverview() {
       const website = getWebsitePeriodData();
       const installs = getPeriodInstallData();
-      const rows = getRecentWebsiteRows(state.period === "month" ? 31 : 14);
+      const rows = getWebsiteRowsForPeriod();
 
       setText("overviewVisitLabel", website.visitLabel);
       setText("overviewClickLabel", website.clickLabel);
@@ -2555,14 +2640,16 @@
 
       setText(
         "overviewVisitSub",
-        state.period === "today"
-          ? "홈페이지 인덱스 진입"
-          : `${website.compareLabel} 대비 ${changeLabel(website.visitChange)}`
+        state.period === "all"
+          ? "수집 시작 이후 누적"
+          : state.period === "today"
+            ? "홈페이지 인덱스 진입"
+            : `${website.compareLabel} 대비 ${changeLabel(website.visitChange)}`
       );
 
       setText(
         "overviewInstallLabel",
-        state.period === "today" ? "오늘 실제 신규 설치" : state.period === "week" ? "이번 주 실제 신규 설치" : "이번 달 실제 신규 설치"
+        state.period === "all" ? "전체 실제 신규 설치" : state.period === "today" ? "오늘 실제 신규 설치" : state.period === "week" ? "이번 주 실제 신규 설치" : "이번 달 실제 신규 설치"
       );
 
       setText("overviewInstallValue", installs.currentTotal === null ? "-" : formatNumber(installs.currentTotal));
@@ -2601,15 +2688,18 @@
         ]
       );
 
-      const launchTotal = installs.launchTotal;
-      const iosTotal = Number(installs.iosTotal || 0);
-      const androidTotal = Number(installs.androidTotal || 0);
-      const iosShare = launchTotal > 0 ? (iosTotal / launchTotal) * 100 : 0;
-      const androidShare = launchTotal > 0 ? (androidTotal / launchTotal) * 100 : 0;
+      const periodInstallTotal = installs.currentTotal;
+      const periodIos = Number(installs.iosCurrent || 0);
+      const periodAndroid = Number(installs.androidCurrent || 0);
+      const iosShare = periodInstallTotal > 0 ? (periodIos / periodInstallTotal) * 100 : 0;
+      const androidShare = periodInstallTotal > 0 ? (periodAndroid / periodInstallTotal) * 100 : 0;
+      const periodLabel = periodName();
 
-      setText("overviewLaunchTotal", launchTotal === null ? "-" : formatNumber(launchTotal));
-      setText("overviewIosShare", launchTotal > 0 ? `${formatNumber(iosTotal)} · ${formatRate(iosShare)}` : "-");
-      setText("overviewAndroidShare", launchTotal > 0 ? `${formatNumber(androidTotal)} · ${formatRate(androidShare)}` : "-");
+      setText("overviewInstallSnapshotTitle", `${periodLabel} 실제 설치`);
+      setText("overviewDonutLabel", periodLabel);
+      setText("overviewLaunchTotal", periodInstallTotal === null ? "-" : formatNumber(periodInstallTotal));
+      setText("overviewIosShare", periodInstallTotal > 0 ? `${formatNumber(periodIos)} · ${formatRate(iosShare)}` : "-");
+      setText("overviewAndroidShare", periodInstallTotal > 0 ? `${formatNumber(periodAndroid)} · ${formatRate(androidShare)}` : "-");
       document.getElementById("overviewInstallDonut").style.setProperty("--ios-share", iosShare.toFixed(2));
       setText("overviewLatestDates", `iOS ${installs.iosLatest ? compactDate(installs.iosLatest) : "-"} · Android ${installs.androidLatest ? compactDate(installs.androidLatest) : "-"}`);
     }
@@ -2619,27 +2709,29 @@
        ========================================================= */
     function renderTraffic() {
       const website = getWebsitePeriodData();
-      const rows = getRecentWebsiteRows(state.period === "month" ? 31 : 14);
+      const rows = getWebsiteRowsForPeriod();
 
       setText("trafficMainLabel", website.visitLabel);
       setText("trafficMainValue", formatNumber(website.visits));
-      setText("trafficTotalValue", formatNumber(state.stats?.total?.visits || 0));
+      setText("trafficSecondaryLabel", `${periodName()} 다운로드 클릭`);
+      setText("trafficTotalValue", formatNumber(website.clicks));
+      setText("trafficSecondarySub", `${periodName()} 기준 스토어 이동 클릭`);
       setText("trafficClickRateValue", Number(website.clickRate || 0).toFixed(1));
       setText(
         "trafficMainSub",
-        state.period === "today" ? "홈페이지 인덱스 진입" : `${website.compareLabel} 대비 ${changeLabel(website.visitChange)}`
+        state.period === "all" ? "수집 시작 이후 누적" : state.period === "today" ? "홈페이지 인덱스 진입" : `${website.compareLabel} 대비 ${changeLabel(website.visitChange)}`
       );
       setText(
         "trafficCompareText",
-        state.period === "today" ? "당일 집계" : `${website.compareLabel} 대비 ${changeLabel(website.visitChange)}`
+        state.period === "all" ? "전체 누적 흐름" : state.period === "today" ? "당일 집계" : `${website.compareLabel} 대비 ${changeLabel(website.visitChange)}`
       );
-      setText("trafficChartTitle", state.period === "month" ? "이번 달 일별 방문" : "최근 방문 추이");
+      setText("trafficChartTitle", state.period === "all" ? "전체 월별 방문 추이" : state.period === "today" ? "오늘 방문" : state.period === "week" ? "이번 주 일별 방문" : "이번 달 일별 방문");
 
       renderSparkline("trafficSpark", rows.map(row => Number(row.visits || 0)), COLORS.green, true);
 
       renderLineChart(
         "trafficChart",
-        rows.map(row => ({ label: compactDate(row.date), visits: Number(row.visits || 0) })),
+        rows.map(row => ({ label: row.label, visits: Number(row.visits || 0) })),
         [{ key: "visits", name: "방문", color: COLORS.green }]
       );
 
@@ -2665,7 +2757,7 @@
         item.className = "rank-row";
         item.innerHTML = `
           <div class="rank-num">${index + 1}</div>
-          <div class="rank-label">${formatDate(row.date)}</div>
+          <div class="rank-label">${row.monthly ? formatMonth(row.key) : formatDate(row.key)}</div>
           <div class="rank-value">${formatNumber(row.visits)}회</div>
         `;
         container.appendChild(item);
@@ -2678,27 +2770,29 @@
     function renderClicks() {
       const website = getWebsitePeriodData();
       const platform = getPlatformClickData();
-      const rows = getRecentWebsiteRows(state.period === "month" ? 31 : 14);
+      const installs = getPeriodInstallData();
+      const rows = getWebsiteRowsForPeriod();
 
       setText("clickMainLabel", website.clickLabel);
       setText("clickMainValue", formatNumber(website.clicks));
       setText("clickRateValue", Number(website.clickRate || 0).toFixed(1));
-      setText("clickTotalValue", formatNumber(state.stats?.total?.downloads || 0));
+      setText("clickSecondaryLabel", `${periodName()} 실제 신규 설치`);
+      setText("clickTotalValue", installs.currentTotal === null ? "-" : formatNumber(installs.currentTotal));
       setText(
         "clickMainSub",
-        state.period === "today" ? "스토어 이동 버튼 클릭" : `${website.compareLabel} 대비 ${changeLabel(website.clickChange)}`
+        state.period === "all" ? "수집 시작 이후 누적" : state.period === "today" ? "스토어 이동 버튼 클릭" : `${website.compareLabel} 대비 ${changeLabel(website.clickChange)}`
       );
       setText(
         "clickCompareText",
-        state.period === "today" ? "당일 집계" : `${website.compareLabel} 대비 ${changeLabel(website.clickChange)}`
+        `${periodName()} 클릭과 설치 비교`
       );
-      setText("clickChartTitle", state.period === "month" ? "이번 달 일별 다운로드 클릭" : "최근 다운로드 클릭 추이");
+      setText("clickChartTitle", state.period === "all" ? "전체 월별 다운로드 클릭" : state.period === "today" ? "오늘 다운로드 클릭" : state.period === "week" ? "이번 주 일별 다운로드 클릭" : "이번 달 일별 다운로드 클릭");
 
       renderSparkline("clickSpark", rows.map(row => Number(row.downloads || 0)), COLORS.orange, false);
 
       renderLineChart(
         "clickChart",
-        rows.map(row => ({ label: compactDate(row.date), clicks: Number(row.downloads || 0) })),
+        rows.map(row => ({ label: row.label, clicks: Number(row.downloads || 0) })),
         [{ key: "clicks", name: "다운로드 클릭", color: COLORS.orange }]
       );
 
@@ -2723,43 +2817,47 @@
        ========================================================= */
     function renderInstalls() {
       const installs = getPeriodInstallData();
-      const monthly = state.period === "month";
-      const rows = getInstallRows(monthly);
+      const rows = getInstallRowsForPeriod();
+      const periodTotal = installs.currentTotal;
+      const iosValue = Number(installs.iosCurrent || 0);
+      const androidValue = Number(installs.androidCurrent || 0);
+      const iosShare = periodTotal > 0 ? (iosValue / periodTotal) * 100 : 0;
+      const androidShare = periodTotal > 0 ? (androidValue / periodTotal) * 100 : 0;
+      const label = periodName();
 
-      const launchTotal = installs.launchTotal;
-      const iosTotal = Number(installs.iosTotal || 0);
-      const androidTotal = Number(installs.androidTotal || 0);
-      const iosShare = launchTotal > 0 ? (iosTotal / launchTotal) * 100 : 0;
-      const androidShare = launchTotal > 0 ? (androidTotal / launchTotal) * 100 : 0;
-
-      setText("installLaunchTotal", launchTotal === null ? "-" : formatNumber(launchTotal));
-      setText("installIosValue", formatNumber(iosTotal));
-      setText("installAndroidValue", formatNumber(androidTotal));
-      setText("installIosShare", launchTotal > 0 ? formatRate(iosShare) : "-");
-      setText("installAndroidShare", launchTotal > 0 ? formatRate(androidShare) : "-");
+      setText("installMainLabel", `${label} 실제 신규 설치`);
+      setText("installLaunchTotal", periodTotal === null ? "-" : formatNumber(periodTotal));
+      setText("installIosValue", formatNumber(iosValue));
+      setText("installAndroidValue", formatNumber(androidValue));
+      setText("installIosShare", periodTotal > 0 ? formatRate(iosShare) : "-");
+      setText("installAndroidShare", periodTotal > 0 ? formatRate(androidShare) : "-");
       setText("installLatestText", `iOS ${installs.iosLatest ? compactDate(installs.iosLatest) : "-"} · Android ${installs.androidLatest ? compactDate(installs.androidLatest) : "-"}까지 확정`);
 
-      setText(
-        "installPeriodSummary",
-        `${state.period === "today" ? "오늘" : state.period === "week" ? "이번 주" : "이번 달"} 확정분 ${installs.currentTotal === null ? "-" : formatNumber(installs.currentTotal)}건`
-      );
-
-      setText(
-        "installPlatformStatus",
-        `iOS ${installs.iosLatest ? compactDate(installs.iosLatest) : "대기"} · Android ${installs.androidLatest ? compactDate(installs.androidLatest) : "대기"}`
-      );
+      setText("installPeriodSummary", `${label} 확정분 ${periodTotal === null ? "-" : formatNumber(periodTotal)}건`);
+      setText("installPlatformStatus", `iOS ${installs.iosLatest ? compactDate(installs.iosLatest) : "대기"} · Android ${installs.androidLatest ? compactDate(installs.androidLatest) : "대기"}`);
+      setText("installActivityTitle", state.period === "all" ? "최근 설치 활동" : `${label} 설치 활동`);
 
       document.getElementById("installDonut").style.setProperty("--ios-share", iosShare.toFixed(2));
-      setText("installDonutTotal", launchTotal === null ? "-" : formatNumber(launchTotal));
-      setText("installDonutIos", launchTotal > 0 ? `${formatNumber(iosTotal)} · ${formatRate(iosShare)}` : "-");
-      setText("installDonutAndroid", launchTotal > 0 ? `${formatNumber(androidTotal)} · ${formatRate(androidShare)}` : "-");
+      setText("installDonutLabel", label);
+      setText("installDonutTotal", periodTotal === null ? "-" : formatNumber(periodTotal));
+      setText("installDonutIos", periodTotal > 0 ? `${formatNumber(iosValue)} · ${formatRate(iosShare)}` : "-");
+      setText("installDonutAndroid", periodTotal > 0 ? `${formatNumber(androidValue)} · ${formatRate(androidShare)}` : "-");
 
-      setText("installChartTitle", monthly ? "월별 실제 신규 설치" : "최근 실제 신규 설치 추이");
+      setText(
+        "installChartTitle",
+        state.period === "all"
+          ? "전체 월별 실제 신규 설치"
+          : state.period === "today"
+            ? "오늘 실제 신규 설치"
+            : state.period === "week"
+              ? "이번 주 일별 실제 신규 설치"
+              : "이번 달 일별 실제 신규 설치"
+      );
 
       renderLineChart(
         "installChart",
         rows.map(row => ({
-          label: monthly ? `${Number(row.key.split("-")[1])}월` : compactDate(row.key),
+          label: state.period === "all" ? `${Number(row.key.split("-")[1])}월` : compactDate(row.key),
           ios: row.ios,
           android: row.android,
           total: row.total
@@ -2769,7 +2867,7 @@
           { key: "android", name: "Android", color: COLORS.green },
           { key: "total", name: "합계", color: COLORS.black, width: 3.5 }
         ],
-        "확정된 실제 설치 데이터가 아직 없습니다."
+        "선택한 기간의 확정 설치 데이터가 아직 없습니다."
       );
 
       setText(
@@ -2786,7 +2884,20 @@
       container.innerHTML = "";
 
       const installs = getPeriodInstallData();
-      const rows = getInstallRows(false)
+      let activityRows = getInstallRows(false);
+      const today = currentDate();
+
+      if (state.period === "today") {
+        activityRows = activityRows.filter(row => row.key === today);
+      } else if (state.period === "week") {
+        const start = mondayOfWeek(today);
+        activityRows = activityRows.filter(row => row.key >= start && row.key <= today);
+      } else if (state.period === "month") {
+        const month = today.slice(0, 7);
+        activityRows = activityRows.filter(row => String(row.key).startsWith(month));
+      }
+
+      const rows = activityRows
         .filter(row => {
           const iosActive = row.iosConfirmed && Number(row.ios || 0) > 0;
           const androidActive = row.androidConfirmed && Number(row.android || 0) > 0;
@@ -2826,18 +2937,18 @@
        ========================================================= */
     function renderWebsiteTable(bodyId) {
       const body = document.getElementById(bodyId);
-      const rows = [...getWebsiteDailyRows()].sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      const rows = [...getWebsiteRowsForPeriod()].sort((a, b) => String(b.key).localeCompare(String(a.key)));
       body.innerHTML = "";
 
       if (!rows.length) {
-        body.appendChild(emptyRow(4, "집계된 데이터가 없습니다."));
+        body.appendChild(emptyRow(4, "선택한 기간에 집계된 데이터가 없습니다."));
         return;
       }
 
       rows.forEach(row => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${formatDate(row.date)}</td>
+          <td>${row.monthly ? formatMonth(row.key) : formatDate(row.key)}</td>
           <td>${formatNumber(row.visits)}회</td>
           <td class="orange-value">${formatNumber(row.downloads)}회</td>
           <td>${formatRate(row.downloadRate)}</td>
@@ -2848,13 +2959,13 @@
 
     function renderInstallTable() {
       const body = document.getElementById("installTableBody");
-      const monthly = state.period === "month";
-      const rows = getInstallRows(monthly).sort((a, b) => String(b.key).localeCompare(String(a.key)));
+      const monthly = state.period === "all";
+      const rows = getInstallRowsForPeriod().sort((a, b) => String(b.key).localeCompare(String(a.key)));
       setText("installTableFirstHead", monthly ? "월" : "날짜");
       body.innerHTML = "";
 
       if (!rows.length) {
-        body.appendChild(emptyRow(4, "실제 앱 설치 데이터가 아직 없습니다."));
+        body.appendChild(emptyRow(4, "선택한 기간의 실제 앱 설치 데이터가 아직 없습니다."));
         return;
       }
 
@@ -2935,7 +3046,7 @@
 
     async function initialize() {
       setView("overview");
-      setPeriod("today");
+      setPeriod("all");
 
       if (getToken()) {
         showDashboard();
