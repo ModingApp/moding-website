@@ -837,8 +837,384 @@
       font-weight: 700;
     }
 
+
+
     /* =========================================================
-       07 SYSTEM POPOVER
+       07 OPERATIONS DATA BOARD
+       ========================================================= */
+    .data-board {
+      margin-top: 28px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: #fff;
+      box-shadow: 0 18px 52px rgba(23, 49, 25, .04);
+    }
+
+    .data-board-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .data-board-title {
+      margin-top: 6px;
+      font-size: clamp(26px, 3vw, 38px);
+      line-height: 1;
+      letter-spacing: -.055em;
+      font-weight: 950;
+    }
+
+    .data-board-desc {
+      margin-top: 9px;
+      color: var(--sub);
+      font-size: 11.5px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .board-source-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .board-source {
+      min-height: 30px;
+      padding: 0 11px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--sub);
+      font-size: 9.5px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .board-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(290px, .75fr);
+      gap: 14px;
+    }
+
+    .board-panel {
+      min-width: 0;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--soft);
+    }
+
+    .board-panel.white {
+      background: #fff;
+    }
+
+    .board-panel-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .board-panel-title {
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 950;
+      letter-spacing: -.03em;
+    }
+
+    .board-panel-caption {
+      color: var(--sub);
+      font-size: 9.5px;
+      line-height: 1.4;
+      font-weight: 750;
+      text-align: right;
+    }
+
+    .board-legend {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .board-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--sub);
+      font-size: 9.5px;
+      font-weight: 800;
+    }
+
+    .legend-line {
+      width: 18px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--green);
+    }
+
+    .legend-line.orange {
+      background: var(--orange);
+    }
+
+    .legend-line.blue {
+      background: var(--blue);
+    }
+
+    .legend-line.black {
+      background: var(--black);
+    }
+
+    .svg-chart-wrap {
+      width: 100%;
+      min-height: 265px;
+      margin-top: 10px;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .svg-chart {
+      width: 100%;
+      min-width: 620px;
+      height: 265px;
+      display: block;
+    }
+
+    .svg-grid-line {
+      stroke: #DDE5DE;
+      stroke-width: 1;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .svg-axis-text {
+      fill: #808982;
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .svg-series {
+      fill: none;
+      stroke-width: 3;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .svg-series.visits {
+      stroke: var(--green);
+    }
+
+    .svg-series.clicks {
+      stroke: var(--orange);
+    }
+
+    .svg-series.ios {
+      stroke: var(--blue);
+    }
+
+    .svg-series.android {
+      stroke: var(--green);
+    }
+
+    .svg-series.total {
+      stroke: var(--black);
+    }
+
+    .svg-dot {
+      stroke: #fff;
+      stroke-width: 2;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .svg-dot.visits,
+    .svg-dot.android {
+      fill: var(--green);
+    }
+
+    .svg-dot.clicks {
+      fill: var(--orange);
+    }
+
+    .svg-dot.ios {
+      fill: var(--blue);
+    }
+
+    .svg-dot.total {
+      fill: var(--black);
+    }
+
+    .board-empty {
+      min-height: 230px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sub);
+      font-size: 11px;
+      line-height: 1.6;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .donut-layout {
+      min-height: 265px;
+      margin-top: 8px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 16px;
+    }
+
+    .donut-chart {
+      --ios-share: 0deg;
+      position: relative;
+      width: 176px;
+      height: 176px;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          var(--blue) 0deg var(--ios-share),
+          var(--green) var(--ios-share) 360deg
+        );
+      box-shadow: inset 0 0 0 1px rgba(21, 39, 23, .04);
+    }
+
+    .donut-chart::after {
+      content: "";
+      position: absolute;
+      inset: 27px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 1px var(--line);
+    }
+
+    .donut-center {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .donut-center small {
+      color: var(--sub);
+      font-size: 9.5px;
+      font-weight: 850;
+    }
+
+    .donut-center strong {
+      margin-top: 3px;
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -.055em;
+      font-weight: 950;
+    }
+
+    .donut-breakdown {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .donut-stat {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .donut-stat small {
+      color: var(--sub);
+      font-size: 9px;
+      font-weight: 850;
+    }
+
+    .donut-stat strong {
+      display: block;
+      margin-top: 3px;
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    .donut-stat.ios strong {
+      color: var(--blue);
+    }
+
+    .donut-stat.android strong {
+      color: var(--green);
+    }
+
+    .board-funnel {
+      margin-top: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .board-funnel-row {
+      display: grid;
+      grid-template-columns: 116px minmax(0, 1fr) 64px;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .board-funnel-label {
+      color: var(--sub);
+      font-size: 10px;
+      font-weight: 850;
+    }
+
+    .board-funnel-track {
+      height: 16px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #E4E9E4;
+    }
+
+    .board-funnel-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+      transition: width .35s ease;
+    }
+
+    .board-funnel-fill.clicks {
+      background: var(--orange);
+    }
+
+    .board-funnel-fill.installs {
+      background: var(--black);
+    }
+
+    .board-funnel-value {
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 950;
+      text-align: right;
+    }
+
+    .board-footnote {
+      margin-top: 14px;
+      color: var(--sub);
+      font-size: 9.5px;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+
+    /* =========================================================
+       08 SYSTEM POPOVER
        ========================================================= */
     .system-popover {
       position: fixed;
@@ -945,9 +1321,13 @@
     }
 
     /* =========================================================
-       08 RESPONSIVE
+       09 RESPONSIVE
        ========================================================= */
     @media (max-width: 900px) {
+      .board-grid {
+        grid-template-columns: 1fr;
+      }
+
       .kpi-grid {
         grid-template-columns: 1fr;
       }
@@ -1049,6 +1429,29 @@
 
       .split-grid {
         grid-template-columns: 1fr;
+      }
+
+      .data-board {
+        padding: 20px 15px;
+        border-radius: 24px;
+      }
+
+      .data-board-head {
+        display: block;
+      }
+
+      .board-source-row {
+        margin-top: 12px;
+        justify-content: flex-start;
+      }
+
+      .board-panel {
+        padding: 17px 14px;
+      }
+
+      .board-funnel-row {
+        grid-template-columns: 92px minmax(0, 1fr) 54px;
+        gap: 8px;
       }
     }
 
@@ -1509,6 +1912,199 @@
           ></div>
         </div>
       </section>
+
+      <section class="data-board">
+        <div class="data-board-head">
+          <div>
+            <div class="section-kicker">
+              OPERATIONS BOARD
+            </div>
+
+            <h2 class="data-board-title">
+              운영 데이터 보드
+            </h2>
+
+            <p class="data-board-desc">
+              방문부터 스토어 클릭 그리고 실제 신규 설치까지 흐름을 그래프로 확인합니다.
+            </p>
+          </div>
+
+          <div class="board-source-row">
+            <span id="boardAppleSource" class="board-source">
+              iOS 기준일 -
+            </span>
+
+            <span id="boardGoogleSource" class="board-source">
+              Android 기준일 -
+            </span>
+          </div>
+        </div>
+
+        <div class="board-grid">
+          <article class="board-panel white">
+            <div class="board-panel-head">
+              <div>
+                <h3 class="board-panel-title">
+                  유입 · 다운로드 클릭 흐름
+                </h3>
+              </div>
+
+              <div id="flowBoardCaption" class="board-panel-caption">
+                최근 14일
+              </div>
+            </div>
+
+            <div class="board-legend">
+              <span class="board-legend-item">
+                <span class="legend-line"></span>
+                홈페이지 방문
+              </span>
+
+              <span class="board-legend-item">
+                <span class="legend-line orange"></span>
+                다운로드 클릭
+              </span>
+            </div>
+
+            <div class="svg-chart-wrap">
+              <div id="flowBoardChart"></div>
+            </div>
+          </article>
+
+          <article class="board-panel white">
+            <div class="board-panel-head">
+              <div>
+                <h3 class="board-panel-title">
+                  플랫폼 구성
+                </h3>
+              </div>
+
+              <div class="board-panel-caption">
+                출시 후 누적 신규 설치
+              </div>
+            </div>
+
+            <div class="donut-layout">
+              <div id="platformDonut" class="donut-chart">
+                <div class="donut-center">
+                  <small>누적 설치</small>
+                  <strong id="platformDonutTotal">-</strong>
+                </div>
+              </div>
+
+              <div class="donut-breakdown">
+                <div class="donut-stat ios">
+                  <small>iOS</small>
+                  <strong id="platformDonutIos">-</strong>
+                </div>
+
+                <div class="donut-stat android">
+                  <small>Android</small>
+                  <strong id="platformDonutAndroid">-</strong>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="board-panel white">
+            <div class="board-panel-head">
+              <div>
+                <h3 class="board-panel-title">
+                  실제 신규 설치 추이
+                </h3>
+              </div>
+
+              <div id="installBoardCaption" class="board-panel-caption">
+                스토어 확정 데이터 기준
+              </div>
+            </div>
+
+            <div class="board-legend">
+              <span class="board-legend-item">
+                <span class="legend-line blue"></span>
+                iOS
+              </span>
+
+              <span class="board-legend-item">
+                <span class="legend-line"></span>
+                Android
+              </span>
+
+              <span class="board-legend-item">
+                <span class="legend-line black"></span>
+                합계
+              </span>
+            </div>
+
+            <div class="svg-chart-wrap">
+              <div id="installBoardChart"></div>
+            </div>
+          </article>
+
+          <article class="board-panel white">
+            <div class="board-panel-head">
+              <div>
+                <h3 class="board-panel-title">
+                  퍼널 수치
+                </h3>
+              </div>
+
+              <div class="board-panel-caption">
+                선택 기간 기준
+              </div>
+            </div>
+
+            <div class="board-funnel">
+              <div class="board-funnel-row">
+                <div class="board-funnel-label">
+                  홈페이지 방문
+                </div>
+
+                <div class="board-funnel-track">
+                  <div id="boardFunnelVisitsBar" class="board-funnel-fill"></div>
+                </div>
+
+                <div id="boardFunnelVisitsValue" class="board-funnel-value">
+                  0
+                </div>
+              </div>
+
+              <div class="board-funnel-row">
+                <div class="board-funnel-label">
+                  다운로드 클릭
+                </div>
+
+                <div class="board-funnel-track">
+                  <div id="boardFunnelClicksBar" class="board-funnel-fill clicks"></div>
+                </div>
+
+                <div id="boardFunnelClicksValue" class="board-funnel-value">
+                  0
+                </div>
+              </div>
+
+              <div class="board-funnel-row">
+                <div class="board-funnel-label">
+                  실제 신규 설치
+                </div>
+
+                <div class="board-funnel-track">
+                  <div id="boardFunnelInstallsBar" class="board-funnel-fill installs"></div>
+                </div>
+
+                <div id="boardFunnelInstallsValue" class="board-funnel-value">
+                  -
+                </div>
+              </div>
+            </div>
+
+            <div class="board-footnote">
+              방문·클릭·설치는 서로 다른 집계 소스입니다. 클릭 → 설치 수치는 동일 사용자를 연결한 전환율이 아니라 운영 참고용입니다.
+            </div>
+          </article>
+        </div>
+      </section>
+
     </section>
 
     <!-- TRAFFIC -->
@@ -2150,6 +2746,8 @@
     const SESSION_TOKEN_KEY =
       "moding_admin_token";
 
+    const RECENT_DAYS = 14;
+
     const state = {
       view: "overview",
       period: "today",
@@ -2611,6 +3209,16 @@
         store?.last_synced_at ||
         store?.syncedAt ||
         store?.updatedAt ||
+        null
+      );
+    }
+
+    function getStoreLatestDate(
+      store
+    ) {
+      return (
+        store?.latestDataDate ||
+        store?.latest_data_date ||
         null
       );
     }
@@ -3179,7 +3787,7 @@
           await fetch(
             `${apiUrl(
               ENDPOINTS.stats
-            )}?days=7`,
+            )}?days=${RECENT_DAYS}`,
             {
               method:
                 "GET",
@@ -3477,6 +4085,7 @@
       );
 
       renderOverviewChart();
+      renderOperationsBoard();
     }
 
     function renderOverviewChart() {
@@ -3496,7 +4105,7 @@
           state.period ===
             "month"
             ? "최근 6개월 실제 설치"
-            : "최근 7일 실제 설치"
+            : `최근 ${RECENT_DAYS}일 실제 설치`
         );
 
         return;
@@ -3590,7 +4199,7 @@
         state.period ===
           "month"
           ? "이번 달 일별 방문"
-          : "최근 7일 방문"
+          : `최근 ${RECENT_DAYS}일 방문`
       );
 
       renderBarChart(
@@ -3693,7 +4302,7 @@
         state.period ===
           "month"
           ? "이번 달 일별 클릭"
-          : "최근 7일 다운로드 클릭"
+          : `최근 ${RECENT_DAYS}일 다운로드 클릭`
       );
 
       renderBarChart(
@@ -3766,8 +4375,709 @@
       };
     }
 
+
+
     /* =========================================================
-       08 INSTALLS
+       08 OPERATIONS DATA BOARD
+       ========================================================= */
+    function renderOperationsBoard() {
+      const website =
+        getWebsitePeriodData();
+
+      const installs =
+        getPeriodInstallData();
+
+      const iosLatest =
+        getStoreLatestDate(
+          installs.ios
+        );
+
+      const androidLatest =
+        getStoreLatestDate(
+          installs.android
+        );
+
+      setText(
+        "boardAppleSource",
+        iosLatest
+          ? `iOS 기준일 ${compactDate(iosLatest)}`
+          : "iOS 기준일 -"
+      );
+
+      setText(
+        "boardGoogleSource",
+        androidLatest
+          ? `Android 기준일 ${compactDate(androidLatest)}`
+          : "Android 기준일 -"
+      );
+
+      setText(
+        "flowBoardCaption",
+        state.period === "month"
+          ? "이번 달 일별"
+          : `최근 ${RECENT_DAYS}일`
+      );
+
+      renderFlowBoardChart();
+      renderInstallBoardChart();
+      renderPlatformDonut();
+      renderBoardFunnel(
+        website,
+        installs
+      );
+    }
+
+    function getAscendingWebsiteRows() {
+      const rows =
+        state.period === "month"
+          ? (
+              Array.isArray(
+                state.stats?.monthDaily
+              )
+                ? [...state.stats.monthDaily]
+                : []
+            )
+          : (
+              Array.isArray(
+                state.stats?.daily
+              )
+                ? [...state.stats.daily].reverse()
+                : []
+            );
+
+      return rows;
+    }
+
+    function getInstallBoardRows() {
+      const installs =
+        getPeriodInstallData();
+
+      if (
+        !installs.iosReady ||
+        !installs.androidReady
+      ) {
+        return [];
+      }
+
+      const monthly =
+        state.period === "month";
+
+      const key =
+        monthly
+          ? "month"
+          : "date";
+
+      const iosRows =
+        monthly
+          ? installs.ios?.monthly
+          : installs.ios?.daily;
+
+      const androidRows =
+        monthly
+          ? installs.android?.monthly
+          : installs.android?.daily;
+
+      const map =
+        new Map();
+
+      (
+        Array.isArray(iosRows)
+          ? iosRows
+          : []
+      ).forEach(
+        (row) => {
+          const rowKey =
+            row?.[key];
+
+          if (!rowKey) {
+            return;
+          }
+
+          map.set(
+            rowKey,
+            {
+              ios:
+                getIosValue(row) ?? 0,
+              android: 0
+            }
+          );
+        }
+      );
+
+      (
+        Array.isArray(androidRows)
+          ? androidRows
+          : []
+      ).forEach(
+        (row) => {
+          const rowKey =
+            row?.[key];
+
+          if (!rowKey) {
+            return;
+          }
+
+          const current =
+            map.get(rowKey) || {
+              ios: 0,
+              android: 0
+            };
+
+          current.android =
+            getAndroidValue(row) ?? 0;
+
+          map.set(
+            rowKey,
+            current
+          );
+        }
+      );
+
+      return Array.from(
+        map.entries()
+      )
+        .sort(
+          (a, b) =>
+            String(a[0]).localeCompare(
+              String(b[0])
+            )
+        )
+        .map(
+          ([rowKey, value]) => ({
+            label:
+              monthly
+                ? `${Number(
+                    rowKey.split("-")[1]
+                  )}월`
+                : compactDate(rowKey),
+            ios:
+              Number(value.ios || 0),
+            android:
+              Number(value.android || 0),
+            total:
+              Number(value.ios || 0) +
+              Number(value.android || 0)
+          })
+        );
+    }
+
+    function renderFlowBoardChart() {
+      const rows =
+        getAscendingWebsiteRows()
+          .map(
+            (row) => ({
+              label:
+                compactDate(row.date),
+              visits:
+                Number(row.visits || 0),
+              clicks:
+                Number(row.downloads || 0)
+            })
+          );
+
+      renderSvgLineChart(
+        "flowBoardChart",
+        rows,
+        [
+          {
+            key: "visits",
+            className: "visits"
+          },
+          {
+            key: "clicks",
+            className: "clicks"
+          }
+        ],
+        "표시할 유입 데이터가 없습니다."
+      );
+    }
+
+    function renderInstallBoardChart() {
+      const rows =
+        getInstallBoardRows();
+
+      setText(
+        "installBoardCaption",
+        state.period === "month"
+          ? "월별 합계"
+          : "스토어 확정 데이터 기준"
+      );
+
+      renderSvgLineChart(
+        "installBoardChart",
+        rows,
+        [
+          {
+            key: "ios",
+            className: "ios"
+          },
+          {
+            key: "android",
+            className: "android"
+          },
+          {
+            key: "total",
+            className: "total"
+          }
+        ],
+        "iOS와 Android 설치 데이터가 모두 준비되면 추이가 표시됩니다."
+      );
+    }
+
+    function renderPlatformDonut() {
+      const ios =
+        state.stats?.ios || {};
+
+      const android =
+        state.stats?.android || {};
+
+      const iosReady =
+        storeReady(ios);
+
+      const androidReady =
+        storeReady(android);
+
+      const iosTotal =
+        iosReady
+          ? getIosValue(ios?.total)
+          : null;
+
+      const androidTotal =
+        androidReady
+          ? getAndroidValue(android?.total)
+          : null;
+
+      const donut =
+        document.getElementById(
+          "platformDonut"
+        );
+
+      if (
+        iosTotal === null ||
+        androidTotal === null
+      ) {
+        donut.style.setProperty(
+          "--ios-share",
+          "0deg"
+        );
+
+        setText(
+          "platformDonutTotal",
+          "-"
+        );
+
+        setText(
+          "platformDonutIos",
+          "-"
+        );
+
+        setText(
+          "platformDonutAndroid",
+          "-"
+        );
+
+        return;
+      }
+
+      const total =
+        Number(iosTotal || 0) +
+        Number(androidTotal || 0);
+
+      const iosShare =
+        total > 0
+          ? Number(iosTotal || 0) / total
+          : 0;
+
+      donut.style.setProperty(
+        "--ios-share",
+        `${iosShare * 360}deg`
+      );
+
+      setText(
+        "platformDonutTotal",
+        formatNumber(total)
+      );
+
+      setText(
+        "platformDonutIos",
+        `${formatNumber(iosTotal)}건 · ${formatRate(
+          iosShare * 100
+        )}`
+      );
+
+      setText(
+        "platformDonutAndroid",
+        `${formatNumber(androidTotal)}건 · ${formatRate(
+          total > 0
+            ? (
+                Number(androidTotal || 0) /
+                total
+              ) * 100
+            : 0
+        )}`
+      );
+    }
+
+    function renderBoardFunnel(
+      website,
+      installs
+    ) {
+      const visitValue =
+        Number(website.visits || 0);
+
+      const clickValue =
+        Number(website.clicks || 0);
+
+      const installValue =
+        installs.currentTotal === null
+          ? null
+          : Number(installs.currentTotal || 0);
+
+      const maxValue =
+        Math.max(
+          1,
+          visitValue,
+          clickValue,
+          installValue ?? 0
+        );
+
+      const setBar =
+        (id, value) => {
+          const element =
+            document.getElementById(id);
+
+          const width =
+            value === null
+              ? 0
+              : Math.max(
+                  value > 0 ? 4 : 0,
+                  Math.min(
+                    100,
+                    (value / maxValue) * 100
+                  )
+                );
+
+          element.style.width =
+            `${width}%`;
+        };
+
+      setBar(
+        "boardFunnelVisitsBar",
+        visitValue
+      );
+
+      setBar(
+        "boardFunnelClicksBar",
+        clickValue
+      );
+
+      setBar(
+        "boardFunnelInstallsBar",
+        installValue
+      );
+
+      setText(
+        "boardFunnelVisitsValue",
+        formatNumber(visitValue)
+      );
+
+      setText(
+        "boardFunnelClicksValue",
+        formatNumber(clickValue)
+      );
+
+      setText(
+        "boardFunnelInstallsValue",
+        installValue === null
+          ? "-"
+          : formatNumber(installValue)
+      );
+    }
+
+    function renderSvgLineChart(
+      elementId,
+      rows,
+      series,
+      emptyMessage
+    ) {
+      const target =
+        document.getElementById(
+          elementId
+        );
+
+      target.innerHTML = "";
+
+      if (!rows.length) {
+        const empty =
+          document.createElement(
+            "div"
+          );
+
+        empty.className =
+          "board-empty";
+
+        empty.textContent =
+          emptyMessage;
+
+        target.appendChild(
+          empty
+        );
+
+        return;
+      }
+
+      const width = 760;
+      const height = 265;
+      const left = 42;
+      const right = 18;
+      const top = 18;
+      const bottom = 38;
+      const plotWidth =
+        width - left - right;
+      const plotHeight =
+        height - top - bottom;
+
+      const values =
+        [];
+
+      rows.forEach(
+        (row) => {
+          series.forEach(
+            (item) => {
+              values.push(
+                Number(
+                  row?.[item.key] || 0
+                )
+              );
+            }
+          );
+        }
+      );
+
+      const maxValue =
+        Math.max(
+          1,
+          ...values
+        );
+
+      const niceMax =
+        Math.max(
+          1,
+          Math.ceil(maxValue / 5) * 5
+        );
+
+      const svgNS =
+        "http://www.w3.org/2000/svg";
+
+      const svg =
+        document.createElementNS(
+          svgNS,
+          "svg"
+        );
+
+      svg.setAttribute(
+        "viewBox",
+        `0 0 ${width} ${height}`
+      );
+
+      svg.setAttribute(
+        "class",
+        "svg-chart"
+      );
+
+      const makeSvg =
+        (tag, attrs = {}) => {
+          const node =
+            document.createElementNS(
+              svgNS,
+              tag
+            );
+
+          Object.entries(
+            attrs
+          ).forEach(
+            ([key, value]) => {
+              node.setAttribute(
+                key,
+                String(value)
+              );
+            }
+          );
+
+          return node;
+        };
+
+      for (
+        let i = 0;
+        i <= 4;
+        i++
+      ) {
+        const y =
+          top +
+          (plotHeight / 4) * i;
+
+        const line =
+          makeSvg(
+            "line",
+            {
+              x1: left,
+              x2: width - right,
+              y1: y,
+              y2: y,
+              class: "svg-grid-line"
+            }
+          );
+
+        svg.appendChild(line);
+
+        const label =
+          makeSvg(
+            "text",
+            {
+              x: left - 8,
+              y: y + 3,
+              "text-anchor": "end",
+              class: "svg-axis-text"
+            }
+          );
+
+        label.textContent =
+          formatNumber(
+            Math.round(
+              niceMax -
+              (niceMax / 4) * i
+            )
+          );
+
+        svg.appendChild(label);
+      }
+
+      const xFor =
+        (index) => {
+          if (
+            rows.length === 1
+          ) {
+            return left +
+              plotWidth / 2;
+          }
+
+          return left +
+            (plotWidth * index) /
+            (rows.length - 1);
+        };
+
+      const yFor =
+        (value) =>
+          top +
+          plotHeight -
+          (
+            Number(value || 0) /
+            niceMax
+          ) *
+          plotHeight;
+
+      const labelStep =
+        rows.length > 16
+          ? 3
+          : rows.length > 10
+            ? 2
+            : 1;
+
+      rows.forEach(
+        (row, index) => {
+          if (
+            index % labelStep !== 0 &&
+            index !== rows.length - 1
+          ) {
+            return;
+          }
+
+          const label =
+            makeSvg(
+              "text",
+              {
+                x: xFor(index),
+                y: height - 10,
+                "text-anchor": "middle",
+                class: "svg-axis-text"
+              }
+            );
+
+          label.textContent =
+            row.label || "-";
+
+          svg.appendChild(label);
+        }
+      );
+
+      series.forEach(
+        (item) => {
+          const points =
+            rows
+              .map(
+                (row, index) =>
+                  `${xFor(index)},${yFor(
+                    row?.[item.key]
+                  )}`
+              )
+              .join(" ");
+
+          const polyline =
+            makeSvg(
+              "polyline",
+              {
+                points,
+                class:
+                  `svg-series ${item.className}`
+              }
+            );
+
+          svg.appendChild(polyline);
+
+          rows.forEach(
+            (row, index) => {
+              const circle =
+                makeSvg(
+                  "circle",
+                  {
+                    cx: xFor(index),
+                    cy: yFor(
+                      row?.[item.key]
+                    ),
+                    r: 4,
+                    class:
+                      `svg-dot ${item.className}`
+                  }
+                );
+
+              const title =
+                makeSvg(
+                  "title"
+                );
+
+              title.textContent =
+                `${row.label || "-"} · ${formatNumber(
+                  row?.[item.key]
+                )}`;
+
+              circle.appendChild(
+                title
+              );
+
+              svg.appendChild(
+                circle
+              );
+            }
+          );
+        }
+      );
+
+      target.appendChild(svg);
+    }
+
+
+    /* =========================================================
+       09 INSTALLS
        ========================================================= */
     function renderInstalls() {
       const website =
@@ -3950,7 +5260,7 @@
         state.period ===
           "month"
           ? "최근 6개월 실제 신규 설치"
-          : "최근 7일 실제 신규 설치"
+          : `최근 ${RECENT_DAYS}일 실제 신규 설치`
       );
 
       renderBarChart(
@@ -3987,7 +5297,7 @@
     }
 
     /* =========================================================
-       09 CHART DATA / TABLES
+       10 CHART DATA / TABLES
        ========================================================= */
     function getWebsiteChartRows(
       metric
@@ -4677,7 +5987,7 @@
     }
 
     /* =========================================================
-       10 SYSTEM / LOGOUT / INIT
+       11 SYSTEM / LOGOUT / INIT
        ========================================================= */
     function renderSystemStatus() {
       const ios =
@@ -4733,7 +6043,7 @@
                 ios
               )
             }`
-          : "Snapshot 요청 및 App Downloads 보고서 생성 후 DAILY instance 대기"
+          : "Apple Sales Summary 신규 App Units 데이터 준비 중"
       );
 
       setText(
@@ -4758,8 +6068,8 @@
           : storeHasPayload(
               android
             )
-            ? "Google Play 설치 보고서 데이터 저장 대기"
-            : "Google Play 설치 보고서 버킷 권한 반영 대기"
+            ? "Google Play New users 데이터 저장 상태 확인"
+            : "Google Play New users 데이터 연결 대기"
       );
     }
 
