@@ -1213,6 +1213,38 @@
     }
 
 
+
+    /* =========================================================
+       PAGE GRAPH BOARDS
+       ========================================================= */
+    .page-data-board {
+      margin-top: 16px;
+    }
+
+    .page-data-board .board-grid {
+      grid-template-columns: minmax(0, 1.45fr) minmax(300px, .8fr);
+    }
+
+    .click-donut {
+      --ios-end: 0deg;
+      --android-end: 0deg;
+      background:
+        conic-gradient(
+          var(--blue) 0deg var(--ios-end),
+          var(--green) var(--ios-end) var(--android-end),
+          #BFC7C0 var(--android-end) 360deg
+        );
+    }
+
+    .donut-stat.unknown strong {
+      color: #7B857D;
+    }
+
+    .donut-breakdown.three {
+      width: 100%;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     /* =========================================================
        08 SYSTEM POPOVER
        ========================================================= */
@@ -1428,6 +1460,14 @@
       }
 
       .split-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-data-board .board-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .donut-breakdown.three {
         grid-template-columns: 1fr;
       }
 
@@ -2172,34 +2212,36 @@
         </article>
       </div>
 
-      <section class="chart-card">
-        <div class="section-head">
+      <section class="data-board page-data-board">
+        <div class="data-board-head">
           <div>
-            <div class="section-kicker">
-              TRAFFIC
-            </div>
-
-            <h2
-              id="trafficChartTitle"
-              class="section-title"
-            >
-              방문 추이
-            </h2>
+            <div class="section-kicker">TRAFFIC BOARD</div>
+            <h2 class="data-board-title">유입 그래프</h2>
+            <p class="data-board-desc">방문 추이와 다운로드 클릭의 움직임을 같은 시간축에서 비교합니다.</p>
           </div>
-
-          <div
-            id="trafficCompareText"
-            class="section-caption"
-          >
-            당일 집계
-          </div>
+          <div id="trafficGraphCaption" class="board-source">최근 14일</div>
         </div>
 
-        <div class="chart-scroll">
-          <div
-            id="trafficChart"
-            class="bar-chart"
-          ></div>
+        <div class="board-grid">
+          <article class="board-panel white">
+            <div class="board-panel-head">
+              <h3 class="board-panel-title">방문 · 클릭 추이</h3>
+              <div class="board-panel-caption">일별 흐름</div>
+            </div>
+            <div class="board-legend">
+              <span class="board-legend-item"><span class="legend-line"></span>방문</span>
+              <span class="board-legend-item"><span class="legend-line orange"></span>다운로드 클릭</span>
+            </div>
+            <div class="svg-chart-wrap"><div id="trafficBoardChart"></div></div>
+          </article>
+
+          <article class="board-panel white">
+            <div class="board-panel-head">
+              <h3 class="board-panel-title">방문 → 클릭률</h3>
+              <div class="board-panel-caption">기간별 변화</div>
+            </div>
+            <div class="svg-chart-wrap"><div id="trafficRateBoardChart"></div></div>
+          </article>
         </div>
       </section>
 
@@ -2359,34 +2401,45 @@
         </div>
       </section>
 
-      <section class="chart-card">
-        <div class="section-head">
+      <section class="data-board page-data-board">
+        <div class="data-board-head">
           <div>
-            <div class="section-kicker">
-              CLICK TREND
-            </div>
-
-            <h2
-              id="clickChartTitle"
-              class="section-title"
-            >
-              다운로드 클릭 추이
-            </h2>
+            <div class="section-kicker">CLICK BOARD</div>
+            <h2 class="data-board-title">다운로드 클릭 그래프</h2>
+            <p class="data-board-desc">방문과 다운로드 클릭 추이 그리고 스토어별 클릭 비중을 함께 확인합니다.</p>
           </div>
-
-          <div
-            id="clickCompareText"
-            class="section-caption"
-          >
-            당일 집계
-          </div>
+          <div id="clickGraphCaption" class="board-source">최근 14일</div>
         </div>
 
-        <div class="chart-scroll">
-          <div
-            id="clickChart"
-            class="bar-chart"
-          ></div>
+        <div class="board-grid">
+          <article class="board-panel white">
+            <div class="board-panel-head">
+              <h3 class="board-panel-title">방문 · 다운로드 클릭</h3>
+              <div class="board-panel-caption">동일 시간축 비교</div>
+            </div>
+            <div class="board-legend">
+              <span class="board-legend-item"><span class="legend-line"></span>방문</span>
+              <span class="board-legend-item"><span class="legend-line orange"></span>클릭</span>
+            </div>
+            <div class="svg-chart-wrap"><div id="clickBoardChart"></div></div>
+          </article>
+
+          <article class="board-panel white">
+            <div class="board-panel-head">
+              <h3 class="board-panel-title">스토어별 클릭 비중</h3>
+              <div class="board-panel-caption">선택 기간 기준</div>
+            </div>
+            <div class="donut-layout">
+              <div id="clickPlatformDonut" class="donut-chart click-donut">
+                <div class="donut-center"><small>전체 클릭</small><strong id="clickDonutTotal">-</strong></div>
+              </div>
+              <div class="donut-breakdown three">
+                <div class="donut-stat ios"><small>iOS</small><strong id="clickDonutIos">-</strong></div>
+                <div class="donut-stat android"><small>Android</small><strong id="clickDonutAndroid">-</strong></div>
+                <div class="donut-stat unknown"><small>미분류</small><strong id="clickDonutUnknown">-</strong></div>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -2569,31 +2622,48 @@
         </div>
       </section>
 
-      <section class="chart-card">
-        <div class="section-head">
+      <section class="data-board page-data-board">
+        <div class="data-board-head">
           <div>
-            <div class="section-kicker">
-              INSTALL TREND
-            </div>
-
-            <h2
-              id="installChartTitle"
-              class="section-title"
-            >
-              실제 신규 설치 추이
-            </h2>
+            <div class="section-kicker">INSTALL BOARD</div>
+            <h2 class="data-board-title">실제 설치 그래프</h2>
+            <p class="data-board-desc">iOS와 Android 신규 설치를 플랫폼별로 분리하고 합계 흐름까지 함께 봅니다.</p>
           </div>
-
-          <div class="section-caption">
-            iOS + Android
+          <div class="board-source-row">
+            <span id="installPageAppleSource" class="board-source">iOS 기준일 -</span>
+            <span id="installPageGoogleSource" class="board-source">Android 기준일 -</span>
           </div>
         </div>
 
-        <div class="chart-scroll">
-          <div
-            id="installChart"
-            class="bar-chart"
-          ></div>
+        <div class="board-grid">
+          <article class="board-panel white">
+            <div class="board-panel-head">
+              <h3 class="board-panel-title">플랫폼별 신규 설치 추이</h3>
+              <div id="installPageGraphCaption" class="board-panel-caption">스토어 확정 데이터 기준</div>
+            </div>
+            <div class="board-legend">
+              <span class="board-legend-item"><span class="legend-line blue"></span>iOS</span>
+              <span class="board-legend-item"><span class="legend-line"></span>Android</span>
+              <span class="board-legend-item"><span class="legend-line black"></span>합계</span>
+            </div>
+            <div class="svg-chart-wrap"><div id="installPageBoardChart"></div></div>
+          </article>
+
+          <article class="board-panel white">
+            <div class="board-panel-head">
+              <h3 class="board-panel-title">누적 플랫폼 구성</h3>
+              <div class="board-panel-caption">출시 후 누적</div>
+            </div>
+            <div class="donut-layout">
+              <div id="installPageDonut" class="donut-chart">
+                <div class="donut-center"><small>누적 설치</small><strong id="installPageDonutTotal">-</strong></div>
+              </div>
+              <div class="donut-breakdown">
+                <div class="donut-stat ios"><small>iOS</small><strong id="installPageDonutIos">-</strong></div>
+                <div class="donut-stat android"><small>Android</small><strong id="installPageDonutAndroid">-</strong></div>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -4202,14 +4272,7 @@
           : `최근 ${RECENT_DAYS}일 방문`
       );
 
-      renderBarChart(
-        "trafficChart",
-        getWebsiteChartRows(
-          "visits"
-        ),
-        "",
-        "표시할 방문 데이터가 없습니다."
-      );
+      renderTrafficGraphBoard();
 
       renderWebsiteTable(
         "trafficTableBody"
@@ -4305,14 +4368,7 @@
           : `최근 ${RECENT_DAYS}일 다운로드 클릭`
       );
 
-      renderBarChart(
-        "clickChart",
-        getWebsiteChartRows(
-          "downloads"
-        ),
-        "orange",
-        "표시할 클릭 데이터가 없습니다."
-      );
+      renderClicksGraphBoard();
 
       renderWebsiteTable(
         "clickTableBody"
@@ -4358,24 +4414,202 @@
           current?.google
         );
 
+      const unknown =
+        firstFiniteNumber(
+          current?.unknown,
+          current?.other
+        );
+
+      const ready =
+        ios !== null ||
+        android !== null ||
+        unknown !== null;
+
+      const iosValue = ios ?? 0;
+      const androidValue = android ?? 0;
+      const unknownValue = unknown ?? 0;
+
       return {
-        ready:
-          ios !==
-            null ||
-          android !==
-            null,
-
-        ios:
-          ios ??
-          0,
-
-        android:
-          android ??
-          0
+        ready,
+        ios: iosValue,
+        android: androidValue,
+        unknown: unknownValue,
+        total:
+          iosValue +
+          androidValue +
+          unknownValue
       };
     }
 
 
+
+    /* =========================================================
+       PAGE-SPECIFIC GRAPH BOARDS
+       ========================================================= */
+    function renderTrafficGraphBoard() {
+      const rows =
+        getAscendingWebsiteRows().map(
+          (row) => ({
+            label: compactDate(row.date),
+            visits: Number(row.visits || 0),
+            clicks: Number(row.downloads || 0),
+            rate:
+              Number(row.visits || 0) > 0
+                ? (Number(row.downloads || 0) / Number(row.visits || 0)) * 100
+                : 0
+          })
+        );
+
+      setText(
+        "trafficGraphCaption",
+        state.period === "month"
+          ? "이번 달 일별"
+          : `최근 ${RECENT_DAYS}일`
+      );
+
+      renderSvgLineChart(
+        "trafficBoardChart",
+        rows,
+        [
+          { key: "visits", className: "visits" },
+          { key: "clicks", className: "clicks" }
+        ],
+        "표시할 유입 데이터가 없습니다."
+      );
+
+      renderSvgLineChart(
+        "trafficRateBoardChart",
+        rows,
+        [{ key: "rate", className: "total" }],
+        "표시할 클릭률 데이터가 없습니다.",
+        { percent: true }
+      );
+    }
+
+    function renderClicksGraphBoard() {
+      const rows =
+        getAscendingWebsiteRows().map(
+          (row) => ({
+            label: compactDate(row.date),
+            visits: Number(row.visits || 0),
+            clicks: Number(row.downloads || 0)
+          })
+        );
+
+      setText(
+        "clickGraphCaption",
+        state.period === "month"
+          ? "이번 달 일별"
+          : `최근 ${RECENT_DAYS}일`
+      );
+
+      renderSvgLineChart(
+        "clickBoardChart",
+        rows,
+        [
+          { key: "visits", className: "visits" },
+          { key: "clicks", className: "clicks" }
+        ],
+        "표시할 다운로드 클릭 데이터가 없습니다."
+      );
+
+      renderClickPlatformDonut();
+    }
+
+    function renderClickPlatformDonut() {
+      const platform = getPlatformClickData();
+      const donut = document.getElementById("clickPlatformDonut");
+
+      if (!donut || !platform.ready) {
+        if (donut) {
+          donut.style.setProperty("--ios-end", "0deg");
+          donut.style.setProperty("--android-end", "0deg");
+        }
+        setText("clickDonutTotal", "-");
+        setText("clickDonutIos", "-");
+        setText("clickDonutAndroid", "-");
+        setText("clickDonutUnknown", "-");
+        return;
+      }
+
+      const total = Number(platform.total || 0);
+      const iosShare = total > 0 ? Number(platform.ios || 0) / total : 0;
+      const androidShare = total > 0 ? Number(platform.android || 0) / total : 0;
+
+      donut.style.setProperty("--ios-end", `${iosShare * 360}deg`);
+      donut.style.setProperty("--android-end", `${(iosShare + androidShare) * 360}deg`);
+
+      setText("clickDonutTotal", formatNumber(total));
+      setText("clickDonutIos", `${formatNumber(platform.ios)}회 · ${formatRate(iosShare * 100)}`);
+      setText("clickDonutAndroid", `${formatNumber(platform.android)}회 · ${formatRate(androidShare * 100)}`);
+      setText(
+        "clickDonutUnknown",
+        `${formatNumber(platform.unknown)}회 · ${formatRate(
+          total > 0 ? (Number(platform.unknown || 0) / total) * 100 : 0
+        )}`
+      );
+    }
+
+    function renderInstallsGraphBoard() {
+      const installs = getPeriodInstallData();
+      const iosLatest = getStoreLatestDate(installs.ios);
+      const androidLatest = getStoreLatestDate(installs.android);
+
+      setText(
+        "installPageAppleSource",
+        iosLatest ? `iOS 기준일 ${compactDate(iosLatest)}` : "iOS 기준일 -"
+      );
+      setText(
+        "installPageGoogleSource",
+        androidLatest ? `Android 기준일 ${compactDate(androidLatest)}` : "Android 기준일 -"
+      );
+      setText(
+        "installPageGraphCaption",
+        state.period === "month" ? "월별 합계" : "스토어 확정 데이터 기준"
+      );
+
+      renderSvgLineChart(
+        "installPageBoardChart",
+        getInstallBoardRows(),
+        [
+          { key: "ios", className: "ios" },
+          { key: "android", className: "android" },
+          { key: "total", className: "total" }
+        ],
+        "iOS와 Android 설치 데이터가 모두 준비되면 추이가 표시됩니다."
+      );
+
+      renderInstallPageDonut();
+    }
+
+    function renderInstallPageDonut() {
+      const ios = state.stats?.ios || {};
+      const android = state.stats?.android || {};
+      const iosTotal = storeReady(ios) ? getIosValue(ios?.total) : null;
+      const androidTotal = storeReady(android) ? getAndroidValue(android?.total) : null;
+      const donut = document.getElementById("installPageDonut");
+
+      if (!donut || iosTotal === null || androidTotal === null) {
+        if (donut) donut.style.setProperty("--ios-share", "0deg");
+        setText("installPageDonutTotal", "-");
+        setText("installPageDonutIos", "-");
+        setText("installPageDonutAndroid", "-");
+        return;
+      }
+
+      const total = Number(iosTotal || 0) + Number(androidTotal || 0);
+      const iosShare = total > 0 ? Number(iosTotal || 0) / total : 0;
+      donut.style.setProperty("--ios-share", `${iosShare * 360}deg`);
+
+      setText("installPageDonutTotal", formatNumber(total));
+      setText("installPageDonutIos", `${formatNumber(iosTotal)}건 · ${formatRate(iosShare * 100)}`);
+      setText(
+        "installPageDonutAndroid",
+        `${formatNumber(androidTotal)}건 · ${formatRate(
+          total > 0 ? (Number(androidTotal || 0) / total) * 100 : 0
+        )}`
+      );
+    }
 
     /* =========================================================
        08 OPERATIONS DATA BOARD
@@ -4798,7 +5032,8 @@
       elementId,
       rows,
       series,
-      emptyMessage
+      emptyMessage,
+      options = {}
     ) {
       const target =
         document.getElementById(
@@ -4941,13 +5176,16 @@
             }
           );
 
+        const axisValue =
+          niceMax -
+          (niceMax / 4) * i;
+
         label.textContent =
-          formatNumber(
-            Math.round(
-              niceMax -
-              (niceMax / 4) * i
-            )
-          );
+          options.percent
+            ? `${Number(axisValue).toFixed(0)}%`
+            : formatNumber(
+                Math.round(axisValue)
+              );
 
         svg.appendChild(label);
       }
@@ -5056,9 +5294,13 @@
                 );
 
               title.textContent =
-                `${row.label || "-"} · ${formatNumber(
-                  row?.[item.key]
-                )}`;
+                options.percent
+                  ? `${row.label || "-"} · ${Number(
+                      row?.[item.key] || 0
+                    ).toFixed(1)}%`
+                  : `${row.label || "-"} · ${formatNumber(
+                      row?.[item.key]
+                    )}`;
 
               circle.appendChild(
                 title
@@ -5263,12 +5505,7 @@
           : `최근 ${RECENT_DAYS}일 실제 신규 설치`
       );
 
-      renderBarChart(
-        "installChart",
-        getInstallChartRows(),
-        "black",
-        "iOS와 Android 데이터가 모두 준비되면 설치 추이가 표시됩니다."
-      );
+      renderInstallsGraphBoard();
 
       renderInstallTable();
     }
