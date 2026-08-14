@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
   <!-- =========================================================
-       01. 기본 메타 정보
+       01. 기본 메타
        ========================================================= -->
   <meta charset="utf-8">
 
@@ -28,6 +28,7 @@
     rel="canonical"
     href="https://moding.app/download.html"
   >
+
 
   <!-- =========================================================
        02. SNS / 카카오톡 미리보기
@@ -87,29 +88,61 @@
     content="https://apps.apple.com/kr/app/id6772018982"
   >
 
+
   <!-- =========================================================
-       03. 모바일 자동분기 + 유입 추적
+       03. 화면 깜빡임 방지
+
+       HTML이 그려지기 전부터 숨겨둡니다.
+
+       PC / Mac / 검색로봇만
+       JS에서 다시 visible 처리합니다.
+
+       따라서 정상적인 모바일 접속에서는
+       다운로드 선택 카드가 보이지 않습니다.
+       ========================================================= -->
+  <style>
+    html {
+      visibility: hidden;
+      background: #ffffff;
+    }
+  </style>
+
+
+  <!-- JavaScript가 꺼진 환경은 페이지 표시 -->
+  <noscript>
+    <style>
+      html {
+        visibility: visible !important;
+      }
+    </style>
+  </noscript>
+
+
+  <!-- =========================================================
+       04. 자동분기 + 채널 추적
        ========================================================= -->
   <script>
     /* =========================================================
-       기본 주소
+       API / STORE URL
        ========================================================= */
 
     const TRACK_API =
       "https://flat-queen-f1fb.moding-inc.workers.dev/track/download";
 
+
     const ANDROID_URL =
       "https://play.google.com/store/apps/details?id=com.moding.application";
+
 
     const IOS_URL =
       "https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982";
 
 
     /* =========================================================
-       User Agent
+       USER AGENT
        ========================================================= */
 
-    const ua =
+    const USER_AGENT =
       navigator.userAgent ||
       navigator.vendor ||
       window.opera ||
@@ -119,32 +152,33 @@
     /* =========================================================
        검색로봇 판별
 
-       검색로봇은 자동 이동하지 않고
-       download.html 내용을 정상 수집합니다.
+       검색로봇은 스토어로 보내지 않고
+       download.html 내용을 수집하도록 합니다.
        ========================================================= */
 
-    const isBot =
+    const IS_BOT =
       /bot|crawl|crawler|spider|slurp|yeti|googlebot|bingbot|daumoa|ads-naver|blueno/i
-        .test(ua);
+        .test(USER_AGENT);
 
 
     /* =========================================================
        Android 판별
        ========================================================= */
 
-    const isAndroid =
-      /android/i.test(ua);
+    const IS_ANDROID =
+      /android/i.test(USER_AGENT);
 
 
     /* =========================================================
        iPhone / iPad 판별
 
-       최신 iPadOS는 MacIntel로 표시될 수 있으므로
-       maxTouchPoints도 함께 확인합니다.
+       최신 iPadOS는 User Agent를
+       Mac처럼 표현할 수 있으므로
+       터치 포인트까지 함께 확인합니다.
        ========================================================= */
 
-    const isIOS =
-      /iPhone|iPad|iPod/i.test(ua) ||
+    const IS_IOS =
+      /iPhone|iPad|iPod/i.test(USER_AGENT) ||
       (
         navigator.platform === "MacIntel" &&
         navigator.maxTouchPoints > 1
@@ -152,48 +186,27 @@
 
 
     /* =========================================================
-       모바일 자동분기 여부
+       모바일 자동분기 대상
        ========================================================= */
 
-    const isMobileStoreTarget =
-      !isBot &&
+    const IS_MOBILE_STORE_TARGET =
+      !IS_BOT &&
       (
-        isAndroid ||
-        isIOS
+        IS_ANDROID ||
+        IS_IOS
       );
 
 
     /* =========================================================
-       모바일에서는 중간 download.html 화면 숨김
+       SOURCE 정리
 
-       스토어로 넘어가는 아주 짧은 순간
-       PC용 다운로드 카드가 번쩍 보이는 현상을 막습니다.
-       ========================================================= */
+       예:
 
-    if (isMobileStoreTarget) {
-      document.documentElement.style.visibility =
-        "hidden";
-    }
-
-
-    /* =========================================================
-       유입 Source 정리
-
-       사용 예:
-
-       당근
        ?src=daangn
-
-       네이버 카페
        ?src=naver_cafe
-
-       네이버 블로그
        ?src=naver_blog
-
-       유튜브
+       ?src=kakao
        ?src=youtube
-
-       전단
        ?src=leaflet
        ========================================================= */
 
@@ -205,31 +218,33 @@
           .replace(
             /[^a-z0-9_-]/g,
             ""
+          )
+          .slice(
+            0,
+            50
           );
 
-      if (!source) {
-        return "";
-      }
 
-      return source.slice(
-        0,
-        50
-      );
+      return source;
     }
 
 
     /* =========================================================
-       src 파라미터가 없는 경우
-       document.referrer로 보조 추정
+       Referrer 기반 보조 판별
+
+       src 파라미터가 있는 경우에는
+       src가 항상 우선합니다.
        ========================================================= */
 
     function detectReferrerSource() {
       const referrer =
         document.referrer || "";
 
+
       if (!referrer) {
         return "";
       }
+
 
       try {
         const hostname =
@@ -292,21 +307,21 @@
 
         return "referral";
 
-      } catch (error) {
+      } catch (_) {
         return "";
       }
     }
 
 
     /* =========================================================
-       최종 유입 Source 결정
+       최종 유입 Source
 
-       우선순위:
+       우선순위
 
-       1. ?src=
-       2. ?utm_source=
+       1. src
+       2. utm_source
        3. 현재 세션에 저장된 source
-       4. referrer
+       4. document.referrer
        5. direct
        ========================================================= */
 
@@ -332,6 +347,7 @@
           );
         } catch (_) {}
 
+
         return explicitSource;
       }
 
@@ -343,6 +359,7 @@
               "moding_source"
             )
           );
+
 
         if (savedSource) {
           return savedSource;
@@ -363,6 +380,7 @@
           );
         } catch (_) {}
 
+
         return referrerSource;
       }
 
@@ -371,12 +389,12 @@
     }
 
 
-    const trafficSource =
+    const TRAFFIC_SOURCE =
       getTrafficSource();
 
 
     /* =========================================================
-       다운로드 추적 중복 방지
+       같은 페이지에서 중복 카운팅 방지
        ========================================================= */
 
     let downloadTracked =
@@ -384,13 +402,17 @@
 
 
     /* =========================================================
-       Worker로 다운로드 분기 정보 전송
+       카운팅
 
-       중요한 점:
-       keepalive:true
+       1순위:
+       navigator.sendBeacon
 
-       페이지가 즉시 App Store / Google Play로 이동해도
-       브라우저가 요청 전송을 계속 시도합니다.
+       - 전송 완료를 기다릴 필요 없음
+       - 즉시 외부 스토어 이동 가능
+       - 페이지 이동 중 분석 이벤트 전송에 적합
+
+       2순위:
+       fetch + keepalive
        ========================================================= */
 
     function trackDownload(platform) {
@@ -403,67 +425,85 @@
         true;
 
 
-      const payload = {
-        platform:
-          platform,
+      const trackingUrl =
+        TRACK_API +
+        "?platform=" +
+        encodeURIComponent(platform) +
+        "&src=" +
+        encodeURIComponent(TRAFFIC_SOURCE);
 
-        source:
-          trafficSource,
 
-        path:
-          window.location.pathname,
+      /* ---------------------------------------------------------
+         sendBeacon
+         --------------------------------------------------------- */
 
-        referrer:
-          document.referrer || ""
-      };
+      try {
+        if (
+          typeof navigator.sendBeacon ===
+          "function"
+        ) {
+          const sent =
+            navigator.sendBeacon(
+              trackingUrl,
+              ""
+            );
 
+
+          if (sent) {
+            return;
+          }
+        }
+
+      } catch (_) {}
+
+
+      /* ---------------------------------------------------------
+         Fallback
+         --------------------------------------------------------- */
 
       try {
         fetch(
-          TRACK_API,
+          trackingUrl,
           {
             method:
               "POST",
 
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
-
-            body:
-              JSON.stringify(
-                payload
-              ),
-
             keepalive:
-              true
+              true,
+
+            cache:
+              "no-store"
           }
-        ).catch(
-          () => {}
-        );
+        )
+          .catch(
+            () => {}
+          );
 
       } catch (_) {}
     }
 
 
     /* =========================================================
-       스토어 즉시 이동
-
-       이전처럼 250ms 기다리지 않습니다.
-
-       추적 요청만 발생시키고
-       즉시 스토어로 이동합니다.
+       모바일 즉시 스토어 이동
        ========================================================= */
 
-    function trackAndRedirect(
+    function redirectToStore(
       platform,
       storeUrl
     ) {
+      /*
+       * 카운팅 요청만 발생시킵니다.
+       * 완료를 기다리지 않습니다.
+       */
       trackDownload(
         platform
       );
 
 
+      /*
+       * 다운로드 HTML 화면을 표시하지 않고
+       * 즉시 스토어로 교체합니다.
+       */
       window.location.replace(
         storeUrl
       );
@@ -471,7 +511,7 @@
 
 
     /* =========================================================
-       모바일 자동분기
+       실제 자동분기
 
        Android
        → Google Play
@@ -479,40 +519,60 @@
        iPhone / iPad
        → App Store
 
-       PC / Mac
-       → 자동 이동 없음
-       → 아래 다운로드 페이지 표시
+       PC / 일반 Mac
+       → download.html 표시
+
+       검색로봇
+       → download.html 표시
        ========================================================= */
 
-    if (isMobileStoreTarget) {
-      if (isAndroid) {
-        trackAndRedirect(
-          "android",
-          ANDROID_URL
-        );
-
-      } else if (isIOS) {
-        trackAndRedirect(
-          "ios",
-          IOS_URL
-        );
-      }
+    if (
+      !IS_BOT &&
+      IS_ANDROID
+    ) {
+      redirectToStore(
+        "android",
+        ANDROID_URL
+      );
 
 
+    } else if (
+      !IS_BOT &&
+      IS_IOS
+    ) {
+      redirectToStore(
+        "ios",
+        IOS_URL
+      );
+
+
+    } else {
       /*
-       * 특수 인앱 브라우저 등에서
-       * 외부 스토어 이동이 실패하는 경우를 대비합니다.
-       *
-       * 1.8초 뒤에도 download.html에 남아 있다면
-       * PC용 선택 화면을 다시 보여줍니다.
+       * PC / Mac / 검색로봇
        */
+      document.documentElement.style.visibility =
+        "visible";
+    }
 
-      setTimeout(
+
+    /* =========================================================
+       모바일 자동분기 실패 대비
+
+       정상적인 경우 이미 App Store / Google Play로
+       이동했기 때문에 이 코드는 실행될 화면이 없습니다.
+
+       특수 인앱브라우저 등에서 외부 이동이 실패해서
+       download.html에 계속 남아 있을 때만
+       2.5초 뒤 수동 선택 화면을 보여줍니다.
+       ========================================================= */
+
+    if (IS_MOBILE_STORE_TARGET) {
+      window.setTimeout(
         () => {
           document.documentElement.style.visibility =
             "visible";
         },
-        1800
+        2500
       );
     }
   </script>
@@ -520,47 +580,73 @@
 
   <style>
     /* =========================================================
-       04. 브랜드 컬러
+       05. 브랜드 변수
        ========================================================= */
 
     :root {
-      --moding-green: #238B22;
-      --moding-green-dark: #1c6f1c;
-      --moding-orange: #FF8C00;
+      --moding-green:
+        #238B22;
 
-      --bg-light: #F7F9F8;
-      --bg-white: #FFFFFF;
+      --moding-green-dark:
+        #1C6F1C;
 
-      --text-main: #1F3B1F;
-      --text-sub: #666666;
+      --moding-orange:
+        #FF8C00;
 
-      --border-light: #E1E4E2;
+      --bg-light:
+        #F7F9F8;
+
+      --bg-white:
+        #FFFFFF;
+
+      --text-main:
+        #1F3B1F;
+
+      --text-sub:
+        #666666;
+
+      --border-light:
+        #E1E4E2;
 
       --shadow-card:
         0 14px 36px
-        rgba(0, 0, 0, 0.12);
+        rgba(
+          0,
+          0,
+          0,
+          0.12
+        );
     }
 
 
     /* =========================================================
-       05. Reset
+       06. RESET
        ========================================================= */
 
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin:
+        0;
+
+      padding:
+        0;
+
+      box-sizing:
+        border-box;
     }
 
 
     html {
-      -webkit-text-size-adjust: 100%;
+      -webkit-text-size-adjust:
+        100%;
     }
 
 
     body {
-      min-height: 100vh;
-      min-height: 100dvh;
+      min-height:
+        100vh;
+
+      min-height:
+        100dvh;
 
       font-family:
         -apple-system,
@@ -572,14 +658,26 @@
       background:
         radial-gradient(
           circle at 18% 18%,
-          rgba(255, 140, 0, 0.18),
+          rgba(
+            255,
+            140,
+            0,
+            0.18
+          ),
           transparent 28%
         ),
+
         radial-gradient(
           circle at 88% 78%,
-          rgba(35, 139, 34, 0.18),
+          rgba(
+            35,
+            139,
+            34,
+            0.18
+          ),
           transparent 30%
         ),
+
         linear-gradient(
           135deg,
           #F7F9F8 0%,
@@ -625,7 +723,12 @@
 
 
     /* =========================================================
-       06. Download Card
+       07. 다운로드 카드
+
+       기본적으로 PC용입니다.
+
+       모바일에서는 정상적으로 스토어가 열리면
+       이 화면을 볼 일이 없습니다.
        ========================================================= */
 
     .download-wrap {
@@ -692,7 +795,8 @@
         14px;
 
       padding:
-        7px 14px;
+        7px
+        14px;
 
       border-radius:
         999px;
@@ -724,6 +828,9 @@
       margin-bottom:
         12px;
 
+      color:
+        var(--moding-green);
+
       font-size:
         30px;
 
@@ -735,9 +842,6 @@
 
       letter-spacing:
         -0.045em;
-
-      color:
-        var(--moding-green);
     }
 
 
@@ -751,19 +855,19 @@
       margin-bottom:
         26px;
 
+      color:
+        var(--text-sub);
+
       font-size:
         15px;
 
       line-height:
         1.75;
-
-      color:
-        var(--text-sub);
     }
 
 
     /* =========================================================
-       07. Store Buttons
+       08. STORE BUTTON
        ========================================================= */
 
     .store-buttons {
@@ -779,6 +883,15 @@
       min-height:
         58px;
 
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
       border-radius:
         18px;
 
@@ -790,15 +903,6 @@
 
       font-weight:
         900;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
 
       transition:
         transform 0.2s ease,
@@ -815,11 +919,11 @@
 
 
     .store-btn.ios {
-      background:
-        #111111;
-
       color:
         #FFFFFF;
+
+      background:
+        #111111;
 
       border:
         2px solid
@@ -828,11 +932,11 @@
 
 
     .store-btn.android {
-      background:
-        var(--moding-green);
-
       color:
         #FFFFFF;
+
+      background:
+        var(--moding-green);
 
       border:
         2px solid
@@ -850,25 +954,28 @@
 
 
     /* =========================================================
-       08. 안내 문구
+       09. 안내
        ========================================================= */
 
     .note {
       margin-top:
         18px;
 
+      color:
+        #888888;
+
       font-size:
         12px;
 
       line-height:
         1.65;
-
-      color:
-        #888888;
     }
 
 
     .home-link {
+      margin-top:
+        14px;
+
       display:
         inline-flex;
 
@@ -877,9 +984,6 @@
 
       justify-content:
         center;
-
-      margin-top:
-        14px;
 
       color:
         var(--moding-green);
@@ -926,22 +1030,25 @@
       margin-top:
         18px;
 
+      color:
+        #999999;
+
       font-size:
         12px;
 
       line-height:
         1.7;
-
-      color:
-        #999999;
     }
 
 
     /* =========================================================
-       09. Responsive
+       10. RESPONSIVE
        ========================================================= */
 
-    @media (max-width: 420px) {
+    @media (
+      max-width:
+        420px
+    ) {
       body {
         padding:
           20px;
@@ -1074,9 +1181,8 @@
 
 
   <!-- =========================================================
-       10. PC / 자동분기 실패 시 수동 버튼 추적
+       11. PC / 자동분기 실패 시 수동 버튼 추적
        ========================================================= -->
-
   <script>
     const iosDownloadButton =
       document.getElementById(
