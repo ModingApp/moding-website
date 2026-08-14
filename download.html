@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
   <!-- =========================================================
-       기본 메타 정보
+       01. 기본 메타 정보
        ========================================================= -->
   <meta charset="utf-8">
 
@@ -19,7 +19,10 @@
     content="모딩(Moding) 앱 다운로드 페이지입니다. Android와 iPhone에서 모딩 앱을 설치할 수 있으며, 사용 중인 기기에 맞는 스토어로 자동 이동합니다."
   >
 
-  <meta name="robots" content="index, follow">
+  <meta
+    name="robots"
+    content="index, follow"
+  >
 
   <link
     rel="canonical"
@@ -27,10 +30,17 @@
   >
 
   <!-- =========================================================
-       SNS / 카카오 미리보기
+       02. SNS / 카카오톡 미리보기
        ========================================================= -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Moding">
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:site_name"
+    content="Moding"
+  >
 
   <meta
     property="og:title"
@@ -52,9 +62,20 @@
     content="https://moding.app/og-image.png"
   >
 
-  <meta property="og:image:width" content="500">
-  <meta property="og:image:height" content="500">
-  <meta property="og:image:type" content="image/png">
+  <meta
+    property="og:image:width"
+    content="500"
+  >
+
+  <meta
+    property="og:image:height"
+    content="500"
+  >
+
+  <meta
+    property="og:image:type"
+    content="image/png"
+  >
 
   <meta
     property="al:ios:app_store_id"
@@ -67,17 +88,26 @@
   >
 
   <!-- =========================================================
-       유입 추적 + 기기별 자동 분기
+       03. 모바일 자동분기 + 유입 추적
        ========================================================= -->
   <script>
+    /* =========================================================
+       기본 주소
+       ========================================================= */
+
     const TRACK_API =
       "https://flat-queen-f1fb.moding-inc.workers.dev/track/download";
 
-    const androidUrl =
+    const ANDROID_URL =
       "https://play.google.com/store/apps/details?id=com.moding.application";
 
-    const iosUrl =
+    const IOS_URL =
       "https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982";
+
+
+    /* =========================================================
+       User Agent
+       ========================================================= */
 
     const ua =
       navigator.userAgent ||
@@ -85,18 +115,33 @@
       window.opera ||
       "";
 
+
     /* =========================================================
-       1. 검색로봇 판별
+       검색로봇 판별
+
+       검색로봇은 자동 이동하지 않고
+       download.html 내용을 정상 수집합니다.
        ========================================================= */
+
     const isBot =
       /bot|crawl|crawler|spider|slurp|yeti|googlebot|bingbot|daumoa|ads-naver|blueno/i
         .test(ua);
 
+
     /* =========================================================
-       2. 기기 판별
+       Android 판별
        ========================================================= */
+
     const isAndroid =
       /android/i.test(ua);
+
+
+    /* =========================================================
+       iPhone / iPad 판별
+
+       최신 iPadOS는 MacIntel로 표시될 수 있으므로
+       maxTouchPoints도 함께 확인합니다.
+       ========================================================= */
 
     const isIOS =
       /iPhone|iPad|iPod/i.test(ua) ||
@@ -105,8 +150,51 @@
         navigator.maxTouchPoints > 1
       );
 
+
     /* =========================================================
-       3. 유입 Source 정리
+       모바일 자동분기 여부
+       ========================================================= */
+
+    const isMobileStoreTarget =
+      !isBot &&
+      (
+        isAndroid ||
+        isIOS
+      );
+
+
+    /* =========================================================
+       모바일에서는 중간 download.html 화면 숨김
+
+       스토어로 넘어가는 아주 짧은 순간
+       PC용 다운로드 카드가 번쩍 보이는 현상을 막습니다.
+       ========================================================= */
+
+    if (isMobileStoreTarget) {
+      document.documentElement.style.visibility =
+        "hidden";
+    }
+
+
+    /* =========================================================
+       유입 Source 정리
+
+       사용 예:
+
+       당근
+       ?src=daangn
+
+       네이버 카페
+       ?src=naver_cafe
+
+       네이버 블로그
+       ?src=naver_blog
+
+       유튜브
+       ?src=youtube
+
+       전단
+       ?src=leaflet
        ========================================================= */
 
     function normalizeSource(value) {
@@ -114,14 +202,26 @@
         String(value || "")
           .trim()
           .toLowerCase()
-          .replace(/[^a-z0-9_-]/g, "");
+          .replace(
+            /[^a-z0-9_-]/g,
+            ""
+          );
 
       if (!source) {
         return "";
       }
 
-      return source.slice(0, 50);
+      return source.slice(
+        0,
+        50
+      );
     }
+
+
+    /* =========================================================
+       src 파라미터가 없는 경우
+       document.referrer로 보조 추정
+       ========================================================= */
 
     function detectReferrerSource() {
       const referrer =
@@ -137,6 +237,7 @@
             .hostname
             .toLowerCase();
 
+
         if (
           hostname.includes("daangn") ||
           hostname.includes("karrot")
@@ -144,11 +245,13 @@
           return "daangn";
         }
 
+
         if (
           hostname.includes("naver")
         ) {
           return "naver";
         }
+
 
         if (
           hostname.includes("kakao") ||
@@ -157,6 +260,7 @@
           return "kakao";
         }
 
+
         if (
           hostname.includes("youtube") ||
           hostname.includes("youtu.be")
@@ -164,11 +268,13 @@
           return "youtube";
         }
 
+
         if (
           hostname.includes("instagram")
         ) {
           return "instagram";
         }
+
 
         if (
           hostname.includes("facebook")
@@ -176,11 +282,13 @@
           return "facebook";
         }
 
+
         if (
           hostname.includes("google")
         ) {
           return "google";
         }
+
 
         return "referral";
 
@@ -189,27 +297,32 @@
       }
     }
 
+
+    /* =========================================================
+       최종 유입 Source 결정
+
+       우선순위:
+
+       1. ?src=
+       2. ?utm_source=
+       3. 현재 세션에 저장된 source
+       4. referrer
+       5. direct
+       ========================================================= */
+
     function getTrafficSource() {
       const params =
         new URLSearchParams(
           window.location.search
         );
 
-      /*
-       * 우선순위
-       *
-       * 1. ?src=
-       * 2. ?utm_source=
-       * 3. 이전에 저장한 source
-       * 4. document.referrer 추정
-       * 5. direct
-       */
 
       const explicitSource =
         normalizeSource(
           params.get("src") ||
           params.get("utm_source")
         );
+
 
       if (explicitSource) {
         try {
@@ -222,6 +335,7 @@
         return explicitSource;
       }
 
+
       try {
         const savedSource =
           normalizeSource(
@@ -233,51 +347,83 @@
         if (savedSource) {
           return savedSource;
         }
+
       } catch (_) {}
+
 
       const referrerSource =
         detectReferrerSource();
 
+
       if (referrerSource) {
+        try {
+          sessionStorage.setItem(
+            "moding_source",
+            referrerSource
+          );
+        } catch (_) {}
+
         return referrerSource;
       }
+
 
       return "direct";
     }
 
+
     const trafficSource =
       getTrafficSource();
 
+
     /* =========================================================
-       4. 다운로드 클릭 추적
+       다운로드 추적 중복 방지
        ========================================================= */
 
-    let downloadTracked = false;
+    let downloadTracked =
+      false;
 
-    async function trackDownload(platform) {
-      /*
-       * 한 페이지 접속에서
-       * 자동분기 + 버튼클릭이 겹치더라도
-       * 중복 카운팅하지 않습니다.
-       */
+
+    /* =========================================================
+       Worker로 다운로드 분기 정보 전송
+
+       중요한 점:
+       keepalive:true
+
+       페이지가 즉시 App Store / Google Play로 이동해도
+       브라우저가 요청 전송을 계속 시도합니다.
+       ========================================================= */
+
+    function trackDownload(platform) {
       if (downloadTracked) {
         return;
       }
 
-      downloadTracked = true;
+
+      downloadTracked =
+        true;
+
 
       const payload = {
-        platform,
-        source: trafficSource,
-        path: window.location.pathname,
-        referrer: document.referrer || ""
+        platform:
+          platform,
+
+        source:
+          trafficSource,
+
+        path:
+          window.location.pathname,
+
+        referrer:
+          document.referrer || ""
       };
 
+
       try {
-        await fetch(
+        fetch(
           TRACK_API,
           {
-            method: "POST",
+            method:
+              "POST",
 
             headers: {
               "Content-Type":
@@ -285,148 +431,136 @@
             },
 
             body:
-              JSON.stringify(payload),
+              JSON.stringify(
+                payload
+              ),
 
-            keepalive: true
+            keepalive:
+              true
           }
+        ).catch(
+          () => {}
         );
 
-      } catch (error) {
-        /*
-         * 추적 실패 때문에
-         * 스토어 이동을 막지는 않습니다.
-         */
-        console.warn(
-          "Moding download tracking failed",
-          error
-        );
-      }
+      } catch (_) {}
     }
 
+
     /* =========================================================
-       5. 추적 후 스토어 이동
+       스토어 즉시 이동
+
+       이전처럼 250ms 기다리지 않습니다.
+
+       추적 요청만 발생시키고
+       즉시 스토어로 이동합니다.
        ========================================================= */
 
-    async function trackAndRedirect(
+    function trackAndRedirect(
       platform,
-      url
+      storeUrl
     ) {
-      /*
-       * Worker 전송을 최대 약 250ms만 기다립니다.
-       * 광고 유입 카운팅 정확도를 높이되
-       * 사용자 이동이 느려지지 않도록 합니다.
-       */
-      await Promise.race([
-        trackDownload(platform),
+      trackDownload(
+        platform
+      );
 
-        new Promise(
-          (resolve) =>
-            setTimeout(
-              resolve,
-              250
-            )
-        )
-      ]);
 
-      window.location.replace(url);
+      window.location.replace(
+        storeUrl
+      );
     }
 
+
     /* =========================================================
-       6. 자동 분기
+       모바일 자동분기
+
+       Android
+       → Google Play
+
+       iPhone / iPad
+       → App Store
+
+       PC / Mac
+       → 자동 이동 없음
+       → 아래 다운로드 페이지 표시
        ========================================================= */
 
-    if (!isBot) {
+    if (isMobileStoreTarget) {
       if (isAndroid) {
         trackAndRedirect(
           "android",
-          androidUrl
+          ANDROID_URL
         );
 
       } else if (isIOS) {
         trackAndRedirect(
           "ios",
-          iosUrl
+          IOS_URL
         );
       }
+
+
+      /*
+       * 특수 인앱 브라우저 등에서
+       * 외부 스토어 이동이 실패하는 경우를 대비합니다.
+       *
+       * 1.8초 뒤에도 download.html에 남아 있다면
+       * PC용 선택 화면을 다시 보여줍니다.
+       */
+
+      setTimeout(
+        () => {
+          document.documentElement.style.visibility =
+            "visible";
+        },
+        1800
+      );
     }
-
-    /* =========================================================
-       7. 화면 로드 후 수동 버튼 추적
-       ========================================================= */
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      () => {
-        const iosButton =
-          document.querySelector(
-            ".store-btn.ios"
-          );
-
-        const androidButton =
-          document.querySelector(
-            ".store-btn.android"
-          );
-
-        if (iosButton) {
-          iosButton.addEventListener(
-            "click",
-            (event) => {
-              /*
-               * PC 등 자동분기되지 않는 환경에서
-               * 수동 App Store 클릭을 추적합니다.
-               */
-              trackDownload("ios");
-            }
-          );
-        }
-
-        if (androidButton) {
-          androidButton.addEventListener(
-            "click",
-            (event) => {
-              /*
-               * PC 등 자동분기되지 않는 환경에서
-               * 수동 Google Play 클릭을 추적합니다.
-               */
-              trackDownload("android");
-            }
-          );
-        }
-      }
-    );
   </script>
+
 
   <style>
     /* =========================================================
-       1. 브랜드 컬러 / 기본 변수
+       04. 브랜드 컬러
        ========================================================= */
+
     :root {
       --moding-green: #238B22;
       --moding-green-dark: #1c6f1c;
       --moding-orange: #FF8C00;
+
       --bg-light: #F7F9F8;
-      --bg-white: #ffffff;
+      --bg-white: #FFFFFF;
+
       --text-main: #1F3B1F;
       --text-sub: #666666;
-      --border-light: #e1e4e2;
-      --shadow-card: 0 14px 36px rgba(0, 0, 0, 0.12);
+
+      --border-light: #E1E4E2;
+
+      --shadow-card:
+        0 14px 36px
+        rgba(0, 0, 0, 0.12);
     }
 
+
     /* =========================================================
-       2. Reset
+       05. Reset
        ========================================================= */
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+
     html {
       -webkit-text-size-adjust: 100%;
     }
 
+
     body {
       min-height: 100vh;
+      min-height: 100dvh;
 
       font-family:
         -apple-system,
@@ -452,44 +586,68 @@
           #EEF6EF 100%
         );
 
-      color: var(--text-main);
+      color:
+        var(--text-main);
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display:
+        flex;
 
-      padding: 26px;
+      align-items:
+        center;
 
-      word-break: keep-all;
+      justify-content:
+        center;
+
+      padding:
+        26px;
+
+      word-break:
+        keep-all;
     }
+
 
     a {
-      color: inherit;
+      color:
+        inherit;
     }
+
 
     img {
-      display: block;
-      max-width: 100%;
-      height: auto;
+      display:
+        block;
+
+      max-width:
+        100%;
+
+      height:
+        auto;
     }
+
 
     /* =========================================================
-       3. Download Card
+       06. Download Card
        ========================================================= */
+
     .download-wrap {
-      width: 100%;
-      max-width: 440px;
+      width:
+        100%;
+
+      max-width:
+        440px;
     }
 
+
     .download-card {
-      width: 100%;
+      width:
+        100%;
 
       padding:
         34px
         26px
         30px;
 
-      border-radius: 30px;
+      border-radius:
+        30px;
 
       background:
         var(--bg-white);
@@ -506,26 +664,38 @@
       box-shadow:
         var(--shadow-card);
 
-      text-align: center;
+      text-align:
+        center;
     }
+
 
     .logo {
-      width: 142px;
-      margin: 0 auto 24px;
+      width:
+        142px;
+
+      margin:
+        0 auto 24px;
     }
 
+
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display:
+        inline-flex;
 
-      margin-bottom: 14px;
+      align-items:
+        center;
 
-      padding:
-        7px
+      justify-content:
+        center;
+
+      margin-bottom:
         14px;
 
-      border-radius: 999px;
+      padding:
+        7px 14px;
+
+      border-radius:
+        999px;
 
       border:
         1.5px solid
@@ -539,22 +709,29 @@
       color:
         var(--moding-green);
 
-      font-size: 12px;
+      font-size:
+        12px;
 
-      font-weight: 900;
+      font-weight:
+        900;
 
       letter-spacing:
         0.08em;
     }
 
+
     h1 {
-      margin-bottom: 12px;
+      margin-bottom:
+        12px;
 
-      font-size: 30px;
+      font-size:
+        30px;
 
-      font-weight: 900;
+      font-weight:
+        900;
 
-      line-height: 1.28;
+      line-height:
+        1.28;
 
       letter-spacing:
         -0.045em;
@@ -563,41 +740,65 @@
         var(--moding-green);
     }
 
+
     h1 .orange {
       color:
         var(--moding-orange);
     }
 
+
     .desc {
-      margin-bottom: 26px;
+      margin-bottom:
+        26px;
 
-      font-size: 15px;
+      font-size:
+        15px;
 
-      line-height: 1.75;
+      line-height:
+        1.75;
 
       color:
         var(--text-sub);
     }
 
+
+    /* =========================================================
+       07. Store Buttons
+       ========================================================= */
+
     .store-buttons {
-      display: grid;
-      gap: 12px;
+      display:
+        grid;
+
+      gap:
+        12px;
     }
 
+
     .store-btn {
-      min-height: 58px;
+      min-height:
+        58px;
 
-      border-radius: 18px;
+      border-radius:
+        18px;
 
-      text-decoration: none;
+      text-decoration:
+        none;
 
-      font-size: 15px;
+      font-size:
+        15px;
 
-      font-weight: 900;
+      font-weight:
+        900;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
 
       transition:
         transform 0.2s ease,
@@ -606,34 +807,38 @@
         border-color 0.2s ease;
     }
 
+
     .store-btn:hover {
       transform:
         translateY(-2px);
     }
+
 
     .store-btn.ios {
       background:
         #111111;
 
       color:
-        #ffffff;
+        #FFFFFF;
 
       border:
         2px solid
         #111111;
     }
 
+
     .store-btn.android {
       background:
         var(--moding-green);
 
       color:
-        #ffffff;
+        #FFFFFF;
 
       border:
         2px solid
         var(--moding-green);
     }
+
 
     .store-btn.android:hover {
       background:
@@ -643,32 +848,50 @@
         var(--moding-green-dark);
     }
 
+
+    /* =========================================================
+       08. 안내 문구
+       ========================================================= */
+
     .note {
-      margin-top: 18px;
+      margin-top:
+        18px;
 
-      font-size: 12px;
+      font-size:
+        12px;
 
-      line-height: 1.65;
+      line-height:
+        1.65;
 
       color:
         #888888;
     }
 
-    .home-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
 
-      margin-top: 14px;
+    .home-link {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      margin-top:
+        14px;
 
       color:
         var(--moding-green);
 
-      text-decoration: none;
+      text-decoration:
+        none;
 
-      font-size: 12px;
+      font-size:
+        12px;
 
-      font-weight: 850;
+      font-weight:
+        850;
 
       border-bottom:
         1px solid
@@ -684,6 +907,7 @@
         border-color 0.2s ease;
     }
 
+
     .home-link:hover {
       color:
         var(--moding-orange);
@@ -697,24 +921,32 @@
         );
     }
 
+
     .download-info {
-      margin-top: 18px;
+      margin-top:
+        18px;
 
-      font-size: 12px;
+      font-size:
+        12px;
 
-      line-height: 1.7;
+      line-height:
+        1.7;
 
       color:
         #999999;
     }
 
+
     /* =========================================================
-       4. Responsive
+       09. Responsive
        ========================================================= */
+
     @media (max-width: 420px) {
       body {
-        padding: 20px;
+        padding:
+          20px;
       }
+
 
       .download-card {
         padding:
@@ -726,20 +958,24 @@
           26px;
       }
 
+
       .logo {
         width:
           132px;
       }
+
 
       h1 {
         font-size:
           27px;
       }
 
+
       .desc {
         font-size:
           14px;
       }
+
 
       .store-btn {
         min-height:
@@ -752,36 +988,46 @@
   </style>
 </head>
 
+
 <body>
   <main class="download-wrap">
+
     <section
       class="download-card"
       aria-label="모딩 앱 다운로드"
     >
+
       <img
         src="/모딩로고.png"
         alt="모딩 Moding 로고"
         class="logo"
       >
 
+
       <div class="eyebrow">
         MODING APP
       </div>
 
+
       <h1>
         모딩 앱<br>
+
         <span class="orange">
           다운로드
         </span>
       </h1>
+
 
       <p class="desc">
         사용 중인 기기에 맞는 스토어로 자동 이동합니다.<br>
         자동 이동이 되지 않으면 아래 버튼을 선택해 주세요.
       </p>
 
+
       <div class="store-buttons">
+
         <a
+          id="iosDownloadButton"
           href="https://apps.apple.com/kr/app/%EB%AA%A8%EB%94%A9-%EC%9A%B0%EB%A6%AC%EC%8B%9D%EB%8B%B9%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%ED%8A%B9%EC%88%98%EC%8B%9D%EC%9E%90%EC%9E%AC/id6772018982"
           class="store-btn ios"
           target="_blank"
@@ -790,7 +1036,9 @@
           iPhone 앱 다운로드
         </a>
 
+
         <a
+          id="androidDownloadButton"
           href="https://play.google.com/store/apps/details?id=com.moding.application"
           class="store-btn android"
           target="_blank"
@@ -798,11 +1046,14 @@
         >
           Android 앱 다운로드
         </a>
+
       </div>
+
 
       <p class="note">
         PC에서 접속한 경우 사용하는 휴대폰에 맞는 스토어를 선택해 주세요.
       </p>
+
 
       <a
         href="/"
@@ -811,11 +1062,56 @@
         모딩 공식 홈페이지로 이동
       </a>
 
+
       <p class="download-info">
         모딩은 외식업 사장님을 위한 식품·식자재 거래 앱입니다.<br>
         Android와 iPhone에서 모딩 앱을 설치할 수 있습니다.
       </p>
+
     </section>
+
   </main>
+
+
+  <!-- =========================================================
+       10. PC / 자동분기 실패 시 수동 버튼 추적
+       ========================================================= -->
+
+  <script>
+    const iosDownloadButton =
+      document.getElementById(
+        "iosDownloadButton"
+      );
+
+
+    const androidDownloadButton =
+      document.getElementById(
+        "androidDownloadButton"
+      );
+
+
+    if (iosDownloadButton) {
+      iosDownloadButton.addEventListener(
+        "click",
+        () => {
+          trackDownload(
+            "ios"
+          );
+        }
+      );
+    }
+
+
+    if (androidDownloadButton) {
+      androidDownloadButton.addEventListener(
+        "click",
+        () => {
+          trackDownload(
+            "android"
+          );
+        }
+      );
+    }
+  </script>
 </body>
 </html>
