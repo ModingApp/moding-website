@@ -1745,6 +1745,105 @@
         flex-basis: 146px;
       }
     }
+
+
+    /* v11 · 직관형 운영 대시보드 */
+    .status-line.warning {
+      color: #B66500;
+      font-weight: 850;
+    }
+
+    .status-strip {
+      margin-bottom: 16px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      color: var(--sub);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .status-strip strong {
+      color: var(--ink);
+      font-weight: 950;
+    }
+
+    .status-strip.pending {
+      border-color: #F1D8B8;
+      background: #FFF9F1;
+    }
+
+    .status-badge {
+      flex: 0 0 auto;
+      min-height: 30px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--sub);
+      font-size: 11px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .status-badge.ready {
+      background: var(--green-soft);
+      color: var(--green-dark);
+    }
+
+    .system-dot.warn {
+      background: var(--orange);
+    }
+
+    .simple-summary {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .simple-summary-item {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .simple-summary-item small {
+      display: block;
+      color: var(--sub);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .simple-summary-item strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 20px;
+      font-weight: 950;
+      letter-spacing: -.035em;
+    }
+
+    @media (max-width: 700px) {
+      .status-strip {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 13px 14px;
+        font-size: 11px;
+      }
+
+      .simple-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+
   </style>
 </head>
 
@@ -1797,7 +1896,7 @@
         <div class="kicker">MODING DASHBOARD</div>
         <h1 class="dashboard-title">운영 현황</h1>
         <p class="dashboard-desc">
-          홈페이지 방문부터 당근·네이버·카카오·유튜브 등 채널 유입과 실제 앱 설치까지 한눈에 확인합니다.
+          유입부터 스토어 이동과 실제 설치까지 한눈에 확인합니다.
         </p>
       </div>
 
@@ -1845,6 +1944,17 @@
       <div class="system-item">
         <div class="system-item-top">
           <div class="system-name">
+            <span id="workerSystemDot" class="system-dot"></span>
+            Worker API
+          </div>
+          <div id="workerSystemState" class="system-state">확인 중</div>
+        </div>
+        <div id="workerSystemDesc" class="system-desc">Worker 버전 확인 중</div>
+      </div>
+
+      <div class="system-item">
+        <div class="system-item-top">
+          <div class="system-name">
             <span id="appleSystemDot" class="system-dot"></span>
             Apple App Store
           </div>
@@ -1874,6 +1984,14 @@
         </div>
         <div class="system-desc">관리자 통계 API 응답 기준</div>
       </div>
+
+      <div class="system-item">
+        <div class="system-item-top">
+          <div class="system-name">집계 기준</div>
+          <div class="system-state">요약</div>
+        </div>
+        <div class="system-desc">고유 방문 = 중복 제거 · 스토어 이동 = 실제 스토어 진입 · 실제 설치 = Apple/Google 확정 데이터</div>
+      </div>
     </div>
   </aside>
 
@@ -1883,6 +2001,7 @@
     const SESSION_TOKEN_KEY = "moding_admin_token";
     const APP_LAUNCH_DATE = "2026-07-01";
     const APP_LAUNCH_MONTH = APP_LAUNCH_DATE.slice(0, 7);
+    const REQUIRED_WORKER_VERSION = "stats-v9-hybrid-google-install-fallback";
 
     const COLORS = {
       green: "#238B22",
@@ -1912,7 +2031,8 @@
     const state = {
       view: "overview",
       period: "all",
-      stats: null
+      stats: null,
+      workerInfo: null
     };
 
     const loginView = document.getElementById("loginView");
@@ -2033,9 +2153,34 @@
       return "전체";
     }
 
-    function setDashboardStatus(message, isError = false) {
+    function setDashboardStatus(message, level = "") {
+      const isError = level === true || level === "error";
+      const isWarning = level === "warning";
       dashboardStatus.textContent = message;
       dashboardStatus.classList.toggle("error", isError);
+      dashboardStatus.classList.toggle("warning", isWarning);
+    }
+
+    function validateStatsPayload(data) {
+      const checks = [
+        ["today", data?.today],
+        ["total", data?.total],
+        ["week", data?.week],
+        ["month", data?.month],
+        ["ios", data?.ios],
+        ["android", data?.android],
+        ["clickPlatforms", data?.clickPlatforms],
+        ["channels", data?.channels],
+        ["uniqueTracking", data?.uniqueTracking]
+      ];
+
+      return checks
+        .filter(([, value]) => value === null || value === undefined)
+        .map(([key]) => key);
+    }
+
+    function workerVersionCompatible() {
+      return state.workerInfo?.version === REQUIRED_WORKER_VERSION;
     }
 
     function showLogin() {
@@ -3062,20 +3207,13 @@
       const rows = getWebsiteRows();
       const label = periodName();
 
-      const channelUsesUnique =
-        channels.external.some(
-          row => row.uniqueEntry > 0
-        );
-
-      const channelTotalForVisual =
-        channelUsesUnique
-          ? channels.externalUniqueEntries
-          : channels.externalEntries;
+      const channelUsesUnique = channels.external.some(row => row.uniqueEntry > 0);
+      const channelTotalForVisual = channelUsesUnique
+        ? channels.externalUniqueEntries
+        : channels.externalEntries;
 
       const channelSlices = channels.external.map(row => ({
-        value: channelUsesUnique
-          ? row.uniqueEntry
-          : row.entry,
+        value: channelUsesUnique ? row.uniqueEntry : row.entry,
         color: channelMeta(row.source).color
       }));
 
@@ -3085,74 +3223,82 @@
         { value: clicks.unknown, color: COLORS.muted }
       ];
 
-      content.innerHTML = `
-        ${uniqueTrackingBanner()}
+      const installDisplay = install.total === null ? "집계 중" : install.total;
+      const installUnit = install.total === null ? "" : "건";
+      const installFooter = install.total === null
+        ? "스토어 최신 데이터 대기"
+        : install.partial
+          ? "현재 확인된 수치 · 일부 날짜 집계 중"
+          : "최신 확정 수치";
 
+      content.innerHTML = `
         <div class="kpi-grid">
           ${kpiCard({
-            label: `${label} 고유 홈페이지 방문`,
+            label: `${label} 고유 방문자`,
             value: unique.visitors,
             unit: "명",
-            desc: `중복 사용자 제거 기준 · ${trackingStartText()}부터`,
+            desc: "중복을 제거한 홈페이지 방문자",
             className: "primary",
-            footer: `<span>방문 이벤트 ${formatNumber(website.visits)}회</span>`
+            footer: `방문 ${formatNumber(website.visits)}회`
           })}
 
           ${kpiCard({
-            label: `${label} 외부채널 고유 유입`,
-            value: channels.externalUniqueEntries,
+            label: `${label} 고유 스토어 이동`,
+            value: unique.downloaders,
             unit: "명",
-            desc: "당근·네이버·카카오 등 채널별 고유 유입 합계",
+            desc: "스토어까지 이동한 고유 사용자",
             className: "compact",
-            footer: channels.external[0]
-              ? `1위 ${escapeHtml(channelMeta(channels.external[0].source).label)} · 고유 ${formatNumber(channels.external[0].uniqueEntry)}명`
-              : "아직 확인된 외부채널 유입 없음"
+            footer: `이동 ${formatNumber(clicks.total)}회`
           })}
 
           ${kpiCard({
             label: `${label} 스토어 이동`,
             value: clicks.total,
             unit: "회",
-            desc: "App Store · Google Play로 실제 이동한 이벤트",
+            desc: "App Store · Google Play 이동",
             className: "compact",
-            footer: `<span class="unique-pair">고유 이동자 <strong>${formatNumber(unique.downloaders)}명</strong></span>`
+            footer: `iOS ${formatNumber(clicks.ios)} · Android ${formatNumber(clicks.android)}`
           })}
 
           ${kpiCard({
-            label: `${label} 실제 신규 설치`,
-            value: install.total === null ? "-" : install.total,
-            unit: "건",
-            desc: `Apple 신규 다운로드 + ${androidInstallMetricLabel(install.android)} · 웹 유입과 별도 집계`,
+            label: `${label} 실제 설치`,
+            value: installDisplay,
+            unit: installUnit,
+            desc: `iOS ${install.iosDisplayReady ? formatNumber(install.iosValue) : "대기"} · Android ${install.androidDisplayReady ? formatNumber(install.androidValue) : "대기"}`,
             className: "compact",
-            footer: `<span class="chip unknown">별도 집계</span><span>iOS ${install.iosDisplayReady ? formatNumber(install.iosValue) : "대기"} · Android ${install.androidDisplayReady ? formatNumber(install.androidValue) : "대기"}</span>`
+            footer: installFooter
           })}
         </div>
 
         <section class="surface channel-visual">
           <div class="section-head">
             <div>
-              <div class="eyebrow">CHANNEL MIX</div>
-              <h2 class="section-title">어디에서 들어왔는지</h2>
+              <div class="eyebrow">CHANNEL</div>
+              <h2 class="section-title">유입 채널</h2>
             </div>
-
-            <div class="section-caption">
-              ${channelUsesUnique ? "고유 사용자 기준 채널 비중" : "기존 이벤트 기준 채널 비중"}<br>
-              직접 유입은 별도 표시
-            </div>
+            <div class="section-caption">${channelUsesUnique ? "고유 사용자 기준" : "유입 이벤트 기준"}</div>
           </div>
 
           <div class="channel-visual-grid">
             <div>
               ${donutHtml(
                 channelSlices,
-                channelUsesUnique ? "고유 외부유입" : "외부채널",
+                channelUsesUnique ? "외부 고유유입" : "외부 유입",
                 `${formatNumber(channelTotalForVisual)}${channelUsesUnique ? "명" : "회"}`
               )}
-
-              <div class="note-box">
-                ${channels.external.length
-                  ? `활성 외부채널 <strong>${formatNumber(channels.external.length)}개</strong>`
-                  : "아직 확인된 외부채널 데이터가 없습니다."}
+              <div class="simple-summary">
+                <div class="simple-summary-item">
+                  <small>활성 채널</small>
+                  <strong>${formatNumber(channels.external.length)}개</strong>
+                </div>
+                <div class="simple-summary-item">
+                  <small>직접 유입</small>
+                  <strong>${formatNumber(channels.direct.uniqueEntry || channels.direct.entry)}${channels.direct.uniqueEntry ? "명" : "회"}</strong>
+                </div>
+                <div class="simple-summary-item">
+                  <small>1위 채널</small>
+                  <strong>${channels.external[0] ? escapeHtml(channelMeta(channels.external[0].source).label) : "-"}</strong>
+                </div>
               </div>
             </div>
 
@@ -3165,143 +3311,41 @@
               )}
             </div>
           </div>
-
-          <div class="direct-box">
-            <div>
-              <strong>출처 미확인 · 직접 유입</strong>
-              <span>
-                고유 ${formatNumber(channels.direct.uniqueEntry)}명 · 이벤트 ${formatNumber(channels.direct.entry)}회
-              </span>
-            </div>
-
-            <span class="direct-value">
-              ${formatNumber(channels.direct.uniqueEntry)}명
-            </span>
-          </div>
         </section>
 
         <div class="section-grid">
           <section class="surface section-card">
             <div class="section-head">
               <div>
-                <div class="eyebrow">WEB ACTIVITY</div>
-                <h2 class="section-title">방문과 스토어 이동 추이</h2>
+                <div class="eyebrow">TREND</div>
+                <h2 class="section-title">방문 · 스토어 이동</h2>
               </div>
-
               <div class="chart-legend">
-                <span class="legend-item">
-                  <span class="legend-dot"></span>
-                  방문 이벤트
-                </span>
-
-                <span class="legend-item">
-                  <span class="legend-dot orange"></span>
-                  스토어 이동
-                </span>
+                <span class="legend-item"><span class="legend-dot"></span>방문</span>
+                <span class="legend-item"><span class="legend-dot orange"></span>스토어 이동</span>
               </div>
             </div>
-
             <div class="chart-wrap">
               ${lineChart(
-                rows.map(row => ({
-                  label: row.label,
-                  visits: row.visits,
-                  downloads: row.downloads
-                })),
+                rows.map(row => ({ label: row.label, visits: row.visits, downloads: row.downloads })),
                 [
-                  {
-                    key: "visits",
-                    name: "홈페이지 방문",
-                    color: COLORS.green
-                  },
-                  {
-                    key: "downloads",
-                    name: "스토어 이동",
-                    color: COLORS.orange
-                  }
+                  { key: "visits", name: "방문", color: COLORS.green },
+                  { key: "downloads", name: "스토어 이동", color: COLORS.orange }
                 ]
               )}
             </div>
           </section>
 
           <aside class="surface section-card">
-            <div class="eyebrow">STORE PLATFORM</div>
+            <div class="eyebrow">PLATFORM</div>
             <h2 class="section-title">스토어 이동 구성</h2>
-
             <div class="donut-layout">
-              ${donutHtml(
-                platformSlices,
-                label,
-                `${formatNumber(clicks.total)}회`
-              )}
-
+              ${donutHtml(platformSlices, label, `${formatNumber(clicks.total)}회`)}
               <div class="share-list">
-                <div class="share-row">
-                  <span class="share-name">
-                    <span class="legend-dot blue"></span>
-                    iOS
-                  </span>
-
-                  <span class="share-value">
-                    ${formatNumber(clicks.ios)}
-                    ·
-                    ${formatRate(percent(clicks.ios, clicks.total))}
-                  </span>
-                </div>
-
-                <div class="share-row">
-                  <span class="share-name">
-                    <span class="legend-dot"></span>
-                    Android
-                  </span>
-
-                  <span class="share-value">
-                    ${formatNumber(clicks.android)}
-                    ·
-                    ${formatRate(percent(clicks.android, clicks.total))}
-                  </span>
-                </div>
-
-                <div class="share-row">
-                  <span class="share-name">
-                    <span class="legend-dot muted"></span>
-                    미분류
-                  </span>
-
-                  <span class="share-value">
-                    ${formatNumber(clicks.unknown)}
-                    ·
-                    ${formatRate(percent(clicks.unknown, clicks.total))}
-                  </span>
-                </div>
+                <div class="share-row"><span class="share-name"><span class="legend-dot blue"></span>iOS</span><span class="share-value">${formatNumber(clicks.ios)} · ${formatRate(percent(clicks.ios, clicks.total))}</span></div>
+                <div class="share-row"><span class="share-name"><span class="legend-dot"></span>Android</span><span class="share-value">${formatNumber(clicks.android)} · ${formatRate(percent(clicks.android, clicks.total))}</span></div>
+                <div class="share-row"><span class="share-name"><span class="legend-dot muted"></span>미분류</span><span class="share-value">${formatNumber(clicks.unknown)}</span></div>
               </div>
-            </div>
-
-            ${platformBarsHtml([
-              {
-                label: "iOS",
-                value: clicks.ios,
-                dotClass: "blue",
-                fillClass: "blue"
-              },
-              {
-                label: "Android",
-                value: clicks.android,
-                dotClass: "",
-                fillClass: ""
-              },
-              {
-                label: "미분류",
-                value: clicks.unknown,
-                dotClass: "muted",
-                fillClass: "muted"
-              }
-            ])}
-
-            <div class="note-box">
-              고유 스토어 이동자
-              <strong>${formatNumber(unique.downloaders)}명</strong><br>
-              iOS ${formatNumber(unique.ios)}명 · Android ${formatNumber(unique.android)}명
             </div>
           </aside>
         </div>
@@ -3313,260 +3357,93 @@
     function renderChannels() {
       const channels = groupChannels();
       const label = periodName();
-
-      const channelUsesUnique =
-        channels.external.some(
-          row => row.uniqueEntry > 0
-        );
-
-      const channelTotalForVisual =
-        channelUsesUnique
-          ? channels.externalUniqueEntries
-          : channels.externalEntries;
-
-      const channelSlices = channels.external.map(row => ({
-        value: channelUsesUnique
-          ? row.uniqueEntry
-          : row.entry,
+      const channelUsesUnique = channels.external.some(row => row.uniqueEntry > 0);
+      const totalForVisual = channelUsesUnique ? channels.externalUniqueEntries : channels.externalEntries;
+      const slices = channels.external.map(row => ({
+        value: channelUsesUnique ? row.uniqueEntry : row.entry,
         color: channelMeta(row.source).color
       }));
-
       const top = channels.external[0];
 
-      const topShare = top
-        ? percent(
-            channelUsesUnique
-              ? top.uniqueEntry
-              : top.entry,
-            channelTotalForVisual
-          )
-        : 0;
-
       content.innerHTML = `
-        ${uniqueTrackingBanner()}
-
         <div class="kpi-grid">
           ${kpiCard({
             label: `${label} 활성 채널`,
             value: channels.external.length,
             unit: "개",
-            desc: "유입 데이터가 발생한 외부 채널",
+            desc: "유입이 발생한 외부 채널",
             className: "primary",
-            footer: top
-              ? `현재 1위 ${escapeHtml(channelMeta(top.source).label)}`
-              : "외부채널 데이터 대기"
+            footer: top ? `1위 ${escapeHtml(channelMeta(top.source).label)}` : "유입 대기"
           })}
 
           ${kpiCard({
-            label: `${label} 외부채널 고유 유입`,
+            label: `${label} 외부 고유 유입`,
             value: channels.externalUniqueEntries,
             unit: "명",
-            desc: "동일 브라우저 중복을 제거한 채널별 고유 유입 합계",
+            desc: "채널별 중복을 제거한 유입",
             className: "compact",
-            footer: `원시 유입 이벤트 ${formatNumber(channels.externalEntries)}회`
+            footer: `유입 이벤트 ${formatNumber(channels.externalEntries)}회`
           })}
 
           ${kpiCard({
-            label: `${label} 외부채널 스토어 이동`,
+            label: `${label} 스토어 이동`,
             value: channels.externalDownloads,
             unit: "회",
-            desc: "외부채널에서 App Store · Google Play 이동",
+            desc: "외부채널에서 스토어로 이동",
             className: "compact",
-            footer: `고유 이동자 ${formatNumber(channels.externalUniqueDownloads)}명`
+            footer: `고유 ${formatNumber(channels.externalUniqueDownloads)}명`
           })}
 
           ${kpiCard({
-            label: `${label} 고유 스토어 이동`,
-            value: channels.externalUniqueDownloads,
-            unit: "명",
-            desc: "선택한 기간에서 같은 브라우저의 반복 스토어 이동을 중복 제거",
+            label: `${label} 직접 유입`,
+            value: channels.direct.uniqueEntry || channels.direct.entry,
+            unit: channels.direct.uniqueEntry ? "명" : "회",
+            desc: "채널 정보가 없는 유입",
             className: "compact",
-            footer: `iOS ${formatNumber(channels.externalUniqueIos)} · Android ${formatNumber(channels.externalUniqueAndroid)}`
+            footer: `스토어 이동 ${formatNumber(channels.direct.downloads)}회`
           })}
         </div>
 
         <section class="surface channel-visual">
           <div class="section-head">
             <div>
-              <div class="eyebrow">CHANNEL SHARE</div>
-              <h2 class="section-title">채널별 유입 구성</h2>
+              <div class="eyebrow">RANKING</div>
+              <h2 class="section-title">채널 순위</h2>
             </div>
-
-            <div class="section-caption">
-              ${channelUsesUnique ? "고유 사용자 기준" : "기존 이벤트 기준"}<br>
-              유입이 생긴 채널만 자동 표시
-            </div>
+            <div class="section-caption">${channelUsesUnique ? "고유 유입 기준" : "유입 이벤트 기준"}</div>
           </div>
 
           <div class="channel-visual-grid">
-            <div>
-              ${donutHtml(
-                channelSlices,
-                channelUsesUnique ? "고유 외부유입" : "외부 유입",
-                `${formatNumber(channelTotalForVisual)}${channelUsesUnique ? "명" : "회"}`
-              )}
-
-              <div class="note-box">
-                ${top
-                  ? `<strong>${escapeHtml(channelMeta(top.source).label)}</strong> 비중 ${formatRate(topShare)}`
-                  : "외부채널 유입 데이터가 아직 없습니다."}
-              </div>
-            </div>
-
-            <div>
-              ${channelBarsHtml(
-                channels.external,
-                channels.externalUniqueEntries,
-                "uniqueEntry",
-                "명"
-              )}
-            </div>
-          </div>
-
-          <div class="direct-box">
-            <div>
-              <strong>출처 미확인 · 직접 유입</strong>
-              <span>
-                고유 ${formatNumber(channels.direct.uniqueEntry)}명 · 방문 ${formatNumber(channels.direct.visits)}회 · 스토어 ${formatNumber(channels.direct.downloads)}회
-              </span>
-            </div>
-
-            <span class="direct-value">
-              ${formatNumber(channels.direct.uniqueEntry)}명
-            </span>
-          </div>
-        </section>
-
-        <section class="surface flow-card">
-          <div class="section-head">
-            <div>
-              <div class="eyebrow">CHANNEL ACTION</div>
-              <h2 class="section-title">외부채널 유입 이후 행동</h2>
-            </div>
-
-            <div class="section-caption">
-              고유 유입 → 이동 횟수 → 고유 이동자
-            </div>
-          </div>
-
-          <div class="flow-grid">
-            <div
-              class="flow-step"
-              style="--flow:${channels.externalUniqueEntries > 0 ? 100 : 0}%"
-            >
-              <div class="flow-label">
-                고유 유입
-              </div>
-
-              <div class="flow-value">
-                ${formatNumber(channels.externalUniqueEntries)}
-              </div>
-
-              <div class="flow-note">
-                채널별 고유 사용자 유입 합계
-              </div>
-            </div>
-
-            <div
-              class="flow-step orange"
-              style="--flow:${clamp(
-                percent(
-                  channels.externalDownloads,
-                  Math.max(
-                    channels.externalEntries,
-                    channels.externalDownloads,
-                    1
-                  )
-                ),
-                0,
-                100
-              )}%"
-            >
-              <div class="flow-label">
-                스토어 이동
-              </div>
-
-              <div class="flow-value">
-                ${formatNumber(channels.externalDownloads)}
-              </div>
-
-              <div class="flow-note">
-                반복 클릭을 포함한 실제 이동 이벤트
-              </div>
-            </div>
-
-            <div
-              class="flow-step blue"
-              style="--flow:${channels.externalUniqueDownloads > 0 ? 100 : 0}%"
-            >
-              <div class="flow-label">
-                고유 스토어 이동
-              </div>
-
-              <div class="flow-value">
-                ${formatNumber(channels.externalUniqueDownloads)}
-              </div>
-
-              <div class="flow-note">
-                iOS ${formatNumber(channels.externalUniqueIos)} · Android ${formatNumber(channels.externalUniqueAndroid)}
-              </div>
-            </div>
+            <div>${donutHtml(slices, "외부채널", `${formatNumber(totalForVisual)}${channelUsesUnique ? "명" : "회"}`)}</div>
+            <div>${channelBarsHtml(channels.external, channels.externalUniqueEntries, "uniqueEntry", "명")}</div>
           </div>
         </section>
 
         <details class="surface details-card">
           <summary>
-            <div>
-              <div class="eyebrow">CHANNEL DETAIL</div>
-              <h2 class="section-title">채널 상세 수치</h2>
-            </div>
-
+            <div><div class="eyebrow">DETAIL</div><h2 class="section-title">채널 상세</h2></div>
             <span class="details-toggle"></span>
           </summary>
-
           <div class="table-wrap">
-            <table
-              class="data-table"
-              style="min-width:1080px"
-            >
+            <table class="data-table" style="min-width:1000px">
               <thead>
-                <tr>
-                  <th>채널</th>
-                  <th>고유 유입</th>
-                  <th>유입 이벤트</th>
-                  <th>홈페이지 방문</th>
-                  <th>스토어 이동</th>
-                  <th>고유 스토어</th>
-                  <th>iOS</th>
-                  <th>Android</th>
-                  <th>미분류</th>
-                </tr>
+                <tr><th>채널</th><th>고유 유입</th><th>방문</th><th>스토어 이동</th><th>고유 이동</th><th>iOS</th><th>Android</th></tr>
               </thead>
-
               <tbody>
                 ${channels.external.length
                   ? channels.external.map(row => `
                       <tr>
                         <td>${escapeHtml(channelMeta(row.source).label)}</td>
                         <td>${formatNumber(row.uniqueEntry)}명</td>
-                        <td>${formatNumber(row.entry)}회</td>
                         <td>${formatNumber(row.visits)}회</td>
                         <td class="orange-value">${formatNumber(row.downloads)}회</td>
                         <td>${formatNumber(row.uniqueDownloads)}명</td>
                         <td class="ios-value">${formatNumber(row.ios)}회</td>
                         <td class="android-value">${formatNumber(row.android)}회</td>
-                        <td class="muted-value">${formatNumber(row.unknown)}회</td>
-                      </tr>
-                    `).join("")
-                  : `<tr><td colspan="9" class="empty">선택한 기간의 외부채널 데이터가 없습니다.</td></tr>`}
+                      </tr>`).join("")
+                  : `<tr><td colspan="7" class="empty">외부채널 데이터가 없습니다.</td></tr>`}
               </tbody>
             </table>
-          </div>
-
-          <div class="note-box">
-            <strong>고유 유입</strong>은 Worker v9의 visitor ID 기준입니다.
-            같은 브라우저의 반복 진입은 선택한 기간 기준으로 중복 제거되며,
-            원시 방문·스토어 이동 횟수는 별도로 계속 보존됩니다.
           </div>
         </details>
       `;
@@ -3575,7 +3452,6 @@
     }
 
     function renderDownloads() {
-      const website = getWebsitePeriod();
       const unique = getUniquePeriod();
       const rows = getWebsiteRows();
       const uniqueRows = getUniqueRows();
@@ -3584,28 +3460,16 @@
       const label = periodName();
 
       const sourceRows = channels.rows
-        .filter(row =>
-          number(row.downloads) > 0 ||
-          number(row.uniqueDownloads) > 0
-        )
-        .sort((a, b) => {
-          if (b.uniqueDownloads !== a.uniqueDownloads) {
-            return b.uniqueDownloads - a.uniqueDownloads;
-          }
+        .filter(row => number(row.downloads) > 0 || number(row.uniqueDownloads) > 0)
+        .sort((a, b) => b.uniqueDownloads - a.uniqueDownloads || b.downloads - a.downloads);
 
-          return b.downloads - a.downloads;
-        });
-
-      const sourceUniqueTotal = sourceRows.reduce(
-        (sum, row) => sum + row.uniqueDownloads,
-        0
-      );
-
-      const rawPlatformSlices = [
-        { value: clicks.ios, color: COLORS.blue },
-        { value: clicks.android, color: COLORS.green },
-        { value: clicks.unknown, color: COLORS.muted }
-      ];
+      const sourceUniqueTotal = sourceRows.reduce((sum, row) => sum + row.uniqueDownloads, 0);
+      const uniqueChartMap = new Map(uniqueRows.map(row => [row.key, row]));
+      const trendRows = rows.map(row => ({
+        label: row.label,
+        downloads: row.downloads,
+        uniqueDownloads: number(uniqueChartMap.get(row.key)?.downloaders)
+      }));
 
       const uniquePlatformSlices = [
         { value: unique.ios, color: COLORS.blue },
@@ -3613,253 +3477,80 @@
         { value: unique.unknown, color: COLORS.muted }
       ];
 
-      const uniqueChartMap = new Map(
-        uniqueRows.map(row => [
-          row.key,
-          row
-        ])
-      );
-
-      const trendRows = rows.map(row => ({
-        label: row.label,
-        downloads: row.downloads,
-        uniqueDownloads: number(
-          uniqueChartMap.get(row.key)?.downloaders
-        )
-      }));
-
       content.innerHTML = `
-        ${uniqueTrackingBanner()}
-
         <div class="kpi-grid">
           ${kpiCard({
-            label: `${label} 스토어 이동`,
-            value: clicks.total,
-            unit: "회",
-            desc: "App Store · Google Play로 이동한 전체 이벤트",
-            className: "primary",
-            spark: sparkline(
-              rows.map(row => row.downloads),
-              COLORS.green,
-              true
-            )
-          })}
-
-          ${kpiCard({
-            label: `${label} 고유 스토어 이동`,
+            label: `${label} 고유 이동자`,
             value: unique.downloaders,
             unit: "명",
-            desc: `같은 브라우저 반복 이동 제거 · ${trackingStartText()}부터`,
-            className: "compact",
-            footer: `원시 이동 ${formatNumber(clicks.total)}회`
+            desc: "스토어로 이동한 고유 사용자",
+            className: "primary",
+            footer: `이동 ${formatNumber(clicks.total)}회`
           })}
-
+          ${kpiCard({
+            label: `${label} 이동 횟수`,
+            value: clicks.total,
+            unit: "회",
+            desc: "반복 이동을 포함한 전체 횟수",
+            className: "compact",
+            footer: `iOS ${formatNumber(clicks.ios)} · Android ${formatNumber(clicks.android)}`
+          })}
           ${kpiCard({
             label: "iOS 고유 이동",
             value: unique.ios,
             unit: "명",
-            desc: `고유 이동자의 ${formatRate(percent(unique.ios, unique.downloaders))}`,
+            desc: `${formatRate(percent(unique.ios, unique.downloaders))}`,
             className: "compact",
-            footer: `원시 iOS 이동 ${formatNumber(clicks.ios)}회`
+            footer: `이동 ${formatNumber(clicks.ios)}회`
           })}
-
           ${kpiCard({
             label: "Android 고유 이동",
             value: unique.android,
             unit: "명",
-            desc: `고유 이동자의 ${formatRate(percent(unique.android, unique.downloaders))}`,
+            desc: `${formatRate(percent(unique.android, unique.downloaders))}`,
             className: "compact",
-            footer: `원시 Android 이동 ${formatNumber(clicks.android)}회`
+            footer: `이동 ${formatNumber(clicks.android)}회`
           })}
         </div>
 
         <div class="section-grid">
           <section class="surface section-card">
             <div class="section-head">
-              <div>
-                <div class="eyebrow">DOWNLOAD TREND</div>
-                <h2 class="section-title">스토어 이동 추이</h2>
-              </div>
-
+              <div><div class="eyebrow">TREND</div><h2 class="section-title">스토어 이동 추이</h2></div>
               <div class="chart-legend">
-                <span class="legend-item">
-                  <span class="legend-dot orange"></span>
-                  이동 이벤트
-                </span>
-
-                <span class="legend-item">
-                  <span class="legend-dot black"></span>
-                  고유 이동자
-                </span>
+                <span class="legend-item"><span class="legend-dot orange"></span>이동</span>
+                <span class="legend-item"><span class="legend-dot black"></span>고유 이동자</span>
               </div>
             </div>
-
             <div class="chart-wrap">
-              ${lineChart(
-                trendRows,
-                [
-                  {
-                    key: "downloads",
-                    name: "스토어 이동",
-                    color: COLORS.orange
-                  },
-                  {
-                    key: "uniqueDownloads",
-                    name: "고유 이동자",
-                    color: COLORS.black,
-                    width: 3.6
-                  }
-                ]
-              )}
+              ${lineChart(trendRows, [
+                { key: "downloads", name: "스토어 이동", color: COLORS.orange },
+                { key: "uniqueDownloads", name: "고유 이동자", color: COLORS.black, width: 3.6 }
+              ])}
             </div>
           </section>
 
           <aside class="surface section-card">
-            <div class="eyebrow">UNIQUE PLATFORM</div>
-            <h2 class="section-title">고유 이동자 플랫폼</h2>
-
+            <div class="eyebrow">PLATFORM</div>
+            <h2 class="section-title">고유 이동자 구성</h2>
             <div class="donut-layout">
-              ${donutHtml(
-                uniquePlatformSlices,
-                "고유 이동자",
-                `${formatNumber(unique.downloaders)}명`
-              )}
-
+              ${donutHtml(uniquePlatformSlices, "고유 이동자", `${formatNumber(unique.downloaders)}명`)}
               <div class="share-list">
-                <div class="share-row">
-                  <span class="share-name">
-                    <span class="legend-dot blue"></span>
-                    iOS
-                  </span>
-
-                  <span class="share-value">
-                    ${formatNumber(unique.ios)}
-                    ·
-                    ${formatRate(percent(unique.ios, unique.downloaders))}
-                  </span>
-                </div>
-
-                <div class="share-row">
-                  <span class="share-name">
-                    <span class="legend-dot"></span>
-                    Android
-                  </span>
-
-                  <span class="share-value">
-                    ${formatNumber(unique.android)}
-                    ·
-                    ${formatRate(percent(unique.android, unique.downloaders))}
-                  </span>
-                </div>
-
-                <div class="share-row">
-                  <span class="share-name">
-                    <span class="legend-dot muted"></span>
-                    미분류
-                  </span>
-
-                  <span class="share-value">
-                    ${formatNumber(unique.unknown)}
-                    ·
-                    ${formatRate(percent(unique.unknown, unique.downloaders))}
-                  </span>
-                </div>
+                <div class="share-row"><span class="share-name"><span class="legend-dot blue"></span>iOS</span><span class="share-value">${formatNumber(unique.ios)}</span></div>
+                <div class="share-row"><span class="share-name"><span class="legend-dot"></span>Android</span><span class="share-value">${formatNumber(unique.android)}</span></div>
+                <div class="share-row"><span class="share-name"><span class="legend-dot muted"></span>미분류</span><span class="share-value">${formatNumber(unique.unknown)}</span></div>
               </div>
-            </div>
-
-            ${platformBarsHtml([
-              {
-                label: "iOS",
-                value: unique.ios,
-                dotClass: "blue",
-                fillClass: "blue"
-              },
-              {
-                label: "Android",
-                value: unique.android,
-                dotClass: "",
-                fillClass: ""
-              },
-              {
-                label: "미분류",
-                value: unique.unknown,
-                dotClass: "muted",
-                fillClass: "muted"
-              }
-            ])}
-
-            <div class="note-box">
-              원시 이동은
-              <strong>${formatNumber(clicks.total)}회</strong><br>
-              iOS ${formatNumber(clicks.ios)}회 · Android ${formatNumber(clicks.android)}회
             </div>
           </aside>
         </div>
 
         <section class="surface channel-visual">
           <div class="section-head">
-            <div>
-              <div class="eyebrow">DOWNLOAD SOURCE</div>
-              <h2 class="section-title">어느 채널에서 스토어로 갔나</h2>
-            </div>
-
-            <div class="section-caption">
-              고유 스토어 이동자 기준<br>
-              원시 이동 횟수도 함께 표시
-            </div>
+            <div><div class="eyebrow">SOURCE</div><h2 class="section-title">스토어 이동 채널</h2></div>
+            <div class="section-caption">고유 이동자 기준</div>
           </div>
-
-          <div style="margin-top:24px">
-            ${channelBarsHtml(
-              sourceRows,
-              sourceUniqueTotal,
-              "uniqueDownloads",
-              "명"
-            )}
-          </div>
+          <div style="margin-top:24px">${channelBarsHtml(sourceRows, sourceUniqueTotal, "uniqueDownloads", "명")}</div>
         </section>
-
-        <details class="surface details-card">
-          <summary>
-            <div>
-              <div class="eyebrow">WEB DETAIL</div>
-              <h2 class="section-title">기간별 방문 · 스토어 이동 기록</h2>
-            </div>
-
-            <span class="details-toggle"></span>
-          </summary>
-
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>${state.period === "all" ? "월" : "날짜"}</th>
-                  <th>홈페이지 방문</th>
-                  <th>스토어 이동</th>
-                  <th>이동 / 방문 비율</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                ${rows.length
-                  ? [...rows].reverse().map(row => `
-                      <tr>
-                        <td>${row.monthly ? formatMonth(row.key) : formatDate(row.key)}</td>
-                        <td>${formatNumber(row.visits)}회</td>
-                        <td class="orange-value">${formatNumber(row.downloads)}회</td>
-                        <td>${row.visits > 0 ? formatRate(percent(row.downloads, row.visits)) : "-"}</td>
-                      </tr>
-                    `).join("")
-                  : `<tr><td colspan="4" class="empty">선택한 기간의 데이터가 없습니다.</td></tr>`}
-              </tbody>
-            </table>
-          </div>
-
-          <div class="note-box">
-            <strong>스토어 이동</strong>은 실제 이동 이벤트 횟수이고
-            <strong>고유 스토어 이동</strong>은 같은 브라우저의 반복 이동을 제거한 사용자 수입니다.
-          </div>
-        </details>
       `;
 
       animateRenderedUi();
@@ -3870,208 +3561,98 @@
       const rows = getInstallRowsForPeriod();
       const label = periodName();
       const total = install.total;
-      const ios = number(install.iosValue);
-      const android = number(install.androidValue);
+      const ios = install.iosDisplayReady ? number(install.iosValue) : 0;
+      const android = install.androidDisplayReady ? number(install.androidValue) : 0;
       const iosShare = total > 0 ? percent(ios, total) : 0;
       const androidShare = total > 0 ? percent(android, total) : 0;
 
       const chartRows = rows.map(row => ({
-        label: state.period === "all"
-          ? `${Number(String(row.key).split("-")[1])}월`
-          : compactDate(row.key),
+        label: state.period === "all" ? `${Number(String(row.key).split("-")[1])}월` : compactDate(row.key),
         ios: row.ios,
         android: row.android,
-        total: row.knownTotal ?? row.total
+        total: row.knownTotal
       }));
 
-      let cumulative = 0;
-      const cumulativeRows = chartRows.map(row => {
-        if (row.knownTotal !== null && row.knownTotal !== undefined) cumulative += number(row.knownTotal);
-        return { label: row.label, cumulative };
-      });
-
-      const platformSlices = [
-        { value: ios, color: COLORS.blue },
-        { value: android, color: COLORS.green }
-      ];
-
-      const activityRows = [...getInstallRows(false)]
-        .filter(row => (
-          (row.iosConfirmed && number(row.ios) > 0) ||
-          (row.androidConfirmed && number(row.android) > 0)
-        ))
-        .sort((a, b) => String(b.key).localeCompare(String(a.key)))
-        .slice(0, 8);
+      const pending = total === null || install.partial;
+      const totalDisplay = total === null ? "집계 중" : total;
+      const totalUnit = total === null ? "" : "건";
+      const statusText = total === null
+        ? "아직 확정된 설치 데이터가 없습니다"
+        : install.partial
+          ? "현재까지 확인된 설치 수입니다"
+          : "최신 확정 수치입니다";
 
       content.innerHTML = `
+        <div class="status-strip ${pending ? "pending" : ""}">
+          <div>
+            <strong>${statusText}</strong>
+            · iOS ${install.iosLatest ? compactDate(install.iosLatest) : "대기"}
+            · Android ${install.androidLatest ? compactDate(install.androidLatest) : "대기"}
+          </div>
+          <span class="status-badge ${pending ? "" : "ready"}">${pending ? "일부 집계 중" : "확정"}</span>
+        </div>
+
         <div class="kpi-grid">
           ${kpiCard({
-            label: `${label} 실제 신규 설치`,
-            value: total === null ? "-" : total,
-            unit: "건",
-            desc: install.partial
-              ? "현재 확정된 설치 수만 먼저 표시 · 최근 날짜는 스토어 집계 대기"
-              : "Apple 신규 다운로드 + Google Play Daily User Installs · 웹 유입과 별도 집계",
+            label: `${label} 실제 설치`,
+            value: totalDisplay,
+            unit: totalUnit,
+            desc: "Apple + Google 확인값",
             className: "primary",
-            footer: `${install.partial ? "부분 집계 · " : ""}최신 확정 iOS ${install.iosLatest ? compactDate(install.iosLatest) : "-"} · Android ${install.androidLatest ? compactDate(install.androidLatest) : "-"}`
+            footer: install.partial ? "부분 집계" : "최신 확정"
           })}
-
           ${kpiCard({
             label: "iOS",
-            value: install.iosDisplayReady ? ios : "-",
-            unit: "건",
-            desc: total > 0 ? `전체 실제 설치의 ${formatRate(iosShare)}` : "Apple 확정 데이터",
+            value: install.iosDisplayReady ? ios : "집계 중",
+            unit: install.iosDisplayReady ? "건" : "",
+            desc: install.iosLatest ? `${compactDate(install.iosLatest)}까지` : "데이터 대기",
             className: "compact",
-            footer: install.iosLatest ? `${compactDate(install.iosLatest)}까지 확정` : "데이터 대기"
+            footer: total > 0 ? `${formatRate(iosShare)}` : "Apple"
           })}
-
           ${kpiCard({
             label: "Android",
-            value: install.androidDisplayReady ? android : "-",
-            unit: "건",
-            desc: total > 0
-              ? `전체 실제 설치의 ${formatRate(androidShare)} · ${androidInstallMetricLabel(install.android)}`
-              : androidInstallMetricLabel(install.android),
+            value: install.androidDisplayReady ? android : "집계 중",
+            unit: install.androidDisplayReady ? "건" : "",
+            desc: install.androidLatest ? `${compactDate(install.androidLatest)}까지` : "데이터 대기",
             className: "compact",
             footer: androidInstallStatusText(install.android)
           })}
-
           ${kpiCard({
-            label: "플랫폼 구성",
-            value: total === null ? "-" : total,
-            unit: "건",
+            label: "집계 상태",
+            value: pending ? "진행 중" : "완료",
+            unit: "",
             desc: `iOS ${formatRate(iosShare)} · Android ${formatRate(androidShare)}`,
             className: "compact",
-            footer: install.partial
-              ? "현재 확정된 데이터 합계 · 최근 날짜 집계 대기"
-              : install.androidMode === "legacy_fallback"
-                ? "Apple 확정값 + Android 기존 확정값"
-                : "Apple · Google 최신 확정 데이터 기준"
+            footer: install.androidMode === "legacy_fallback" ? "Android 기존값 유지 · 자동보고서 대기" : "스토어 확정 데이터"
           })}
         </div>
 
-        <div class="section-grid">
-          <section class="surface section-card">
-            <div class="section-head">
-              <div>
-                <div class="eyebrow">INSTALL TREND</div>
-                <h2 class="section-title">실제 신규 설치 추이</h2>
-              </div>
-              <div class="chart-legend">
-                <span class="legend-item"><span class="legend-dot blue"></span>iOS</span>
-                <span class="legend-item"><span class="legend-dot"></span>Android</span>
-                <span class="legend-item"><span class="legend-dot black"></span>합계</span>
-              </div>
-            </div>
-
-            <div class="chart-wrap">
-              ${lineChart(
-                chartRows,
-                [
-                  { key: "ios", name: "iOS", color: COLORS.blue },
-                  { key: "android", name: "Android", color: COLORS.green },
-                  { key: "total", name: "확인된 합계", color: COLORS.black, width: 3.8 }
-                ],
-                "선택한 기간의 확정 설치 데이터가 아직 없습니다."
-              )}
-            </div>
-          </section>
-
-          <aside class="surface section-card">
-            <div class="eyebrow">PLATFORM MIX</div>
-            <h2 class="section-title">설치 플랫폼 구성</h2>
-
-            <div class="donut-layout">
-              ${donutHtml(platformSlices, label, total === null ? "-" : `${formatNumber(total)}건`)}
-              <div class="share-list">
-                <div class="share-row">
-                  <span class="share-name"><span class="legend-dot blue"></span>iOS</span>
-                  <span class="share-value">${install.iosDisplayReady ? `${formatNumber(ios)} · ${formatRate(iosShare)}` : "-"}</span>
-                </div>
-                <div class="share-row">
-                  <span class="share-name"><span class="legend-dot"></span>Android</span>
-                  <span class="share-value">${install.androidDisplayReady ? `${formatNumber(android)} · ${formatRate(androidShare)}` : "-"}</span>
-                </div>
-              </div>
-            </div>
-
-            ${platformBarsHtml([
-              { label: "iOS", value: ios, dotClass: "blue", fillClass: "blue" },
-              { label: "Android", value: android, dotClass: "", fillClass: "" }
-            ])}
-          </aside>
-        </div>
-
-        <section class="surface flow-card">
-          <div class="section-head">
-            <div>
-              <div class="eyebrow">CUMULATIVE</div>
-              <h2 class="section-title">선택 기간 누적 설치 흐름</h2>
-            </div>
-            <div class="section-caption">현재 불러온 확정 데이터 범위에서 누적</div>
-          </div>
-
-          <div class="chart-wrap">
-            ${lineChart(
-              cumulativeRows,
-              [{ key: "cumulative", name: "누적 설치", color: COLORS.black, width: 4 }],
-              "누적 설치를 표시할 확정 데이터가 없습니다."
-            )}
-          </div>
-        </section>
-
         <section class="surface section-card" style="margin-top:16px">
           <div class="section-head">
-            <div>
-              <div class="eyebrow">RECENT ACTIVITY</div>
-              <h2 class="section-title">최근 설치 활동</h2>
+            <div><div class="eyebrow">TREND</div><h2 class="section-title">실제 설치 추이</h2></div>
+            <div class="chart-legend">
+              <span class="legend-item"><span class="legend-dot blue"></span>iOS</span>
+              <span class="legend-item"><span class="legend-dot"></span>Android</span>
+              <span class="legend-item"><span class="legend-dot black"></span>확인된 합계</span>
             </div>
-            <div class="section-caption">설치가 있었던 날짜 중심</div>
           </div>
-
-          <div class="activity-list">
-            ${activityRows.length
-              ? activityRows.map(row => `
-                  <div class="activity-row">
-                    <div class="activity-date">${formatDate(row.key)}</div>
-                    <div class="activity-platforms">
-                      ${row.iosConfirmed ? `<span class="chip ios">iOS ${formatNumber(row.ios)}건</span>` : `<span class="chip unknown">iOS 집계대기</span>`}
-                      ${row.androidConfirmed ? `<span class="chip android">Android ${formatNumber(row.android)}건</span>` : `<span class="chip unknown">Android 집계대기</span>`}
-                    </div>
-                    <div class="activity-total">${row.exact
-                      ? `${formatNumber(row.knownTotal)}건`
-                      : row.knownTotal !== null
-                        ? `${formatNumber(row.knownTotal)}건 · 부분`
-                        : "집계 대기"}</div>
-                  </div>
-                `).join("")
-              : `<div class="chart-empty" style="min-height:150px">확정 설치 활동이 없습니다.</div>`}
-          </div>
-
-          <div class="note-box">
-            주간·월간 합계는 현재까지 확정된 설치 수를 먼저 표시합니다. 최신 확정일 이후 날짜는 0건으로 단정하지 않고 집계 대기로 남깁니다. Android는 8월 10일까지 기존 New users 확정값을 보존하고, 8월 11일부터 Daily User Installs 자동 보고서가 들어오는 날짜만 확정합니다.
+          <div class="chart-wrap">
+            ${lineChart(chartRows, [
+              { key: "ios", name: "iOS", color: COLORS.blue },
+              { key: "android", name: "Android", color: COLORS.green },
+              { key: "total", name: "확인된 합계", color: COLORS.black, width: 3.8 }
+            ], "확정 설치 데이터가 아직 없습니다.")}
           </div>
         </section>
 
-        <details class="surface details-card">
+        <details class="surface details-card" open>
           <summary>
-            <div>
-              <div class="eyebrow">INSTALL DETAIL</div>
-              <h2 class="section-title">설치 상세 기록</h2>
-            </div>
+            <div><div class="eyebrow">DAILY</div><h2 class="section-title">설치 기록</h2></div>
             <span class="details-toggle"></span>
           </summary>
-
           <div class="table-wrap">
             <table class="data-table">
-              <thead>
-                <tr>
-                  <th>${state.period === "all" ? "월" : "날짜"}</th>
-                  <th>iOS</th>
-                  <th>Android</th>
-                  <th>합계</th>
-                </tr>
-              </thead>
+              <thead><tr><th>${state.period === "all" ? "월" : "날짜"}</th><th>iOS</th><th>Android</th><th>합계</th></tr></thead>
               <tbody>
                 ${rows.length
                   ? [...rows].reverse().map(row => `
@@ -4079,22 +3660,11 @@
                         <td>${state.period === "all" ? formatMonth(row.key) : formatDate(row.key)}</td>
                         <td class="${row.iosConfirmed ? "ios-value" : "muted-value"}">${row.iosConfirmed ? `${formatNumber(row.ios)}건` : "집계 대기"}</td>
                         <td class="${row.androidConfirmed ? "android-value" : "muted-value"}">${row.androidConfirmed ? `${formatNumber(row.android)}건` : "집계 대기"}</td>
-                        <td>${row.exact
-                          ? `${formatNumber(row.knownTotal)}건`
-                          : row.knownTotal !== null
-                            ? `${formatNumber(row.knownTotal)}건 (부분)`
-                            : "-"}</td>
-                      </tr>
-                    `).join("")
-                  : `<tr><td colspan="4" class="empty">선택한 기간의 실제 설치 데이터가 없습니다.</td></tr>`}
+                        <td>${row.knownTotal !== null ? `${formatNumber(row.knownTotal)}건${row.exact ? "" : " (부분)"}` : "-"}</td>
+                      </tr>`).join("")
+                  : `<tr><td colspan="4" class="empty">설치 데이터가 없습니다.</td></tr>`}
               </tbody>
             </table>
-          </div>
-
-          <div class="note-box">
-            <strong>실제 설치 지표 기준</strong><br>
-            iOS는 Apple 신규 다운로드 데이터를 사용합니다. Android는 기존 확정 이력을 보존하기 위해 2026.08.10까지 Play Console New users 값을 유지하고, 2026.08.11부터 Google Play Daily User Installs 자동 보고서를 이어서 사용합니다.
-            자동 보고서가 아직 도착하지 않은 날짜는 0건으로 확정하지 않고 집계 대기로 표시합니다.
           </div>
         </details>
       `;
@@ -4112,7 +3682,12 @@
 
     function renderSystemStatus() {
       const install = getInstallPeriod();
+      const storeStatus = state.stats?.storeStatus || {};
+      const googleStatus = storeStatus.googlePlayInstalls || {};
 
+      const workerDot = document.getElementById("workerSystemDot");
+      const workerState = document.getElementById("workerSystemState");
+      const workerDesc = document.getElementById("workerSystemDesc");
       const appleDot = document.getElementById("appleSystemDot");
       const googleDot = document.getElementById("googleSystemDot");
       const appleState = document.getElementById("appleSystemState");
@@ -4120,31 +3695,45 @@
       const appleDesc = document.getElementById("appleSystemDesc");
       const googleDesc = document.getElementById("googleSystemDesc");
 
+      const version = state.workerInfo?.version || null;
+      const compatible = workerVersionCompatible();
+      workerDot.classList.toggle("ready", compatible);
+      workerDot.classList.toggle("warn", Boolean(version && !compatible));
+      workerState.textContent = compatible ? "정상" : version ? "버전 불일치" : "확인 필요";
+      workerDesc.textContent = version
+        ? `${version}${compatible ? "" : ` · 필요 ${REQUIRED_WORKER_VERSION}`}`
+        : "Worker 버전을 확인하지 못했습니다.";
+
       appleDot.classList.toggle("ready", install.iosReady);
-      googleDot.classList.toggle("ready", install.androidReady);
+      appleState.textContent = install.iosReady ? "연결됨" : "집계 대기";
+      appleDesc.textContent = install.iosLatest
+        ? `신규 다운로드 · ${compactDate(install.iosLatest)}까지`
+        : "Apple 설치 데이터 대기";
 
-      appleState.textContent = install.iosReady ? "연결됨" : "준비 중";
-      appleDesc.textContent = install.iosReady
-        ? `신규 다운로드 · 최신 확정 ${install.iosLatest ? compactDate(install.iosLatest) : "-"}`
-        : "Apple 신규 다운로드 데이터 대기";
-
-      if (install.androidMode === "hybrid") {
-        googleState.textContent = "연결됨";
+      const googleMode = googleStatus.mode || install.androidMode;
+      if (googleMode === "hybrid") {
+        googleDot.classList.add("ready");
+        googleDot.classList.remove("warn");
+        googleState.textContent = "자동 집계";
         googleDesc.textContent = install.androidBulkLatest
-          ? `자동 집계 전환 완료 · Daily User Installs 최신 ${compactDate(install.androidBulkLatest)}`
+          ? `Daily User Installs · ${compactDate(install.androidBulkLatest)}까지`
           : androidInstallStatusText(install.android);
         return;
       }
 
-      if (install.androidMode === "legacy_fallback") {
-        googleState.textContent = "기존 데이터 사용 중";
+      if (googleMode === "legacy_fallback") {
+        googleDot.classList.remove("ready");
+        googleDot.classList.add("warn");
+        googleState.textContent = "기존값 사용";
         googleDesc.textContent = install.androidLegacyLatest
-          ? `New users ${compactDate(install.androidLegacyLatest)}까지 표시 · Daily User Installs 자동 보고서 대기`
-          : "기존 확정값 표시 · Daily User Installs 자동 보고서 대기";
+          ? `New users · ${compactDate(install.androidLegacyLatest)}까지 · 자동보고서 대기`
+          : "기존 확정값 사용 · 자동보고서 대기";
         return;
       }
 
-      googleState.textContent = "준비 중";
+      googleDot.classList.remove("ready");
+      googleDot.classList.add("warn");
+      googleState.textContent = "보고서 대기";
       googleDesc.textContent = "Google Play 설치 데이터 대기";
     }
 
@@ -4228,14 +3817,21 @@
       setDashboardStatus("통계를 불러오는 중입니다.");
 
       try {
-        const response = await fetch(`${apiUrl("/admin/stats")}?days=31`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json"
-          },
-          cache: "no-store"
-        });
+        const [response, workerResponse] = await Promise.all([
+          fetch(`${apiUrl("/admin/stats")}?days=31`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              Accept: "application/json"
+            },
+            cache: "no-store"
+          }),
+          fetch(apiUrl("/"), {
+            method: "GET",
+            headers: { Accept: "application/json" },
+            cache: "no-store"
+          }).catch(() => null)
+        ]);
 
         if (response.status === 401) {
           clearToken();
@@ -4248,7 +3844,15 @@
           throw new Error("통계를 불러오지 못했습니다.");
         }
 
-        state.stats = await response.json();
+        const statsData = await response.json();
+        const missing = validateStatsPayload(statsData);
+        if (missing.length) {
+          throw new Error(`Worker 응답 필드 누락: ${missing.join(", ")}`);
+        }
+
+        state.stats = statsData;
+        state.workerInfo = workerResponse?.ok ? await workerResponse.json() : null;
+
         renderCurrentView();
         renderSystemStatus();
 
@@ -4257,15 +3861,20 @@
           minute: "2-digit"
         })}`;
 
-        setDashboardStatus("");
+        if (!workerVersionCompatible()) {
+          const liveVersion = state.workerInfo?.version || "확인 불가";
+          setDashboardStatus(`Worker 버전 확인 필요 · 현재 ${liveVersion} · 필요 ${REQUIRED_WORKER_VERSION}`, "warning");
+        } else {
+          setDashboardStatus("");
+        }
       } catch (error) {
-        setDashboardStatus(error?.message || "통계 조회 중 오류가 발생했습니다.", true);
+        setDashboardStatus(error?.message || "통계 조회 중 오류가 발생했습니다.", "error");
       } finally {
         refreshBtn.disabled = false;
       }
     }
 
-    systemBtn.addEventListener("click", () => {
+        systemBtn.addEventListener("click", () => {
       systemPopover.hidden = !systemPopover.hidden;
     });
 
@@ -4289,6 +3898,7 @@
 
       clearToken();
       state.stats = null;
+      state.workerInfo = null;
       systemPopover.hidden = true;
       showLogin();
     });
