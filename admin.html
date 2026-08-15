@@ -1857,11 +1857,11 @@
         <div class="system-item-top">
           <div class="system-name">
             <span id="googleSystemDot" class="system-dot"></span>
-            Google Play · Daily User Installs
+            Google Play 설치
           </div>
           <div id="googleSystemState" class="system-state">확인 중</div>
         </div>
-        <div id="googleSystemDesc" class="system-desc">Google Play Daily User Installs 상태 확인 중</div>
+        <div id="googleSystemDesc" class="system-desc">Google Play 설치 데이터 상태 확인 중</div>
       </div>
 
       <div class="system-item">
@@ -2426,6 +2426,43 @@
       );
     }
 
+    function getAndroidInstallMode(store) {
+      return String(store?.mode || "").trim() || "waiting";
+    }
+
+    function androidInstallMetricLabel(store) {
+      const mode = getAndroidInstallMode(store);
+
+      if (mode === "hybrid") {
+        return "8.10까지 New users + 8.11부터 Daily User Installs";
+      }
+
+      if (mode === "legacy_fallback") {
+        return "기존 Google Play New users 확정값";
+      }
+
+      return "Google Play 설치 데이터";
+    }
+
+    function androidInstallStatusText(store) {
+      const mode = getAndroidInstallMode(store);
+      const latest = getLatestDataDate(store);
+
+      if (mode === "hybrid") {
+        return latest
+          ? `${compactDate(latest)}까지 확정 · 자동 집계`
+          : "Daily User Installs 자동 집계";
+      }
+
+      if (mode === "legacy_fallback") {
+        return latest
+          ? `${compactDate(latest)}까지 기존 확정값 · 자동 보고서 대기`
+          : "기존 확정값 사용 중 · 자동 보고서 대기";
+      }
+
+      return "Google Play 설치 데이터 대기";
+    }
+
     function getInstallPeriod() {
       const ios = state.stats?.ios || {};
       const android = state.stats?.android || {};
@@ -2508,7 +2545,12 @@
         androidValue,
         total,
         iosLatest,
-        androidLatest
+        androidLatest,
+        androidMode: getAndroidInstallMode(android),
+        androidLegacyReady: Boolean(android?.legacyReady),
+        androidBulkReady: Boolean(android?.bulkReady),
+        androidLegacyLatest: android?.legacyLatestDataDate || null,
+        androidBulkLatest: android?.bulkLatestDataDate || null
       };
     }
 
@@ -3013,7 +3055,7 @@
             label: `${label} 실제 신규 설치`,
             value: install.total === null ? "-" : install.total,
             unit: "건",
-            desc: "Apple 신규 다운로드 + Google Play Daily User Installs · 웹 유입과 별도 집계",
+            desc: `Apple 신규 다운로드 + ${androidInstallMetricLabel(install.android)} · 웹 유입과 별도 집계`,
             className: "compact",
             footer: `<span class="chip unknown">별도 집계</span><span>iOS ${install.iosDisplayReady ? formatNumber(install.iosValue) : "대기"} · Android ${install.androidDisplayReady ? formatNumber(install.androidValue) : "대기"}</span>`
           })}
@@ -3455,7 +3497,7 @@
           </div>
 
           <div class="note-box">
-            <strong>고유 유입</strong>은 Worker v8의 visitor ID 기준입니다.
+            <strong>고유 유입</strong>은 Worker v9의 visitor ID 기준입니다.
             같은 브라우저의 반복 진입은 선택한 기간 기준으로 중복 제거되며,
             원시 방문·스토어 이동 횟수는 별도로 계속 보존됩니다.
           </div>
@@ -3818,9 +3860,11 @@
             label: "Android",
             value: install.androidDisplayReady ? android : "-",
             unit: "건",
-            desc: total > 0 ? `전체 실제 설치의 ${formatRate(androidShare)}` : "Google Play Daily User Installs",
+            desc: total > 0
+              ? `전체 실제 설치의 ${formatRate(androidShare)} · ${androidInstallMetricLabel(install.android)}`
+              : androidInstallMetricLabel(install.android),
             className: "compact",
-            footer: install.androidLatest ? `${compactDate(install.androidLatest)}까지 확정 · Daily User Installs` : "Daily User Installs 데이터 대기"
+            footer: androidInstallStatusText(install.android)
           })}
 
           ${kpiCard({
@@ -3829,7 +3873,9 @@
             unit: "건",
             desc: `iOS ${formatRate(iosShare)} · Android ${formatRate(androidShare)}`,
             className: "compact",
-            footer: "Apple · Google 최신 확정 데이터 기준"
+            footer: install.androidMode === "legacy_fallback"
+              ? "Apple 확정값 + Android 기존 확정값"
+              : "Apple · Google 최신 확정 데이터 기준"
           })}
         </div>
 
@@ -3928,7 +3974,7 @@
           </div>
 
           <div class="note-box">
-            최신 확정일 이후의 0은 실제 0건으로 단정하지 않습니다. iOS와 Google Play Daily User Installs 모두 스토어 보고서 반영이 늦을 수 있습니다.
+            최신 확정일 이후의 0은 실제 0건으로 단정하지 않습니다. Android는 8월 10일까지 기존 New users 확정값을 보존하고, 8월 11일부터 Daily User Installs 자동 보고서가 들어오는 날짜만 확정합니다.
           </div>
         </section>
 
@@ -3968,8 +4014,8 @@
 
           <div class="note-box">
             <strong>실제 설치 지표 기준</strong><br>
-            iOS는 Apple 신규 다운로드 데이터를 사용하고 Android는 Google Play 표준 bulk 보고서의 Daily User Installs를 사용합니다.
-            최신 확정일 이후 날짜는 0건으로 확정하지 않고 집계 대기로 표시합니다.
+            iOS는 Apple 신규 다운로드 데이터를 사용합니다. Android는 기존 확정 이력을 보존하기 위해 2026.08.10까지 Play Console New users 값을 유지하고, 2026.08.11부터 Google Play Daily User Installs 자동 보고서를 이어서 사용합니다.
+            자동 보고서가 아직 도착하지 않은 날짜는 0건으로 확정하지 않고 집계 대기로 표시합니다.
           </div>
         </details>
       `;
@@ -3988,19 +4034,39 @@
     function renderSystemStatus() {
       const install = getInstallPeriod();
 
-      document.getElementById("appleSystemDot").classList.toggle("ready", install.iosReady);
-      document.getElementById("googleSystemDot").classList.toggle("ready", install.androidReady);
+      const appleDot = document.getElementById("appleSystemDot");
+      const googleDot = document.getElementById("googleSystemDot");
+      const appleState = document.getElementById("appleSystemState");
+      const googleState = document.getElementById("googleSystemState");
+      const appleDesc = document.getElementById("appleSystemDesc");
+      const googleDesc = document.getElementById("googleSystemDesc");
 
-      document.getElementById("appleSystemState").textContent = install.iosReady ? "연결됨" : "준비 중";
-      document.getElementById("googleSystemState").textContent = install.androidReady ? "연결됨" : "준비 중";
+      appleDot.classList.toggle("ready", install.iosReady);
+      googleDot.classList.toggle("ready", install.androidReady);
 
-      document.getElementById("appleSystemDesc").textContent = install.iosReady
+      appleState.textContent = install.iosReady ? "연결됨" : "준비 중";
+      appleDesc.textContent = install.iosReady
         ? `신규 다운로드 · 최신 확정 ${install.iosLatest ? compactDate(install.iosLatest) : "-"}`
         : "Apple 신규 다운로드 데이터 대기";
 
-      document.getElementById("googleSystemDesc").textContent = install.androidReady
-        ? `Daily User Installs · 최신 확정 ${install.androidLatest ? compactDate(install.androidLatest) : "-"}`
-        : "Google Play Daily User Installs 보고서 대기";
+      if (install.androidMode === "hybrid") {
+        googleState.textContent = "연결됨";
+        googleDesc.textContent = install.androidBulkLatest
+          ? `자동 집계 전환 완료 · Daily User Installs 최신 ${compactDate(install.androidBulkLatest)}`
+          : androidInstallStatusText(install.android);
+        return;
+      }
+
+      if (install.androidMode === "legacy_fallback") {
+        googleState.textContent = "기존 데이터 사용 중";
+        googleDesc.textContent = install.androidLegacyLatest
+          ? `New users ${compactDate(install.androidLegacyLatest)}까지 표시 · Daily User Installs 자동 보고서 대기`
+          : "기존 확정값 표시 · Daily User Installs 자동 보고서 대기";
+        return;
+      }
+
+      googleState.textContent = "준비 중";
+      googleDesc.textContent = "Google Play 설치 데이터 대기";
     }
 
     function setView(view) {
