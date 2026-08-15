@@ -1878,6 +1878,7 @@
   </aside>
 
   <script>
+    // MODING ADMIN v10 - partial install period totals
     const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
     const SESSION_TOKEN_KEY = "moding_admin_token";
     const APP_LAUNCH_DATE = "2026-07-01";
@@ -2491,6 +2492,30 @@
       }
 
       const today = currentDate();
+      const periodStart =
+        state.period === "today"
+          ? today
+          : state.period === "week"
+            ? mondayOfWeek(today)
+            : state.period === "month"
+              ? `${today.slice(0, 7)}-01`
+              : APP_LAUNCH_DATE;
+
+      const iosHasCoverage =
+        state.period === "all"
+          ? iosReady
+          : Boolean(
+              iosLatest &&
+              iosLatest >= periodStart
+            );
+
+      const androidHasCoverage =
+        state.period === "all"
+          ? androidReady
+          : Boolean(
+              androidLatest &&
+              androidLatest >= periodStart
+            );
 
       const iosPeriodConfirmed =
         state.period === "all"
@@ -2508,29 +2533,24 @@
               androidLatest >= today
             );
 
-      const iosDisplayReady =
-        state.period === "all"
-          ? iosReady
-          : iosPeriodConfirmed;
-
-      const androidDisplayReady =
-        state.period === "all"
-          ? androidReady
-          : androidPeriodConfirmed;
+      const iosDisplayReady = iosHasCoverage;
+      const androidDisplayReady = androidHasCoverage;
 
       const total =
-        state.period === "all"
+        iosDisplayReady || androidDisplayReady
           ? (
-              iosReady || androidReady
-                ? number(iosValue) + number(androidValue)
-                : null
+              (iosDisplayReady ? number(iosValue) : 0) +
+              (androidDisplayReady ? number(androidValue) : 0)
             )
-          : (
-              iosPeriodConfirmed &&
-              androidPeriodConfirmed
-                ? number(iosValue) + number(androidValue)
-                : null
-            );
+          : null;
+
+      const partial =
+        state.period !== "all" &&
+        total !== null &&
+        !(
+          iosPeriodConfirmed &&
+          androidPeriodConfirmed
+        );
 
       return {
         ios,
@@ -2539,8 +2559,12 @@
         androidReady,
         iosDisplayReady,
         androidDisplayReady,
+        iosHasCoverage,
+        androidHasCoverage,
         iosPeriodConfirmed,
         androidPeriodConfirmed,
+        partial,
+        periodStart,
         iosValue,
         androidValue,
         total,
@@ -2552,6 +2576,12 @@
         androidLegacyLatest: android?.legacyLatestDataDate || null,
         androidBulkLatest: android?.bulkLatestDataDate || null
       };
+    }
+
+    function monthEndIso(monthKey) {
+      const [year, month] = String(monthKey).split("-").map(Number);
+      if (!year || !month) return null;
+      return new Date(Date.UTC(year, month, 0)).toISOString().slice(0, 10);
     }
 
     function getInstallRows(monthly = false) {
@@ -2579,16 +2609,48 @@
         .sort((a, b) => String(a[0]).localeCompare(String(b[0])))
         .map(([rowKey, value]) => {
           if (monthly) {
-            const iosValue = number(value.ios);
-            const androidValue = number(value.android);
+            const monthStart = `${rowKey}-01`;
+            const monthEnd = monthEndIso(rowKey);
+
+            const iosHasCoverage = Boolean(
+              install.iosLatest &&
+              install.iosLatest >= monthStart
+            );
+
+            const androidHasCoverage = Boolean(
+              install.androidLatest &&
+              install.androidLatest >= monthStart
+            );
+
+            const iosConfirmed = Boolean(
+              monthEnd &&
+              install.iosLatest &&
+              install.iosLatest >= monthEnd
+            );
+
+            const androidConfirmed = Boolean(
+              monthEnd &&
+              install.androidLatest &&
+              install.androidLatest >= monthEnd
+            );
+
+            const iosValue = iosHasCoverage ? number(value.ios) : null;
+            const androidValue = androidHasCoverage ? number(value.android) : null;
+            const knownTotal =
+              iosHasCoverage || androidHasCoverage
+                ? (iosHasCoverage ? number(iosValue) : 0) +
+                  (androidHasCoverage ? number(androidValue) : 0)
+                : null;
+
             return {
               key: rowKey,
               ios: iosValue,
               android: androidValue,
-              total: iosValue + androidValue,
-              iosConfirmed: true,
-              androidConfirmed: true,
-              exact: true
+              iosConfirmed,
+              androidConfirmed,
+              exact: iosConfirmed && androidConfirmed,
+              knownTotal,
+              total: knownTotal
             };
           }
 
@@ -2601,8 +2663,14 @@
             install.androidLatest &&
             rowKey <= install.androidLatest
           );
+
           const iosValue = iosConfirmed ? number(value.ios) : null;
           const androidValue = androidConfirmed ? number(value.android) : null;
+          const knownTotal =
+            iosConfirmed || androidConfirmed
+              ? (iosConfirmed ? number(iosValue) : 0) +
+                (androidConfirmed ? number(androidValue) : 0)
+              : null;
 
           return {
             key: rowKey,
@@ -2611,9 +2679,8 @@
             iosConfirmed,
             androidConfirmed,
             exact: iosConfirmed && androidConfirmed,
-            total: iosConfirmed && androidConfirmed
-              ? number(iosValue) + number(androidValue)
-              : null
+            knownTotal,
+            total: knownTotal
           };
         });
     }
@@ -3814,12 +3881,12 @@
           : compactDate(row.key),
         ios: row.ios,
         android: row.android,
-        total: row.total
+        total: row.knownTotal ?? row.total
       }));
 
       let cumulative = 0;
       const cumulativeRows = chartRows.map(row => {
-        if (row.total !== null && row.total !== undefined) cumulative += number(row.total);
+        if (row.knownTotal !== null && row.knownTotal !== undefined) cumulative += number(row.knownTotal);
         return { label: row.label, cumulative };
       });
 
@@ -3842,9 +3909,11 @@
             label: `${label} 실제 신규 설치`,
             value: total === null ? "-" : total,
             unit: "건",
-            desc: "Apple 신규 다운로드 + Google Play Daily User Installs · 웹 유입과 별도 집계",
+            desc: install.partial
+              ? "현재 확정된 설치 수만 먼저 표시 · 최근 날짜는 스토어 집계 대기"
+              : "Apple 신규 다운로드 + Google Play Daily User Installs · 웹 유입과 별도 집계",
             className: "primary",
-            footer: `최신 확정 iOS ${install.iosLatest ? compactDate(install.iosLatest) : "-"} · Android ${install.androidLatest ? compactDate(install.androidLatest) : "-"}`
+            footer: `${install.partial ? "부분 집계 · " : ""}최신 확정 iOS ${install.iosLatest ? compactDate(install.iosLatest) : "-"} · Android ${install.androidLatest ? compactDate(install.androidLatest) : "-"}`
           })}
 
           ${kpiCard({
@@ -3873,9 +3942,11 @@
             unit: "건",
             desc: `iOS ${formatRate(iosShare)} · Android ${formatRate(androidShare)}`,
             className: "compact",
-            footer: install.androidMode === "legacy_fallback"
-              ? "Apple 확정값 + Android 기존 확정값"
-              : "Apple · Google 최신 확정 데이터 기준"
+            footer: install.partial
+              ? "현재 확정된 데이터 합계 · 최근 날짜 집계 대기"
+              : install.androidMode === "legacy_fallback"
+                ? "Apple 확정값 + Android 기존 확정값"
+                : "Apple · Google 최신 확정 데이터 기준"
           })}
         </div>
 
@@ -3899,7 +3970,7 @@
                 [
                   { key: "ios", name: "iOS", color: COLORS.blue },
                   { key: "android", name: "Android", color: COLORS.green },
-                  { key: "total", name: "합계", color: COLORS.black, width: 3.8 }
+                  { key: "total", name: "확인된 합계", color: COLORS.black, width: 3.8 }
                 ],
                 "선택한 기간의 확정 설치 데이터가 아직 없습니다."
               )}
@@ -3967,14 +4038,18 @@
                       ${row.iosConfirmed ? `<span class="chip ios">iOS ${formatNumber(row.ios)}건</span>` : `<span class="chip unknown">iOS 집계대기</span>`}
                       ${row.androidConfirmed ? `<span class="chip android">Android ${formatNumber(row.android)}건</span>` : `<span class="chip unknown">Android 집계대기</span>`}
                     </div>
-                    <div class="activity-total">${row.exact ? `${formatNumber(row.total)}건` : "부분 집계"}</div>
+                    <div class="activity-total">${row.exact
+                      ? `${formatNumber(row.knownTotal)}건`
+                      : row.knownTotal !== null
+                        ? `${formatNumber(row.knownTotal)}건 · 부분`
+                        : "집계 대기"}</div>
                   </div>
                 `).join("")
               : `<div class="chart-empty" style="min-height:150px">확정 설치 활동이 없습니다.</div>`}
           </div>
 
           <div class="note-box">
-            최신 확정일 이후의 0은 실제 0건으로 단정하지 않습니다. Android는 8월 10일까지 기존 New users 확정값을 보존하고, 8월 11일부터 Daily User Installs 자동 보고서가 들어오는 날짜만 확정합니다.
+            주간·월간 합계는 현재까지 확정된 설치 수를 먼저 표시합니다. 최신 확정일 이후 날짜는 0건으로 단정하지 않고 집계 대기로 남깁니다. Android는 8월 10일까지 기존 New users 확정값을 보존하고, 8월 11일부터 Daily User Installs 자동 보고서가 들어오는 날짜만 확정합니다.
           </div>
         </section>
 
@@ -4004,7 +4079,11 @@
                         <td>${state.period === "all" ? formatMonth(row.key) : formatDate(row.key)}</td>
                         <td class="${row.iosConfirmed ? "ios-value" : "muted-value"}">${row.iosConfirmed ? `${formatNumber(row.ios)}건` : "집계 대기"}</td>
                         <td class="${row.androidConfirmed ? "android-value" : "muted-value"}">${row.androidConfirmed ? `${formatNumber(row.android)}건` : "집계 대기"}</td>
-                        <td>${row.exact ? `${formatNumber(row.total)}건` : "-"}</td>
+                        <td>${row.exact
+                          ? `${formatNumber(row.knownTotal)}건`
+                          : row.knownTotal !== null
+                            ? `${formatNumber(row.knownTotal)}건 (부분)`
+                            : "-"}</td>
                       </tr>
                     `).join("")
                   : `<tr><td colspan="4" class="empty">선택한 기간의 실제 설치 데이터가 없습니다.</td></tr>`}
