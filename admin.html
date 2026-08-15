@@ -1802,6 +1802,121 @@
       background: var(--orange);
     }
 
+    /* v12 · 설치 기록 플랫폼 가로막대 */
+    .install-record-bars {
+      margin-top: 22px;
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #FAFCFA;
+    }
+
+    .install-record-bar-row {
+      min-width: 0;
+    }
+
+    .install-record-bar-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 14px;
+    }
+
+    .install-record-bar-name {
+      min-width: 0;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 950;
+      letter-spacing: -.025em;
+    }
+
+    .install-record-bar-name small {
+      display: block;
+      margin-top: 4px;
+      color: var(--sub);
+      font-size: 11px;
+      line-height: 1.45;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .install-record-bar-value {
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+    }
+
+    .install-record-bar-value.pending {
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    .install-record-track {
+      height: 13px;
+      margin-top: 11px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #E9EEEA;
+    }
+
+    .install-record-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      transition: width .55s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .install-record-fill.ios {
+      background: var(--blue);
+    }
+
+    .install-record-fill.android {
+      background: var(--green);
+    }
+
+    .install-record-bar-foot {
+      margin-top: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--sub);
+      font-size: 11px;
+      line-height: 1.4;
+      font-weight: 760;
+    }
+
+    .install-record-bar-foot strong {
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    @media (max-width: 700px) {
+      .install-record-bars {
+        padding: 16px;
+        gap: 16px;
+        border-radius: 18px;
+      }
+
+      .install-record-bar-name {
+        font-size: 14px;
+      }
+
+      .install-record-bar-value {
+        font-size: 20px;
+      }
+
+      .install-record-track {
+        height: 11px;
+      }
+    }
+
     .simple-summary {
       margin-top: 16px;
       display: grid;
@@ -1996,7 +2111,7 @@
   </aside>
 
   <script>
-    // MODING ADMIN v10 - partial install period totals
+    // MODING ADMIN v12 - install record platform bars
     const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
     const SESSION_TOKEN_KEY = "moding_admin_token";
     const APP_LAUNCH_DATE = "2026-07-01";
@@ -3566,12 +3681,13 @@
       const iosShare = total > 0 ? percent(ios, total) : 0;
       const androidShare = total > 0 ? percent(android, total) : 0;
 
-      const chartRows = rows.map(row => ({
-        label: state.period === "all" ? `${Number(String(row.key).split("-")[1])}월` : compactDate(row.key),
-        ios: row.ios,
-        android: row.android,
-        total: row.knownTotal
-      }));
+      const iosBarShare = total > 0 && install.iosDisplayReady
+        ? percent(ios, total)
+        : 0;
+
+      const androidBarShare = total > 0 && install.androidDisplayReady
+        ? percent(android, total)
+        : 0;
 
       const pending = total === null || install.partial;
       const totalDisplay = total === null ? "집계 중" : total;
@@ -3627,29 +3743,68 @@
           })}
         </div>
 
-        <section class="surface section-card" style="margin-top:16px">
-          <div class="section-head">
-            <div><div class="eyebrow">TREND</div><h2 class="section-title">실제 설치 추이</h2></div>
-            <div class="chart-legend">
-              <span class="legend-item"><span class="legend-dot blue"></span>iOS</span>
-              <span class="legend-item"><span class="legend-dot"></span>Android</span>
-              <span class="legend-item"><span class="legend-dot black"></span>확인된 합계</span>
-            </div>
-          </div>
-          <div class="chart-wrap">
-            ${lineChart(chartRows, [
-              { key: "ios", name: "iOS", color: COLORS.blue },
-              { key: "android", name: "Android", color: COLORS.green },
-              { key: "total", name: "확인된 합계", color: COLORS.black, width: 3.8 }
-            ], "확정 설치 데이터가 아직 없습니다.")}
-          </div>
-        </section>
-
         <details class="surface details-card" open>
           <summary>
             <div><div class="eyebrow">DAILY</div><h2 class="section-title">설치 기록</h2></div>
             <span class="details-toggle"></span>
           </summary>
+
+          <div class="install-record-bars">
+            <div class="install-record-bar-row">
+              <div class="install-record-bar-head">
+                <div class="install-record-bar-name">
+                  Apple App Store
+                  <small>
+                    iOS · ${install.iosLatest ? `${compactDate(install.iosLatest)}까지 확정` : "집계 대기"}
+                  </small>
+                </div>
+
+                <div class="install-record-bar-value ${install.iosDisplayReady ? "" : "pending"}">
+                  ${install.iosDisplayReady ? `${formatNumber(ios)}건` : "집계 대기"}
+                </div>
+              </div>
+
+              <div class="install-record-track">
+                <div
+                  class="install-record-fill ios"
+                  data-bar-width="${clamp(iosBarShare, 0, 100).toFixed(2)}"
+                ></div>
+              </div>
+
+              <div class="install-record-bar-foot">
+                <span>${install.iosDisplayReady && total > 0 ? `확인된 설치의 ${formatRate(iosBarShare)}` : "Apple 확정 데이터 기준"}</span>
+                <strong>${install.iosDisplayReady ? "iOS" : "대기"}</strong>
+              </div>
+            </div>
+
+            <div class="install-record-bar-row">
+              <div class="install-record-bar-head">
+                <div class="install-record-bar-name">
+                  Google Play
+                  <small>
+                    Android · ${install.androidLatest ? `${compactDate(install.androidLatest)}까지 확정` : "집계 대기"}
+                  </small>
+                </div>
+
+                <div class="install-record-bar-value ${install.androidDisplayReady ? "" : "pending"}">
+                  ${install.androidDisplayReady ? `${formatNumber(android)}건` : "집계 대기"}
+                </div>
+              </div>
+
+              <div class="install-record-track">
+                <div
+                  class="install-record-fill android"
+                  data-bar-width="${clamp(androidBarShare, 0, 100).toFixed(2)}"
+                ></div>
+              </div>
+
+              <div class="install-record-bar-foot">
+                <span>${install.androidDisplayReady && total > 0 ? `확인된 설치의 ${formatRate(androidBarShare)}` : androidInstallStatusText(install.android)}</span>
+                <strong>${install.androidMode === "legacy_fallback" ? "기존값 유지" : "Android"}</strong>
+              </div>
+            </div>
+          </div>
+
           <div class="table-wrap">
             <table class="data-table">
               <thead><tr><th>${state.period === "all" ? "월" : "날짜"}</th><th>iOS</th><th>Android</th><th>합계</th></tr></thead>
