@@ -2087,7 +2087,13 @@
       "moding_tracking_source";
 
     const INDEX_VISIT_SESSION_PREFIX =
-      "moding_index_visit_tracked_v2";
+      "moding_index_visit_tracked_v3";
+
+    const VISITOR_ID_STORAGE_KEY =
+      "moding_visitor_id_v1";
+
+    const VISITOR_ID_SESSION_FALLBACK_KEY =
+      "moding_visitor_id_session_v1";
 
     function normalizeTrackingSource(value) {
       let source =
@@ -2359,6 +2365,121 @@
       return resolved;
     }
 
+    function isValidVisitorId(value) {
+      return /^[a-zA-Z0-9_-]{16,200}$/.test(
+        String(value || "")
+      );
+    }
+
+    function createVisitorId() {
+      try {
+        if (
+          window.crypto &&
+          typeof window.crypto.randomUUID ===
+            "function"
+        ) {
+          return (
+            "mv_" +
+            window.crypto
+              .randomUUID()
+              .replace(/-/g, "")
+          );
+        }
+      } catch (error) {}
+
+      try {
+        if (
+          window.crypto &&
+          typeof window.crypto.getRandomValues ===
+            "function"
+        ) {
+          const bytes =
+            new Uint8Array(16);
+
+          window.crypto.getRandomValues(
+            bytes
+          );
+
+          const randomPart =
+            Array.from(bytes)
+              .map((value) =>
+                value
+                  .toString(16)
+                  .padStart(2, "0")
+              )
+              .join("");
+
+          return (
+            "mv_" +
+            Date.now().toString(36) +
+            "_" +
+            randomPart
+          );
+        }
+      } catch (error) {}
+
+      return (
+        "mv_" +
+        Date.now().toString(36) +
+        "_" +
+        Math.random()
+          .toString(36)
+          .slice(2) +
+        Math.random()
+          .toString(36)
+          .slice(2)
+      );
+    }
+
+    function getOrCreateVisitorId() {
+      try {
+        const stored =
+          localStorage.getItem(
+            VISITOR_ID_STORAGE_KEY
+          );
+
+        if (isValidVisitorId(stored)) {
+          return stored;
+        }
+
+        const created =
+          createVisitorId();
+
+        localStorage.setItem(
+          VISITOR_ID_STORAGE_KEY,
+          created
+        );
+
+        return created;
+      } catch (error) {}
+
+      try {
+        const stored =
+          sessionStorage.getItem(
+            VISITOR_ID_SESSION_FALLBACK_KEY
+          );
+
+        if (isValidVisitorId(stored)) {
+          return stored;
+        }
+
+        const created =
+          createVisitorId();
+
+        sessionStorage.setItem(
+          VISITOR_ID_SESSION_FALLBACK_KEY,
+          created
+        );
+
+        return created;
+      } catch (error) {}
+
+      return createVisitorId();
+    }
+
+    const MODING_VISITOR_ID =
+      getOrCreateVisitorId();
+
     const MODING_TRACKING_SOURCE =
       resolveTrackingSource();
 
@@ -2367,7 +2488,7 @@
       data = {}
     ) {
       try {
-        fetch(
+        return fetch(
           `${COUNTER_API_BASE}${path}`,
           {
             method: "POST",
@@ -2377,16 +2498,24 @@
 
             headers: {
               "Content-Type":
-                "application/json"
+                "application/json",
+
+              "X-Moding-Visitor-ID":
+                MODING_VISITOR_ID
             },
 
             body:
-              JSON.stringify(
-                data
-              )
+              JSON.stringify({
+                ...data,
+
+                visitorId:
+                  MODING_VISITOR_ID
+              })
           }
-        ).catch(() => {});
-      } catch (error) {}
+        ).catch(() => null);
+      } catch (error) {
+        return Promise.resolve(null);
+      }
     }
 
     function trackIndexVisitOnce() {
@@ -2457,20 +2586,60 @@
       return "unknown";
     }
 
-    function trackDownloadClick(
+    function trackStoreMove(
       platform
     ) {
-      postCounter(
-        "/track/download",
-        {
-          platform:
-            platform ||
-            detectClientPlatform(),
+      const resolvedPlatform =
+        platform ||
+        detectClientPlatform();
 
-          source:
-            MODING_TRACKING_SOURCE
+      const params =
+        new URLSearchParams({
+          platform:
+            resolvedPlatform,
+
+          src:
+            MODING_TRACKING_SOURCE,
+
+          visitorId:
+            MODING_VISITOR_ID
+        });
+
+      const trackingUrl =
+        `${COUNTER_API_BASE}` +
+        `/track/download?` +
+        params.toString();
+
+      try {
+        if (
+          typeof navigator.sendBeacon ===
+            "function"
+        ) {
+          const sent =
+            navigator.sendBeacon(
+              trackingUrl,
+              ""
+            );
+
+          if (sent) {
+            return true;
+          }
         }
-      );
+      } catch (error) {}
+
+      try {
+        fetch(
+          trackingUrl,
+          {
+            method: "POST",
+            mode: "cors",
+            cache: "no-store",
+            keepalive: true
+          }
+        ).catch(() => {});
+      } catch (error) {}
+
+      return false;
     }
 
     trackIndexVisitOnce();
@@ -2803,10 +2972,6 @@
       const platform =
         detectClientPlatform();
 
-      trackDownloadClick(
-        platform
-      );
-
       const androidUrl =
         "https://play.google.com/store/apps/details?id=com.moding.application";
 
@@ -2818,6 +2983,10 @@
       ) {
         event.preventDefault();
 
+        trackStoreMove(
+          "android"
+        );
+
         window.location.href =
           androidUrl;
 
@@ -2828,6 +2997,10 @@
         platform === "ios"
       ) {
         event.preventDefault();
+
+        trackStoreMove(
+          "ios"
+        );
 
         window.location.href =
           iosUrl;
