@@ -109,8 +109,14 @@
     const SOURCE_SESSION_KEY =
       "moding_tracking_source";
 
-    const STORE_TRACK_SESSION_PREFIX =
-      "moding_store_redirect_tracked";
+    const VISITOR_ID_STORAGE_KEY =
+      "moding_visitor_id_v1";
+
+    const VISITOR_ID_SESSION_FALLBACK_KEY =
+      "moding_visitor_id_session_v1";
+
+    const TRACKED_STORE_PLATFORMS =
+      new Set();
 
     const USER_AGENT =
       navigator.userAgent ||
@@ -152,6 +158,9 @@
       }
 
       const aliases = {
+        none: "direct",
+        organic_direct: "direct",
+
         karrot: "daangn",
         danggeun: "daangn",
         daangn_market: "daangn",
@@ -179,7 +188,13 @@
         offline_flyer: "leaflet",
         pamphlet: "leaflet",
 
-        qrcode: "qr"
+        qrcode: "qr",
+
+        googleplay: "google_play",
+        playstore: "google_play",
+
+        appstore: "app_store",
+        apple: "app_store"
       };
 
       return aliases[source] || source;
@@ -400,34 +415,145 @@
       return "direct";
     }
 
+    function isValidVisitorId(value) {
+      return /^[a-zA-Z0-9_-]{16,200}$/.test(
+        String(value || "")
+      );
+    }
+
+    function createVisitorId() {
+      try {
+        if (
+          window.crypto &&
+          typeof window.crypto.randomUUID ===
+            "function"
+        ) {
+          return (
+            "mv_" +
+            window.crypto
+              .randomUUID()
+              .replace(/-/g, "")
+          );
+        }
+      } catch (_) {}
+
+      try {
+        if (
+          window.crypto &&
+          typeof window.crypto.getRandomValues ===
+            "function"
+        ) {
+          const bytes =
+            new Uint8Array(16);
+
+          window.crypto.getRandomValues(
+            bytes
+          );
+
+          const randomPart =
+            Array.from(bytes)
+              .map((value) =>
+                value
+                  .toString(16)
+                  .padStart(2, "0")
+              )
+              .join("");
+
+          return (
+            "mv_" +
+            Date.now().toString(36) +
+            "_" +
+            randomPart
+          );
+        }
+      } catch (_) {}
+
+      return (
+        "mv_" +
+        Date.now().toString(36) +
+        "_" +
+        Math.random()
+          .toString(36)
+          .slice(2) +
+        Math.random()
+          .toString(36)
+          .slice(2)
+      );
+    }
+
+    function getOrCreateVisitorId() {
+      try {
+        const stored =
+          localStorage.getItem(
+            VISITOR_ID_STORAGE_KEY
+          );
+
+        if (isValidVisitorId(stored)) {
+          return stored;
+        }
+
+        const created =
+          createVisitorId();
+
+        localStorage.setItem(
+          VISITOR_ID_STORAGE_KEY,
+          created
+        );
+
+        return created;
+      } catch (_) {}
+
+      try {
+        const stored =
+          sessionStorage.getItem(
+            VISITOR_ID_SESSION_FALLBACK_KEY
+          );
+
+        if (isValidVisitorId(stored)) {
+          return stored;
+        }
+
+        const created =
+          createVisitorId();
+
+        sessionStorage.setItem(
+          VISITOR_ID_SESSION_FALLBACK_KEY,
+          created
+        );
+
+        return created;
+      } catch (_) {}
+
+      return createVisitorId();
+    }
+
     const TRAFFIC_SOURCE =
       getTrafficSource();
+
+    const MODING_VISITOR_ID =
+      getOrCreateVisitorId();
 
     function markStoreRedirectOnce(
       platform
     ) {
-      if (REFERRER_INFO.isModing) {
+      const normalizedPlatform =
+        platform === "android"
+          ? "android"
+          : platform === "ios"
+            ? "ios"
+            : "unknown";
+
+      if (
+        TRACKED_STORE_PLATFORMS.has(
+          normalizedPlatform
+        )
+      ) {
         return false;
       }
 
-      const key =
-        `${STORE_TRACK_SESSION_PREFIX}:` +
-        `${TRAFFIC_SOURCE}:` +
-        `${platform}`;
-
-      try {
-        if (
-          sessionStorage.getItem(key) ===
-          "1"
-        ) {
-          return false;
-        }
-
-        sessionStorage.setItem(
-          key,
-          "1"
-        );
-      } catch (_) {}
+      TRACKED_STORE_PLATFORMS.add(
+        normalizedPlatform
+      );
 
       return true;
     }
@@ -440,13 +566,14 @@
           platform
         )
       ) {
-        return;
+        return false;
       }
 
       const trackingUrl =
         `${COUNTER_API_BASE}/track/download` +
         `?platform=${encodeURIComponent(platform)}` +
-        `&src=${encodeURIComponent(TRAFFIC_SOURCE)}`;
+        `&src=${encodeURIComponent(TRAFFIC_SOURCE)}` +
+        `&visitorId=${encodeURIComponent(MODING_VISITOR_ID)}`;
 
       try {
         if (
@@ -460,7 +587,7 @@
             );
 
           if (sent) {
-            return;
+            return true;
           }
         }
       } catch (_) {}
@@ -476,6 +603,8 @@
           }
         ).catch(() => {});
       } catch (_) {}
+
+      return true;
     }
 
     function redirectToStore(
