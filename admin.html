@@ -2111,7 +2111,7 @@
   </aside>
 
   <script>
-    // MODING ADMIN v12 - install record platform bars
+    // MODING ADMIN v13 - install trend kept, date table replaced by platform bars
     const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
     const SESSION_TOKEN_KEY = "moding_admin_token";
     const APP_LAUNCH_DATE = "2026-07-01";
@@ -3681,6 +3681,15 @@
       const iosShare = total > 0 ? percent(ios, total) : 0;
       const androidShare = total > 0 ? percent(android, total) : 0;
 
+      const chartRows = rows.map(row => ({
+        label: state.period === "all"
+          ? `${Number(String(row.key).split("-")[1])}월`
+          : compactDate(row.key),
+        ios: row.ios,
+        android: row.android,
+        total: row.knownTotal
+      }));
+
       const iosBarShare = total > 0 && install.iosDisplayReady
         ? percent(ios, total)
         : 0;
@@ -3743,9 +3752,36 @@
           })}
         </div>
 
+        <section class="surface section-card" style="margin-top:16px">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">TREND</div>
+              <h2 class="section-title">실제 설치 추이</h2>
+            </div>
+
+            <div class="chart-legend">
+              <span class="legend-item"><span class="legend-dot blue"></span>iOS</span>
+              <span class="legend-item"><span class="legend-dot"></span>Android</span>
+              <span class="legend-item"><span class="legend-dot black"></span>확인된 합계</span>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            ${lineChart(
+              chartRows,
+              [
+                { key: "ios", name: "iOS", color: COLORS.blue },
+                { key: "android", name: "Android", color: COLORS.green },
+                { key: "total", name: "확인된 합계", color: COLORS.black, width: 3.8 }
+              ],
+              "확정 설치 데이터가 아직 없습니다."
+            )}
+          </div>
+        </section>
+
         <details class="surface details-card" open>
           <summary>
-            <div><div class="eyebrow">DAILY</div><h2 class="section-title">설치 기록</h2></div>
+            <div><div class="eyebrow">PLATFORM</div><h2 class="section-title">설치 기록</h2></div>
             <span class="details-toggle"></span>
           </summary>
 
@@ -3805,22 +3841,7 @@
             </div>
           </div>
 
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead><tr><th>${state.period === "all" ? "월" : "날짜"}</th><th>iOS</th><th>Android</th><th>합계</th></tr></thead>
-              <tbody>
-                ${rows.length
-                  ? [...rows].reverse().map(row => `
-                      <tr>
-                        <td>${state.period === "all" ? formatMonth(row.key) : formatDate(row.key)}</td>
-                        <td class="${row.iosConfirmed ? "ios-value" : "muted-value"}">${row.iosConfirmed ? `${formatNumber(row.ios)}건` : "집계 대기"}</td>
-                        <td class="${row.androidConfirmed ? "android-value" : "muted-value"}">${row.androidConfirmed ? `${formatNumber(row.android)}건` : "집계 대기"}</td>
-                        <td>${row.knownTotal !== null ? `${formatNumber(row.knownTotal)}건${row.exact ? "" : " (부분)"}` : "-"}</td>
-                      </tr>`).join("")
-                  : `<tr><td colspan="4" class="empty">설치 데이터가 없습니다.</td></tr>`}
-              </tbody>
-            </table>
-          </div>
+
         </details>
       `;
 
