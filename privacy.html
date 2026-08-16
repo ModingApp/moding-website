@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <!-- =========================================================
-       기본 메타 정보
-       ========================================================= -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
   <title>개인정보처리방침 | 모딩(Moding)</title>
-
-  <meta name="description" content="모딩(Moding)의 개인정보처리방침입니다. 주식회사 모딩은 개인정보 보호법 등 관련 법령에 따라 이용자의 개인정보를 안전하게 처리합니다.">
+  <meta name="description" content="주식회사 모딩의 개인정보 처리 목적·항목·보유기간·제3자 제공·처리위탁과 이용자 권리를 안내합니다.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#238B22">
+  <link rel="canonical" href="https://moding.app/privacy.html">
+  <link rel="icon" type="image/png" href="/og-image.png">
+  <link rel="stylesheet" href="/assets/css/site-common.css">
 
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
   <meta property="og:site_name" content="Moding">
   <meta property="og:title" content="개인정보처리방침 | 모딩(Moding)">
-  <meta property="og:description" content="모딩 개인정보처리방침. 개인정보 처리 목적, 처리 항목, 보유기간, 제3자 제공, 처리위탁 및 정보주체의 권리를 안내합니다.">
+  <meta property="og:description" content="주식회사 모딩의 개인정보 처리 목적·항목·보유기간·제3자 제공·처리위탁과 이용자 권리를 안내합니다.">
   <meta property="og:url" content="https://moding.app/privacy.html">
-  <meta property="og:image" content="https://moding.app/모딩로고.png">
+  <meta property="og:image" content="https://moding.app/og-image.png">
+  <meta property="og:image:width" content="500">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="모딩 로고">
 
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="개인정보처리방침 | 모딩(Moding)">
+  <meta name="twitter:description" content="주식회사 모딩의 개인정보 처리 목적·항목·보유기간·제3자 제공·처리위탁과 이용자 권리를 안내합니다.">
+  <meta name="twitter:image" content="https://moding.app/og-image.png">
+  <script src="/assets/js/site-tracking.js"></script>
+
+<!-- =========================================================
+       기본 메타 정보
+       ========================================================= -->
   <style>
     /* =========================================================
        1. 브랜드 컬러 / 공통 변수
@@ -1321,33 +1335,14 @@
     /* =========================================================
        복사 / 드래그 방지
        ========================================================= */
-    document.addEventListener("contextmenu", function (e) {
-      if (!e.target.closest("input, textarea, a, button")) {
-        e.preventDefault();
-      }
-    });
+    
 
-    document.addEventListener("dragstart", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
-    });
+    
 
-    document.addEventListener("keydown", function (e) {
-      const key = e.key.toLowerCase();
+    
 
-      if ((e.ctrlKey || e.metaKey) && !e.target.closest("input, textarea")) {
-        if (["c", "x", "v", "s", "u", "p", "a"].includes(key)) {
-          e.preventDefault();
-        }
-      }
-    });
-
-    document.addEventListener("copy", function (e) {
-      if (!e.target.closest("input, textarea")) {
-        e.preventDefault();
-      }
-    });
+    
   </script>
 </body>
 </html>
+
