@@ -2308,6 +2308,416 @@
     const siteFooter = document.querySelector(".site-footer");
     const indicatorButtons = [];
 
+    const COUNTER_API_BASE =
+      "https://flat-queen-f1fb.moding-inc.workers.dev";
+
+    const TRACKING_SOURCE_SESSION_KEY =
+      "moding_tracking_source";
+
+    const ALLIANCE_VISIT_SESSION_PREFIX =
+      "moding_alliance_visit_tracked_v1";
+
+    const VISITOR_ID_STORAGE_KEY =
+      "moding_visitor_id_v1";
+
+    const VISITOR_ID_SESSION_FALLBACK_KEY =
+      "moding_visitor_id_session_v1";
+
+    function normalizeTrackingSource(value) {
+      let source =
+        String(value || "")
+          .trim()
+          .toLowerCase()
+          .replace(/[^a-z0-9_-]/g, "")
+          .slice(0, 50);
+
+      if (!source) {
+        return "";
+      }
+
+      const aliases = {
+        none: "direct",
+        organic_direct: "direct",
+        karrot: "daangn",
+        danggeun: "daangn",
+        daangn_market: "daangn",
+        karrotmarket: "daangn",
+        naverblog: "naver_blog",
+        blog_naver: "naver_blog",
+        navercafe: "naver_cafe",
+        cafe_naver: "naver_cafe",
+        naverplace: "naver_place",
+        smartplace: "naver_place",
+        naver_smartplace: "naver_place",
+        kakaotalk: "kakao",
+        kakao_talk: "kakao",
+        insta: "instagram",
+        fb: "facebook",
+        twitter: "x",
+        yt: "youtube",
+        flyer: "leaflet",
+        offline_flyer: "leaflet",
+        pamphlet: "leaflet",
+        qrcode: "qr",
+        googleplay: "google_play",
+        playstore: "google_play",
+        appstore: "app_store",
+        apple: "app_store"
+      };
+
+      return aliases[source] || source;
+    }
+
+    function trackingSourceFromReferrer() {
+      const referrer =
+        String(document.referrer || "").trim();
+
+      if (!referrer) {
+        return "";
+      }
+
+      try {
+        const refUrl = new URL(referrer);
+
+        const querySource =
+          refUrl.searchParams.get("source") ||
+          refUrl.searchParams.get("src") ||
+          refUrl.searchParams.get("utm_source");
+
+        if (querySource) {
+          return normalizeTrackingSource(
+            querySource
+          );
+        }
+
+        const host =
+          String(refUrl.hostname || "")
+            .toLowerCase()
+            .replace(/^www\./, "");
+
+        if (
+          !host ||
+          host === "moding.app" ||
+          host.endsWith(".moding.app")
+        ) {
+          return "";
+        }
+
+        if (
+          host.includes("daangn.com") ||
+          host.includes("karrotmarket.com") ||
+          host.includes("karrot.com")
+        ) {
+          return "daangn";
+        }
+
+        if (
+          host === "naver.com" ||
+          host.endsWith(".naver.com") ||
+          host === "naver.me"
+        ) {
+          return "naver";
+        }
+
+        if (
+          host === "kakao.com" ||
+          host.endsWith(".kakao.com") ||
+          host === "kakaocorp.com" ||
+          host.endsWith(".kakaocorp.com")
+        ) {
+          return "kakao";
+        }
+
+        if (
+          host === "google.com" ||
+          host.endsWith(".google.com") ||
+          /^google\.[a-z.]+$/.test(host)
+        ) {
+          return "google";
+        }
+
+        if (
+          host === "youtube.com" ||
+          host.endsWith(".youtube.com") ||
+          host === "youtu.be"
+        ) {
+          return "youtube";
+        }
+
+        if (
+          host === "instagram.com" ||
+          host.endsWith(".instagram.com")
+        ) {
+          return "instagram";
+        }
+
+        if (
+          host === "facebook.com" ||
+          host.endsWith(".facebook.com") ||
+          host === "fb.com" ||
+          host.endsWith(".fb.com")
+        ) {
+          return "facebook";
+        }
+
+        if (
+          host === "x.com" ||
+          host.endsWith(".x.com") ||
+          host === "twitter.com" ||
+          host.endsWith(".twitter.com") ||
+          host === "t.co"
+        ) {
+          return "x";
+        }
+
+        return "referral";
+      } catch (error) {
+        return "";
+      }
+    }
+
+    function resolveTrackingSource() {
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      const explicitSource =
+        normalizeTrackingSource(
+          params.get("source") ||
+          params.get("src") ||
+          params.get("utm_source")
+        );
+
+      if (explicitSource) {
+        try {
+          sessionStorage.setItem(
+            TRACKING_SOURCE_SESSION_KEY,
+            explicitSource
+          );
+        } catch (error) {}
+
+        return explicitSource;
+      }
+
+      const referrerSource =
+        trackingSourceFromReferrer();
+
+      if (referrerSource) {
+        try {
+          sessionStorage.setItem(
+            TRACKING_SOURCE_SESSION_KEY,
+            referrerSource
+          );
+        } catch (error) {}
+
+        return referrerSource;
+      }
+
+      try {
+        const savedSource =
+          normalizeTrackingSource(
+            sessionStorage.getItem(
+              TRACKING_SOURCE_SESSION_KEY
+            )
+          );
+
+        if (savedSource) {
+          return savedSource;
+        }
+      } catch (error) {}
+
+      try {
+        sessionStorage.setItem(
+          TRACKING_SOURCE_SESSION_KEY,
+          "direct"
+        );
+      } catch (error) {}
+
+      return "direct";
+    }
+
+    function isValidVisitorId(value) {
+      return /^[a-zA-Z0-9_-]{16,200}$/.test(
+        String(value || "")
+      );
+    }
+
+    function createVisitorId() {
+      try {
+        if (
+          window.crypto &&
+          typeof window.crypto.randomUUID ===
+            "function"
+        ) {
+          return (
+            "mv_" +
+            window.crypto
+              .randomUUID()
+              .replace(/-/g, "")
+          );
+        }
+      } catch (error) {}
+
+      try {
+        if (
+          window.crypto &&
+          typeof window.crypto.getRandomValues ===
+            "function"
+        ) {
+          const values =
+            new Uint32Array(4);
+
+          window.crypto.getRandomValues(
+            values
+          );
+
+          return (
+            "mv_" +
+            Array.from(values)
+              .map((value) =>
+                value
+                  .toString(36)
+                  .padStart(7, "0")
+              )
+              .join("")
+          );
+        }
+      } catch (error) {}
+
+      return (
+        "mv_" +
+        Date.now().toString(36) +
+        "_" +
+        Math.random()
+          .toString(36)
+          .slice(2) +
+        Math.random()
+          .toString(36)
+          .slice(2)
+      );
+    }
+
+    function getOrCreateVisitorId() {
+      try {
+        const stored =
+          localStorage.getItem(
+            VISITOR_ID_STORAGE_KEY
+          );
+
+        if (isValidVisitorId(stored)) {
+          return stored;
+        }
+
+        const created =
+          createVisitorId();
+
+        localStorage.setItem(
+          VISITOR_ID_STORAGE_KEY,
+          created
+        );
+
+        return created;
+      } catch (error) {}
+
+      try {
+        const stored =
+          sessionStorage.getItem(
+            VISITOR_ID_SESSION_FALLBACK_KEY
+          );
+
+        if (isValidVisitorId(stored)) {
+          return stored;
+        }
+
+        const created =
+          createVisitorId();
+
+        sessionStorage.setItem(
+          VISITOR_ID_SESSION_FALLBACK_KEY,
+          created
+        );
+
+        return created;
+      } catch (error) {}
+
+      return createVisitorId();
+    }
+
+    function postAllianceVisit(
+      source,
+      visitorId
+    ) {
+      try {
+        return fetch(
+          COUNTER_API_BASE +
+            "/track/visit",
+          {
+            method: "POST",
+            mode: "cors",
+            cache: "no-store",
+            keepalive: true,
+
+            headers: {
+              "Content-Type":
+                "application/json",
+
+              "X-Moding-Visitor-ID":
+                visitorId
+            },
+
+            body:
+              JSON.stringify({
+                source,
+                visitorId
+              })
+          }
+        ).catch(() => null);
+      } catch (error) {
+        return Promise.resolve(null);
+      }
+    }
+
+    function trackAllianceVisitOnce() {
+      const source =
+        resolveTrackingSource();
+
+      const visitorId =
+        getOrCreateVisitorId();
+
+      const visitSessionKey =
+        ALLIANCE_VISIT_SESSION_PREFIX +
+        ":" +
+        source;
+
+      try {
+        if (
+          sessionStorage.getItem(
+            visitSessionKey
+          ) === "1"
+        ) {
+          return;
+        }
+
+        sessionStorage.setItem(
+          visitSessionKey,
+          "1"
+        );
+
+        postAllianceVisit(
+          source,
+          visitorId
+        );
+      } catch (error) {
+        postAllianceVisit(
+          source,
+          visitorId
+        );
+      }
+    }
+
+    trackAllianceVisitOnce();
+
     function syncFooterHeight() {
       if (!siteFooter) return;
 
