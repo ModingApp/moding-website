@@ -159,6 +159,8 @@
 
         insta: "instagram",
         fb: "facebook",
+        thread: "threads",
+        threads_app: "threads",
         twitter: "x",
         yt: "youtube",
 
@@ -290,6 +292,18 @@
         ) {
           return {
             source: "instagram",
+            isModing: false
+          };
+        }
+
+        if (
+          host === "threads.com" ||
+          host.endsWith(".threads.com") ||
+          host === "threads.net" ||
+          host.endsWith(".threads.net")
+        ) {
+          return {
+            source: "threads",
             isModing: false
           };
         }
