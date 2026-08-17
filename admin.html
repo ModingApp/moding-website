@@ -726,6 +726,7 @@
     .source-icon.instagram { background: #FFF0F6; color: #D62976; }
     .source-icon.google { background: #EEF4FF; color: #4285F4; }
     .source-icon.facebook { background: #EEF4FF; color: #1877F2; }
+    .source-icon.threads { background: #F1F1F1; color: #111111; }
     .source-icon.x { background: #F0F1F0; color: #111; }
     .source-icon.leaflet,
     .source-icon.qr { background: var(--green-soft); color: var(--green); }
@@ -2508,6 +2509,7 @@
       kakao: { label: "카카오톡", icon: "K", className: "kakao", color: "#E7C900" },
       youtube: { label: "유튜브", icon: "▶", className: "youtube", color: "#FF0033" },
       instagram: { label: "인스타그램", icon: "◎", className: "instagram", color: "#D62976" },
+      threads: { label: "스레드", icon: "@", className: "threads", color: "#111111" },
       google: { label: "구글", icon: "G", className: "google", color: "#4285F4" },
       facebook: { label: "페이스북", icon: "f", className: "facebook", color: "#1877F2" },
       x: { label: "X", icon: "X", className: "x", color: "#111111" },
@@ -2730,6 +2732,7 @@
       if (value === "insta") return "instagram";
       if (value === "yt") return "youtube";
       if (value === "fb") return "facebook";
+      if (value === "thread" || value === "threads_app") return "threads";
       if (value === "twitter") return "x";
       return value;
     }
