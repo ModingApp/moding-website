@@ -400,6 +400,54 @@
       color: rgba(255,255,255,.82);
     }
 
+    .hero-variant-daangn {
+      display: none;
+    }
+
+    body.is-daangn-campaign .hero-variant-default {
+      display: none;
+    }
+
+    body.is-daangn-campaign .hero-variant-daangn {
+      display: initial;
+    }
+
+    .hero-actions {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-cta {
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: inherit;
+      text-decoration: none;
+      font-size: 13.5px;
+      line-height: 1;
+      font-weight: 900;
+      cursor: pointer;
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-cta.primary {
+      background: #fff;
+      color: var(--green-dark);
+      box-shadow: 0 12px 28px rgba(0,0,0,.16);
+    }
+
     .scene-visual {
       min-width: 0;
       display: flex;
@@ -1106,6 +1154,17 @@
         line-height: 1.55;
       }
 
+      .hero-actions {
+        margin-top: 16px;
+      }
+
+      .hero-cta {
+        min-height: 43px;
+        padding: 0 15px;
+        border-radius: 15px;
+        font-size: 12.5px;
+      }
+
       .scene-visual {
         min-height: 0;
         align-items: flex-end;
@@ -1352,6 +1411,14 @@
       .scene-desc {
         margin-top: 8px;
         font-size: 13px;
+      }
+
+      .hero-actions {
+        margin-top: 10px;
+      }
+
+      .hero-cta {
+        min-height: 40px;
       }
 
       .category-card {
@@ -1732,17 +1799,43 @@
         <div class="scene-grid">
 
           <div class="scene-copy">
-            <div class="kicker">ALLIANCE MODING</div>
+            <div class="kicker">
+              <span class="hero-variant-default">ALLIANCE MODING</span>
+              <span class="hero-variant-daangn">당근에서 오신 식품 제조사·유통사께</span>
+            </div>
 
             <h1 class="hero-title">
-              좋은 상품을<br>
-              <em>더 많은 가게로</em>
+              <span class="hero-variant-default">
+                좋은 상품을<br>
+                <em>더 많은 가게로</em>
+              </span>
+              <span class="hero-variant-daangn">
+                식당에 납품할<br>
+                <em>상품이 있으신가요</em>
+              </span>
             </h1>
 
             <p class="scene-desc">
-              모딩은 좋은 상품을 가진 식품제조사와<br>
-              새로운 거래처를 연결합니다.
+              <span class="hero-variant-default">
+                모딩은 좋은 상품을 가진 식품 제조사·유통사와<br>
+                새로운 외식업 거래처를 연결합니다
+              </span>
+              <span class="hero-variant-daangn">
+                모딩이 좋은 상품을<br>
+                새로운 외식업 거래처와 연결합니다
+              </span>
             </p>
+
+            <div class="hero-actions" aria-label="입점 상담">
+              <a
+                href="https://pf.kakao.com/_CixjCX/friend"
+                class="hero-cta primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                내 상품 입점 가능 여부 확인하기
+              </a>
+            </div>
           </div>
 
           <div class="scene-visual" aria-hidden="true">
@@ -2317,6 +2410,41 @@
     const scenes = Array.from(document.querySelectorAll(".scene"));
     const siteFooter = document.querySelector(".site-footer");
     const indicatorButtons = [];
+
+    function resolveAllianceCampaignSource() {
+      const params = new URLSearchParams(window.location.search);
+      const explicitSource = normalizeTrackingSource(
+        params.get("src") ||
+        params.get("utm_source") ||
+        params.get("source")
+      );
+
+      if (explicitSource) return explicitSource;
+
+      try {
+        const referrerHost = new URL(document.referrer).hostname
+          .toLowerCase()
+          .replace(/^www\./, "");
+
+        if (
+          referrerHost.includes("daangn.com") ||
+          referrerHost.includes("karrotmarket.com") ||
+          referrerHost.includes("karrot.com")
+        ) {
+          return "daangn";
+        }
+      } catch (error) {}
+
+      return "";
+    }
+
+    const allianceCampaignSource = resolveAllianceCampaignSource();
+    const isDaangnCampaign = allianceCampaignSource === "daangn";
+
+    document.body.classList.toggle(
+      "is-daangn-campaign",
+      isDaangnCampaign
+    );
 
     const COUNTER_API_BASE =
       "https://flat-queen-f1fb.moding-inc.workers.dev";
@@ -3047,4 +3175,3 @@
   </script>
 </body>
 </html>
-
