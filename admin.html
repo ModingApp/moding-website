@@ -2334,6 +2334,364 @@
       }
     }
 
+    /* v16 · rolling periods + range picker + simpler channel cards */
+    .period-tabs {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .period-tab {
+      min-width: 104px;
+    }
+
+    .range-panel {
+      margin-top: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .range-fields {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .range-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .range-field label {
+      color: var(--sub);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .range-input {
+      min-height: 44px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      outline: none;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .range-input:focus {
+      border-color: rgba(35, 139, 34, .5);
+      box-shadow: 0 0 0 4px rgba(35, 139, 34, .08);
+    }
+
+    .range-separator {
+      padding-bottom: 13px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .range-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .range-btn {
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+      color: var(--sub);
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .range-btn.primary {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
+    }
+
+    .range-summary {
+      color: var(--sub);
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 760;
+    }
+
+    .channel-journey {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+    }
+
+    .journey-step {
+      min-width: 0;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--soft);
+    }
+
+    .journey-step.store {
+      background: var(--orange-soft);
+    }
+
+    .journey-step small {
+      display: block;
+      color: var(--sub);
+      font-size: 10px;
+      font-weight: 850;
+    }
+
+    .journey-step strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .journey-arrow {
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .channel-secondary {
+      margin-top: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 7px 14px;
+      color: var(--sub);
+      font-size: 11px;
+      line-height: 1.5;
+      font-weight: 780;
+    }
+
+    .channel-platforms {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .channel-platforms strong {
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    @media (max-width: 860px) {
+      .filter-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .period-tabs {
+        width: 100%;
+      }
+
+      .period-tab {
+        min-width: 0;
+      }
+
+      .range-panel {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .range-actions {
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .period-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .period-tab:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .range-fields {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .range-separator {
+        display: none;
+      }
+
+      .range-input {
+        width: 100%;
+      }
+
+      .range-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .channel-journey {
+        grid-template-columns: 1fr;
+      }
+
+      .journey-arrow {
+        transform: rotate(90deg);
+        text-align: center;
+      }
+    }
+
+    /* v17 · trusted administrator devices */
+    .trust-option {
+      margin-top: 14px;
+      padding: 13px 15px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #F8FBF8;
+      cursor: pointer;
+    }
+
+    .trust-option input {
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      accent-color: var(--green);
+    }
+
+    .trust-option strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .trust-option small {
+      display: block;
+      margin-top: 3px;
+      color: var(--sub);
+      font-size: 11px;
+      line-height: 1.45;
+      font-weight: 720;
+    }
+
+    .device-management {
+      padding-top: 4px;
+    }
+
+    .device-management-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .device-management-head strong {
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .device-management-head button,
+    .device-action {
+      min-height: 32px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--sub);
+      font-size: 10px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .device-action.danger {
+      border-color: #F0D4D4;
+      color: var(--danger);
+    }
+
+    .device-list {
+      margin-top: 10px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .device-card {
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .device-card.current {
+      border-color: #BFDDBF;
+      background: #F8FCF8;
+    }
+
+    .device-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .device-name {
+      min-width: 0;
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .device-current {
+      margin-left: 6px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 9px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .device-meta {
+      margin-top: 7px;
+      color: var(--sub);
+      font-size: 10px;
+      line-height: 1.55;
+      font-weight: 720;
+    }
+
+    .device-actions {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .device-empty {
+      padding: 18px 10px;
+      border-radius: 13px;
+      background: var(--soft);
+      color: var(--sub);
+      font-size: 11px;
+      line-height: 1.55;
+      font-weight: 760;
+      text-align: center;
+    }
+
   </style>
 </head>
 
@@ -2371,6 +2729,14 @@
           <button id="passwordToggle" class="password-toggle" type="button">보기</button>
         </div>
 
+        <label class="trust-option" for="rememberDevice">
+          <input id="rememberDevice" type="checkbox" checked>
+          <span>
+            <strong>이 기기를 30일간 신뢰</strong>
+            <small>등록된 기기에서는 접속 토큰이 자동으로 갱신됩니다.</small>
+          </span>
+        </label>
+
         <button id="loginSubmit" class="login-submit" type="submit">
           관리자 페이지 들어가기
         </button>
@@ -2402,7 +2768,7 @@
 
     <nav class="primary-tabs" aria-label="통계 종류">
       <button class="primary-tab is-active" data-view="overview" type="button">개요</button>
-      <button class="primary-tab" data-view="channels" type="button">어디서 왔나</button>
+      <button class="primary-tab" data-view="channels" type="button">유입 채널</button>
       <button class="primary-tab" data-view="downloads" type="button">스토어 이동</button>
       <button class="primary-tab" data-view="installs" type="button">실제 설치</button>
     </nav>
@@ -2411,14 +2777,36 @@
       <nav class="period-tabs" aria-label="통계 기간">
         <button class="period-tab is-active" data-period="all" type="button">전체</button>
         <button class="period-tab" data-period="today" type="button">오늘</button>
-        <button class="period-tab" data-period="week" type="button">주간</button>
-        <button class="period-tab" data-period="month" type="button">월간</button>
+        <button class="period-tab" data-period="last7" type="button">최근 7일</button>
+        <button class="period-tab" data-period="last30" type="button">최근 30일</button>
+        <button class="period-tab" data-period="custom" type="button">📅 기간 선택</button>
       </nav>
 
       <div class="launch-mark">
         앱 배포일 <strong>2026.07.01</strong>
       </div>
     </div>
+
+    <section id="rangePanel" class="range-panel" aria-label="조회 기간 선택" hidden>
+      <div>
+        <div class="range-fields">
+          <div class="range-field">
+            <label for="rangeStart">시작일</label>
+            <input id="rangeStart" class="range-input" type="date" min="2026-07-01">
+          </div>
+          <span class="range-separator">부터</span>
+          <div class="range-field">
+            <label for="rangeEnd">종료일</label>
+            <input id="rangeEnd" class="range-input" type="date" min="2026-07-01">
+          </div>
+        </div>
+        <div id="rangeSummary" class="range-summary">날짜를 선택하면 해당 기간 전체를 다시 집계합니다.</div>
+      </div>
+      <div class="range-actions">
+        <button id="rangeCancel" class="range-btn" type="button">닫기</button>
+        <button id="rangeApply" class="range-btn primary" type="button">이 기간 보기</button>
+      </div>
+    </section>
 
     <section id="content" class="content-panel"></section>
     <div id="dashboardStatus" class="status-line" aria-live="polite"></div>
@@ -2482,16 +2870,27 @@
         </div>
         <div class="system-desc">방문한 사람 = 반복 방문 제외 · 스토어로 간 사람 = 반복 이동 제외 · 실제 설치 = Apple/Google에서 확인된 수치</div>
       </div>
+
+      <div class="system-item device-management">
+        <div class="device-management-head">
+          <strong>로그인 기기</strong>
+          <button id="revokeOtherDevicesBtn" type="button">다른 기기 모두 로그아웃</button>
+        </div>
+        <div id="deviceList" class="device-list">
+          <div class="device-empty">시스템 창을 열면 등록 기기를 확인합니다.</div>
+        </div>
+      </div>
     </div>
   </aside>
 
   <script>
-    // MODING ADMIN v15 - simple language + overview snapshot + paired install bars
+    // MODING ADMIN v17 - range filters + trusted administrator devices
     const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
     const SESSION_TOKEN_KEY = "moding_admin_token";
+    const TRUSTED_DEVICE_KEY = "moding_admin_trusted_device";
     const APP_LAUNCH_DATE = "2026-07-01";
     const APP_LAUNCH_MONTH = APP_LAUNCH_DATE.slice(0, 7);
-    const REQUIRED_WORKER_VERSION = "stats-v10-reliable-google-sync";
+    const REQUIRED_WORKER_VERSION = "stats-v12-trusted-devices";
 
     const COLORS = {
       green: "#238B22",
@@ -2522,8 +2921,11 @@
     const state = {
       view: "overview",
       period: "all",
+      rangeStart: null,
+      rangeEnd: null,
       stats: null,
-      workerInfo: null
+      workerInfo: null,
+      devices: []
     };
 
     const loginView = document.getElementById("loginView");
@@ -2541,6 +2943,15 @@
     const passwordToggle = document.getElementById("passwordToggle");
     const loginSubmit = document.getElementById("loginSubmit");
     const loginError = document.getElementById("loginError");
+    const rememberDevice = document.getElementById("rememberDevice");
+    const rangePanel = document.getElementById("rangePanel");
+    const rangeStart = document.getElementById("rangeStart");
+    const rangeEnd = document.getElementById("rangeEnd");
+    const rangeSummary = document.getElementById("rangeSummary");
+    const rangeApply = document.getElementById("rangeApply");
+    const rangeCancel = document.getElementById("rangeCancel");
+    const deviceList = document.getElementById("deviceList");
+    const revokeOtherDevicesBtn = document.getElementById("revokeOtherDevicesBtn");
 
     const primaryTabs = Array.from(document.querySelectorAll(".primary-tab"));
     const periodTabs = Array.from(document.querySelectorAll(".period-tab"));
@@ -2559,6 +2970,101 @@
 
     function clearToken() {
       sessionStorage.removeItem(SESSION_TOKEN_KEY);
+    }
+
+    function getTrustedDevice() {
+      try {
+        const value = JSON.parse(localStorage.getItem(TRUSTED_DEVICE_KEY) || "null");
+        return value?.id && value?.token ? value : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function saveTrustedDevice(value) {
+      if (!value?.id || !value?.token) return;
+      localStorage.setItem(TRUSTED_DEVICE_KEY, JSON.stringify({
+        id: value.id,
+        token: value.token,
+        expiresAt: number(value.expiresAt),
+        deviceName: value.deviceName || "등록 기기"
+      }));
+    }
+
+    function clearTrustedDevice() {
+      localStorage.removeItem(TRUSTED_DEVICE_KEY);
+    }
+
+    async function refreshTrustedSession() {
+      const trusted = getTrustedDevice();
+
+      if (!trusted) return false;
+
+      try {
+        const response = await fetch(apiUrl("/admin/refresh"), {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            deviceId: trusted.id,
+            deviceToken: trusted.token
+          }),
+          cache: "no-store"
+        });
+
+        if (!response.ok) {
+          clearToken();
+          clearTrustedDevice();
+          return false;
+        }
+
+        const data = await response.json();
+        if (!data?.token || !data?.trustedDevice) {
+          clearToken();
+          clearTrustedDevice();
+          return false;
+        }
+
+        saveToken(data.token);
+        saveTrustedDevice(data.trustedDevice);
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    async function adminFetch(path, options = {}, retry = true) {
+      let token = getToken();
+
+      if (!token && await refreshTrustedSession()) {
+        token = getToken();
+      }
+
+      const headers = new Headers(options.headers || {});
+      if (token) headers.set("Authorization", `Bearer ${token}`);
+      if (!headers.has("Accept")) headers.set("Accept", "application/json");
+
+      const response = await fetch(apiUrl(path), {
+        ...options,
+        headers,
+        cache: "no-store"
+      });
+
+      if (response.status === 401 && retry && await refreshTrustedSession()) {
+        return adminFetch(path, options, false);
+      }
+
+      return response;
+    }
+
+    async function postAdmin(path, body = {}) {
+      return adminFetch(path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
     }
 
     function number(value) {
@@ -2677,10 +3183,52 @@
       return date.toISOString().slice(0, 10);
     }
 
+    function addIsoDays(dateString, amount) {
+      const [year, month, day] = String(dateString).split("-").map(Number);
+      const date = new Date(Date.UTC(year, month - 1, day));
+      date.setUTCDate(date.getUTCDate() + amount);
+      return date.toISOString().slice(0, 10);
+    }
+
+    function rangeDayCount(startDate, endDate) {
+      if (!startDate || !endDate) return 0;
+      const start = new Date(`${startDate}T00:00:00Z`);
+      const end = new Date(`${endDate}T00:00:00Z`);
+      return Math.floor((end - start) / 86400000) + 1;
+    }
+
+    function selectedPeriodRange(period = state.period) {
+      const today = currentDate();
+
+      if (period === "last7") {
+        return { startDate: addIsoDays(today, -6), endDate: today };
+      }
+
+      if (period === "last30") {
+        return { startDate: addIsoDays(today, -29), endDate: today };
+      }
+
+      if (period === "custom" && state.rangeStart && state.rangeEnd) {
+        return { startDate: state.rangeStart, endDate: state.rangeEnd };
+      }
+
+      return null;
+    }
+
+    function isRangePeriod(period = state.period) {
+      return ["last7", "last30", "custom"].includes(period);
+    }
+
     function periodName() {
       if (state.period === "today") return "오늘";
-      if (state.period === "week") return "이번 주";
-      if (state.period === "month") return "이번 달";
+      if (state.period === "last7") return "최근 7일";
+      if (state.period === "last30") return "최근 30일";
+      if (state.period === "custom") {
+        const range = selectedPeriodRange();
+        return range
+          ? `${compactDate(range.startDate)} ~ ${compactDate(range.endDate)}`
+          : "선택 기간";
+      }
       return "전체";
     }
 
@@ -2759,7 +3307,11 @@
 
     function getWebsitePeriod() {
       const stats = state.stats || {};
-      const current = state.period === "all" ? stats.total : stats[state.period];
+      const current = isRangePeriod()
+        ? stats.selectedRange?.website
+        : state.period === "all"
+          ? stats.total
+          : stats[state.period];
       return {
         visits: number(current?.visits),
         downloads: number(current?.downloads),
@@ -2783,24 +3335,17 @@
           }));
       }
 
-      let rows = state.period === "month" && Array.isArray(stats.monthDaily)
-        ? [...stats.monthDaily]
-        : Array.isArray(stats.daily)
-          ? [...stats.daily]
-          : [];
+      let rows = Array.isArray(stats.daily) ? [...stats.daily] : [];
 
       if (state.period === "today") {
         rows = rows.filter(row => row.date === today);
       }
 
-      if (state.period === "week") {
-        const start = mondayOfWeek(today);
-        rows = rows.filter(row => row.date >= start && row.date <= today);
-      }
-
-      if (state.period === "month") {
-        const month = today.slice(0, 7);
-        rows = rows.filter(row => String(row.date).startsWith(month));
+      if (isRangePeriod()) {
+        const range = selectedPeriodRange();
+        rows = range
+          ? rows.filter(row => row.date >= range.startDate && row.date <= range.endDate)
+          : [];
       }
 
       return rows
@@ -2818,7 +3363,11 @@
 
     function getUniquePeriod() {
       const root = state.stats?.uniqueTracking || {};
-      const current = state.period === "all" ? root.total : root[state.period];
+      const current = isRangePeriod()
+        ? state.stats?.selectedRange?.uniqueTracking
+        : state.period === "all"
+          ? root.total
+          : root[state.period];
 
       return {
         trackingStartDate: root.trackingStartDate || null,
@@ -2854,14 +3403,11 @@
         rows = rows.filter(row => row.date === today);
       }
 
-      if (state.period === "week") {
-        const start = mondayOfWeek(today);
-        rows = rows.filter(row => row.date >= start && row.date <= today);
-      }
-
-      if (state.period === "month") {
-        const month = today.slice(0, 7);
-        rows = rows.filter(row => String(row.date).startsWith(month));
+      if (isRangePeriod()) {
+        const range = selectedPeriodRange();
+        rows = range
+          ? rows.filter(row => row.date >= range.startDate && row.date <= range.endDate)
+          : [];
       }
 
       return rows
@@ -2903,7 +3449,11 @@
 
     function getChannelPeriod() {
       const root = state.stats?.channels || {};
-      const current = state.period === "all" ? root.total : root[state.period];
+      const current = isRangePeriod()
+        ? state.stats?.selectedRange?.channels
+        : state.period === "all"
+          ? root.total
+          : root[state.period];
       return {
         visits: number(current?.visits),
         downloads: number(current?.downloads),
@@ -3061,7 +3611,11 @@
 
     function getPlatformClicks() {
       const root = state.stats?.clickPlatforms || {};
-      const current = state.period === "all" ? root.total : root[state.period];
+      const current = isRangePeriod()
+        ? state.stats?.selectedRange?.clickPlatforms
+        : state.period === "all"
+          ? root.total
+          : root[state.period];
       const ios = number(current?.ios);
       const android = number(current?.android);
       const unknown = number(current?.unknown);
@@ -3154,29 +3708,25 @@
       let iosValue = null;
       let androidValue = null;
 
-      if (state.period === "today") {
+      if (isRangePeriod()) {
+        iosValue = getIosValue(state.stats?.selectedRange?.ios);
+        androidValue = getAndroidValue(state.stats?.selectedRange?.android);
+      } else if (state.period === "today") {
         iosValue = getIosValue(ios.today);
         androidValue = getAndroidValue(android.today);
-      } else if (state.period === "week") {
-        iosValue = getIosValue(ios.week);
-        androidValue = getAndroidValue(android.week);
-      } else if (state.period === "month") {
-        iosValue = getIosValue(ios.month);
-        androidValue = getAndroidValue(android.month);
       } else {
         iosValue = getIosValue(ios.total);
         androidValue = getAndroidValue(android.total);
       }
 
       const today = currentDate();
-      const periodStart =
-        state.period === "today"
-          ? today
-          : state.period === "week"
-            ? mondayOfWeek(today)
-            : state.period === "month"
-              ? `${today.slice(0, 7)}-01`
-              : APP_LAUNCH_DATE;
+      const activeRange = selectedPeriodRange();
+      const periodStart = state.period === "today"
+        ? today
+        : activeRange?.startDate || APP_LAUNCH_DATE;
+      const periodEnd = state.period === "today"
+        ? today
+        : activeRange?.endDate || today;
 
       const iosHasCoverage =
         state.period === "all"
@@ -3199,7 +3749,7 @@
           ? iosReady
           : Boolean(
               iosLatest &&
-              iosLatest >= today
+              iosLatest >= periodEnd
             );
 
       const androidPeriodConfirmed =
@@ -3207,7 +3757,7 @@
           ? androidReady
           : Boolean(
               androidLatest &&
-              androidLatest >= today
+              androidLatest >= periodEnd
             );
 
       const iosDisplayReady = iosHasCoverage;
@@ -3242,6 +3792,7 @@
         androidPeriodConfirmed,
         partial,
         periodStart,
+        periodEnd,
         iosValue,
         androidValue,
         total,
@@ -3375,14 +3926,11 @@
         rows = rows.filter(row => row.key === today);
       }
 
-      if (state.period === "week") {
-        const start = mondayOfWeek(today);
-        rows = rows.filter(row => row.key >= start && row.key <= today);
-      }
-
-      if (state.period === "month") {
-        const month = today.slice(0, 7);
-        rows = rows.filter(row => row.key.startsWith(month));
+      if (isRangePeriod()) {
+        const range = selectedPeriodRange();
+        rows = range
+          ? rows.filter(row => row.key >= range.startDate && row.key <= range.endDate)
+          : [];
       }
 
       return rows;
@@ -3588,12 +4136,27 @@
           ${rows.map(row => {
             const meta = channelMeta(row.source);
             const value = number(row[effectiveValueKey]);
-            const share = percent(value, effectiveTotal);
             const width = clamp(
               value / maxValue * 100,
               value > 0 ? 4 : 0,
               100
             );
+            const hasUniqueEntrants = number(row.uniqueEntrants) > 0;
+            const hasUniqueDownloads = number(row.uniqueDownloads) > 0;
+            const entrantValue = hasUniqueEntrants
+              ? number(row.uniqueEntrants)
+              : number(row.visits || row.entry);
+            const storeValue = hasUniqueDownloads
+              ? number(row.uniqueDownloads)
+              : number(row.downloads);
+            const movementRate = hasUniqueEntrants
+              ? percent(storeValue, entrantValue)
+              : null;
+            const platformParts = [
+              number(row.ios) > 0 ? `iPhone ${formatNumber(row.ios)}회` : "",
+              number(row.android) > 0 ? `Android ${formatNumber(row.android)}회` : "",
+              number(row.unknown) > 0 ? `기타 ${formatNumber(row.unknown)}회` : ""
+            ].filter(Boolean);
 
             return `
               <div class="channel-bar-row">
@@ -3605,7 +4168,7 @@
                   </div>
 
                   <div class="source-share">
-                    ${formatRate(share)}
+                    ${movementRate === null ? "이동률 -" : `이동률 ${formatRate(movementRate)}`}
                   </div>
 
                   <div class="source-total">
@@ -3621,33 +4184,22 @@
                   ></div>
                 </div>
 
-                <div class="channel-bar-detail">
-                  ${number(row.uniqueEntrants) > 0
-                    ? `<span class="unique-chip">들어온 사람 ${formatNumber(row.uniqueEntrants)}명</span>`
-                    : ""}
+                <div class="channel-journey">
+                  <div class="journey-step">
+                    <small>${hasUniqueEntrants ? "유입한 사람" : "방문"}</small>
+                    <strong>${formatNumber(entrantValue)}${hasUniqueEntrants ? "명" : "회"}</strong>
+                  </div>
+                  <div class="journey-arrow" aria-hidden="true">→</div>
+                  <div class="journey-step store">
+                    <small>${hasUniqueDownloads ? "스토어로 간 사람" : "스토어 이동"}</small>
+                    <strong>${formatNumber(storeValue)}${hasUniqueDownloads ? "명" : "회"}</strong>
+                  </div>
+                </div>
 
-                  ${number(row.visits) > 0
-                    ? `<span class="chip visit">방문 ${formatNumber(row.visits)}회</span>`
-                    : ""}
-
-                  ${number(row.downloads) > 0
-                    ? `<span class="chip store">스토어 ${formatNumber(row.downloads)}회</span>`
-                    : ""}
-
-                  ${number(row.uniqueDownloads) > 0
-                    ? `<span class="unique-chip">스토어로 간 사람 ${formatNumber(row.uniqueDownloads)}명</span>`
-                    : ""}
-
-                  ${number(row.ios) > 0
-                    ? `<span class="chip ios">iOS ${formatNumber(row.ios)}회</span>`
-                    : ""}
-
-                  ${number(row.android) > 0
-                    ? `<span class="chip android">Android ${formatNumber(row.android)}회</span>`
-                    : ""}
-
-                  ${number(row.unknown) > 0
-                    ? `<span class="chip unknown">미분류 ${formatNumber(row.unknown)}회</span>`
+                <div class="channel-secondary">
+                  <span>총 방문 ${formatNumber(row.visits)}회 · 총 스토어 이동 ${formatNumber(row.downloads)}회</span>
+                  ${platformParts.length
+                    ? `<span class="channel-platforms"><strong>스토어 이동 상세</strong> ${platformParts.join(" · ")}</span>`
                     : ""}
                 </div>
               </div>
@@ -3934,7 +4486,7 @@
           })}
 
           ${kpiCard({
-            label: "가장 많이 온 곳",
+            label: "가장 많은 유입 채널",
             value: topChannel ? channelMeta(topChannel.source).label : "-",
             unit: "",
             desc: topChannel ? `${formatNumber(topChannelValue)}${topChannelUnit} 들어옴` : "외부 유입 없음",
@@ -3988,7 +4540,7 @@
             <div class="section-head">
               <div>
                 <div class="eyebrow">SOURCE</div>
-                <h2 class="section-title">어디서 왔나</h2>
+                <h2 class="section-title">유입 채널</h2>
               </div>
               <div class="section-caption">상위 3개</div>
             </div>
@@ -4043,7 +4595,7 @@
           })}
 
           ${kpiCard({
-            label: `${label} 외부에서 들어온 사람`,
+            label: `${label} 외부 채널 유입`,
             value: channels.externalUniqueEntries,
             unit: "명",
             desc: "반복 방문 제외",
@@ -4074,13 +4626,13 @@
           <div class="section-head">
             <div>
               <div class="eyebrow">RANKING</div>
-              <h2 class="section-title">어디서 많이 왔나</h2>
+              <h2 class="section-title">유입 채널 순위</h2>
             </div>
             <div class="section-caption">${channelUsesPeople ? "사람 수 기준" : "방문 횟수 기준"}</div>
           </div>
 
           <div class="channel-visual-grid">
-            <div>${donutHtml(slices, "외부에서", `${formatNumber(totalForVisual)}${channelUsesPeople ? "명" : "회"}`)}</div>
+            <div>${donutHtml(slices, "외부 채널", `${formatNumber(totalForVisual)}${channelUsesPeople ? "명" : "회"}`)}</div>
             <div>${channelBarsHtml(channels.external, channels.externalUniqueEntries, "uniqueEntry", "명")}</div>
           </div>
         </section>
@@ -4212,7 +4764,7 @@
 
         <section class="surface channel-visual">
           <div class="section-head">
-            <div><div class="eyebrow">SOURCE</div><h2 class="section-title">어디서 스토어로 갔나</h2></div>
+            <div><div class="eyebrow">SOURCE</div><h2 class="section-title">스토어 이동 유입 채널</h2></div>
             <div class="section-caption">사람 수 기준</div>
           </div>
           <div style="margin-top:24px">${channelBarsHtml(sourceRows, sourceUniqueTotal, "uniqueDownloads", "명")}</div>
@@ -4394,6 +4946,120 @@
       renderOverview();
     }
 
+    function formatUnixTime(value) {
+      const date = new Date(number(value) * 1000);
+      if (Number.isNaN(date.getTime())) return "-";
+      return new Intl.DateTimeFormat("ko-KR", {
+        month: "numeric",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: "Asia/Seoul"
+      }).format(date);
+    }
+
+    function renderDevices() {
+      const rows = Array.isArray(state.devices) ? state.devices : [];
+
+      deviceList.innerHTML = rows.length
+        ? rows.map(device => `
+            <div class="device-card ${device.current ? "current" : ""}">
+              <div class="device-card-head">
+                <div class="device-name">
+                  ${escapeHtml(device.deviceName || "등록 기기")}
+                  ${device.current ? `<span class="device-current">현재 기기</span>` : ""}
+                </div>
+              </div>
+              <div class="device-meta">
+                마지막 접속 ${escapeHtml(formatUnixTime(device.lastSeenAt))}<br>
+                접속 IP ${escapeHtml(device.lastIp || "확인 불가")} · 신뢰 만료 ${escapeHtml(formatUnixTime(device.expiresAt))}
+              </div>
+              <div class="device-actions">
+                <button class="device-action" data-device-action="rename" data-device-id="${escapeHtml(device.id)}" data-device-name="${escapeHtml(device.deviceName || "등록 기기")}" type="button">이름 변경</button>
+                <button class="device-action danger" data-device-action="revoke" data-device-id="${escapeHtml(device.id)}" data-current="${device.current ? "true" : "false"}" type="button">로그아웃</button>
+              </div>
+            </div>
+          `).join("")
+        : `<div class="device-empty">현재 등록된 신뢰 기기를 확인하지 못했습니다.</div>`;
+    }
+
+    async function loadDevices() {
+      deviceList.innerHTML = `<div class="device-empty">등록 기기를 확인하는 중입니다.</div>`;
+
+      try {
+        const response = await adminFetch("/admin/devices", { method: "GET" });
+
+        if (response.status === 401) {
+          clearToken();
+          clearTrustedDevice();
+          showLogin();
+          return;
+        }
+
+        if (!response.ok) throw new Error("기기 목록을 불러오지 못했습니다.");
+
+        const data = await response.json();
+        state.devices = Array.isArray(data.devices) ? data.devices : [];
+        renderDevices();
+      } catch (error) {
+        deviceList.innerHTML = `<div class="device-empty">${escapeHtml(error?.message || "기기 목록 조회 중 오류가 발생했습니다.")}</div>`;
+      }
+    }
+
+    async function renameDevice(deviceId, currentName) {
+      const nextName = window.prompt("기기 이름을 입력해주세요.", currentName || "등록 기기");
+      if (nextName === null) return;
+
+      const deviceName = nextName.trim();
+      if (!deviceName) return;
+
+      const response = await postAdmin("/admin/devices/rename", {
+        deviceId,
+        deviceName
+      });
+
+      if (!response.ok) {
+        window.alert("기기 이름을 변경하지 못했습니다.");
+        return;
+      }
+
+      const trusted = getTrustedDevice();
+      if (trusted?.id === deviceId) {
+        saveTrustedDevice({ ...trusted, deviceName });
+      }
+
+      await loadDevices();
+    }
+
+    async function revokeDevice(deviceId, current) {
+      const confirmed = window.confirm(
+        current
+          ? "현재 기기를 로그아웃하시겠습니까?"
+          : "선택한 기기의 관리자 로그인을 해제하시겠습니까?"
+      );
+      if (!confirmed) return;
+
+      const response = await postAdmin("/admin/devices/revoke", { deviceId });
+
+      if (!response.ok) {
+        window.alert("기기 로그아웃을 완료하지 못했습니다.");
+        return;
+      }
+
+      if (current) {
+        clearToken();
+        clearTrustedDevice();
+        state.stats = null;
+        state.devices = [];
+        systemPopover.hidden = true;
+        showLogin();
+        return;
+      }
+
+      await loadDevices();
+    }
+
     function renderSystemStatus() {
       const install = getInstallPeriod();
       const storeStatus = state.stats?.storeStatus || {};
@@ -4479,12 +5145,51 @@
       renderCurrentView();
     }
 
-    function setPeriod(period) {
-      state.period = period;
+    function syncPeriodButtons(period = state.period) {
       periodTabs.forEach(button => {
         button.classList.toggle("is-active", button.dataset.period === period);
       });
+    }
+
+    function updateRangeSummaryText() {
+      const startDate = rangeStart.value;
+      const endDate = rangeEnd.value;
+      const days = rangeDayCount(startDate, endDate);
+
+      rangeSummary.textContent = days > 0
+        ? `${compactDate(startDate)}부터 ${compactDate(endDate)}까지 · ${formatNumber(days)}일간 집계`
+        : "시작일과 종료일을 확인해주세요.";
+    }
+
+    async function setPeriod(period) {
+      if (period === "custom") {
+        const today = currentDate();
+        rangeStart.max = today;
+        rangeEnd.max = today;
+        rangeStart.value = state.rangeStart || addIsoDays(today, -6);
+        rangeEnd.value = state.rangeEnd || today;
+        rangePanel.hidden = false;
+        syncPeriodButtons("custom");
+        updateRangeSummaryText();
+        return;
+      }
+
+      state.period = period;
+      rangePanel.hidden = true;
+      syncPeriodButtons(period);
+
+      if (isRangePeriod(period)) {
+        const range = selectedPeriodRange(period);
+        state.rangeStart = range?.startDate || null;
+        state.rangeEnd = range?.endDate || null;
+        await loadStats();
+        return;
+      }
+
+      state.rangeStart = null;
+      state.rangeEnd = null;
       renderCurrentView();
+      renderSystemStatus();
     }
 
     primaryTabs.forEach(button => {
@@ -4492,7 +5197,38 @@
     });
 
     periodTabs.forEach(button => {
-      button.addEventListener("click", () => setPeriod(button.dataset.period));
+      button.addEventListener("click", () => void setPeriod(button.dataset.period));
+    });
+
+    rangeStart.addEventListener("change", updateRangeSummaryText);
+    rangeEnd.addEventListener("change", updateRangeSummaryText);
+
+    rangeCancel.addEventListener("click", () => {
+      rangePanel.hidden = true;
+      syncPeriodButtons();
+    });
+
+    rangeApply.addEventListener("click", async () => {
+      const startDate = rangeStart.value;
+      const endDate = rangeEnd.value;
+      const today = currentDate();
+
+      if (!startDate || !endDate || startDate > endDate) {
+        rangeSummary.textContent = "시작일이 종료일보다 늦지 않도록 선택해주세요.";
+        return;
+      }
+
+      if (startDate < APP_LAUNCH_DATE || endDate > today) {
+        rangeSummary.textContent = `조회 가능 기간은 ${compactDate(APP_LAUNCH_DATE)}부터 ${compactDate(today)}까지입니다.`;
+        return;
+      }
+
+      state.period = "custom";
+      state.rangeStart = startDate;
+      state.rangeEnd = endDate;
+      rangePanel.hidden = true;
+      syncPeriodButtons("custom");
+      await loadStats();
     });
 
     passwordToggle.addEventListener("click", () => {
@@ -4514,7 +5250,10 @@
         const response = await fetch(apiUrl("/admin/login"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password })
+          body: JSON.stringify({
+            password,
+            rememberDevice: rememberDevice.checked
+          })
         });
 
         if (!response.ok) {
@@ -4529,6 +5268,11 @@
         if (!data?.token) throw new Error("인증 토큰을 받지 못했습니다.");
 
         saveToken(data.token);
+        if (rememberDevice.checked && data.trustedDevice) {
+          saveTrustedDevice(data.trustedDevice);
+        } else {
+          clearTrustedDevice();
+        }
         passwordInput.value = "";
         showDashboard();
         await loadStats();
@@ -4541,25 +5285,27 @@
     });
 
     async function loadStats() {
-      const token = getToken();
-      if (!token) {
+      if (!getToken() && !await refreshTrustedSession()) {
         showLogin();
         return;
       }
 
       refreshBtn.disabled = true;
+      rangeApply.disabled = true;
       setDashboardStatus("통계를 불러오는 중입니다.");
 
       try {
+        const statsPath = new URL(apiUrl("/admin/stats"));
+        statsPath.searchParams.set("days", "366");
+
+        const range = selectedPeriodRange();
+        if (isRangePeriod() && range) {
+          statsPath.searchParams.set("from", range.startDate);
+          statsPath.searchParams.set("to", range.endDate);
+        }
+
         const [response, workerResponse] = await Promise.all([
-          fetch(`${apiUrl("/admin/stats")}?days=31`, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: "application/json"
-            },
-            cache: "no-store"
-          }),
+          adminFetch(`${statsPath.pathname}${statsPath.search}`, { method: "GET" }),
           fetch(apiUrl("/"), {
             method: "GET",
             headers: { Accept: "application/json" },
@@ -4569,6 +5315,7 @@
 
         if (response.status === 401) {
           clearToken();
+          clearTrustedDevice();
           showLogin();
           loginError.textContent = "관리자 인증이 만료되었습니다. 다시 로그인해주세요.";
           return;
@@ -4584,8 +5331,14 @@
           throw new Error(`Worker 응답 필드 누락: ${missing.join(", ")}`);
         }
 
+        if (isRangePeriod() && !statsData.selectedRange) {
+          throw new Error("선택한 기간의 집계 결과를 받지 못했습니다.");
+        }
+
         state.stats = statsData;
         state.workerInfo = workerResponse?.ok ? await workerResponse.json() : null;
+        rangeStart.max = statsData.today?.date || currentDate();
+        rangeEnd.max = statsData.today?.date || currentDate();
 
         renderCurrentView();
         renderSystemStatus();
@@ -4605,11 +5358,13 @@
         setDashboardStatus(error?.message || "통계 조회 중 오류가 발생했습니다.", "error");
       } finally {
         refreshBtn.disabled = false;
+        rangeApply.disabled = false;
       }
     }
 
-        systemBtn.addEventListener("click", () => {
+    systemBtn.addEventListener("click", async () => {
       systemPopover.hidden = !systemPopover.hidden;
+      if (!systemPopover.hidden) await loadDevices();
     });
 
     systemCloseBtn.addEventListener("click", () => {
@@ -4618,27 +5373,55 @@
 
     refreshBtn.addEventListener("click", loadStats);
 
-    logoutBtn.addEventListener("click", async () => {
-      const token = getToken();
+    deviceList.addEventListener("click", event => {
+      const button = event.target.closest("[data-device-action]");
+      if (!button) return;
 
-      if (token) {
+      const deviceId = button.dataset.deviceId;
+      if (button.dataset.deviceAction === "rename") {
+        void renameDevice(deviceId, button.dataset.deviceName);
+      }
+
+      if (button.dataset.deviceAction === "revoke") {
+        void revokeDevice(deviceId, button.dataset.current === "true");
+      }
+    });
+
+    revokeOtherDevicesBtn.addEventListener("click", async () => {
+      if (!window.confirm("현재 기기를 제외한 모든 관리자 기기를 로그아웃하시겠습니까?")) return;
+
+      const response = await postAdmin("/admin/devices/revoke-others");
+      if (!response.ok) {
+        window.alert("다른 기기 로그아웃을 완료하지 못했습니다.");
+        return;
+      }
+
+      await loadDevices();
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      if (getToken() || getTrustedDevice()) {
         try {
-          await fetch(apiUrl("/admin/logout"), {
-            method: "POST",
-            headers: { Authorization: `Bearer ${token}` }
-          });
+          await adminFetch("/admin/logout", { method: "POST" });
         } catch (_) {}
       }
 
       clearToken();
+      clearTrustedDevice();
       state.stats = null;
       state.workerInfo = null;
+      state.devices = [];
+      state.period = "all";
+      state.rangeStart = null;
+      state.rangeEnd = null;
+      rangePanel.hidden = true;
+      syncPeriodButtons("all");
       systemPopover.hidden = true;
       showLogin();
     });
 
     async function initialize() {
-      if (getToken()) {
+      if (getToken() || await refreshTrustedSession()) {
         showDashboard();
         await loadStats();
       } else {
@@ -4650,4 +5433,3 @@
   </script>
 </body>
 </html>
-
