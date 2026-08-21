@@ -3,6 +3,8 @@
 
   const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
   const SOURCE_KEY = "moding_tracking_source";
+  const ATTRIBUTION_KEY = "moding_tracking_attribution_v1";
+  const ATTRIBUTION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
   const VISITOR_KEY = "moding_visitor_id_v1";
   const VISITOR_SESSION_KEY = "moding_visitor_id_session_v1";
   const VISIT_PREFIX = "moding_site_visit_tracked_v1";
@@ -28,6 +30,8 @@
     kakaotalk: "kakao",
     kakao_talk: "kakao",
     insta: "instagram",
+    thread: "threads",
+    threads_app: "threads",
     fb: "facebook",
     twitter: "x",
     yt: "youtube",
@@ -74,6 +78,14 @@
     return aliases[source] || source;
   }
 
+  function normalizeCampaign(value) {
+    return String(value || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9._-]/g, "")
+      .slice(0, 100);
+  }
+
   function isNaverSearchReferrer(referrer, host) {
     if (host === "search.naver.com" || host.endsWith(".search.naver.com")) {
       return true;
@@ -89,60 +101,159 @@
       referrer.searchParams.has("where");
   }
 
-  function sourceFromReferrer() {
-    if (!document.referrer) return "";
+  function referrerAttribution() {
+    if (!document.referrer) return null;
 
     try {
       const referrer = new URL(document.referrer);
-      const querySource =
+      const host = referrer.hostname.toLowerCase().replace(/^www\./, "");
+      if (!host || host === "moding.app" || host.endsWith(".moding.app")) return null;
+
+      const querySource = normalizeSource(
         referrer.searchParams.get("source") ||
         referrer.searchParams.get("src") ||
-        referrer.searchParams.get("utm_source");
+        referrer.searchParams.get("utm_source")
+      );
 
-      if (querySource) return normalizeSource(querySource);
-
-      const host = referrer.hostname.toLowerCase().replace(/^www\./, "");
-      if (!host || host === "moding.app" || host.endsWith(".moding.app")) return "";
-      if (/daangn\.com|karrotmarket\.com|karrot\.com/.test(host)) return "daangn";
-      if (host === "blog.naver.com" || host.endsWith(".blog.naver.com")) return "naver_blog";
-      if (host === "cafe.naver.com" || host.endsWith(".cafe.naver.com")) return "naver_cafe";
-      if (host === "m.place.naver.com" || host === "place.naver.com" || host.endsWith(".place.naver.com")) return "naver_place";
-      if (isNaverSearchReferrer(referrer, host)) return "naver_search";
-      if (host === "naver.me" || host === "naver.com" || host.endsWith(".naver.com")) return "naver";
-      if (host === "kakao.com" || host.endsWith(".kakao.com") || host.endsWith(".kakaocorp.com")) return "kakao";
-      if (host === "google.com" || host.endsWith(".google.com") || /^google\.[a-z.]+$/.test(host)) return "google";
-      if (host === "youtube.com" || host.endsWith(".youtube.com") || host === "youtu.be") return "youtube";
-      if (host === "instagram.com" || host.endsWith(".instagram.com")) return "instagram";
-      if (host === "facebook.com" || host.endsWith(".facebook.com") || host === "fb.com") return "facebook";
-      if (host === "x.com" || host.endsWith(".x.com") || host === "twitter.com" || host === "t.co") return "x";
-      return "referral";
+      if (querySource) return { source: querySource, referrerHost: host };
+      if (/daangn\.com|karrotmarket\.com|karrot\.com/.test(host)) return { source: "daangn", referrerHost: host };
+      if (host === "blog.naver.com" || host.endsWith(".blog.naver.com")) return { source: "naver_blog", referrerHost: host };
+      if (host === "cafe.naver.com" || host.endsWith(".cafe.naver.com")) return { source: "naver_cafe", referrerHost: host };
+      if (host === "m.place.naver.com" || host === "place.naver.com" || host.endsWith(".place.naver.com")) return { source: "naver_place", referrerHost: host };
+      if (isNaverSearchReferrer(referrer, host)) return { source: "naver_search", referrerHost: host };
+      if (host === "naver.me" || host === "naver.com" || host.endsWith(".naver.com")) return { source: "naver", referrerHost: host };
+      if (host === "kakao.com" || host.endsWith(".kakao.com") || host.endsWith(".kakaocorp.com")) return { source: "kakao", referrerHost: host };
+      if (host === "google.com" || host.endsWith(".google.com") || /^google\.[a-z.]+$/.test(host)) return { source: "google", referrerHost: host };
+      if (host === "youtube.com" || host.endsWith(".youtube.com") || host === "youtu.be") return { source: "youtube", referrerHost: host };
+      if (host === "instagram.com" || host.endsWith(".instagram.com")) return { source: "instagram", referrerHost: host };
+      if (host === "threads.net" || host.endsWith(".threads.net") || host === "threads.com" || host.endsWith(".threads.com")) return { source: "threads", referrerHost: host };
+      if (host === "facebook.com" || host.endsWith(".facebook.com") || host === "fb.com") return { source: "facebook", referrerHost: host };
+      if (host === "x.com" || host.endsWith(".x.com") || host === "twitter.com" || host === "t.co") return { source: "x", referrerHost: host };
+      return { source: "referral", referrerHost: host };
     } catch (error) {
-      return "";
+      return null;
     }
   }
 
-  function resolveSource() {
+  function sourceFromInAppBrowser() {
+    const ua = String(navigator.userAgent || "");
+    if (/KAKAOTALK/i.test(ua)) return "kakao";
+    if (/NAVER/i.test(ua)) return "naver";
+    if (/Instagram/i.test(ua)) return "instagram";
+    if (/Threads|Barcelona/i.test(ua)) return "threads";
+    if (/FBAN|FBAV|FBIOS|FB_IAB/i.test(ua)) return "facebook";
+    if (/Twitter/i.test(ua)) return "x";
+    if (/YouTube/i.test(ua)) return "youtube";
+    return "";
+  }
+
+  function readStoredAttribution() {
+    const raw = storageGet(localStorage, ATTRIBUTION_KEY);
+    if (!raw) return null;
+
+    try {
+      const saved = JSON.parse(raw);
+      const capturedAt = Number(saved?.capturedAt || 0);
+      const source = normalizeSource(saved?.source);
+      if (!source || source === "direct" || !capturedAt || Date.now() - capturedAt > ATTRIBUTION_TTL_MS) {
+        storageRemove(localStorage, ATTRIBUTION_KEY);
+        return null;
+      }
+
+      return {
+        source,
+        campaignId: normalizeCampaign(saved?.campaignId),
+        referrerHost: String(saved?.referrerHost || "").slice(0, 120)
+      };
+    } catch (error) {
+      storageRemove(localStorage, ATTRIBUTION_KEY);
+      return null;
+    }
+  }
+
+  function rememberAttribution(attribution) {
+    if (!attribution?.source || attribution.source === "direct") return;
+    storageSet(localStorage, ATTRIBUTION_KEY, JSON.stringify({
+      source: attribution.source,
+      campaignId: attribution.campaignId || "",
+      referrerHost: attribution.referrerHost || "",
+      capturedAt: Date.now()
+    }));
+  }
+
+  function resolveAttribution() {
     const params = new URLSearchParams(window.location.search);
+    const campaignId = normalizeCampaign(
+      params.get("cid") || params.get("utm_campaign") || params.get("campaign")
+    );
     const explicit = normalizeSource(
       params.get("source") || params.get("src") || params.get("utm_source")
     );
 
     if (explicit) {
+      const tagged = {
+        source: explicit,
+        sourceMethod: explicit === "direct" ? "direct" : "tagged",
+        campaignId,
+        referrerHost: ""
+      };
       storageSet(sessionStorage, SOURCE_KEY, explicit);
-      return explicit;
+      rememberAttribution(tagged);
+      return tagged;
     }
 
-    const referred = sourceFromReferrer();
-    if (referred) {
-      storageSet(sessionStorage, SOURCE_KEY, referred);
-      return referred;
+    const referred = referrerAttribution();
+    if (referred?.source) {
+      const attribution = {
+        source: referred.source,
+        sourceMethod: "referrer",
+        campaignId,
+        referrerHost: referred.referrerHost || ""
+      };
+      storageSet(sessionStorage, SOURCE_KEY, attribution.source);
+      rememberAttribution(attribution);
+      return attribution;
     }
 
-    const saved = normalizeSource(storageGet(sessionStorage, SOURCE_KEY));
-    if (saved) return saved;
+    const inAppSource = normalizeSource(sourceFromInAppBrowser());
+    if (inAppSource) {
+      const inferred = {
+        source: inAppSource,
+        sourceMethod: "in_app",
+        campaignId,
+        referrerHost: ""
+      };
+      storageSet(sessionStorage, SOURCE_KEY, inAppSource);
+      rememberAttribution(inferred);
+      return inferred;
+    }
+
+    const stored = readStoredAttribution();
+    if (stored) {
+      storageSet(sessionStorage, SOURCE_KEY, stored.source);
+      return {
+        ...stored,
+        sourceMethod: "persisted"
+      };
+    }
+
+    const legacySource = normalizeSource(storageGet(sessionStorage, SOURCE_KEY));
+    if (legacySource && legacySource !== "direct") {
+      return {
+        source: legacySource,
+        sourceMethod: "persisted",
+        campaignId: "",
+        referrerHost: ""
+      };
+    }
 
     storageSet(sessionStorage, SOURCE_KEY, "direct");
-    return "direct";
+    return {
+      source: "direct",
+      sourceMethod: "direct",
+      campaignId: "",
+      referrerHost: ""
+    };
   }
 
   function validVisitorId(value) {
@@ -177,18 +288,26 @@
     return created;
   }
 
-  const source = resolveSource();
+  const attribution = resolveAttribution();
   const visitor = visitorId();
-  const visitKey = `${VISIT_PREFIX}:${source}`;
+  const visitKey = `${VISIT_PREFIX}:${attribution.source}`;
 
-  window.ModingTracking = Object.freeze({ source, visitorId: visitor });
+  window.ModingTracking = Object.freeze({
+    ...attribution,
+    confidence: attribution.sourceMethod === "tagged" || attribution.sourceMethod === "referrer"
+      ? "confirmed"
+      : attribution.sourceMethod === "direct"
+        ? "unresolved"
+        : "estimated",
+    visitorId: visitor
+  });
 
   if (/bot|crawl|crawler|spider|slurp|yeti|googlebot|bingbot|daumoa|ads-naver/i.test(navigator.userAgent || "")) return;
   if (storageGet(sessionStorage, visitKey) === "1") return;
 
   storageSet(sessionStorage, visitKey, "1");
-  storageSet(sessionStorage, `moding_index_visit_tracked_v3:${source}`, "1");
-  storageSet(sessionStorage, `moding_alliance_visit_tracked_v1:${source}`, "1");
+  storageSet(sessionStorage, `moding_index_visit_tracked_v3:${attribution.source}`, "1");
+  storageSet(sessionStorage, `moding_alliance_visit_tracked_v1:${attribution.source}`, "1");
 
   fetch(`${API_BASE}/track/visit`, {
     method: "POST",
@@ -200,7 +319,10 @@
       "X-Moding-Visitor-ID": visitor
     },
     body: JSON.stringify({
-      source,
+      source: attribution.source,
+      sourceMethod: attribution.sourceMethod,
+      campaignId: attribution.campaignId,
+      referrerHost: attribution.referrerHost,
       visitorId: visitor,
       landingPage: window.location.pathname || "/"
     })
