@@ -857,6 +857,11 @@
       background: #F9FAF9;
     }
 
+    .attribution-before {
+      border-color: #C7D4E5;
+      background: #F3F7FC;
+    }
+
     .flow-card {
       margin-top: 16px;
       padding: 30px;
@@ -2910,13 +2915,13 @@
   </aside>
 
   <script>
-    // MODING ADMIN v19 - consistent source confidence attribution
+    // MODING ADMIN v20 - attribution coverage and store sync freshness
     const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
     const SESSION_TOKEN_KEY = "moding_admin_token";
     const TRUSTED_DEVICE_KEY = "moding_admin_trusted_device";
     const APP_LAUNCH_DATE = "2026-07-01";
     const APP_LAUNCH_MONTH = APP_LAUNCH_DATE.slice(0, 7);
-    const REQUIRED_WORKER_VERSION = "stats-v15-attribution-consistency";
+    const REQUIRED_WORKER_VERSION = "stats-v16-data-freshness";
 
     const COLORS = {
       green: "#238B22",
@@ -3157,9 +3162,26 @@
 
     function parseSyncMeta(value) {
       if (!value) return null;
-      if (typeof value === "object") return value;
+      if (typeof value === "object") {
+        if (Object.prototype.hasOwnProperty.call(value, "value")) {
+          const parsed = parseSyncMeta(value.value);
+          const updatedAt = value.updatedAt || value.updated_at || null;
+
+          if (parsed && typeof parsed === "object") {
+            return {
+              ...parsed,
+              updatedAt: parsed.updatedAt || updatedAt
+            };
+          }
+
+          return parsed || null;
+        }
+
+        return value;
+      }
+
       try {
-        return JSON.parse(value);
+        return parseSyncMeta(JSON.parse(value));
       } catch (error) {
         return { detail: String(value) };
       }
@@ -3525,6 +3547,20 @@
       };
     }
 
+    function attributionCoverage(attribution, unique = getUniquePeriod()) {
+      const classifiedVisitors =
+        number(attribution?.confirmed?.visitors) +
+        number(attribution?.estimated?.visitors) +
+        number(attribution?.unresolved?.visitors);
+      const periodVisitors = number(unique?.visitors);
+
+      return {
+        periodVisitors,
+        classifiedVisitors,
+        beforeTrackingVisitors: Math.max(0, periodVisitors - classifiedVisitors)
+      };
+    }
+
     function attributionStartText(attribution) {
       if (attribution?.trackingStartAt) {
         const raw = String(attribution.trackingStartAt).trim();
@@ -3539,13 +3575,18 @@
         : "신규 분류 적용 이후";
     }
 
-    function attributionBanner(attribution) {
+    function attributionBanner(attribution, coverage = attributionCoverage(attribution)) {
+      const coverageText = coverage.beforeTrackingVisitors > 0
+        ? `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명 중 ${formatNumber(coverage.classifiedVisitors)}명은 분류 대상이며, 분류 적용 전 ${formatNumber(coverage.beforeTrackingVisitors)}명은 아래 합계에서 제외됩니다.`
+        : `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명 모두 출처 분류 대상입니다.`;
+
       return `
         <div class="tracking-banner">
           <div>
             <strong>출처 판정 기준</strong>
             URL 태그·외부 링크는 확정, 30일 이내 이전 유입·인앱 브라우저는 추정으로 표시합니다.
             같은 방문자는 해당 기간의 가장 신뢰도 높은 한 단계에만 포함하며, 근거가 없는 방문에는 임의로 출처를 붙이지 않습니다.
+            ${coverageText}
           </div>
           <span class="tracking-pill">${escapeHtml(attributionStartText(attribution))}</span>
         </div>
@@ -3768,6 +3809,18 @@
       const mode = getAndroidInstallMode(store);
       const latest = getLatestDataDate(store);
 
+      if (store?.bulkStale) {
+        const ageDays = store?.bulkAgeDays !== null &&
+          store?.bulkAgeDays !== undefined &&
+          Number.isFinite(Number(store.bulkAgeDays))
+          ? Number(store.bulkAgeDays)
+          : null;
+
+        return latest
+          ? `${compactDate(latest)}까지 확정${ageDays !== null ? ` · ${ageDays}일 지연` : " · 업데이트 지연"}`
+          : "Google 설치 보고서 업데이트 지연";
+      }
+
       if (mode === "hybrid") {
         return latest
           ? `${compactDate(latest)}까지 확정 · 자동 집계`
@@ -3889,6 +3942,13 @@
         androidMode: getAndroidInstallMode(android),
         androidLegacyReady: Boolean(android?.legacyReady),
         androidBulkReady: Boolean(android?.bulkReady),
+        androidBulkFresh: Boolean(android?.bulkFresh),
+        androidBulkStale: Boolean(android?.bulkStale),
+        androidBulkAgeDays: android?.bulkAgeDays !== null &&
+          android?.bulkAgeDays !== undefined &&
+          Number.isFinite(Number(android.bulkAgeDays))
+          ? Number(android.bulkAgeDays)
+          : null,
         androidLegacyLatest: android?.legacyLatestDataDate || null,
         androidBulkLatest: android?.bulkLatestDataDate || null
       };
@@ -4539,6 +4599,7 @@
       const confirmedAttribution = attributionDisplay(attribution.confirmed);
       const estimatedAttribution = attributionDisplay(attribution.estimated);
       const unresolvedAttribution = attributionDisplay(attribution.unresolved);
+      const coverage = attributionCoverage(attribution, unique);
 
       const installDisplay = install.total === null ? "집계 중" : install.total;
       const installUnit = install.total === null ? "" : "건";
@@ -4672,6 +4733,13 @@
                 </div>
                 <span class="direct-value">${formatNumber(unresolvedAttribution.value)}${unresolvedAttribution.unit}</span>
               </div>
+              <div class="direct-box attribution-before">
+                <div>
+                  <strong>분류 적용 전</strong>
+                  <span>출처 분류 시작 전 방문</span>
+                </div>
+                <span class="direct-value">${formatNumber(coverage.beforeTrackingVisitors)}명</span>
+              </div>
             </div>
           </aside>
         </div>
@@ -4683,6 +4751,7 @@
     function renderChannels() {
       const channels = groupChannels();
       const attribution = getAttributionPeriod();
+      const unique = getUniquePeriod();
       const label = periodName();
       const channelUsesPeople = channels.external.some(row => row.uniqueEntry > 0);
       const totalForVisual = channelUsesPeople ? channels.externalUniqueEntries : channels.externalEntries;
@@ -4694,6 +4763,7 @@
       const confirmedAttribution = attributionDisplay(attribution.confirmed);
       const estimatedAttribution = attributionDisplay(attribution.estimated);
       const unresolvedAttribution = attributionDisplay(attribution.unresolved);
+      const coverage = attributionCoverage(attribution, unique);
 
       content.innerHTML = `
         <div class="kpi-grid">
@@ -4701,9 +4771,13 @@
             label: `${label} 유입 채널`,
             value: channels.external.length,
             unit: "개",
-            desc: "사람이 들어온 외부 채널",
+            desc: `방문 ${formatNumber(coverage.periodVisitors)}명 중 출처 분류 ${formatNumber(coverage.classifiedVisitors)}명`,
             className: "primary",
-            footer: top ? `가장 많은 곳 ${escapeHtml(channelMeta(top.source).label)}` : "유입 대기"
+            footer: coverage.beforeTrackingVisitors > 0
+              ? `분류 적용 전 ${formatNumber(coverage.beforeTrackingVisitors)}명 별도`
+              : top
+                ? `가장 많은 곳 ${escapeHtml(channelMeta(top.source).label)}`
+                : "유입 대기"
           })}
 
           ${kpiCard({
@@ -4734,7 +4808,7 @@
           })}
         </div>
 
-        ${attributionBanner(attribution)}
+        ${attributionBanner(attribution, coverage)}
 
         <section class="surface channel-visual">
           <div class="section-head">
@@ -5209,27 +5283,59 @@
         : "Apple 설치 데이터 대기";
 
       const googleMode = googleStatus.mode || install.androidMode;
-      const googleError = googleStatus.lastError || googleBulkStatus.lastError;
+      const googleError = parseSyncMeta(googleStatus.lastError || googleBulkStatus.lastError);
       const googleSuccess = parseSyncMeta(googleStatus.lastSuccess || googleBulkStatus.lastSuccess);
       const googleAttempt = parseSyncMeta(googleStatus.lastAttempt || googleBulkStatus.lastAttempt);
       const scheduledFailed = scheduledResult && scheduledResult.ok === false;
-
-      if (googleMode === "hybrid" || googleStatus.state === "ready") {
-        googleDot.classList.add("ready");
-        googleDot.classList.remove("warn");
-        googleState.textContent = "정상";
-        const latest = install.androidBulkLatest || googleStatus.bulkLatestDataDate || googleBulkStatus.latestDataDate;
-        googleDesc.textContent = latest
-          ? `${compactDate(latest)}까지 반영${googleSuccess?.at ? ` · 동기화 ${compactDateTime(googleSuccess.at)}` : ""}`
-          : androidInstallStatusText(install.android);
-        return;
-      }
+      const scheduledGoogleJob = Array.isArray(scheduledResult?.jobs)
+        ? scheduledResult.jobs.find(job => job?.name === "google_bulk_installs")
+        : null;
+      const googleStateValue = googleStatus.state || googleBulkStatus.state || null;
+      const googleStale =
+        googleStateValue === "stale" ||
+        googleStatus.bulkStale === true ||
+        googleBulkStatus.stale === true;
+      const googleAgeDaysValue = googleStatus.bulkAgeDays ?? googleBulkStatus.ageDays;
+      const googleAgeDays = googleAgeDaysValue !== null &&
+        googleAgeDaysValue !== undefined &&
+        Number.isFinite(Number(googleAgeDaysValue))
+        ? Number(googleAgeDaysValue)
+        : null;
+      const latest = install.androidBulkLatest || googleStatus.bulkLatestDataDate || googleBulkStatus.latestDataDate;
 
       if (googleError) {
         googleDot.classList.remove("ready");
         googleDot.classList.add("warn");
         googleState.textContent = "확인 필요";
         googleDesc.textContent = `${googleSyncIssueText(googleError)}${googleAttempt?.at ? ` · ${compactDateTime(googleAttempt.at)}` : ""}`;
+        return;
+      }
+
+      if (scheduledGoogleJob?.ok === false) {
+        googleDot.classList.remove("ready");
+        googleDot.classList.add("warn");
+        googleState.textContent = "동기화 확인";
+        googleDesc.textContent = `${scheduledGoogleJob.error || scheduledGoogleJob.message || "최근 Google 자동 동기화 실패"}${googleAttempt?.at ? ` · ${compactDateTime(googleAttempt.at)}` : ""}`;
+        return;
+      }
+
+      if (googleStale) {
+        googleDot.classList.remove("ready");
+        googleDot.classList.add("warn");
+        googleState.textContent = "업데이트 지연";
+        googleDesc.textContent = latest
+          ? `${compactDate(latest)}까지 반영${googleAgeDays !== null ? ` · ${googleAgeDays}일 지연` : ""}${googleSuccess?.at ? ` · 마지막 동기화 ${compactDateTime(googleSuccess.at)}` : ""}`
+          : "Google 설치 보고서 업데이트 지연";
+        return;
+      }
+
+      if (googleMode === "hybrid" || googleStateValue === "ready") {
+        googleDot.classList.add("ready");
+        googleDot.classList.remove("warn");
+        googleState.textContent = "정상";
+        googleDesc.textContent = latest
+          ? `${compactDate(latest)}까지 반영${googleSuccess?.at ? ` · 동기화 ${compactDateTime(googleSuccess.at)}` : ""}`
+          : androidInstallStatusText(install.android);
         return;
       }
 
