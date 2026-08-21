@@ -1225,6 +1225,7 @@
       </a>
 
       <div class="nav-menu">
+        <a href="download.html">앱 다운로드</a>
         <a href="about.html">About</a>
         <a href="brand.html">Brand</a>
         <a href="services.html">Services</a>
@@ -1272,6 +1273,7 @@
       </div>
 
       <nav class="mobile-menu-links" aria-label="모바일 메뉴">
+        <a href="download.html">앱 다운로드</a>
         <a href="about.html">About</a>
         <a href="brand.html">Brand</a>
         <a href="services.html">Services</a>
@@ -2172,6 +2174,12 @@
         naver_smartplace:
           "naver_place",
 
+        naversearch: "naver_search",
+        "naver-search": "naver_search",
+        naverorganic: "naver_search",
+        naver_organic:
+          "naver_search",
+
         kakaotalk: "kakao",
         kakao_talk: "kakao",
 
@@ -2190,6 +2198,50 @@
       return (
         aliases[source] ||
         source
+      );
+    }
+
+    function isNaverSearchReferrer(
+      refUrl,
+      host
+    ) {
+      if (
+        host === "search.naver.com" ||
+        host.endsWith(
+          ".search.naver.com"
+        )
+      ) {
+        return true;
+      }
+
+      const isNaverHost =
+        host === "naver.com" ||
+        host.endsWith(
+          ".naver.com"
+        );
+
+      if (!isNaverHost) {
+        return false;
+      }
+
+      const path =
+        String(
+          refUrl.pathname || ""
+        ).toLowerCase();
+
+      return (
+        path.includes(
+          "/search.naver"
+        ) ||
+        path.startsWith(
+          "/search/"
+        ) ||
+        refUrl.searchParams.has(
+          "query"
+        ) ||
+        refUrl.searchParams.has(
+          "where"
+        )
       );
     }
 
@@ -2263,6 +2315,42 @@
         )
       ) {
         return "daangn";
+      }
+
+      if (
+        host === "blog.naver.com" ||
+        host.endsWith(
+          ".blog.naver.com"
+        )
+      ) {
+        return "naver_blog";
+      }
+
+      if (
+        host === "cafe.naver.com" ||
+        host.endsWith(
+          ".cafe.naver.com"
+        )
+      ) {
+        return "naver_cafe";
+      }
+
+      if (
+        host === "place.naver.com" ||
+        host.endsWith(
+          ".place.naver.com"
+        )
+      ) {
+        return "naver_place";
+      }
+
+      if (
+        isNaverSearchReferrer(
+          refUrl,
+          host
+        )
+      ) {
+        return "naver_search";
       }
 
       if (
@@ -3814,4 +3902,3 @@
 
 </body>
 </html>
-

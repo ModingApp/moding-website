@@ -48,6 +48,26 @@
       }
     }
   </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "모딩",
+          "item": "https://moding.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "앱 다운로드",
+          "item": "https://moding.app/download.html"
+        }
+      ]
+    }
+  </script>
   <script src="/assets/js/site-tracking.js"></script>
 
 <style>
@@ -155,6 +175,11 @@
         smartplace: "naver_place",
         naver_smartplace: "naver_place",
 
+        naversearch: "naver_search",
+        "naver-search": "naver_search",
+        naverorganic: "naver_search",
+        naver_organic: "naver_search",
+
         kakaotalk: "kakao",
         kakao_talk: "kakao",
 
@@ -177,6 +202,50 @@
       };
 
       return aliases[source] || source;
+    }
+
+    function isNaverSearchReferrer(
+      refUrl,
+      host
+    ) {
+      if (
+        host === "search.naver.com" ||
+        host.endsWith(
+          ".search.naver.com"
+        )
+      ) {
+        return true;
+      }
+
+      const isNaverHost =
+        host === "naver.com" ||
+        host.endsWith(
+          ".naver.com"
+        );
+
+      if (!isNaverHost) {
+        return false;
+      }
+
+      const path =
+        String(
+          refUrl.pathname || ""
+        ).toLowerCase();
+
+      return (
+        path.includes(
+          "/search.naver"
+        ) ||
+        path.startsWith(
+          "/search/"
+        ) ||
+        refUrl.searchParams.has(
+          "query"
+        ) ||
+        refUrl.searchParams.has(
+          "where"
+        )
+      );
     }
 
     function getReferrerInfo() {
@@ -234,6 +303,54 @@
         ) {
           return {
             source: "daangn",
+            isModing: false
+          };
+        }
+
+        if (
+          host === "blog.naver.com" ||
+          host.endsWith(
+            ".blog.naver.com"
+          )
+        ) {
+          return {
+            source: "naver_blog",
+            isModing: false
+          };
+        }
+
+        if (
+          host === "cafe.naver.com" ||
+          host.endsWith(
+            ".cafe.naver.com"
+          )
+        ) {
+          return {
+            source: "naver_cafe",
+            isModing: false
+          };
+        }
+
+        if (
+          host === "place.naver.com" ||
+          host.endsWith(
+            ".place.naver.com"
+          )
+        ) {
+          return {
+            source: "naver_place",
+            isModing: false
+          };
+        }
+
+        if (
+          isNaverSearchReferrer(
+            refUrl,
+            host
+          )
+        ) {
+          return {
+            source: "naver_search",
             isModing: false
           };
         }

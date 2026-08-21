@@ -21,6 +21,10 @@
     naverplace: "naver_place",
     smartplace: "naver_place",
     naver_smartplace: "naver_place",
+    naversearch: "naver_search",
+    "naver-search": "naver_search",
+    naverorganic: "naver_search",
+    naver_organic: "naver_search",
     kakaotalk: "kakao",
     kakao_talk: "kakao",
     insta: "instagram",
@@ -70,6 +74,21 @@
     return aliases[source] || source;
   }
 
+  function isNaverSearchReferrer(referrer, host) {
+    if (host === "search.naver.com" || host.endsWith(".search.naver.com")) {
+      return true;
+    }
+
+    const isNaverHost = host === "naver.com" || host.endsWith(".naver.com");
+    if (!isNaverHost) return false;
+
+    const path = String(referrer.pathname || "").toLowerCase();
+    return path.includes("/search.naver") ||
+      path.startsWith("/search/") ||
+      referrer.searchParams.has("query") ||
+      referrer.searchParams.has("where");
+  }
+
   function sourceFromReferrer() {
     if (!document.referrer) return "";
 
@@ -85,6 +104,10 @@
       const host = referrer.hostname.toLowerCase().replace(/^www\./, "");
       if (!host || host === "moding.app" || host.endsWith(".moding.app")) return "";
       if (/daangn\.com|karrotmarket\.com|karrot\.com/.test(host)) return "daangn";
+      if (host === "blog.naver.com" || host.endsWith(".blog.naver.com")) return "naver_blog";
+      if (host === "cafe.naver.com" || host.endsWith(".cafe.naver.com")) return "naver_cafe";
+      if (host === "m.place.naver.com" || host === "place.naver.com" || host.endsWith(".place.naver.com")) return "naver_place";
+      if (isNaverSearchReferrer(referrer, host)) return "naver_search";
       if (host === "naver.me" || host === "naver.com" || host.endsWith(".naver.com")) return "naver";
       if (host === "kakao.com" || host.endsWith(".kakao.com") || host.endsWith(".kakaocorp.com")) return "kakao";
       if (host === "google.com" || host.endsWith(".google.com") || /^google\.[a-z.]+$/.test(host)) return "google";

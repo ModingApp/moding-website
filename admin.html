@@ -2905,6 +2905,7 @@
     const CHANNEL_META = {
       daangn: { label: "당근", icon: "🥕", className: "daangn", color: "#FF6F0F" },
       naver: { label: "네이버", icon: "N", className: "naver", color: "#03C75A" },
+      naver_search: { label: "네이버 검색", icon: "N", className: "naver", color: "#00A843" },
       kakao: { label: "카카오톡", icon: "K", className: "kakao", color: "#E7C900" },
       youtube: { label: "유튜브", icon: "▶", className: "youtube", color: "#FF0033" },
       instagram: { label: "인스타그램", icon: "◎", className: "instagram", color: "#D62976" },
@@ -3275,6 +3276,7 @@
 
     function channelFamily(source) {
       const value = String(source || "direct").toLowerCase();
+      if (value === "naver_search") return "naver_search";
       if (value.startsWith("naver")) return "naver";
       if (value === "kakaotalk" || value === "kakao_talk") return "kakao";
       if (value === "insta") return "instagram";
