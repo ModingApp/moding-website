@@ -2910,13 +2910,13 @@
   </aside>
 
   <script>
-    // MODING ADMIN v18 - source confidence attribution
+    // MODING ADMIN v19 - consistent source confidence attribution
     const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
     const SESSION_TOKEN_KEY = "moding_admin_token";
     const TRUSTED_DEVICE_KEY = "moding_admin_trusted_device";
     const APP_LAUNCH_DATE = "2026-07-01";
     const APP_LAUNCH_MONTH = APP_LAUNCH_DATE.slice(0, 7);
-    const REQUIRED_WORKER_VERSION = "stats-v14-source-attribution";
+    const REQUIRED_WORKER_VERSION = "stats-v15-attribution-consistency";
 
     const COLORS = {
       green: "#238B22",
@@ -3510,6 +3510,7 @@
 
       return {
         trackingStartDate: root.trackingStartDate || current?.trackingStartDate || null,
+        trackingStartAt: root.trackingStartAt || current?.trackingStartAt || null,
         confirmed: bucket(current?.confirmed),
         estimated: bucket(current?.estimated),
         unresolved: bucket(current?.unresolved),
@@ -3518,14 +3519,21 @@
     }
 
     function attributionDisplay(bucket) {
-      const visitors = number(bucket?.visitors);
       return {
-        value: visitors > 0 ? visitors : number(bucket?.visits),
-        unit: visitors > 0 ? "명" : "회"
+        value: number(bucket?.visitors),
+        unit: "명"
       };
     }
 
     function attributionStartText(attribution) {
+      if (attribution?.trackingStartAt) {
+        const raw = String(attribution.trackingStartAt).trim();
+        const utc = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(raw)
+          ? `${raw.replace(" ", "T")}Z`
+          : raw;
+        return `${compactDateTime(utc)} 분류 적용 이후`;
+      }
+
       return attribution?.trackingStartDate
         ? `${compactDate(attribution.trackingStartDate)} 분류 적용 이후`
         : "신규 분류 적용 이후";
@@ -3537,7 +3545,7 @@
           <div>
             <strong>출처 판정 기준</strong>
             URL 태그·외부 링크는 확정, 30일 이내 이전 유입·인앱 브라우저는 추정으로 표시합니다.
-            근거가 없는 방문과 과거 미확인 기록은 임의로 출처를 붙이지 않습니다.
+            같은 방문자는 해당 기간의 가장 신뢰도 높은 한 단계에만 포함하며, 근거가 없는 방문에는 임의로 출처를 붙이지 않습니다.
           </div>
           <span class="tracking-pill">${escapeHtml(attributionStartText(attribution))}</span>
         </div>
@@ -4530,10 +4538,7 @@
       const topChannelUnit = topChannel && number(topChannel.uniqueEntry) > 0 ? "명" : "회";
       const confirmedAttribution = attributionDisplay(attribution.confirmed);
       const estimatedAttribution = attributionDisplay(attribution.estimated);
-      const unresolvedAttribution = {
-        value: channels.direct.uniqueEntry || channels.direct.entry,
-        unit: channels.direct.uniqueEntry ? "명" : "회"
-      };
+      const unresolvedAttribution = attributionDisplay(attribution.unresolved);
 
       const installDisplay = install.total === null ? "집계 중" : install.total;
       const installUnit = install.total === null ? "" : "건";
@@ -4688,8 +4693,7 @@
       const top = channels.external[0];
       const confirmedAttribution = attributionDisplay(attribution.confirmed);
       const estimatedAttribution = attributionDisplay(attribution.estimated);
-      const unresolvedValue = channels.direct.uniqueEntry || channels.direct.entry;
-      const unresolvedUnit = channels.direct.uniqueEntry ? "명" : "회";
+      const unresolvedAttribution = attributionDisplay(attribution.unresolved);
 
       content.innerHTML = `
         <div class="kpi-grid">
@@ -4722,11 +4726,11 @@
 
           ${kpiCard({
             label: `${label} 미확인 출처`,
-            value: unresolvedValue,
-            unit: unresolvedUnit,
+            value: unresolvedAttribution.value,
+            unit: unresolvedAttribution.unit,
             desc: "브라우저가 출처 근거를 보내지 않은 방문",
             className: "compact",
-            footer: `스토어 이동 ${formatNumber(channels.direct.downloads)}회`
+            footer: attributionStartText(attribution)
           })}
         </div>
 
