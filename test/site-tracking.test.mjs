@@ -301,7 +301,7 @@ test("관리자 출처 카드는 동일한 분류 표와 사람 단위를 사용
   );
   assert.match(
     adminCode,
-    /REQUIRED_WORKER_VERSION = "stats-v15-attribution-consistency"/
+    /REQUIRED_WORKER_VERSION = "stats-v16-data-freshness"/
   );
   assert.doesNotMatch(
     adminCode,
