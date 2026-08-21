@@ -2915,7 +2915,7 @@
   </aside>
 
   <script>
-    // MODING ADMIN v20 - attribution coverage and store sync freshness
+    // MODING ADMIN v21 - historical traffic remains in every total
     const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
     const SESSION_TOKEN_KEY = "moding_admin_token";
     const TRUSTED_DEVICE_KEY = "moding_admin_trusted_device";
@@ -3577,7 +3577,7 @@
 
     function attributionBanner(attribution, coverage = attributionCoverage(attribution)) {
       const coverageText = coverage.beforeTrackingVisitors > 0
-        ? `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명 중 ${formatNumber(coverage.classifiedVisitors)}명은 분류 대상이며, 분류 적용 전 ${formatNumber(coverage.beforeTrackingVisitors)}명은 아래 합계에서 제외됩니다.`
+        ? `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명은 전체 방문과 채널 원시 집계에 모두 포함됩니다. 이 중 ${formatNumber(coverage.classifiedVisitors)}명은 출처 분류 대상이며, 분류 시작 전 ${formatNumber(coverage.beforeTrackingVisitors)}명은 확정·추정·미확인 구분에만 포함하지 않습니다.`
         : `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명 모두 출처 분류 대상입니다.`;
 
       return `
@@ -4747,8 +4747,8 @@
               </div>
               <div class="direct-box attribution-before">
                 <div>
-                  <strong>분류 적용 전</strong>
-                  <span>출처 분류 시작 전 방문</span>
+                  <strong>분류 시작 전 방문</strong>
+                  <span>전체 방문·채널 집계에 포함</span>
                 </div>
                 <span class="direct-value">${formatNumber(coverage.beforeTrackingVisitors)}명</span>
               </div>
@@ -4783,10 +4783,10 @@
             label: `${label} 유입 채널`,
             value: channels.external.length,
             unit: "개",
-            desc: `방문 ${formatNumber(coverage.periodVisitors)}명 중 출처 분류 ${formatNumber(coverage.classifiedVisitors)}명`,
+            desc: `방문 ${formatNumber(coverage.periodVisitors)}명 전체 포함 · 출처 분류 ${formatNumber(coverage.classifiedVisitors)}명`,
             className: "primary",
             footer: coverage.beforeTrackingVisitors > 0
-              ? `분류 적용 전 ${formatNumber(coverage.beforeTrackingVisitors)}명 별도`
+              ? `분류 시작 전 ${formatNumber(coverage.beforeTrackingVisitors)}명도 전체 집계에 포함`
               : top
                 ? `가장 많은 곳 ${escapeHtml(channelMeta(top.source).label)}`
                 : "유입 대기"
