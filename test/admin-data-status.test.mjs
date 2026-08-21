@@ -52,4 +52,6 @@ test("admin explains visitors from before attribution tracking", () => {
   assert.match(adminHtml, /분류 적용 전/);
   assert.match(adminHtml, /beforeTrackingVisitors/);
   assert.match(adminHtml, /stats-v16-data-freshness/);
+  assert.match(adminHtml, /androidFreshnessAffectsPeriod/);
+  assert.match(adminHtml, /Google 보고서 지연 확인 필요/);
 });
