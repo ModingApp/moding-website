@@ -2610,11 +2610,55 @@
       return createVisitorId();
     }
 
+    const MODING_TRACKING =
+      window.ModingTracking || {};
+
     const MODING_VISITOR_ID =
-      getOrCreateVisitorId();
+      isValidVisitorId(
+        MODING_TRACKING.visitorId
+      )
+        ? MODING_TRACKING.visitorId
+        : getOrCreateVisitorId();
 
     const MODING_TRACKING_SOURCE =
-      resolveTrackingSource();
+      normalizeTrackingSource(
+        MODING_TRACKING.source ||
+        resolveTrackingSource()
+      );
+
+    const MODING_TRACKING_METHOD =
+      String(
+        MODING_TRACKING.sourceMethod ||
+        (
+          MODING_TRACKING_SOURCE ===
+            "direct"
+            ? "direct"
+            : "legacy"
+        )
+      );
+
+    const MODING_TRACKING_CONTEXT = {
+      source:
+        MODING_TRACKING_SOURCE,
+      sourceMethod:
+        MODING_TRACKING_METHOD,
+      campaignId:
+        String(
+          MODING_TRACKING.campaignId ||
+          ""
+        ),
+      referrerHost:
+        String(
+          MODING_TRACKING.referrerHost ||
+          ""
+        ),
+      landingPage:
+        String(
+          MODING_TRACKING.landingPage ||
+          window.location.pathname ||
+          "/"
+        )
+    };
 
     function postCounter(
       path,
@@ -2671,18 +2715,12 @@
 
         postCounter(
           "/track/visit",
-          {
-            source:
-              MODING_TRACKING_SOURCE
-          }
+          MODING_TRACKING_CONTEXT
         );
       } catch (error) {
         postCounter(
           "/track/visit",
-          {
-            source:
-              MODING_TRACKING_SOURCE
-          }
+          MODING_TRACKING_CONTEXT
         );
       }
     }
@@ -2733,6 +2771,18 @@
 
           src:
             MODING_TRACKING_SOURCE,
+
+          sourceMethod:
+            MODING_TRACKING_CONTEXT.sourceMethod,
+
+          campaignId:
+            MODING_TRACKING_CONTEXT.campaignId,
+
+          referrerHost:
+            MODING_TRACKING_CONTEXT.referrerHost,
+
+          landingPage:
+            MODING_TRACKING_CONTEXT.landingPage,
 
           visitorId:
             MODING_VISITOR_ID
@@ -3145,9 +3195,7 @@
         event?.currentTarget
       ) {
         event.currentTarget.href =
-          `/download.html?src=${encodeURIComponent(
-            MODING_TRACKING_SOURCE
-          )}`;
+          "/download.html";
       }
 
       return true;

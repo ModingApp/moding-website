@@ -12,6 +12,24 @@ const trackingCode =
     "utf8"
   );
 
+const indexCode =
+  fs.readFileSync(
+    new URL(
+      "../index.html",
+      import.meta.url
+    ),
+    "utf8"
+  );
+
+const adminCode =
+  fs.readFileSync(
+    new URL(
+      "../admin.html",
+      import.meta.url
+    ),
+    "utf8"
+  );
+
 class MemoryStorage {
   constructor(initial = {}) {
     this.values =
@@ -43,6 +61,7 @@ function runTracking({
   referrer = "",
   userAgent = "Mozilla/5.0",
   savedAttribution = null,
+  sessionAttribution = null,
 } = {}) {
   const requests = [];
   const localStorage =
@@ -56,6 +75,18 @@ function runTracking({
       "moding_tracking_attribution_v1",
       JSON.stringify(
         savedAttribution
+      )
+    );
+  }
+
+  const sessionStorage =
+    new MemoryStorage();
+
+  if (sessionAttribution) {
+    sessionStorage.setItem(
+      "moding_tracking_session_attribution_v1",
+      JSON.stringify(
+        sessionAttribution
       )
     );
   }
@@ -76,8 +107,7 @@ function runTracking({
       userAgent,
     },
     localStorage,
-    sessionStorage:
-      new MemoryStorage(),
+    sessionStorage,
     fetch: (url, options) => {
       requests.push({
         url,
@@ -210,5 +240,71 @@ test("근거가 없으면 미확인 직접 유입으로 전송한다", () => {
   assert.equal(
     result.attribution.confidence,
     "unresolved"
+  );
+});
+
+test("내부 페이지 이동 뒤에도 최초 세션의 확정 근거를 유지한다", () => {
+  const result = runTracking({
+    referrer:
+      "https://moding.app/",
+    sessionAttribution: {
+      source: "threads",
+      sourceMethod: "tagged",
+      campaignId: "threads_profile",
+      referrerHost: "",
+      landingPage: "/",
+    },
+  });
+
+  assert.equal(
+    result.attribution.source,
+    "threads"
+  );
+  assert.equal(
+    result.attribution.sourceMethod,
+    "tagged"
+  );
+  assert.equal(
+    result.attribution.confidence,
+    "confirmed"
+  );
+  assert.equal(
+    result.body.landingPage,
+    "/"
+  );
+});
+
+test("홈페이지 스토어 이동은 출처 근거를 함께 보내고 내부 링크에 출처 태그를 재생성하지 않는다", () => {
+  assert.match(
+    indexCode,
+    /sourceMethod:\s*MODING_TRACKING_CONTEXT\.sourceMethod/
+  );
+  assert.match(
+    indexCode,
+    /landingPage:\s*MODING_TRACKING_CONTEXT\.landingPage/
+  );
+  assert.doesNotMatch(
+    indexCode,
+    /\/download\.html\?src=/
+  );
+});
+
+test("관리자 출처 카드는 동일한 분류 표와 사람 단위를 사용한다", () => {
+  const unresolvedAssignments =
+    adminCode.match(
+      /const unresolvedAttribution = attributionDisplay\(attribution\.unresolved\);/g
+    ) || [];
+
+  assert.equal(
+    unresolvedAssignments.length,
+    2
+  );
+  assert.match(
+    adminCode,
+    /REQUIRED_WORKER_VERSION = "stats-v15-attribution-consistency"/
+  );
+  assert.doesNotMatch(
+    adminCode,
+    /const unresolvedValue = channels\.direct/
   );
 });

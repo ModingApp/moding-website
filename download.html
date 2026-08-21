@@ -715,7 +715,7 @@
         `&sourceMethod=${encodeURIComponent(SOURCE_METHOD)}` +
         `&campaignId=${encodeURIComponent(CAMPAIGN_ID)}` +
         `&referrerHost=${encodeURIComponent(REFERRER_HOST)}` +
-        `&landingPage=${encodeURIComponent(window.location.pathname || "/download.html")}` +
+        `&landingPage=${encodeURIComponent(ACTIVE_TRACKING.landingPage || window.location.pathname || "/download.html")}` +
         `&visitorId=${encodeURIComponent(MODING_VISITOR_ID)}`;
 
       try {

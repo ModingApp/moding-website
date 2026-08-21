@@ -3,6 +3,7 @@
 
   const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
   const SOURCE_KEY = "moding_tracking_source";
+  const SESSION_ATTRIBUTION_KEY = "moding_tracking_session_attribution_v1";
   const ATTRIBUTION_KEY = "moding_tracking_attribution_v1";
   const ATTRIBUTION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
   const VISITOR_KEY = "moding_visitor_id_v1";
@@ -86,6 +87,72 @@
       .slice(0, 100);
   }
 
+  function normalizeAttributionMethod(value, source) {
+    const method = String(value || "")
+      .trim()
+      .toLowerCase();
+
+    if (source === "direct") return "direct";
+    if (["tagged", "referrer", "in_app", "persisted"].includes(method)) return method;
+    return "persisted";
+  }
+
+  function normalizeReferrerHost(value) {
+    return String(value || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9.-]/g, "")
+      .slice(0, 120);
+  }
+
+  function normalizeLandingPage(value) {
+    let page = String(value || window.location.pathname || "/")
+      .split("?")[0]
+      .split("#")[0];
+
+    if (!page.startsWith("/")) page = `/${page}`;
+    return page.slice(0, 300);
+  }
+
+  function normalizeSessionAttribution(value) {
+    const source = normalizeSource(value?.source);
+    if (!source) return null;
+
+    const sourceMethod = normalizeAttributionMethod(value?.sourceMethod, source);
+    const referrerHost = normalizeReferrerHost(value?.referrerHost);
+
+    return {
+      source,
+      sourceMethod: sourceMethod === "referrer" && !referrerHost
+        ? "persisted"
+        : sourceMethod,
+      campaignId: normalizeCampaign(value?.campaignId),
+      referrerHost,
+      landingPage: normalizeLandingPage(value?.landingPage)
+    };
+  }
+
+  function readSessionAttribution() {
+    const raw = storageGet(sessionStorage, SESSION_ATTRIBUTION_KEY);
+    if (!raw) return null;
+
+    try {
+      return normalizeSessionAttribution(JSON.parse(raw));
+    } catch (error) {
+      storageRemove(sessionStorage, SESSION_ATTRIBUTION_KEY);
+      return null;
+    }
+  }
+
+  function rememberSessionAttribution(value) {
+    const attribution = normalizeSessionAttribution(value);
+    if (!attribution) return null;
+
+    storageSet(sessionStorage, SOURCE_KEY, attribution.source);
+    storageSet(sessionStorage, SESSION_ATTRIBUTION_KEY, JSON.stringify(attribution));
+    return attribution;
+  }
+
   function isNaverSearchReferrer(referrer, host) {
     if (host === "search.naver.com" || host.endsWith(".search.naver.com")) {
       return true;
@@ -163,7 +230,7 @@
       return {
         source,
         campaignId: normalizeCampaign(saved?.campaignId),
-        referrerHost: String(saved?.referrerHost || "").slice(0, 120)
+        referrerHost: normalizeReferrerHost(saved?.referrerHost)
       };
     } catch (error) {
       storageRemove(localStorage, ATTRIBUTION_KEY);
@@ -191,69 +258,73 @@
     );
 
     if (explicit) {
-      const tagged = {
+      const tagged = rememberSessionAttribution({
         source: explicit,
         sourceMethod: explicit === "direct" ? "direct" : "tagged",
         campaignId,
-        referrerHost: ""
-      };
-      storageSet(sessionStorage, SOURCE_KEY, explicit);
+        referrerHost: "",
+        landingPage: window.location.pathname || "/"
+      });
       rememberAttribution(tagged);
       return tagged;
     }
 
     const referred = referrerAttribution();
     if (referred?.source) {
-      const attribution = {
+      const attribution = rememberSessionAttribution({
         source: referred.source,
         sourceMethod: "referrer",
         campaignId,
-        referrerHost: referred.referrerHost || ""
-      };
-      storageSet(sessionStorage, SOURCE_KEY, attribution.source);
+        referrerHost: referred.referrerHost || "",
+        landingPage: window.location.pathname || "/"
+      });
       rememberAttribution(attribution);
       return attribution;
     }
 
+    const sessionAttribution = readSessionAttribution();
+    if (sessionAttribution) return sessionAttribution;
+
     const inAppSource = normalizeSource(sourceFromInAppBrowser());
     if (inAppSource) {
-      const inferred = {
+      const inferred = rememberSessionAttribution({
         source: inAppSource,
         sourceMethod: "in_app",
         campaignId,
-        referrerHost: ""
-      };
-      storageSet(sessionStorage, SOURCE_KEY, inAppSource);
+        referrerHost: "",
+        landingPage: window.location.pathname || "/"
+      });
       rememberAttribution(inferred);
       return inferred;
     }
 
     const stored = readStoredAttribution();
     if (stored) {
-      storageSet(sessionStorage, SOURCE_KEY, stored.source);
-      return {
+      return rememberSessionAttribution({
         ...stored,
-        sourceMethod: "persisted"
-      };
+        sourceMethod: "persisted",
+        landingPage: window.location.pathname || "/"
+      });
     }
 
     const legacySource = normalizeSource(storageGet(sessionStorage, SOURCE_KEY));
     if (legacySource && legacySource !== "direct") {
-      return {
+      return rememberSessionAttribution({
         source: legacySource,
         sourceMethod: "persisted",
         campaignId: "",
-        referrerHost: ""
-      };
+        referrerHost: "",
+        landingPage: window.location.pathname || "/"
+      });
     }
 
-    storageSet(sessionStorage, SOURCE_KEY, "direct");
-    return {
+    return rememberSessionAttribution({
       source: "direct",
       sourceMethod: "direct",
       campaignId: "",
-      referrerHost: ""
-    };
+      referrerHost: "",
+      landingPage: window.location.pathname || "/"
+    });
   }
 
   function validVisitorId(value) {
@@ -324,7 +395,7 @@
       campaignId: attribution.campaignId,
       referrerHost: attribution.referrerHost,
       visitorId: visitor,
-      landingPage: window.location.pathname || "/"
+      landingPage: attribution.landingPage
     })
   })
     .then(response => {
