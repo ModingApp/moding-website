@@ -3912,12 +3912,23 @@
             )
           : null;
 
+      const androidFreshnessAffectsPeriod = Boolean(
+        android?.bulkStale &&
+        androidLatest &&
+        androidLatest < periodEnd
+      );
+
       const partial =
-        state.period !== "all" &&
         total !== null &&
-        !(
-          iosPeriodConfirmed &&
-          androidPeriodConfirmed
+        (
+          androidFreshnessAffectsPeriod ||
+          (
+            state.period !== "all" &&
+            !(
+              iosPeriodConfirmed &&
+              androidPeriodConfirmed
+            )
+          )
         );
 
       return {
@@ -3931,6 +3942,7 @@
         androidHasCoverage,
         iosPeriodConfirmed,
         androidPeriodConfirmed,
+        androidFreshnessAffectsPeriod,
         partial,
         periodStart,
         periodEnd,
@@ -4635,7 +4647,7 @@
             unit: installUnit,
             desc: installSub,
             className: "compact",
-            footer: `Apple ${install.iosDisplayReady ? formatNumber(install.iosValue) : "대기"} · Google ${install.androidDisplayReady ? formatNumber(install.androidValue) : "대기"}`
+            footer: `Apple ${install.iosDisplayReady ? formatNumber(install.iosValue) : "대기"} · Google ${install.androidDisplayReady ? formatNumber(install.androidValue) : "대기"}${install.androidFreshnessAffectsPeriod && install.androidLatest ? ` (${compactDate(install.androidLatest)}까지)` : ""}`
           })}
 
           ${kpiCard({
@@ -5029,9 +5041,13 @@
             label: "Google",
             value: install.androidDisplayReady ? android : "집계 중",
             unit: install.androidDisplayReady ? "건" : "",
-            desc: install.androidLatest ? `${compactDate(install.androidLatest)}까지 반영` : "데이터 대기",
+            desc: androidInstallStatusText(install.android),
             className: "compact",
-            footer: install.androidMode === "legacy_fallback" ? "기존 데이터 표시 중" : "Google Play"
+            footer: install.androidBulkStale
+              ? "업데이트 지연"
+              : install.androidMode === "legacy_fallback"
+                ? "기존 데이터 표시 중"
+                : "Google Play"
           })}
           ${kpiCard({
             label: "업데이트 상태",
@@ -5039,7 +5055,11 @@
             unit: "",
             desc: `Apple ${formatRate(iosShare)} · Google ${formatRate(androidShare)}`,
             className: "compact",
-            footer: install.androidMode === "legacy_fallback" ? "Google 최신 데이터 대기" : "스토어 데이터 기준"
+            footer: install.androidBulkStale
+              ? "Google 보고서 지연 확인 필요"
+              : install.androidMode === "legacy_fallback"
+                ? "Google 최신 데이터 대기"
+                : "스토어 데이터 기준"
           })}
         </div>
 
@@ -5116,7 +5136,7 @@
 
               <div class="install-record-bar-foot">
                 <span>${install.androidDisplayReady && total > 0 ? `전체 설치의 ${formatRate(androidBarShare)}` : "Google 데이터 기준"}</span>
-                <strong>${install.androidMode === "legacy_fallback" ? "최신 데이터 대기" : "Google"}</strong>
+                <strong>${install.androidBulkStale ? "업데이트 지연" : install.androidMode === "legacy_fallback" ? "최신 데이터 대기" : "Google"}</strong>
               </div>
             </div>
           </div>
