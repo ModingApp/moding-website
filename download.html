@@ -623,11 +623,54 @@
       return createVisitorId();
     }
 
+    const ACTIVE_TRACKING =
+      window.ModingTracking || {};
+
     const TRAFFIC_SOURCE =
+      normalizeSource(
+        ACTIVE_TRACKING.source
+      ) ||
       getTrafficSource();
 
+    const SOURCE_METHOD =
+      [
+        "tagged",
+        "referrer",
+        "persisted",
+        "in_app",
+        "direct"
+      ].includes(
+        ACTIVE_TRACKING.sourceMethod
+      )
+        ? ACTIVE_TRACKING.sourceMethod
+        : TRAFFIC_SOURCE === "direct"
+          ? "direct"
+          : "legacy";
+
+    const CAMPAIGN_ID =
+      String(
+        ACTIVE_TRACKING.campaignId || ""
+      )
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9._-]/g, "")
+        .slice(0, 100);
+
+    const REFERRER_HOST =
+      String(
+        ACTIVE_TRACKING.referrerHost || ""
+      )
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9.-]/g, "")
+        .slice(0, 120);
+
     const MODING_VISITOR_ID =
-      getOrCreateVisitorId();
+      isValidVisitorId(
+        ACTIVE_TRACKING.visitorId
+      )
+        ? ACTIVE_TRACKING.visitorId
+        : getOrCreateVisitorId();
 
     function markStoreRedirectOnce(
       platform
@@ -669,6 +712,10 @@
         `${COUNTER_API_BASE}/track/download` +
         `?platform=${encodeURIComponent(platform)}` +
         `&src=${encodeURIComponent(TRAFFIC_SOURCE)}` +
+        `&sourceMethod=${encodeURIComponent(SOURCE_METHOD)}` +
+        `&campaignId=${encodeURIComponent(CAMPAIGN_ID)}` +
+        `&referrerHost=${encodeURIComponent(REFERRER_HOST)}` +
+        `&landingPage=${encodeURIComponent(window.location.pathname || "/download.html")}` +
         `&visitorId=${encodeURIComponent(MODING_VISITOR_ID)}`;
 
       try {
