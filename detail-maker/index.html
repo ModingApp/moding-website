@@ -8,14 +8,12 @@
   <meta name="theme-color" content="#238B22" />
   <link rel="icon" type="image/png" href="/og-image.png" />
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./visual-v2.css" />
   <script src="https://unpkg.com/konva@10.3.0/konva.min.js"></script>
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="/" aria-label="모딩 홈페이지로 이동">
-      <img src="/모딩로고.png" alt="모딩" />
-      <span>상세페이지 제작기</span>
-    </a>
+    <a class="brand" href="/" aria-label="모딩 홈페이지로 이동"><img src="/모딩로고.png" alt="모딩" /><span>상세페이지 제작기</span></a>
     <div class="top-actions">
       <button id="newProjectBtn" class="btn ghost" type="button">새 프로젝트</button>
       <button id="saveProjectBtn" class="btn ghost" type="button">JSON 저장</button>
@@ -27,34 +25,43 @@
   <main class="workspace">
     <aside class="panel left-panel">
       <section class="panel-section">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">PRODUCT</p>
-            <h2>상품정보</h2>
-          </div>
-          <span class="badge">실물 보호</span>
-        </div>
+        <div class="section-head"><div><p class="eyebrow">PRODUCT</p><h2>상품정보</h2></div><span class="badge">실물 보호</span></div>
         <label class="field">상품명<input id="productName" type="text" value="스지도가니탕" /></label>
-        <div class="field-grid">
-          <label class="field">중량<input id="productWeight" type="text" value="500g" /></label>
-          <label class="field">보관<input id="productStorage" type="text" value="냉동" /></label>
-        </div>
+        <div class="field-grid"><label class="field">중량<input id="productWeight" type="text" value="500g" /></label><label class="field">보관<input id="productStorage" type="text" value="냉동" /></label></div>
         <label class="field">포장<input id="productPackage" type="text" value="비닐실링" /></label>
         <label class="field">핵심문구<textarea id="productHeadline" rows="3">진한 도가니육수에 스지와 도가니를 담았습니다</textarea></label>
         <label class="field">보조문구<textarea id="productDescription" rows="4">간편하게 데워 국밥과 전골 메뉴로 활용해보세요</textarea></label>
       </section>
 
       <section class="panel-section">
-        <div class="section-head compact"><h2>실제 상품사진</h2></div>
-        <label class="upload-zone" for="productImageInput">
-          <strong>상품사진 업로드</strong>
-          <span>실제 판매상품 사진만 사용합니다</span>
-          <input id="productImageInput" type="file" accept="image/*" />
-        </label>
-        <div class="inline-actions">
-          <button id="fitImageBtn" class="btn small" type="button">화면에 맞춤</button>
-          <button id="lockProductBtn" class="btn small" type="button">상품사진 잠금</button>
+        <div class="section-head compact"><h2>메인 비주얼</h2><span class="visual-chip"><strong>V2</strong> 실물+조리</span></div>
+        <label class="upload-zone" for="productImageInput"><strong>실제 상품사진 업로드</strong><span>상품 자체는 변형하지 않고 보호 레이어로 사용합니다</span><input id="productImageInput" type="file" accept="image/*" /></label>
+        <div id="productVisualStatus" class="visual-status"><i></i><span>상품사진을 올려주세요</span></div>
+
+        <div class="visual-workflow">
+          <p class="visual-workflow-title">상품사진 처리</p>
+          <div class="cutout-range"><input id="cutoutThreshold" type="range" min="215" max="252" value="242" /><output id="cutoutThresholdValue">242</output></div>
+          <div class="visual-actions"><button id="applyCutoutBtn" class="btn small" type="button">흰 배경 자동 누끼</button><button id="restoreProductBtn" class="btn small" type="button">원본 복원</button></div>
+          <p class="note">흰색·연회색 배경 상품사진용입니다. 상품 내용은 건드리지 않고 배경 알파값만 제거합니다.</p>
+          <div class="v2-divider"></div>
+          <p class="visual-workflow-title">조리예시</p>
+          <label class="upload-zone cooking-upload" for="cookingImageInput"><strong>조리사진 추가</strong><span>상품과 별도 레이어로 관리합니다</span><input id="cookingImageInput" type="file" accept="image/*" /></label>
+          <div id="cookingVisualStatus" class="visual-status"><i></i><span>조리예시가 아직 없습니다</span></div>
+          <button id="requestCookingAiBtn" class="btn block" type="button">상품만 있을 때 AI 조리예시 생성</button>
+          <p class="ai-pipeline-note">AI 조리예시는 브라우저에 API 키를 노출하지 않고 서버에서 생성하도록 다음 단계에서 연결합니다.</p>
         </div>
+
+        <div class="visual-workflow">
+          <p class="visual-workflow-title">메인 구성</p>
+          <div class="visual-mode">
+            <button data-visual-mode="product-only" type="button">상품 중심</button>
+            <button class="active" data-visual-mode="product-cooking" type="button">상품 + 조리</button>
+            <button data-visual-mode="cooking-focus" type="button">조리 중심</button>
+          </div>
+          <button id="composeMainBtn" class="btn main-compose-btn" type="button">메인 비주얼 자동 구성</button>
+        </div>
+
+        <div class="inline-actions"><button id="fitImageBtn" class="btn small" type="button">상품 화면에 맞춤</button><button id="lockProductBtn" class="btn small" type="button">상품사진 잠금</button></div>
       </section>
 
       <section class="panel-section">
@@ -69,19 +76,9 @@
     </aside>
 
     <section class="canvas-area">
-      <div class="canvas-toolbar">
-        <div class="zoom-group">
-          <button id="zoomOutBtn" class="icon-btn" type="button" aria-label="축소">−</button>
-          <span id="zoomLabel">100%</span>
-          <button id="zoomInBtn" class="icon-btn" type="button" aria-label="확대">＋</button>
-          <button id="fitCanvasBtn" class="btn small" type="button">화면 맞춤</button>
-        </div>
-        <div class="canvas-info">MASTER 2048 × 2048</div>
-      </div>
-      <div id="stageViewport" class="stage-viewport">
-        <div id="stageContainer" class="stage-container" aria-label="상세페이지 캔버스"></div>
-      </div>
-      <div class="canvas-hint">요소를 클릭한 뒤 드래그하거나 모서리를 잡아 크기를 조절할 수 있습니다</div>
+      <div class="canvas-toolbar"><div class="zoom-group"><button id="zoomOutBtn" class="icon-btn" type="button" aria-label="축소">−</button><span id="zoomLabel">100%</span><button id="zoomInBtn" class="icon-btn" type="button" aria-label="확대">＋</button><button id="fitCanvasBtn" class="btn small" type="button">화면 맞춤</button></div><div class="canvas-info">MASTER 2048 × 2048</div></div>
+      <div id="stageViewport" class="stage-viewport"><div id="stageContainer" class="stage-container" aria-label="상세페이지 캔버스"></div></div>
+      <div class="canvas-hint">상품은 보호하고 조리예시·문구·장식만 독립 레이어로 수정합니다</div>
     </section>
 
     <aside class="panel right-panel">
@@ -90,50 +87,21 @@
         <div id="emptyInspector" class="empty-state">캔버스에서 요소를 선택하세요</div>
         <div id="nodeInspector" hidden>
           <div class="selected-name" id="selectedNodeName">-</div>
-          <div class="field-grid">
-            <label class="field">X<input id="nodeX" type="number" /></label>
-            <label class="field">Y<input id="nodeY" type="number" /></label>
-          </div>
-          <div class="field-grid">
-            <label class="field">너비<input id="nodeWidth" type="number" /></label>
-            <label class="field">높이<input id="nodeHeight" type="number" /></label>
-          </div>
+          <div class="field-grid"><label class="field">X<input id="nodeX" type="number" /></label><label class="field">Y<input id="nodeY" type="number" /></label></div>
+          <div class="field-grid"><label class="field">너비<input id="nodeWidth" type="number" /></label><label class="field">높이<input id="nodeHeight" type="number" /></label></div>
           <label class="field">회전<input id="nodeRotation" type="number" step="1" /></label>
-          <div id="textInspector" hidden>
-            <label class="field">텍스트<textarea id="nodeText" rows="4"></textarea></label>
-            <div class="field-grid">
-              <label class="field">글자크기<input id="nodeFontSize" type="number" min="10" max="240" /></label>
-              <label class="field">행간<input id="nodeLineHeight" type="number" min="0.7" max="3" step="0.05" /></label>
-            </div>
-            <label class="field">정렬<select id="nodeAlign"><option value="left">왼쪽</option><option value="center">가운데</option><option value="right">오른쪽</option></select></label>
-          </div>
-          <div class="inline-actions wrap">
-            <button id="bringFrontBtn" class="btn small" type="button">맨 앞으로</button>
-            <button id="sendBackBtn" class="btn small" type="button">맨 뒤로</button>
-            <button id="toggleLockBtn" class="btn small" type="button">잠금</button>
-            <button id="deleteNodeBtn" class="btn small danger" type="button">삭제</button>
-          </div>
+          <div id="textInspector" hidden><label class="field">텍스트<textarea id="nodeText" rows="4"></textarea></label><div class="field-grid"><label class="field">글자크기<input id="nodeFontSize" type="number" min="10" max="240" /></label><label class="field">행간<input id="nodeLineHeight" type="number" min="0.7" max="3" step="0.05" /></label></div><label class="field">정렬<select id="nodeAlign"><option value="left">왼쪽</option><option value="center">가운데</option><option value="right">오른쪽</option></select></label></div>
+          <div class="inline-actions wrap"><button id="bringFrontBtn" class="btn small" type="button">맨 앞으로</button><button id="sendBackBtn" class="btn small" type="button">맨 뒤로</button><button id="toggleLockBtn" class="btn small" type="button">잠금</button><button id="deleteNodeBtn" class="btn small danger" type="button">삭제</button></div>
         </div>
       </section>
 
-      <section class="panel-section">
-        <div class="section-head compact"><h2>레이어 추가</h2></div>
-        <div class="add-grid">
-          <button id="addTextBtn" class="btn block" type="button">텍스트 추가</button>
-          <button id="addBadgeBtn" class="btn block" type="button">배지 추가</button>
-          <label class="btn block file-btn">이미지 추가<input id="extraImageInput" type="file" accept="image/*" /></label>
-        </div>
-      </section>
-
-      <section class="panel-section">
-        <div class="section-head compact"><h2>프로젝트</h2></div>
-        <label class="field">프로젝트명<input id="projectName" type="text" value="스지도가니탕 상세페이지" /></label>
-        <p class="note">JSON에는 상품정보와 모든 레이어 좌표가 저장됩니다. 실제 상품사진도 프로젝트 내부에 포함됩니다.</p>
-      </section>
+      <section class="panel-section"><div class="section-head compact"><h2>레이어 추가</h2></div><div class="add-grid"><button id="addTextBtn" class="btn block" type="button">텍스트 추가</button><button id="addBadgeBtn" class="btn block" type="button">배지 추가</button><label class="btn block file-btn">이미지 추가<input id="extraImageInput" type="file" accept="image/*" /></label></div></section>
+      <section class="panel-section"><div class="section-head compact"><h2>프로젝트</h2></div><label class="field">프로젝트명<input id="projectName" type="text" value="스지도가니탕 상세페이지" /></label><p class="note">JSON에는 상품정보와 모든 레이어 좌표가 저장됩니다. 실제 상품사진도 프로젝트 내부에 포함됩니다.</p></section>
     </aside>
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="./app.js"></script>
+  <script src="./visual-v2.js"></script>
 </body>
 </html>
