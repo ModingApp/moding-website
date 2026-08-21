@@ -831,6 +831,32 @@
       white-space: nowrap;
     }
 
+    .attribution-stack {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .attribution-stack .direct-box {
+      margin-top: 0 !important;
+    }
+
+    .attribution-confirmed {
+      border-style: solid;
+      border-color: #A9D7AF;
+      background: #F1F8F2;
+    }
+
+    .attribution-estimated {
+      border-color: #F0C987;
+      background: #FFF8EB;
+    }
+
+    .attribution-unresolved {
+      border-color: #CCD4CD;
+      background: #F9FAF9;
+    }
+
     .flow-card {
       margin-top: 16px;
       padding: 30px;
@@ -2884,13 +2910,13 @@
   </aside>
 
   <script>
-    // MODING ADMIN v17 - range filters + trusted administrator devices
+    // MODING ADMIN v18 - source confidence attribution
     const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
     const SESSION_TOKEN_KEY = "moding_admin_token";
     const TRUSTED_DEVICE_KEY = "moding_admin_trusted_device";
     const APP_LAUNCH_DATE = "2026-07-01";
     const APP_LAUNCH_MONTH = APP_LAUNCH_DATE.slice(0, 7);
-    const REQUIRED_WORKER_VERSION = "stats-v13-studio-scheduler";
+    const REQUIRED_WORKER_VERSION = "stats-v14-source-attribution";
 
     const COLORS = {
       green: "#238B22",
@@ -3251,7 +3277,8 @@
         ["android", data?.android],
         ["clickPlatforms", data?.clickPlatforms],
         ["channels", data?.channels],
-        ["uniqueTracking", data?.uniqueTracking]
+        ["uniqueTracking", data?.uniqueTracking],
+        ["attribution", data?.attribution]
       ];
 
       return checks
@@ -3464,6 +3491,57 @@
         unknown: number(current?.unknown),
         sources: Array.isArray(current?.sources) ? current.sources : []
       };
+    }
+
+    function getAttributionPeriod() {
+      const root = state.stats?.attribution || {};
+      const current = isRangePeriod()
+        ? state.stats?.selectedRange?.attribution
+        : state.period === "all"
+          ? root.total
+          : root[state.period];
+
+      const bucket = value => ({
+        visitors: number(value?.visitors),
+        visits: number(value?.visits),
+        downloaders: number(value?.downloaders),
+        downloads: number(value?.downloads)
+      });
+
+      return {
+        trackingStartDate: root.trackingStartDate || current?.trackingStartDate || null,
+        confirmed: bucket(current?.confirmed),
+        estimated: bucket(current?.estimated),
+        unresolved: bucket(current?.unresolved),
+        classifiedVisits: number(current?.classifiedVisits)
+      };
+    }
+
+    function attributionDisplay(bucket) {
+      const visitors = number(bucket?.visitors);
+      return {
+        value: visitors > 0 ? visitors : number(bucket?.visits),
+        unit: visitors > 0 ? "명" : "회"
+      };
+    }
+
+    function attributionStartText(attribution) {
+      return attribution?.trackingStartDate
+        ? `${compactDate(attribution.trackingStartDate)} 분류 적용 이후`
+        : "신규 분류 적용 이후";
+    }
+
+    function attributionBanner(attribution) {
+      return `
+        <div class="tracking-banner">
+          <div>
+            <strong>출처 판정 기준</strong>
+            URL 태그·외부 링크는 확정, 30일 이내 이전 유입·인앱 브라우저는 추정으로 표시합니다.
+            근거가 없는 방문과 과거 미확인 기록은 임의로 출처를 붙이지 않습니다.
+          </div>
+          <span class="tracking-pill">${escapeHtml(attributionStartText(attribution))}</span>
+        </div>
+      `;
     }
 
     function groupChannels() {
@@ -4440,6 +4518,7 @@
       const website = getWebsitePeriod();
       const unique = getUniquePeriod();
       const channels = groupChannels();
+      const attribution = getAttributionPeriod();
       const clicks = getPlatformClicks();
       const install = getInstallPeriod();
       const label = periodName();
@@ -4449,6 +4528,12 @@
         ? (number(topChannel.uniqueEntry) > 0 ? number(topChannel.uniqueEntry) : number(topChannel.entry))
         : 0;
       const topChannelUnit = topChannel && number(topChannel.uniqueEntry) > 0 ? "명" : "회";
+      const confirmedAttribution = attributionDisplay(attribution.confirmed);
+      const estimatedAttribution = attributionDisplay(attribution.estimated);
+      const unresolvedAttribution = {
+        value: channels.direct.uniqueEntry || channels.direct.entry,
+        unit: channels.direct.uniqueEntry ? "명" : "회"
+      };
 
       const installDisplay = install.total === null ? "집계 중" : install.total;
       const installUnit = install.total === null ? "" : "건";
@@ -4560,12 +4645,28 @@
               </div>
             </div>
 
-            <div class="direct-box" style="margin-top:10px">
-              <div>
-                <strong>직접 들어온 사람</strong>
-                <span>출처를 확인할 수 없는 방문</span>
+            <div class="attribution-stack">
+              <div class="direct-box attribution-confirmed">
+                <div>
+                  <strong>확정 출처</strong>
+                  <span>채널 URL 태그 · 외부 링크</span>
+                </div>
+                <span class="direct-value">${formatNumber(confirmedAttribution.value)}${confirmedAttribution.unit}</span>
               </div>
-              <span class="direct-value">${formatNumber(channels.direct.uniqueEntry || channels.direct.entry)}${channels.direct.uniqueEntry ? "명" : "회"}</span>
+              <div class="direct-box attribution-estimated">
+                <div>
+                  <strong>추정 출처</strong>
+                  <span>이전 유입 · 인앱 브라우저</span>
+                </div>
+                <span class="direct-value">${formatNumber(estimatedAttribution.value)}${estimatedAttribution.unit}</span>
+              </div>
+              <div class="direct-box attribution-unresolved">
+                <div>
+                  <strong>미확인 출처</strong>
+                  <span>출처 근거가 없는 방문</span>
+                </div>
+                <span class="direct-value">${formatNumber(unresolvedAttribution.value)}${unresolvedAttribution.unit}</span>
+              </div>
             </div>
           </aside>
         </div>
@@ -4576,6 +4677,7 @@
 
     function renderChannels() {
       const channels = groupChannels();
+      const attribution = getAttributionPeriod();
       const label = periodName();
       const channelUsesPeople = channels.external.some(row => row.uniqueEntry > 0);
       const totalForVisual = channelUsesPeople ? channels.externalUniqueEntries : channels.externalEntries;
@@ -4584,6 +4686,10 @@
         color: channelMeta(row.source).color
       }));
       const top = channels.external[0];
+      const confirmedAttribution = attributionDisplay(attribution.confirmed);
+      const estimatedAttribution = attributionDisplay(attribution.estimated);
+      const unresolvedValue = channels.direct.uniqueEntry || channels.direct.entry;
+      const unresolvedUnit = channels.direct.uniqueEntry ? "명" : "회";
 
       content.innerHTML = `
         <div class="kpi-grid">
@@ -4597,32 +4703,34 @@
           })}
 
           ${kpiCard({
-            label: `${label} 외부 채널 유입`,
-            value: channels.externalUniqueEntries,
-            unit: "명",
-            desc: "반복 방문 제외",
+            label: `${label} 확정 출처`,
+            value: confirmedAttribution.value,
+            unit: confirmedAttribution.unit,
+            desc: "채널 URL 태그 · 외부 링크로 확인",
             className: "compact",
-            footer: `방문 횟수 ${formatNumber(channels.externalEntries)}회`
+            footer: attributionStartText(attribution)
           })}
 
           ${kpiCard({
-            label: `${label} 스토어로 간 사람`,
-            value: channels.externalUniqueDownloads,
-            unit: "명",
-            desc: "외부 채널에서 스토어까지 이동",
+            label: `${label} 추정 출처`,
+            value: estimatedAttribution.value,
+            unit: estimatedAttribution.unit,
+            desc: "이전 유입 · 인앱 브라우저로 추정",
             className: "compact",
-            footer: `스토어 이동 ${formatNumber(channels.externalDownloads)}회`
+            footer: attributionStartText(attribution)
           })}
 
           ${kpiCard({
-            label: `${label} 직접 들어온 사람`,
-            value: channels.direct.uniqueEntry || channels.direct.entry,
-            unit: channels.direct.uniqueEntry ? "명" : "회",
-            desc: "출처를 확인할 수 없는 방문",
+            label: `${label} 미확인 출처`,
+            value: unresolvedValue,
+            unit: unresolvedUnit,
+            desc: "브라우저가 출처 근거를 보내지 않은 방문",
             className: "compact",
             footer: `스토어 이동 ${formatNumber(channels.direct.downloads)}회`
           })}
         </div>
+
+        ${attributionBanner(attribution)}
 
         <section class="surface channel-visual">
           <div class="section-head">
