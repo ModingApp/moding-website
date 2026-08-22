@@ -289,7 +289,7 @@ test("홈페이지 스토어 이동은 출처 근거를 함께 보내고 내부 
   );
 });
 
-test("관리자 출처 카드는 동일한 분류 표와 사람 단위를 사용한다", () => {
+test("관리자 출처 진단은 보조 정보로 한 번만 표시한다", () => {
   const unresolvedAssignments =
     adminCode.match(
       /const unresolvedAttribution = attributionDisplay\(attribution\.unresolved\);/g
@@ -297,7 +297,7 @@ test("관리자 출처 카드는 동일한 분류 표와 사람 단위를 사용
 
   assert.equal(
     unresolvedAssignments.length,
-    2
+    1
   );
   assert.match(
     adminCode,

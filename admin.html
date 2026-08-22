@@ -2915,7 +2915,7 @@
   </aside>
 
   <script>
-    // MODING ADMIN v21 - historical traffic remains in every total
+    // MODING ADMIN v22 - date-filtered channel totals stay primary
     const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
     const SESSION_TOKEN_KEY = "moding_admin_token";
     const TRUSTED_DEVICE_KEY = "moding_admin_trusted_device";
@@ -3557,7 +3557,7 @@
       return {
         periodVisitors,
         classifiedVisitors,
-        beforeTrackingVisitors: Math.max(0, periodVisitors - classifiedVisitors)
+        withoutDetailVisitors: Math.max(0, periodVisitors - classifiedVisitors)
       };
     }
 
@@ -3567,24 +3567,24 @@
         const utc = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(raw)
           ? `${raw.replace(" ", "T")}Z`
           : raw;
-        return `${compactDateTime(utc)} 분류 적용 이후`;
+        return `${compactDateTime(utc)} 세부 판정 기록 이후`;
       }
 
       return attribution?.trackingStartDate
-        ? `${compactDate(attribution.trackingStartDate)} 분류 적용 이후`
-        : "신규 분류 적용 이후";
+        ? `${compactDate(attribution.trackingStartDate)} 세부 판정 기록 이후`
+        : "세부 판정 기록 이후";
     }
 
     function attributionBanner(attribution, coverage = attributionCoverage(attribution)) {
-      const coverageText = coverage.beforeTrackingVisitors > 0
-        ? `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명은 전체 방문과 채널 원시 집계에 모두 포함됩니다. 이 중 ${formatNumber(coverage.classifiedVisitors)}명은 출처 분류 대상이며, 분류 시작 전 ${formatNumber(coverage.beforeTrackingVisitors)}명은 확정·추정·미확인 구분에만 포함하지 않습니다.`
-        : `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명 모두 출처 분류 대상입니다.`;
+      const coverageText = coverage.withoutDetailVisitors > 0
+        ? `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명은 전체 방문과 채널 집계에 모두 포함됩니다. 이 중 ${formatNumber(coverage.classifiedVisitors)}명은 세부 판정 정보가 있으며, ${formatNumber(coverage.withoutDetailVisitors)}명은 확정·추정·미확인 보조 통계에만 포함되지 않습니다.`
+        : `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명 모두 세부 판정 정보가 있습니다.`;
 
       return `
         <div class="tracking-banner">
           <div>
-            <strong>출처 판정 기준</strong>
-            URL 태그·외부 링크는 확정, 30일 이내 이전 유입·인앱 브라우저는 추정으로 표시합니다.
+            <strong>출처 판정 보조 정보</strong>
+            채널 순위는 선택 기간의 유입 기록을 기준으로 계산합니다. URL 태그·외부 링크는 확정, 30일 이내 이전 유입·인앱 브라우저는 추정으로 표시합니다.
             같은 방문자는 해당 기간의 가장 신뢰도 높은 한 단계에만 포함하며, 근거가 없는 방문에는 임의로 출처를 붙이지 않습니다.
             ${coverageText}
           </div>
@@ -3663,11 +3663,11 @@
           )
         )
         .sort((a, b) => {
-          if (b.uniqueEntry !== a.uniqueEntry) {
-            return b.uniqueEntry - a.uniqueEntry;
+          if (b.entry !== a.entry) {
+            return b.entry - a.entry;
           }
 
-          return b.entry - a.entry;
+          return b.downloads - a.downloads;
         });
 
       const externalEntries = external.reduce(
@@ -4264,38 +4264,23 @@
     function channelBarsHtml(
       rows,
       totalEntries,
-      valueKey = "uniqueEntry",
-      unit = "명"
+      valueKey = "entry",
+      unit = "회"
     ) {
       if (!rows.length) {
         return `<div class="chart-empty">선택한 기간의 외부채널 데이터가 없습니다.</div>`;
       }
 
-      const values = rows.map(row => number(row[valueKey]));
-      const hasPrimaryData = values.some(value => value > 0);
-
-      const effectiveValueKey = hasPrimaryData
-        ? valueKey
-        : "entry";
-
-      const effectiveUnit = hasPrimaryData
-        ? unit
-        : "회";
-
-      const effectiveTotal = hasPrimaryData
-        ? totalEntries
-        : rows.reduce((sum, row) => sum + number(row.entry), 0);
-
       const maxValue = Math.max(
         1,
-        ...rows.map(row => number(row[effectiveValueKey]))
+        ...rows.map(row => number(row[valueKey]))
       );
 
       return `
         <div class="channel-bars">
           ${rows.map(row => {
             const meta = channelMeta(row.source);
-            const value = number(row[effectiveValueKey]);
+            const value = number(row[valueKey]);
             const width = clamp(
               value / maxValue * 100,
               value > 0 ? 4 : 0,
@@ -4303,13 +4288,9 @@
             );
             const hasUniqueEntrants = number(row.uniqueEntrants) > 0;
             const hasUniqueDownloads = number(row.uniqueDownloads) > 0;
-            const entrantValue = hasUniqueEntrants
-              ? number(row.uniqueEntrants)
-              : number(row.visits || row.entry);
-            const storeValue = hasUniqueDownloads
-              ? number(row.uniqueDownloads)
-              : number(row.downloads);
-            const movementRate = hasUniqueEntrants
+            const entrantValue = number(row.visits || row.entry);
+            const storeValue = number(row.downloads);
+            const movementRate = entrantValue > 0
               ? percent(storeValue, entrantValue)
               : null;
             const platformParts = [
@@ -4332,7 +4313,7 @@
                   </div>
 
                   <div class="source-total">
-                    ${formatNumber(value)}${effectiveUnit}
+                    ${formatNumber(value)}${unit}
                   </div>
                 </div>
 
@@ -4346,18 +4327,20 @@
 
                 <div class="channel-journey">
                   <div class="journey-step">
-                    <small>${hasUniqueEntrants ? "유입한 사람" : "방문"}</small>
-                    <strong>${formatNumber(entrantValue)}${hasUniqueEntrants ? "명" : "회"}</strong>
+                    <small>기간 내 유입</small>
+                    <strong>${formatNumber(entrantValue)}회</strong>
                   </div>
                   <div class="journey-arrow" aria-hidden="true">→</div>
                   <div class="journey-step store">
-                    <small>${hasUniqueDownloads ? "스토어로 간 사람" : "스토어 이동"}</small>
-                    <strong>${formatNumber(storeValue)}${hasUniqueDownloads ? "명" : "회"}</strong>
+                    <small>스토어 이동</small>
+                    <strong>${formatNumber(storeValue)}회</strong>
                   </div>
                 </div>
 
                 <div class="channel-secondary">
-                  <span>총 방문 ${formatNumber(row.visits)}회 · 총 스토어 이동 ${formatNumber(row.downloads)}회</span>
+                  <span>${hasUniqueEntrants || hasUniqueDownloads
+                    ? `고유 ID 확인 유입 ${formatNumber(row.uniqueEntrants)}명 · 스토어 이동 ${formatNumber(row.uniqueDownloads)}명`
+                    : "고유 ID 세부 정보 없음"}</span>
                   ${platformParts.length
                     ? `<span class="channel-platforms"><strong>스토어 이동 상세</strong> ${platformParts.join(" · ")}</span>`
                     : ""}
@@ -4435,31 +4418,27 @@
         return `<div class="chart-empty" style="min-height:190px">아직 외부 유입이 없습니다.</div>`;
       }
 
-      const usePeople = picked.some(row => number(row.uniqueEntry) > 0);
-      const values = picked.map(row => usePeople ? number(row.uniqueEntry) : number(row.entry));
+      const values = picked.map(row => number(row.entry));
       const maxValue = Math.max(1, ...values);
 
       return `
         <div class="quick-channel-list">
           ${picked.map(row => {
             const meta = channelMeta(row.source);
-            const value = usePeople ? number(row.uniqueEntry) : number(row.entry);
+            const value = number(row.entry);
             const width = clamp(value / maxValue * 100, value > 0 ? 5 : 0, 100);
-            const storePeople = number(row.uniqueDownloads);
             return `
               <div class="quick-channel-row">
                 <div class="quick-channel-head">
                   ${channelIconHtml(row.source)}
                   <div class="quick-channel-name">${escapeHtml(meta.label)}</div>
-                  <div class="quick-channel-value">${formatNumber(value)}${usePeople ? "명" : "회"}</div>
+                  <div class="quick-channel-value">${formatNumber(value)}회</div>
                 </div>
                 <div class="quick-channel-track">
                   <div class="quick-channel-fill" style="background:${meta.color}" data-bar-width="${width.toFixed(2)}"></div>
                 </div>
                 <div class="quick-channel-foot">
-                  ${storePeople > 0
-                    ? `스토어로 간 사람 ${formatNumber(storePeople)}명`
-                    : `스토어 이동 ${formatNumber(row.downloads)}회`}
+                  스토어 이동 ${formatNumber(row.downloads)}회
                 </div>
               </div>
             `;
@@ -4605,9 +4584,9 @@
 
       const topChannel = channels.external[0] || null;
       const topChannelValue = topChannel
-        ? (number(topChannel.uniqueEntry) > 0 ? number(topChannel.uniqueEntry) : number(topChannel.entry))
+        ? number(topChannel.entry)
         : 0;
-      const topChannelUnit = topChannel && number(topChannel.uniqueEntry) > 0 ? "명" : "회";
+      const topChannelUnit = "회";
       const confirmedAttribution = attributionDisplay(attribution.confirmed);
       const estimatedAttribution = attributionDisplay(attribution.estimated);
       const unresolvedAttribution = attributionDisplay(attribution.unresolved);
@@ -4657,7 +4636,7 @@
             desc: topChannel ? `${formatNumber(topChannelValue)}${topChannelUnit} 들어옴` : "외부 유입 없음",
             className: "compact",
             footer: topChannel
-              ? `스토어로 간 사람 ${formatNumber(topChannel.uniqueDownloads)}명`
+              ? `스토어 이동 ${formatNumber(topChannel.downloads)}회`
               : "채널 데이터 대기"
           })}
         </div>
@@ -4747,10 +4726,10 @@
               </div>
               <div class="direct-box attribution-before">
                 <div>
-                  <strong>분류 시작 전 방문</strong>
-                  <span>전체 방문·채널 집계에 포함</span>
+                  <strong>세부 판정 정보 없음</strong>
+                  <span>전체 방문·채널 집계에는 포함</span>
                 </div>
-                <span class="direct-value">${formatNumber(coverage.beforeTrackingVisitors)}명</span>
+                <span class="direct-value">${formatNumber(coverage.withoutDetailVisitors)}명</span>
               </div>
             </div>
           </aside>
@@ -4765,58 +4744,52 @@
       const attribution = getAttributionPeriod();
       const unique = getUniquePeriod();
       const label = periodName();
-      const channelUsesPeople = channels.external.some(row => row.uniqueEntry > 0);
-      const totalForVisual = channelUsesPeople ? channels.externalUniqueEntries : channels.externalEntries;
+      const totalForVisual = channels.externalEntries;
       const slices = channels.external.map(row => ({
-        value: channelUsesPeople ? row.uniqueEntry : row.entry,
+        value: row.entry,
         color: channelMeta(row.source).color
       }));
       const top = channels.external[0];
-      const confirmedAttribution = attributionDisplay(attribution.confirmed);
-      const estimatedAttribution = attributionDisplay(attribution.estimated);
-      const unresolvedAttribution = attributionDisplay(attribution.unresolved);
       const coverage = attributionCoverage(attribution, unique);
 
       content.innerHTML = `
         <div class="kpi-grid">
           ${kpiCard({
+            label: `${label} 외부 채널 유입`,
+            value: channels.externalEntries,
+            unit: "회",
+            desc: "선택 기간에 기록된 외부 채널 방문",
+            className: "primary",
+            footer: top
+              ? `가장 많은 곳 ${escapeHtml(channelMeta(top.source).label)} ${formatNumber(top.entry)}회`
+              : "유입 대기"
+          })}
+
+          ${kpiCard({
             label: `${label} 유입 채널`,
             value: channels.external.length,
             unit: "개",
-            desc: `방문 ${formatNumber(coverage.periodVisitors)}명 전체 포함 · 출처 분류 ${formatNumber(coverage.classifiedVisitors)}명`,
-            className: "primary",
-            footer: coverage.beforeTrackingVisitors > 0
-              ? `분류 시작 전 ${formatNumber(coverage.beforeTrackingVisitors)}명도 전체 집계에 포함`
-              : top
-                ? `가장 많은 곳 ${escapeHtml(channelMeta(top.source).label)}`
-                : "유입 대기"
+            desc: "기간 내 유입 기록이 있는 외부 채널",
+            className: "compact",
+            footer: `전체 방문자(직접 유입 포함) ${formatNumber(coverage.periodVisitors)}명`
           })}
 
           ${kpiCard({
-            label: `${label} 확정 출처`,
-            value: confirmedAttribution.value,
-            unit: confirmedAttribution.unit,
-            desc: "채널 URL 태그 · 외부 링크로 확인",
+            label: `${label} 외부 채널 스토어 이동`,
+            value: channels.externalDownloads,
+            unit: "회",
+            desc: "외부 채널 유입 후 스토어로 이동",
             className: "compact",
-            footer: attributionStartText(attribution)
+            footer: `iPhone ${formatNumber(channels.externalIos)} · Android ${formatNumber(channels.externalAndroid)}`
           })}
 
           ${kpiCard({
-            label: `${label} 추정 출처`,
-            value: estimatedAttribution.value,
-            unit: estimatedAttribution.unit,
-            desc: "이전 유입 · 인앱 브라우저로 추정",
+            label: "가장 많은 유입 채널",
+            value: top ? channelMeta(top.source).label : "-",
+            unit: "",
+            desc: top ? `${formatNumber(top.entry)}회 유입` : "외부 유입 없음",
             className: "compact",
-            footer: attributionStartText(attribution)
-          })}
-
-          ${kpiCard({
-            label: `${label} 미확인 출처`,
-            value: unresolvedAttribution.value,
-            unit: unresolvedAttribution.unit,
-            desc: "브라우저가 출처 근거를 보내지 않은 방문",
-            className: "compact",
-            footer: attributionStartText(attribution)
+            footer: top ? `스토어 이동 ${formatNumber(top.downloads)}회` : "채널 데이터 대기"
           })}
         </div>
 
@@ -4828,12 +4801,12 @@
               <div class="eyebrow">RANKING</div>
               <h2 class="section-title">유입 채널 순위</h2>
             </div>
-            <div class="section-caption">${channelUsesPeople ? "사람 수 기준" : "방문 횟수 기준"}</div>
+            <div class="section-caption">선택 기간 유입 횟수 기준</div>
           </div>
 
           <div class="channel-visual-grid">
-            <div>${donutHtml(slices, "외부 채널", `${formatNumber(totalForVisual)}${channelUsesPeople ? "명" : "회"}`)}</div>
-            <div>${channelBarsHtml(channels.external, channels.externalUniqueEntries, "uniqueEntry", "명")}</div>
+            <div>${donutHtml(slices, "외부 채널 유입", `${formatNumber(totalForVisual)}회`)}</div>
+            <div>${channelBarsHtml(channels.external, channels.externalEntries, "entry", "회")}</div>
           </div>
         </section>
 
@@ -4845,19 +4818,21 @@
           <div class="table-wrap">
             <table class="data-table" style="min-width:1000px">
               <thead>
-                <tr><th>채널</th><th>들어온 사람</th><th>방문 횟수</th><th>스토어 이동</th><th>스토어로 간 사람</th><th>iPhone</th><th>Android</th></tr>
+                <tr><th>채널</th><th>기간 내 유입</th><th>스토어 이동</th><th>이동률</th><th>iPhone</th><th>Android</th><th>고유 ID 확인</th></tr>
               </thead>
               <tbody>
                 ${channels.external.length
                   ? channels.external.map(row => `
                       <tr>
                         <td>${escapeHtml(channelMeta(row.source).label)}</td>
-                        <td>${formatNumber(row.uniqueEntry)}명</td>
                         <td>${formatNumber(row.visits)}회</td>
                         <td class="orange-value">${formatNumber(row.downloads)}회</td>
-                        <td>${formatNumber(row.uniqueDownloads)}명</td>
+                        <td>${row.visits > 0 ? formatRate(percent(row.downloads, row.visits)) : "-"}</td>
                         <td class="ios-value">${formatNumber(row.ios)}회</td>
                         <td class="android-value">${formatNumber(row.android)}회</td>
+                        <td>${row.uniqueEntry > 0 || row.uniqueDownloads > 0
+                          ? `유입 ${formatNumber(row.uniqueEntry)}명 · 이동 ${formatNumber(row.uniqueDownloads)}명`
+                          : "-"}</td>
                       </tr>`).join("")
                   : `<tr><td colspan="7" class="empty">아직 외부 유입이 없습니다.</td></tr>`}
               </tbody>
@@ -4879,9 +4854,9 @@
 
       const sourceRows = channels.rows
         .filter(row => number(row.downloads) > 0 || number(row.uniqueDownloads) > 0)
-        .sort((a, b) => b.uniqueDownloads - a.uniqueDownloads || b.downloads - a.downloads);
+        .sort((a, b) => b.downloads - a.downloads || b.entry - a.entry);
 
-      const sourceUniqueTotal = sourceRows.reduce((sum, row) => sum + row.uniqueDownloads, 0);
+      const sourceDownloadTotal = sourceRows.reduce((sum, row) => sum + row.downloads, 0);
       const uniqueChartMap = new Map(uniqueRows.map(row => [row.key, row]));
       const trendRows = rows.map(row => ({
         label: row.label,
@@ -4965,9 +4940,9 @@
         <section class="surface channel-visual">
           <div class="section-head">
             <div><div class="eyebrow">SOURCE</div><h2 class="section-title">스토어 이동 유입 채널</h2></div>
-            <div class="section-caption">사람 수 기준</div>
+            <div class="section-caption">선택 기간 이동 횟수 기준</div>
           </div>
-          <div style="margin-top:24px">${channelBarsHtml(sourceRows, sourceUniqueTotal, "uniqueDownloads", "명")}</div>
+          <div style="margin-top:24px">${channelBarsHtml(sourceRows, sourceDownloadTotal, "downloads", "회")}</div>
         </section>
       `;
 
