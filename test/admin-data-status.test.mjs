@@ -89,8 +89,45 @@ test("admin keeps visitors without detailed attribution in the main totals", () 
   assert.match(adminHtml, /Google 보고서 지연 확인 필요/);
 });
 
-test("channel ranking uses complete date-filtered channel records", () => {
+test("channel reporting uses people only for fully covered periods", () => {
   const context = {
+    state: {
+      period: "today",
+      stats: {
+        uniqueTracking: { trackingStartDate: "2026-08-21" }
+      }
+    },
+    currentDate() {
+      return "2026-08-23";
+    },
+    selectedPeriodRange(period) {
+      if (period === "last7") {
+        return { startDate: "2026-08-17", endDate: "2026-08-23" };
+      }
+      if (period === "last30") {
+        return { startDate: "2026-07-25", endDate: "2026-08-23" };
+      }
+      return null;
+    }
+  };
+  vm.createContext(context);
+  vm.runInContext(
+    `${extractFunction("selectedPeriodBounds", "isRangePeriod")}; this.hasCompleteUniqueTracking = hasCompleteUniqueTracking;`,
+    context
+  );
+
+  assert.equal(context.hasCompleteUniqueTracking(), true);
+  context.state.period = "last7";
+  assert.equal(context.hasCompleteUniqueTracking(), false);
+  context.state.period = "last30";
+  assert.equal(context.hasCompleteUniqueTracking(), false);
+  context.state.period = "all";
+  assert.equal(context.hasCompleteUniqueTracking(), false);
+});
+
+test("channel ranking switches between people and event counts", () => {
+  const context = {
+    usePeople: false,
     number(value) {
       return Number(value || 0);
     },
@@ -102,6 +139,9 @@ test("channel ranking uses complete date-filtered channel records", () => {
     },
     channelUniqueEntry(row) {
       return Number(row?.uniqueEntrants || 0);
+    },
+    channelReportingUsesPeople() {
+      return context.usePeople;
     },
     getChannelPeriod() {
       return {
@@ -130,18 +170,86 @@ test("channel ranking uses complete date-filtered channel records", () => {
     context
   );
 
-  const channels = JSON.parse(JSON.stringify(context.groupChannels()));
+  const eventChannels = JSON.parse(JSON.stringify(context.groupChannels()));
 
-  assert.equal(channels.external[0].source, "daangn");
-  assert.equal(channels.external[0].entry, 247);
-  assert.equal(channels.externalEntries, 287);
-  assert.equal(channels.externalUniqueEntries, 76);
-  assert.match(adminHtml, /const totalForVisual = channels\.externalEntries/);
+  assert.equal(eventChannels.usePeople, false);
+  assert.equal(eventChannels.external[0].source, "daangn");
+  assert.equal(eventChannels.external[0].entry, 247);
+  assert.equal(eventChannels.externalEntries, 287);
+  assert.equal(eventChannels.externalUniqueEntries, 76);
+
+  context.usePeople = true;
+  const peopleChannels = JSON.parse(JSON.stringify(context.groupChannels()));
+
+  assert.equal(peopleChannels.usePeople, true);
+  assert.equal(peopleChannels.external[0].source, "google");
+  assert.equal(peopleChannels.external[0].uniqueEntry, 40);
+  assert.match(adminHtml, /const totalForVisual = usePeople/);
   assert.match(
     adminHtml,
-    /channelBarsHtml\(channels\.external, channels\.externalEntries, "entry", "회"\)/
+    /usePeople \? "uniqueEntry" : "entry"/
   );
-  assert.doesNotMatch(adminHtml, /channelUsesPeople/);
+  assert.match(adminHtml, /스토어로 간 사람/);
+  assert.match(adminHtml, /고유 추적 이전 기록 포함/);
+});
+
+test("today channel card separates unique people from repeated events", () => {
+  const context = {
+    number(value) {
+      return Number(value || 0);
+    },
+    clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    },
+    percent(value, total) {
+      return total > 0 ? value / total * 100 : 0;
+    },
+    formatRate(value) {
+      return `${Number(value).toFixed(1)}%`;
+    },
+    formatNumber(value) {
+      return Number(value || 0).toLocaleString("ko-KR");
+    },
+    escapeHtml(value) {
+      return String(value);
+    },
+    channelMeta() {
+      return { label: "당근", color: "#ff6f0f" };
+    },
+    channelIconHtml() {
+      return "🥕";
+    }
+  };
+  vm.createContext(context);
+  vm.runInContext(
+    `${extractFunction("channelBarsHtml", "platformBarsHtml")}; this.channelBarsHtml = channelBarsHtml;`,
+    context
+  );
+
+  const row = {
+    source: "daangn",
+    entry: 80,
+    downloads: 76,
+    ios: 13,
+    android: 63,
+    unknown: 0,
+    uniqueEntry: 70,
+    uniqueEntrants: 70,
+    uniqueDownloads: 69,
+    uniqueIos: 13,
+    uniqueAndroid: 56,
+    uniqueUnknown: 0
+  };
+
+  const peopleHtml = context.channelBarsHtml([row], 70, "uniqueEntry", "명");
+  assert.match(peopleHtml, /이동률 98\.6%/);
+  assert.match(peopleHtml, /70명/);
+  assert.match(peopleHtml, /69명/);
+  assert.match(peopleHtml, /방문 80회 · 스토어 이동 76회/);
+
+  const eventHtml = context.channelBarsHtml([row], 80, "entry", "회");
+  assert.match(eventHtml, /이동률 95\.0%/);
+  assert.match(eventHtml, /고유 ID 확인 유입 70명 · 스토어 이동 69명/);
 });
 
 test("recent seven-day channel view requests and renders the selected range", () => {
