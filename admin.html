@@ -2915,7 +2915,7 @@
   </aside>
 
   <script>
-    // MODING ADMIN v22 - date-filtered channel totals stay primary
+    // MODING ADMIN v23 - coverage-aware people and event metrics
     const API_BASE = "https://flat-queen-f1fb.moding-inc.workers.dev";
     const SESSION_TOKEN_KEY = "moding_admin_token";
     const TRUSTED_DEVICE_KEY = "moding_admin_trusted_device";
@@ -3264,6 +3264,31 @@
       return null;
     }
 
+    function selectedPeriodBounds(period = state.period) {
+      const today = currentDate();
+
+      if (period === "today") {
+        return { startDate: today, endDate: today };
+      }
+
+      return selectedPeriodRange(period);
+    }
+
+    function hasCompleteUniqueTracking(period = state.period) {
+      const trackingStartDate = state.stats?.uniqueTracking?.trackingStartDate;
+      const bounds = selectedPeriodBounds(period);
+
+      if (!trackingStartDate || !bounds) return false;
+
+      // The first tracking date may only contain a partial day, so the
+      // following calendar day is the first fully comparable period start.
+      return bounds.startDate > trackingStartDate;
+    }
+
+    function channelReportingUsesPeople() {
+      return hasCompleteUniqueTracking();
+    }
+
     function isRangePeriod(period = state.period) {
       return ["last7", "last30", "custom"].includes(period);
     }
@@ -3422,6 +3447,8 @@
 
       return {
         trackingStartDate: root.trackingStartDate || null,
+        firstDate: current?.firstDate || null,
+        lastDate: current?.lastDate || null,
         entrants: number(current?.entrants),
         visitors: number(current?.visitors),
         downloaders: number(current?.downloaders),
@@ -3511,6 +3538,9 @@
         ios: number(current?.ios),
         android: number(current?.android),
         unknown: number(current?.unknown),
+        uniqueEntrants: number(current?.uniqueEntrants),
+        uniqueVisits: number(current?.uniqueVisits),
+        uniqueDownloads: number(current?.uniqueDownloads),
         sources: Array.isArray(current?.sources) ? current.sources : []
       };
     }
@@ -3547,6 +3577,17 @@
       };
     }
 
+    function externalAttributionSummary(attribution) {
+      return {
+        visitors:
+          number(attribution?.confirmed?.visitors) +
+          number(attribution?.estimated?.visitors),
+        downloaders:
+          number(attribution?.confirmed?.downloaders) +
+          number(attribution?.estimated?.downloaders)
+      };
+    }
+
     function attributionCoverage(attribution, unique = getUniquePeriod()) {
       const classifiedVisitors =
         number(attribution?.confirmed?.visitors) +
@@ -3575,16 +3616,24 @@
         : "세부 판정 기록 이후";
     }
 
-    function attributionBanner(attribution, coverage = attributionCoverage(attribution)) {
+    function attributionBanner(
+      attribution,
+      coverage = attributionCoverage(attribution),
+      usePeople = channelReportingUsesPeople()
+    ) {
       const coverageText = coverage.withoutDetailVisitors > 0
         ? `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명은 전체 방문과 채널 집계에 모두 포함됩니다. 이 중 ${formatNumber(coverage.classifiedVisitors)}명은 세부 판정 정보가 있으며, ${formatNumber(coverage.withoutDetailVisitors)}명은 확정·추정·미확인 보조 통계에만 포함되지 않습니다.`
         : `이 기간 방문자 ${formatNumber(coverage.periodVisitors)}명 모두 세부 판정 정보가 있습니다.`;
+
+      const countingText = usePeople
+        ? "고유 추적이 온전히 적용된 기간이므로 채널 대표 숫자는 반복을 제거한 사람 수로 표시하고, 방문·스토어 이동 횟수는 보조 정보로 표시합니다."
+        : `고유 추적 시작일(${escapeHtml(trackingStartText())}) 이전 기록이 포함되어 채널 대표 숫자는 전체 유입 횟수로 표시하고, 확인 가능한 고유 인원은 보조 정보로 분리합니다.`;
 
       return `
         <div class="tracking-banner">
           <div>
             <strong>출처 판정 보조 정보</strong>
-            채널 순위는 선택 기간의 유입 기록을 기준으로 계산합니다. URL 태그·외부 링크는 확정, 30일 이내 이전 유입·인앱 브라우저는 추정으로 표시합니다.
+            ${countingText} URL 태그·외부 링크는 확정, 30일 이내 이전 유입·인앱 브라우저는 추정으로 표시합니다.
             같은 방문자는 해당 기간의 가장 신뢰도 높은 한 단계에만 포함하며, 근거가 없는 방문에는 임의로 출처를 붙이지 않습니다.
             ${coverageText}
           </div>
@@ -3595,6 +3644,7 @@
 
     function groupChannels() {
       const raw = getChannelPeriod();
+      const usePeople = channelReportingUsesPeople();
       const map = new Map();
 
       raw.sources.forEach(row => {
@@ -3663,11 +3713,15 @@
           )
         )
         .sort((a, b) => {
-          if (b.entry !== a.entry) {
-            return b.entry - a.entry;
+          const primaryA = usePeople ? a.uniqueEntry : a.entry;
+          const primaryB = usePeople ? b.uniqueEntry : b.entry;
+          if (primaryB !== primaryA) {
+            return primaryB - primaryA;
           }
 
-          return b.downloads - a.downloads;
+          const secondaryA = usePeople ? a.uniqueDownloads : a.downloads;
+          const secondaryB = usePeople ? b.uniqueDownloads : b.downloads;
+          return secondaryB - secondaryA;
         });
 
       const externalEntries = external.reduce(
@@ -3722,6 +3776,7 @@
 
       return {
         raw,
+        usePeople,
         rows,
         direct,
         external,
@@ -4275,6 +4330,7 @@
         1,
         ...rows.map(row => number(row[valueKey]))
       );
+      const usePeople = ["uniqueEntry", "uniqueDownloads"].includes(valueKey);
 
       return `
         <div class="channel-bars">
@@ -4288,15 +4344,25 @@
             );
             const hasUniqueEntrants = number(row.uniqueEntrants) > 0;
             const hasUniqueDownloads = number(row.uniqueDownloads) > 0;
-            const entrantValue = number(row.visits || row.entry);
-            const storeValue = number(row.downloads);
+            const entrantEvents = number(row.entry);
+            const storeEvents = number(row.downloads);
+            const entrantPeople = number(row.uniqueEntry);
+            const storePeople = number(row.uniqueDownloads);
+            const entrantValue = usePeople ? entrantPeople : entrantEvents;
+            const storeValue = usePeople ? storePeople : storeEvents;
             const movementRate = entrantValue > 0
               ? percent(storeValue, entrantValue)
               : null;
             const platformParts = [
-              number(row.ios) > 0 ? `iPhone ${formatNumber(row.ios)}회` : "",
-              number(row.android) > 0 ? `Android ${formatNumber(row.android)}회` : "",
-              number(row.unknown) > 0 ? `기타 ${formatNumber(row.unknown)}회` : ""
+              number(usePeople ? row.uniqueIos : row.ios) > 0
+                ? `iPhone ${formatNumber(usePeople ? row.uniqueIos : row.ios)}${usePeople ? "명" : "회"}`
+                : "",
+              number(usePeople ? row.uniqueAndroid : row.android) > 0
+                ? `Android ${formatNumber(usePeople ? row.uniqueAndroid : row.android)}${usePeople ? "명" : "회"}`
+                : "",
+              number(usePeople ? row.uniqueUnknown : row.unknown) > 0
+                ? `기타 ${formatNumber(usePeople ? row.uniqueUnknown : row.unknown)}${usePeople ? "명" : "회"}`
+                : ""
             ].filter(Boolean);
 
             return `
@@ -4327,20 +4393,22 @@
 
                 <div class="channel-journey">
                   <div class="journey-step">
-                    <small>기간 내 유입</small>
-                    <strong>${formatNumber(entrantValue)}회</strong>
+                    <small>${usePeople ? "유입한 사람" : "기간 내 유입"}</small>
+                    <strong>${formatNumber(entrantValue)}${usePeople ? "명" : "회"}</strong>
                   </div>
                   <div class="journey-arrow" aria-hidden="true">→</div>
                   <div class="journey-step store">
-                    <small>스토어 이동</small>
-                    <strong>${formatNumber(storeValue)}회</strong>
+                    <small>${usePeople ? "스토어로 간 사람" : "스토어 이동"}</small>
+                    <strong>${formatNumber(storeValue)}${usePeople ? "명" : "회"}</strong>
                   </div>
                 </div>
 
                 <div class="channel-secondary">
-                  <span>${hasUniqueEntrants || hasUniqueDownloads
-                    ? `고유 ID 확인 유입 ${formatNumber(row.uniqueEntrants)}명 · 스토어 이동 ${formatNumber(row.uniqueDownloads)}명`
-                    : "고유 ID 세부 정보 없음"}</span>
+                  <span>${usePeople
+                    ? `방문 ${formatNumber(entrantEvents)}회 · 스토어 이동 ${formatNumber(storeEvents)}회`
+                    : hasUniqueEntrants || hasUniqueDownloads
+                      ? `고유 ID 확인 유입 ${formatNumber(entrantPeople)}명 · 스토어 이동 ${formatNumber(storePeople)}명`
+                      : "고유 ID 세부 정보 없음"}</span>
                   ${platformParts.length
                     ? `<span class="channel-platforms"><strong>스토어 이동 상세</strong> ${platformParts.join(" · ")}</span>`
                     : ""}
@@ -4412,33 +4480,39 @@
       `;
     }
 
-    function quickChannelsHtml(rows, limit = 3) {
+    function quickChannelsHtml(
+      rows,
+      limit = 3,
+      usePeople = channelReportingUsesPeople()
+    ) {
       const picked = rows.slice(0, limit);
       if (!picked.length) {
         return `<div class="chart-empty" style="min-height:190px">아직 외부 유입이 없습니다.</div>`;
       }
 
-      const values = picked.map(row => number(row.entry));
+      const values = picked.map(row => number(usePeople ? row.uniqueEntry : row.entry));
       const maxValue = Math.max(1, ...values);
 
       return `
         <div class="quick-channel-list">
           ${picked.map(row => {
             const meta = channelMeta(row.source);
-            const value = number(row.entry);
+            const value = number(usePeople ? row.uniqueEntry : row.entry);
             const width = clamp(value / maxValue * 100, value > 0 ? 5 : 0, 100);
             return `
               <div class="quick-channel-row">
                 <div class="quick-channel-head">
                   ${channelIconHtml(row.source)}
                   <div class="quick-channel-name">${escapeHtml(meta.label)}</div>
-                  <div class="quick-channel-value">${formatNumber(value)}회</div>
+                  <div class="quick-channel-value">${formatNumber(value)}${usePeople ? "명" : "회"}</div>
                 </div>
                 <div class="quick-channel-track">
                   <div class="quick-channel-fill" style="background:${meta.color}" data-bar-width="${width.toFixed(2)}"></div>
                 </div>
                 <div class="quick-channel-foot">
-                  스토어 이동 ${formatNumber(row.downloads)}회
+                  ${usePeople
+                    ? `스토어로 간 사람 ${formatNumber(row.uniqueDownloads)}명 · 이동 ${formatNumber(row.downloads)}회`
+                    : `스토어 이동 ${formatNumber(row.downloads)}회 · 고유 ID 확인 ${formatNumber(row.uniqueEntry)}명`}
                 </div>
               </div>
             `;
@@ -4581,12 +4655,13 @@
       const clicks = getPlatformClicks();
       const install = getInstallPeriod();
       const label = periodName();
+      const usePeople = channels.usePeople;
 
       const topChannel = channels.external[0] || null;
       const topChannelValue = topChannel
-        ? number(topChannel.entry)
+        ? number(usePeople ? topChannel.uniqueEntry : topChannel.entry)
         : 0;
-      const topChannelUnit = "회";
+      const topChannelUnit = usePeople ? "명" : "회";
       const confirmedAttribution = attributionDisplay(attribution.confirmed);
       const estimatedAttribution = attributionDisplay(attribution.estimated);
       const unresolvedAttribution = attributionDisplay(attribution.unresolved);
@@ -4603,21 +4678,25 @@
       content.innerHTML = `
         <div class="kpi-grid">
           ${kpiCard({
-            label: `${label} 방문한 사람`,
-            value: unique.visitors,
-            unit: "명",
-            desc: "반복 방문 제외",
+            label: usePeople ? `${label} 방문한 사람` : `${label} 방문 횟수`,
+            value: usePeople ? unique.visitors : website.visits,
+            unit: usePeople ? "명" : "회",
+            desc: usePeople ? "반복 방문 제외" : "고유 추적 이전 기록 포함",
             className: "primary",
-            footer: `방문 횟수 ${formatNumber(website.visits)}회`
+            footer: usePeople
+              ? `방문 횟수 ${formatNumber(website.visits)}회`
+              : `고유 ID 확인 ${formatNumber(unique.visitors)}명`
           })}
 
           ${kpiCard({
-            label: `${label} 스토어로 간 사람`,
-            value: unique.downloaders,
-            unit: "명",
-            desc: "반복 이동 제외",
+            label: usePeople ? `${label} 스토어로 간 사람` : `${label} 스토어 이동 횟수`,
+            value: usePeople ? unique.downloaders : clicks.total,
+            unit: usePeople ? "명" : "회",
+            desc: usePeople ? "반복 이동 제외" : "고유 추적 이전 기록 포함",
             className: "compact",
-            footer: `스토어 이동 ${formatNumber(clicks.total)}회`
+            footer: usePeople
+              ? `스토어 이동 ${formatNumber(clicks.total)}회`
+              : `고유 ID 확인 ${formatNumber(unique.downloaders)}명`
           })}
 
           ${kpiCard({
@@ -4636,7 +4715,9 @@
             desc: topChannel ? `${formatNumber(topChannelValue)}${topChannelUnit} 들어옴` : "외부 유입 없음",
             className: "compact",
             footer: topChannel
-              ? `스토어 이동 ${formatNumber(topChannel.downloads)}회`
+              ? usePeople
+                ? `스토어로 간 사람 ${formatNumber(topChannel.uniqueDownloads)}명 · 이동 ${formatNumber(topChannel.downloads)}회`
+                : `스토어 이동 ${formatNumber(topChannel.downloads)}회 · 고유 ID 확인 ${formatNumber(topChannel.uniqueEntry)}명`
               : "채널 데이터 대기"
           })}
         </div>
@@ -4653,18 +4734,22 @@
 
             ${overviewCoreBarsHtml([
               {
-                label: "방문한 사람",
-                value: unique.visitors,
-                unit: "명",
+                label: usePeople ? "방문한 사람" : "방문 횟수",
+                value: usePeople ? unique.visitors : website.visits,
+                unit: usePeople ? "명" : "회",
                 className: "visit",
-                sub: `방문 ${formatNumber(website.visits)}회`
+                sub: usePeople
+                  ? `방문 ${formatNumber(website.visits)}회`
+                  : `고유 ID 확인 ${formatNumber(unique.visitors)}명`
               },
               {
-                label: "스토어로 간 사람",
-                value: unique.downloaders,
-                unit: "명",
+                label: usePeople ? "스토어로 간 사람" : "스토어 이동",
+                value: usePeople ? unique.downloaders : clicks.total,
+                unit: usePeople ? "명" : "회",
                 className: "store",
-                sub: `이동 ${formatNumber(clicks.total)}회`
+                sub: usePeople
+                  ? `이동 ${formatNumber(clicks.total)}회`
+                  : `고유 ID 확인 ${formatNumber(unique.downloaders)}명`
               },
               {
                 label: "실제 설치",
@@ -4689,7 +4774,7 @@
               <div class="section-caption">상위 3개</div>
             </div>
 
-            ${quickChannelsHtml(channels.external, 3)}
+            ${quickChannelsHtml(channels.external, 3, usePeople)}
 
             <div class="overview-mini-platform">
               <div>
@@ -4744,24 +4829,42 @@
       const attribution = getAttributionPeriod();
       const unique = getUniquePeriod();
       const label = periodName();
-      const totalForVisual = channels.externalEntries;
+      const usePeople = channels.usePeople;
+      const coverage = attributionCoverage(attribution, unique);
+      const externalAttribution = externalAttributionSummary(attribution);
+      const hasAttributionDetail =
+        coverage.classifiedVisitors > 0 || coverage.periodVisitors === 0;
+      const externalPeople = hasAttributionDetail
+        ? externalAttribution.visitors
+        : channels.externalUniqueEntries;
+      const externalStorePeople = hasAttributionDetail
+        ? externalAttribution.downloaders
+        : channels.externalUniqueDownloads;
+      const totalForVisual = usePeople
+        ? channels.externalUniqueEntries
+        : channels.externalEntries;
       const slices = channels.external.map(row => ({
-        value: row.entry,
+        value: usePeople ? row.uniqueEntry : row.entry,
         color: channelMeta(row.source).color
       }));
       const top = channels.external[0];
-      const coverage = attributionCoverage(attribution, unique);
+      const topEntry = top
+        ? number(usePeople ? top.uniqueEntry : top.entry)
+        : 0;
+      const topDownloads = top
+        ? number(usePeople ? top.uniqueDownloads : top.downloads)
+        : 0;
 
       content.innerHTML = `
         <div class="kpi-grid">
           ${kpiCard({
-            label: `${label} 외부 채널 유입`,
-            value: channels.externalEntries,
-            unit: "회",
-            desc: "선택 기간에 기록된 외부 채널 방문",
+            label: usePeople ? `${label} 외부 채널 유입` : `${label} 외부 채널 유입 횟수`,
+            value: usePeople ? externalPeople : channels.externalEntries,
+            unit: usePeople ? "명" : "회",
+            desc: usePeople ? "반복 방문을 제외한 외부 유입" : "고유 추적 이전 기록이 포함된 전체 유입",
             className: "primary",
             footer: top
-              ? `가장 많은 곳 ${escapeHtml(channelMeta(top.source).label)} ${formatNumber(top.entry)}회`
+              ? `가장 많은 곳 ${escapeHtml(channelMeta(top.source).label)} ${formatNumber(topEntry)}${usePeople ? "명" : "회"}`
               : "유입 대기"
           })}
 
@@ -4775,25 +4878,31 @@
           })}
 
           ${kpiCard({
-            label: `${label} 외부 채널 스토어 이동`,
-            value: channels.externalDownloads,
-            unit: "회",
-            desc: "외부 채널 유입 후 스토어로 이동",
+            label: usePeople ? `${label} 외부 채널 스토어 이동` : `${label} 외부 채널 스토어 이동 횟수`,
+            value: usePeople ? externalStorePeople : channels.externalDownloads,
+            unit: usePeople ? "명" : "회",
+            desc: usePeople ? "외부 유입 후 스토어로 간 사람" : "외부 유입 후 발생한 전체 스토어 이동",
             className: "compact",
-            footer: `iPhone ${formatNumber(channels.externalIos)} · Android ${formatNumber(channels.externalAndroid)}`
+            footer: usePeople
+              ? `이동 ${formatNumber(channels.externalDownloads)}회 · iPhone ${formatNumber(channels.externalUniqueIos)}명 · Android ${formatNumber(channels.externalUniqueAndroid)}명`
+              : `고유 ID 확인 ${formatNumber(externalStorePeople)}명 · iPhone ${formatNumber(channels.externalIos)}회 · Android ${formatNumber(channels.externalAndroid)}회`
           })}
 
           ${kpiCard({
             label: "가장 많은 유입 채널",
             value: top ? channelMeta(top.source).label : "-",
             unit: "",
-            desc: top ? `${formatNumber(top.entry)}회 유입` : "외부 유입 없음",
+            desc: top ? `${formatNumber(topEntry)}${usePeople ? "명" : "회"} 유입` : "외부 유입 없음",
             className: "compact",
-            footer: top ? `스토어 이동 ${formatNumber(top.downloads)}회` : "채널 데이터 대기"
+            footer: top
+              ? usePeople
+                ? `스토어로 간 사람 ${formatNumber(topDownloads)}명 · 이동 ${formatNumber(top.downloads)}회`
+                : `스토어 이동 ${formatNumber(topDownloads)}회 · 고유 ID 확인 ${formatNumber(top.uniqueEntry)}명`
+              : "채널 데이터 대기"
           })}
         </div>
 
-        ${attributionBanner(attribution, coverage)}
+        ${attributionBanner(attribution, coverage, usePeople)}
 
         <section class="surface channel-visual">
           <div class="section-head">
@@ -4801,12 +4910,21 @@
               <div class="eyebrow">RANKING</div>
               <h2 class="section-title">유입 채널 순위</h2>
             </div>
-            <div class="section-caption">선택 기간 유입 횟수 기준</div>
+            <div class="section-caption">${usePeople ? "중복 제거한 사람 수 기준" : "전체 유입 횟수 기준"}</div>
           </div>
 
           <div class="channel-visual-grid">
-            <div>${donutHtml(slices, "외부 채널 유입", `${formatNumber(totalForVisual)}회`)}</div>
-            <div>${channelBarsHtml(channels.external, channels.externalEntries, "entry", "회")}</div>
+            <div>${donutHtml(
+              slices,
+              usePeople ? "채널별 고유 유입" : "외부 채널 유입",
+              `${formatNumber(totalForVisual)}${usePeople ? "명" : "회"}`
+            )}</div>
+            <div>${channelBarsHtml(
+              channels.external,
+              totalForVisual,
+              usePeople ? "uniqueEntry" : "entry",
+              usePeople ? "명" : "회"
+            )}</div>
           </div>
         </section>
 
@@ -4851,12 +4969,22 @@
       const clicks = getPlatformClicks();
       const channels = groupChannels();
       const label = periodName();
+      const usePeople = channels.usePeople;
 
       const sourceRows = channels.rows
         .filter(row => number(row.downloads) > 0 || number(row.uniqueDownloads) > 0)
-        .sort((a, b) => b.downloads - a.downloads || b.entry - a.entry);
+        .sort((a, b) => {
+          const primaryA = number(usePeople ? a.uniqueDownloads : a.downloads);
+          const primaryB = number(usePeople ? b.uniqueDownloads : b.downloads);
+          if (primaryB !== primaryA) return primaryB - primaryA;
+          return number(usePeople ? b.uniqueEntry : b.entry) -
+            number(usePeople ? a.uniqueEntry : a.entry);
+        });
 
-      const sourceDownloadTotal = sourceRows.reduce((sum, row) => sum + row.downloads, 0);
+      const sourceDownloadTotal = sourceRows.reduce(
+        (sum, row) => sum + number(usePeople ? row.uniqueDownloads : row.downloads),
+        0
+      );
       const uniqueChartMap = new Map(uniqueRows.map(row => [row.key, row]));
       const trendRows = rows.map(row => ({
         label: row.label,
@@ -4864,45 +4992,51 @@
         uniqueDownloads: number(uniqueChartMap.get(row.key)?.downloaders)
       }));
 
-      const uniquePlatformSlices = [
-        { value: unique.ios, color: COLORS.blue },
-        { value: unique.android, color: COLORS.green },
-        { value: unique.unknown, color: COLORS.muted }
+      const platformSlices = [
+        { value: usePeople ? unique.ios : clicks.ios, color: COLORS.blue },
+        { value: usePeople ? unique.android : clicks.android, color: COLORS.green },
+        { value: usePeople ? unique.unknown : clicks.unknown, color: COLORS.muted }
       ];
 
       content.innerHTML = `
         <div class="kpi-grid">
           ${kpiCard({
-            label: `${label} 스토어로 간 사람`,
-            value: unique.downloaders,
-            unit: "명",
-            desc: "반복 이동 제외",
+            label: usePeople ? `${label} 스토어로 간 사람` : `${label} 스토어 이동 횟수`,
+            value: usePeople ? unique.downloaders : clicks.total,
+            unit: usePeople ? "명" : "회",
+            desc: usePeople ? "반복 이동 제외" : "고유 추적 이전 기록 포함",
             className: "primary",
-            footer: `스토어 이동 ${formatNumber(clicks.total)}회`
+            footer: usePeople
+              ? `스토어 이동 ${formatNumber(clicks.total)}회`
+              : `고유 ID 확인 ${formatNumber(unique.downloaders)}명`
           })}
           ${kpiCard({
-            label: `${label} 스토어 이동 횟수`,
-            value: clicks.total,
-            unit: "회",
-            desc: "반복 이동 포함",
+            label: usePeople ? `${label} 스토어 이동 횟수` : `${label} 고유 ID 확인`,
+            value: usePeople ? clicks.total : unique.downloaders,
+            unit: usePeople ? "회" : "명",
+            desc: usePeople ? "반복 이동 포함" : "추적 적용 이후 확인된 사람",
             className: "compact",
             footer: `iPhone ${formatNumber(clicks.ios)} · Android ${formatNumber(clicks.android)}`
           })}
           ${kpiCard({
-            label: "iPhone에서 간 사람",
-            value: unique.ios,
-            unit: "명",
+            label: usePeople ? "iPhone에서 간 사람" : "iPhone 스토어 이동",
+            value: usePeople ? unique.ios : clicks.ios,
+            unit: usePeople ? "명" : "회",
             desc: "App Store로 이동",
             className: "compact",
-            footer: `이동 ${formatNumber(clicks.ios)}회`
+            footer: usePeople
+              ? `이동 ${formatNumber(clicks.ios)}회`
+              : `고유 ID 확인 ${formatNumber(unique.ios)}명`
           })}
           ${kpiCard({
-            label: "Android에서 간 사람",
-            value: unique.android,
-            unit: "명",
+            label: usePeople ? "Android에서 간 사람" : "Android 스토어 이동",
+            value: usePeople ? unique.android : clicks.android,
+            unit: usePeople ? "명" : "회",
             desc: "Google Play로 이동",
             className: "compact",
-            footer: `이동 ${formatNumber(clicks.android)}회`
+            footer: usePeople
+              ? `이동 ${formatNumber(clicks.android)}회`
+              : `고유 ID 확인 ${formatNumber(unique.android)}명`
           })}
         </div>
 
@@ -4927,11 +5061,15 @@
             <div class="eyebrow">PLATFORM</div>
             <h2 class="section-title">어느 기기에서 갔나</h2>
             <div class="donut-layout">
-              ${donutHtml(uniquePlatformSlices, "스토어로 간 사람", `${formatNumber(unique.downloaders)}명`)}
+              ${donutHtml(
+                platformSlices,
+                usePeople ? "스토어로 간 사람" : "스토어 이동",
+                `${formatNumber(usePeople ? unique.downloaders : clicks.total)}${usePeople ? "명" : "회"}`
+              )}
               <div class="share-list">
-                <div class="share-row"><span class="share-name"><span class="legend-dot blue"></span>iPhone</span><span class="share-value">${formatNumber(unique.ios)}</span></div>
-                <div class="share-row"><span class="share-name"><span class="legend-dot"></span>Android</span><span class="share-value">${formatNumber(unique.android)}</span></div>
-                <div class="share-row"><span class="share-name"><span class="legend-dot muted"></span>기타</span><span class="share-value">${formatNumber(unique.unknown)}</span></div>
+                <div class="share-row"><span class="share-name"><span class="legend-dot blue"></span>iPhone</span><span class="share-value">${formatNumber(usePeople ? unique.ios : clicks.ios)}</span></div>
+                <div class="share-row"><span class="share-name"><span class="legend-dot"></span>Android</span><span class="share-value">${formatNumber(usePeople ? unique.android : clicks.android)}</span></div>
+                <div class="share-row"><span class="share-name"><span class="legend-dot muted"></span>기타</span><span class="share-value">${formatNumber(usePeople ? unique.unknown : clicks.unknown)}</span></div>
               </div>
             </div>
           </aside>
@@ -4940,9 +5078,14 @@
         <section class="surface channel-visual">
           <div class="section-head">
             <div><div class="eyebrow">SOURCE</div><h2 class="section-title">스토어 이동 유입 채널</h2></div>
-            <div class="section-caption">선택 기간 이동 횟수 기준</div>
+            <div class="section-caption">${usePeople ? "중복 제거한 사람 수 기준" : "전체 이동 횟수 기준"}</div>
           </div>
-          <div style="margin-top:24px">${channelBarsHtml(sourceRows, sourceDownloadTotal, "downloads", "회")}</div>
+          <div style="margin-top:24px">${channelBarsHtml(
+            sourceRows,
+            sourceDownloadTotal,
+            usePeople ? "uniqueDownloads" : "downloads",
+            usePeople ? "명" : "회"
+          )}</div>
         </section>
       `;
 
