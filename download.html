@@ -32,38 +32,60 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "모딩-우리식당에 필요한 특수식자재",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Android, iOS",
-      "url": "https://moding.app/download.html",
-      "downloadUrl": [
-        "https://play.google.com/store/apps/details?id=com.moding.application",
-        "https://apps.apple.com/kr/app/id6772018982"
-      ],
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "KRW"
-      }
-    }
-  </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
+      "@graph": [
         {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "모딩",
-          "item": "https://moding.app/"
+          "@type": "WebPage",
+          "@id": "https://moding.app/download.html#webpage",
+          "url": "https://moding.app/download.html",
+          "name": "모딩 앱 다운로드",
+          "isPartOf": {
+            "@id": "https://moding.app/#website"
+          },
+          "about": {
+            "@id": "https://moding.app/download.html#application"
+          },
+          "breadcrumb": {
+            "@id": "https://moding.app/download.html#breadcrumb"
+          },
+          "inLanguage": "ko-KR"
         },
         {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "앱 다운로드",
-          "item": "https://moding.app/download.html"
+          "@type": "SoftwareApplication",
+          "@id": "https://moding.app/download.html#application",
+          "name": "모딩-우리식당에 필요한 특수식자재",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Android, iOS",
+          "url": "https://moding.app/download.html",
+          "publisher": {
+            "@id": "https://moding.app/#organization"
+          },
+          "downloadUrl": [
+            "https://play.google.com/store/apps/details?id=com.moding.application",
+            "https://apps.apple.com/kr/app/id6772018982"
+          ],
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://moding.app/download.html#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "모딩",
+              "item": "https://moding.app/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "앱 다운로드",
+              "item": "https://moding.app/download.html"
+            }
+          ]
         }
       ]
     }
