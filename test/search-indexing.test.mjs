@@ -109,6 +109,45 @@ test("homepage final search copy and core indexing signals remain locked", () =>
   assert.match(homepage, /href="\/download\.html"/);
 });
 
+test("download page uses one square search-safe representative image", () => {
+  const downloadPage = publicPageHtml.get("download.html");
+  const nodes = flattenJsonLd(readJsonLd(downloadPage));
+  const webpage = nodes.find(
+    (node) => node["@id"] === "https://moding.app/download.html#webpage"
+  );
+  const primaryImage = nodes.find(
+    (node) => node["@id"] === "https://moding.app/download.html#primaryimage"
+  );
+
+  assert.match(
+    downloadPage,
+    /<meta property="og:image" content="https:\/\/moding\.app\/download-search-logo-v2\.png">/
+  );
+  assert.match(
+    downloadPage,
+    /<meta property="og:image:width" content="1200">/
+  );
+  assert.match(
+    downloadPage,
+    /<meta property="og:image:height" content="1200">/
+  );
+  assert.match(
+    downloadPage,
+    /src="\/download-search-logo-v2\.png"/
+  );
+  assert.doesNotMatch(downloadPage, /src="\/모딩로고\.png"/);
+  assert.equal(
+    webpage.primaryImageOfPage["@id"],
+    "https://moding.app/download.html#primaryimage"
+  );
+  assert.equal(
+    primaryImage.contentUrl,
+    "https://moding.app/download-search-logo-v2.png"
+  );
+  assert.equal(primaryImage.width, 1200);
+  assert.equal(primaryImage.height, 1200);
+});
+
 test("primary child pages declare homepage membership and breadcrumbs", () => {
   for (const [fileName, expectedId] of publicPages.slice(1)) {
     const nodes = flattenJsonLd(readJsonLd(publicPageHtml.get(fileName)));
