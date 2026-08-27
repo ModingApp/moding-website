@@ -83,6 +83,32 @@ test("homepage explicitly connects all primary public pages", () => {
   );
 });
 
+test("homepage final search copy and core indexing signals remain locked", () => {
+  const homepage = publicPageHtml.get("index.html");
+
+  assert.match(
+    homepage,
+    /<title>모딩\(Moding\) \| 사장님의 가게에 새로운 선택지를<\/title>/
+  );
+  assert.match(
+    homepage,
+    /<meta name="description" content="외식업 사장님을 위한 B2B 식품 거래 플랫폼 모딩입니다\. 우리가게에 필요한 다양한 수산물·육가공·소스·가공식품을 찾아보세요\.">/
+  );
+  assert.match(
+    homepage,
+    /<link rel="canonical" href="https:\/\/moding\.app\/">/
+  );
+  assert.match(
+    homepage,
+    /외식업 사장님을 위한 식자재 거래 플랫폼 모딩/
+  );
+  assert.doesNotMatch(
+    homepage,
+    /<a href="download\.html">앱 다운로드<\/a>/
+  );
+  assert.match(homepage, /href="\/download\.html"/);
+});
+
 test("primary child pages declare homepage membership and breadcrumbs", () => {
   for (const [fileName, expectedId] of publicPages.slice(1)) {
     const nodes = flattenJsonLd(readJsonLd(publicPageHtml.get(fileName)));
