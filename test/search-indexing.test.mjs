@@ -83,6 +83,20 @@ test("homepage explicitly connects all primary public pages", () => {
   );
 });
 
+test("homepage connects verified official Moding channels", () => {
+  const nodes = flattenJsonLd(readJsonLd(publicPageHtml.get("index.html")));
+  const organization = nodes.find(
+    (node) => node["@id"] === "https://moding.app/#organization"
+  );
+
+  assert.deepEqual(organization.sameAs, [
+    "https://pf.kakao.com/_CixjCX",
+    "https://cafe.naver.com/modinginc",
+    "https://play.google.com/store/apps/details?id=com.moding.application",
+    "https://apps.apple.com/kr/app/id6772018982"
+  ]);
+});
+
 test("homepage final search copy and core indexing signals remain locked", () => {
   const homepage = publicPageHtml.get("index.html");
 
@@ -107,6 +121,23 @@ test("homepage final search copy and core indexing signals remain locked", () =>
     /<a href="download\.html">앱 다운로드<\/a>/
   );
   assert.match(homepage, /href="\/download\.html"/);
+});
+
+test("homepage first hero follows the green and orange title system", () => {
+  const homepage = publicPageHtml.get("index.html");
+
+  assert.match(
+    homepage,
+    /<h1>\s*사장님의 가게에<br>\s*<em>새로운 선택지를<\/em>\s*<\/h1>/
+  );
+  assert.match(
+    homepage,
+    /\.hero-copy h1,\s*\.hero-copy h2,\s*\.final-copy h2\s*{\s*color: var\(--green-dark\);/
+  );
+  assert.match(
+    homepage,
+    /\.hero-copy h1 em,\s*\.hero-copy h2 em,[\s\S]*?{\s*color: var\(--orange\);/
+  );
 });
 
 test("download page uses one square search-safe representative image", () => {
