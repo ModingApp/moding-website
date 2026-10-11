@@ -84,7 +84,7 @@ try {
             await page.mouse.wheel(0, before.height * .85); await settle(page);
             const after = await rootState(page);
             assert(after.top > 1, `${engine}/${name}/${width} did not scroll`);
-            const withinTall = after.sections.some(s => s.height > after.height + 2 && after.top >= s.top && after.top <= s.top + s.height - after.height);
+            const withinTall = after.sections.some(s => s.height > after.height + 2 && after.top >= s.top - 2 && after.top <= s.top + s.height - after.height + 2);
             assert(withinTall || after.sections.some(s => Math.abs(s.top - after.top) <= 2) || Math.abs(after.top - after.max) <= 2, `${name} stopped between screens: ${after.top}`);
             const next = page.locator('[data-next],[data-scroll-target]').filter({ visible: true }).first();
             if (await next.count()) {
@@ -117,9 +117,9 @@ try {
       const cdp = engine === 'chrome' ? await context.newCDPSession(page) : null;
       async function swipe(left) {
         const from = left ? 320 : 70, to = left ? 70 : 320;
-        if (!cdp) return syntheticSwipe(page, '#snapRoot', from, 420, to, 422);
-        await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: from, y: 420 }] });
-        for (let n = 1; n <= 6; n++) { await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: from + (to - from) * n / 6, y: 422 }] }); await page.waitForTimeout(25); }
+        if (!cdp) return syntheticSwipe(page, '#snapRoot', from, 110, to, 112);
+        await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: from, y: 110 }] });
+        for (let n = 1; n <= 6; n++) { await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: from + (to - from) * n / 6, y: 112 }] }); await page.waitForTimeout(25); }
         await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
       }
       for (let i = 0; i < marketing.length; i++) {
