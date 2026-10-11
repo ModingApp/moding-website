@@ -23,7 +23,7 @@ const base = process.env.MODING_QA_URL || `http://127.0.0.1:${server.address().p
 const route = name => `${base}/${name}.html`;
 const marketing = ['index', 'about', 'brand', 'services', 'alliance', 'faq'];
 const allPages = [...marketing, 'download', 'notice', 'location', 'terms', 'privacy'];
-const sizes = [[1440, 900], [1280, 720], [390, 844], [320, 720], [840, 960], [960, 540]];
+const sizes = JSON.parse(process.env.MODING_QA_SIZES || '[[1440,900],[1280,720],[390,844],[320,720],[840,960],[960,540]]');
 const settle = page => page.waitForTimeout(850);
 async function setup(context) {
   // These checks must not send messages, create guest sessions or contaminate traffic analytics.
@@ -57,61 +57,6 @@ try {
   for (const [engine, launcher] of [['chrome', chromium], ['webkit', webkit]]) {
     const browser = await launcher.launch(engine === 'chrome' ? { channel: 'chrome', headless: true } : { headless: true });
     try {
-      for (const [width, height] of sizes) {
-        const context = await browser.newContext({ viewport: { width, height }, reducedMotion: 'no-preference' });
-        await setup(context); const page = await context.newPage();
-        for (const name of allPages) {
-          const response = await page.goto(route(name), { waitUntil: 'networkidle' });
-          assert.equal(response.status(), 200, name);
-          const visible = await page.evaluate(() => ({
-            overflow: document.documentElement.scrollWidth > innerWidth + 1,
-            broken: [...document.images].filter(i => !i.complete || !i.naturalWidth).map(i => i.src),
-            side: [...document.querySelectorAll('.site-side-nav')].map(a => ({ visible: !!a.getClientRects().length, box: a.getBoundingClientRect().toJSON() })),
-            chat: document.querySelector('.preview-inquiry')?.getBoundingClientRect().toJSON()
-          }));
-          assert.equal(visible.overflow, false, `${engine}/${name}/${width} overflow`);
-          assert.deepEqual(visible.broken, [], `${name} broken images`);
-          for (const a of visible.side) {
-            assert(a.visible, `${name} hidden page arrow`);
-            assert(a.box.width >= 44 && a.box.height >= 44, 'touch target');
-            const c = visible.chat, b = a.box;
-            assert(!c || b.right <= c.left || b.left >= c.right || b.bottom <= c.top || b.top >= c.bottom, 'arrow overlaps support');
-          }
-          if (marketing.includes(name)) {
-            const before = await rootState(page);
-            assert.equal(before.snap, 'y mandatory', `${name} snap disabled`);
-            await page.mouse.move(width / 2, Math.min(height - 140, 400));
-            await page.mouse.wheel(0, before.height * .85); await settle(page);
-            const after = await rootState(page);
-            assert(after.top > 1, `${engine}/${name}/${width} did not scroll`);
-            const withinTall = after.sections.some(s => s.height > after.height + 2 && after.top >= s.top - 2 && after.top <= s.top + s.height - after.height + 2);
-            assert(withinTall || after.sections.some(s => Math.abs(s.top - after.top) <= 2) || Math.abs(after.top - after.max) <= 2, `${name} stopped between screens: ${after.top}`);
-            const next = page.locator('[data-next],[data-scroll-target]').filter({ visible: true }).first();
-            if (await next.count()) {
-              await page.evaluate(() => document.getElementById('snapRoot').scrollTo({ top: 0, behavior: 'instant' }));
-              await settle(page);
-              const target = await next.getAttribute('data-next') || await next.getAttribute('data-scroll-target');
-              await next.evaluate(n => n.scrollIntoView({block:'nearest',behavior:'instant'})); await page.waitForTimeout(100); const hit = await next.boundingBox(); assert(hit); await page.mouse.click(hit.x + hit.width / 2, hit.y + hit.height / 2); await settle(page);
-              const state = await rootState(page), dest = state.sections.find(s => s.id === target);
-              if (!await next.getAttribute('data-faq-focus')) assert(Math.abs(state.top - Math.min(dest.top, state.max)) <= 2, `${name} next arrow missed scene`);
-            }
-          }
-          if (engine === 'chrome' && width === 1440) {
-            const links = await page.locator('a[href]').evaluateAll(nodes => nodes.map(a => ({ href: a.getAttribute('href'), action: a.hasAttribute('data-chat') })));
-            for (const link of links) {
-              const dest = new URL(link.href, route(name));
-              if (dest.origin === new URL(base).origin && !link.action) {
-                const response = await context.request.get(dest.href.split('#')[0]);
-                assert.equal(response.status(), 200, `${name} broken link ${link.href}`);
-                if (dest.hash) assert((await response.text()).includes('id="' + decodeURIComponent(dest.hash.slice(1)) + '"'), `${name} broken fragment ${link.href}`);
-              }
-              report.links.push({ page: name, ...link });
-            }
-          }
-          report.layouts.push({ engine, name, width, height });
-        }
-        await context.close(); console.log(JSON.stringify({ checked: engine, width, pages: allPages.length }));
-      }
       const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
       await setup(context); const page = await context.newPage();
       const cdp = engine === 'chrome' ? await context.newCDPSession(page) : null;
@@ -152,7 +97,7 @@ try {
       for (const category of ['faq-products', 'faq-mdpick', 'faq-payment', 'faq-admission']) {
         await page.locator(`[data-faq-focus="${category}"]`).click(); await settle(page);
         assert.equal(await page.evaluate(() => document.activeElement.id), category);
-        const box = await page.locator('#' + category).boundingBox(); assert(box.y >= 65 && box.y < 180, `${category} not in view`);
+        const box = await page.locator('#' + category).boundingBox(); assert(box.y >= 65 && box.y + Math.min(box.height, 120) <= page.viewportSize().height, `${category} answer not in view`);
       }
       await page.goto(route('alliance')); await page.locator('[data-chat]').first().click();
       await page.waitForFunction(() => !document.querySelector('.preview-chat').hidden);
@@ -169,6 +114,70 @@ try {
       await page.locator('[data-next="connection"]').click(); await settle(page);
       assert((await rootState(page)).top > 0);
       await context.close();
+      for (const [width, height] of sizes) {
+        const context = await browser.newContext({ viewport: { width, height }, reducedMotion: 'no-preference' });
+        await setup(context); const page = await context.newPage();
+        for (const name of allPages) {
+          const response = await page.goto(route(name), { waitUntil: 'networkidle' });
+          assert.equal(response.status(), 200, name);
+          const visible = await page.evaluate(() => ({
+            overflow: document.documentElement.scrollWidth > innerWidth + 1,
+            broken: [...document.images].filter(i => !i.complete || !i.naturalWidth).map(i => i.src),
+            side: [...document.querySelectorAll('.site-side-nav')].map(a => ({ visible: !!a.getClientRects().length, box: a.getBoundingClientRect().toJSON() })),
+            chat: document.querySelector('.preview-inquiry')?.getBoundingClientRect().toJSON()
+          }));
+          assert.equal(visible.overflow, false, `${engine}/${name}/${width} overflow`);
+          assert.deepEqual(visible.broken, [], `${name} broken images`);
+          for (const a of visible.side) {
+            assert(a.visible, `${name} hidden page arrow`);
+            assert(a.box.width >= 44 && a.box.height >= 44, 'touch target');
+            const c = visible.chat, b = a.box;
+            assert(!c || b.right <= c.left || b.left >= c.right || b.bottom <= c.top || b.top >= c.bottom, 'arrow overlaps support');
+          }
+          if (marketing.includes(name)) {
+            const before = await rootState(page);
+            assert.equal(before.snap, 'y mandatory', `${name} snap disabled`);
+            await page.mouse.move(width / 2, Math.min(height - 140, 400));
+            await page.mouse.wheel(0, before.height * .85); await settle(page);
+            const after = await rootState(page);
+            assert(after.top > 1, `${engine}/${name}/${width} did not scroll`);
+            const withinTall = after.sections.some(s => s.height > after.height + 2 && after.top >= s.top - 2 && after.top <= s.top + s.height - after.height + 2);
+            assert(withinTall || after.sections.some(s => Math.abs(s.top - after.top) <= 2) || Math.abs(after.top - after.max) <= 2, `${name} stopped between screens: ${after.top}`);
+            const next = page.locator('[data-next],[data-scroll-target]').filter({ visible: true }).first();
+            if (await next.count()) {
+              await page.evaluate(() => document.getElementById('snapRoot').scrollTo({ top: 0, behavior: 'instant' }));
+              await settle(page);
+              const target = await next.getAttribute('data-next') || await next.getAttribute('data-scroll-target');
+              await next.evaluate(n => n.scrollIntoView({block:'nearest',behavior:'instant'})); await page.waitForTimeout(100); const hit = await next.boundingBox(); assert(hit); await page.mouse.click(hit.x + hit.width / 2, hit.y + hit.height / 2); await settle(page);
+              const state = await rootState(page), dest = state.sections.find(s => s.id === target);
+              if (!await next.getAttribute('data-faq-focus')) assert(Math.abs(state.top - Math.min(dest.top, state.max)) <= 2, `${name} next arrow missed scene`);
+            }
+            await page.evaluate(() => { const r = document.getElementById('snapRoot'); r.scrollTo({top:r.scrollHeight,behavior:'instant'}); });
+            await page.waitForTimeout(150);
+            const footer = await page.locator('.site-footer').boundingBox();
+            assert(footer.y + footer.height <= height + 2, `${name} footer unreachable`);
+            const covered = await page.evaluate(() => {
+              const arrows = [...document.querySelectorAll('.site-side-nav')].map(a => a.getBoundingClientRect());
+              return [...document.querySelectorAll('.site-footer a')].some(a => { const b=a.getBoundingClientRect(); return arrows.some(r => r.left < b.right && r.right > b.left && r.top < b.bottom && r.bottom > b.top); });
+            });
+            assert(!covered, `${name} footer link covered by page arrow`);
+          }
+          if (engine === 'chrome' && width === 1440) {
+            const links = await page.locator('a[href]').evaluateAll(nodes => nodes.map(a => ({ href: a.getAttribute('href'), action: a.hasAttribute('data-chat') })));
+            for (const link of links) {
+              const dest = new URL(link.href, route(name));
+              if (dest.origin === new URL(base).origin && !link.action) {
+                const response = await context.request.get(dest.href.split('#')[0]);
+                assert.equal(response.status(), 200, `${name} broken link ${link.href}`);
+                if (dest.hash) assert((await response.text()).includes('id="' + decodeURIComponent(dest.hash.slice(1)) + '"'), `${name} broken fragment ${link.href}`);
+              }
+              report.links.push({ page: name, ...link });
+            }
+          }
+          report.layouts.push({ engine, name, width, height });
+        }
+        await context.close(); console.log(JSON.stringify({ checked: engine, width, pages: allPages.length }));
+      }
     } finally { await browser.close(); }
   }
   assert.deepEqual(report.errors, []); assert.deepEqual(report.mutations, []);

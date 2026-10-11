@@ -79,7 +79,9 @@ html[data-moding-standard="v1"] :focus-visible{outline:3px solid #FF8C00;outline
 
 /* Keep page arrows above the support launcher and below menus/dialogs. */
 html[data-moding-standard="v1"] .site-side-nav{display:flex!important;z-index:80;bottom:max(100px,calc(env(safe-area-inset-bottom) + 82px))!important}
+html[data-moding-standard="v1"] body.is-last-scene .site-side-nav{bottom:max(100px,calc(var(--footer-height,0px) + 18px),calc(env(safe-area-inset-bottom) + 82px))!important}
 html[data-moding-standard="v1"] .site-side-nav[inert]{visibility:hidden;pointer-events:none}
+html[data-moding-standard="v1"] .connected-main>.site-footer{scroll-snap-align:end;scroll-snap-stop:always}
 @layer moding-standard {
  html[data-moding-standard="v1"] .connected-hero [data-moding-role="frame"]{padding-bottom:84px!important}
 }

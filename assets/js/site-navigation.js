@@ -20,6 +20,10 @@
   }
   new MutationObserver(syncControls).observe(root, { attributes: true, attributeFilter: ['inert'] });
   syncControls();
+  const footer = document.querySelector('.site-footer');
+  if (footer) new ResizeObserver(() => {
+    document.documentElement.style.setProperty('--footer-height', `${Math.ceil(footer.getBoundingClientRect().height)}px`);
+  }).observe(footer);
 
   function refresh() {
     if (navigating || blocked()) return;
