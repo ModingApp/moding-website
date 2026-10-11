@@ -102,11 +102,11 @@ test("homepage final search copy and core indexing signals remain locked", () =>
 
   assert.match(
     homepage,
-    /<title>모딩\(Moding\) \| 사장님의 가게에 새로운 선택지를<\/title>/
+    /<title>모딩\(MODING\)｜외식업 식자재 거래 플랫폼<\/title>/
   );
   assert.match(
     homepage,
-    /<meta name="description" content="외식업 사장님을 위한 B2B 식품 거래 플랫폼 모딩입니다\. 우리가게에 필요한 다양한 수산물·육가공·소스·가공식품을 찾아보세요\.">/
+    /<meta name="description" content="모딩은 제조사와 식당을 연결하는 사업자 전용 식품·식자재 거래 플랫폼입니다\. 앱 다운로드와 판매자 입점 안내를 확인하세요\.">/
   );
   assert.match(
     homepage,
@@ -114,11 +114,11 @@ test("homepage final search copy and core indexing signals remain locked", () =>
   );
   assert.match(
     homepage,
-    /외식업 사장님을 위한 식자재 거래 플랫폼 모딩/
+    /모딩은 제조사와 식당을 연결하는 사업자 전용 식품·식자재 거래 플랫폼입니다\./
   );
-  assert.doesNotMatch(
+  assert.match(
     homepage,
-    /<a href="download\.html">앱 다운로드<\/a>/
+    /<a href="\/download\.html">앱 다운로드<\/a>/
   );
   assert.match(homepage, /href="\/download\.html"/);
 });
@@ -128,16 +128,10 @@ test("homepage first hero follows the green and orange title system", () => {
 
   assert.match(
     homepage,
-    /<h1>\s*사장님의 가게에<br>\s*<em>새로운 선택지를<\/em>\s*<\/h1>/
+    /<h1[^>]*>새로운 상품을<br><em>찾고 싶을 때<\/em><\/h1>/
   );
-  assert.match(
-    homepage,
-    /\.hero-copy h1,\s*\.hero-copy h2,\s*\.final-copy h2\s*{\s*color: var\(--green-dark\);/
-  );
-  assert.match(
-    homepage,
-    /\.hero-copy h1 em,\s*\.hero-copy h2 em,[\s\S]*?{\s*color: var\(--orange\);/
-  );
+  assert.match(homepage, /src="\/assets\/js\/homepage-scenes\.js"/);
+  assert.match(homepage, /href="\/assets\/css\/site-presentation\.css"/);
 });
 
 test("download page uses one square search-safe representative image", () => {

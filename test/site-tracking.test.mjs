@@ -275,14 +275,10 @@ test("내부 페이지 이동 뒤에도 최초 세션의 확정 근거를 유지
 });
 
 test("홈페이지 스토어 이동은 출처 근거를 함께 보내고 내부 링크에 출처 태그를 재생성하지 않는다", () => {
-  assert.match(
-    indexCode,
-    /sourceMethod:\s*MODING_TRACKING_CONTEXT\.sourceMethod/
-  );
-  assert.match(
-    indexCode,
-    /landingPage:\s*MODING_TRACKING_CONTEXT\.landingPage/
-  );
+  const downloadCode = fs.readFileSync(new URL('../download.html', import.meta.url), 'utf8');
+  assert.match(indexCode, /href="\/download\.html"/);
+  assert.match(downloadCode, /sourceMethod=\$\{encodeURIComponent\(SOURCE_METHOD\)\}/);
+  assert.match(downloadCode, /landingPage=\$\{encodeURIComponent\(ACTIVE_TRACKING\.landingPage/);
   assert.doesNotMatch(
     indexCode,
     /\/download\.html\?src=/
