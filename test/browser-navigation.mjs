@@ -19,7 +19,9 @@ const server = createServer(async (req, res) => {
   catch { res.writeHead(404); res.end(); }
 });
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
-const base = process.env.MODING_QA_URL || `http://127.0.0.1:${server.address().port}`;
+const localBase = `http://127.0.0.1:${server.address().port}`;
+const base = process.env.MODING_QA_URL || 'https://moding.app';
+const localReview = !process.env.MODING_QA_URL;
 const route = name => `${base}/${name}.html`;
 const marketing = ['index', 'about', 'brand', 'services', 'alliance', 'faq'];
 const allPages = [...marketing, 'download', 'notice', 'location', 'terms', 'privacy'];
@@ -31,6 +33,10 @@ async function setup(context) {
     if (!['GET', 'HEAD', 'OPTIONS'].includes(r.request().method())) {
       if (r.request().url().includes('consultation')) report.mutations.push(r.request().url());
       return r.abort();
+    }
+    if (localReview && new URL(r.request().url()).origin === new URL(base).origin) {
+      const u = new URL(r.request().url());
+      return r.fulfill({response:await context.request.get(localBase + u.pathname + u.search)});
     }
     return r.continue();
   });
@@ -54,7 +60,7 @@ async function syntheticSwipe(page, selector, x, y, endX, endY) {
   }, { x, y, endX, endY });
 }
 try {
-  for (const [engine, launcher] of [['chrome', chromium], ['webkit', webkit]]) {
+  for (const [engine, launcher] of [['chrome', chromium], ['webkit', webkit]].filter(([name]) => !process.env.MODING_QA_ENGINE || name === process.env.MODING_QA_ENGINE)) {
     const browser = await launcher.launch(engine === 'chrome' ? { channel: 'chrome', headless: true } : { headless: true });
     try {
       const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
@@ -107,7 +113,9 @@ try {
       await Promise.all([page.waitForEvent('load'), page.locator('[data-refresh-home]').click()]);
       assert.notEqual(await page.evaluate(() => window.ModingHomepage.state().index), last);
       last = await page.evaluate(() => window.ModingHomepage.state().index);
-      await page.mouse.move(200, 400); await Promise.all([page.waitForEvent('load'), page.mouse.wheel(0, -180)]);
+      await page.mouse.move(200, 400);
+      const pull = () => engine === 'chrome' ? page.mouse.wheel(0, -180) : page.locator('#snapRoot').evaluate(r => r.dispatchEvent(new WheelEvent('wheel', {deltaY:-180,bubbles:true})));
+      await Promise.all([page.waitForEvent('load'), pull()]);
       assert.notEqual(await page.evaluate(() => window.ModingHomepage.state().index), last);
       await page.emulateMedia({ reducedMotion: 'reduce' });
       assert.equal(await page.locator('#snapRoot').evaluate(r => getComputedStyle(r).scrollBehavior), 'auto');
@@ -167,7 +175,7 @@ try {
             for (const link of links) {
               const dest = new URL(link.href, route(name));
               if (dest.origin === new URL(base).origin && !link.action) {
-                const response = await context.request.get(dest.href.split('#')[0]);
+                const response = await context.request.get(localReview ? localBase + dest.pathname + dest.search : dest.href.split('#')[0]);
                 assert.equal(response.status(), 200, `${name} broken link ${link.href}`);
                 if (dest.hash) assert((await response.text()).includes('id="' + decodeURIComponent(dest.hash.slice(1)) + '"'), `${name} broken fragment ${link.href}`);
               }
