@@ -5,7 +5,7 @@
 .preview-chat-compose textarea{min-width:0;flex:1;min-height:48px;max-height:160px;resize:vertical;font-size:16px;line-height:1.5}
 .preview-chat-compose button[type=submit]{min-height:48px;background:#238b22;color:white;border-color:#238b22}
 .preview-chat-compose button:disabled{opacity:.55;cursor:wait}
-.preview-chat-compose .consultation-attach{min-height:36px;font-size:12px;padding:5px 10px;margin-right:calc(100% - 90px)}
+.preview-chat-compose .consultation-attach{min-height:44px;font-size:13px;padding:5px 10px;margin-right:calc(100% - 90px)}
 .consultation-attachments{display:flex;gap:6px;flex-wrap:wrap;max-width:100%;width:100%}
 .consultation-attachments:empty{display:none}
 .consultation-attachments button{max-width:100%;overflow-wrap:anywhere;font-size:12px!important}
@@ -18,7 +18,7 @@
 .consultation-message.operator{margin-right:auto;background:white}
 .consultation-message p{white-space:pre-wrap;margin:4px 0 0!important}
 .consultation-message small{font-size:11px;font-weight:700}
-.preview-chat-head button{padding:6px 8px;flex:none;font-size:12px}
+.preview-chat-head button{min-width:44px;padding:6px 8px;flex:none;font-size:13px}
 .preview-chat-head strong{min-width:0;font-size:15px}
 .preview-chat-content{overscroll-behavior:contain;min-height:0}
 .moding-service-definition{max-width:720px;margin:0 auto 20px;font-size:15px;line-height:1.65;word-break:keep-all}
