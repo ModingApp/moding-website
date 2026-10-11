@@ -121,7 +121,7 @@ try {
       assert.equal(await page.locator('#snapRoot').evaluate(r => getComputedStyle(r).scrollBehavior), 'auto');
       await page.locator('[data-next="connection"]').click(); await settle(page);
       assert((await rootState(page)).top > 0);
-      await context.close();
+      await context.unrouteAll({ behavior: 'wait' }); await context.close();
       for (const [width, height] of sizes) {
         const context = await browser.newContext({ viewport: { width, height }, reducedMotion: 'no-preference' });
         await setup(context); const page = await context.newPage();
@@ -184,7 +184,7 @@ try {
           }
           report.layouts.push({ engine, name, width, height });
         }
-        await context.close(); console.log(JSON.stringify({ checked: engine, width, pages: allPages.length }));
+        await context.unrouteAll({ behavior: 'wait' }); await context.close(); console.log(JSON.stringify({ checked: engine, width, pages: allPages.length }));
       }
     } finally { await browser.close(); }
   }

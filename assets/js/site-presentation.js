@@ -9,6 +9,22 @@
  function activate(){scheduled=false;if(!root)return;const r=root.getBoundingClientRect(),point=r.top+Math.min(r.height*.38,250);let selected=scenes.find(s=>{const b=s.getBoundingClientRect();return b.top<=point&&b.bottom>point})||scenes[0];for(const s of scenes){const b=s.getBoundingClientRect(),visible=b.bottom>r.top&&b.top<r.bottom;s.classList.toggle('is-active',s===selected);if(visible){for(const e of s.querySelectorAll('.reveal'))e.classList.add('is-visible')}}document.body.classList.toggle('is-last-scene',selected===scenes.at(-1))}
  root?.addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(activate)}},{passive:true});
  if(header)new ResizeObserver(sync).observe(header);addEventListener('resize',sync);window.visualViewport?.addEventListener('resize',sync);sync();
+ // All public pages share the same support/page-control clearance, including partial footers.
+ const footer=document.querySelector('footer');
+ if(footer){
+  let footerFrame=0;
+  function measureFooter(){
+   footerFrame=0;
+   const box=footer.getBoundingClientRect(),viewport=root?root.getBoundingClientRect():{top:0,bottom:window.visualViewport?.height||innerHeight};
+   const visible=Math.max(0,Math.min(box.bottom,viewport.bottom)-Math.max(box.top,viewport.top));
+   document.documentElement.style.setProperty('--footer-height',Math.ceil(box.height)+'px');
+   document.documentElement.style.setProperty('--moding-footer-visible',Math.ceil(visible)+'px');
+  }
+  function scheduleFooter(){if(!footerFrame)footerFrame=requestAnimationFrame(measureFooter)}
+  new ResizeObserver(scheduleFooter).observe(footer);
+  (root||window).addEventListener('scroll',scheduleFooter,{passive:true});
+  addEventListener('resize',scheduleFooter);window.visualViewport?.addEventListener('resize',scheduleFooter);scheduleFooter();
+ }
  function closeMenu(){if(!menu||!menu.classList.contains('is-open'))return;menu.classList.remove('is-open');menu.setAttribute('aria-hidden','true');toggle?.setAttribute('aria-expanded','false');if(root){root.style.overflowY='auto';root.inert=false}if(header)header.inert=false;menuFocus?.focus()}
  toggle?.addEventListener('click',()=>{menuFocus=toggle;menu.classList.add('is-open');menu.setAttribute('aria-hidden','false');toggle.setAttribute('aria-expanded','true');if(root){root.style.overflowY='hidden';root.inert=true}if(header)header.inert=true;closeMenuButton?.focus()});closeMenuButton?.addEventListener('click',closeMenu);
  document.querySelectorAll('.mobile-menu-links a').forEach(a=>a.addEventListener('click',closeMenu));
