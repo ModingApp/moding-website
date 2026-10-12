@@ -122,6 +122,10 @@ try {
             const caption=await page.locator('.experience-desktop-copy').evaluate(e=>({width:e.getBoundingClientRect().width,overflow:e.scrollWidth>e.clientWidth+1,labels:[...e.querySelectorAll('strong')].map(n=>{const b=n.getBoundingClientRect();return{width:b.width,height:b.height,font:parseFloat(getComputedStyle(n).fontSize),line:parseFloat(getComputedStyle(n).lineHeight)}})}));
             check(caption.width>250&&!caption.overflow&&caption.labels.every(n=>n.width>=80&&n.height<=n.line*2.1),key+'/experience-captions-readable',caption);
           }
+          if(name==='services'&&width<=820){
+            const spaces=await page.locator('.service-grid').evaluateAll(es=>es.map(e=>{const copy=e.querySelector('.service-copy'),svg=e.querySelector('.service-visual svg');return svg.getBoundingClientRect().top-copy.getBoundingClientRect().bottom}));
+            check(spaces.every(n=>n>=-1&&n<=40),key+'/service-copy-art-gap',spaces);
+          }
           if(name==='faq'){
             check(await page.locator('.contact-btn.email').count()===0,key+'/email-action-removed');
             check(await page.locator('#page5 .scene-desc').innerText()==='추가 문의는 1:1 상담으로 문의해 주세요.',key+'/consultation-copy');

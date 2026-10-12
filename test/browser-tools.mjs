@@ -37,6 +37,13 @@ try{
      }
      if(file==='detail-maker/index.html'){
       await page.locator('#generateBtn').click();assert(await page.locator('#setupView').isVisible(),'missing photo must keep setup open');
+      // A provided brand icon is an isolated UI test fixture, never a submitted product/photo.
+      await page.locator('#productImageInput').setInputFiles(path.join(repo,'assets/brand/icon.png'));
+      await page.waitForFunction(()=>document.querySelector('#productPreview img')?.naturalWidth>0&&document.querySelector('#productVisualStatus').textContent.includes('배치합니다')||document.querySelector('#productVisualStatus').textContent.includes('정리했습니다'));
+      await page.locator('#generateBtn').click();await page.waitForFunction(()=>!document.querySelector('#editorView').hidden);
+      const editor=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth+1,canvas:!!document.querySelector('#stageContainer canvas'),tiny:[...document.querySelectorAll('#editorView button,#editorActions button')].filter(n=>n.getClientRects().length).filter(n=>n.getBoundingClientRect().height<44).map(n=>({text:n.textContent,height:n.getBoundingClientRect().height}))}));
+      assert(!editor.overflow,'editor viewport overflow');assert(editor.canvas,'editor canvas did not render');assert.deepEqual(editor.tiny,[],'editor small buttons');
+
      }
      if(out){await page.screenshot({path:path.join(out,engine+'-'+width+'x'+height+'-'+file.replaceAll('/','-')+'.png'),fullPage:true})}
      report.pages.push({engine,file,width,height});
