@@ -131,7 +131,7 @@ test("homepage first hero follows the green and orange title system", () => {
     /<h1[^>]*>새로운 상품을<br><em>찾고 싶을 때<\/em><\/h1>/
   );
   assert.match(homepage, /src="\/assets\/js\/homepage-scenes\.js"/);
-  assert.match(homepage, /href="\/assets\/css\/site-presentation\.css"/);
+  assert.match(homepage, /href="\/assets\/css\/site-presentation\.css(?:\?v=[a-zA-Z0-9-]+)?"/);
 });
 
 test("download page uses one square search-safe representative image", () => {

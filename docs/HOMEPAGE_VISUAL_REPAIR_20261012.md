@@ -42,3 +42,9 @@
 - 한진 제휴 / 판매자센터 / Play Store / App Store 주소 HTTP 200 확인.
 - 11개 HTML head, 약관·개인정보 본문, 7종 장면·박스 연출·상담·다운로드·추적 코드와 robots는 기준 운영본과 대조하여 보존 확인.
 - 실제 iPhone·Android·폴더블 기기 조작 검수는 이번 결과에 포함하지 않음. 운영 배포 성공 및 실제 제공 파일 확인은 배포 후 별도로 기록.
+
+## 가독성 적용 및 맥 검수 · 2026-10-12
+
+본문 18/16px, 보조 15/14px, 주요 문의·다운로드 외형 및 문구 중심, 저높이 숨김 제거, 서비스 프레임/격자 역할 분리, 메인 7종 표시 비율, 문서·독립 웹 도구의 읽기 규격을 적용했습니다. 좁거나 낮은 창은 조작 영역과 읽기 영역을 분리합니다. 인증·신청·상담 API와 원본 7종 자산은 변경하지 않았습니다.
+
+맥 자동 검수 결과: `{"staticTests":25,"chrome":{"pages":110,"scenes":260,"heroes":70},"webkit":{"pages":55,"scenes":130,"heroes":35},"tools":24,"navigation":{"layouts":132,"moves":20,"links":210},"errors":0,"realMessagesSent":0,"productionUpdated":false}`. WebKit의 터치 이동은 DOM 이벤트 검수이며 실제 iPhone/Android 앱 실기기 검수가 아닙니다. 실제 상담·신청 전송은 실행하지 않았습니다. 운영 반영은 별도로 Pages 빌드 커밋과 실제 응답을 확인합니다.
